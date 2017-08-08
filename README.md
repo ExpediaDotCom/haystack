@@ -34,7 +34,7 @@ it both difficult and time-consuming to resolve live site issues and improve sys
     * a homegrown CRSLogs system
     
 ### The Solution
-![High Level Block Diagram](documentation/diagrams/Haystack%20v2%20Components.png)
+![High Level Block Diagram](documentation/diagrams/Haystack%20Components.png)
 
 Below find information about components in the block diagram above.
 
@@ -84,5 +84,7 @@ a lightweight service that uses [Kafka Streams](https://kafka.apache.org/documen
 records from Kafka, transform them to JSON, and write them to another topic in Kafka. The plugins will then consume
 from the latter topic, and then write the JSON records just consumed to their destinations.
 #### User Interface
-The Haystack UI is found int [haystack-ui](https://github.com/ExpediaDotCom/haystack-ui). 
-This UI is also visible at http://haystack-web.test.expedia.com/.
+The mock UI is visible at http://haystack-web.test.expedia.com/.
+Packages in the Haystack UI System:
+1. [haystack-ui](https://github.com/ExpediaDotCom/haystack-ui)
+2. [haystack-trace-query](https://github.com/ExpediaDotCom/haystack-trace-query)
