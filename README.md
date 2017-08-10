@@ -74,6 +74,6 @@ The Dependencies module uses the parent/child relationships of Span objects to c
 service, stored in a [Neo4j](https://en.wikipedia.org/wiki/Neo4j) graph database.
 
 #### UI
-The UI (User Interface) module exposes (one a website) the spans, stitched spans, trends, and dependencies created by 
-the other modules. To simplify the API from the UI module to the Span databases, a small Query module bundles the data
-from the Cassandra store with the metadata from the ElasticSearch store.
+The UI (User Interface) module exposes (through a website) the Spans, Stitched Spans, Trends, and Dependencies created
+by the other modules. To simplify the API from the UI module to the Span databases, a small Query module bundles the
+data from the Cassandra store with the metadata from the ElasticSearch store.
