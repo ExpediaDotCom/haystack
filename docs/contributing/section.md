@@ -18,22 +18,9 @@ We use [Github Issues](https://github.com/ExpediaDotCom/haystack-ui/issues) for 
 
  The documentation uses [Gitbook](https://www.gitbook.com/) as an organizational framework. The documentation source can be found on the gh-pages branch in the [base haystack repository](https://github.com/ExpediaDotCom/haystack/).
 
-  The following code can be used to build gitbook properly.
-
-
-
- ```
- git checkout gh-pages
- gitbook build
- git pull origin gh-pages --rebase
- cp -R _book/* .
- git clean -fx node_modules
- git clean -fx _book
- git add .
- git commit -a -m [commit addition/subtraction]
- git push origin gh-pages
- ```
-
+ For generating `gitbook` styled pages, you can use [generate_docsite.sh](https://github.com/ExpediaDotCom/haystack/blob/master/docs/generate_docsite.sh). After generating pages, they should be pused out to `gh-pages`
+ branch for publishing on [expediadotcom.github.io/haystack](https://expediadotcom.github.io/haystack)
+ 
  ### License
 
  By contributing to Haystack, you agree that your contributions will be licensed under its [Apache License](https://github.com/ExpediaDotCom/haystack/blob/master/LICENSE).
