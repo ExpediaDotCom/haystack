@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# this script will use /docs folder as source of md files
+# will generate gitbook styled html files from md files
+# and get them ready for commit and push to gh-pages file
+# TODO will automate this process using a build job
+
 # install gitbook
 npm install -g gitbook-cli
 
@@ -13,8 +18,5 @@ cp -R _book/* ..
 git clean -fx node_modules
 git clean -fx _book
 
-# add all files
-git add .
-
-# commit
-git commit -a -m "Updated docs"
+# add rest of the files
+git add ..
