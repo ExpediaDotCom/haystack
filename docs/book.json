@@ -1,0 +1,11 @@
+{
+  "title": "Haystack Documentation",
+  "gitbook": "2.0.1",
+  "plugins": ["share","edit-link"],
+  "pluginsConfig": {
+      "edit-link": {
+          "base": "https://github.com/ExpediaDotCom/haystack/tree/master/docs",
+          "label": "Edit This Page"
+      }
+    }
+}
