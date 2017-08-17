@@ -1,0 +1,27 @@
+{
+  "title": "Haystack Documentation",
+  "gitbook": "3.2.3",
+  "plugins": [
+    "share",
+    "edit-link",
+    "github",
+    "forkmegithub",
+    "disqus"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/ExpediaDotCom/haystack/tree/master/docs",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/ExpediaDotCom/haystack"
+    },
+    "forkmegithub": {
+      "url": "https://github.com/ExpediaDotCom/haystack",
+      "color": "darkblue"
+    },
+    "disqus": {
+      "shortName": "haystack-2"
+    }
+  }
+}
