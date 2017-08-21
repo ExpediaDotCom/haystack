@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ (datasource "config").name }}
+  namespace: {{ (datasource "config").namespace }}
+  labels:
+    name: {{ (datasource "config").name }}
+spec:
+  type: ExternalName
+  externalName: {{ (datasource "config").value }}
+
+

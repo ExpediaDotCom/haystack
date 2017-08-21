@@ -3,3 +3,4 @@
 .idea/
 .DS_Store
 .node_modules
+deployment/k8s/third_party_softwares/*
