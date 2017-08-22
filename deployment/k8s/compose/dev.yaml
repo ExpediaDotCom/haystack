@@ -6,7 +6,6 @@ deployable_units:
        ports:
           containerPort: 2181
           servicePort: 2181
-          nodePort: 32181
      - name: elasticsearch
        image: elasticsearch:2.4.6-alpine
        env:
@@ -16,7 +15,6 @@ deployable_units:
        ports:
         containerPort: 9200
         servicePort: 9200
-        hostPort: 33001
      - name: cassandra
        image: cassandra:3.11.0
        replicas: 1
@@ -83,18 +81,11 @@ cluster:
    - path: addons/1.6/monitoring/influxdb.yaml
      params:
        image: gcr.io/google_containers/heapster-influxdb-amd64:v1.1.1
-       env:
-         - name: INFLUXDB_GRAPHITE_ENABLED
-           value: "true"
-         - name: INFLUXDB_ADMIN_ENABLED
-           value: "true"
-         - name: INFLUXDB_GRAPHITE_TEMPLATES_0
-           value: "system.*"
        storage: 100Mi
        storageClass: standard
        hostAdminPort: 8083 # opens up admin on port 8083 locally
-       hostGraphitePort: 2003 # this helps to test locally if graphite port is working good for influxdb
        hostHttpPort: 8086 # can access influxdb locally http://$(minikube ip):8086
+       hostGraphitePort: 2003 # this helps to test locally if graphite port is working good for influxdb
    - path: addons/1.6/monitoring/grafana.yaml
      params:
        image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.1
