@@ -1,0 +1,104 @@
+# defines the configuration for components and services that are deployed as containers
+deployable_units:
+     - name: zk
+       image: wurstmeister/zookeeper:3.4.6
+       replicas: 1
+       ports:
+          containerPort: 2181
+          servicePort: 2181
+     - name: elasticsearch
+       image: elasticsearch:2.4.6-alpine
+       env:
+         - name: "ES_JAVA_OPTS"
+           value: "-Xms256m -Xmx256m"
+       replicas: 1
+       ports:
+        containerPort: 9200
+        servicePort: 9200
+     - name: cassandra
+       image: cassandra:3.11.0
+       replicas: 1
+       env:
+         - name: "MAX_HEAP_SIZE"
+           value: "256m"
+         - name: "HEAP_NEWSIZE"
+           value: "256m"
+       ports:
+         containerPort: 9042
+         servicePort: 9042
+     - name: kafka-service
+       image: wurstmeister/kafka:0.10.2.1
+       replicas: 1
+       env:
+         - name: "KAFKA_ADVERTISED_HOST_NAME"
+           value: "replace_with_minikube_ip"
+         - name: "KAFKA_ADVERTISED_PORT"
+           value: "9092"
+         - name: "KAFKA_ZOOKEEPER_CONNECT"
+           value: "zk:2181"
+         - name: "KAFKA_CREATE_TOPICS"
+           value: "spans:1:1"
+       ports:
+          containerPort: 9092
+          servicePort: 9092
+          hostPort: 9092
+     - name: kafka-rest-svc
+       image: confluentinc/cp-kafka-rest:3.2.1
+       replicas: 1
+       env:
+         - name: "KAFKA_REST_ZOOKEEPER_CONNECT"
+           value: "zk:2181"
+         - name: "KAFKA_REST_HOST_NAME"
+           value: "replace_with_minikube_ip"
+       ports:
+          containerPort: 8082
+          servicePort: 8082
+          hostPort: 8082
+     - name: haystack-span-stitcher
+       image: haystack-span-stitcher:latest
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       appConfigPath: configs/dev/span-stitcher.conf
+       env:
+        - name: OVERRIDES_CONFIG_PATH
+          value: /configs/span-stitcher.conf
+     - name: haystack-stitched-span-collector
+       image: haystack-stitched-span-collector:latest
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       appConfigPath: configs/dev/stitched-span-collector.conf
+       autoscale:
+         maxReplicas: 2
+         targetCPUUtilizationPercentage: 75
+       env:
+        - name: OVERRIDES_CONFIG_PATH
+          value: /configs/stitched-span-collector.conf
+proxy_services:
+    - name: kafkasvc
+      value: kafka-service.haystack-dev.svc.cluster.local
+cluster:
+  addons:
+   - path: addons/1.6/monitoring/influxdb.yaml
+     params:
+       image: gcr.io/google_containers/heapster-influxdb-amd64:v1.1.1
+       storage: 100Mi
+       storageClass: standard
+       hostAdminPort: 8083 # opens up admin on port 8083 locally
+       hostHttpPort: 8086 # can access influxdb locally http://$(minikube ip):8086
+       hostGraphitePort: 2003 # this helps to test locally if graphite port is working good for influxdb
+   - path: addons/1.6/monitoring/grafana.yaml
+     params:
+       image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.1
+       rootUrl: "http://haystack.local/grafana"
+   - path: addons/1.6/monitoring/heapster.yaml
+     params:
+       image: gcr.io/google_containers/heapster-amd64:v1.4.0
+   - path: addons/traefik/traefik.yaml
+     params:
+       name: traefik-ingress-controller
+       image: traefik:v1.3.3
+       replicas: 1
+       hostName: haystack.local # echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+       nodePort: 32300
+
+
