@@ -29,12 +29,6 @@ In the `<dependencies>` section of pom.xml put:
     <artifactId>servo-core</artifactId>
     <version>${servo-version}</version>
 </dependency>
-<!-- https://mvnrepository.com/artifact/com.netflix.servo/servo-graphite -->
-<dependency>
-    <groupId>com.netflix.servo</groupId>
-    <artifactId>servo-graphite</artifactId>
-    <version>${servo-version}</version>
-</dependency>
 <dependency>
     <groupId>com.expedia.www</groupId>
     <artifactId>haystack-commons</artifactId>
@@ -63,6 +57,7 @@ The class never should not contain spaces or periods; if it does, they will be c
 ##### Singleton
 Your Servo objects should be singletons, either as static (Java) or object (Scala) variables. 
 #### Counter
+##### Creation
 The code below is a Java snippet that shows the right way to create a Counter:
 ```
 static final Counter REQUEST = MetricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS_NAME, "REQUEST");
@@ -70,7 +65,14 @@ static final Counter REQUEST = MetricObjects.createAndRegisterCounter(SUBSYSTEM,
 Because the Servo Counter generates a RATE metric, using upper case for the variable name `REQUEST` and the counter name 
 `"REQUEST"` is recommended because doing so results in an sensibly named complete metric name of `REQUEST_RATE` in
 InfluxDb, as explained in the "Graphite Bridge" section of this document.
+##### Usage
+Simply increment the Counter to count:
+```
+REQUEST.increment();
+```
+It will be reset when its value is reported to InfluxDb.
 #### Timer
+##### Creation
 The code below is a Java snippet that shows the right way to create a Timer:
 ```
 static final Timer JSON_SERIALIZATION = MetricObjects.createAndRegisterTimer(SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
@@ -78,8 +80,23 @@ static final Timer JSON_SERIALIZATION = MetricObjects.createAndRegisterTimer(SUB
 The Servo Timer generates two metrics (GAUGE and NORMALIZED), and using upper case is again suggested (see the Counter 
 section above) to create complete metric names of `JSON_SERIALIZATION_GAUGE` and `JSON_SERIALIZATION_NORMALIZED`.
 Choose the appropriate time unit as the last argument:
-* For on-host code, `TimeUnit.MICROSECONDS` is probably appropriate
+* For on-host code, `TimeUnit.MICROSECONDS` is probably appropriate.
 * For network calls, `TimeUnit.MILLISECONDS` may be sufficient.
+The coarser TimeUnit.MILLISECONDS has less performance impact than the finer TimeUnit.MICROSECONDS and 
+TimeUnit.NANOSECONDS; you can read more about this issue
+[here](https://stackoverflow.com/questions/19052316/why-is-system-nanotime-way-slower-in-performance-than-system-currenttimemill)
+and [here](http://stas-blogspot.blogspot.nl/2012/02/what-is-behind-systemnanotime.html).
+##### Usage
+Follow the pattern below (this is for Java; the Scala implementation is similar):
+```
+final Stopwatch stopwatch = JSON_SERIALIZATION.start();
+try {
+    // Do the work being timed
+} finally {
+    stopwatch.stop();
+}
+```
+Again, the Timer will be reset when its values are reported to InfluxDb.
 #### The Main Method
 To initialize the metrics system, the first line of your main() method should be:
 ```
