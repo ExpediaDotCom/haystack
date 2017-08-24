@@ -16,19 +16,12 @@ create Counters and Timers.
 #### Dependencies
 In the `<properties>` section of pom.xml put:
 ```
-<servo-version>...</servo-version>
 <haystack-commons-version>...</haystack-commons-version>
 ```
-You should of course use the correct version of the dependencies in place of ... above.
+You should of course use the correct version of the haystack-commons dependency in place of ... above.
 
 In the `<dependencies>` section of pom.xml put:
 ```
-<!-- https://mvnrepository.com/artifact/com.netflix.servo/servo-core -->
-<dependency>
-    <groupId>com.netflix.servo</groupId>
-    <artifactId>servo-core</artifactId>
-    <version>${servo-version}</version>
-</dependency>
 <dependency>
     <groupId>com.expedia.www</groupId>
     <artifactId>haystack-commons</artifactId>
@@ -36,13 +29,14 @@ In the `<dependencies>` section of pom.xml put:
 </dependency>
 ```
 #### How to create objects
+In the examples below, the values of `SUBSYSTEM` and `CLASS_NAME` should not contain spaces or periods (each period or 
+space will be changed to a hyphen).
 ##### Subsystem
 As you will see, creating a Servo object in Haystack requires a "subsystem" String, whose value will be something like
 "pipes" or "trends"; the `SUBSYSTEM` constant below should be defined at a high level in your subsystem code base.
 ```
 public static final String SUBSYSTEM = "subsystemName"; // e.g. "pipes" or "trends"
 ```
-`SUBSYSTEM` never should not contain spaces or periods; if it does, each will be changed to a hyphen.
 ##### Class
 Creating a Servo object also requires a "class" String, which is often the Java class or Scala object containing the
 object:
@@ -54,14 +48,14 @@ resides, so it also acceptable to choose a "class" String that will never change
 ```
 private static final String CLASS_NAME = "JsonSerialization";
 ```
-`CLASS_NAME` never should not contain spaces or periods; if it does, each will be changed to a hyphen.
 ##### Singleton
-Your Servo objects should be singletons, either as static (Java) or object (Scala) variables. 
+Your Servo objects should be singletons, either as static (Java) or object (Scala) variables. The MetricObjects
+variable can be managed by a Dependency Injection (DI) framework or not, as you see fit.
 #### Counter
 ##### Creation
 The code below is a Java snippet that shows the right way to create a Counter:
 ```
-static final Counter REQUEST = MetricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS_NAME, "REQUEST");
+static final Counter REQUEST = (new MetricObjects()).createAndRegisterCounter(SUBSYSTEM, CLASS_NAME, "REQUEST");
 ```
 Because the Servo Counter generates a RATE metric, using upper case for the variable name `REQUEST` and the counter name 
 `"REQUEST"` is recommended because doing so results in an sensibly named complete metric name of `REQUEST_RATE` in
@@ -76,7 +70,7 @@ It will be reset when its value is reported to InfluxDb.
 ##### Creation
 The code below is a Java snippet that shows the right way to create a Timer:
 ```
-static final Timer JSON_SERIALIZATION = MetricObjects.createAndRegisterTimer(SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
+static final Timer JSON_SERIALIZATION = (new MetricObjects()).createAndRegisterTimer(SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
 ```
 The Servo Timer generates two metrics (GAUGE and NORMALIZED), and using upper case is again suggested (see the Counter 
 section above) to create complete metric names of `JSON_SERIALIZATION_GAUGE` and `JSON_SERIALIZATION_NORMALIZED`.
@@ -99,9 +93,9 @@ try {
 ```
 Again, the Timer will be reset when its values are reported to InfluxDb.
 #### The Main Method
-To initialize the metrics system, the first line of your main() method should be:
+To initialize the metrics system, the first line of your main() method should be something like:
 ```
-MetricPublishing.start();
+(new MetricPublishing()).start();
 ```
 #### Configuration
 You will typically have a base.yaml in your resources directory whose contents will include:
@@ -115,8 +109,9 @@ haystack:
      queueSize: 10
 ```
 ### Graphite Bridge
-The Graphite [plaintext protocol](http://graphite.readthedocs.io/en/latest/feeding-carbon.html#the-plaintext-protocol)
-consists of three space-delimited Strings terminated by a newline:
+The "Graphite Bridge" connects Servo metrics from the application to the Haystack InfluxDb via Graphite 
+[plaintext protocol](http://graphite.readthedocs.io/en/latest/feeding-carbon.html#the-plaintext-protocol) messages.
+Such a message consists of three space-delimited Strings terminated by a newline:
 ```
  <metric path> <metric value> <metric timestamp>\n
 ```
