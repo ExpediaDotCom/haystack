@@ -37,9 +37,18 @@ public class MetricPublishing {
 
     // will be mocked out in unit tests
     static GraphiteConfig graphiteConfig = cp.bind("haystack.graphite", GraphiteConfig.class);
-    static Factory factory = new Factory();
 
-    public static void start() {
+    private final Factory factory;
+
+    public MetricPublishing() {
+        this(new Factory());
+    }
+
+    public MetricPublishing(Factory factory) {
+        this.factory = factory;
+    }
+
+    public void start() {
         final PollScheduler pollScheduler = PollScheduler.getInstance();
         pollScheduler.start();
         final MetricPoller monitorRegistryMetricPoller = factory.createMonitorRegistryMetricPoller();
@@ -48,17 +57,17 @@ public class MetricPublishing {
         pollScheduler.addPoller(task, graphiteConfig.pollIntervalSeconds(), TimeUnit.SECONDS);
     }
 
-    static MetricObserver createGraphiteObserver() {
+    MetricObserver createGraphiteObserver() {
         final String address = graphiteConfig.address() + ":" + graphiteConfig.port();
         return rateTransform(async(factory.createGraphiteMetricObserver(ASYNC_METRIC_OBSERVER_NAME, address)));
     }
 
-    static MetricObserver rateTransform(MetricObserver observer) {
+    MetricObserver rateTransform(MetricObserver observer) {
         final long heartbeat = POLL_INTERVAL_SECONDS_TO_HEARTBEAT_MULTIPLIER * graphiteConfig.pollIntervalSeconds();
         return factory.createCounterToRateMetricTransform(observer, heartbeat, TimeUnit.SECONDS);
     }
 
-    static MetricObserver async(MetricObserver observer) {
+    MetricObserver async(MetricObserver observer) {
         final long expireTime = POLL_INTERVAL_SECONDS_TO_EXPIRE_TIME_MULTIPLIER * graphiteConfig.pollIntervalSeconds();
         final int queueSize = graphiteConfig.queueSize();
         return factory.createAsyncMetricObserver(observer, queueSize, expireTime);

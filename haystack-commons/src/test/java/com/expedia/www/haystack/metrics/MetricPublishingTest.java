@@ -1,6 +1,6 @@
 package com.expedia.www.haystack.metrics;
 
-import com.netflix.servo.Metric;
+import com.expedia.www.haystack.metrics.MetricPublishing.Factory;
 import com.netflix.servo.publish.AsyncMetricObserver;
 import com.netflix.servo.publish.BasicMetricFilter;
 import com.netflix.servo.publish.CounterToRateMetricTransform;
@@ -54,8 +54,7 @@ public class MetricPublishingTest {
     private static final String ADDRESS_AND_PORT = ADDRESS + ':' + PORT;
 
     @Mock
-    private MetricPublishing.Factory mockFactory;
-    private MetricPublishing.Factory realFactory;
+    private Factory mockFactory;
 
     @Mock
     private MetricObserver mockMetricObserver;
@@ -79,17 +78,20 @@ public class MetricPublishingTest {
     @Mock
     private MetricPoller mockMetricPoller;
 
+    // Objects under test
+    private MetricPublishing metricPublishing;
+    private Factory factory;
+
     @Before
     public void setUp() {
-        realFactory = MetricPublishing.factory;
         realGraphiteConfig = MetricPublishing.graphiteConfig;
-        MetricPublishing.factory = mockFactory;
         MetricPublishing.graphiteConfig = mockGraphiteConfig;
+        metricPublishing = new MetricPublishing(mockFactory);
+        factory = new Factory();
     }
 
     @After
     public void tearDown() {
-        MetricPublishing.factory = realFactory;
         MetricPublishing.graphiteConfig = realGraphiteConfig;
         if(PollScheduler.getInstance().isStarted()) {
             PollScheduler.getInstance().stop();
@@ -102,7 +104,7 @@ public class MetricPublishingTest {
     public void testStart() throws UnknownHostException {
         final List<MetricObserver> observers = whensForStart();
 
-        MetricPublishing.start();
+        metricPublishing.start();
 
         verifiesForStart(observers);
     }
@@ -125,7 +127,7 @@ public class MetricPublishingTest {
     public void testCreateGraphiteObserver() throws UnknownHostException {
         whensForCreateGraphiteObserver();
 
-        final MetricObserver metricObserver = MetricPublishing.createGraphiteObserver();
+        final MetricObserver metricObserver = metricPublishing.createGraphiteObserver();
         assertSame(mockCounterToRateMetricTransform, metricObserver);
 
         verifiesForCreateGraphiteObserver(2);
@@ -151,7 +153,7 @@ public class MetricPublishingTest {
     public void testRateTransform() {
         whensForRateTransform();
 
-        final MetricObserver metricObserver = MetricPublishing.rateTransform(mockMetricObserver);
+        final MetricObserver metricObserver = metricPublishing.rateTransform(mockMetricObserver);
         assertSame(mockCounterToRateMetricTransform, metricObserver);
 
         verifiesForRateTransform(1, mockMetricObserver);
@@ -172,7 +174,7 @@ public class MetricPublishingTest {
     public void testAsync() {
         whensForAsync();
 
-        final MetricObserver metricObserver = MetricPublishing.async(mockMetricObserver);
+        final MetricObserver metricObserver = metricPublishing.async(mockMetricObserver);
         assertSame(mockAsyncMetricObserver, metricObserver);
 
         verifiesForAsync(1, mockMetricObserver);
@@ -194,7 +196,7 @@ public class MetricPublishingTest {
 
     @Test
     public void testFactoryCreateAsyncMetricObserver() {
-        final MetricObserver metricObserver = realFactory.createAsyncMetricObserver(
+        final MetricObserver metricObserver = factory.createAsyncMetricObserver(
                 mockMetricObserver, QUEUE_SIZE, EXPIRE_TIME);
         assertEquals(ASYNC_METRIC_OBSERVER_NAME, metricObserver.getName());
         assertEquals(AsyncMetricObserver.class, metricObserver.getClass());
@@ -204,7 +206,7 @@ public class MetricPublishingTest {
     public void testFactoryCreateCounterToRateMetricTransform() {
         when(mockMetricObserver.getName()).thenReturn(ASYNC_METRIC_OBSERVER_NAME);
 
-        final MetricObserver metricObserver = realFactory.createCounterToRateMetricTransform(
+        final MetricObserver metricObserver = factory.createCounterToRateMetricTransform(
                 mockMetricObserver, HEARTBEAT, TimeUnit.SECONDS);
 
         assertEquals(ASYNC_METRIC_OBSERVER_NAME, metricObserver.getName());
@@ -214,7 +216,7 @@ public class MetricPublishingTest {
 
     @Test
     public void testFactoryCreateGraphiteMetricObserver() {
-        final MetricObserver metricObserver = realFactory.createGraphiteMetricObserver(PREFIX, ADDRESS_AND_PORT);
+        final MetricObserver metricObserver = factory.createGraphiteMetricObserver(PREFIX, ADDRESS_AND_PORT);
         assertEquals("GraphiteMetricObserver" + PREFIX, metricObserver.getName());
         assertEquals(GraphiteMetricObserver.class, metricObserver.getClass());
     }
@@ -223,7 +225,7 @@ public class MetricPublishingTest {
     public void testFactoryCreateTask() {
         when(mockMetricPoller.poll(any(MetricFilter.class), anyBoolean())).thenReturn(Collections.emptyList());
 
-        final PollRunnable task = realFactory.createTask(mockMetricPoller, Collections.emptyList());
+        final PollRunnable task = factory.createTask(mockMetricPoller, Collections.emptyList());
         task.run();
 
         verify(mockMetricPoller).poll(BasicMetricFilter.MATCH_ALL, true);
@@ -233,7 +235,7 @@ public class MetricPublishingTest {
     public void testFactoryCreateMonitorRegistryMetricPoller() {
         when(mockMetricPoller.poll(any(MetricFilter.class), anyBoolean())).thenReturn(Collections.emptyList());
 
-        final MetricPoller metricPoller = realFactory.createMonitorRegistryMetricPoller();
+        final MetricPoller metricPoller = factory.createMonitorRegistryMetricPoller();
 
         assertEquals(MonitorRegistryMetricPoller.class, metricPoller.getClass());
     }

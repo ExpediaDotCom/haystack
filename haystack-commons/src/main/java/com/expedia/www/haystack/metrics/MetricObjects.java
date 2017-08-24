@@ -20,7 +20,16 @@ import java.util.concurrent.TimeUnit;
 public class MetricObjects {
     static final String TAG_KEY_SUBSYSTEM = "subsystem";
     static final String TAG_KEY_CLASS = "class";
-    static Factory factory = new Factory(); // will be mocked out in unit tests
+
+    private final Factory factory;
+
+    public MetricObjects() {
+        this(new Factory());
+    }
+
+    public MetricObjects(Factory factory) {
+        this.factory = factory;
+    }
 
     /**
      * Creates a new Counter; you should only call this method once for each Counter in your code.
@@ -30,7 +39,7 @@ public class MetricObjects {
      * @param counterName the name of the counter, usually the name of the variable holding the Counter instance
      * @return a new Counter that this method registers in the DefaultMonitorRegistry before returning it.
      */
-    public static Counter createAndRegisterCounter(String subsystem, String klass, String counterName) {
+    public Counter createAndRegisterCounter(String subsystem, String klass, String counterName) {
         final TaggingContext taggingContext = () -> getTags(subsystem, klass);
         final Counter counter = Monitors.newCounter(counterName, taggingContext);
         factory.getMonitorRegistry().register(counter);
@@ -46,7 +55,7 @@ public class MetricObjects {
      * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS
      * @return a new Timer that this method registers in the DefaultMonitorRegistry before returning it.
      */
-    public static Timer createAndRegisterTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
+    public Timer createAndRegisterTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
         final TaggingContext taggingContext = () -> getTags(subsystem, klass);
         final Timer timer = Monitors.newTimer(timerName, timeUnit, taggingContext);
         factory.getMonitorRegistry().register(timer);

@@ -33,20 +33,22 @@ public class MetricObjectsTest {
 
     @Mock
     private MetricObjects.Factory mockFactory;
-    private MetricObjects.Factory realFactory;
 
     @Mock
     private MonitorRegistry mockMonitorRegistry;
 
+    // Objects under test
+    private MetricObjects metricObjects;
+    private MetricObjects.Factory factory;
+
     @Before
     public void setUp() {
-        realFactory = MetricObjects.factory;
-        MetricObjects.factory = mockFactory;
+        metricObjects = new MetricObjects(mockFactory);
+        factory = new MetricObjects.Factory();
     }
 
     @After
     public void tearDown() {
-        MetricObjects.factory = realFactory;
         verifyNoMoreInteractions(mockFactory, mockMonitorRegistry);
     }
 
@@ -54,7 +56,7 @@ public class MetricObjectsTest {
     public void testCreateAndRegisterCounter() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Counter counter = MetricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
+        final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
 
         assertsAndVerifiesForCreateAndRegister(counter);
     }
@@ -63,7 +65,7 @@ public class MetricObjectsTest {
     public void testCreateAndRegisterTimer() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Timer timer = MetricObjects.createAndRegisterTimer(SUBSYSTEM, CLASS, METRIC_NAME, TimeUnit.MILLISECONDS);
+        final Timer timer = metricObjects.createAndRegisterTimer(SUBSYSTEM, CLASS, METRIC_NAME, TimeUnit.MILLISECONDS);
 
         assertsAndVerifiesForCreateAndRegister(timer);
     }
@@ -80,7 +82,7 @@ public class MetricObjectsTest {
 
     @Test
     public void testFactoryGetDefaultMonitorRegisterInstance() {
-        assertSame(DefaultMonitorRegistry.getInstance(), realFactory.getMonitorRegistry());
+        assertSame(DefaultMonitorRegistry.getInstance(), factory.getMonitorRegistry());
     }
 
     @Test
