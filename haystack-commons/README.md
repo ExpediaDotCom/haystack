@@ -42,6 +42,7 @@ As you will see, creating a Servo object in Haystack requires a "subsystem" Stri
 ```
 public static final String SUBSYSTEM = "subsystemName"; // e.g. "pipes" or "trends"
 ```
+`SUBSYSTEM` never should not contain spaces or periods; if it does, each will be changed to a hyphen.
 ##### Class
 Creating a Servo object also requires a "class" String, which is often the Java class or Scala object containing the
 object:
@@ -53,7 +54,7 @@ resides, so it also acceptable to choose a "class" String that will never change
 ```
 private static final String CLASS_NAME = "JsonSerialization";
 ```
-The class never should not contain spaces or periods; if it does, they will be changed to a hyphen.
+`CLASS_NAME` never should not contain spaces or periods; if it does, each will be changed to a hyphen.
 ##### Singleton
 Your Servo objects should be singletons, either as static (Java) or object (Scala) variables. 
 #### Counter
@@ -109,7 +110,7 @@ haystack:
   graphite:
      prefix: "haystack"
      address: "haystack.local" # set in /etc/hosts per instructions in haystack/deployment module
-     port: 2003 # Graphite port; typicallly 2003
+     port: 2003 # Graphite port; typically 2003
      pollIntervalSeconds: 60
      queueSize: 10
 ```
@@ -126,7 +127,7 @@ InfluxDb via the OpenTSDB protocol does not currently exist; instead, the bridge
 and an InfluxDb template (read about them in this 
 [README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md) file) parses the Graphite plain
 text message into tags. (You can read about metrics tags 
-[here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html)).)
+[here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html).))
 
 This graphite bridge therefore requires a convention to map each metric piece to a tag; this convention is found/used in 
 three places that must agree on the convention:
