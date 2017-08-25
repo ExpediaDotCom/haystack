@@ -14,6 +14,8 @@ import org.cfg4j.provider.ConfigurationProviderBuilder;
 import org.cfg4j.source.classpath.ClasspathConfigurationSource;
 import org.cfg4j.source.context.filesprovider.ConfigFilesProvider;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,6 +31,7 @@ public class MetricPublishing {
     static final String ASYNC_METRIC_OBSERVER_NAME = "haystack";
     static final int POLL_INTERVAL_SECONDS_TO_EXPIRE_TIME_MULTIPLIER = 2000;
     static final int POLL_INTERVAL_SECONDS_TO_HEARTBEAT_MULTIPLIER = 2;
+    static final String HOST_NAME_UNKNOWN_HOST_EXCEPTION = "HostName-UnknownHostException";
 
     // TODO Add EnvironmentVariablesConfigurationSource object to handle env variables from apply-compose.sh et al
     private static ConfigFilesProvider cfp = () -> Collections.singletonList(Paths.get("base.yaml"));
@@ -84,7 +87,14 @@ public class MetricPublishing {
         }
 
         MetricObserver createGraphiteMetricObserver(String prefix, String address) {
-            return new GraphiteMetricObserver(prefix, address, new HaystackGraphiteNamingConvention());
+            String hostName;
+            try {
+                hostName = InetAddress.getLocalHost().getHostName();
+            } catch (UnknownHostException e) {
+                // There's no way to test this catch without introducing excessive ugliness into the code
+                hostName = HOST_NAME_UNKNOWN_HOST_EXCEPTION;
+            }
+            return new GraphiteMetricObserver(prefix, address, new HaystackGraphiteNamingConvention(hostName));
         }
 
         PollRunnable createTask(MetricPoller poller, Collection<MetricObserver> observers) {

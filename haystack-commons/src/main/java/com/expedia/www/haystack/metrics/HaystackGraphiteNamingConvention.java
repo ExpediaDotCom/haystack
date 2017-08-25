@@ -7,27 +7,17 @@ import com.netflix.servo.publish.graphite.GraphiteNamingConvention;
 import com.netflix.servo.tag.Tag;
 import com.netflix.servo.tag.TagList;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_CLASS;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
 
 public class HaystackGraphiteNamingConvention implements GraphiteNamingConvention {
-    static final String HOST_NAME_UNKNOWN_HOST_EXCEPTION = "HostName-UnknownHostException";
     static final String MISSING_TAG = "MISSING_TAG_%s";
-    static final String MISSING_VALUE = "MISSING_VALUE_%s";
     static final String METRIC_FORMAT = "%s.%s.%s.%s_%s";
 
-    static Factory factory = new Factory(); // will be mocked out in unit tests
-    static final String LOCAL_HOST_NAME = getLocalHost();
+    private final String hostName;
 
-    static String getLocalHost() {
-        try {
-            return cleanup(factory.getLocalHost().getHostName(), "");
-        } catch (UnknownHostException e) {
-            return HOST_NAME_UNKNOWN_HOST_EXCEPTION;
-        }
+    HaystackGraphiteNamingConvention(String hostName) {
+        this.hostName = cleanup(hostName);
     }
 
     @Override
@@ -38,7 +28,7 @@ public class HaystackGraphiteNamingConvention implements GraphiteNamingConventio
         final String klass = cleanup(tags, TAG_KEY_CLASS);
         final String configName = config.getName(); // Servo disallows null for name, no need to cleanup
         final String type = cleanup(tags, DataSourceType.KEY);
-        return String.format(METRIC_FORMAT, subsystem, LOCAL_HOST_NAME, klass, configName, type);
+        return String.format(METRIC_FORMAT, subsystem, hostName, klass, configName, type);
     }
 
     private static String cleanup(TagList tags, String name) {
@@ -49,19 +39,12 @@ public class HaystackGraphiteNamingConvention implements GraphiteNamingConventio
         if(tag == null) {
             return String.format(MISSING_TAG, name);
         }
-        return cleanup(tag.getValue(), name);
+        return cleanup(tag.getValue());
     }
 
-    private static String cleanup(String value, String name) {
-        if(value == null) {
-            return String.format(MISSING_VALUE, name);
-        }
+    private static String cleanup(String value) {
+        // Servo disallows null or "" in tag value, so there's no need to check for that here;
+        // just handle spaces and periods, replacing each such illegal character with an underscore.
         return value.replace(" ", "_").replace(".", "_");
-    }
-
-    static class Factory {
-        InetAddress getLocalHost() throws UnknownHostException {
-            return InetAddress.getLocalHost();
-        }
     }
 }

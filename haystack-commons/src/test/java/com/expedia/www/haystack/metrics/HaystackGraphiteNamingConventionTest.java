@@ -13,22 +13,16 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.HOST_NAME_UNKNOWN_HOST_EXCEPTION;
-import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.LOCAL_HOST_NAME;
 import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.METRIC_FORMAT;
 import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.MISSING_TAG;
-import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.MISSING_VALUE;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_CLASS;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class HaystackGraphiteNamingConventionTest {
@@ -37,10 +31,8 @@ public class HaystackGraphiteNamingConventionTest {
     private final static String SUBSYSTEM = RANDOM.nextLong() + "SUBSYSTEM";
     private final static String CLASS = RANDOM.nextLong() + "CLASS";
     private final static String TYPE = RANDOM.nextLong() + "TYPE";
-
-    @Mock
-    private HaystackGraphiteNamingConvention.Factory mockFactory;
-    private HaystackGraphiteNamingConvention.Factory realFactory;
+    private final static String LOCAL_HOST_NAME = "127.0.0.1";
+    private final static String LOCAL_HOST_NAME_CLEANED = LOCAL_HOST_NAME.replace(".", "_");
 
     @Mock
     private InetAddress mockLocalHost;
@@ -49,43 +41,12 @@ public class HaystackGraphiteNamingConventionTest {
 
     @Before
     public void setUp() {
-        realFactory = HaystackGraphiteNamingConvention.factory;
-        HaystackGraphiteNamingConvention.factory = mockFactory;
-        haystackGraphiteNamingConvention = new HaystackGraphiteNamingConvention();
+        haystackGraphiteNamingConvention = new HaystackGraphiteNamingConvention(LOCAL_HOST_NAME);
     }
 
     @After
     public void tearDown() {
-        HaystackGraphiteNamingConvention.factory = realFactory;
-        verifyNoMoreInteractions(mockFactory, mockLocalHost);
-    }
-
-    @Test
-    public void testThatStaticHostNameIsLocalHost() throws UnknownHostException {
-        final String expected = InetAddress.getLocalHost().getHostName().replace(" ", "_").replace(".", "_");
-        assertEquals(expected, LOCAL_HOST_NAME);
-    }
-
-    @Test
-    public void testGetLocalHostException() throws UnknownHostException {
-        when(mockFactory.getLocalHost()).thenThrow(new UnknownHostException());
-
-        final String localHost = HaystackGraphiteNamingConvention.getLocalHost();
-        assertEquals(HOST_NAME_UNKNOWN_HOST_EXCEPTION, localHost);
-
-        verify(mockFactory).getLocalHost();
-    }
-
-    @Test
-    public void testGetLocalHostNullHostName() throws UnknownHostException {
-        when(mockFactory.getLocalHost()).thenReturn(mockLocalHost);
-
-        final String localHost = HaystackGraphiteNamingConvention.getLocalHost();
-        assertEquals(String.format(MISSING_VALUE, ""), localHost);
-
-        verify(mockFactory).getLocalHost();
-        //noinspection ResultOfMethodCallIgnored
-        verify(mockLocalHost).getHostName();
+        verifyNoMoreInteractions(mockLocalHost);
     }
 
     @Test
@@ -95,7 +56,7 @@ public class HaystackGraphiteNamingConventionTest {
         final String name = haystackGraphiteNamingConvention.getName(metric);
 
         final String expected = String.format(METRIC_FORMAT, String.format(MISSING_TAG, TAG_KEY_SUBSYSTEM),
-                LOCAL_HOST_NAME, String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME,
+                LOCAL_HOST_NAME_CLEANED, String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME,
                 String.format(MISSING_TAG, DataSourceType.KEY));
         assertEquals(expected, name);
     }
@@ -110,6 +71,6 @@ public class HaystackGraphiteNamingConventionTest {
 
         final String name = haystackGraphiteNamingConvention.getName(metric);
 
-        assertEquals(String.format(METRIC_FORMAT, SUBSYSTEM, LOCAL_HOST_NAME, CLASS, METRIC_NAME, TYPE), name);
+        assertEquals(String.format(METRIC_FORMAT, SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE), name);
     }
 }
