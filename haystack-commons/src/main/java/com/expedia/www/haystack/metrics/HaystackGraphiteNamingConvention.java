@@ -38,7 +38,7 @@ public class HaystackGraphiteNamingConvention implements GraphiteNamingConventio
         final String klass = cleanup(tags, TAG_KEY_CLASS);
         final String configName = config.getName(); // Servo disallows null for name, no need to cleanup
         final String type = cleanup(tags, DataSourceType.KEY);
-        return String.format(METRIC_FORMAT, LOCAL_HOST_NAME, subsystem, klass, configName, type);
+        return String.format(METRIC_FORMAT, subsystem, LOCAL_HOST_NAME, klass, configName, type);
     }
 
     private static String cleanup(TagList tags, String name) {

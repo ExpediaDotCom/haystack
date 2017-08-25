@@ -94,8 +94,9 @@ public class HaystackGraphiteNamingConventionTest {
 
         final String name = haystackGraphiteNamingConvention.getName(metric);
 
-        final String expected = String.format(METRIC_FORMAT, LOCAL_HOST_NAME, String.format(MISSING_TAG, TAG_KEY_SUBSYSTEM),
-                String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME, String.format(MISSING_TAG, DataSourceType.KEY));
+        final String expected = String.format(METRIC_FORMAT, String.format(MISSING_TAG, TAG_KEY_SUBSYSTEM),
+                LOCAL_HOST_NAME, String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME,
+                String.format(MISSING_TAG, DataSourceType.KEY));
         assertEquals(expected, name);
     }
 
@@ -109,6 +110,6 @@ public class HaystackGraphiteNamingConventionTest {
 
         final String name = haystackGraphiteNamingConvention.getName(metric);
 
-        assertEquals(String.format(METRIC_FORMAT, LOCAL_HOST_NAME, SUBSYSTEM, CLASS, METRIC_NAME, TYPE), name);
+        assertEquals(String.format(METRIC_FORMAT, SUBSYSTEM, LOCAL_HOST_NAME, CLASS, METRIC_NAME, TYPE), name);
     }
 }
