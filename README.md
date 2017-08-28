@@ -18,7 +18,7 @@ Haystack is intended to help users make sense of the information in these logs, 
 working quite right (too slow, failing service calls, etc.): to find "the needle in the haystack" (thus the name).
 
 ### The Solution
-![High Level Block Diagram](documentation/diagrams/Haystack%20Components.png)
+![High Level Block Diagram](docs/images/HaystackComponents.png)
 Below find information about components in the block diagram above.
 
 #### Infrastructure
