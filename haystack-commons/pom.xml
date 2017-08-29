@@ -3,31 +3,41 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!--
-       /*
-        *
-        *  Copyright 2017 Expedia, Inc.
-        *
-        *     Licensed under the Apache License, Version 2.0 (the "License");
-        *     you may not use this file except in compliance with the License.
-        *     You may obtain a copy of the License at
-        *
-        *         http://www.apache.org/licenses/LICENSE-2.0
-        *
-        *     Unless required by applicable law or agreed to in writing, software
-        *     distributed under the License is distributed on an "AS IS" BASIS,
-        *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-        *     See the License for the specific language governing permissions and
-        *     limitations under the License.
-        *
-        */
-      -->
     <groupId>com.expedia.www</groupId>
     <artifactId>haystack-commons</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1</version>
+    <packaging>jar</packaging>
 
     <name>haystack-commons</name>
+    <description>Code needed by all or most Haystack packages</description>
     <url>http://maven.apache.org</url>
+
+    <licenses>
+        <!--
+           /*
+            *
+            *  Copyright 2017 Expedia, Inc.
+            *
+            *     Licensed under the Apache License, Version 2.0 (the "License");
+            *     you may not use this file except in compliance with the License.
+            *     You may obtain a copy of the License at
+            *
+            *         http://www.apache.org/licenses/LICENSE-2.0
+            *
+            *     Unless required by applicable law or agreed to in writing, software
+            *     distributed under the License is distributed on an "AS IS" BASIS,
+            *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+            *     See the License for the specific language governing permissions and
+            *     limitations under the License.
+            *
+            */
+          -->
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
     <properties>
         <cfg4j-core-version>4.4.1</cfg4j-core-version>
@@ -88,6 +98,32 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar-plugin-version}</version>
+            </plugin>
+            <plugin>
+                <!-- Include source files in the jar -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Include javadoc in the jar -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

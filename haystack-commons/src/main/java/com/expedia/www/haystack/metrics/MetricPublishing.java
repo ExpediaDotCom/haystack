@@ -43,14 +43,25 @@ public class MetricPublishing {
 
     private final Factory factory;
 
+    /**
+     * Creates a new instance of MetricPublishing; intended to be used by non-unit-test code.
+     */
     public MetricPublishing() {
         this(new Factory());
     }
 
+    /**
+     * Creates a new instance of MetricPublishing with a user-specified Factory; intended to be used by unit-test code
+     * so that the Factory can be mocked.
+     */
     public MetricPublishing(Factory factory) {
         this.factory = factory;
     }
 
+    /**
+     * Starts the polling that will publish metrics at regular intervals. This start() method should be called by
+     * the main() method of the application.
+     */
     public void start() {
         final PollScheduler pollScheduler = PollScheduler.getInstance();
         pollScheduler.start();
@@ -76,17 +87,52 @@ public class MetricPublishing {
         return factory.createAsyncMetricObserver(observer, queueSize, expireTime);
     }
 
-    static class Factory {
-        MetricObserver createAsyncMetricObserver(MetricObserver observer, int queueSize, long expireTime) {
+    /**
+     * Factory to wrap static or final methods; this Factory facilitates unit testing
+     */
+    public static class Factory {
+        /**
+         * The default (and only) constructor.
+         */
+        public Factory() {
+            // default constructor
+        }
+
+        /**
+         * Creates an AsyncMetricObserver that wraps another MetricObserver
+         *
+         * @param observer   a wrapped observer that will be updated asynchronously.
+         * @param queueSize  maximum size of the update queue, if the queue fills up older entries will be dropped.
+         * @param expireTime age in milliseconds before an update expires and will not be passed to the wrapped
+         *                   observer.
+         * @return the MetricObserver
+         */
+        public MetricObserver createAsyncMetricObserver(MetricObserver observer, int queueSize, long expireTime) {
             return new AsyncMetricObserver(ASYNC_METRIC_OBSERVER_NAME, observer, queueSize, expireTime);
         }
 
-        MetricObserver createCounterToRateMetricTransform(
+        /**
+         * Creates a MetricObserver that transforms Counter metrics into a rate per second.
+         *
+         * @param observer  downstream observer to forward values to after the rate has been computed
+         * @param heartbeat the specified heartbeat interval; should be a multiple of the sampling interval used when
+         *                  collecting the metrics
+         * @param timeUnit  Time unit for the heartbeat parameter
+         * @return the MetricObserver
+         */
+        public MetricObserver createCounterToRateMetricTransform(
                 MetricObserver observer, long heartbeat, TimeUnit timeUnit) {
             return new CounterToRateMetricTransform(observer, heartbeat, timeUnit);
         }
 
-        MetricObserver createGraphiteMetricObserver(String prefix, String address) {
+        /**
+         * Creates an Observer that shunts metrics out to the Graphite monitoring backend.
+         *
+         * @param prefix  base name to attach onto each metric published ("metricPrefix.{rest of name}".
+         * @param address address of the graphite data port in "host:port" format.
+         * @return The Observer that will shunt the metrics to Graphite
+         */
+        public MetricObserver createGraphiteMetricObserver(String prefix, String address) {
             String hostName;
             try {
                 hostName = InetAddress.getLocalHost().getHostName();
@@ -97,11 +143,24 @@ public class MetricPublishing {
             return new GraphiteMetricObserver(prefix, address, new HaystackGraphiteNamingConvention(hostName));
         }
 
-        PollRunnable createTask(MetricPoller poller, Collection<MetricObserver> observers) {
+        /**
+         * Creates a Runnable that will send updates to a collection of Observers. This Runnable will poll, matching all
+         * metrics, and send the metrics to all of the given observers.
+         *
+         * @param poller    the MetricPoller
+         * @param observers the Observers that will receive the polled metrics
+         * @return the Runnable
+         */
+        public PollRunnable createTask(MetricPoller poller, Collection<MetricObserver> observers) {
             return new PollRunnable(poller, BasicMetricFilter.MATCH_ALL, true, observers);
         }
 
-        MetricPoller createMonitorRegistryMetricPoller() {
+        /**
+         * Creates a Poller that fetches {@link com.netflix.servo.annotations.Monitor} metrics from a monitor registry.
+         *
+         * @return the MetricPoller
+         */
+        public MetricPoller createMonitorRegistryMetricPoller() {
             return new MonitorRegistryMetricPoller();
         }
     }
