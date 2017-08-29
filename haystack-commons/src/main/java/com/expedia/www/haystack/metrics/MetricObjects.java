@@ -23,10 +23,19 @@ public class MetricObjects {
 
     private final Factory factory;
 
+    /**
+     * Create a new instance of MetricObjects; intended to be used by non-unit-test code.
+     */
     public MetricObjects() {
         this(new Factory());
     }
 
+    /**
+     * Create a new instance of MetricObjects with a user-specified Factory; intended to be used by unit-test code
+     * so that the Factory can be mocked.
+     *
+     * @param factory The Factory to use to obtain a MonitorRegistry
+     */
     public MetricObjects(Factory factory) {
         this.factory = factory;
     }
@@ -34,9 +43,10 @@ public class MetricObjects {
     /**
      * Creates a new Counter; you should only call this method once for each Counter in your code.
      *
-     * @param subsystem   the subsystem, typically something like "pipes" or "trends"
-     * @param klass       the metric class, frequently (but not necessarily) the class containing the counter the module
-     * @param counterName the name of the counter, usually the name of the variable holding the Counter instance
+     * @param subsystem   the subsystem, typically something like "pipes" or "trends".
+     * @param klass       the metric class, frequently (but not necessarily) the class containing the Counter.
+     * @param counterName the name of the Counter, usually the name of the variable holding the Counter instance;
+     *                    using upper case for counterName is recommended.
      * @return a new Counter that this method registers in the DefaultMonitorRegistry before returning it.
      */
     public Counter createAndRegisterCounter(String subsystem, String klass, String counterName) {
@@ -47,12 +57,14 @@ public class MetricObjects {
     }
 
     /**
-     * Creates a new Timer; you should only call this method once for each Timer in your code
+     * Creates a new Timer; you should only call this method once for each Timer in your code.
      *
-     * @param subsystem the subsystem, typically something like "pipes" or "trends"
-     * @param klass     the metric class, frequently (but not necessarily) the class containing the counter the module
-     * @param timerName the name of the timer, usually the name of the variable holding the Timer instance
-     * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS
+     * @param subsystem the subsystem, typically something like "pipes" or "trends".
+     * @param klass     the metric class, frequently (but not necessarily) the class containing the Timer.
+     * @param timerName the name of the Timer, usually the name of the variable holding the Timer instance
+     *                  using upper case for timerName is recommended.
+     * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS; use TimeUnit.MICROSECONDS or
+     *                  TimeUnit.NANOSECONDS (rare) for more precision.
      * @return a new Timer that this method registers in the DefaultMonitorRegistry before returning it.
      */
     public Timer createAndRegisterTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
@@ -69,8 +81,24 @@ public class MetricObjects {
         return new BasicTagList(builder.result());
     }
 
-    static class Factory {
-        MonitorRegistry getMonitorRegistry() {
+    /**
+     * Factory to wrap static or final methods; this Factory facilitates unit testing.
+     */
+    public static class Factory {
+        /**
+         * The default (and only) constructor.
+         */
+        public Factory() {
+            // default constructor
+        }
+
+        /**
+         * Returns the MonitorRegistry that keeps track of objects with
+         * {@link com.netflix.servo.annotations.Monitor} annotations.
+         *
+         * @return the MonitorRegistry to use.
+         */
+        public MonitorRegistry getMonitorRegistry() {
             return DefaultMonitorRegistry.getInstance();
         }
     }
