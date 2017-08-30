@@ -16,6 +16,7 @@ import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
 public class HaystackGraphiteNamingConvention implements GraphiteNamingConvention {
     static final String MISSING_TAG = "MISSING_TAG_%s";
     static final String METRIC_FORMAT = "%s.%s.%s.%s_%s";
+    static final String STATISTIC_TAG_NAME = "statistic";
 
     private final String hostName;
 
@@ -48,7 +49,12 @@ public class HaystackGraphiteNamingConvention implements GraphiteNamingConventio
         final String klass = cleanup(tags, TAG_KEY_CLASS);
         final String configName = config.getName(); // Servo disallows null for name, no need to cleanup
         final String type = cleanup(tags, DataSourceType.KEY);
-        return String.format(METRIC_FORMAT, subsystem, hostName, klass, configName, type);
+
+        // Timer comes with a statistic tag; Counter does not
+        final Tag statisticTag = tags.getTag(STATISTIC_TAG_NAME);
+        final String statisticName = statisticTag == null ? null : statisticTag.getValue();
+        final String metricName = statisticName == null ? type : type + '_' + statisticName;
+        return String.format(METRIC_FORMAT, subsystem, hostName, klass, configName, metricName);
     }
 
     private static String cleanup(TagList tags, String name) {

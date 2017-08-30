@@ -66,14 +66,17 @@ Simply increment the Counter to count:
 REQUEST.increment();
 ```
 It will be reset when its value is reported to InfluxDb.
-#### Timer
+#### BasicTimer
 ##### Creation
-The code below is a Java snippet that shows the right way to create a Timer:
+The code below is a Java snippet that shows the right way to create a BasicTimer:
 ```
-static final Timer JSON_SERIALIZATION = (new MetricObjects()).createAndRegisterTimer(SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
+static final Timer JSON_SERIALIZATION = (new MetricObjects()).createAndRegisterTimer(
+    SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
 ```
-The Servo Timer generates two metrics (GAUGE and NORMALIZED), and using upper case is again suggested (see the Counter 
-section above) to create complete metric names of `JSON_SERIALIZATION_GAUGE` and `JSON_SERIALIZATION_NORMALIZED`.
+The Servo Timer generates four metrics (GAUGE max, NORMALIZED count, NORMALIZED totalOfSquares, and NORMALIZED
+totalTime), and while using upper case is again suggested (see the Counter section above), the complete metric names 
+(`JSON_SERIALIZATION_GAUGE_min`, `JSON_SERIALIZATION_NORMALIZED_count`, `JSON_SERIALIZATION_NORMALIZED_totalOfSquares`, 
+and `JSON_SERIALIZATION_NORMALIZED_totalTime`) are mixed case.
 Choose the appropriate time unit as the last argument:
 * For on-host code, `TimeUnit.MICROSECONDS` is probably appropriate.
 * For network calls, `TimeUnit.MILLISECONDS` may be sufficient.
@@ -90,6 +93,10 @@ try {
 } finally {
     stopwatch.stop();
 }
+```
+You can also do your own timing without using a Stopwatch:
+```
+JSON_SERIALIZATION.record(timeItTookInMs, TimeUnit.MILLISECONDS);
 ```
 Again, the Timer will be reset when its values are reported to InfluxDb.
 #### The Main Method
@@ -142,5 +149,5 @@ where:
 * `<server>` is the host name
 * `<subsystem>` is the value discussed in the "Subsystem" section above
 * `<class>` is the  value discussed in the "Class" section above
-* `<VARIABLE_NAME>_<METRIC_NAME>` is the complete metric name; see `REQUEST_RATE`, `JSON_SERIALIZATION_GAUGE`, and 
-`JSON_SERIALIZATION_NORMALIZED` in the "Counter" and "Timer" sections above.
+* `<VARIABLE_NAME>_<METRIC_NAME>_<timerStatName>` is the complete metric name; see the "Counter" and "BasicTimer" 
+sections above.
