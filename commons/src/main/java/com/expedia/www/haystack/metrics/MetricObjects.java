@@ -36,7 +36,7 @@ public class MetricObjects {
      *
      * @param factory The Factory to use to obtain a MonitorRegistry
      */
-    public MetricObjects(Factory factory) {
+    MetricObjects(Factory factory) {
         this.factory = factory;
     }
 
