@@ -59,7 +59,9 @@
         <cfg4j-core-version>4.4.1</cfg4j-core-version>
         <junit-version>4.12</junit-version>
         <maven-compiler-plugin-version>3.6.1</maven-compiler-plugin-version>
+        <maven-javadoc-plugin-version>2.10.4</maven-javadoc-plugin-version>
         <maven-jar-plugin-version>3.0.2</maven-jar-plugin-version>
+        <maven-source-plugin-version>3.0.1</maven-source-plugin-version>
         <mockito-version>1.9.5</mockito-version>
         <servo-version>0.12.17</servo-version>
         <slf4j-version>1.7.25</slf4j-version>
@@ -119,6 +121,7 @@
                 <!-- Build a source JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>${maven-source-plugin-version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -132,6 +135,7 @@
                 <!-- Build a JavaDoc JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin-version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>

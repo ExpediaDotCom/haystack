@@ -2,9 +2,10 @@ package com.expedia.www.haystack.metrics;
 
 import com.netflix.servo.DefaultMonitorRegistry;
 import com.netflix.servo.MonitorRegistry;
+import com.netflix.servo.monitor.BasicTimer;
 import com.netflix.servo.monitor.Counter;
+import com.netflix.servo.monitor.MonitorConfig;
 import com.netflix.servo.monitor.Monitors;
-import com.netflix.servo.monitor.Timer;
 import com.netflix.servo.tag.BasicTagList;
 import com.netflix.servo.tag.SmallTagMap;
 import com.netflix.servo.tag.TagList;
@@ -57,21 +58,22 @@ public class MetricObjects {
     }
 
     /**
-     * Creates a new Timer; you should only call this method once for each Timer in your code.
+     * Creates a new BasicTimer; you should only call this method once for each BasicTimer in your code.
      *
      * @param subsystem the subsystem, typically something like "pipes" or "trends".
      * @param klass     the metric class, frequently (but not necessarily) the class containing the Timer.
      * @param timerName the name of the Timer, usually the name of the variable holding the Timer instance
      *                  using upper case for timerName is recommended.
-     * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS; use TimeUnit.MICROSECONDS or
-     *                  TimeUnit.NANOSECONDS (rare) for more precision.
+     * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS; use TimeUnit.NANOSECONDS (rare) or
+     *                  TimeUnit.MICROSECONDS for more precision.
      * @return a new Timer that this method registers in the DefaultMonitorRegistry before returning it.
      */
-    public Timer createAndRegisterTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
+    public BasicTimer createAndRegisterBasicTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
         final TaggingContext taggingContext = () -> getTags(subsystem, klass);
-        final Timer timer = Monitors.newTimer(timerName, timeUnit, taggingContext);
-        factory.getMonitorRegistry().register(timer);
-        return timer;
+        final MonitorConfig.Builder builder = MonitorConfig.builder(timerName).withTags(taggingContext.getTags());
+        final BasicTimer basicTimer = new BasicTimer(builder.build(), timeUnit);
+        factory.getMonitorRegistry().register(basicTimer);
+        return basicTimer;
     }
 
     private static TagList getTags(String subsystem, String klass) {
