@@ -53,8 +53,10 @@ public class MetricPublishing {
     /**
      * Creates a new instance of MetricPublishing with a user-specified Factory; intended to be used by unit-test code
      * so that the Factory can be mocked.
+     *
+     * @param factory The factory to use.
      */
-    public MetricPublishing(Factory factory) {
+    MetricPublishing(Factory factory) {
         this.factory = factory;
     }
 
@@ -90,11 +92,11 @@ public class MetricPublishing {
     /**
      * Factory to wrap static or final methods; this Factory facilitates unit testing
      */
-    public static class Factory {
+    static class Factory {
         /**
          * The default (and only) constructor.
          */
-        public Factory() {
+        Factory() {
             // default constructor
         }
 
@@ -107,7 +109,7 @@ public class MetricPublishing {
          *                   observer.
          * @return the MetricObserver
          */
-        public MetricObserver createAsyncMetricObserver(MetricObserver observer, int queueSize, long expireTime) {
+        MetricObserver createAsyncMetricObserver(MetricObserver observer, int queueSize, long expireTime) {
             return new AsyncMetricObserver(ASYNC_METRIC_OBSERVER_NAME, observer, queueSize, expireTime);
         }
 
@@ -120,7 +122,7 @@ public class MetricPublishing {
          * @param timeUnit  Time unit for the heartbeat parameter
          * @return the MetricObserver
          */
-        public MetricObserver createCounterToRateMetricTransform(
+        MetricObserver createCounterToRateMetricTransform(
                 MetricObserver observer, long heartbeat, TimeUnit timeUnit) {
             return new CounterToRateMetricTransform(observer, heartbeat, timeUnit);
         }
@@ -132,7 +134,7 @@ public class MetricPublishing {
          * @param address address of the graphite data port in "host:port" format.
          * @return The Observer that will shunt the metrics to Graphite
          */
-        public MetricObserver createGraphiteMetricObserver(String prefix, String address) {
+        MetricObserver createGraphiteMetricObserver(String prefix, String address) {
             String hostName;
             try {
                 hostName = InetAddress.getLocalHost().getHostName();
@@ -151,7 +153,7 @@ public class MetricPublishing {
          * @param observers the Observers that will receive the polled metrics
          * @return the Runnable
          */
-        public PollRunnable createTask(MetricPoller poller, Collection<MetricObserver> observers) {
+        PollRunnable createTask(MetricPoller poller, Collection<MetricObserver> observers) {
             return new PollRunnable(poller, BasicMetricFilter.MATCH_ALL, true, observers);
         }
 
@@ -160,7 +162,7 @@ public class MetricPublishing {
          *
          * @return the MetricPoller
          */
-        public MetricPoller createMonitorRegistryMetricPoller() {
+        MetricPoller createMonitorRegistryMetricPoller() {
             return new MonitorRegistryMetricPoller();
         }
     }

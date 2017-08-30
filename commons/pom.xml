@@ -3,14 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.expedia.www</groupId>
     <artifactId>haystack-commons</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
 
-    <name>haystack-commons</name>
-    <description>Code needed by all or most Haystack packages</description>
-    <url>http://maven.apache.org</url>
+    <scm>
+        <connection>scm:git:git://github.com/ExpediaDotCom/haystack.git</connection>
+        <developerConnection>scm:git:ssh://github.com/ExpediaDotCom/haystack.git</developerConnection>
+        <url>http://github.com/ExpediaDotCom/haystack/tree/master/common</url>
+    </scm>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Code needed by all or most other Haystack packages</description>
+    <url>https://github.com/ExpediaDotCom/haystack/tree/master/commons</url>
 
     <licenses>
         <!--
@@ -38,6 +45,15 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <developers>
+        <developer>
+            <name>Jeff Baker</name>
+            <email>jeffbaker@expedia.com</email>
+            <organization>Haystack</organization>
+            <organizationUrl>https://expediadotcom.github.io/haystack/infrastructure/section.html</organizationUrl>
+        </developer>
+    </developers>
 
     <properties>
         <cfg4j-core-version>4.4.1</cfg4j-core-version>
@@ -100,7 +116,7 @@
                 <version>${maven-jar-plugin-version}</version>
             </plugin>
             <plugin>
-                <!-- Include source files in the jar -->
+                <!-- Build a source JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
                 <executions>
@@ -113,7 +129,7 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- Include javadoc in the jar -->
+                <!-- Build a JavaDoc JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <executions>

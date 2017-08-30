@@ -122,7 +122,7 @@ InfluxDb via the OpenTSDB protocol does not currently exist; instead, the bridge
 and an InfluxDb template (read about them in this 
 [README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md) file) parses the Graphite plain
 text message into tags. (You can read about metrics tags 
-[here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html).))
+[here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html).)
 
 This graphite bridge therefore requires a convention to map each metric piece to a tag; this convention is found/used in 
 three places that must agree on the convention:
@@ -138,7 +138,7 @@ As a result, the graphite message has the following meaning:
 <system>.<server>.<subsystem>.<class>.<VARIABLE_NAME>_<METRIC_NAME>
 ```
 where:
-* `<system>` is always "haystack"
+* `<system>` is typically "haystack" (this value is controlled by the `haystack.graphite.prefix` configuration)
 * `<server>` is the host name
 * `<subsystem>` is the value discussed in the "Subsystem" section above
 * `<class>` is the  value discussed in the "Class" section above
