@@ -42,6 +42,7 @@ deployable_units:
           containerPort: 9092
           servicePort: 9092
           hostPort: 9092
+
      - name: kafka-rest-svc
        image: confluentinc/cp-kafka-rest:3.2.1
        replicas: 1
@@ -54,26 +55,15 @@ deployable_units:
           containerPort: 8082
           servicePort: 8082
           hostPort: 8082
-     - name: haystack-span-stitcher
-       image: haystack-span-stitcher:latest
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       appConfigPath: configs/dev/span-stitcher.conf
-       env:
-        - name: OVERRIDES_CONFIG_PATH
-          value: /configs/span-stitcher.conf
 
-     - name: haystack-stitched-span-collector
-       image: haystack-stitched-span-collector:latest
+     - name: haystack-trace-indexer
+       image: haystack-trace-indexer:latest
        replicas: 1
        terminationGracePeriodSeconds: 30
-       appConfigPath: configs/dev/stitched-span-collector.conf
-       autoscale:
-         maxReplicas: 2
-         targetCPUUtilizationPercentage: 75
+       appConfigPath: configs/dev/trace-indexer.conf
        env:
         - name: OVERRIDES_CONFIG_PATH
-          value: /configs/stitched-span-collector.conf
+          value: /configs/trace-indexer.conf
 
      - name: haystack-span-timeseries-transformer
        image: haystack-span-timeseries-transformer:latest
@@ -85,7 +75,6 @@ deployable_units:
        env:
         - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
           value: "kafkasvc:9092"
-
 
      - name:  haystack-timeseries-aggregator
        image:  haystack-timeseries-aggregator:latest
