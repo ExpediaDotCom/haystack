@@ -3,9 +3,10 @@ Automates deployment of Haystack components using [Kubernetes](https://en.wikipe
 ## Installation
 Clone this repository and run the script, as documented in the next section.
 ## Usage
-From the root of the location to which haystack-deployment has been cloned:
+From the root of the location to which haystack has been cloned:
 ```
-./k8s/apply-compose.sh -a install
+cd deployment/k8s
+./apply-compose.sh -a install
 ```
 will install required third party software, start the minikube and install all haystack components in dev mode. 
 
@@ -33,7 +34,7 @@ kubectl config get-contexts
 ```
 list all the available contexts. Choose your cluster context, and deploy the haystack with:
 ```
-./k8s/apply-compose.sh -a install -e test --use-context <context-name>
+./apply-compose.sh -a install -e test --use-context <context-name>
 ```
 Please note the default context for all environments will be minikube. This is done intentionally to safeguard developers 
 from pushing their local dev changes to other environments. 
@@ -91,10 +92,10 @@ to see the text you gave to the producer.
 
 To uninstall all haystack components:
 ```
-./k8s/apply-compose.sh -a uninstall
+./apply-compose.sh -a uninstall
 ```
 To learn more about `apply-compose.sh`, type :
 ```
-./k8s/apply-compose.sh --help
+./apply-compose.sh --help
 ```
 and by looking at the `apply-compose.sh` [source](k8s/apply-compose.sh).
