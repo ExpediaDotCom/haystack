@@ -14,10 +14,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_CLASS;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.verify;
@@ -62,10 +62,10 @@ public class MetricObjectsTest {
     }
 
     @Test
-    public void testCreateAndRegisterTimer() {
+    public void testCreateAndRegisterBasicTimer() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Timer timer = metricObjects.createAndRegisterTimer(SUBSYSTEM, CLASS, METRIC_NAME, TimeUnit.MILLISECONDS);
+        final Timer timer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
 
         assertsAndVerifiesForCreateAndRegister(timer);
     }

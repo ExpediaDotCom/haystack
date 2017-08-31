@@ -66,14 +66,17 @@ Simply increment the Counter to count:
 REQUEST.increment();
 ```
 It will be reset when its value is reported to InfluxDb.
-#### Timer
+#### BasicTimer
 ##### Creation
-The code below is a Java snippet that shows the right way to create a Timer:
+The code below is a Java snippet that shows the right way to create a BasicTimer:
 ```
-static final Timer JSON_SERIALIZATION = (new MetricObjects()).createAndRegisterTimer(SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
+static final Timer JSON_SERIALIZATION = (new MetricObjects()).createAndRegisterTimer(
+    SUBSYSTEM, KLASS_NAME, "JSON_SERIALIZATION", TimeUnit.MICROSECONDS);
 ```
-The Servo Timer generates two metrics (GAUGE and NORMALIZED), and using upper case is again suggested (see the Counter 
-section above) to create complete metric names of `JSON_SERIALIZATION_GAUGE` and `JSON_SERIALIZATION_NORMALIZED`.
+The Servo Timer generates four metrics (GAUGE max, NORMALIZED count, NORMALIZED totalOfSquares, and NORMALIZED
+totalTime), and while using upper case is again suggested (see the Counter section above), the complete metric names 
+(`JSON_SERIALIZATION_GAUGE_min`, `JSON_SERIALIZATION_NORMALIZED_count`, `JSON_SERIALIZATION_NORMALIZED_totalOfSquares`, 
+and `JSON_SERIALIZATION_NORMALIZED_totalTime`) are mixed case.
 Choose the appropriate time unit as the last argument:
 * For on-host code, `TimeUnit.MICROSECONDS` is probably appropriate.
 * For network calls, `TimeUnit.MILLISECONDS` may be sufficient.
@@ -90,6 +93,10 @@ try {
 } finally {
     stopwatch.stop();
 }
+```
+You can also do your own timing without using a Stopwatch:
+```
+JSON_SERIALIZATION.record(timeItTookInMs, TimeUnit.MILLISECONDS);
 ```
 Again, the Timer will be reset when its values are reported to InfluxDb.
 #### The Main Method
@@ -122,7 +129,7 @@ InfluxDb via the OpenTSDB protocol does not currently exist; instead, the bridge
 and an InfluxDb template (read about them in this 
 [README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md) file) parses the Graphite plain
 text message into tags. (You can read about metrics tags 
-[here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html).))
+[here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html).)
 
 This graphite bridge therefore requires a convention to map each metric piece to a tag; this convention is found/used in 
 three places that must agree on the convention:
@@ -138,9 +145,9 @@ As a result, the graphite message has the following meaning:
 <system>.<server>.<subsystem>.<class>.<VARIABLE_NAME>_<METRIC_NAME>
 ```
 where:
-* `<system>` is always "haystack"
+* `<system>` is typically "haystack" (this value is controlled by the `haystack.graphite.prefix` configuration)
 * `<server>` is the host name
 * `<subsystem>` is the value discussed in the "Subsystem" section above
 * `<class>` is the  value discussed in the "Class" section above
-* `<VARIABLE_NAME>_<METRIC_NAME>` is the complete metric name; see `REQUEST_RATE`, `JSON_SERIALIZATION_GAUGE`, and 
-`JSON_SERIALIZATION_NORMALIZED` in the "Counter" and "Timer" sections above.
+* `<VARIABLE_NAME>_<METRIC_NAME>_<timerStatName>` is the complete metric name; see the "Counter" and "BasicTimer" 
+sections above.

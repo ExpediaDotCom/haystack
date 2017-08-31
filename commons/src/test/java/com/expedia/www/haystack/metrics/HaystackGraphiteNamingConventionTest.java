@@ -19,6 +19,7 @@ import java.util.Random;
 
 import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.METRIC_FORMAT;
 import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.MISSING_TAG;
+import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.STATISTIC_TAG_NAME;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_CLASS;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
 import static org.junit.Assert.assertEquals;
@@ -31,6 +32,7 @@ public class HaystackGraphiteNamingConventionTest {
     private final static String SUBSYSTEM = RANDOM.nextLong() + "SUBSYSTEM";
     private final static String CLASS = RANDOM.nextLong() + "CLASS";
     private final static String TYPE = RANDOM.nextLong() + "TYPE";
+    private final static String STATISTIC = RANDOM.nextLong() + "STATISTIC";
     private final static String LOCAL_HOST_NAME = "127.0.0.1";
     private final static String LOCAL_HOST_NAME_CLEANED = LOCAL_HOST_NAME.replace(".", "_");
 
@@ -62,7 +64,7 @@ public class HaystackGraphiteNamingConventionTest {
     }
 
     @Test
-    public void testGetNameNoneNull() {
+    public void testGetNameNoneNullWithoutStatistic() {
         final List<Tag> tagList = new ArrayList<>(3);
         tagList.add(Tags.newTag(TAG_KEY_SUBSYSTEM, SUBSYSTEM));
         tagList.add(Tags.newTag(TAG_KEY_CLASS, CLASS));
@@ -72,5 +74,21 @@ public class HaystackGraphiteNamingConventionTest {
         final String name = haystackGraphiteNamingConvention.getName(metric);
 
         assertEquals(String.format(METRIC_FORMAT, SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE), name);
+    }
+
+    @Test
+    public void testGetNameNoneNullWithStatistic() {
+        final List<Tag> tagList = new ArrayList<>(4);
+        tagList.add(Tags.newTag(TAG_KEY_SUBSYSTEM, SUBSYSTEM));
+        tagList.add(Tags.newTag(TAG_KEY_CLASS, CLASS));
+        tagList.add(Tags.newTag(DataSourceType.KEY, TYPE));
+        tagList.add(Tags.newTag(STATISTIC_TAG_NAME, STATISTIC));
+        final Metric metric = new Metric(METRIC_NAME, new BasicTagList(tagList), 0, 0);
+
+        final String name = haystackGraphiteNamingConvention.getName(metric);
+
+        final String expected = String.format(METRIC_FORMAT,
+                SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE + '_' + STATISTIC);
+        assertEquals(expected, name);
     }
 }
