@@ -2,6 +2,7 @@ package com.expedia.www.haystack.metrics;
 
 import com.netflix.servo.DefaultMonitorRegistry;
 import com.netflix.servo.MonitorRegistry;
+import com.netflix.servo.annotations.DataSourceType;
 import com.netflix.servo.monitor.Counter;
 import com.netflix.servo.monitor.Monitor;
 import com.netflix.servo.monitor.Timer;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.slf4j.Logger;
 
 import java.util.Random;
 
@@ -37,19 +39,24 @@ public class MetricObjectsTest {
     @Mock
     private MonitorRegistry mockMonitorRegistry;
 
+    @Mock
+    private Logger mockLogger;
+
     // Objects under test
     private MetricObjects metricObjects;
     private MetricObjects.Factory factory;
 
     @Before
     public void setUp() {
-        metricObjects = new MetricObjects(mockFactory);
+        metricObjects = new MetricObjects(mockFactory, mockLogger);
         factory = new MetricObjects.Factory();
     }
 
     @After
     public void tearDown() {
-        verifyNoMoreInteractions(mockFactory, mockMonitorRegistry);
+        MetricObjects.COUNTERS.clear();
+        MetricObjects.TIMERS.clear();
+        verifyNoMoreInteractions(mockFactory, mockMonitorRegistry, mockLogger);
     }
 
     @Test
@@ -58,7 +65,25 @@ public class MetricObjectsTest {
 
         final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
 
-        assertsAndVerifiesForCreateAndRegister(counter);
+        assertsAndVerifiesForCreateAndRegisterCounter(counter);
+    }
+
+    @Test
+    public void testCreateAndRegisterExistingCounter() {
+        when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
+
+        final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
+        final Counter existingCounter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
+
+        assertSame(counter, existingCounter);
+        verify(mockLogger).warn(String.format(MetricObjects.COUNTER_ALREADY_REGISTERED, existingCounter));
+        assertsAndVerifiesForCreateAndRegisterCounter(counter);
+    }
+
+    private void assertsAndVerifiesForCreateAndRegisterCounter(Counter counter) {
+        assertsAndVerifiesForCreateAndRegister(counter, 3);
+        final TagList tagList = counter.getConfig().getTags();
+        assertEquals(DataSourceType.COUNTER.getValue(), tagList.getValue(DataSourceType.KEY));
     }
 
     @Test
@@ -67,12 +92,24 @@ public class MetricObjectsTest {
 
         final Timer timer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
 
-        assertsAndVerifiesForCreateAndRegister(timer);
+        assertsAndVerifiesForCreateAndRegister(timer, 2);
     }
 
-    private void assertsAndVerifiesForCreateAndRegister(Monitor<?> monitor) {
+    @Test
+    public void testCreateAndRegisterExistingBasicTimer() {
+        when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
+
+        final Timer timer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
+        final Timer existingTimer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
+
+        assertSame(timer, existingTimer);
+        verify(mockLogger).warn(String.format(MetricObjects.TIMER_ALREADY_REGISTERED, existingTimer));
+        assertsAndVerifiesForCreateAndRegister(timer, 2);
+    }
+
+    private void assertsAndVerifiesForCreateAndRegister(Monitor<?> monitor, int expectedTagListSize) {
         final TagList tagList = monitor.getConfig().getTags();
-        assertEquals(2, tagList.size());
+        assertEquals(expectedTagListSize, tagList.size());
         assertEquals(SUBSYSTEM, tagList.getValue(TAG_KEY_SUBSYSTEM));
         assertEquals(CLASS, tagList.getValue(TAG_KEY_CLASS));
         assertEquals(METRIC_NAME, monitor.getConfig().getName());

@@ -9,14 +9,9 @@ import com.netflix.servo.publish.MonitorRegistryMetricPoller;
 import com.netflix.servo.publish.PollRunnable;
 import com.netflix.servo.publish.PollScheduler;
 import com.netflix.servo.publish.graphite.GraphiteMetricObserver;
-import org.cfg4j.provider.ConfigurationProvider;
-import org.cfg4j.provider.ConfigurationProviderBuilder;
-import org.cfg4j.source.classpath.ClasspathConfigurationSource;
-import org.cfg4j.source.context.filesprovider.ConfigFilesProvider;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -32,14 +27,6 @@ public class MetricPublishing {
     static final int POLL_INTERVAL_SECONDS_TO_EXPIRE_TIME_MULTIPLIER = 2000;
     static final int POLL_INTERVAL_SECONDS_TO_HEARTBEAT_MULTIPLIER = 2;
     static final String HOST_NAME_UNKNOWN_HOST_EXCEPTION = "HostName-UnknownHostException";
-
-    // TODO Add EnvironmentVariablesConfigurationSource object to handle env variables from apply-compose.sh et al
-    private static ConfigFilesProvider cfp = () -> Collections.singletonList(Paths.get("base.yaml"));
-    private static ClasspathConfigurationSource ccs = new ClasspathConfigurationSource(cfp);
-    private static ConfigurationProvider cp = new ConfigurationProviderBuilder().withConfigurationSource(ccs).build();
-
-    // will be mocked out in unit tests
-    static GraphiteConfig graphiteConfig = cp.bind("haystack.graphite", GraphiteConfig.class);
 
     private final Factory factory;
 
@@ -64,26 +51,27 @@ public class MetricPublishing {
      * Starts the polling that will publish metrics at regular intervals. This start() method should be called by
      * the main() method of the application.
      */
-    public void start() {
+    public void start(GraphiteConfig graphiteConfig) {
         final PollScheduler pollScheduler = PollScheduler.getInstance();
         pollScheduler.start();
         final MetricPoller monitorRegistryMetricPoller = factory.createMonitorRegistryMetricPoller();
-        final List<MetricObserver> observers = Collections.singletonList(createGraphiteObserver());
+        final List<MetricObserver> observers = Collections.singletonList(createGraphiteObserver(graphiteConfig));
         final PollRunnable task = factory.createTask(monitorRegistryMetricPoller, observers);
         pollScheduler.addPoller(task, graphiteConfig.pollIntervalSeconds(), TimeUnit.SECONDS);
     }
 
-    MetricObserver createGraphiteObserver() {
+    MetricObserver createGraphiteObserver(GraphiteConfig graphiteConfig) {
         final String address = graphiteConfig.address() + ":" + graphiteConfig.port();
-        return rateTransform(async(factory.createGraphiteMetricObserver(ASYNC_METRIC_OBSERVER_NAME, address)));
+        return rateTransform(graphiteConfig,
+                async(graphiteConfig, factory.createGraphiteMetricObserver(ASYNC_METRIC_OBSERVER_NAME, address)));
     }
 
-    MetricObserver rateTransform(MetricObserver observer) {
+    MetricObserver rateTransform(GraphiteConfig graphiteConfig, MetricObserver observer) {
         final long heartbeat = POLL_INTERVAL_SECONDS_TO_HEARTBEAT_MULTIPLIER * graphiteConfig.pollIntervalSeconds();
         return factory.createCounterToRateMetricTransform(observer, heartbeat, TimeUnit.SECONDS);
     }
 
-    MetricObserver async(MetricObserver observer) {
+    MetricObserver async(GraphiteConfig graphiteConfig, MetricObserver observer) {
         final long expireTime = POLL_INTERVAL_SECONDS_TO_EXPIRE_TIME_MULTIPLIER * graphiteConfig.pollIntervalSeconds();
         final int queueSize = graphiteConfig.queueSize();
         return factory.createAsyncMetricObserver(observer, queueSize, expireTime);

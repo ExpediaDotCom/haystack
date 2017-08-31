@@ -2,16 +2,21 @@ package com.expedia.www.haystack.metrics;
 
 import com.netflix.servo.DefaultMonitorRegistry;
 import com.netflix.servo.MonitorRegistry;
+import com.netflix.servo.monitor.BasicCounter;
 import com.netflix.servo.monitor.BasicTimer;
 import com.netflix.servo.monitor.Counter;
 import com.netflix.servo.monitor.MonitorConfig;
-import com.netflix.servo.monitor.Monitors;
+import com.netflix.servo.monitor.Timer;
 import com.netflix.servo.tag.BasicTagList;
 import com.netflix.servo.tag.SmallTagMap;
 import com.netflix.servo.tag.TagList;
 import com.netflix.servo.tag.TaggingContext;
 import com.netflix.servo.tag.Tags;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -21,14 +26,19 @@ import java.util.concurrent.TimeUnit;
 public class MetricObjects {
     static final String TAG_KEY_SUBSYSTEM = "subsystem";
     static final String TAG_KEY_CLASS = "class";
+    static final String COUNTER_ALREADY_REGISTERED = "The Counter %s has already been registered";
+    static final String TIMER_ALREADY_REGISTERED = "The Timer %s has already been registered";
+    static final ConcurrentMap<MonitorConfig, Counter> COUNTERS = new ConcurrentHashMap<>();
+    static final ConcurrentMap<MonitorConfig, Timer> TIMERS = new ConcurrentHashMap<>();
 
     private final Factory factory;
+    private final Logger logger;
 
     /**
      * Create a new instance of MetricObjects; intended to be used by non-unit-test code.
      */
     public MetricObjects() {
-        this(new Factory());
+        this(new Factory(), LoggerFactory.getLogger(MetricObjects.class));
     }
 
     /**
@@ -37,7 +47,8 @@ public class MetricObjects {
      *
      * @param factory The Factory to use to obtain a MonitorRegistry
      */
-    MetricObjects(Factory factory) {
+    MetricObjects(Factory factory, Logger logger) {
+        this.logger = logger;
         this.factory = factory;
     }
 
@@ -46,6 +57,8 @@ public class MetricObjects {
      * thread-safe, because both of Servo's implementations of the MonitorRegistry interface use thread-safe
      * implementations to hold the registered monitors: com.netflix.servo.jmx.JmxMonitorRegistry uses a ConcurrentMap,
      * and com.netflix.servo.BasicMonitorRegistry uses Collections.synchronizedSet().
+     * If you call the method twice with the same arguments, the Counter created during the first call will be returned
+     * by the second call.
      *
      * @param subsystem   the subsystem, typically something like "pipes" or "trends".
      * @param klass       the metric class, frequently (but not necessarily) the class containing the Counter.
@@ -54,8 +67,13 @@ public class MetricObjects {
      * @return a new Counter that this method registers in the DefaultMonitorRegistry before returning it.
      */
     public Counter createAndRegisterCounter(String subsystem, String klass, String counterName) {
-        final TaggingContext taggingContext = () -> getTags(subsystem, klass);
-        final Counter counter = Monitors.newCounter(counterName, taggingContext);
+        final MonitorConfig monitorConfig = buildMonitorConfig(subsystem, klass, counterName);
+        final Counter counter = new BasicCounter(monitorConfig);
+        final Counter existingCounter = COUNTERS.putIfAbsent(monitorConfig, counter);
+        if(existingCounter != null) {
+            logger.warn(String.format(COUNTER_ALREADY_REGISTERED, existingCounter.toString()));
+            return existingCounter;
+        }
         factory.getMonitorRegistry().register(counter);
         return counter;
     }
@@ -63,6 +81,8 @@ public class MetricObjects {
     /**
      * Creates a new BasicTimer; you should only call this method once for each BasicTimer in your code.
      * This method is thread-safe; see the comments in {@link #createAndRegisterCounter}.
+     * If you call the method twice with the same arguments, the Timer created during the first call will be returned
+     * by the second call.
      *
      * @param subsystem the subsystem, typically something like "pipes" or "trends".
      * @param klass     the metric class, frequently (but not necessarily) the class containing the Timer.
@@ -72,12 +92,21 @@ public class MetricObjects {
      *                  TimeUnit.MICROSECONDS for more precision.
      * @return a new BasicTimer that this method registers in the DefaultMonitorRegistry before returning it.
      */
-    public BasicTimer createAndRegisterBasicTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
-        final TaggingContext taggingContext = () -> getTags(subsystem, klass);
-        final MonitorConfig.Builder builder = MonitorConfig.builder(timerName).withTags(taggingContext.getTags());
-        final BasicTimer basicTimer = new BasicTimer(builder.build(), timeUnit);
+    public Timer createAndRegisterBasicTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
+        final MonitorConfig monitorConfig = buildMonitorConfig(subsystem, klass, timerName);
+        final Timer basicTimer = new BasicTimer(monitorConfig, timeUnit);
+        final Timer existingTimer = TIMERS.putIfAbsent(monitorConfig, basicTimer);
+        if(existingTimer != null) {
+            logger.warn(String.format(TIMER_ALREADY_REGISTERED, existingTimer.toString()));
+            return existingTimer;
+        }
         factory.getMonitorRegistry().register(basicTimer);
         return basicTimer;
+    }
+
+    private MonitorConfig buildMonitorConfig(String subsystem, String klass, String monitorName) {
+        final TaggingContext taggingContext = () -> getTags(subsystem, klass);
+        return MonitorConfig.builder(monitorName).withTags(taggingContext.getTags()).build();
     }
 
     private static TagList getTags(String subsystem, String klass) {
