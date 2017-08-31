@@ -42,7 +42,10 @@ public class MetricObjects {
     }
 
     /**
-     * Creates a new Counter; you should only call this method once for each Counter in your code.
+     * Creates a new Counter; you should only call this method once for each Counter in your code. This method is
+     * thread-safe, because both of Servo's implementations of the MonitorRegistry interface use thread-safe
+     * implementations to hold the registered monitors: com.netflix.servo.jmx.JmxMonitorRegistry uses a ConcurrentMap,
+     * and com.netflix.servo.BasicMonitorRegistry uses Collections.synchronizedSet().
      *
      * @param subsystem   the subsystem, typically something like "pipes" or "trends".
      * @param klass       the metric class, frequently (but not necessarily) the class containing the Counter.
@@ -59,6 +62,7 @@ public class MetricObjects {
 
     /**
      * Creates a new BasicTimer; you should only call this method once for each BasicTimer in your code.
+     * This method is thread-safe; see the comments in {@link #createAndRegisterCounter}.
      *
      * @param subsystem the subsystem, typically something like "pipes" or "trends".
      * @param klass     the metric class, frequently (but not necessarily) the class containing the Timer.
@@ -66,7 +70,7 @@ public class MetricObjects {
      *                  using upper case for timerName is recommended.
      * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS; use TimeUnit.NANOSECONDS (rare) or
      *                  TimeUnit.MICROSECONDS for more precision.
-     * @return a new Timer that this method registers in the DefaultMonitorRegistry before returning it.
+     * @return a new BasicTimer that this method registers in the DefaultMonitorRegistry before returning it.
      */
     public BasicTimer createAndRegisterBasicTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
         final TaggingContext taggingContext = () -> getTags(subsystem, klass);
@@ -86,21 +90,21 @@ public class MetricObjects {
     /**
      * Factory to wrap static or final methods; this Factory facilitates unit testing.
      */
-    public static class Factory {
+    static class Factory {
         /**
          * The default (and only) constructor.
          */
-        public Factory() {
+        Factory() {
             // default constructor
         }
 
         /**
-         * Returns the MonitorRegistry that keeps track of objects with
-         * {@link com.netflix.servo.annotations.Monitor} annotations.
+         * Returns the MonitorRegistry that keeps track of Monitor objects.
+         * This method is thread-safe; see the comments in {@link #createAndRegisterCounter}.
          *
          * @return the MonitorRegistry to use.
          */
-        public MonitorRegistry getMonitorRegistry() {
+        MonitorRegistry getMonitorRegistry() {
             return DefaultMonitorRegistry.getInstance();
         }
     }
