@@ -11,16 +11,18 @@ import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_CLASS;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
 
 /**
- * Facilitates the creation of a Graphite plain text message that conforms to the Haystack standard.
+ * Facilitates the creation of a Graphite plain text message that conforms to the Haystack standard, so that such a
+ * Graphite message can be produced by Servo and consumed by InfluxDb, creating tags from the period-delimited pieces of
+ * the Graphite message.
  */
-public class HaystackGraphiteNamingConvention implements GraphiteNamingConvention {
+public class ServoToInfluxDbViaGraphiteNamingConvention implements GraphiteNamingConvention {
     static final String MISSING_TAG = "MISSING_TAG_%s";
     static final String METRIC_FORMAT = "%s.%s.%s.%s_%s";
     static final String STATISTIC_TAG_NAME = "statistic";
 
     private final String hostName;
 
-    HaystackGraphiteNamingConvention(String hostName) {
+    ServoToInfluxDbViaGraphiteNamingConvention(String hostName) {
         this.hostName = cleanup(hostName);
     }
 
