@@ -142,7 +142,7 @@ public class MetricPublishing {
                 // There's no way to test this catch without introducing excessive ugliness into the code
                 hostName = HOST_NAME_UNKNOWN_HOST_EXCEPTION;
             }
-            return new GraphiteMetricObserver(prefix, address, new HaystackGraphiteNamingConvention(hostName));
+            return new GraphiteMetricObserver(prefix, address, new ServoToInfluxDbViaGraphiteNamingConvention(hostName));
         }
 
         /**

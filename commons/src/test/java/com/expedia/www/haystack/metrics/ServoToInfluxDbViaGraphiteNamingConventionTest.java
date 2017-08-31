@@ -17,16 +17,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.METRIC_FORMAT;
-import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.MISSING_TAG;
-import static com.expedia.www.haystack.metrics.HaystackGraphiteNamingConvention.STATISTIC_TAG_NAME;
+import static com.expedia.www.haystack.metrics.ServoToInfluxDbViaGraphiteNamingConvention.METRIC_FORMAT;
+import static com.expedia.www.haystack.metrics.ServoToInfluxDbViaGraphiteNamingConvention.MISSING_TAG;
+import static com.expedia.www.haystack.metrics.ServoToInfluxDbViaGraphiteNamingConvention.STATISTIC_TAG_NAME;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_CLASS;
 import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_SUBSYSTEM;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
-public class HaystackGraphiteNamingConventionTest {
+public class ServoToInfluxDbViaGraphiteNamingConventionTest {
     private final static Random RANDOM = new Random();
     private final static String METRIC_NAME = RANDOM.nextLong() + "METRIC_NAME";
     private final static String SUBSYSTEM = RANDOM.nextLong() + "SUBSYSTEM";
@@ -39,11 +39,11 @@ public class HaystackGraphiteNamingConventionTest {
     @Mock
     private InetAddress mockLocalHost;
 
-    private HaystackGraphiteNamingConvention haystackGraphiteNamingConvention;
+    private ServoToInfluxDbViaGraphiteNamingConvention servoToInfluxDbViaGraphiteNamingConvention;
 
     @Before
     public void setUp() {
-        haystackGraphiteNamingConvention = new HaystackGraphiteNamingConvention(LOCAL_HOST_NAME);
+        servoToInfluxDbViaGraphiteNamingConvention = new ServoToInfluxDbViaGraphiteNamingConvention(LOCAL_HOST_NAME);
     }
 
     @After
@@ -55,7 +55,7 @@ public class HaystackGraphiteNamingConventionTest {
     public void testGetNameAllNull() {
         final Metric metric = new Metric(METRIC_NAME, BasicTagList.EMPTY, 0, 0);
 
-        final String name = haystackGraphiteNamingConvention.getName(metric);
+        final String name = servoToInfluxDbViaGraphiteNamingConvention.getName(metric);
 
         final String expected = String.format(METRIC_FORMAT, String.format(MISSING_TAG, TAG_KEY_SUBSYSTEM),
                 LOCAL_HOST_NAME_CLEANED, String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME,
@@ -71,7 +71,7 @@ public class HaystackGraphiteNamingConventionTest {
         tagList.add(Tags.newTag(DataSourceType.KEY, TYPE));
         final Metric metric = new Metric(METRIC_NAME, new BasicTagList(tagList), 0, 0);
 
-        final String name = haystackGraphiteNamingConvention.getName(metric);
+        final String name = servoToInfluxDbViaGraphiteNamingConvention.getName(metric);
 
         assertEquals(String.format(METRIC_FORMAT, SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE), name);
     }
@@ -85,7 +85,7 @@ public class HaystackGraphiteNamingConventionTest {
         tagList.add(Tags.newTag(STATISTIC_TAG_NAME, STATISTIC));
         final Metric metric = new Metric(METRIC_NAME, new BasicTagList(tagList), 0, 0);
 
-        final String name = haystackGraphiteNamingConvention.getName(metric);
+        final String name = servoToInfluxDbViaGraphiteNamingConvention.getName(metric);
 
         final String expected = String.format(METRIC_FORMAT,
                 SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE + '_' + STATISTIC);
