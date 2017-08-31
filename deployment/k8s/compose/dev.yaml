@@ -84,7 +84,19 @@ deployable_units:
          targetCPUUtilizationPercentage: 75
        env:
         - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
-          value: "192.168.99.100:9092"
+          value: "kafkasvc:9092"
+
+
+     - name:  haystack-timeseries-aggregator
+       image:  haystack-timeseries-aggregator:latest
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       autoscale:
+         maxReplicas: 2
+         targetCPUUtilizationPercentage: 75
+       env:
+        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+          value: "kafkasvc:9092"
 
      - name: metrictank
        image: raintank/metrictank:latest
@@ -101,7 +113,7 @@ deployable_units:
         - name: MT_CASSANDRA_ADDRS
           value: cassandrasvc:9042
         - name: MT_KAFKA_MDM_IN_BROKERS
-          value: "192.168.99.100:9092"
+          value: "kafkasvc:9092"
         - name: MT_KAFKA_MDM_IN_ENABLED
           value: "true"
         - name: MT_CASSANDRA_IDX_HOSTS
