@@ -42,6 +42,7 @@ deployable_units:
           containerPort: 9092
           servicePort: 9092
           hostPort: 9092
+
      - name: kafka-rest-svc
        image: confluentinc/cp-kafka-rest:3.2.1
        replicas: 1
@@ -54,74 +55,62 @@ deployable_units:
           containerPort: 8082
           servicePort: 8082
           hostPort: 8082
-     - name: haystack-span-stitcher
-       image: haystack-span-stitcher:latest
+
+     - name: haystack-trace-indexer
+       image: haystack-trace-indexer:latest
        replicas: 1
        terminationGracePeriodSeconds: 30
-       appConfigPath: configs/dev/span-stitcher.conf
+       appConfigPath: configs/dev/trace-indexer.conf
        env:
         - name: OVERRIDES_CONFIG_PATH
-          value: /configs/span-stitcher.conf
+          value: /configs/trace-indexer.conf
 
-     - name: haystack-stitched-span-collector
-       image: haystack-stitched-span-collector:latest
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       appConfigPath: configs/dev/stitched-span-collector.conf
-       autoscale:
-         maxReplicas: 2
-         targetCPUUtilizationPercentage: 75
-       env:
-        - name: OVERRIDES_CONFIG_PATH
-          value: /configs/stitched-span-collector.conf
-
-     - name: haystack-span-timeseries-transformer
-       image: haystack-span-timeseries-transformer:latest
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       autoscale:
-         maxReplicas: 2
-         targetCPUUtilizationPercentage: 75
-       env:
-        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
-          value: "kafkasvc:9092"
-
-
-     - name:  haystack-timeseries-aggregator
-       image:  haystack-timeseries-aggregator:latest
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       autoscale:
-         maxReplicas: 2
-         targetCPUUtilizationPercentage: 75
-       env:
-        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
-          value: "kafkasvc:9092"
-
-     - name: metrictank
-       image: raintank/metrictank:latest
-       replicas: 1
-       ports:
-         containerPort: 6060
-         servicePort: 6060
-         hostPort: 6060
-       env:
-        - name: MT_HTTP_MULTI_TENANT
-          value: "false"
-        - name: MT_CARBON_IN_ENABLED
-          value: "false"
-        - name: MT_CASSANDRA_ADDRS
-          value: cassandrasvc:9042
-        - name: MT_KAFKA_MDM_IN_BROKERS
-          value: "kafkasvc:9092"
-        - name: MT_KAFKA_MDM_IN_ENABLED
-          value: "true"
-        - name: MT_CASSANDRA_IDX_HOSTS
-          value: cassandrasvc:9042
-        - name: MT_HTTP_MULTI_TENANT
-          value: "false"
-        - name: MT_STATS_ADDR
-          value: monitoring-influxdb-graphite.kube-system.svc:2003
+#     - name: haystack-span-timeseries-transformer
+#       image: haystack-span-timeseries-transformer:latest
+#       replicas: 1
+#       terminationGracePeriodSeconds: 30
+#       autoscale:
+#         maxReplicas: 2
+#         targetCPUUtilizationPercentage: 75
+#       env:
+#        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+#          value: "kafkasvc:9092"
+#
+#     - name:  haystack-timeseries-aggregator
+#       image:  haystack-timeseries-aggregator:latest
+#       replicas: 1
+#       terminationGracePeriodSeconds: 30
+#       autoscale:
+#         maxReplicas: 2
+#         targetCPUUtilizationPercentage: 75
+#       env:
+#        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+#          value: "kafkasvc:9092"
+#
+#     - name: metrictank
+#       image: raintank/metrictank:latest
+#       replicas: 1
+#       ports:
+#         containerPort: 6060
+#         servicePort: 6060
+#         hostPort: 6060
+#       env:
+#        - name: MT_HTTP_MULTI_TENANT
+#          value: "false"
+#        - name: MT_CARBON_IN_ENABLED
+#          value: "false"
+#        - name: MT_CASSANDRA_ADDRS
+#          value: cassandrasvc:9042
+#        - name: MT_KAFKA_MDM_IN_BROKERS
+#          value: "kafkasvc:9092"
+#        - name: MT_KAFKA_MDM_IN_ENABLED
+#          value: "true"
+#        - name: MT_CASSANDRA_IDX_HOSTS
+#          value: cassandrasvc:9042
+#        - name: MT_HTTP_MULTI_TENANT
+#          value: "false"
+#        - name: MT_STATS_ADDR
+#          value: monitoring-influxdb-graphite.kube-system.svc:2003
 
 proxy_services:
     - name: kafkasvc
