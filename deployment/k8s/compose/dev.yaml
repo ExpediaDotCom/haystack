@@ -62,6 +62,7 @@ deployable_units:
        env:
         - name: OVERRIDES_CONFIG_PATH
           value: /configs/span-stitcher.conf
+
      - name: haystack-stitched-span-collector
        image: haystack-stitched-span-collector:latest
        replicas: 1
@@ -73,9 +74,50 @@ deployable_units:
        env:
         - name: OVERRIDES_CONFIG_PATH
           value: /configs/stitched-span-collector.conf
+
+     - name: haystack-span-timeseries-transformer
+       image: haystack-span-timeseries-transformer:latest
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       autoscale:
+         maxReplicas: 2
+         targetCPUUtilizationPercentage: 75
+       env:
+        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+          value: "192.168.99.100:9092"
+
+     - name: metrictank
+       image: raintank/metrictank:latest
+       replicas: 1
+       ports:
+         containerPort: 6060
+         servicePort: 6060
+         hostPort: 6060
+       env:
+        - name: MT_HTTP_MULTI_TENANT
+          value: "false"
+        - name: MT_CARBON_IN_ENABLED
+          value: "false"
+        - name: MT_CASSANDRA_ADDRS
+          value: cassandrasvc:9042
+        - name: MT_KAFKA_MDM_IN_BROKERS
+          value: "192.168.99.100:9092"
+        - name: MT_KAFKA_MDM_IN_ENABLED
+          value: "true"
+        - name: MT_CASSANDRA_IDX_HOSTS
+          value: cassandrasvc:9042
+        - name: MT_HTTP_MULTI_TENANT
+          value: "false"
+        - name: MT_STATS_ADDR
+          value: monitoring-influxdb-graphite.kube-system.svc:2003
+
 proxy_services:
     - name: kafkasvc
       value: kafka-service.haystack-dev.svc.cluster.local
+
+    - name: cassandrasvc
+      value: cassandra.haystack-dev.svc.cluster.local
+
 cluster:
   addons:
    - path: addons/1.6/monitoring/influxdb.yaml
