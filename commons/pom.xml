@@ -56,7 +56,6 @@
     </developers>
 
     <properties>
-        <cfg4j-core-version>4.4.1</cfg4j-core-version>
         <junit-version>4.12</junit-version>
         <maven-compiler-plugin-version>3.6.1</maven-compiler-plugin-version>
         <maven-javadoc-plugin-version>2.10.4</maven-javadoc-plugin-version>
@@ -68,12 +67,6 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.cfg4j/cfg4j-core -->
-        <dependency>
-            <groupId>org.cfg4j</groupId>
-            <artifactId>cfg4j-core</artifactId>
-            <version>${cfg4j-core-version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>

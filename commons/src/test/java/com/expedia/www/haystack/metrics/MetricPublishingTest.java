@@ -61,7 +61,6 @@ public class MetricPublishingTest {
 
     @Mock
     private GraphiteConfig mockGraphiteConfig;
-    private GraphiteConfig realGraphiteConfig;
 
     @Mock
     private MetricObserver mockAsyncMetricObserver;
@@ -84,15 +83,12 @@ public class MetricPublishingTest {
 
     @Before
     public void setUp() {
-        realGraphiteConfig = MetricPublishing.graphiteConfig;
-        MetricPublishing.graphiteConfig = mockGraphiteConfig;
         metricPublishing = new MetricPublishing(mockFactory);
         factory = new Factory();
     }
 
     @After
     public void tearDown() {
-        MetricPublishing.graphiteConfig = realGraphiteConfig;
         if(PollScheduler.getInstance().isStarted()) {
             PollScheduler.getInstance().stop();
         }
@@ -104,7 +100,7 @@ public class MetricPublishingTest {
     public void testStart() throws UnknownHostException {
         final List<MetricObserver> observers = whensForStart();
 
-        metricPublishing.start();
+        metricPublishing.start(mockGraphiteConfig);
 
         verifiesForStart(observers);
     }
@@ -127,7 +123,7 @@ public class MetricPublishingTest {
     public void testCreateGraphiteObserver() throws UnknownHostException {
         whensForCreateGraphiteObserver();
 
-        final MetricObserver metricObserver = metricPublishing.createGraphiteObserver();
+        final MetricObserver metricObserver = metricPublishing.createGraphiteObserver(mockGraphiteConfig);
         assertSame(mockCounterToRateMetricTransform, metricObserver);
 
         verifiesForCreateGraphiteObserver(2);
@@ -153,7 +149,7 @@ public class MetricPublishingTest {
     public void testRateTransform() {
         whensForRateTransform();
 
-        final MetricObserver metricObserver = metricPublishing.rateTransform(mockMetricObserver);
+        final MetricObserver metricObserver = metricPublishing.rateTransform(mockGraphiteConfig, mockMetricObserver);
         assertSame(mockCounterToRateMetricTransform, metricObserver);
 
         verifiesForRateTransform(1, mockMetricObserver);
@@ -174,7 +170,7 @@ public class MetricPublishingTest {
     public void testAsync() {
         whensForAsync();
 
-        final MetricObserver metricObserver = metricPublishing.async(mockMetricObserver);
+        final MetricObserver metricObserver = metricPublishing.async(mockGraphiteConfig, mockMetricObserver);
         assertSame(mockAsyncMetricObserver, metricObserver);
 
         verifiesForAsync(1, mockMetricObserver);

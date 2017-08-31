@@ -50,7 +50,14 @@ private static final String CLASS_NAME = "JsonSerialization";
 ```
 ##### Singleton
 Your Servo objects should be singletons, either as static (Java) or object (Scala) variables. The MetricObjects
-variable can be managed by a Dependency Injection (DI) framework or not, as you see fit.
+variable can be managed by a Dependency Injection (DI) framework or not, as you see fit. Servo objects are specified
+with Identifiers:
+1. Subsystem
+2. Class Name
+3. Metric Name
+If a Counter or Timer is created twice (that is, its Identifiers match that of an already registered Counter or Timer),
+then a warning will be logged and the existing object returned by the createAndRegister call. A Timer and a Counter 
+with matching Identifiers is allowed but best avoided.
 #### Counter
 ##### Creation
 The code below is a Java snippet that shows the right way to create a Counter:
@@ -102,8 +109,9 @@ Again, the Timer will be reset when its values are reported to InfluxDb.
 #### The Main Method
 To initialize the metrics system, the first line of your main() method should be something like:
 ```
-(new MetricPublishing()).start();
+(new MetricPublishing()).start(graphiteConfig);
 ```
+where graphiteConfig is an implementation of the GraphiteConfig interface declared in this module.
 #### Configuration
 You will typically have a base.yaml in your resources directory whose contents will include:
 ```
@@ -124,9 +132,9 @@ Such a message consists of three space-delimited Strings terminated by a newline
 ```
 The `<metric value>` is a number, and the pieces of `<metric path>` are traditionally separated by a period.
 Note that the period-delimited pieces contain no metadata; that is, the meanings of each piece are not specified in the
-message. This lack of metadata is addressed in [OpenTSDB](http://opentsdb.net) but a bridge to connect Servo metrics to
-InfluxDb via the OpenTSDB protocol does not currently exist; instead, the bridge uses the Graphite plaintext protocol, 
-and an InfluxDb template (read about them in this 
+message. This lack of metadata is addressed in [OpenTSDB](http://opentsdb.net) but code to connect Servo metrics to
+InfluxDb via the OpenTSDB protocol does not currently exist in Servo; instead, the bridge uses the Graphite plaintext 
+protocol, and an InfluxDb template (read about them in this 
 [README](https://github.com/influxdata/influxdb/blob/master/services/graphite/README.md) file) parses the Graphite plain
 text message into tags. (You can read about metrics tags 
 [here](http://opentsdb.net/docs/build/html/user_guide/query/timeseries.html).)
