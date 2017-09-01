@@ -81,75 +81,41 @@ public class MetricPublishing {
      * Factory to wrap static or final methods; this Factory facilitates unit testing
      */
     static class Factory {
-        /**
-         * The default (and only) constructor.
-         */
         Factory() {
             // default constructor
         }
 
-        /**
-         * Creates an AsyncMetricObserver that wraps another MetricObserver
-         *
-         * @param observer   a wrapped observer that will be updated asynchronously.
-         * @param queueSize  maximum size of the update queue, if the queue fills up older entries will be dropped.
-         * @param expireTime age in milliseconds before an update expires and will not be passed to the wrapped
-         *                   observer.
-         * @return the MetricObserver
-         */
+        static String getLocalHostName(Factory factory) {
+            try {
+                return factory.getLocalHost().getHostName();
+            } catch (UnknownHostException e) {
+                return HOST_NAME_UNKNOWN_HOST_EXCEPTION;
+            }
+        }
+
         MetricObserver createAsyncMetricObserver(MetricObserver observer, int queueSize, long expireTime) {
             return new AsyncMetricObserver(ASYNC_METRIC_OBSERVER_NAME, observer, queueSize, expireTime);
         }
 
-        /**
-         * Creates a MetricObserver that transforms Counter metrics into a rate per second.
-         *
-         * @param observer  downstream observer to forward values to after the rate has been computed
-         * @param heartbeat the specified heartbeat interval; should be a multiple of the sampling interval used when
-         *                  collecting the metrics
-         * @param timeUnit  Time unit for the heartbeat parameter
-         * @return the MetricObserver
-         */
         MetricObserver createCounterToRateMetricTransform(
                 MetricObserver observer, long heartbeat, TimeUnit timeUnit) {
             return new CounterToRateMetricTransform(observer, heartbeat, timeUnit);
         }
 
-        /**
-         * Creates an Observer that shunts metrics out to the Graphite monitoring backend.
-         *
-         * @param prefix  base name to attach onto each metric published ("metricPrefix.{rest of name}".
-         * @param address address of the graphite data port in "host:port" format.
-         * @return The Observer that will shunt the metrics to Graphite
-         */
-        MetricObserver createGraphiteMetricObserver(String prefix, String address) {
-            String hostName;
-            try {
-                hostName = InetAddress.getLocalHost().getHostName();
-            } catch (UnknownHostException e) {
-                // There's no way to test this catch without introducing excessive ugliness into the code
-                hostName = HOST_NAME_UNKNOWN_HOST_EXCEPTION;
-            }
-            return new GraphiteMetricObserver(prefix, address, new ServoToInfluxDbViaGraphiteNamingConvention(hostName));
+        InetAddress getLocalHost() throws UnknownHostException {
+            return InetAddress.getLocalHost();
         }
 
-        /**
-         * Creates a Runnable that will send updates to a collection of Observers. This Runnable will poll, matching all
-         * metrics, and send the metrics to all of the given observers.
-         *
-         * @param poller    the MetricPoller
-         * @param observers the Observers that will receive the polled metrics
-         * @return the Runnable
-         */
+        MetricObserver createGraphiteMetricObserver(String prefix, String address) {
+            final String hostName = Factory.getLocalHostName(this);
+            return new GraphiteMetricObserver(prefix, address,
+                    new ServoToInfluxDbViaGraphiteNamingConvention(hostName));
+        }
+
         PollRunnable createTask(MetricPoller poller, Collection<MetricObserver> observers) {
             return new PollRunnable(poller, BasicMetricFilter.MATCH_ALL, true, observers);
         }
 
-        /**
-         * Creates a Poller that fetches {@link com.netflix.servo.annotations.Monitor} metrics from a monitor registry.
-         *
-         * @return the MetricPoller
-         */
         MetricPoller createMonitorRegistryMetricPoller() {
             return new MonitorRegistryMetricPoller();
         }

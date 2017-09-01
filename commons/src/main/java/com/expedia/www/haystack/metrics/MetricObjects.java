@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 @SuppressWarnings("WeakerAccess")
 public class MetricObjects {
     static final String TAG_KEY_SUBSYSTEM = "subsystem";
+    static final String TAG_KEY_APPLICATION = "application";
     static final String TAG_KEY_CLASS = "class";
     static final String COUNTER_ALREADY_REGISTERED = "The Counter %s has already been registered";
     static final String TIMER_ALREADY_REGISTERED = "The Timer %s has already been registered";
@@ -61,16 +62,17 @@ public class MetricObjects {
      * by the second call.
      *
      * @param subsystem   the subsystem, typically something like "pipes" or "trends".
+     * @param application the application in the subsystem
      * @param klass       the metric class, frequently (but not necessarily) the class containing the Counter.
      * @param counterName the name of the Counter, usually the name of the variable holding the Counter instance;
      *                    using upper case for counterName is recommended.
      * @return a new Counter that this method registers in the DefaultMonitorRegistry before returning it.
      */
-    public Counter createAndRegisterCounter(String subsystem, String klass, String counterName) {
-        final MonitorConfig monitorConfig = buildMonitorConfig(subsystem, klass, counterName);
+    public Counter createAndRegisterCounter(String subsystem, String application, String klass, String counterName) {
+        final MonitorConfig monitorConfig = buildMonitorConfig(subsystem, application, klass, counterName);
         final Counter counter = new BasicCounter(monitorConfig);
         final Counter existingCounter = COUNTERS.putIfAbsent(monitorConfig, counter);
-        if(existingCounter != null) {
+        if (existingCounter != null) {
             logger.warn(String.format(COUNTER_ALREADY_REGISTERED, existingCounter.toString()));
             return existingCounter;
         }
@@ -84,19 +86,20 @@ public class MetricObjects {
      * If you call the method twice with the same arguments, the Timer created during the first call will be returned
      * by the second call.
      *
-     * @param subsystem the subsystem, typically something like "pipes" or "trends".
-     * @param klass     the metric class, frequently (but not necessarily) the class containing the Timer.
-     * @param timerName the name of the Timer, usually the name of the variable holding the Timer instance
-     *                  using upper case for timerName is recommended.
-     * @param timeUnit  desired precision, typically TimeUnit.MILLISECONDS; use TimeUnit.NANOSECONDS (rare) or
-     *                  TimeUnit.MICROSECONDS for more precision.
+     * @param subsystem   the subsystem, typically something like "pipes" or "trends".
+     * @param application the application in the subsystem
+     * @param klass       the metric class, frequently (but not necessarily) the class containing the Timer.
+     * @param timerName   the name of the Timer, usually the name of the variable holding the Timer instance
+     *                    using upper case for timerName is recommended.
+     * @param timeUnit    desired precision, typically TimeUnit.MILLISECONDS; use TimeUnit.NANOSECONDS (rare) or
      * @return a new BasicTimer that this method registers in the DefaultMonitorRegistry before returning it.
      */
-    public Timer createAndRegisterBasicTimer(String subsystem, String klass, String timerName, TimeUnit timeUnit) {
-        final MonitorConfig monitorConfig = buildMonitorConfig(subsystem, klass, timerName);
+    public Timer createAndRegisterBasicTimer(
+            String subsystem, String application, String klass, String timerName, TimeUnit timeUnit) {
+        final MonitorConfig monitorConfig = buildMonitorConfig(subsystem, application, klass, timerName);
         final Timer basicTimer = new BasicTimer(monitorConfig, timeUnit);
         final Timer existingTimer = TIMERS.putIfAbsent(monitorConfig, basicTimer);
-        if(existingTimer != null) {
+        if (existingTimer != null) {
             logger.warn(String.format(TIMER_ALREADY_REGISTERED, existingTimer.toString()));
             return existingTimer;
         }
@@ -104,14 +107,15 @@ public class MetricObjects {
         return basicTimer;
     }
 
-    private MonitorConfig buildMonitorConfig(String subsystem, String klass, String monitorName) {
-        final TaggingContext taggingContext = () -> getTags(subsystem, klass);
+    private MonitorConfig buildMonitorConfig(String subsystem, String application, String klass, String monitorName) {
+        final TaggingContext taggingContext = () -> getTags(subsystem, application, klass);
         return MonitorConfig.builder(monitorName).withTags(taggingContext.getTags()).build();
     }
 
-    private static TagList getTags(String subsystem, String klass) {
-        final SmallTagMap.Builder builder = new SmallTagMap.Builder(2);
+    private static TagList getTags(String subsystem, String application, String klass) {
+        final SmallTagMap.Builder builder = new SmallTagMap.Builder(3);
         builder.add(Tags.newTag(TAG_KEY_SUBSYSTEM, subsystem));
+        builder.add(Tags.newTag(TAG_KEY_APPLICATION, application));
         builder.add(Tags.newTag(TAG_KEY_CLASS, klass));
         return new BasicTagList(builder.result());
     }
@@ -120,19 +124,10 @@ public class MetricObjects {
      * Factory to wrap static or final methods; this Factory facilitates unit testing.
      */
     static class Factory {
-        /**
-         * The default (and only) constructor.
-         */
         Factory() {
             // default constructor
         }
 
-        /**
-         * Returns the MonitorRegistry that keeps track of Monitor objects.
-         * This method is thread-safe; see the comments in {@link #createAndRegisterCounter}.
-         *
-         * @return the MonitorRegistry to use.
-         */
         MonitorRegistry getMonitorRegistry() {
             return DefaultMonitorRegistry.getInstance();
         }
