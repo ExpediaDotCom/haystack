@@ -69,7 +69,7 @@ public class ServoToInfluxDbViaGraphiteNamingConventionTest {
 
     @Test
     public void testGetNameNoneNullWithoutStatistic() {
-        final List<Tag> tagList = new ArrayList<>(3);
+        final List<Tag> tagList = new ArrayList<>(4);
         tagList.add(Tags.newTag(TAG_KEY_SUBSYSTEM, SUBSYSTEM));
         tagList.add(Tags.newTag(TAG_KEY_APPLICATION, APPLICATION));
         tagList.add(Tags.newTag(TAG_KEY_CLASS, CLASS));
