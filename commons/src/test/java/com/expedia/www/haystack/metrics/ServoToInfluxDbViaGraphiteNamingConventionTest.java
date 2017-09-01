@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static com.expedia.www.haystack.metrics.MetricObjects.TAG_KEY_APPLICATION;
 import static com.expedia.www.haystack.metrics.ServoToInfluxDbViaGraphiteNamingConvention.METRIC_FORMAT;
 import static com.expedia.www.haystack.metrics.ServoToInfluxDbViaGraphiteNamingConvention.MISSING_TAG;
 import static com.expedia.www.haystack.metrics.ServoToInfluxDbViaGraphiteNamingConvention.STATISTIC_TAG_NAME;
@@ -30,6 +31,7 @@ public class ServoToInfluxDbViaGraphiteNamingConventionTest {
     private final static Random RANDOM = new Random();
     private final static String METRIC_NAME = RANDOM.nextLong() + "METRIC_NAME";
     private final static String SUBSYSTEM = RANDOM.nextLong() + "SUBSYSTEM";
+    private final static String APPLICATION = RANDOM.nextLong() + "APPLICATION";
     private final static String CLASS = RANDOM.nextLong() + "CLASS";
     private final static String TYPE = RANDOM.nextLong() + "TYPE";
     private final static String STATISTIC = RANDOM.nextLong() + "STATISTIC";
@@ -57,8 +59,10 @@ public class ServoToInfluxDbViaGraphiteNamingConventionTest {
 
         final String name = servoToInfluxDbViaGraphiteNamingConvention.getName(metric);
 
-        final String expected = String.format(METRIC_FORMAT, String.format(MISSING_TAG, TAG_KEY_SUBSYSTEM),
-                LOCAL_HOST_NAME_CLEANED, String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME,
+        final String expected = String.format(METRIC_FORMAT,
+                String.format(MISSING_TAG, TAG_KEY_SUBSYSTEM),
+                String.format(MISSING_TAG, TAG_KEY_APPLICATION), LOCAL_HOST_NAME_CLEANED,
+                String.format(MISSING_TAG, TAG_KEY_CLASS), METRIC_NAME,
                 String.format(MISSING_TAG, DataSourceType.KEY));
         assertEquals(expected, name);
     }
@@ -67,19 +71,22 @@ public class ServoToInfluxDbViaGraphiteNamingConventionTest {
     public void testGetNameNoneNullWithoutStatistic() {
         final List<Tag> tagList = new ArrayList<>(3);
         tagList.add(Tags.newTag(TAG_KEY_SUBSYSTEM, SUBSYSTEM));
+        tagList.add(Tags.newTag(TAG_KEY_APPLICATION, APPLICATION));
         tagList.add(Tags.newTag(TAG_KEY_CLASS, CLASS));
         tagList.add(Tags.newTag(DataSourceType.KEY, TYPE));
         final Metric metric = new Metric(METRIC_NAME, new BasicTagList(tagList), 0, 0);
 
         final String name = servoToInfluxDbViaGraphiteNamingConvention.getName(metric);
 
-        assertEquals(String.format(METRIC_FORMAT, SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE), name);
+        assertEquals(String.format(
+                METRIC_FORMAT, SUBSYSTEM, APPLICATION, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE), name);
     }
 
     @Test
     public void testGetNameNoneNullWithStatistic() {
-        final List<Tag> tagList = new ArrayList<>(4);
+        final List<Tag> tagList = new ArrayList<>(5);
         tagList.add(Tags.newTag(TAG_KEY_SUBSYSTEM, SUBSYSTEM));
+        tagList.add(Tags.newTag(TAG_KEY_APPLICATION, APPLICATION));
         tagList.add(Tags.newTag(TAG_KEY_CLASS, CLASS));
         tagList.add(Tags.newTag(DataSourceType.KEY, TYPE));
         tagList.add(Tags.newTag(STATISTIC_TAG_NAME, STATISTIC));
@@ -88,7 +95,7 @@ public class ServoToInfluxDbViaGraphiteNamingConventionTest {
         final String name = servoToInfluxDbViaGraphiteNamingConvention.getName(metric);
 
         final String expected = String.format(METRIC_FORMAT,
-                SUBSYSTEM, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE + '_' + STATISTIC);
+                SUBSYSTEM, APPLICATION, LOCAL_HOST_NAME_CLEANED, CLASS, METRIC_NAME, TYPE + '_' + STATISTIC);
         assertEquals(expected, name);
     }
 }

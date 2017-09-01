@@ -30,6 +30,7 @@ import static org.mockito.Mockito.when;
 public class MetricObjectsTest {
     private final static Random RANDOM = new Random();
     private final static String SUBSYSTEM = RANDOM.nextLong() + "SUBSYSTEM";
+    private final static String APPLICATION = RANDOM.nextLong() + "APPLICATION";
     private final static String CLASS = RANDOM.nextLong() + "CLASS";
     private final static String METRIC_NAME = RANDOM.nextLong() + "METRIC_NAME";
 
@@ -63,7 +64,7 @@ public class MetricObjectsTest {
     public void testCreateAndRegisterCounter() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
+        final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, APPLICATION, CLASS, METRIC_NAME);
 
         assertsAndVerifiesForCreateAndRegisterCounter(counter);
     }
@@ -72,8 +73,9 @@ public class MetricObjectsTest {
     public void testCreateAndRegisterExistingCounter() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
-        final Counter existingCounter = metricObjects.createAndRegisterCounter(SUBSYSTEM, CLASS, METRIC_NAME);
+        final Counter counter = metricObjects.createAndRegisterCounter(SUBSYSTEM, APPLICATION, CLASS, METRIC_NAME);
+        final Counter existingCounter = metricObjects.createAndRegisterCounter(
+                SUBSYSTEM, APPLICATION, CLASS, METRIC_NAME);
 
         assertSame(counter, existingCounter);
         verify(mockLogger).warn(String.format(MetricObjects.COUNTER_ALREADY_REGISTERED, existingCounter));
@@ -81,7 +83,7 @@ public class MetricObjectsTest {
     }
 
     private void assertsAndVerifiesForCreateAndRegisterCounter(Counter counter) {
-        assertsAndVerifiesForCreateAndRegister(counter, 3);
+        assertsAndVerifiesForCreateAndRegister(counter, 4);
         final TagList tagList = counter.getConfig().getTags();
         assertEquals(DataSourceType.COUNTER.getValue(), tagList.getValue(DataSourceType.KEY));
     }
@@ -90,21 +92,24 @@ public class MetricObjectsTest {
     public void testCreateAndRegisterBasicTimer() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Timer timer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
+        final Timer timer = metricObjects.createAndRegisterBasicTimer(
+                SUBSYSTEM, APPLICATION, CLASS, METRIC_NAME, MILLISECONDS);
 
-        assertsAndVerifiesForCreateAndRegister(timer, 2);
+        assertsAndVerifiesForCreateAndRegister(timer, 3);
     }
 
     @Test
     public void testCreateAndRegisterExistingBasicTimer() {
         when(mockFactory.getMonitorRegistry()).thenReturn(mockMonitorRegistry);
 
-        final Timer timer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
-        final Timer existingTimer = metricObjects.createAndRegisterBasicTimer(SUBSYSTEM, CLASS, METRIC_NAME, MILLISECONDS);
+        final Timer timer = metricObjects.createAndRegisterBasicTimer(
+                SUBSYSTEM, APPLICATION, CLASS, METRIC_NAME, MILLISECONDS);
+        final Timer existingTimer = metricObjects.createAndRegisterBasicTimer(
+                SUBSYSTEM, APPLICATION, CLASS, METRIC_NAME, MILLISECONDS);
 
         assertSame(timer, existingTimer);
         verify(mockLogger).warn(String.format(MetricObjects.TIMER_ALREADY_REGISTERED, existingTimer));
-        assertsAndVerifiesForCreateAndRegister(timer, 2);
+        assertsAndVerifiesForCreateAndRegister(timer, 3);
     }
 
     private void assertsAndVerifiesForCreateAndRegister(Monitor<?> monitor, int expectedTagListSize) {

@@ -25,6 +25,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static com.expedia.www.haystack.metrics.MetricPublishing.ASYNC_METRIC_OBSERVER_NAME;
+import static com.expedia.www.haystack.metrics.MetricPublishing.HOST_NAME_UNKNOWN_HOST_EXCEPTION;
 import static com.expedia.www.haystack.metrics.MetricPublishing.POLL_INTERVAL_SECONDS_TO_EXPIRE_TIME_MULTIPLIER;
 import static com.expedia.www.haystack.metrics.MetricPublishing.POLL_INTERVAL_SECONDS_TO_HEARTBEAT_MULTIPLIER;
 import static org.junit.Assert.assertEquals;
@@ -239,5 +240,15 @@ public class MetricPublishingTest {
     @Test
     public void testDefaultConstructor() {
         new MetricPublishing();
+    }
+
+    @Test
+    public void testFactoryGetLocalHostUnknownHostException() throws UnknownHostException {
+        when(mockFactory.getLocalHost()).thenThrow(new UnknownHostException());
+
+        final String localHostName = Factory.getLocalHostName(mockFactory);
+
+        assertEquals(HOST_NAME_UNKNOWN_HOST_EXCEPTION, localHostName);
+        verify(mockFactory).getLocalHost();
     }
 }
