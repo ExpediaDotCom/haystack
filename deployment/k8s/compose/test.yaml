@@ -29,6 +29,8 @@ cluster:
    - path: addons/1.6/monitoring/grafana.yaml
      params:
        image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.1
+       storage: 2Gi
+       storageClass: default
    - path: addons/1.6/monitoring/heapster.yaml
      params:
        image: gcr.io/google_containers/heapster-amd64:v1.4.0
