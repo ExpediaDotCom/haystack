@@ -42,8 +42,10 @@ cluster:
        awsSecretKey: ""
    - path: addons/traefik/traefik.yaml
      params:
+       ssl:
+        enabled: false
        name: traefik-ingress-controller
-       image: traefik:v1.3.3
+       image: traefik:v1.3.7
        replicas: 2
        hostName: <host-name-cname>
        nodePort: 32300

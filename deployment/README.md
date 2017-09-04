@@ -17,7 +17,7 @@ with '-e' option. 'dev' is used as default.
 
 
 ## Haystack Namespace
-The apply-compose script deploys all haystack components under different namespace. We use following convention to name this 'namespace' 
+The apply-compose script deploys all haystack components under a dedicated namespace. We use following convention to name this 'namespace' 
 ```
 haystack-<environment name>
 ```
@@ -36,8 +36,8 @@ list all the available contexts. Choose your cluster context, and deploy the hay
 ```
 ./apply-compose.sh -a install -e test --use-context <context-name>
 ```
-Please note the default context for all environments will be minikube. This is done intentionally to safeguard developers 
-from pushing their local dev changes to other environments. 
+Please note the default context for all environments will be minikube. In other words, --use-context will always point to minikube.
+This is done intentionally to safeguard developers from pushing their local dev changes to other environments. 
 
 ## Addons
 By default, we install addons for [monitoring](https://github.com/kubernetes/heapster), [logging](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/fluentd-elasticsearch) and reverse proxy called [Traefik](https://github.com/containous/traefik)
@@ -52,17 +52,17 @@ However you can avoid Traefik completely and deploy UI components as a service i
 ```
 Once you have cname record to minikube, access traefik dashboard at
 ```
- http://haystack.local:32300
+ https://haystack.local:32300
 ```
 and grafana at
 ```
- http://haystack.local:32300/grafana
+ https://haystack.local:32300/grafana
 ```
 
 ## App Configs
 Every haystack service/component will be bundled with some default configurations to run on kubernetes. However we can provide 'overrides' depending upon environment it runs in.
-We can provide these overrides as configuration files for instance 'configs/test/span-stitcher.yaml' and provide the settings in 'compose' file.
-Then we mount them inside the container under say /configs/span-stitcher.yaml using Kubernetes' [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap)
+We can provide these overrides either as environment variables or a configuration file. For e.g. we have a configuration file placed at 'configs/test/trace-indexer.conf' for haystack-trace-indexer component.
+We then pass this as 'appConfigPath' parameter value in the 'compose' file for the same component. The deployment script mounts this configuration file inside the container at /configs/trace-indexer.conf using Kubernetes' [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap)
 
 ## Scheduled Jobs
 We run scheduled jobs to remove the old indices created on ElasticSearch for logs collected by Fluentd. Howeever, we don not setup one in dev envivonment.
