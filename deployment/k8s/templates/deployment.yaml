@@ -21,10 +21,16 @@ spec:
          - name: {{ (datasource "config").name }}
            image: {{ (datasource "config").image }}
            imagePullPolicy: IfNotPresent
-{{- if has (datasource "config") "configMapName" }}
+{{- if has (datasource "config") "volumes" }}
            volumeMounts:
+{{- if has (datasource "config").volumes "appConfig" }}
               - name: config-volume
-                mountPath: "/configs"
+                mountPath: "{{ (datasource "config").volumes.appConfig.mountPath }}"
+{{- end }}
+{{- if has (datasource "config").volumes "ssl" }}
+              - name: ssl
+                mountPath: {{ (datasource "config").volumes.ssl.mountPath }}
+{{- end }}
 {{- end }}
 {{- if has (datasource "config") "env" }}
            env:
@@ -47,11 +53,18 @@ spec:
       nodeSelector:
 {{ (datasource "config").nodeSelector | toYAML | strings.Indent 8 }}
 {{- end }}
-{{- if has (datasource "config") "configMapName" }}
+{{- if has (datasource "config") "volumes" }}
       volumes:
+{{- if has (datasource "config") "appConfigMapName" }}
       - name: config-volume
         configMap:
-          name: {{ (datasource "config").configMapName }}
+          name: {{ (datasource "config").appConfigMapName }}
+{{- end }}
+{{- if has (datasource "config").volumes "ssl" }}
+      - name: ssl
+        secret:
+         secretName: {{ (datasource "config").volumes.ssl.certsSecretName }}
+{{- end }}
 {{- end }}
 ---
 

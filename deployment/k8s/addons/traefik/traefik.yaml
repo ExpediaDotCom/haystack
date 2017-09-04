@@ -28,27 +28,13 @@ data:
       compress = false
         [entryPoints.https.tls]
           [[entryPoints.https.tls.certificates]]
-          CertFile = "/ssl/tls.crt"
-          KeyFile = "/ssl/tls.key"
+          CertFile = "/ssl/ssl.crt"
+          KeyFile = "/ssl/ssl.key"
 {{- end }}
     [kubernetes]
     [web]
     address = ":8080"
 ---
-{{- if (datasource "config").ssl.enabled }}
-kind: Secret
-apiVersion: v1
-metadata:
-  name: {{ (datasource "config").name }}-default-cert
-  namespace: kube-system
-  labels:
-    app: {{ (datasource "config").name }}
-type: Opaque
-data:
-  tls.crt: {{ (datasource "config").ssl.cert }}
-  tls.key: {{ (datasource "config").ssl.key }}
----
-{{- end }}
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
@@ -124,7 +110,7 @@ spec:
 {{- if (datasource "config").ssl.enabled }}
       - name: ssl
         secret:
-         secretName: {{ (datasource "config").name }}-default-cert
+         secretName: {{ (datasource "config").ssl.certsSecretName }}
 {{- end }}
       containers:
       - image: {{ (datasource "config").image }}

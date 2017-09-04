@@ -187,7 +187,7 @@ function installComponent() {
   createConfigMap $COMPONENT_CONFIG_JSON
 
   if [[ -n $CONFIG_MAP_NAME ]]; then
-    echo $COMPONENT_CONFIG_JSON | $JQ '. + {"configMapName": "'$CONFIG_MAP_NAME'"}' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON
+    echo $COMPONENT_CONFIG_JSON | $JQ '. + {"appConfigMapName": "'$CONFIG_MAP_NAME'"}' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON
   else
     echo $COMPONENT_CONFIG_JSON > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON
   fi
@@ -208,7 +208,7 @@ function createProxyService() {
 function createConfigMap() {
    local COMPONENT_CONFIG_JSON=$(echo $*)
    local COMPONENT_NAME=`echo $COMPONENT_CONFIG_JSON | $JQ -r '.name'`
-   local APP_CONFIG_PATH=`echo $COMPONENT_CONFIG_JSON | $JQ -r '.appConfigPath'`
+   local APP_CONFIG_PATH=`echo $COMPONENT_CONFIG_JSON | $JQ -r '.volumes.appConfig.path'`
 
    if [[ -f $APP_CONFIG_PATH ]]; then
     local APP_CONFIG_CKSUM=0
@@ -405,6 +405,22 @@ function installComponents() {
     esac
 }
 
+function installSecrets() {
+  local SECRETS_JSON=`cat $COMPOSE_JSON_FILE | $JQ .secrets`
+  # count all the secrets to be installed
+  local SECRETS_COUNT=`echo $SECRETS_JSON | $JQ '. | length'`
+  local i="0"
+  while [ $i -lt $SECRETS_COUNT ]
+  do
+    # add the namespace attribute in the config before rendering the templates
+    local SECRET_CONFIG_PATH=`echo $SECRETS_JSON | $JQ -r '.['$i'].path'`
+    echo $SECRETS_JSON | $JQ '.['$i'].params + {"namespace":"'$HAYSTACK_NAMESPACE'"}' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON
+    # run kubectl to install secret
+    cat $SECRET_CONFIG_PATH | $GOMPLATE -d config=$SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON | $KUBECTL apply --record -f -
+    i=$[$i+1]
+  done
+}
+
 function installProxyServices() {
     local PROXY_SERVICES_JSON=`cat $COMPOSE_JSON_FILE | $JQ .proxy_services`
 
@@ -465,6 +481,9 @@ verifyK8sCluster
 
 # setup the namespace for this environment, naming convention is haystack-{{environment-name}}
 createNamespaceIfNotExists
+
+# store the secrets like certs etc in k8s. we dont delete the secrets as part of un-installation.
+installSecrets
 
 # deploy cluster addons like heapster, grafana etc.
 installClusterAddons
