@@ -50,7 +50,7 @@ deployable_units:
          - name: "KAFKA_REST_ZOOKEEPER_CONNECT"
            value: "zk:2181"
          - name: "KAFKA_REST_HOST_NAME"
-           value: "replace_with_minikube_ip"
+           value: "kafkasvc"
        ports:
           containerPort: 8082
           servicePort: 8082
@@ -146,6 +146,8 @@ cluster:
      params:
        image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.1
        rootUrl: "http://haystack.local/grafana"
+       storage: 50Mi
+       storageClass: standard
    - path: addons/1.6/monitoring/heapster.yaml
      params:
        image: gcr.io/google_containers/heapster-amd64:v1.4.0
