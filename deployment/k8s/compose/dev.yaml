@@ -37,7 +37,7 @@ deployable_units:
          - name: "KAFKA_ZOOKEEPER_CONNECT"
            value: "zk:2181"
          - name: "KAFKA_CREATE_TOPICS"
-           value: "spans:1:1"
+           value: "spans:1:1,metricpoints:1:1,mdm:1:1"
        ports:
           containerPort: 9092
           servicePort: 9092
@@ -54,26 +54,6 @@ deployable_units:
           containerPort: 8082
           servicePort: 8082
           hostPort: 8082
-     - name: haystack-span-stitcher
-       image: haystack-span-stitcher:latest
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       appConfigPath: configs/dev/span-stitcher.conf
-       env:
-        - name: OVERRIDES_CONFIG_PATH
-          value: /configs/span-stitcher.conf
-
-     - name: haystack-stitched-span-collector
-       image: haystack-stitched-span-collector:latest
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       appConfigPath: configs/dev/stitched-span-collector.conf
-       autoscale:
-         maxReplicas: 2
-         targetCPUUtilizationPercentage: 75
-       env:
-        - name: OVERRIDES_CONFIG_PATH
-          value: /configs/stitched-span-collector.conf
 
      - name: haystack-span-timeseries-transformer
        image: haystack-span-timeseries-transformer:latest
@@ -83,9 +63,9 @@ deployable_units:
          maxReplicas: 2
          targetCPUUtilizationPercentage: 75
        env:
-        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
-          value: "kafkasvc:9092"
-
+         - name: HAYSTACK_KAFKA_STREAMS_NUM_STREAM_THREADS
+           value: "1"
+       initCommand: "sleep 30"
 
      - name:  haystack-timeseries-aggregator
        image:  haystack-timeseries-aggregator:latest
@@ -95,8 +75,9 @@ deployable_units:
          maxReplicas: 2
          targetCPUUtilizationPercentage: 75
        env:
-        - name: HAYSTACK_KAFKA_STREAMS_BOOTSTRAP_SERVERS
-          value: "kafkasvc:9092"
+         - name: HAYSTACK_KAFKA_STREAMS_NUM_STREAM_THREADS
+           value: "1"
+       initCommand: "sleep 30"
 
      - name: metrictank
        image: raintank/metrictank:latest
