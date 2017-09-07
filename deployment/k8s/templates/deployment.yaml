@@ -17,6 +17,12 @@ spec:
       {{- if has (datasource "config") "terminationGracePeriodSeconds" }}
       terminationGracePeriodSeconds: {{(datasource "config").terminationGracePeriodSeconds}}
       {{- end }}
+      {{- if has (datasource "config") "initCommand" }}
+      initContainers:
+         - name: init-{{(datasource "config").name }}
+           image: busybox
+           command: ['sh', '-c', {{ (datasource "config").initCommand }}]
+      {{- end }}
       containers:
          - name: {{ (datasource "config").name }}
            image: {{ (datasource "config").image }}
