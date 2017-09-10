@@ -27,6 +27,10 @@ spec:
          - name: {{ (datasource "config").name }}
            image: {{ (datasource "config").image }}
            imagePullPolicy: IfNotPresent
+{{- if has (datasource "config") "livenessProbe" }}
+           livenessProbe:
+{{ (datasource "config").livenessProbe | toYAML | strings.Indent 13 }}
+{{- end }}
 {{- if has (datasource "config") "volumes" }}
            volumeMounts:
 {{- if has (datasource "config").volumes "appConfig" }}
