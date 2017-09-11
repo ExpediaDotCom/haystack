@@ -218,13 +218,13 @@ function createConfigMap() {
     CONFIG_MAP_NAME=$COMPONENT_NAME-$APP_CONFIG_CKSUM
 
     # check if the configmap exists for this component and configs checksums
-    if [[ `$KUBECTL get configmap $CONFIG_MAP_NAME 2>/dev/null` ]]; then
+    if [[ `$KUBECTL get configmap $CONFIG_MAP_NAME --namespace=$HAYSTACK_NAMESPACE 2>/dev/null` ]]; then
       echo "no change in config map for $COMPONENT_NAME"
     else
        CONFIG_FILE_NAME=$(basename $APP_CONFIG_PATH)
        $KUBECTL create configmap $CONFIG_MAP_NAME --from-file=$CONFIG_FILE_NAME=$APP_CONFIG_PATH --namespace=$HAYSTACK_NAMESPACE --generator='configmap/v1'
        # write the labels on configmap
-       $KUBECTL label configmap $CONFIG_MAP_NAME app-name=$COMPONENT_NAME
+       $KUBECTL label configmap/$CONFIG_MAP_NAME --namespace=$HAYSTACK_NAMESPACE app-name=$COMPONENT_NAME
     fi
    else
      unset CONFIG_MAP_NAME
