@@ -81,7 +81,15 @@ deployable_units:
        env:
          - name: HAYSTACK_KAFKA_STREAMS_NUM_STREAM_THREADS
            value: "1"
-       initCommand: "sleep 30"
+       livenessProbe:
+         exec:
+          command:
+          - "grep"
+          - "true"
+          - "/app/isHealthy"
+         initialDelaySeconds: 15
+         periodSeconds: 5
+         failureThreshold: 2
 
      - name:  haystack-timeseries-aggregator
        image:  haystack-timeseries-aggregator:latest

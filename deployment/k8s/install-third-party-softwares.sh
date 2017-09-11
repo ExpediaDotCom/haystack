@@ -21,7 +21,7 @@ case "$(uname -s)" in
      mkdir -p $INSTALL_DIR/linux/x64
      curl -L https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -o $INSTALL_DIR/linux/x64/jq
      curl -L https://github.com/hairyhenderson/gomplate/releases/download/v1.9.1/gomplate_linux-amd64 -o $INSTALL_DIR/linux/x64/gomplate
-     mkdir -p $INSTALL_DIR/linux/x64/kubectl/1.5.7
+     mkdir -p $INSTALL_DIR/linux/x64/kubectl/1.6.7
      curl -L https://storage.googleapis.com/kubernetes-release/release/v1.6.7/bin/linux/amd64/kubectl -o $INSTALL_DIR/linux/x64/kubectl/1.6.7/kubectl
      ;;
 
