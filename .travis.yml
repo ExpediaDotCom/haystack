@@ -4,7 +4,7 @@ node_js:
   - '8'
 
 script:
-  - cd docs && generate_docsite.sh  # generate doc pages
+  - cd docs && ./generate_docsite.sh  # generate doc pages
   - mv docs/_book ../out            # move generated resources to out folder
 
 # deploy out folder to gh-pages branch
