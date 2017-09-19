@@ -3,11 +3,6 @@ language: node_js
 node_js:
   - '8'
 
-env:
-  global:
-  - GH_REF: github.com/ExpediaDotCom/haystack
-  - secure: u7s7D6P+E5XNLY2Vs8EqD/g6ZXZsRCJv+o715CxcwipmSmt/iCQ0qI2Jq2nBjabazT4n/EBIqAMXw4dBVt4I/CoygACIuC4FvJy0nqT1NVyiyp/bHf8vXC2fhNq7vIcJ3OjgzpgssOfmsYVVp0ahOKP7AaUAMO5O/R70XCqba8ZFFsebCGhme19WhbGQ5TB5UtHy/xPeso5p+MgdaKAwiAfVQHP+dbItuTV1C9raD9UJVA+T+B94T6RxIksmtbO3pOOCHOpy6mf93DCwKBhUe7HrHiLuf9bJO8n07DSTwBitWSJR4aB+oKnaWNSrBfI8Y6Vq1A3zIByUPSdrOyBinugJxFCigPGAaOgn2qSteOTS30zqGKsT5HB6yND1jEP0LjjH5pNizqelp6DIkB1qPDsU9e6cGs/z4gl4zl/PsjuoJuVxISXGESgdcYyNagSm3Hi00c8dKEohN3xCZkIWsbjk5ie+W7B9afbHRJHCxI5rY/MDgn+oZGSrdJ63fayJJV5uhcJIupgCqeoTDDk7R1qLJZvEbavCtBMxE5vE7Cqh7iesMMCSQkiNaqySdGSv79piMnVKm9c40MpUAetOHY5qHZ2/CE+UR7ANCzx7io08sKT3vJBcF/Ws5Cu5yTlY+OwVfjAE95hZmmKkkoINq6wpkANsrJVL8zU1maHB9AI=
-
 script:
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ];  then docs/deploy_docsite.sh; fi
 
