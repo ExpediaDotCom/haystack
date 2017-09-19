@@ -7,4 +7,5 @@ cd docs
 ./generate_docsite.sh
 
 # copy generated sources to root of out
+mkdir ../out
 cp -R _book/* ../out
