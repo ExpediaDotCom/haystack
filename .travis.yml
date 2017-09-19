@@ -3,9 +3,10 @@ language: node_js
 node_js:
   - '8'
 
-# generate doc pages resources and move generated resources to out folder
+# generate doc pages and move generated resources to out folder
 script:
-  - cd ./docs && ./generate_docsite.sh && mv ./_book ../out/
+  - cd ./docs && ./generate_docsite.sh
+  - cd .. && mv docs/_book out
 
 # deploy out folder to gh-pages branch
 deploy:
