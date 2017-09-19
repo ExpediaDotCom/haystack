@@ -17,7 +17,7 @@ cd haystack/docs
 ./generate_docsite.sh
 
 # copy generated sources
-cp -R _book/* ..
+cp -R ./_book/* ..
 
 # If there are no changes to the compiled out then just bail.
 rm -rf ../deployment/
