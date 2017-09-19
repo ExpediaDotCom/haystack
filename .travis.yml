@@ -4,8 +4,10 @@ node_js:
   - '8'
 
 script:
-  - if [ "$TRAVIS_PULL_REQUEST" == "false" ];  then docs/deploy_docsite.sh; fi
+  - cd docs && ./generate_docsite.sh  # generate doc pages
+  - mv ./_book ../out                 # move generated resources to out folder
 
+# deploy out folder to gh-pages branch
 deploy:
   provider: pages
   skip_cleanup: true
