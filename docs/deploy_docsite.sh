@@ -19,7 +19,6 @@ cd haystack/docs
 # copy generated sources
 cp -R _book/* ..
 
-
 # If there are no changes to the compiled out then just bail.
 rm -rf ../deployment/
 if git diff --quiet; then
@@ -30,9 +29,8 @@ fi
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
 git clean -fx node_modules
-git clean -fx _book
 git add -A ..
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Now that we're all set up, we can push.
-#git push $SSH_REPO $SOURCE_BRANCH:$TARGET_BRANCH
+git push $SSH_REPO $SOURCE_BRANCH:$TARGET_BRANCH
