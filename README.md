@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ExpediaDotCom/haystack.svg?branch=master)](https://travis-ci.org/ExpediaDotCom/haystack)
+
 # haystack
 Topmost level repository for public open source Haystack
 

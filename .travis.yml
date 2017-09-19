@@ -5,7 +5,7 @@ node_js:
 
 # generate doc pages resources and move generated resources to out folder
 script:
-  - cd docs && ./generate_docsite.sh && mv _book ../out
+  - cd ./docs && ./generate_docsite.sh && mv ./_book ../out/
 
 # deploy out folder to gh-pages branch
 deploy:
@@ -13,6 +13,10 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
   local_dir: out
-  target_branch: gh-pages-shadow
+  target_branch: gh-pages
   on:
-    branch: travis-for-docs
+    branch: master
+
+notifications:
+  email:
+    - haystack-notifications@expedia.com
