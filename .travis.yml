@@ -6,4 +6,4 @@ node_js:
 script:
   # build and publish docsite
   # upload to dockerhub only for master(non PR)
-  - if ! [ "$TRAVIS_PULL_REQUEST" == "false" ];  then docs/deploy_docsite.sh; fi
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ];  then docs/deploy_docsite.sh; fi
