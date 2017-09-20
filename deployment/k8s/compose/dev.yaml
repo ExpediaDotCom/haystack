@@ -71,6 +71,21 @@ deployable_units:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/trace-indexer.conf
 
+     - name: haystack-pipes-json-transformer
+       image: haystack-pipes-json-transformer:latest
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/json-transformer.yaml
+         mountPath: /configs
+        ssl:
+         mountPath: /etc/ssl/certs
+         certsSecretName: haystack-default-certs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/json-transformer.yaml
+
      - name: haystack-span-timeseries-transformer
        image: haystack-span-timeseries-transformer:latest
        replicas: 1
