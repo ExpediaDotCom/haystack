@@ -37,24 +37,11 @@ deployable_units:
          - name: "KAFKA_ZOOKEEPER_CONNECT"
            value: "zk:2181"
          - name: "KAFKA_CREATE_TOPICS"
-           value: "spans:1:1,metricpoints:1:1,mdm:1:1"
+           value: "proto-spans:1:1,metricpoints:1:1,mdm:1:1"
        ports:
           containerPort: 9092
           servicePort: 9092
           hostPort: 9092
-
-     - name: kafka-rest-svc
-       image: confluentinc/cp-kafka-rest:3.2.1
-       replicas: 1
-       env:
-         - name: "KAFKA_REST_ZOOKEEPER_CONNECT"
-           value: "zk:2181"
-         - name: "KAFKA_REST_HOST_NAME"
-           value: "kafkasvc"
-       ports:
-          containerPort: 8082
-          servicePort: 8082
-          hostPort: 8082
 
      - name: haystack-trace-indexer
        image: haystack-trace-indexer:latest
@@ -64,19 +51,25 @@ deployable_units:
         appConfig:
          path: configs/dev/trace-indexer.conf
          mountPath: /configs
-        ssl:
-         mountPath: /etc/ssl/certs
-         certsSecretName: haystack-default-certs
        env:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/trace-indexer.conf
+       livenessProbe: 
+        exec: 
+         command: 
+         - grep
+         - "true"
+         - /app/isHealthy
+        initialDelaySeconds: 30
+        periodSeconds: 5
+        failureThreshold: 1
 
      - name: haystack-span-timeseries-transformer
        image: haystack-span-timeseries-transformer:latest
        replicas: 1
        terminationGracePeriodSeconds: 30
        autoscale:
-         maxReplicas: 2
+         maxReplicas: 1
          targetCPUUtilizationPercentage: 75
        env:
          - name: HAYSTACK_KAFKA_STREAMS_NUM_STREAM_THREADS
