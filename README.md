@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/ExpediaDotCom/haystack.svg?branch=master)](https://travis-ci.org/ExpediaDotCom/haystack)
+[![Docs](https://img.shields.io/badge/docs-current-brightgreen.svg)](https://expediadotcom.github.io/haystack/)
+[![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/ExpediaDotCom/haystack/blob/master/LICENSE)
 
 # haystack
 Topmost level repository for public open source Haystack
