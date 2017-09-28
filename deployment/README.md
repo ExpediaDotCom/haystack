@@ -2,13 +2,28 @@
 Automates deployment of Haystack components using [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes)
 ## Installation
 Clone this repository and run the script, as documented in the next section.
+
 ## Usage
+### Start
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/k8s
 ./apply-compose.sh -a install
 ```
-will install required third party software, start the minikube and install all haystack components in dev mode. 
+will install required third party software, start the minikube and install all haystack components in dev mode.
+
+### Stop
+From the root of the location to which haystack has been cloned:
+```
+cd deployment/k8s
+./apply-compose.sh -a uninstall
+```
+will uninstall all haystack components, but will leave minikube running. To bring down minikube:
+```
+minikube stop
+``` 
+Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
+during the install process.
 
 ## What components get installed ?
 The list of components that get installed in dev mode can be found at k8s/compose/dev.yaml. 'dev' is a logic name of an environment, 
