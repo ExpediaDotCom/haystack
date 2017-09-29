@@ -72,9 +72,6 @@ deployable_units:
         appConfig:
          path: configs/dev/json-transformer.yaml
          mountPath: /configs
-        ssl:
-         mountPath: /etc/ssl/certs
-         certsSecretName: haystack-default-certs
        env:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/json-transformer.yaml

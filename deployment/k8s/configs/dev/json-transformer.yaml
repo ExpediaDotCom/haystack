@@ -9,7 +9,7 @@ pipe:
     replicationFactor: 1
 graphite:
   prefix: "haystack"
-  address: "replace_with_minikube_ip"
+  address: "monitoring-influxdb-graphite"
   port: 2003
   pollIntervalSeconds: 60
   queueSize: 10
