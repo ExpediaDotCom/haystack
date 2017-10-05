@@ -44,7 +44,7 @@ deployable_units:
           hostPort: 9092
 
      - name: haystack-trace-indexer
-       image: haystack-trace-indexer:latest
+       image: expediadotcom/haystack-trace-indexer:4f6689b13344034fc9e84957d4297281639e7be3
        replicas: 1
        terminationGracePeriodSeconds: 30
        volumes:
@@ -76,8 +76,38 @@ deployable_units:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/json-transformer.yaml
 
+     - name: haystack-trace-reader
+       image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/trace-reader.conf
+         mountPath: /configs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/trace-reader.conf
+       ports:
+        containerPort: 8080
+        servicePort: 8080
+
+     - name: haystack-trace-reader
+       image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/trace-reader.conf
+         mountPath: /configs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/trace-reader.conf
+       ports:
+        containerPort: 8080
+        servicePort: 8080
+
      - name: haystack-span-timeseries-transformer
-       image: haystack-span-timeseries-transformer:latest
+       image: expediadotcom/haystack-span-timeseries-transformer:3f343719b85cf72f50625910e89c41432fcc8112
        replicas: 1
        terminationGracePeriodSeconds: 30
        autoscale:
@@ -97,7 +127,7 @@ deployable_units:
          failureThreshold: 2
 
      - name:  haystack-timeseries-aggregator
-       image:  haystack-timeseries-aggregator:latest
+       image: expediadotcom/haystack-timeseries-aggregator:3f343719b85cf72f50625910e89c41432fcc8112
        replicas: 1
        terminationGracePeriodSeconds: 30
        autoscale:
