@@ -65,7 +65,7 @@ deployable_units:
         failureThreshold: 1
 
      - name: haystack-pipes-json-transformer
-       image: haystack-pipes-json-transformer:latest
+       image: expediadotcom/haystack-pipes-json-transformer:810c4b1f879402e3cd7e36ae8238a13c7792edea
        replicas: 1
        terminationGracePeriodSeconds: 30
        volumes:
@@ -75,21 +75,6 @@ deployable_units:
        env:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/json-transformer.yaml
-
-     - name: haystack-trace-reader
-       image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
-       replicas: 1
-       terminationGracePeriodSeconds: 30
-       volumes:
-        appConfig:
-         path: configs/dev/trace-reader.conf
-         mountPath: /configs
-       env:
-        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
-          value: /configs/trace-reader.conf
-       ports:
-        containerPort: 8080
-        servicePort: 8080
 
      - name: haystack-trace-reader
        image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
