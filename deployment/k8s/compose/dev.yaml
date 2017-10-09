@@ -137,7 +137,7 @@ deployable_units:
           value: monitoring-influxdb-graphite.kube-system.svc:2003
 
      - name: haystack-ui
-       image: expediadotcom/haystack-ui:latest
+       image: expediadotcom/haystack-ui:514c04ddeedd076d52e24fb7a4e6d34cf389b49f
        replicas: 1
        terminationGracePeriodSeconds: 30
        ports:
