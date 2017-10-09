@@ -136,6 +136,14 @@ deployable_units:
         - name: MT_STATS_ADDR
           value: monitoring-influxdb-graphite.kube-system.svc:2003
 
+     - name: haystack-ui
+       image: expediadotcom/haystack-ui:latest
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       ports:
+         containerPort: 8080
+         servicePort: 8080
+
 proxy_services:
     - name: kafkasvc
       value: kafka-service.haystack-dev.svc.cluster.local
@@ -179,5 +187,4 @@ cluster:
        replicas: 1
        hostName: haystack.local # echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
        nodePort: 32300
-
 

@@ -137,7 +137,7 @@ function installClusterAddons() {
             echo "configuring addon '$ADDON_PATH' on the k8s cluster"
             local HAS_ARGS=`echo $ADDON_JSON | $JQ '. | has("params")'`
             if [[ $HAS_ARGS == true ]]; then
-                `echo $ADDON_JSON | $JQ '.params' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON`
+                `echo $ADDON_JSON | $JQ '.params + {"namespace":"'$HAYSTACK_NAMESPACE'"}' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON`
                 cat $ADDON_PATH | $GOMPLATE -d config=$SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON | $KUBECTL apply --record -f -
             else
               $KUBECTL apply -f $ADDON_PATH --record
