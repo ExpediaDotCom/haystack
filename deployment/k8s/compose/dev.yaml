@@ -64,6 +64,16 @@ deployable_units:
         periodSeconds: 5
         failureThreshold: 1
 
+     - name: haystack-pipes-json-transformer
+       image: expediadotcom/haystack-pipes-json-transformer:810c4b1f879402e3cd7e36ae8238a13c7792edea
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafkasvc
+        - name: HAYSTACK_GRAPHITE_ADDRESS
+          value: monitoring-influxdb-graphite.kube-system.svc
+
      - name: haystack-trace-reader
        image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
        replicas: 1
