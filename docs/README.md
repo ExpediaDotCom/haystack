@@ -20,4 +20,5 @@ working quite right (too slow, failing service calls, etc.): to find "the needle
 
 ### The Solution
 ![High Level Block Diagram](images/Haystack Components.png)
+<br/>
 [Information about components in the block diagram above](infrastructure/section.md)
