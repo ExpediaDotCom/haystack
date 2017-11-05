@@ -150,6 +150,13 @@ deployable_units:
        image: expediadotcom/haystack-ui:7d6be1f84552e8087e133bb6ca377ca1894f0633
        replicas: 1
        terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/haystack-ui.json
+         mountPath: /configs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/haystack-ui.json
        ports:
          containerPort: 8080
          servicePort: 8080
