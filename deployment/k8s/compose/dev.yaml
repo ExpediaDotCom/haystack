@@ -86,8 +86,8 @@ deployable_units:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/trace-reader.conf
        ports:
-        containerPort: 8080
-        servicePort: 8080
+        containerPort: 8088
+        servicePort: 8088
 
      - name: haystack-span-timeseries-transformer
        image: expediadotcom/haystack-span-timeseries-transformer:3f343719b85cf72f50625910e89c41432fcc8112
