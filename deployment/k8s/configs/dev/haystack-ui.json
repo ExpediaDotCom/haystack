@@ -1,0 +1,13 @@
+{
+  "port": 8080,
+  "cluster": true,
+  "upstreamTimeout": 60000,
+  "rootService": "stark-service",
+  "stores": {
+    "traces": {
+      "storeName": "haystack",
+      "haystackHost": "haystack-trace-reader",
+      "haystackPort": 8088
+    }
+  }
+}
