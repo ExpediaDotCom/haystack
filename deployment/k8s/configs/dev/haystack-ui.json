@@ -2,7 +2,7 @@
   "port": 8080,
   "cluster": true,
   "upstreamTimeout": 60000,
-
+  "rootService": "cloud-gate-proxy",
   "stores": {
     "traces": {
       "storeName": "haystack",
