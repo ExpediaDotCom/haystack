@@ -12,6 +12,10 @@ Visualization tools in haystack-ui include -
 Haystack-ui's navigation is pivoted around services. On selecting a service, you will get various visualizations tools each corresponding to a haystack sub-systems. Next sections provide list of major tools/pages available in Haystack UI.
 
 
+## Demo
+<img src="../images/demo.gif" style="width: 800px;"/>
+
+
 ## Code, Deployment and Configuration
 Refer the source repo - [https://github.com/ExpediaDotCom/haystack-ui](https://github.com/ExpediaDotCom/haystack-ui)
 
