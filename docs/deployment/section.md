@@ -1,4 +1,4 @@
-# ![Haystack](../images/logo_small.png)
+<img src="images/logo.png" style="width: 200px;"/>
 
 ## [Haystack Deployment](https://github.com/ExpediaInc/haystack-deployment)
 

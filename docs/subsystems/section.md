@@ -1,4 +1,4 @@
-# ![Haystack](../images/logo_small.png)
+<img src="images/logo.png" style="width: 200px;"/>
 
 ## Subsystems
 The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/section.md), based on
