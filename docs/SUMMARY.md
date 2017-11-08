@@ -2,13 +2,15 @@
 
 * [Introduction](README.md)
 
-* [Infrastructure](infrastructure/section.md)
-    * [Trends](infrastructure/trends.md)
-    * [Pipes](infrastructure/pipes.md)
-    * [Stitcher](infrastructure/stitcher.md)
-    * [Spans](infrastructure/spans.md)
-    * [Dependencies](infrastructure/dependencies.md)
-    * [UI](infrastructure/ui.md)
+* [Subsystems](subsystems/section.md)
+    * [Traces](subsystems/traces.md)
+    * [Trends](subsystems/trends.md)
+    * [Dependencies](subsystems/dependencies.md)
+    * [Pipes](subsystems/pipes.md)
+ 
+* [UI](ui/section.md)
+    * [Traces Page](ui/traces.md)
+    * [Trends Page](ui/traces.md)
 
 * [Deployment](deployment/section.md)
 

@@ -1,5 +1,4 @@
-# ![Haystack](images/logo.png)
-
+<img src="images/logo.png" style="width: 600px;"/>
 
 ## Introduction
 
@@ -21,4 +20,4 @@ working quite right in the cluster of services (increased latency, failing servi
 ### The Solution
 ![High Level Block Diagram](images/Haystack Components.png)
 <br/>
-[Information about components in the block diagram above](infrastructure/section.md)
+[Information about components in the block diagram above](subsystems/section.md)
