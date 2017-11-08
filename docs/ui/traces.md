@@ -16,10 +16,11 @@ Here are the available search options -
 
 
 ## Search Results
+Trace search results are presented in tabluar format for easy visualization of the data. All the columns are sortable.
+
 <img src="../images/traces.png" style="width: 800px;"/>
 
-Trace search results are presented in tabluar format for easy visualization of the data. All the columns are sortable.
-Here are details about how each column is calculated -
+Here are details about how each column in search results is calculated -
 - **Start Time** - Start time of the first span in local timezone.
 - **Root** - Operation name of the root span, root span(aka. loopback span) is the first span where user request started. Second line provides the URL(from span.tags.url in trace).
 - **Success** - Status of trace. Is marked failure if any spans in trace have success marked as false.
@@ -32,11 +33,9 @@ Here are details about how each column is calculated -
   
   
 ## Trace Details
-<img src="../images/trace_details.png" style="width: 800px;"/>
-
 Waterfall for the trace, it shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
 
-You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span.
+<img src="../images/trace_details.png" style="width: 800px;"/>
 
-Also, clicking on `Share Trace` copies a sharable persistent link for the trace.
+You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. Also, clicking on `Share Trace` copies a sharable persistent link for the trace.
 
