@@ -1,4 +1,4 @@
-<img src="images/logo.png" style="width: 200px;"/>
+<img src="../images/logo.png" style="width: 200px;"/>
 
 # Haystack UI
 Haystack-ui is the web UI for haystack. It is the central place for visualizing processed data from various haystack sub-systems. 

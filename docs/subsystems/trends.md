@@ -1,4 +1,4 @@
-<img src="images/logo.png" style="width: 200px;"/>
+<img src="../images/logo.png" style="width: 200px;"/>
 
 # [Haystack Trends](https://github.com/ExpediaDotCom/haystack-trends)
 
