@@ -15,6 +15,6 @@
     * [Trends View](ui/trends.md)
 * [Clients](clients.md)
 * [Deployment](deployment/deployment.md)
-    * [Subsystems](deployment/subsytems.md)
+    * [Subsystems](deployment/sub_sytems.md)
     * [Clients](deployment/clients.md)
 * [Contributing](contributing.md)
