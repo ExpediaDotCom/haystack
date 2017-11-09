@@ -1,7 +1,5 @@
 <img src="images/logo.png" style="width: 600px;"/>
 
-## Introduction
-
 [Haystack](https://github.com/ExpediaDotCom/haystack) is an Expedia-backed open source project to facilitate detection
 and remediation of problems with enterprise-level web services and websites.
 

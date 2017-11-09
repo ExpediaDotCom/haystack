@@ -1,17 +1,20 @@
 # Summary
 
 * [Introduction](README.md)
-
-* [Subsystems](subsystems/section.md)
+* [Getting Started](getting_started.md)
+* [Architecture](architecture.md)
+* [Subsystems](subsystems/subsytems.md)
     * [Traces](subsystems/traces.md)
     * [Trends](subsystems/trends.md)
     * [Dependencies](subsystems/dependencies.md)
+    * [Anomaly Detection](subsystems/anomaly_detection.md)
     * [Pipes](subsystems/pipes.md)
- 
-* [UI](ui/section.md)
-    * [Traces Page](ui/traces.md)
-    * [Trends Page](ui/traces.md)
-
-* [Deployment](deployment/section.md)
-
-* [Contributing](contributing/section.md)
+    * [Collectors](subsystems/collectors.md)
+* [UI](ui/ui.md)
+    * [Traces View](ui/traces.md)
+    * [Trends View](ui/trends.md)
+* [Clients](clients.md)
+* [Deployment](deployment/deployment.md)
+    * [Subsystems](deployment/subsytems.md)
+    * [Clients](deployment/clients.md)
+* [Contributing](contributing.md)

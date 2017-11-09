@@ -1,6 +1,4 @@
-<img src="../images/logo.png" style="width: 200px;"/>
-
-# [Haystack Trends](https://github.com/ExpediaDotCom/haystack-trends)
+# Haystack Trends
 
 haystack-trends contains the required modules for trending the spans pushed to haystack. We currently plan to compute four trends for each
 combination `service_name` and `operation_name` contained in the spans (refer to the [span schema](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/span.proto) for details of the fields in the span  )

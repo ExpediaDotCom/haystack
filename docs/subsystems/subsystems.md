@@ -1,6 +1,5 @@
-<img src="../images/logo.png" style="width: 200px;"/>
+# Haystack Subsystems
 
-## Subsystems
 The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/section.md), based on
 [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes), that deploys a working development environment with working
 implementations of all of the services in the block diagram above. This same mechanism, with different configurations,
