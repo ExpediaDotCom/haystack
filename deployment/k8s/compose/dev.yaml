@@ -65,7 +65,7 @@ deployable_units:
         failureThreshold: 1
 
      - name: haystack-pipes-json-transformer
-       image: expediadotcom/haystack-pipes-json-transformer:810c4b1f879402e3cd7e36ae8238a13c7792edea
+       image: expediadotcom/haystack-pipes-json-transformer:7ee334aedd181a6b383e57b728dd74b5904d97c1
        replicas: 1
        terminationGracePeriodSeconds: 30
        env:
