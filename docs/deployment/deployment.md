@@ -1,6 +1,4 @@
-<img src="images/logo.png" style="width: 200px;"/>
-
-## [Haystack Deployment](https://github.com/ExpediaInc/haystack-deployment)
+# Deployment
 
 Automates deployment of Haystack components using [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes)
 ### Installation

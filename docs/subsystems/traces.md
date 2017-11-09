@@ -1,3 +1,3 @@
-<img src="../images/logo.png" style="width: 200px;"/>
+# Haystack Traces
 
-# Spans
+[TODO]

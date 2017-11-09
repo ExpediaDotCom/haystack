@@ -1,10 +1,8 @@
-<img src="../images/logo.png" style="width: 200px;"/>
-
 # Traces 
+
 Visualization for tracing sub-system of Haystack.
 
-
-## Search  
+### Search  
 User can search for Traces going through a service. Operation can be 'all' or any specific operation from the given service. Time Picker allows presets and time range. 
 Here are the available search options -
 - **Service**: Service through which trace must go through
@@ -15,7 +13,7 @@ Here are the available search options -
 - **Time Range Picker**: User can select any presets or specify a custom time window.
 
 
-## Search Results
+### Search Results
 Trace search results are presented in tabluar format for easy visualization of the data. All the columns are sortable.
 
 <img src="../images/traces.png" style="width: 800px;"/>
@@ -32,7 +30,7 @@ Here are details about how each column in search results is calculated -
 - **Total Duration** - Duration of the span. It is the difference between the start time of earliest operation and the end time of last operation in the trace
   
   
-## Trace Details
+### Trace Details
 Waterfall for the trace, it shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
 
 <img src="../images/trace_details.png" style="width: 800px;"/>

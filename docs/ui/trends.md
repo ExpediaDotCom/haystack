@@ -1,10 +1,8 @@
-<img src="../images/logo.png" style="width: 200px;"/>
-
 # Trends
+
 Visualization for vital service health trends. Haystack trends 3 metrices for each operation of all services - count, duration(tp95, tp99, median) and success %.
 
-
-## Operation Summary
+### Operation Summary
 You would get summary stats for count, duration and success % for all operation of the service on landing on Trends page.
 
 <img src="../images/trends.png" style="width: 800px;"/>
@@ -12,7 +10,7 @@ You would get summary stats for count, duration and success % for all operation 
 All 3 columns are sortable. You can change the duration for which you want summaries by changing `Showing summary for` dropdown.
 
 
-## Operation Trend Details 
+### Operation Trend Details 
 Graphs for count, duraiton and success % trends. 
 
 <img src="../images/trend_details.png" style="width: 800px;"/>
