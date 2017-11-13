@@ -1,0 +1,24 @@
+[submodule "haystack-traces"]
+	path = haystack-traces
+	url = https://github.com/ExpediaDotCom/haystack-traces
+[submodule "haystack-trends"]
+	path = haystack-trends
+	url = https://github.com/ExpediaDotCom/haystack-trends
+[submodule "haystack-ui"]
+	path = haystack-ui
+	url = https://github.com/ExpediaDotCom/haystack-ui
+[submodule "haystack-collector"]
+	path = haystack-collector
+	url = https://github.com/ExpediaDotCom/haystack-collector
+[submodule "haystack-pipes"]
+	path = haystack-pipes
+	url = https://github.com/ExpediaDotCom/haystack-pipes
+[submodule "haystack-idl"]
+	path = haystack-idl
+	url = https://github.com/ExpediaDotCom/haystack-idl
+[submodule "haystack-agent"]
+	path = haystack-agent
+	url = https://github.com/ExpediaDotCom/haystack-agent
+[submodule "haystack-client-java"]
+	path = haystack-client-java
+	url = https://github.com/ExpediaDotCom/haystack-client-java
