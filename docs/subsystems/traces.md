@@ -17,7 +17,7 @@ Following is a typical flow of a single request that starts from the browser or 
 ### Architecture
 The traces subsystem comprises of following components:
 
-<img src="../images/trace-subsystem-architecture.png" style="width: 800px;"/>
+<img src="../images/trace-subsystem-architecture.png" style="width: 400px;"/>
 
 - **Indexer**: The role of 'indexer' is to read the spans from kafka and group them together based on span's unique traceId. It finally writes this [grouped data structure](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/spanBuffer.proto) to Cassandra and ElasticSearch. Cassandra is used as a raw data store where all the spans are inserted with TraceId as a primary key. ElasticSearch is used to build an index on the metadata, serviceName and operationName associated with every span. This helps the 'reader' service to query elasticsearch for any contextual search e.g. fetch all TraceId(requests) that have any span with `serviceName=xyz` and a metadata tag `success=false`. 
 
