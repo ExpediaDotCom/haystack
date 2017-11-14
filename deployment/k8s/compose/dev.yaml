@@ -51,9 +51,6 @@ deployable_units:
         appConfig:
          path: configs/dev/trace-indexer.conf
          mountPath: /configs
-        jmxtransConfig:
-         path: jmxtrans
-         mountPath: /app/bin/jmx
        env:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
           value: /configs/trace-indexer.conf
