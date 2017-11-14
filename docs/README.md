@@ -15,7 +15,3 @@ categorized in different ways; the list below is one such way)
 Haystack is intended to help users make sense of the information in these transaction logs, particularly when things are not
 working quite right in the cluster of services (increased latency, failing service calls, etc.): to find service and/or network latency that is causing the issue. i.e., "the needle in the haystack" (thus the name).
 
-### The Solution
-![High Level Block Diagram](images/Haystack Components.png)
-<br/>
-[Information about components in the block diagram above](subsystems/section.md)
