@@ -49,7 +49,7 @@ deployable_units:
        terminationGracePeriodSeconds: 30
        volumes:
         appConfig:
-         path: configs/trace-indexer.conf
+         path: configs/dev/trace-indexer.conf
          mountPath: /configs
         jmxtransConfig:
          path: jmxtrans
@@ -67,6 +67,15 @@ deployable_units:
         periodSeconds: 5
         failureThreshold: 1
 
+     - name: haystack-pipes-json-transformer
+       image: expediadotcom/haystack-pipes-json-transformer:7ee334aedd181a6b383e57b728dd74b5904d97c1
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafkasvc
+        - name: HAYSTACK_GRAPHITE_ADDRESS
+          value: monitoring-influxdb-graphite.kube-system.svc
 
      - name: haystack-trace-reader
        image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
@@ -74,7 +83,7 @@ deployable_units:
        terminationGracePeriodSeconds: 30
        volumes:
         appConfig:
-         path: configs/trace-reader.conf
+         path: configs/dev/trace-reader.conf
          mountPath: /configs
        env:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
@@ -146,7 +155,7 @@ deployable_units:
        terminationGracePeriodSeconds: 30
        volumes:
         appConfig:
-         path: configs/haystack-ui.json
+         path: configs/dev/haystack-ui.json
          mountPath: /configs
        env:
         - name: HAYSTACK_OVERRIDES_CONFIG_PATH
