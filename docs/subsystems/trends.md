@@ -2,13 +2,13 @@
 
 The trends subsystem is responsible for reading the spans and generating the vital service health trends.
 
-## Why Trends
+## Why Trends?
 
 Haystack collects all the data from the various services and creates the distributed call graph and depicts the time taken by that call across various services.
 This information can be hard to make sense of unless we have a trend to compare this against. Trends help us in the comparision and also provides the data source for the subsequent anomaly detection system which intends to find out anomalies in service health and trigger alerts
 
 
-##What do we Trend
+## What do we Trend
 
 We currently  compute four trends for each combination of `service` and `operation` contained in the [span](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/span.proto) pushed to haystack.
 
@@ -34,7 +34,7 @@ for reading metric points, aggregating them based on rules and pushing the aggre
 
 The timeseries metric points are metrictank complient and can be directly consumed by metrictank. 
 
- ###Extensions
+ ### Extensions
  
  1. Trends - Other than the four default trends more trends can be computed by adding a [transformer](https://github.com/ExpediaDotCom/haystack-trends/tree/master/span-timeseries-transformer/src/main/scala/com/expedia/www/haystack/metricpoints/transformer)
 to create the metric point and adding an [aggregation-rule](https://github.com/ExpediaDotCom/haystack-trends/tree/master/timeseries-aggregator/src/main/scala/com/expedia/www/haystack/metricpoints/aggregation/rules) for it. 
