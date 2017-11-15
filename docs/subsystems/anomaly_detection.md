@@ -1,3 +1,3 @@
 # Haystack Anomaly Detection
 
-Coming Soon...
+Coming Soon.
