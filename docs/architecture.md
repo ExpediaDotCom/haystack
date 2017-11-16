@@ -1,7 +1,7 @@
 # Architecture
 
 ## Haystack Components Architecture Diagram
-<img src="../images/Haystack Components.png"/>
+<img src="../images/Haystack_Components.png"/>
 
 **Haystack Architecture** is designed on the distributed design principles of building a decentralized and decoupled system.
 To enable that, we have used **Kafka** as our nervous system that helps us achieve the following:
