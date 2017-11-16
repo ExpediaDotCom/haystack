@@ -2,7 +2,8 @@
 set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
+UNIT_NAMES_ARRAY_INDEX="0"
+declare -a UNIT_NAMES
 
 #########################
 # The command line help #
@@ -11,7 +12,8 @@ function display_help() {
     echo "Usage: $0 [option...] " >&2
     echo
     echo "   -a, --action               defines the action for deploying haystack components. possible values: install|uninstall, default: install"
-    echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all"
+    echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all (use separate -u for each unit)"
+    echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
     echo "   -e, --environment          choose the environment settings for cluster(aws) and deployable-units. possible values: dev|test|int|prod, default: dev"
     echo "   --use-context              kubectl context for installing haystack components, possible values: <valid-cluster-context> default: minikube-haystack-<env>"
     echo
@@ -36,7 +38,8 @@ do
           ;;
        -u | --unit-name)
           if [ $# -ne 0 ]; then
-            UNIT_NAME="$2"
+            UNIT_NAMES[UNIT_NAMES_ARRAY_INDEX]="$2"
+            UNIT_NAMES_ARRAY_INDEX=$(( UNIT_NAMES_ARRAY_INDEX + 1 ))
           fi
           shift 2
           ;;
@@ -70,8 +73,8 @@ function verifyArgs() {
    ACTION=install
  fi
 
- if [[ -z $UNIT_NAME ]]; then
-   UNIT_NAME=all
+ if [[ -z $UNIT_NAMES[0] ]]; then
+   UNIT_NAMES[0]=all
  fi
 
  if [[ -z $ENVIRONMENT ]]; then
@@ -246,8 +249,9 @@ function installScheduledJobs() {
 }
 
 function uninstallScheduledJobs() {
-  case "$UNIT_NAME" in
-       all)
+  for UNIT_NAME in ${UNIT_NAMES[@]}; do
+     case "$UNIT_NAME" in
+        all)
           local SCHEDULED_JOBS=`cat $COMPOSE_JSON_FILE | $JQ .scheduled_jobs`
           local SCHEDULED_JOBS_COUNT=`echo $SCHEDULED_JOBS | $JQ '. | length'`
 
@@ -259,7 +263,8 @@ function uninstallScheduledJobs() {
           i=$[$i+1]
           done
           ;;
-    esac
+     esac
+  done
 }
 
 function applyActionOnComponents() {
@@ -326,34 +331,36 @@ function uninstallComponent() {
 }
 
 function uninstallProxyServices() {
+  for UNIT_NAME in ${UNIT_NAMES[@]}; do
     case "$UNIT_NAME" in
-       all)
-          local PROXY_SERVICES_JSON=`cat $COMPOSE_JSON_FILE | $JQ .proxy_services`
-          # count of all the proxy services
-          local PROXY_SERVICES_COUNT=`echo $PROXY_SERVICES_JSON | $JQ '. | length'`
+      all)
+        local PROXY_SERVICES_JSON=`cat $COMPOSE_JSON_FILE | $JQ .proxy_services`
+        # count of all the proxy services
+        local PROXY_SERVICES_COUNT=`echo $PROXY_SERVICES_JSON | $JQ '. | length'`
 
-          local i="0"
-          while [ $i -lt $PROXY_SERVICES_COUNT ]
-          do
-            # add the namespace attribute in the config before rendering the templates
-            local PROXY_NAME=`echo $PROXY_SERVICES_JSON | $JQ -r '.['$i'].name'`
-            uninstallComponent $PROXY_NAME
-          i=$[$i+1]
-          done
-          ;;
+        local i="0"
+        while [ $i -lt $PROXY_SERVICES_COUNT ]
+        do
+          # add the namespace attribute in the config before rendering the templates
+          local PROXY_NAME=`echo $PROXY_SERVICES_JSON | $JQ -r '.['$i'].name'`
+          uninstallComponent $PROXY_NAME
+        i=$[$i+1]
+        done
+        ;;
     esac
+  done
 }
 
 function uninstallComponents() {
-    local DEPLOYABLE_UNITS_JSON=`cat $COMPOSE_JSON_FILE | $JQ .deployable_units`
-
+  local DEPLOYABLE_UNITS_JSON=`cat $COMPOSE_JSON_FILE | $JQ .deployable_units`
+  for UNIT_NAME in ${UNIT_NAMES[@]}; do
     case "$UNIT_NAME" in
-       all)
-          # count of all the deployable units
-          local DEPLOYABLE_UNITS_COUNT=`cat $COMPOSE_JSON_FILE | $JQ '.deployable_units | length'`
+      all)
+        # count of all the deployable units
+        local DEPLOYABLE_UNITS_COUNT=`cat $COMPOSE_JSON_FILE | $JQ '.deployable_units | length'`
 
-          local i="0"
-          while [ $i -lt $DEPLOYABLE_UNITS_COUNT ]
+        local i="0"
+        while [ $i -lt $DEPLOYABLE_UNITS_COUNT ]
           do
             # get the deployable unit name
             local COMPONENT_NAME=`echo $DEPLOYABLE_UNITS_JSON | $JQ -r '.['$i'].name'`
@@ -361,48 +368,50 @@ function uninstallComponents() {
           i=$[$i+1]
           done
           ;;
-       *)
-          local COMPONENT_NAME=$(echo $DEPLOYABLE_UNITS_JSON | $JQ -r '.[] | select(.name=="'$UNIT_NAME'") | .name')
-          if [[ $COMPONENT_NAME == '' ]]; then
-            echo "Error!!! Fail to find the configuration for the component $UNIT_NAME in the compose file."
-            exit 1
-          else
-            uninstallComponent $COMPONENT_NAME
-          fi
-          ;;
+      *)
+        local COMPONENT_NAME=$(echo $DEPLOYABLE_UNITS_JSON | $JQ -r '.[] | select(.name=="'$UNIT_NAME'") | .name')
+        if [[ $COMPONENT_NAME == '' ]]; then
+          echo "Error!!! Fail to find the configuration for the component $UNIT_NAME in the compose file."
+          exit 1
+        else
+          uninstallComponent $COMPONENT_NAME
+        fi
+        ;;
     esac
+  done
 }
 
 function installComponents() {
-    local DEPLOYABLE_UNITS_JSON=`cat $COMPOSE_JSON_FILE | $JQ .deployable_units`
-
+  local DEPLOYABLE_UNITS_JSON=`cat $COMPOSE_JSON_FILE | $JQ .deployable_units`
+  for UNIT_NAME in ${UNIT_NAMES[@]}; do
     case "$UNIT_NAME" in
-       all)
-          echo "All haystack components will be deployed in the namespace '$HAYSTACK_NAMESPACE'"
+      all)
+        echo "All haystack components will be deployed in the namespace '$HAYSTACK_NAMESPACE'"
 
-          # count of all the deployable units
-          local DEPLOYABLE_UNITS_COUNT=`cat $COMPOSE_JSON_FILE | $JQ '.deployable_units | length'`
+        # count of all the deployable units
+        local DEPLOYABLE_UNITS_COUNT=`cat $COMPOSE_JSON_FILE | $JQ '.deployable_units | length'`
 
-          local i="0"
-          while [ $i -lt $DEPLOYABLE_UNITS_COUNT ]
-          do
-            # add the namespace attribute in the config before rendering the templates
-            local CONFIG_JSON=`echo $DEPLOYABLE_UNITS_JSON | $JQ '.['$i'] + {"namespace":"'$HAYSTACK_NAMESPACE'"}'`
-            installComponent $CONFIG_JSON
-          i=$[$i+1]
-          done
-          ;;
-       *)
-          local CONFIG=$(echo $DEPLOYABLE_UNITS_JSON | $JQ '.[] | select(.name=="'$UNIT_NAME'")')
-          if [[ $CONFIG == '' ]]; then
-            echo "Error!!! Fail to find the configuration for the component '$UNIT_NAME' in the compose file"
-            exit 1
-          else
-            local CONFIG_JSON=`echo $CONFIG | $JQ '. + {"namespace":"'$HAYSTACK_NAMESPACE'"}'`
-            installComponent $CONFIG_JSON
-          fi
-          ;;
+        local i="0"
+        while [ $i -lt $DEPLOYABLE_UNITS_COUNT ]
+        do
+          # add the namespace attribute in the config before rendering the templates
+          local CONFIG_JSON=`echo $DEPLOYABLE_UNITS_JSON | $JQ '.['$i'] + {"namespace":"'$HAYSTACK_NAMESPACE'"}'`
+          installComponent $CONFIG_JSON
+        i=$[$i+1]
+        done
+        ;;
+      *)
+        local CONFIG=$(echo $DEPLOYABLE_UNITS_JSON | $JQ '.[] | select(.name=="'$UNIT_NAME'")')
+        if [[ $CONFIG == '' ]]; then
+          echo "Error!!! Fail to find the configuration for the component '$UNIT_NAME' in the compose file"
+          exit 1
+        else
+          local CONFIG_JSON=`echo $CONFIG | $JQ '. + {"namespace":"'$HAYSTACK_NAMESPACE'"}'`
+          installComponent $CONFIG_JSON
+        fi
+        ;;
     esac
+  done
 }
 
 function installSecrets() {
@@ -422,23 +431,24 @@ function installSecrets() {
 }
 
 function installProxyServices() {
-    local PROXY_SERVICES_JSON=`cat $COMPOSE_JSON_FILE | $JQ .proxy_services`
-
+  local PROXY_SERVICES_JSON=`cat $COMPOSE_JSON_FILE | $JQ .proxy_services`
+  for UNIT_NAME in ${UNIT_NAMES[@]}; do
     case "$UNIT_NAME" in
-       all)
-          echo "Deploying proxy services"
-          # count of all the proxy services
-          local SERVICE_UNITS_COUNT=`cat $COMPOSE_JSON_FILE | $JQ '.proxy_services | length'`
-          local i="0"
-          while [ $i -lt $SERVICE_UNITS_COUNT ]
-          do
-            # add the namespace attribute in the config before rendering the templates
-            local CONFIG_JSON=`echo $PROXY_SERVICES_JSON | $JQ '.['$i'] + {"namespace":"'$HAYSTACK_NAMESPACE'"}'`
-            createProxyService $CONFIG_JSON
+      all)
+        echo "Deploying proxy services"
+        # count of all the proxy services
+        local SERVICE_UNITS_COUNT=`cat $COMPOSE_JSON_FILE | $JQ '.proxy_services | length'`
+        local i="0"
+        while [ $i -lt $SERVICE_UNITS_COUNT ]
+        do
+          # add the namespace attribute in the config before rendering the templates
+          local CONFIG_JSON=`echo $PROXY_SERVICES_JSON | $JQ '.['$i'] + {"namespace":"'$HAYSTACK_NAMESPACE'"}'`
+          createProxyService $CONFIG_JSON
           i=$[$i+1]
-          done
-          ;;
+        done
+        ;;
     esac
+  done
 }
 
 function setKubectlContext() {
