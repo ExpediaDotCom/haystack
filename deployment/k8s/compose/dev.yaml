@@ -65,14 +65,26 @@ deployable_units:
         failureThreshold: 1
 
      - name: haystack-pipes-json-transformer
-       image: expediadotcom/haystack-pipes-json-transformer:7ee334aedd181a6b383e57b728dd74b5904d97c1
+       image: expediadotcom/haystack-pipes-json-transformer:a9faee13c3e0f5069c2af24bb1a6456815580357
        replicas: 1
        terminationGracePeriodSeconds: 30
        env:
         - name: HAYSTACK_KAFKA_BROKERS
-          value: kafkasvc
+          value: kafka-service
         - name: HAYSTACK_GRAPHITE_ADDRESS
           value: monitoring-influxdb-graphite.kube-system.svc
+
+     - name: haystack-pipes-kafka-producer
+       image: expediadotcom/haystack-pipes-kafka-producer:a9faee13c3e0f5069c2af24bb1a6456815580357
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafka-service
+        - name: HAYSTACK_GRAPHITE_ADDRESS
+          value: monitoring-influxdb-graphite.kube-system.svc
+        - name: HAYSTACK_EXTERNALKAFKA_BROKERS
+          value: kafka-service
 
      - name: haystack-trace-reader
        image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
@@ -134,13 +146,13 @@ deployable_units:
         - name: MT_CARBON_IN_ENABLED
           value: "false"
         - name: MT_CASSANDRA_ADDRS
-          value: cassandrasvc:9042
+          value: cassandra:9042
         - name: MT_KAFKA_MDM_IN_BROKERS
-          value: "kafkasvc:9092"
+          value: "kafka-service:9092"
         - name: MT_KAFKA_MDM_IN_ENABLED
           value: "true"
         - name: MT_CASSANDRA_IDX_HOSTS
-          value: cassandrasvc:9042
+          value: cassandra:9042
         - name: MT_HTTP_MULTI_TENANT
           value: "false"
         - name: MT_STATS_ADDR
@@ -160,13 +172,6 @@ deployable_units:
        ports:
          containerPort: 8080
          servicePort: 8080
-
-proxy_services:
-    - name: kafkasvc
-      value: kafka-service.haystack-dev.svc.cluster.local
-
-    - name: cassandrasvc
-      value: cassandra.haystack-dev.svc.cluster.local
 
 secrets:
    - path: secrets/ssl-certs.yaml
