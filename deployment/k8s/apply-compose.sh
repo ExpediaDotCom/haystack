@@ -72,8 +72,7 @@ function verifyArgs() {
  if [[ -z $ACTION ]]; then
    ACTION=install
  fi
-
- if [[ -z $UNIT_NAMES[0] ]]; then
+ if [[ -z $UNIT_NAMES ]]; then
    UNIT_NAMES[0]=all
  fi
 
@@ -235,16 +234,21 @@ function createConfigMap() {
 }
 
 function installScheduledJobs() {
-  local SCHEDULED_JOBS=`cat $COMPOSE_JSON_FILE | $JQ .scheduled_jobs`
+local SCHEDULED_JOBS=`cat $COMPOSE_JSON_FILE | $JQ .scheduled_jobs`
   local SCHEDULED_JOBS_COUNT=`echo $SCHEDULED_JOBS | $JQ '. | length'`
-
-  local i="0"
-  while [ $i -lt $SCHEDULED_JOBS_COUNT ]
-  do
-    # add the namespace attribute in the config before rendering the templates
-    echo $SCHEDULED_JOBS | $JQ '.['$i'] + {"namespace":"'$HAYSTACK_NAMESPACE'"}' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON
-    cat templates/scheduleJob.yaml | $GOMPLATE -d config=$SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON | $KUBECTL apply --record -f -
-   i=$[$i+1]
+  for UNIT_NAME in ${UNIT_NAMES[@]}; do
+    case "$UNIT_NAME" in
+      all)
+        local i="0"
+        while [ $i -lt $SCHEDULED_JOBS_COUNT ]
+        do
+            # add the namespace attribute in the config before rendering the templates
+            echo $SCHEDULED_JOBS | $JQ '.['$i'] + {"namespace":"'$HAYSTACK_NAMESPACE'"}' > $SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON
+            cat templates/scheduleJob.yaml | $GOMPLATE -d config=$SINGLE_DEPLOYABLE_UNIT_CONFIG_JSON | $KUBECTL apply --record -f -
+            i=$[$i+1]
+        done
+        ;;
+    esac
   done
 }
 
