@@ -176,19 +176,20 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: traefik-haystack
-  namespace: kube-system
+  name: traefik-haystack-metrictank
+  namespace: {{ (datasource "config").namespace }}
   annotations:
     kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
   - host: {{ (datasource "config").hostName }}
     http:
       paths:
-       - path: /dashboard/
+       - path: /metrictank
          backend:
-           serviceName: traefik-web-ui
-           servicePort: 80
+           serviceName: metrictank
+           servicePort: 6060
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
