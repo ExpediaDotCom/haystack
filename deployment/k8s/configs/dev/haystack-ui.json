@@ -2,12 +2,12 @@
   "port": 8080,
   "cluster": true,
   "upstreamTimeout": 60000,
-  "rootService": "stark-service",
+  "rootService": "cloud-gate-proxy",
   "stores": {
     "traces": {
       "storeName": "haystack",
       "haystackHost": "haystack-trace-reader",
-      "haystackPort": 8088
+      "haystackPort": 8080
     }
   }
 }

@@ -44,7 +44,7 @@ deployable_units:
           hostPort: 9092
 
      - name: haystack-trace-indexer
-       image: expediadotcom/haystack-trace-indexer:4f6689b13344034fc9e84957d4297281639e7be3
+       image: expediadotcom/haystack-trace-indexer:61d53c1cf8d9a8363ab08d73d6815bb6acf1a982
        replicas: 1
        terminationGracePeriodSeconds: 30
        volumes:
@@ -87,7 +87,7 @@ deployable_units:
           value: kafka-service
 
      - name: haystack-trace-reader
-       image: expediadotcom/haystack-trace-reader:4f6689b13344034fc9e84957d4297281639e7be3
+       image: expediadotcom/haystack-trace-reader:61d53c1cf8d9a8363ab08d73d6815bb6acf1a982
        replicas: 1
        terminationGracePeriodSeconds: 30
        volumes:
@@ -102,15 +102,17 @@ deployable_units:
         servicePort: 8088
 
      - name: haystack-span-timeseries-transformer
-       image: expediadotcom/haystack-span-timeseries-transformer:3f343719b85cf72f50625910e89c41432fcc8112
+       image: expediadotcom/haystack-span-timeseries-transformer:6d320e806e63a2809b71a5c3e86c535a842789a4
        replicas: 1
        terminationGracePeriodSeconds: 30
        autoscale:
          maxReplicas: 1
          targetCPUUtilizationPercentage: 75
        env:
-         - name: HAYSTACK_KAFKA_STREAMS_NUM_STREAM_THREADS
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_NUM_STREAM_THREADS
            value: "1"
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+           value: kafka-service
        livenessProbe:
          exec:
           command:
@@ -122,15 +124,17 @@ deployable_units:
          failureThreshold: 2
 
      - name:  haystack-timeseries-aggregator
-       image: expediadotcom/haystack-timeseries-aggregator:3f343719b85cf72f50625910e89c41432fcc8112
+       image: expediadotcom/haystack-timeseries-aggregator:6d320e806e63a2809b71a5c3e86c535a842789a4
        replicas: 1
        terminationGracePeriodSeconds: 30
        autoscale:
          maxReplicas: 2
          targetCPUUtilizationPercentage: 75
        env:
-         - name: HAYSTACK_KAFKA_STREAMS_NUM_STREAM_THREADS
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_NUM_STREAM_THREADS
            value: "1"
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+           value: kafka-service
        initCommand: "sleep 30"
 
      - name: metrictank
@@ -159,7 +163,7 @@ deployable_units:
           value: monitoring-influxdb-graphite.kube-system.svc:2003
 
      - name: haystack-ui
-       image: expediadotcom/haystack-ui:c719f1756344aa05fbd15c9c1010f9e6999ed669
+       image: expediadotcom/haystack-ui:581338e50631ce327bcb9db0ab07484d6b0338ec
        replicas: 1
        terminationGracePeriodSeconds: 30
        volumes:
