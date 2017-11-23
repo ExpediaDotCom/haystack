@@ -20,9 +20,7 @@ haystack-pipes-json-transformer | https://hub.docker.com/u/expediadotcom/haystac
 
 ### How to run these components?
 
-Entire haystack runs locally on minikube(k8s), after 1 click deployment and Kubernetes on the rest of the environments. 
-
-Automates deployment of Haystack components using Kubernetes. 
+Entire haystack runs locally on minikube(k8s), after 1 click deployment and Kubernetes on the rest of the environments. We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). 
 
 #### Installation
 
@@ -97,7 +95,8 @@ UI component can be mounted on Traefik with Host rules, where you need to provid
 
 Once you have cname record to minikube, access traefik dashboard at
 
- ```https://haystack.local:32300
+ ```
+ https://haystack.local:32300
  ```
 and grafana at
 ```
