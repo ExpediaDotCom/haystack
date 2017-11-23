@@ -90,7 +90,8 @@ UI component can be mounted on Traefik with Host rules, where you need to provid
 
 #### How to access traefik dashboard and grafana locally
 
-```echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+```
+echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
 ```
 
 Once you have cname record to minikube, access traefik dashboard at
@@ -98,7 +99,9 @@ Once you have cname record to minikube, access traefik dashboard at
  ```
  https://haystack.local:32300
  ```
+ 
 and grafana at
+
 ```
 https://haystack.local:32300/grafana
 ```
