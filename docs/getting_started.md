@@ -19,7 +19,7 @@ haystack-pipes-json-transformer | https://hub.docker.com/u/expediadotcom/haystac
 
 ### How to run these components?
 
-Entire haystack runs locally on minikube(k8s), after 1 click deployment and Kubernetes on the rest of the environments. We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). 
+We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). Entire haystack runs locally on minikube(k8s), with a 1 click deployment and Kubernetes on the rest of the environments
 
 #### Installation
 
