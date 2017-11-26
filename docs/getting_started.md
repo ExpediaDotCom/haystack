@@ -2,24 +2,11 @@
 
 ### Where are the components?
 
-All of Haystack's backend components are released as Docker images on **ExpediaDotCom Docker Hub**:
-
-Component | Repository 
------------ | ---- |
-haystack-kinesis-span-collector | https://hub.docker.com/u/expediadotcom/haystack-kinesis-span-collector 
-haystack-ui | https://hub.docker.com/u/expediadotcom/haystack-ui 
-haystack-agent | https://hub.docker.com/u/expediadotcom/haystack-agent 
-haystack-trace-indexer | https://hub.docker.com/u/expediadotcom/haystack-trace-indexer 
-haystack-trace-reader | https://hub.docker.com/u/expediadotcom/haystack-trace-reader 
-haystack-timeseries-aggregator | https://hub.docker.com/u/expediadotcom/haystack-timeseries-aggregator 
-haystack-span-timeseries-transformer | https://hub.docker.com/u/expediadotcom/haystack-span-timeseries-transformer 
-haystack-pipes-kafka-producer | https://hub.docker.com/u/expediadotcom/haystack-pipes-kafka-producer
-haystack-pipes-json-transformer | https://hub.docker.com/u/expediadotcom/haystack-pipes-json-transformer 
-
+All of Haystack's backend components are released as [Docker images](https://expediadotcom.github.io/haystack/deployment/sub_systems.html) on **ExpediaDotCom Docker Hub**
 
 ### How to run these components?
 
-We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). Entire haystack runs locally on minikube(k8s), with a 1 click deployment and Kubernetes on the rest of the environments
+We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). Entire haystack runs locally on minikube(k8s), with a 1 click deployment and Kubernetes on the rest of the environments. Deployment scripts are not tied up with minikube(local development),we can use the same script to deploy in production and that is what we use in Expedia
 
 #### Installation
 
