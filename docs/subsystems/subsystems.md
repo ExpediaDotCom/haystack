@@ -39,7 +39,7 @@ data from the Cassandra store with the metadata from the ElasticSearch store.
 
 #### Client
 We have an [OpenTracing][opentracing] compliant client to facilitate
-easy integrations with the ecosystem.  Currently, the we only support
+easy integrations with the ecosystem.  Currently, we only support
 clients directly integrated with the OpenTracing API and don't have
 compatibility built-in to deal with other tracing systems.
 
