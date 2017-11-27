@@ -38,3 +38,9 @@ by the other modules. To simplify the API from the UI module to the Span databas
 data from the Cassandra store with the metadata from the ElasticSearch store.
 
 #### Client
+We have an [OpenTracing][opentracing] compliant client to facilitate
+easy integrations with the ecosystem.  Currently, the we only support
+clients directly integrated with the OpenTracing API and don't have
+compatibility built-in to deal with other tracing systems.
+
+[opentracing]: http://opentracing.io/
