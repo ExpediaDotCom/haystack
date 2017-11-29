@@ -5,3 +5,5 @@ We have an OpenTracing compliant client to facilitate easy integrations with the
 ### Local discoveralbility
 
 /etc/host can have haystack agent running on 127.0.0.1. We can call it by simply using haystack-agent. We need this dicoverability for docker, if we write localhost in code, then it wont be able to talk to it. 
+
+### Ports
