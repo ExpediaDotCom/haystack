@@ -186,7 +186,7 @@ spec:
   - host: {{ (datasource "config").hostName }}
     http:
       paths:
-       - path: /metrictank
+       - path: /metrictank-{{ (datasource "config").namespace }}
          backend:
            serviceName: metrictank
            servicePort: 6060
@@ -218,10 +218,27 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: {{ (datasource "config").hostName }}
+  - host: {{ (datasource "config").haystackUiCname }}
     http:
       paths:
        - path: /
          backend:
            serviceName: haystack-ui
            servicePort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-dashboard
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: {{ (datasource "config").hostName }}
+    http:
+      paths:
+       - path: /
+         backend:
+           serviceName: traefik-web-ui
+           servicePort: 80
