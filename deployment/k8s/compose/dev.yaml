@@ -212,5 +212,6 @@ cluster:
         certsSecretName: haystack-default-certs # points to the name of secret to be used
        replicas: 1
        hostName: haystack.local # echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+       haystackUiCname: haystack.local
        nodePort: 32300
 
