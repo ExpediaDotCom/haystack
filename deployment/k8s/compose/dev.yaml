@@ -71,7 +71,7 @@ deployable_units:
        env:
         - name: HAYSTACK_KAFKA_BROKERS
           value: kafka-service
-        - name: HAYSTACK_GRAPHITE_ADDRESS
+        - name: HAYSTACK_GRAPHITE_HOST
           value: monitoring-influxdb-graphite.kube-system.svc
 
      - name: haystack-pipes-kafka-producer
@@ -81,7 +81,7 @@ deployable_units:
        env:
         - name: HAYSTACK_KAFKA_BROKERS
           value: kafka-service
-        - name: HAYSTACK_GRAPHITE_ADDRESS
+        - name: HAYSTACK_GRAPHITE_HOST
           value: monitoring-influxdb-graphite.kube-system.svc
         - name: HAYSTACK_EXTERNALKAFKA_BROKERS
           value: kafka-service
