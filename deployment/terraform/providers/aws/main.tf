@@ -9,6 +9,6 @@ terraform {
   }
 }
 
-module "region-specific-deployment" {
+module "us-west-2-deployment" {
   source = "us-west-2"
 }
