@@ -15,6 +15,8 @@ function display_help() {
     echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all (use separate -u for each unit)"
     echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
     echo "   -c, --cloud-provider       choose the cloud-provider settings for cluster. possible values: aws default: aws"
+    echo "   -t, --terraform-parameters parameters which need to be passed to terraform eg : secret-key, access-key"
+
     echo
     # echo some stuff here for the -a or --add-options 
     exit 1
