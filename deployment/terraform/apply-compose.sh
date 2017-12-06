@@ -129,12 +129,17 @@ function applyActionOnComponents() {
 }
 
 function uninstallComponents() {
-  echo "TODO : have to delete the haystack infrastructure"
-
+    echo "Deleting haystack infrastructure using terraform"
+    $TERRAFORM init providers/aws
+    $TERRAFORM destroy -var-file=providers/variables/aws/variables.tfvars  providers/aws
 }
 
 function installComponents() {
-echo "TODO : have to create the haystack infrastructure"
+
+    echo "Creating haystack infrastructure using terraform"
+    $TERRAFORM init providers/aws
+    $TERRAFORM apply -var-file=providers/variables/aws/variables.tfvars  providers/aws
+
 }
 
 

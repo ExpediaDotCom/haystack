@@ -10,7 +10,7 @@ case "$(uname -s)" in
    Darwin)
      echo 'Installing binaries for Mac/OS'
      mkdir -p $INSTALL_DIR/mac/x64
-     curl -L https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_darwin_amd64.zip?_ga=2.175573474.1964440187.1512375886-1169145750.1512375886 -o $INSTALL_DIR/mac/x64/terraform.zip;
+     curl -L https://releases.hashicorp.com/terraform/0.10.8/terraform_0.10.8_darwin_amd64.zip -o $INSTALL_DIR/mac/x64/terraform.zip;
      unzip -o $INSTALL_DIR/mac/x64/terraform.zip  -d $INSTALL_DIR/mac/x64/ ;
      rm $INSTALL_DIR/mac/x64/terraform.zip ;
      ;;
