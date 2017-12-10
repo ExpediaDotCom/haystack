@@ -1,25 +1,16 @@
 //TODO: find a way to source global variables from the aws/global/variables.tf from
 variable "kafka_aws_vpc_id" {}
-variable "kafka_aws_base_domain_name" {}
 variable "kafka_aws_region" {}
 variable "kafka_aws_ssh_key" {}
 variable "kafka_aws_subnet" {}
+variable "kafka_broker_count" {}
+variable "kafka_broker_instance_type" {}
 
-
-variable "es_instance_count" {
-  default = 3
-}
-variable "kafka_broker_count" {
-  default = 4
-}
 
 variable "kafka_cluster_name" {
   default = "haystack-kafka"
 }
 
-variable "kafka_broker_instance_type" {
-  default = "m4.xlarge"
-}
 
 variable "kafka_base_ami" {
   type = "map"

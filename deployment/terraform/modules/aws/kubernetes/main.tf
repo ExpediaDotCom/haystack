@@ -6,20 +6,33 @@ module "k8s_iam_roles" {
   source = "iam-roles"
 }
 
+module "k8s_elbs" {
+  source = "elbs"
+  k8s_elb_api_security_group = "module.k8s_security_groups.api-elb-security_group_ids"
+  k8s_elb_subnet = "${var.k8s_aws_external_master_subnet_ids}"
+  k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
+  k8s_cluster_name = "${var.k8s_cluster_name}"
+}
 
 resource "aws_autoscaling_attachment" "master-1-masters-haystack-k8s" {
-  elb = "${aws_elb.api-haystack-k8s.id}"
+  elb = "${module.k8s_elbs.api-elb-id}"
   autoscaling_group_name = "${aws_autoscaling_group.master-1-masters-haystack-k8s.id}"
 }
 
 resource "aws_autoscaling_attachment" "master-2-masters-haystack-k8s" {
-  elb = "${aws_elb.api-haystack-k8s.id}"
+  elb = "${module.k8s_elbs.api-elb-id}"
   autoscaling_group_name = "${aws_autoscaling_group.master-2-masters-haystack-k8s.id}"
 }
 
 resource "aws_autoscaling_attachment" "master-3-masters-haystack-k8s" {
-  elb = "${aws_elb.api-haystack-k8s.id}"
+  elb = "${module.k8s_elbs.api-elb-id}"
   autoscaling_group_name = "${aws_autoscaling_group.master-3-masters-haystack-k8s.id}"
+}
+
+
+resource "aws_autoscaling_attachment" "nodes-haystack-k8s" {
+  elb = "${module.k8s_elbs.nodes-elb-id}"
+  autoscaling_group_name = "${aws_autoscaling_group.nodes-haystack-k8s.id}"
 }
 
 resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
@@ -124,8 +137,8 @@ resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
 resource "aws_autoscaling_group" "nodes-haystack-k8s" {
   name = "nodes.haystack-k8s"
   launch_configuration = "${aws_launch_configuration.nodes-haystack-k8s.id}"
-  max_size = 5
-  min_size = 5
+  max_size = "${var.k8s_node_instance_count}"
+  min_size = "${var.k8s_node_instance_count}"
   vpc_zone_identifier = [
     "${var.k8s_aws_external_worker_subnet_ids}"]
 
@@ -158,43 +171,11 @@ resource "aws_eip" "eip-haystack-k8s" {
   vpc = true
 }
 
-resource "aws_elb" "api-haystack-k8s" {
-  name = "api-haystack-k8s-7kferu"
-
-  listener = {
-    instance_port = 443
-    instance_protocol = "TCP"
-    lb_port = 443
-    lb_protocol = "TCP"
-  }
-
-  security_groups = [
-    "${module.k8s_security_groups.api-elb-security_group_ids}"]
-  subnets = [
-    "${var.k8s_aws_external_master_subnet_ids}"]
-  internal = true
-
-  health_check = {
-    target = "SSL:443"
-    healthy_threshold = 2
-    unhealthy_threshold = 2
-    interval = 10
-    timeout = 5
-  }
-
-  idle_timeout = 300
-
-  tags = {
-    KubernetesCluster = "haystack-k8s"
-    Name = "api.haystack-k8s"
-  }
-}
-
 
 resource "aws_launch_configuration" "master-1-masters-haystack-k8s" {
   name_prefix = "master-1.masters.haystack-k8s"
-  image_id = "ami-06a57e7e"
-  instance_type = "m3.medium"
+  image_id = "${var.k8s_master_ami}"
+  instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
   iam_instance_profile = "${module.k8s_iam_roles.masters_iam-instance-profile_arn}"
   security_groups = [
@@ -208,11 +189,6 @@ resource "aws_launch_configuration" "master-1-masters-haystack-k8s" {
     delete_on_termination = true
   }
 
-  ephemeral_block_device = {
-    device_name = "/dev/sdc"
-    virtual_name = "ephemeral0"
-  }
-
   lifecycle = {
     create_before_destroy = true
   }
@@ -220,8 +196,8 @@ resource "aws_launch_configuration" "master-1-masters-haystack-k8s" {
 
 resource "aws_launch_configuration" "master-2-masters-haystack-k8s" {
   name_prefix = "master-2.masters.haystack-k8s"
-  image_id = "ami-06a57e7e"
-  instance_type = "m3.medium"
+  image_id = "${var.k8s_master_ami}"
+  instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
   iam_instance_profile = "${module.k8s_iam_roles.masters_iam-instance-profile_arn}"
   security_groups = [
@@ -235,10 +211,6 @@ resource "aws_launch_configuration" "master-2-masters-haystack-k8s" {
     delete_on_termination = true
   }
 
-  ephemeral_block_device = {
-    device_name = "/dev/sdc"
-    virtual_name = "ephemeral0"
-  }
 
   lifecycle = {
     create_before_destroy = true
@@ -247,8 +219,8 @@ resource "aws_launch_configuration" "master-2-masters-haystack-k8s" {
 
 resource "aws_launch_configuration" "master-3-masters-haystack-k8s" {
   name_prefix = "master-3.masters.haystack-k8s"
-  image_id = "ami-06a57e7e"
-  instance_type = "m3.medium"
+  image_id = "${var.k8s_master_ami}"
+  instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
   iam_instance_profile = "${module.k8s_iam_roles.masters_iam-instance-profile_arn}"
   security_groups = [
@@ -261,12 +233,6 @@ resource "aws_launch_configuration" "master-3-masters-haystack-k8s" {
     volume_size = 64
     delete_on_termination = true
   }
-
-  ephemeral_block_device = {
-    device_name = "/dev/sdc"
-    virtual_name = "ephemeral0"
-  }
-
   lifecycle = {
     create_before_destroy = true
   }
@@ -274,8 +240,8 @@ resource "aws_launch_configuration" "master-3-masters-haystack-k8s" {
 
 resource "aws_launch_configuration" "nodes-haystack-k8s" {
   name_prefix = "nodes.haystack-k8s"
-  image_id = "ami-06a57e7e"
-  instance_type = "t2.medium"
+  image_id = "${var.k8s_node_ami}"
+  instance_type = "${var.k8s_node_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
   iam_instance_profile = "${module.k8s_iam_roles.nodes_iam-instance-profile_arn}"
   security_groups = [
@@ -294,19 +260,6 @@ resource "aws_launch_configuration" "nodes-haystack-k8s" {
   }
 }
 
-
-resource "aws_route53_record" "api-haystack-k8s" {
-  name = "api.haystack-k8s.${var.k8s_base_domain_name}"
-  type = "A"
-
-  alias = {
-    name = "${aws_elb.api-haystack-k8s.dns_name}"
-    zone_id = "${aws_elb.api-haystack-k8s.zone_id}"
-    evaluate_target_health = false
-  }
-
-  zone_id = "/hostedzone/Z3HD2JQ3E1K3F8"
-}
 
 terraform = {
   required_version = ">= 0.9.3"

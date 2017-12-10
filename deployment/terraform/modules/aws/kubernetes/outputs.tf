@@ -1,5 +1,5 @@
 output "cluster_name" {
-  value = "${var.ks8_cluster_name}"
+  value = "${var.k8s_cluster_name}"
 }
 
 output "master_security_group_ids" {

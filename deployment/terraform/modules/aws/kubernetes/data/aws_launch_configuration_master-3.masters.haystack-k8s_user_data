@@ -258,7 +258,7 @@ __EOF_CLUSTER_SPEC
 cat > ig_spec.yaml << '__EOF_IG_SPEC'
 kubelet: null
 nodeLabels:
-  kops.k8s.io/instancegroup: master-us-west-2c-3
+  kops.k8s.io/instancegroup: master-3
 taints: null
 
 __EOF_IG_SPEC
@@ -271,7 +271,7 @@ Assets:
 - f62360d3351bed837ae3ffcdee65e9d57511695a@https://kubeupv2.s3.amazonaws.com/kops/1.8.0/linux/amd64/utils.tar.gz
 ClusterName: haystack-k8s
 ConfigBase: s3://haystack-deployment-tf/haystack-k8s
-InstanceGroupName: master-us-west-2c-3
+InstanceGroupName: master-3
 Tags:
 - _automatic_upgrades
 - _aws
