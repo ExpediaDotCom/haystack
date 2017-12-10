@@ -25,7 +25,7 @@ echo Disabled > /tmp/csecurity
 [ "Disabled" = 'Disabled' ] && rm /tmp/csecurity
 echo 3.3.0 > /tmp/cversion
 
-ys##  cfn-init downloads everything
+##  cfn-init downloads everything
 ##  and then we're off to the races
 cfn-init -v          --stack haystack-kafka-BrokerStack-1X758P9YFQL3V         --resource NodeLaunchConfig          --region us-west-2
 AMI_SBIN=/tmp/sbin
