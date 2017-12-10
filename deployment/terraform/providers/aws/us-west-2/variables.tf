@@ -11,3 +11,7 @@ variable "aws_vpc_id" {
 variable "aws_subnet" {
   default = "subnet-33f0ea6b"
 }
+
+variable "aws_base_domain_name" {
+  default = "monitoring.test.expedia.com"
+}

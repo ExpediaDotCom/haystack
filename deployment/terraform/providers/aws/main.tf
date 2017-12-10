@@ -6,6 +6,7 @@ terraform {
     bucket = "haystack-deployment-tf"
     key = "terraform/us-west-2"
     region = "us-west-2"
+
   }
 }
 
