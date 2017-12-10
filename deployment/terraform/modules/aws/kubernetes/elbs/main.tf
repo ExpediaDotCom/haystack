@@ -8,8 +8,7 @@ resource "aws_elb" "k8s-api-elb" {
     lb_protocol = "TCP"
   }
 
-  security_groups = [
-    "${var.k8s_elb_api_security_group}"]
+  security_groups ="${var.k8s_elb_api_security_group}"
   subnets = [
     "${var.k8s_elb_subnet}"]
   internal = true
@@ -54,8 +53,7 @@ resource "aws_elb" "k8s-nodes-elb" {
     lb_protocol = "HTTP"
   }
 
-  security_groups = [
-    "${var.k8s_elb_api_security_group}"]
+  security_groups = "${var.k8s_elb_api_security_group}"
   subnets = [
     "${var.k8s_elb_subnet}"]
   internal = true
