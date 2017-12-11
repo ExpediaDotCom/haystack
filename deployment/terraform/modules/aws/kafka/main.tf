@@ -7,8 +7,8 @@ module "kafka-iam-roles" {
 }
 
 
-resource "aws_autoscaling_group" "nodes-haystack-k8s" {
-  name = "nodes.haystack-k8s"
+resource "aws_autoscaling_group" "brokers-haystack-kafka" {
+  name = "brokers.haystack-k8s"
   launch_configuration = "${aws_launch_configuration.broker-haystack-kafka.id}"
   max_size = "${var.kafka_broker_count}"
   min_size = "${var.kafka_broker_count}"
@@ -25,7 +25,7 @@ resource "aws_autoscaling_group" "nodes-haystack-k8s" {
 
 resource "aws_launch_configuration" "broker-haystack-kafka" {
   name_prefix = "broker.haystack-kafka"
-  image_id = "${var.kafka_base_ami[${var.kafka_aws_region}]}"
+  image_id = "${var.kafka_base_ami["${var.kafka_aws_region}"]}"
   instance_type = "${var.kafka_broker_instance_type}"
   key_name = "${var.kafka_aws_ssh_key}"
   iam_instance_profile = "${module.kafka-iam-roles.iam-instance-profile_arn}"

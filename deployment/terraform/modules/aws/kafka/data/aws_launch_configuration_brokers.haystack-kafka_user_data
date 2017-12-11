@@ -25,7 +25,6 @@ echo Disabled > /tmp/csecurity
 [ "Disabled" = 'Disabled' ] && rm /tmp/csecurity
 echo 3.3.0 > /tmp/cversion
 
-## Retrieve scripts to deploy Confluent on the instances
 ##  cfn-init downloads everything
 ##  and then we're off to the races
 cfn-init -v          --stack haystack-kafka-BrokerStack-1X758P9YFQL3V         --resource NodeLaunchConfig          --region us-west-2
