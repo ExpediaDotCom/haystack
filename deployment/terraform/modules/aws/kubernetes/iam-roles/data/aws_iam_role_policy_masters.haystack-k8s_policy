@@ -131,7 +131,7 @@
       "Action": [
         "s3:Get*"
       ],
-      "Resource": "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/*"
+      "Resource": "arn:aws:s3:::haystack-deployment-tf/*"
     },
     {
       "Sid": "kopsK8sRoute53Change",

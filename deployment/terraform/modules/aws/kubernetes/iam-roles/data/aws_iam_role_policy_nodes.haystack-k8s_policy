@@ -29,15 +29,7 @@
         "s3:Get*"
       ],
       "Resource": [
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/addons/*",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/cluster.spec",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/config",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/instancegroup/*",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/pki/issued/*",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/pki/private/kube-proxy/*",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/pki/private/kubelet/*",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/pki/ssh/*",
-        "arn:aws:s3:::haystack-deployment-tf/haystack-k8s/secrets/dockerconfig"
+        "arn:aws:s3:::haystack-deployment-tf/*"
       ]
     },
     {

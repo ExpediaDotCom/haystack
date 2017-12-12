@@ -1,6 +1,7 @@
+
 module "kaystack-k8s" {
   source = "../../modules/aws/kubernetes"
-  k8s_aws_region = "${var.aws_region}"
+  k8s_aws_zone = "${var.aws_zone}"
   k8s_aws_vpc_id = "${var.aws_vpc_id}"
   k8s_aws_external_master_subnet_ids = "${var.aws_subnet}"
   k8s_aws_external_worker_subnet_ids = "${var.aws_subnet}"
@@ -10,8 +11,10 @@ module "kaystack-k8s" {
   k8s_node_instance_count = "${var.k8s_node_instance_count}"
   k8s_hosted_zone_id = "${var.aws_hosted_zone_id}"
   k8s_aws_ssh_key = "${var.aws_ssh_key}"
+  k8s_base_domain_name = "test.monitoring.expedia.com"
 }
 
+/*
 module "kaystack-kafka" {
   source = "../../modules/aws/kafka"
   kafka_aws_vpc_id = "${var.aws_vpc_id}"
@@ -31,5 +34,6 @@ module "kaystack-es" {
 }
 
 
+*/
 
 
