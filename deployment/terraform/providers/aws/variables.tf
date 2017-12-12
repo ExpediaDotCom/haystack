@@ -10,6 +10,9 @@ variable "aws_region" {
   default = "us-west-2"
 }
 
+variable "aws_zone" {
+  default = "us-west-2c"
+}
 variable "aws_ssh_key" {
   default = "haystack"
 }
@@ -38,11 +41,11 @@ variable "kafka_broker_instance_type" {
 }
 
 variable "k8s_master_instance_type" {
-  default = "m4.large"
+  default = "m3.medium"
 }
 
 variable "k8s_node_instance_type" {
-  default = "c4.large"
+  default = "t2.medium"
 }
 variable "k8s_node_instance_count" {
   default = 4

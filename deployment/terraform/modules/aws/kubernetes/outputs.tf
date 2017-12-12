@@ -1,3 +1,4 @@
+/*
 output "cluster_name" {
   value = "${var.k8s_cluster_name}"
 }
@@ -30,9 +31,10 @@ output "nodes_role_name" {
 }
 
 output "region" {
-  value = "${var.k8s_aws_region}"
+  value = "${var.k8s_aws_zone}"
 }
 
 output "vpc_id" {
   value = "${var.k8s_aws_vpc_id}"
 }
+*/

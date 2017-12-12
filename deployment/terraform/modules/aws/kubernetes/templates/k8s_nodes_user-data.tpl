@@ -31,8 +31,8 @@ function ensure-install-dir() {
   if [[ -d /var/lib/toolbox ]]; then
     INSTALL_DIR="/var/lib/toolbox/kubernetes-install"
   fi
-  mkdir -p ${INSTALL_DIR}
-  cd ${INSTALL_DIR}
+  mkdir -p $${INSTALL_DIR}
+  cd $${INSTALL_DIR}
 }
 
 # Retry a download until we get it. Takes a hash and a set of URLs.
@@ -45,18 +45,18 @@ download-or-bust() {
 
   urls=( $* )
   while true; do
-    for url in "${urls[@]}"; do
-      local file="${url##*/}"
-      rm -f "${file}"
+    for url in "$${urls[@]}"; do
+      local file="$${url##*/}"
+      rm -f "$${file}"
 
       if [[ $(which curl) ]]; then
-        if ! curl -f --ipv4 -Lo "${file}" --connect-timeout 20 --retry 6 --retry-delay 10 "${url}"; then
-          echo "== Failed to curl ${url}. Retrying. =="
+        if ! curl -f --ipv4 -Lo "$${file}" --connect-timeout 20 --retry 6 --retry-delay 10 "$${url}"; then
+          echo "== Failed to curl $${url}. Retrying. =="
           break
         fi
       elif [[ $(which wget ) ]]; then
-        if ! wget --inet4-only -O "${file}" --connect-timeout=20 --tries=6 --wait=10 "${url}"; then
-          echo "== Failed to wget ${url}. Retrying. =="
+        if ! wget --inet4-only -O "$${file}" --connect-timeout=20 --tries=6 --wait=10 "$${url}"; then
+          echo "== Failed to wget $${url}. Retrying. =="
           break
         fi
       else
@@ -64,13 +64,13 @@ download-or-bust() {
         break
       fi
 
-      if [[ -n "${hash}" ]] && ! validate-hash "${file}" "${hash}"; then
-        echo "== Hash validation of ${url} failed. Retrying. =="
+      if [[ -n "$${hash}" ]] && ! validate-hash "$${file}" "$${hash}"; then
+        echo "== Hash validation of $${url} failed. Retrying. =="
       else
-        if [[ -n "${hash}" ]]; then
-          echo "== Downloaded ${url} (SHA1 = ${hash}) =="
+        if [[ -n "$${hash}" ]]; then
+          echo "== Downloaded $${url} (SHA1 = $${hash}) =="
         else
-          echo "== Downloaded ${url} =="
+          echo "== Downloaded $${url} =="
         fi
         return
       fi
@@ -86,9 +86,9 @@ validate-hash() {
   local -r expected="$2"
   local actual
 
-  actual=$(sha1sum ${file} | awk '{ print $1 }') || true
-  if [[ "${actual}" != "${expected}" ]]; then
-    echo "== ${file} corrupted, sha1 ${actual} doesn't match expected ${expected} =="
+  actual=$(sha1sum $${file} | awk '{ print $1 }') || true
+  if [[ "$${actual}" != "$${expected}" ]]; then
+    echo "== $${file} corrupted, sha1 $${actual} doesn't match expected $${expected} =="
     return 1
   fi
 }
@@ -101,19 +101,19 @@ function try-download-release() {
   # TODO(zmerlynn): Now we REALLY have no excuse not to do the reboot
   # optimization.
 
-  local -r nodeup_urls=( $(split-commas "${NODEUP_URL}") )
-  local -r nodeup_filename="${nodeup_urls[0]##*/}"
-  if [[ -n "${NODEUP_HASH:-}" ]]; then
-    local -r nodeup_hash="${NODEUP_HASH}"
+  local -r nodeup_urls=( $(split-commas "$${NODEUP_URL}") )
+  local -r nodeup_filename="$${nodeup_urls[0]##*/}"
+  if [[ -n "$${NODEUP_HASH:-}" ]]; then
+    local -r nodeup_hash="$${NODEUP_HASH}"
   else
   # TODO: Remove?
     echo "Downloading sha1 (not found in env)"
-    download-or-bust "" "${nodeup_urls[@]/%/.sha1}"
-    local -r nodeup_hash=$(cat "${nodeup_filename}.sha1")
+    download-or-bust "" "$${nodeup_urls[@]/%/.sha1}"
+    local -r nodeup_hash=$(cat "$${nodeup_filename}.sha1")
   fi
 
-  echo "Downloading nodeup (${nodeup_urls[@]})"
-  download-or-bust "${nodeup_hash}" "${nodeup_urls[@]}"
+  echo "Downloading nodeup ($${nodeup_urls[@]})"
+  download-or-bust "$${nodeup_hash}" "$${nodeup_urls[@]}"
 
   chmod +x nodeup
 }
@@ -127,7 +127,7 @@ function download-release() {
 
   echo "Running nodeup"
   # We can't run in the foreground because of https://github.com/docker/docker/issues/23793
-  ( cd ${INSTALL_DIR}; ./nodeup --install-systemd-unit --conf=${INSTALL_DIR}/kube_env.yaml --v=8  )
+  ( cd $${INSTALL_DIR}; ./nodeup --install-systemd-unit --conf=$${INSTALL_DIR}/kube_env.yaml --v=8  )
 }
 
 ####################################################################################
@@ -150,70 +150,12 @@ docker:
   - max-file=5
   storage: overlay,aufs
   version: 1.13.1
-encryptionConfig: null
-kubeAPIServer:
-  address: 127.0.0.1
-  admissionControl:
-  - Initializers
-  - NamespaceLifecycle
-  - LimitRanger
-  - ServiceAccount
-  - PersistentVolumeLabel
-  - DefaultStorageClass
-  - DefaultTolerationSeconds
-  - NodeRestriction
-  - Priority
-  - ResourceQuota
-  allowPrivileged: true
-  anonymousAuth: false
-  apiServerCount: 3
-  authorizationMode: AlwaysAllow
-  cloudProvider: aws
-  etcdServers:
-  - http://127.0.0.1:4001
-  etcdServersOverrides:
-  - /events#http://127.0.0.1:4002
-  image: gcr.io/google_containers/kube-apiserver:v1.8.4
-  insecurePort: 8080
-  kubeletPreferredAddressTypes:
-  - InternalIP
-  - Hostname
-  - ExternalIP
-  logLevel: 2
-  requestheaderAllowedNames:
-  - aggregator
-  requestheaderExtraHeaderPrefixes:
-  - X-Remote-Extra-
-  requestheaderGroupHeaders:
-  - X-Remote-Group
-  requestheaderUsernameHeaders:
-  - X-Remote-User
-  securePort: 443
-  serviceClusterIPRange: 100.64.0.0/13
-  storageBackend: etcd2
-kubeControllerManager:
-  allocateNodeCIDRs: true
-  attachDetachReconcileSyncPeriod: 1m0s
-  cloudProvider: aws
-  clusterCIDR: 100.96.0.0/11
-  clusterName: haystack-k8s
-  configureCloudRoutes: false
-  image: gcr.io/google_containers/kube-controller-manager:v1.8.4
-  leaderElection:
-    leaderElect: true
-  logLevel: 2
-  useServiceAccountCredentials: true
 kubeProxy:
   clusterCIDR: 100.96.0.0/11
   cpuRequest: 100m
   featureGates: null
   hostnameOverride: '@aws'
   image: gcr.io/google_containers/kube-proxy:v1.8.4
-  logLevel: 2
-kubeScheduler:
-  image: gcr.io/google_containers/kube-scheduler:v1.8.4
-  leaderElection:
-    leaderElect: true
   logLevel: 2
 kubelet:
   allowPrivileged: true
@@ -233,32 +175,13 @@ kubelet:
   podInfraContainerImage: gcr.io/google_containers/pause-amd64:3.0
   podManifestPath: /etc/kubernetes/manifests
   requireKubeconfig: true
-masterKubelet:
-  allowPrivileged: true
-  cgroupRoot: /
-  cloudProvider: aws
-  clusterDNS: 100.64.0.10
-  clusterDomain: cluster.local
-  enableDebuggingHandlers: true
-  evictionHard: memory.available<100Mi,nodefs.available<10%,nodefs.inodesFree<5%,imagefs.available<10%,imagefs.inodesFree<5%
-  featureGates:
-    ExperimentalCriticalPodAnnotation: "true"
-  hostnameOverride: '@aws'
-  kubeconfigPath: /var/lib/kubelet/kubeconfig
-  logLevel: 2
-  networkPluginName: cni
-  nonMasqueradeCIDR: 100.64.0.0/10
-  podInfraContainerImage: gcr.io/google_containers/pause-amd64:3.0
-  podManifestPath: /etc/kubernetes/manifests
-  registerSchedulable: false
-  requireKubeconfig: true
 
 __EOF_CLUSTER_SPEC
 
 cat > ig_spec.yaml << '__EOF_IG_SPEC'
 kubelet: null
 nodeLabels:
-  kops.k8s.io/instancegroup: master-2
+  kops.k8s.io/instancegroup: nodes
 taints: null
 
 __EOF_IG_SPEC
@@ -269,16 +192,15 @@ Assets:
 - 8e2314db816b9b4465c5f713c1152cb0603db15e@https://storage.googleapis.com/kubernetes-release/release/v1.8.4/bin/linux/amd64/kubectl
 - 1d9788b0f5420e1a219aad2cb8681823fc515e7c@https://storage.googleapis.com/kubernetes-release/network-plugins/cni-0799f5732f2a11b329d9e3d51b9c8f2e3759f2ff.tar.gz
 - f62360d3351bed837ae3ffcdee65e9d57511695a@https://kubeupv2.s3.amazonaws.com/kops/1.8.0/linux/amd64/utils.tar.gz
-ClusterName: haystack-k8s
-ConfigBase: s3://haystack-deployment-tf/haystack-k8s
-InstanceGroupName: master-2
+ClusterName: ${cluster_name}
+ConfigBase: s3://${s3_bucket_name}/${cluster_name}
+InstanceGroupName: nodes
 Tags:
 - _automatic_upgrades
 - _aws
-- _kubernetes_master
 - _networking_cni
 channels:
-- s3://haystack-deployment-tf/haystack-k8s/addons/bootstrap-channel.yaml
+- s3://${s3_bucket_name}/${cluster_name}/addons/bootstrap-channel.yaml
 protokubeImage:
   hash: 1b972e92520b3cafd576893ae3daeafdd1bc9ffd
   name: protokube:1.8.0

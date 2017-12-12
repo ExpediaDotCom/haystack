@@ -1,5 +1,5 @@
 resource "aws_elb" "k8s-api-elb" {
-  name = "${var.k8s_cluster_name}-api-elb"
+  name = "haystack-k8s-api-elb"
 
   listener = {
     instance_port = 443
@@ -45,7 +45,7 @@ resource "aws_route53_record" "k8s-api-elb-route53" {
 }
 
 resource "aws_elb" "k8s-nodes-elb" {
-  name = "${var.k8s_cluster_name}-nodes-elb"
+  name = "haystack-k8s-nodes-elb"
 
   listener = {
     instance_port = 32300
