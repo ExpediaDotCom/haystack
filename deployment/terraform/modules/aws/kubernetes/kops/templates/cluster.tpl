@@ -40,8 +40,7 @@ spec:
   kubernetesApiAccess:
   - 0.0.0.0/0
   kubernetesVersion: ${k8s_version}
-  masterPublicName: api.{cluster_name}
-  networkCIDR: 10.1.0.0/16
+  masterPublicName: api.${cluster_name}
   networkID: ${aws_vpc_id}
   networking:
     calico: {}

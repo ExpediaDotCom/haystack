@@ -41,11 +41,11 @@ variable "kafka_broker_instance_type" {
 }
 
 variable "k8s_master_instance_type" {
-  default = "m3.medium"
+  default = "c4.large"
 }
 
 variable "k8s_node_instance_type" {
-  default = "t2.medium"
+  default = "m4.large"
 }
 variable "k8s_node_instance_count" {
   default = 4
