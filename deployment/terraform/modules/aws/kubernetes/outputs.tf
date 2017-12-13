@@ -1,6 +1,5 @@
-/*
 output "cluster_name" {
-  value = "${var.k8s_cluster_name}"
+  value = "${local.k8s_cluster_name}"
 }
 
 output "master_security_group_ids" {
@@ -37,4 +36,3 @@ output "region" {
 output "vpc_id" {
   value = "${var.k8s_aws_vpc_id}"
 }
-*/
