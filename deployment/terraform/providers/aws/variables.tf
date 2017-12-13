@@ -30,7 +30,7 @@ variable "es_instance_count" {
   default = 3
 }
 variable "es_master_count" {
-  default = 1
+  default = 3
 }
 
 variable "kafka_broker_count" {

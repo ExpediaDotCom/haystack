@@ -1,3 +1,7 @@
+data "aws_route53_zone" "haystack_dns_zone" {
+  zone_id = "${var.aws_hosted_zone_id}"
+}
+
 
 module "kaystack-k8s" {
   source = "../../modules/aws/kubernetes"
@@ -11,10 +15,10 @@ module "kaystack-k8s" {
   k8s_node_instance_count = "${var.k8s_node_instance_count}"
   k8s_hosted_zone_id = "${var.aws_hosted_zone_id}"
   k8s_aws_ssh_key = "${var.aws_ssh_key}"
-  k8s_base_domain_name = "test.monitoring.expedia.com"
+  //Refer to bug https://github.com/hashicorp/terraform/issues/8511
+  k8s_base_domain_name = "${replace(data.aws_route53_zone.haystack_dns_zone.name, "/[.]$/", "")}"
 }
 
-/*
 module "kaystack-kafka" {
   source = "../../modules/aws/kafka"
   kafka_aws_vpc_id = "${var.aws_vpc_id}"
@@ -32,8 +36,5 @@ module "kaystack-es" {
   master_instance_type = "${var.es_master_instance_type}"
   worker_instance_type = "${var.es_master_instance_type}"
 }
-
-
-*/
 
 
