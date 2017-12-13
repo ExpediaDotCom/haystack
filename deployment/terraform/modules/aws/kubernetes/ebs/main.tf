@@ -7,7 +7,7 @@ resource "aws_ebs_volume" "1-etcd-events" {
 
   tags = {
     KubernetesCluster    = "${var.k8s_cluster_name}"
-    Name                 = "1.etcd-events.${var.k8s_cluster_name}}"
+    Name                 = "1.etcd-events.${var.k8s_cluster_name}"
     "k8s.io/etcd/events" = "1/1,2,3"
     "k8s.io/role/master" = "1"
   }

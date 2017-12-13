@@ -19,6 +19,13 @@ data "template_file" "cluster_config" {
   }
 }
 
+resource "aws_s3_bucket_object" "kops_config_folder" {
+  bucket = "${var.k8s_s3_bucket_name}"
+  acl    = "private"
+  key    = "${var.k8s_cluster_name}/"
+  source = "/dev/null"
+}
+
 resource "null_resource" "export-cluster-rendered-template" {
   triggers {
     template = "${data.template_file.cluster_config.rendered}"
