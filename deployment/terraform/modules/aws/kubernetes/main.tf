@@ -23,6 +23,13 @@ module "kops" {
   k8s_aws_subnet = "${var.k8s_aws_external_master_subnet_ids}"
 }
 
+module "addons" {
+  source = "addons"
+  k8s_aws_region = "${var.k8s_aws_region}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  k8s_logs_es_url = "${var.k8s_logs_es_url}"
+  k8s_cluster_name = "${local.k8s_cluster_name}"
+}
 
 module "k8s_aws_ebs" {
   source = "ebs"
@@ -66,8 +73,6 @@ resource "aws_autoscaling_attachment" "nodes-haystack-k8s" {
   elb = "${module.k8s_elbs.nodes-elb-id}"
   autoscaling_group_name = "${aws_autoscaling_group.nodes-haystack-k8s.id}"
 }
-
-
 
 
 resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
@@ -207,7 +212,6 @@ resource "aws_eip" "eip-haystack-k8s" {
 }
 
 
-
 data "template_file" "master-1-user-data" {
   template = "${file("${path.module}/templates/k8s_master_user-data.tpl")}"
   vars {
@@ -237,7 +241,6 @@ resource "aws_launch_configuration" "master-1-masters-haystack-k8s" {
     create_before_destroy = true
   }
 }
-
 
 
 data "template_file" "master-2-user-data" {
