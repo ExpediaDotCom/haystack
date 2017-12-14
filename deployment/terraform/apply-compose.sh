@@ -99,8 +99,9 @@ function downloadThirdPartySoftwares() {
  setThirdPartySoftwareBasePath
  # variable for accessing third party softwares
  TERRAFORM=$THIRD_PARTY_SOFTWARE_PATH/terraform
-    
- if [ ! -f $TERRAFORM ]; then
+ KUBECTL=$THIRD_PARTY_SOFTWARE_PATH/kubectl/1.8.0/kubectl
+
+ if [ ! -f $TERRAFORM ]|| [ ! -f $KUBECTL ]; then
    $DIR/install-third-party-softwares.sh
  fi
 }
@@ -131,7 +132,7 @@ function applyActionOnComponents() {
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=providers/backend.tfvars providers
-    $TERRAFORM destroy -var-file=providers/variables.tfvars  providers
+    $TERRAFORM destroy -var-file=providers/variables.tfvars   providers
 }
 
 function installComponents() {

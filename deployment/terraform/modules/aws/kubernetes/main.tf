@@ -51,6 +51,7 @@ module "k8s_elbs" {
   k8s_elb_subnet = "${var.k8s_aws_external_master_subnet_ids}"
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
+  k8s_nodes_api_security_groups = "${module.k8s_security_groups.nodes-api-elb-security_group_ids}"
 }
 
 resource "aws_autoscaling_attachment" "master-1-masters-haystack-k8s" {

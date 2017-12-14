@@ -13,6 +13,8 @@ case "$(uname -s)" in
      curl -L https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_darwin_amd64.zip -o $INSTALL_DIR/mac/x64/terraform.zip;
      unzip -o $INSTALL_DIR/mac/x64/terraform.zip  -d $INSTALL_DIR/mac/x64/ ;
      rm $INSTALL_DIR/mac/x64/terraform.zip ;
+     mkdir -p $INSTALL_DIR/mac/x64/kubectl/1.8.0
+     curl -L https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/darwin/amd64/kubectl -o $INSTALL_DIR/mac/x64/kubectl/1.8.0/kubectl
      ;;
 
    Linux)
@@ -21,6 +23,9 @@ case "$(uname -s)" in
      curl -L https://releases.hashicorp.com/terraform/0.11.1/terraform_0.11.1_linux_amd64.zip?_ga=2.175573474.1964440187.1512375886-1169145750.1512375886 -o $INSTALL_DIR/linux/x64/terraform.zip
      unzip -o $INSTALL_DIR/mac/x64/terraform.zip  -d $INSTALL_DIR/mac/x64/ ;
      rm $INSTALL_DIR/mac/x64/terraform.zip;
+     mkdir -p $INSTALL_DIR/linux/x64/kubectl/1.8.0
+     curl -L https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/darwin/amd64/kubectl -o $INSTALL_DIR/mac/x64/kubectl/1.8.0/kubectl
+
      ;;
 
    *)
