@@ -132,7 +132,7 @@ function applyActionOnComponents() {
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=providers/backend.tfvars providers
-    $TERRAFORM destroy -var-file=providers/variables.tfvars -var ''  providers
+    $TERRAFORM destroy -var-file=providers/variables.tfvars   providers
 }
 
 function installComponents() {
