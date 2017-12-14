@@ -10,6 +10,18 @@ resource "aws_security_group" "api-elb-haystack-k8s" {
   }
 }
 
+
+resource "aws_security_group" "nodes-api-elb-haystack-k8s" {
+  name        = "nodes-api-elb.haystack-k8s"
+  vpc_id      = "${var.k8s_vpc_id}"
+  description = "Security group for api ELB"
+
+  tags = {
+    KubernetesCluster = "haystack-k8s"
+    Name              = "nodes-api-elb.haystack-k8s"
+  }
+}
+
 resource "aws_security_group" "masters-haystack-k8s" {
   name        = "masters.haystack-k8s"
   vpc_id      = "${var.k8s_vpc_id}"
@@ -65,6 +77,27 @@ resource "aws_security_group_rule" "api-elb-egress" {
   from_port         = 0
   to_port           = 0
   protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+
+resource "aws_security_group_rule" "nodes-api-elb-egress" {
+  type              = "egress"
+  security_group_id = "${aws_security_group.nodes-api-elb-haystack-k8s.id}"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+
+
+resource "aws_security_group_rule" "http-nodes-elb-0-0-0-0--0" {
+  type              = "ingress"
+  security_group_id = "${aws_security_group.nodes-api-elb-haystack-k8s.id}"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
 }
 

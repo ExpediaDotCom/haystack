@@ -12,7 +12,7 @@ resource "aws_elb" "k8s-api-elb" {
     "${var.k8s_elb_api_security_groups}"]
   subnets = [
     "${var.k8s_elb_subnet}"]
-  internal = true
+  internal = false
 
   health_check = {
     target = "SSL:443"
@@ -55,10 +55,10 @@ resource "aws_elb" "k8s-nodes-elb" {
   }
 
   security_groups = [
-    "${var.k8s_elb_api_security_groups}"]
+    "${var.k8s_nodes_api_security_groups}"]
   subnets = [
     "${var.k8s_elb_subnet}"]
-  internal = true
+  internal = false
 
   health_check = {
     target = "SSL:22"
