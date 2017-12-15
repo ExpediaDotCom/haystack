@@ -14,15 +14,16 @@ data "template_file" "cluster_config" {
     master_instance_type = "${var.k8s_master_instance_type}"
     node_instance_count = "${var.k8s_node_instance_count}"
     node_instance_type = "${var.k8s_node_instance_type}"
-    aws_subnet = "${var.k8s_aws_subnet}"
+    aws_node_subnet = "${var.k8s_aws_nodes_subnet}"
+    aws_utilities_subnet = "${var.k8s_aws_utilities_subnet}"
     aws_dns_zone_id = "${var.k8s_hosted_zone_id}"
   }
 }
 
 resource "aws_s3_bucket_object" "kops_config_folder" {
   bucket = "${var.k8s_s3_bucket_name}"
-  acl    = "private"
-  key    = "${var.k8s_cluster_name}/"
+  acl = "private"
+  key = "${var.k8s_cluster_name}/"
   source = "/dev/null"
 }
 

@@ -10,7 +10,7 @@ metadata:
 spec:
   api:
     loadBalancer:
-      type: Internal
+      type: Public
   authorization:
     alwaysAllow: {}
   channel: stable
@@ -45,14 +45,21 @@ spec:
   networking:
     weave:
       mtu: 8912
-  nonMasqueradeCIDR: 100.64.0.0/10
+  nonMasqueradeCIDR: 192.168.0.0/16
   sshAccess:
   - 0.0.0.0/0
   subnets:
   - name: ${aws_zone}
     type: Private
     zone: ${aws_zone}
-    id: ${aws_subnet}
+    id: ${aws_node_subnet}
+  - name: utility-${aws_zone}
+    type: Utility
+    zone: us-west-2c
+    id: ${aws_utilities_subnet}
+
+
+
   topology:
     dns:
       type: Public
