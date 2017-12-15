@@ -20,7 +20,8 @@ module "kops" {
   k8s_s3_bucket_name = "${var.k8s_s3_bucket_name}"
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_aws_zone = "${var.k8s_aws_zone}"
-  k8s_aws_subnet = "${var.k8s_aws_external_master_subnet_ids}"
+  k8s_aws_nodes_subnet = "${var.k8s_aws_nodes_subnet_ids}"
+  k8s_aws_utilities_subnet = "${var.k8s_aws_utility_subnet_ids}"
 }
 
 module "addons" {
@@ -48,7 +49,7 @@ module "k8s_iam_roles" {
 module "k8s_elbs" {
   source = "elbs"
   k8s_elb_api_security_groups = "${module.k8s_security_groups.api-elb-security_group_ids}"
-  k8s_elb_subnet = "${var.k8s_aws_external_master_subnet_ids}"
+  k8s_elb_subnet = "${var.k8s_aws_utility_subnet_ids}"
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   k8s_nodes_api_security_groups = "${module.k8s_security_groups.nodes-api-elb-security_group_ids}"
@@ -82,7 +83,7 @@ resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
-    "${var.k8s_aws_external_master_subnet_ids}"]
+    "${var.k8s_aws_nodes_subnet_ids}"]
 
   tag = {
     key = "KubernetesCluster"
@@ -115,7 +116,7 @@ resource "aws_autoscaling_group" "master-2-masters-haystack-k8s" {
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
-    "${var.k8s_aws_external_master_subnet_ids}"]
+    "${var.k8s_aws_nodes_subnet_ids}"]
 
   tag = {
     key = "KubernetesCluster"
@@ -148,7 +149,7 @@ resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
-    "${var.k8s_aws_external_master_subnet_ids}"]
+    "${var.k8s_aws_nodes_subnet_ids}"]
 
   tag = {
     key = "KubernetesCluster"
@@ -181,7 +182,7 @@ resource "aws_autoscaling_group" "nodes-haystack-k8s" {
   max_size = "${var.k8s_node_instance_count}"
   min_size = "${var.k8s_node_instance_count}"
   vpc_zone_identifier = [
-    "${var.k8s_aws_external_worker_subnet_ids}"]
+    "${var.k8s_aws_nodes_subnet_ids}"]
 
   tag = {
     key = "KubernetesCluster"

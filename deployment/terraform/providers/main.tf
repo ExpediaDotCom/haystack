@@ -1,11 +1,12 @@
 module "kaystack-aws-infrastructure" {
   source = "aws"
   aws_vpc_id = "${var.aws_vpc_id}"
-  aws_subnet = "${var.aws_subnet}"
   aws_access_key = "${var.aws_access_key}"
   aws_secret_key = "${var.aws_secret_key}"
   aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
   s3_bucket_name = "${var.s3_bucket_name}"
+  aws_nodes_subnet = "${var.aws_nodes_subnet}"
+  aws_utilities_subnet = "${var.aws_utilities_subnet}"
 }
 
 module "kaystack-app-deployments" {
