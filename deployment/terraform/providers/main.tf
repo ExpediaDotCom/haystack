@@ -12,4 +12,7 @@ module "kaystack-aws-infrastructure" {
 module "kaystack-app-deployments" {
   source = "kubernetes"
   k8s_cluster_name = "${module.kaystack-aws-infrastructure.k8s-cluster-name}"
+  k8s_aws_region = "${var.aws_region}"
+  k8s_logs_es_url = "${module.kaystack-aws-infrastructure.k8s_logs_es_url}"
 }
+

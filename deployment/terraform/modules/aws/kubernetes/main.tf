@@ -24,14 +24,6 @@ module "kops" {
   k8s_aws_utilities_subnet = "${var.k8s_aws_utility_subnet_ids}"
 }
 
-module "addons" {
-  source = "addons"
-  k8s_aws_region = "${var.k8s_aws_region}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  k8s_logs_es_url = "${var.k8s_logs_es_url}"
-  k8s_cluster_name = "${local.k8s_cluster_name}"
-}
-
 module "k8s_aws_ebs" {
   source = "ebs"
   k8s_cluster_name = "${local.k8s_cluster_name}"
