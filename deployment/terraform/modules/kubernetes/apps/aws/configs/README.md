@@ -1,0 +1,1 @@
+In case we want to mount specific configurations per cluster name create a folder with the cluster name and mount the specific config

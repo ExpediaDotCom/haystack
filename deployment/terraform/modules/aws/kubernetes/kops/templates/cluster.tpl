@@ -43,9 +43,8 @@ spec:
   masterPublicName: api.${cluster_name}
   networkID: ${aws_vpc_id}
   networking:
-    weave:
-      mtu: 8912
-  nonMasqueradeCIDR: 192.168.0.0/16
+    calico: {}
+  nonMasqueradeCIDR: 100.64.0.0/10
   sshAccess:
   - 0.0.0.0/0
   subnets:
