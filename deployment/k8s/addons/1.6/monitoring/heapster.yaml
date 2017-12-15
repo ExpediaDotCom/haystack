@@ -46,7 +46,7 @@ spec:
             - /heapster
             - --source=kubernetes:https://kubernetes.default
             - --sink=influxdb:http://monitoring-influxdb.kube-system.svc:8086
-        - image: gcr.io/google_containers/addon-resizer:1.7
+        - image: gcr.io/google_containers/addon-resizer:1.8
           name: heapster-nanny
           resources:
             limits:

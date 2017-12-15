@@ -1,0 +1,1 @@
+//K8s apps to be deployed -- trace-indexer,
