@@ -1,4 +1,4 @@
-module "kaystack-aws-infrastructure" {
+module "haystack-aws-infrastructure" {
   source = "aws"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_access_key = "${var.aws_access_key}"
@@ -9,10 +9,10 @@ module "kaystack-aws-infrastructure" {
   aws_utilities_subnet = "${var.aws_utilities_subnet}"
 }
 
-module "kaystack-app-deployments" {
+module "haystack-app-deployments" {
   source = "kubernetes"
-  k8s_cluster_name = "${module.kaystack-aws-infrastructure.k8s-cluster-name}"
+  k8s_cluster_name = "${module.haystack-aws-infrastructure.k8s-cluster-name}"
   k8s_aws_region = "${var.aws_region}"
-  k8s_logs_es_url = "${module.kaystack-aws-infrastructure.k8s_logs_es_url}"
+  k8s_logs_es_url = "${module.haystack-aws-infrastructure.k8s_logs_es_url}"
 }
 
