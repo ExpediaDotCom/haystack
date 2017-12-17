@@ -1,0 +1,45 @@
+{
+  "variables": {
+    "region": null,
+    "vpc_id": null,
+    "subnet_id": null,
+    "aws_access_key": null,
+    "aws_secret_key": null,
+    "source_ami": null,
+    "ami_name": "cassandra-base",
+    "cassandra_version": "3.11.1",
+    "instance_type": "t2.micro"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "{{user `region`}}",
+    "vpc_id": "{{user `vpc_id`}}",
+    "subnet_id": "{{user `subnet_id`}}",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "source_ami": "{{user `source_ami`}}",
+    "instance_type": "{{user `instance_type`}}",
+    "ami_name": "{{user `ami_name`}}",
+    "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
+    "tags": {
+      "ami_name": "{{user `ami_name`}}",
+      "cassandra_version": "{{user `cassandra_version`}}"
+    }
+  }],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/cassandra.repo",
+      "destination": "/etc/yum.repos.d/cassandra.repo"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "yum install -y cassandra",
+        "chkconfig cassandra on",
+        "service cassandra start",
+        "service cassandra stop"
+      ]
+    }
+  ]
+}
