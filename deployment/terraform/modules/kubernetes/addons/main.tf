@@ -11,3 +11,19 @@ module "traefik-addon" {
   haystack_domain_name = "${var.haystack_domain_name}"
   traefik_node_port = "${var.traefik_node_port}"
 }
+
+module "influxdb-addon" {
+  source = "influxdb"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+}
+
+
+module "grafana-addon" {
+  source = "grafana"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+}
+
+module "heapster-addon" {
+  source = "heapster"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+}

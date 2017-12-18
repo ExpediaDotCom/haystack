@@ -28,50 +28,26 @@ spec:
         volumeMounts:
         - mountPath: /var
           name: grafana-persistent-storage
-        - mountPath: /etc/ssl/certs
-          name: ssl-cert-volume
         env:
         - name: INFLUXDB_HOST
           value: monitoring-influxdb
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
-{{- if has (datasource "config") "smtp" }}
-        - name: GF_SMTP_ENABLED
-          value: "{{ (datasource "config").smtp.enabled }}"
-        - name: GF_SMTP_FROM_ADDRESS
-          value: "{{ (datasource "config").smtp.fromAddress }}"
-        - name: GF_SMTP_FROM_NAME
-          value: "{{ (datasource "config").smtp.fromName }}"
-        - name: GF_SMTP_HOST
-          value: "{{ (datasource "config").smtp.host }}"
-        - name: GF_SMTP_USER
-          value: "{{ (datasource "config").smtp.user }}"
-        - name: GF_SMTP_PASSWORD
-          value: "{{ (datasource "config").smtp.password }}"
-{{- end }}
-{{- if has (datasource "config") "rootUrl" }}
         - name: GF_SERVER_ROOT_URL
-          value: "{{ (datasource "config").rootUrl }}"
+          value: "${grafana_root_path}"
 {{- end }}
-{{- if has (datasource "config") "nodeSelector" }}
-      nodeSelector:
-{{ (datasource "config").nodeSelector | toYAML | strings.Indent 8 }}
-{{- end }}
-      volumes:
-      - name: ssl-cert-volume
-        hostPath:
-           path: /etc/ssl/certs
+
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage
        annotations:
-         volume.beta.kubernetes.io/storage-class: "{{ (datasource "config").storageClass }}"
+         volume.beta.kubernetes.io/storage-class: "${grafana_storage_class}"
      spec:
-       storageClassName: "{{ (datasource "config").storageClass }}"
+       storageClassName: "${grafana_storage_class}"
        accessModes: ["ReadWriteOnce"]
        resources:
          requests:
-           storage: {{ (datasource "config").storage }}
+           storage: "${grafana_storage}"
 ---
 apiVersion: v1
 kind: Service

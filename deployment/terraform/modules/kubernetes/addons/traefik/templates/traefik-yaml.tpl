@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: traefik-config-map
+  name: ${traefik_name}
   namespace: kube-system
   labels:
     app:  ${traefik_name}

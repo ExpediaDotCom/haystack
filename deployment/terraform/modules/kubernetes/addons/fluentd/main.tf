@@ -23,5 +23,8 @@ resource "null_resource" "k8s_fluentd_addons" {
   provisioner "local-exec" {
     command = "${var.kubectl_executable_name} create -f ${local.rendered_fluent_d_addon_path}"
   }
-
+  provisioner "local-exec" {
+    command = "${var.kubectl_executable_name} delete -f ${local.rendered_fluent_d_addon_path}"
+    when = "destroy"
+  }
 }

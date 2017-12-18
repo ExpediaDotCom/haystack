@@ -183,13 +183,9 @@ spec:
         task: monitoring
         k8s-app: monitoring-influxdb
     spec:
-{{- if has (datasource "config") "nodeSelector" }}
-      nodeSelector:
-{{ (datasource "config").nodeSelector | toYAML | strings.Indent 8 }}
-{{- end }}
       containers:
       - name: influxdb
-        image: {{ (datasource "config").image }}
+        image: ${influxdb_image}
         resources:
           # keep request = limit to keep this container in guaranteed class
           limits:
@@ -200,17 +196,6 @@ spec:
             memory: 500Mi
         ports:
           - containerPort: 8083
-{{- if has (datasource "config") "hostAdminPort" }}
-            hostPort: {{ (datasource "config").hostAdminPort }}
-{{- end }}
-          - containerPort: 2003
-{{- if has (datasource "config") "hostGraphitePort" }}
-            hostPort: {{ (datasource "config").hostGraphitePort }}
-{{- end }}
-          - containerPort: 8086
-{{- if has (datasource "config") "hostHttpPort" }}
-            hostPort: {{ (datasource "config").hostHttpPort }}
-{{- end }}
         volumeMounts:
         - mountPath: /data
           name: influxdb-persistent-storage
@@ -227,10 +212,10 @@ spec:
     - metadata:
         name: influxdb-persistent-storage
         annotations:
-          volume.beta.kubernetes.io/storage-class: "{{ (datasource "config").storageClass }}"
+          volume.beta.kubernetes.io/storage-class: "${influxdb_storage_class}"
       spec:
-        storageClassName: "{{ (datasource "config").storageClass }}"
+        storageClassName: "${influxdb_storage_class}"
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: {{ (datasource "config").storage }}
+            storage: ${influxdb_storage}
