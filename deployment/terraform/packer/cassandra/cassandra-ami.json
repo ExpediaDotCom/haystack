@@ -6,7 +6,7 @@
     "aws_access_key": null,
     "aws_secret_key": null,
     "source_ami": null,
-    "ami_name": "cassandra-base",
+    "ami_name": "haystack-cassandra-base-{{timestamp}}",
     "cassandra_version": "3.11.1",
     "instance_type": "t2.micro"
   },
@@ -19,6 +19,7 @@
     "secret_key": "{{user `aws_secret_key`}}",
     "source_ami": "{{user `source_ami`}}",
     "instance_type": "{{user `instance_type`}}",
+    "ssh_username": "ec2-user",
     "ami_name": "{{user `ami_name`}}",
     "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
     "tags": {
@@ -28,6 +29,20 @@
   }],
   "provisioners": [
     {
+      "type": "shell",
+      "inline": [
+        "sudo yum install -y java-1.8.0",
+        "sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java",
+        "sudo java -version"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo chmod a+w /etc/yum.repos.d/"
+      ]
+    },
+    {
       "type": "file",
       "source": "files/cassandra.repo",
       "destination": "/etc/yum.repos.d/cassandra.repo"
@@ -35,10 +50,17 @@
     {
       "type": "shell",
       "inline": [
-        "yum install -y cassandra",
-        "chkconfig cassandra on",
-        "service cassandra start",
-        "service cassandra stop"
+        "sudo yum install -y cassandra"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "echo '* soft nofile 32768' | sudo tee -a /etc/security/limits.conf",
+        "echo '* hard nofile 32768' | sudo tee -a /etc/security/limits.conf",
+        "echo 'root soft nofile 32768' | sudo tee -a /etc/security/limits.conf",
+        "echo 'root hard nofile 32768' | sudo tee -a /etc/security/limits.conf",
+        "echo 127.0.0.1 `hostname` | sudo tee -a /etc/hosts"
       ]
     }
   ]
