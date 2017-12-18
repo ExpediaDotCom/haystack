@@ -3,18 +3,17 @@ locals {
 }
 
 
-//creating the fluentd cluster addon for pushing k8s logs to elastic search
+//creating the heapster cluster addon for pushing k8s app metrics to influxdb
 
 data "template_file" "heapster_cluster_addon_config" {
   template = "${file("${path.module}/templates/heapster-yaml.tpl")}"
   vars {
-    aws_region = "${var.k8s_aws_region}"
-    aws_elastic_search_url = "${var.k8s_logs_es_url}"
-    fluentd_image = "${var.k8s_fluentd_image}"
+    influxdb_service_name = "${var.influxdb_servicename}"
+    heapster_image = "${var.k8s_heapster_image}"
   }
 }
 
-resource "null_resource" "k8s_fluentd_addons" {
+resource "null_resource" "k8s_heapster_addons" {
   triggers {
     template = "${data.template_file.heapster_cluster_addon_config.rendered}"
   }
@@ -25,4 +24,8 @@ resource "null_resource" "k8s_fluentd_addons" {
     command = "${var.kubectl_executable_name} create -f ${local.rendered_heapster_addon_path}"
   }
 
+  provisioner "local-exec" {
+    command = "${var.kubectl_executable_name} delete -f ${local.rendered_heapster_addon_path}"
+    when = "destroy"
+  }
 }

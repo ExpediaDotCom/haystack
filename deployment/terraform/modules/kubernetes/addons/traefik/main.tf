@@ -27,4 +27,9 @@ resource "null_resource" "traefik_cluster_addon" {
     command = "${var.kubectl_executable_name} create -f ${local.rendered_traefik_addon_path}"
   }
 
+  provisioner "local-exec" {
+    command = "${var.kubectl_executable_name} delete -f ${local.rendered_traefik_addon_path}"
+    when = "destroy"
+  }
+
 }

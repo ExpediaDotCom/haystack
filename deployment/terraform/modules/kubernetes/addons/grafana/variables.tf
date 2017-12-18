@@ -1,9 +1,17 @@
 variable "kubectl_executable_name" {}
-variable "k8s_cluster_name" {}
-variable "k8s_logs_es_url" {}
-variable "k8s_aws_region" {}
 
-variable "k8s_fluentd_image" {
-  default = "cheungpat/fluentd-elasticsearch-aws:1.22"
+variable "k8s_grafana_storage" {
+  default = "100Mi"
+}
+
+variable "k8s_grafana_storage_class" {
+  default = "standard"
+}
+
+variable "k8s_grafana_image" {
+  default = "gcr.io/google_containers/heapster-grafana-amd64:v4.4.3"
+}
+variable "k8s_grafana_root_path" {
+  default = "/grafana"
 }
 

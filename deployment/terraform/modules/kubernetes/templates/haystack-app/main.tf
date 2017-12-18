@@ -1,6 +1,6 @@
 resource "kubernetes_service" "haystack-service" {
   metadata {
-    name = "${var.app_name}-service"
+    name = "${var.app_name}"
     namespace = "${var.namespace}"
   }
   spec {
@@ -17,7 +17,7 @@ resource "kubernetes_service" "haystack-service" {
 
 resource "kubernetes_replication_controller" "haystack-rc" {
   metadata {
-    name = "${var.app_name}-rc"
+    name = "${var.app_name}"
     labels {
       app = "${var.app_name}"
     }

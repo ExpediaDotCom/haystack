@@ -1,5 +1,5 @@
 locals {
-  traefik_node_port = 32300
+  traefik_node_port = 32800
 }
 module "haystack-aws-infrastructure" {
   source = "../../modules/aws"
@@ -10,7 +10,6 @@ module "haystack-aws-infrastructure" {
   s3_bucket_name = "${var.s3_bucket_name}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
   aws_utilities_subnet = "${var.aws_utilities_subnet}"
-  aws_access_key =
 }
 
 module "haystack-app-deployments" {

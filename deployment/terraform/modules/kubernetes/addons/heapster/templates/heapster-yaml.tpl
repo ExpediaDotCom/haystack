@@ -1,85 +1,116 @@
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: fluentd
-rules:
-- apiGroups: [""] # "" indicates the core API group
-  resources: ["pods", "namespaces"]
-  verbs: ["get", "watch", "list"]
+  name: heapster
+  namespace: kube-system
+  labels:
+    k8s-addon: monitoring-standalone.addons.k8s.io
+    k8s-app: heapster
+    kubernetes.io/cluster-service: "true"
+    version: v1.6.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: heapster
+      version: v1.6.0
+  template:
+    metadata:
+      labels:
+        k8s-app: heapster
+        version: v1.6.0
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ''
+        scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
+    spec:
+      serviceAccountName: heapster
+      containers:
+        - image: ${heapster_image}
+          name: heapster
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8082
+              scheme: HTTP
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+          resources:
+            # keep request = limit to keep this container in guaranteed class
+            limits:
+              cpu: 100m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
+          command:
+            - /heapster
+            - --source=kubernetes:https://kubernetes.default
+            - --sink=influxdb:http://${influxdb_service_name}.kube-system.svc:8086
+        - image: gcr.io/google_containers/addon-resizer:1.8
+          name: heapster-nanny
+          resources:
+            limits:
+              cpu: 50m
+              memory: 100Mi
+            requests:
+              cpu: 50m
+              memory: 100Mi
+          env:
+            - name: MY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: MY_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          command:
+            - /pod_nanny
+            - --cpu=80m
+            - --extra-cpu=0.5m
+            - --memory=140Mi
+            - --extra-memory=4Mi
+            - --threshold=5
+            - --deployment=heapster
+            - --container=heapster
+            - --poll-period=300000
+            - --estimator=exponential
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: heapster
+  namespace: kube-system
+  labels:
+    k8s-addon: monitoring-standalone.addons.k8s.io
+    kubernetes.io/name: "Heapster"
+    kubernetes.io/cluster-service: "true"
+spec:
+  ports:
+    - port: 80
+      targetPort: 8082
+  selector:
+    k8s-app: heapster
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: fluentd
+  name: heapster
   namespace: kube-system
+  labels:
+    k8s-addon: monitoring-standalone.addons.k8s.io
 ---
-# This role binding allows "system:serviceaccount:logs:default" to read pods in the "default" namespace.
-kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
 metadata:
-  name: fluentd
+  name: heapster
+  labels:
+    k8s-addon: monitoring-standalone.addons.k8s.io
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:heapster
 subjects:
 - kind: ServiceAccount
-  name: fluentd
+  name: heapster
   namespace: kube-system
-roleRef:
-  kind: ClusterRole
-  name: fluentd
-  apiGroup: rbac.authorization.k8s.io
----
-apiVersion: extensions/v1beta1
-kind: DaemonSet
-metadata:
-  labels:
-    k8s-app: fluentd-logging
-    kubernetes.io/cluster-service: "true"
-  name: fluentd-elasticsearch
-  namespace: kube-system
-spec:
-  selector:
-    matchLabels:
-      k8s-app: fluentd-logging
-      kubernetes.io/cluster-service: "true"
-  template:
-    metadata:
-      annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ""
-      creationTimestamp: null
-      labels:
-        k8s-app: fluentd-logging
-        kubernetes.io/cluster-service: "true"
-      name: fluentd-elasticsearch
-      namespace: kube-system
-    spec:
-      serviceAccount: fluentd
-      hostNetwork: true
-      containers:
-      - env:
-        - name: AWS_REGION
-          value: ${aws_region}
-        - name: AWS_ELASTICSEARCH_URL
-          value: ${aws_elastic_search_url}
-        image: ${fluentd_image}
-        imagePullPolicy: IfNotPresent
-        name: fluentd-elasticsearch
-        resources:
-          limits:
-            memory: 500Mi
-          requests:
-            cpu: 100m
-            memory: 200Mi
-        volumeMounts:
-        - mountPath: /var/log
-          name: varlog
-        - mountPath: /var/lib/docker/containers
-          name: varlibdockercontainers
-          readOnly: true
-      restartPolicy: Always
-      volumes:
-      - hostPath:
-          path: /var/log
-        name: varlog
-      - hostPath:
-          path: /var/lib/docker/containers
-        name: varlibdockercontainers
