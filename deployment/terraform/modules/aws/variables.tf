@@ -1,7 +1,7 @@
 variable "s3_bucket_name" {}
 variable "aws_vpc_id" {}
-variable "aws_utilities_subnet" {}
 variable "aws_nodes_subnet" {}
+variable "aws_utilities_subnet" {}
 variable "aws_hosted_zone_id" {}
 variable "aws_access_key" {}
 variable "aws_secret_key" {}
@@ -19,18 +19,25 @@ variable "aws_ssh_key" {
 }
 
 
-variable "es_master_instance_type" {
+variable "haystack_index_store_es_master_instance_type" {
   default = "r3.large.elasticsearch"
 }
 
-variable "es_worker_instance_type" {
+variable "haystack_logs_instance_type" {
+  default = "r3.large.elasticsearch"
+}
+variable "haystack_logs_instance_count" {
+  default = "1"
+}
+
+variable "haystack_index_store_worker_instance_type" {
   default = "r3.large.elasticsearch"
 }
 
-variable "es_instance_count" {
+variable "haystack_index_store_instance_count" {
   default = 3
 }
-variable "es_master_count" {
+variable "haystack_index_store_master_count" {
   default = 3
 }
 
