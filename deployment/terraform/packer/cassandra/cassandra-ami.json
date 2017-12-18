@@ -6,7 +6,7 @@
     "aws_access_key": null,
     "aws_secret_key": null,
     "source_ami": null,
-    "ami_name": "haystack-cassandra-base-{{timestamp}}",
+    "ami_name": "haystack-cassandra-base",
     "cassandra_version": "3.11.1",
     "instance_type": "t2.micro"
   },
@@ -20,10 +20,10 @@
     "source_ami": "{{user `source_ami`}}",
     "instance_type": "{{user `instance_type`}}",
     "ssh_username": "ec2-user",
-    "ami_name": "{{user `ami_name`}}",
+    "ami_name": "{{user `ami_name`}}-{{timestamp}}",
     "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
     "tags": {
-      "ami_name": "{{user `ami_name`}}",
+      "ami_base_name": "{{user `ami_name`}}",
       "cassandra_version": "{{user `cassandra_version`}}"
     }
   }],
