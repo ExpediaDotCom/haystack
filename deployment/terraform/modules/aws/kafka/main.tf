@@ -8,7 +8,7 @@ module "kafka-iam-roles" {
 
 
 resource "aws_autoscaling_group" "brokers-haystack-kafka" {
-  name = "brokers.haystack-k8s"
+  name = "brokers.haystack-k8s-${count.index}"
   launch_configuration = "${aws_launch_configuration.broker-haystack-kafka.id}"
   max_size = "${var.kafka_broker_count}"
   min_size = "${var.kafka_broker_count}"

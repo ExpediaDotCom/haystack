@@ -25,7 +25,7 @@ function display_help() {
 while :
 do
     case "$1" in
-      -e | --cloud-provider)
+      -c | --cloud-provider)
           if [ $# -ne 0 ]; then
             CLOUD_PROVIDER="$2"
           fi
@@ -78,7 +78,7 @@ function verifyArgs() {
  fi
 
  if [[ -z $CLOUD_PROVIDER ]]; then
-   CLOUD_PROVIDER=aws
+   CLOUD_PROVIDER=local
  fi
 }
 
@@ -131,15 +131,15 @@ function applyActionOnComponents() {
 
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=providers/backend.tfvars providers
-    $TERRAFORM destroy -var-file=providers/variables.tfvars   providers
+    $TERRAFORM init -backend-config=providers/$CLOUD_PROVIDER/backend.tfvars providers/$CLOUD_PROVIDER
+    $TERRAFORM destroy -var-file=providers/$CLOUD_PROVIDER/variables.tfvars   providers/$CLOUD_PROVIDER
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=providers/backend.tfvars providers
-    $TERRAFORM apply -var-file=providers/variables.tfvars  providers
+    $TERRAFORM init -backend-config=providers/$CLOUD_PROVIDER/backend.tfvars providers/$CLOUD_PROVIDER
+    $TERRAFORM apply -var-file=providers/$CLOUD_PROVIDER/variables.tfvars  providers/$CLOUD_PROVIDER
 }
 
 

@@ -8,7 +8,6 @@ locals {
 data "template_file" "fluentd_cluster_addon_config" {
   template = "${file("${path.module}/templates/fluentd-es-yaml.tpl")}"
   vars {
-    aws_region = "${var.k8s_aws_region}"
     aws_elastic_search_url = "${var.k8s_logs_es_url}"
     fluentd_image = "${var.k8s_fluentd_image}"
   }

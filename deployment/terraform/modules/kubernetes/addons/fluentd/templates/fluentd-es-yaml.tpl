@@ -56,8 +56,6 @@ spec:
       hostNetwork: true
       containers:
       - env:
-        - name: AWS_REGION
-          value: ${aws_region}
         - name: AWS_ELASTICSEARCH_URL
           value: ${aws_elastic_search_url}
         image: ${fluentd_image}
