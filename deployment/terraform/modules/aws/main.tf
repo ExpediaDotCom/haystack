@@ -3,7 +3,7 @@ data "aws_route53_zone" "haystack_dns_zone" {
 }
 
 
-module "kaystack-es" {
+module "haystack-es" {
   source = "../../modules/aws/elasticsearch"
   haystack_index_store_master_instance_count = "${var.haystack_index_store_master_count}"
   haystack_index_store_worker_instance_count = "${var.haystack_index_store_instance_count}"
@@ -14,7 +14,7 @@ module "kaystack-es" {
 }
 
 
-module "kaystack-k8s" {
+module "haystack-k8s" {
   source = "../../modules/aws/kubernetes"
   k8s_aws_zone = "${var.aws_zone}"
   k8s_aws_vpc_id = "${var.aws_vpc_id}"
@@ -29,10 +29,10 @@ module "kaystack-k8s" {
   //Refer to bug https://github.com/hashicorp/terraform/issues/8511
   k8s_base_domain_name = "${replace(data.aws_route53_zone.haystack_dns_zone.name, "/[.]$/", "")}"
   k8s_aws_region = "${var.aws_region}"
-  k8s_logs_es_url = "${module.kaystack-es.haystack_logs_es_url}"
+  k8s_logs_es_url = "${module.haystack-es.haystack_logs_es_url}"
 }
 
-module "kaystack-kafka" {
+module "haystack-kafka" {
   source = "../../modules/aws/kafka"
   kafka_aws_vpc_id = "${var.aws_vpc_id}"
   kafka_aws_region = "${var.aws_region}"

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: {{ (datasource "config").image }}
+        image: ${grafana_image}
         resources:
           limits:
             cpu: 100m
