@@ -4,7 +4,7 @@ metadata:
   name: traefik-config-map
   namespace: kube-system
   labels:
-    app: {{ (datasource "config").name }}
+    app:  ${traefik_name}
 data:
   traefik.toml: |
     # traefik.toml
@@ -50,10 +50,10 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: traefik-haystack
+  name: ${traefik_name}
 subjects:
 - kind: ServiceAccount
-  name: traefik-haystack
+  name: ${traefik_name}
   namespace: kube-system
 ---
 apiVersion: v1
@@ -65,39 +65,30 @@ metadata:
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: {{ (datasource "config").name }}
+  name: ${traefik_name}
   namespace: kube-system
   labels:
     k8s-app: traefik-haystack
 spec:
-  replicas: {{ (datasource "config").replicas }}
+  replicas: ${traefik_replicas}
   selector:
     matchLabels:
-      k8s-app: {{ (datasource "config").name }}
+      k8s-app: ${traefik_name}
   template:
     metadata:
       labels:
-        k8s-app: {{ (datasource "config").name }}
-        name: {{ (datasource "config").name }}
+        k8s-app:  ${traefik_name}
+        name:  ${traefik_name}
     spec:
-      serviceAccountName: {{ (datasource "config").name }}
+      serviceAccountName: ${traefik_name}
       terminationGracePeriodSeconds: 60
-{{- if has (datasource "config") "nodeSelector" }}
-      nodeSelector:
-{{ (datasource "config").nodeSelector | toYAML | strings.Indent 8 }}
-{{- end }}
       volumes:
       - name: config
         configMap:
-          name: {{ (datasource "config").name }}
-{{- if (datasource "config").ssl.enabled }}
-      - name: ssl
-        secret:
-         secretName: {{ (datasource "config").ssl.certsSecretName }}
-{{- end }}
+          name: ${traefik_name}
       containers:
-      - image: {{ (datasource "config").image }}
-        name: {{ (datasource "config").name }}
+      - image: ${traefik_image}
+        name: ${traefik_name}
         livenessProbe:
           tcpSocket:
             port: 80
@@ -109,10 +100,6 @@ spec:
         volumeMounts:
          - mountPath: /config
            name: config
-{{- if (datasource "config").ssl.enabled }}
-         - mountPath: /ssl
-           name: ssl
-{{- end }}
         resources:
           limits:
             memory: 100Mi
@@ -128,7 +115,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ (datasource "config").name }}
+  name: ${traefik_name}
   namespace: kube-system
 spec:
   type: NodePort
@@ -137,39 +124,27 @@ spec:
     name: http
   - port: 443
     name: https
-{{- if not (datasource "config").ssl.enabled }}
+
     targetPort: 80
-{{- end }}
-    nodePort: {{ (datasource "config").nodePort }}
+
+    nodePort: ${node_port}
   selector:
-    k8s-app: {{ (datasource "config").name }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: traefik-web-ui
-  namespace: kube-system
-spec:
-  selector:
-    k8s-app: {{ (datasource "config").name }}
-  ports:
-  - port: 80
-    targetPort: 8080
+    k8s-app: ${traefik_name}
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: traefik-haystack-metrictank
-  namespace: {{ (datasource "config").namespace }}
+  namespace: ${k8s_app_namespace}
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: {{ (datasource "config").hostName }}
+  - host: ${haytack_domain_name}
     http:
       paths:
-       - path: /metrictank-{{ (datasource "config").namespace }}
+       - path: /metrictank
          backend:
            serviceName: metrictank
            servicePort: 6060
@@ -184,7 +159,7 @@ metadata:
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-   - host: {{ (datasource "config").hostName }}
+   - host: ${haytack_domain_name}
      http:
         paths:
          - path: /grafana
@@ -196,32 +171,16 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: traefik-haystack-ui
-  namespace: {{ (datasource "config").namespace }}
+  namespace: ${k8s_app_namespace}
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: {{ (datasource "config").haystackUiCname }}
+  - host: ${haytack_domain_name}
     http:
       paths:
        - path: /
          backend:
            serviceName: haystack-ui
            servicePort: 8080
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-dashboard
-  namespace: kube-system
-  annotations:
-    kubernetes.io/ingress.class: traefik
-spec:
-  rules:
-  - host: {{ (datasource "config").hostName }}
-    http:
-      paths:
-       - path: /
-         backend:
-           serviceName: traefik-web-ui
-           servicePort: 80
+

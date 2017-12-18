@@ -11,9 +11,8 @@ resource "kubernetes_service" "haystack-service" {
       port = "${var.service_port}"
       target_port = "${var.container_port}"
     }
-    type = "LoadBalancer"
   }
-  count = "${var.create_service==true?1:0}"
+  count = "${var.create_service && var.enabled?1:0}"
 }
 
 resource "kubernetes_replication_controller" "haystack-rc" {
@@ -30,7 +29,6 @@ resource "kubernetes_replication_controller" "haystack-rc" {
       container {
         image = "${var.image}"
         name = "${var.app_name}"
-
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
     }
@@ -38,4 +36,5 @@ resource "kubernetes_replication_controller" "haystack-rc" {
       app = "${var.app_name}"
     }
   }
+  count = "${var.enabled?1:0}"
 }
