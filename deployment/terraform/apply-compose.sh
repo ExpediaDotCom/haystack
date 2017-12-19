@@ -132,20 +132,44 @@ function applyActionOnComponents() {
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=providers/$CLOUD_PROVIDER/backend.tfvars providers/$CLOUD_PROVIDER
-    $TERRAFORM destroy -var-file=providers/$CLOUD_PROVIDER/variables.tfvars   providers/$CLOUD_PROVIDER
+    $TERRAFORM destroy -var-file=providers/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  providers/$CLOUD_PROVIDER
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=providers/$CLOUD_PROVIDER/backend.tfvars providers/$CLOUD_PROVIDER
-    $TERRAFORM apply -var-file=providers/$CLOUD_PROVIDER/variables.tfvars  providers/$CLOUD_PROVIDER
+    $TERRAFORM apply -var-file=providers/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  providers/$CLOUD_PROVIDER
 }
 
 
+function verifyK8sCluster() {
+  if [[ $CLOUD_PROVIDER == 'local' ]]; then
+    if command_exists minikube; then
+        `minikube status > /tmp/minikube_status`
+        if grep -q -i 'Running' /tmp/minikube_status; then
+            echo "Congratulations! Minikube is found in running state! setting haystack.local as the minikube ip"
+             echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+        else
+             echo 'Minikube is not running, starting now...'
+             minikube start
+          fi
+          echo "Setting haystack.local as the minikube ip"
+          echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+          rm -rf /tmp/minikube_status
+    else
+        echo "Minikube is not installed on local box, please setup minikube by following the instructions at https://kubernetes.io/docs/getting-started-guides/minikube"
+        exit 1
+    fi
+    setKubectlContext
+  fi
+}
 
 # sanitize the arguments passed to the script, and set the defaults correctly
 verifyArgs
+
+#verify minikube is running in local mode
+verifyK8sCluster
 
 # download third party softwares like kubectl, gomplate, jq etc.
 downloadThirdPartySoftwares
