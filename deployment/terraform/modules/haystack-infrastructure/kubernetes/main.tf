@@ -31,7 +31,7 @@ module "kafka" {
 module "metrictank" {
   source = "metrictank"
   replicas = "1"
-  cassandra_address = "${module.cassandra.cassandra_service_name}:${module.cassandra.cassandra_port}"
+  cassandra_address = "${module.cassandra.cassandra_hostname}:${module.cassandra.cassandra_port}"
   kafka_address = "${module.kafka.kafka_service_name}:${module.kafka.kafka_port}"
   namespace = "${var.k8s_app_name_space}"
   graphite_address = "${local.graphite_hostname}:${local.graphite_port}"

@@ -1,7 +1,5 @@
 variable "elasticsearch_hostname" {}
 variable "elasticsearch_port" {}
-variable "zookeeper_hostname" {}
-variable "zookeeper_port" {}
 variable "kafka_hostname" {}
 variable "kafka_port" {}
 variable "cassandra_hostname" {}

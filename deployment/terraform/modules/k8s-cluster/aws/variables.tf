@@ -10,7 +10,6 @@ variable "k8s_master_instance_type" {}
 variable "k8s_hosted_zone_id" {}
 variable "k8s_base_domain_name" {}
 
-variable "k8s_logs_es_url" {}
 variable "k8s_aws_region" {}
 
 variable "kops_executable_name" {

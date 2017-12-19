@@ -1,4 +1,4 @@
-output "elasticsearch_service_name" {
+output "elasticsearch_hostname" {
   value = "${local.app_name}"
 }
 

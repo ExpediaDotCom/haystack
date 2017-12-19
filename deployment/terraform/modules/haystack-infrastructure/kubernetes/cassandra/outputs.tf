@@ -1,4 +1,4 @@
-output "cassandra_service_name" {
+output "cassandra_hostname" {
   value = "${local.app_name}"
 }
 output "cassandra_port" {

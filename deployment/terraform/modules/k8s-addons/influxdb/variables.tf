@@ -9,6 +9,6 @@ variable "k8s_influxdb_storage_class" {
 }
 
 variable "k8s_influxdb_image" {
-  default = "gcr.io/google_containers/heapster-amd64:v1.4.2"
+  default = "gcr.io/google_containers/heapster-influxdb-amd64:v1.3.3"
 }
 
