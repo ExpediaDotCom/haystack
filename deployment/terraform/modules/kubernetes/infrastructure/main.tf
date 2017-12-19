@@ -1,53 +1,43 @@
-module "es" {
-  source = "../templates/haystack-app"
-  app_name = "elasticsearch"
-  image = "${var.es_docker_image}"
-  replicas = "1"
-  create_service = true
-  service_port = "9200"
-  container_port = "9200"
-  enabled = "${var.enabled}"
+locals {
+  graphite_hostname = "monitoring-influxdb-graphite.kube-system.svc"
+  graphite_port = 2003
 }
 
 module "cassandra" {
-  source = "../templates/haystack-app"
-  app_name = "cassandra"
-  image = "${var.cassandra_docker_image}"
+  source = "cassandra"
   replicas = "1"
-  create_service = true
-  service_port = "9042"
-  container_port = "9042"
   enabled = "${var.enabled}"
+  namespace = "${var.k8s_app_name_space}"
+}
+
+module "es" {
+  source = "elasticsearch"
+  replicas = "1"
+  enabled = "${var.enabled}"
+  namespace = "${var.k8s_app_name_space}"
 }
 
 module "zookeeper" {
-  source = "../templates/haystack-app"
-  app_name = "zookeeper"
-  image = "${var.zookeeper_docker_image}"
+  source = "zookeeper"
   replicas = "1"
-  create_service = true
-  service_port = "2181"
-  container_port = "2181"
   enabled = "${var.enabled}"
+  namespace = "${var.k8s_app_name_space}"
 }
 
 module "kafka" {
-  source = "../templates/haystack-app"
-  app_name = "kafka"
-  image = "${var.kafka_docker_image}"
+  source = "kafka"
   replicas = "1"
-  create_service = true
-  service_port = "9092"
-  container_port = "9092"
   enabled = "${var.enabled}"
+  namespace = "${var.k8s_app_name_space}"
+  zk_connection_string = "${module.zookeeper.zookeeper_service_name}:${module.zookeeper.zookeeper_service_port}"
 }
+
 module "metrictank" {
-  source = "../templates/haystack-app"
-  app_name = "metrictank"
-  image = "${var.metrictank_docker_image}"
+  source = "metrictank"
   replicas = "1"
-  create_service = true
-  service_port = "6060"
-  container_port = "6060"
   enabled = "${var.enabled}"
+  cassandra_address = "${module.cassandra.cassandra_service_name}:${module.cassandra.cassandra_port}"
+  kafka_address = "${module.kafka.kafka_service_name}:${module.kafka.kafka_port}"
+  namespace = "${var.k8s_app_name_space}"
+  graphite_address = "${local.graphite_hostname}:${local.graphite_port}"
 }

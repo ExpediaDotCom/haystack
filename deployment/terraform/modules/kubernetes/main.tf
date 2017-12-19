@@ -17,11 +17,21 @@ module "kubernetes-addons" {
 
 module "haystack-infrastructure" {
   source = "infrastructure"
-  k8s_app_name_space = "${var.k8s_app_name_space}"
+  k8s_app_name_space = "${kubernetes_namespace.haystack-app-namespace.metadata.0.name}"
   enabled = "${var.enable_docker_infrastructure}"
 }
 
 module "kubernetes-apps" {
   source = "apps"
-  k8s_app_name_space = "${var.k8s_app_name_space}"
+  k8s_app_name_space = "${kubernetes_namespace.haystack-app-namespace.metadata.0.name}"
+  zookeeper_service_port = "${module.haystack-infrastructure.zookeeper_service_port}"
+  elasticsearch_service_port = "${module.haystack-infrastructure.elasticsearch_service_port}"
+  kafka_port = "${module.haystack-infrastructure.kafka_port}"
+  cassandra_port = "${module.haystack-infrastructure.cassandra_port}"
+  elasticsearch_service_name = "${module.haystack-infrastructure.elasticsearch_service_name}"
+  zookeeper_service_name = "${module.haystack-infrastructure.zookeeper_service_name}"
+  cassandra_service_name = "${module.haystack-infrastructure.cassandra_service_name}"
+  kafka_hostname = "${module.haystack-infrastructure.kafka_service_name}"
+  graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
+  k8s_cluster_name = "${var.k8s_cluster_name}"
 }

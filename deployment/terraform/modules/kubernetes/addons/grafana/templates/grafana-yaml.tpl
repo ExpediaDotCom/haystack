@@ -35,8 +35,6 @@ spec:
           value: "3000"
         - name: GF_SERVER_ROOT_URL
           value: "${grafana_root_path}"
-{{- end }}
-
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage

@@ -5,6 +5,7 @@ locals {
 
 //creating the heapster cluster addon for pushing k8s app metrics to influxdb
 
+
 data "template_file" "heapster_cluster_addon_config" {
   template = "${file("${path.module}/templates/heapster-yaml.tpl")}"
   vars {

@@ -1,3 +1,13 @@
+variable "elasticsearch_service_name" {}
+variable "elasticsearch_service_port" {}
+variable "zookeeper_service_name" {}
+variable "zookeeper_service_port" {}
+variable "kafka_hostname" {}
+variable "kafka_port" {}
+variable "cassandra_service_name" {}
+variable "cassandra_port" {}
+variable "graphite_hostname" {}
+variable "k8s_cluster_name" {}
 variable "k8s_app_name_space" {
   default = "haystack-apps"
 }
