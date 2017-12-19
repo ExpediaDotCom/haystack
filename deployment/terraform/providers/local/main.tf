@@ -1,15 +1,30 @@
-locals {
-  traefik_node_port = 32300
-}
+//when running locally we expect the machine to have a local k8s cluster using minikube
 
-variable "haystack_domain_name" {
-  default = "haystack.local"
-}
-module "haystack-deployments" {
-  source = "../../modules/kubernetes"
+module "k8s-addons" {
+  source = "../../modules/k8s-addons"
   k8s_cluster_name = "${var.k8s_minikube_cluster_name}"
-  enable_docker_infrastructure = true
-  traefik_node_port = "${local.traefik_node_port}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  traefik_node_port = "${var.traefik_node_port}"
+  k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${var.haystack_domain_name}"
+  k8s_logs_es_url = "elasticsearch"
 }
 
+module "haystack-infrastructure" {
+  source = "../../modules/haystack-infrastructure/kubernetes"
+  k8s_app_name_space = "${var.k8s_app_name_space}"
+}
+module "haystack-apps" {
+  source = "../../modules/haystack-apps/kubernetes"
+  kafka_port = "${module.haystack-infrastructure.kafka_port}"
+  elasticsearch_port = "${module.haystack-infrastructure.elasticsearch_port}"
+  zookeeper_hostname = "${module.haystack-infrastructure.zookeeper_hostname}"
+  k8s_cluster_name = "${var.k8s_minikube_cluster_name}"
+  zookeeper_port = "${module.haystack-infrastructure.zookeeper_port}"
+  cassandra_hostname = "${module.haystack-infrastructure.cassandra_hostname}"
+  kafka_hostname = "${module.haystack-infrastructure.kafka_hostname}"
+  cassandra_port = "${module.haystack-infrastructure.kafka_port}"
+  elasticsearch_hostname = "${module.haystack-infrastructure.kafka_port}"
+  graphite_hostname = "${module.haystack-infrastructure.kafka_port}"
+  k8s_app_namespace = "${var.k8s_app_name_space}"
+}
