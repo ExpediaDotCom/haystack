@@ -11,4 +11,8 @@ variable "haystack_index_store_instance_count" {}
 variable "haystack_index_store_master_count" {}
 variable "kafka_broker_count" {}
 variable "kafka_broker_instance_type" {}
+variable "cassandra_node_image" {}
+variable "cassandra_node_volume_size" {}
+variable "cassandra_node_instance_count" {}
+variable "cassandra_node_instance_type" {}
 variable "k8s_app_name_space" {}

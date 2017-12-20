@@ -58,3 +58,16 @@ variable "k8s_node_instance_type" {
 variable "k8s_node_instance_count" {
   default = 4
 }
+
+variable "cassandra_node_image" {
+  default = ""
+}
+variable "cassandra_node_volume_size" {
+  default = 32
+}
+variable "cassandra_node_instance_count" {
+  default = 1
+}
+variable "cassandra_node_instance_type" {
+  default = "c4.xlarge"
+}

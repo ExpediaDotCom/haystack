@@ -5,16 +5,15 @@ locals {
 
 module "cassandra" {
   source = "cassandra"
-  cassandra_security_group = ""
-  cassandra_hosted_zone_id = ""
-  cassandra_aws_vpc_id = ""
-  cassandra_aws_subnet = ""
-  cassandra_node_count = ""
-  cassandra_ssh_key_pair_name = ""
-  cassandra_node_volume_size = ""
-  cassandra_node_instance_type = ""
-  cassandra_node_image = ""
-  cassandra_aws_region = ""
+  cassandra_aws_region = "${var.aws_region}"
+  cassandra_aws_vpc_id = "${var.aws_vpc_id}"
+  cassandra_aws_subnet = "${var.aws_nodes_subnet}"
+  cassandra_hosted_zone_id = "${var.aws_hosted_zone_id}"
+  cassandra_node_image = "${var.cassandra_node_image}"
+  cassandra_node_volume_size = "${var.cassandra_node_volume_size}"
+  cassandra_node_count = "${var.cassandra_node_instance_count}"
+  cassandra_node_instance_type = "${var.cassandra_node_instance_type}"
+  cassandra_ssh_key_pair_name = "${var.aws_ssh_key}"
 }
 
 module "es" {
