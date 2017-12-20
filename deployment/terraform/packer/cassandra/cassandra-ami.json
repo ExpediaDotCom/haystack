@@ -23,7 +23,7 @@
     "ami_name": "{{user `ami_name`}}-{{timestamp}}",
     "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
     "tags": {
-      "ami_base_name": "{{user `ami_name`}}",
+      "type": "{{user `ami_name`}}",
       "cassandra_version": "{{user `cassandra_version`}}"
     }
   }],
@@ -59,8 +59,7 @@
         "echo '* soft nofile 32768' | sudo tee -a /etc/security/limits.conf",
         "echo '* hard nofile 32768' | sudo tee -a /etc/security/limits.conf",
         "echo 'root soft nofile 32768' | sudo tee -a /etc/security/limits.conf",
-        "echo 'root hard nofile 32768' | sudo tee -a /etc/security/limits.conf",
-        "echo 127.0.0.1 `hostname` | sudo tee -a /etc/hosts"
+        "echo 'root hard nofile 32768' | sudo tee -a /etc/security/limits.conf"
       ]
     }
   ]
