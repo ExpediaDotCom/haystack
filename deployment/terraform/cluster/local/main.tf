@@ -3,10 +3,10 @@
 resource "null_resource" "add_local_domain" {
 
   provisioner "local-exec" {
-    command = " echo '$(minikube ip) ${var.haystack_domain_name}' | tee -a /etc/hosts"
+    command = " echo $(minikube ip) ${var.haystack_domain_name} | tee -a /etc/hosts"
   }
   provisioner "local-exec" {
-    command = "sed -i'.bak' '${var.haystack_domain_name}' /etc/hosts"
+    command = "sed '/${var.haystack_domain_name}/d' /etc/hosts"
     when = "destroy"
   }
 }

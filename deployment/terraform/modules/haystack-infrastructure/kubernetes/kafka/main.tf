@@ -1,5 +1,5 @@
 locals {
-  app_name = "kafka"
+  app_name = "kafka-service"
   service_port = 9092
   container_port = 9092
   image = "wurstmeister/kafka:0.10.2.1"

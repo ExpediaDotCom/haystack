@@ -34,17 +34,6 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value = "${local.container_config_path}"
         }
-        liveness_probe {
-          initial_delay_seconds = 15
-          period_seconds = 5
-          failure_threshold = 2
-          exec {
-            command = [
-              "grep",
-              "true",
-              "/app/isHealthy"]
-          }
-        }
         volume_mount {
           mount_path = "/config"
           name = "config-volume"

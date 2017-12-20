@@ -16,17 +16,6 @@ resource "kubernetes_replication_controller" "haystack-rc" {
       container {
         image = "${var.image}"
         name = "${local.app_name}"
-        liveness_probe {
-          initial_delay_seconds = 15
-          period_seconds = 5
-          failure_threshold = 2
-          exec {
-            command = [
-              "grep",
-              "true",
-              "/app/isHealthy"]
-          }
-        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
 
