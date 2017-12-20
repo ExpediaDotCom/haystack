@@ -1,5 +1,17 @@
 //when running locally we expect the machine to have a local k8s cluster using minikube
 
+resource "null_resource" "add_local_domain" {
+
+  provisioner "local-exec" {
+    command = " echo '$(minikube ip) ${var.haystack_domain_name}' | tee -a /etc/hosts"
+  }
+  provisioner "local-exec" {
+    command = "sed -i'.bak' '${var.haystack_domain_name}' /etc/hosts"
+    when = "destroy"
+  }
+}
+
+
 module "k8s-addons" {
   source = "../../modules/k8s-addons"
   k8s_cluster_name = "${var.k8s_minikube_cluster_name}"

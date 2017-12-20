@@ -131,15 +131,15 @@ function applyActionOnComponents() {
 
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=providers/$CLOUD_PROVIDER/backend.tfvars providers/$CLOUD_PROVIDER
-    $TERRAFORM destroy -var-file=providers/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  providers/$CLOUD_PROVIDER
+    $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
+    $TERRAFORM destroy -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=providers/$CLOUD_PROVIDER/backend.tfvars providers/$CLOUD_PROVIDER
-    $TERRAFORM apply -var-file=providers/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  providers/$CLOUD_PROVIDER
+    $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
+    $TERRAFORM apply -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
 }
 
 
@@ -154,14 +154,11 @@ function verifyK8sCluster() {
              echo 'Minikube is not running, starting now...'
              minikube start
           fi
-          echo "Setting haystack.local as the minikube ip"
-          echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
           rm -rf /tmp/minikube_status
     else
         echo "Minikube is not installed on local box, please setup minikube by following the instructions at https://kubernetes.io/docs/getting-started-guides/minikube"
         exit 1
     fi
-    setKubectlContext
   fi
 }
 
