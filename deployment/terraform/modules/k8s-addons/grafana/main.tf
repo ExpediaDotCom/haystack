@@ -9,7 +9,7 @@ data "template_file" "grafana_cluster_addon_config" {
     grafana_image = "${var.k8s_grafana_image}"
     grafana_storage_class = "${var.k8s_grafana_storage_class}"
     grafana_storage = "${var.k8s_grafana_storage}"
-    grafana_root_path = "{var.k8s_grafana_root_path}"
+    grafana_root_path = "${var.k8s_grafana_root_path}"
 
   }
 }

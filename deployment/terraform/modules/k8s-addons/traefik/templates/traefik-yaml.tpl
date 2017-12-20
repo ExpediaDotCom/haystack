@@ -59,7 +59,7 @@ subjects:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: traefik-haystack
+  name: ${traefik_name}
   namespace: kube-system
 ---
 kind: Deployment
@@ -182,5 +182,5 @@ spec:
        - path: /
          backend:
            serviceName: haystack-ui
-           servicePort: 8080
+           servicePort: 80
 
