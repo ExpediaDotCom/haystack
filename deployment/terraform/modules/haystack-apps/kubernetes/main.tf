@@ -18,7 +18,7 @@ module "pipes-json-transformer" {
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
   graphite_hostname = "${var.kafka_hostname}"
-  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  kafka_hostname = "${var.kafka_hostname}"
 }
 module "pipes-kafka-producer" {
   source = "pipes-kafka-producer"
@@ -26,7 +26,7 @@ module "pipes-kafka-producer" {
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
   graphite_hostname = "${var.graphite_hostname}"
-  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  kafka_hostname = "${var.kafka_hostname}"
 }
 
 module "trace-reader" {

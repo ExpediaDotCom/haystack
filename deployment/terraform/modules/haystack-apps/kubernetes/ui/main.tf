@@ -11,7 +11,7 @@ resource "kubernetes_config_map" "haystack-ui" {
   }
 
   data {
-    "haystack-ui.json" = "${file("${local.config_file_path}")}}"
+    "haystack-ui.json" = "${file("${local.config_file_path}")}"
   }
 }
 

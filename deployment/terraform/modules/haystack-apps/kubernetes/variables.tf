@@ -9,18 +9,18 @@ variable "k8s_cluster_name" {}
 variable "k8s_app_namespace" {}
 
 variable "trends_version" {
-  default = "6d320e806e63a2809b71a5c3e86c535a842789a4"
+  default = "df9b59950fb44a8257db1482cc2ae76a3688d12b"
 }
 
 variable "ui_version" {
-  default = "581338e50631ce327bcb9db0ab07484d6b0338ec"
+  default = "459278787c9979855c653c53d66bd181af8aedaa"
 }
 
 variable "traces_version" {
-  default = "61d53c1cf8d9a8363ab08d73d6815bb6acf1a982"
+  default = "92219da46ca3e3ee20f99eafe2939d8e7dfb004e"
 }
 
 
 variable "pipes_version" {
-  default = "a9faee13c3e0f5069c2af24bb1a6456815580357"
+  default = "5c09d1162a17e7fc815493c6be888122a5372bd0"
 }

@@ -12,7 +12,7 @@ resource "kubernetes_config_map" "haystack-ui" {
   }
 
   data {
-    "trace-indexer.conf" = "${file("${local.config_file_path}")}}"
+    "trace-indexer.conf" = "${file("${local.config_file_path}")}"
   }
 }
 
@@ -33,17 +33,6 @@ resource "kubernetes_replication_controller" "haystack-rc" {
         env {
           name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value = "${local.container_config_path}"
-        }
-        liveness_probe {
-          initial_delay_seconds = 15
-          period_seconds = 5
-          failure_threshold = 2
-          exec {
-            command = [
-              "grep",
-              "true",
-              "/app/isHealthy"]
-          }
         }
         volume_mount {
           mount_path = "/config"

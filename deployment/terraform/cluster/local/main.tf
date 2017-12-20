@@ -3,10 +3,10 @@
 resource "null_resource" "add_local_domain" {
 
   provisioner "local-exec" {
-    command = " echo '$(minikube ip) ${var.haystack_domain_name}' | tee -a /etc/hosts"
+    command = " echo $(minikube ip) ${var.haystack_domain_name} | tee -a /etc/hosts"
   }
   provisioner "local-exec" {
-    command = "sed -i'.bak' '${var.haystack_domain_name}' /etc/hosts"
+    command = "sed '/${var.haystack_domain_name}/d' /etc/hosts"
     when = "destroy"
   }
 }
@@ -35,6 +35,6 @@ module "haystack-apps" {
   kafka_hostname = "${module.haystack-infrastructure.kafka_hostname}"
   cassandra_port = "${module.haystack-infrastructure.kafka_port}"
   elasticsearch_hostname = "${module.haystack-infrastructure.kafka_port}"
-  graphite_hostname = "${module.haystack-infrastructure.kafka_port}"
+  graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"
 }

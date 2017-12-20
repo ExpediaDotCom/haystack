@@ -131,15 +131,15 @@ function applyActionOnComponents() {
 
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
-    $TERRAFORM destroy -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
+   sudo $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
+   sudo $TERRAFORM destroy -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
-    $TERRAFORM apply -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
+    sudo $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
+    sudo $TERRAFORM apply -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
 }
 
 
@@ -148,8 +148,7 @@ function verifyK8sCluster() {
     if command_exists minikube; then
         `minikube status > /tmp/minikube_status`
         if grep -q -i 'Running' /tmp/minikube_status; then
-            echo "Congratulations! Minikube is found in running state! setting haystack.local as the minikube ip"
-             echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+            echo "Congratulations! Minikube is found in running state!"
         else
              echo 'Minikube is not running, starting now...'
              minikube start
