@@ -1,0 +1,39 @@
+<jmxtrans-agent>
+    <queries>
+        <!-- OS -->
+        <query objectName="java.lang:type=OperatingSystem" attribute="SystemLoadAverage" resultAlias="os.systemLoadAverage"/>
+
+        <!-- JVM -->
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used" resultAlias="jvm.heapMemoryUsage.used"/>
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="committed" resultAlias="jvm.heapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used" resultAlias="jvm.nonHeapMemoryUsage.used"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="committed" resultAlias="jvm.nonHeapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.loadedClasses"/>
+        <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.thread"/>
+
+        <!-- CASSANDRA -->
+        <query objectName="org.apache.cassandra.metrics:type=ColumnFamily,name=TotalDiskSpaceUsed" attribute="Value" resultAlias="cass.ColumnFamily.TotalDisk"/>
+        <query objectName="org.apache.cassandra.metrics:type=CommitLog,name=WaitingOnCommit" attribute="OneMinuteRate" resultAlias="cass.CommitLog.CommitWait.OneMinRate"/>
+        <query objectName="org.apache.cassandra.metrics:type=ColumnFamily,name=ReadLatency" attribute="OneMinuteRate" resultAlias="cass.ColumnFamily.ColumnRead.OneMinRate"/>
+        <query objectName="org.apache.cassandra.metrics:type=ColumnFamily,name=WriteLatency" attribute="OneMinuteRate" resultAlias="cass.ColumnFamily.ColumnWrite.OneMinRate"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=Read,name=Latency" attribute="OneMinuteRate" resultAlias="cass.ClientRequest.ClientRead.OneMinRate"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Latency" attribute="OneMinuteRate" resultAlias="cass.ClientRequest.ClientWrite.OneMinRate"/>
+        <query objectName="org.apache.cassandra.metrics:type=Compaction,name=BytesCompacted" attribute="Count" resultAlias="cass.Compaction.Bytes"/>
+        <query objectName="org.apache.cassandra.metrics:type=Compaction,name=TotalCompactionsCompleted" attribute="Count" resultAlias="cass.Compaction.Count"/>
+        <query objectName="org.apache.cassandra.metrics:type=ColumnFamily,name=TombstoneScannedHistogram" attribute="Count" resultAlias="cass.ColumnFamily.TombsScannedHist"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=Read,name=Unavailables" attribute="Count" resultAlias="cass.ClientRequest.ClientRead.Unavailable"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=Read,name=Timeouts" attribute="Count" resultAlias="cass.ClientRequest.ClientRead.Timeout"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Unavailables" attribute="Count" resultAlias="cass.ClientRequest.ClientWrite.Unavailable"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=Write,name=Timeouts" attribute="Count" resultAlias="cass.ClientRequest.ClientWrite.Timeout"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=RangeSlice,name=Unavailables" attribute="Count" resultAlias="cass.ClientRequest.ClientRangeSlice.Unavailable"/>
+        <query objectName="org.apache.cassandra.metrics:type=ClientRequest,scope=RangeSlice,name=Timeouts" attribute="Count" resultAlias="cass.ClientRequest.ClientRangeSlice.Timeout"/>
+        <query objectName="org.apache.cassandra.net:type=FailureDetector" attribute="UpEndpointCount" resultAlias="cass.Net.UpCount"/>
+        <query objectName="org.apache.cassandra.net:type=FailureDetector" attribute="DownEndpointCount" resultAlias="cass.Net.DownCount"/>
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <host>${HAYSTACK_GRAPHITE_HOST}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT}</port>
+        <namePrefix>haystack.traces.reader.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+</jmxtrans-agent>

@@ -32,35 +32,53 @@
       "type": "shell",
       "inline": [
         "sudo yum install -y java-1.8.0",
+        "sudo yum install -y jna",
         "sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java",
-        "sudo java -version"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline": [
+        "sudo mkdir /var/jmxtrans",
+        "sudo curl https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-1.2.6/jmxtrans-agent-1.2.6-sources.jar -o /var/jmxtrans/jmxtrans.jar",
+        "sudo chmod a+w /etc/sysctl.conf",
+        "sudo chmod a+w /etc/security/limits.conf",
+        "sudo chmod a+w /var/jmxtrans",
         "sudo chmod a+w /etc/yum.repos.d/"
       ]
     },
     {
       "type": "file",
-      "source": "files/cassandra.repo",
+      "source": "resources/sysctl.conf",
+      "destination": "/etc/sysctl.conf"
+    },
+    {
+      "type": "file",
+      "source": "resources/limits.conf",
+      "destination": "/etc/security/limits.conf"
+    },
+    {
+      "type": "file",
+      "source": "resources/jmxtrans-agent.xml",
+      "destination": "/var/jmxtrans/jmxtrans-agent.xml"
+    },
+    {
+      "type": "file",
+      "source": "resources/cassandra.repo",
       "destination": "/etc/yum.repos.d/cassandra.repo"
     },
     {
       "type": "shell",
       "inline": [
-        "sudo yum install -y cassandra"
+        "sudo yum install -y cassandra",
+        "sudo chmod a+w /etc/cassandra/default.conf/cassandra.yaml",
+        "sudo chmod a+w /etc/cassandra/default.conf/cassandra-env.sh"
       ]
     },
     {
-      "type": "shell",
-      "inline": [
-        "echo '* soft nofile 32768' | sudo tee -a /etc/security/limits.conf",
-        "echo '* hard nofile 32768' | sudo tee -a /etc/security/limits.conf",
-        "echo 'root soft nofile 32768' | sudo tee -a /etc/security/limits.conf",
-        "echo 'root hard nofile 32768' | sudo tee -a /etc/security/limits.conf"
-      ]
+      "type": "file",
+      "source": "resources/cassandra.yaml",
+      "destination": "/etc/cassandra/default.conf/cassandra.yaml"
+    },
+    {
+      "type": "file",
+      "source": "resources/cassandra-env.sh",
+      "destination": "/etc/cassandra/default.conf/cassandra-env.sh"
     }
   ]
 }
