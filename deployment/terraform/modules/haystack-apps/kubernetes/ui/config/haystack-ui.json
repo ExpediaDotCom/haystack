@@ -1,0 +1,16 @@
+{
+  "port": 8080,
+  "cluster": true,
+  "upstreamTimeout": 60000,
+  "rootService": "haystack-root",
+  "stores": {
+    "traces": {
+      "storeName": "haystack",
+      "haystackHost": "haystack-trace-reader",
+      "haystackPort": 8080
+    },
+    "trends": {
+      "storeName": "haystack"
+    }
+  }
+}
