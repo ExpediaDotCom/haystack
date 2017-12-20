@@ -43,6 +43,10 @@ module "haystack-infrastructure" {
   aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
   kafka_broker_count = "${var.kafka_broker_count}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
+  cassandra_node_image = "${var.cassandra_node_image}"
+  cassandra_node_volume_size = "${var.cassandra_node_volume_size}"
+  cassandra_node_instance_count = "${var.cassandra_node_instance_count}"
+  cassandra_node_instance_type = "${var.cassandra_node_instance_type}"
 }
 module "haystack-apps" {
   source = "../../modules/haystack-apps/kubernetes"

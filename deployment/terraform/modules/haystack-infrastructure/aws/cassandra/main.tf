@@ -18,6 +18,12 @@ locals {
   cassandra_config_yaml_path = "/etc/cassandra/default.conf/cassandra.yaml"
   cassandra_non_seed_node_count = "${var.cassandra_node_count - 1}"
   cassandra_cname = "haystack-cassandra"
+  cassandra_ssh_user = "ec2-user"
+}
+
+module "cassandra-security-groups" {
+  source = "security_groups"
+  cassandra_aws_vpc_id= "${var.cassandra_aws_vpc_id}"
 }
 
 data "template_file" "cassandra_seed_config" {
@@ -33,7 +39,7 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
   ami = "${local.cassandra_ami}"
   instance_type = "${var.cassandra_node_instance_type}"
   subnet_id = "${var.cassandra_aws_subnet}"
-  security_groups = ["${var.cassandra_security_group}"]
+  security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
   key_name = "${var.cassandra_ssh_key_pair_name}"
 
   tags {
@@ -50,7 +56,7 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
-      user     = "${var.cassandra_ssh_user}"
+      user     = "${local.cassandra_ssh_user}"
       private_key = "${file(var.cassandra_ssh_key_file_path)}"
     }
 
@@ -77,7 +83,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   ami = "${local.cassandra_ami}"
   instance_type = "${var.cassandra_node_instance_type}"
   subnet_id = "${var.cassandra_aws_subnet}"
-  security_groups = ["${var.cassandra_security_group}"]
+  security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
   key_name = "${var.cassandra_ssh_key_pair_name}"
 
   tags {
@@ -95,7 +101,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
-      user     = "${var.cassandra_ssh_user}"
+      user     = "${local.cassandra_ssh_user}"
       private_key = "${file(var.cassandra_ssh_key_file_path)}"
     }
 

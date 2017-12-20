@@ -1,5 +1,5 @@
 resource "aws_security_group" "brokers-haystack-kafka" {
-  name = "brokers.haystack-k8s"
+  name = "brokers.haystack"
   vpc_id = "${var.kafka_aws_vpc_id}"
   description = "Security group for haystack kafka brokers"
 
@@ -9,7 +9,7 @@ resource "aws_security_group" "brokers-haystack-kafka" {
 }
 
 resource "aws_security_group" "workers-haystack-kafka" {
-  name = "workers.haystack-k8s"
+  name = "workers.haystack"
   vpc_id = "${var.kafka_aws_vpc_id}"
   description = "Security group for haystack kafka workers"
 
