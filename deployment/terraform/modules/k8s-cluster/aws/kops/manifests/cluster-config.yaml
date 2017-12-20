@@ -1,0 +1,150 @@
+############################################
+# NOTE: This file is managed by Terraform  #
+# Don't make any manual modification to it #
+############################################
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: 2017-12-11T07:32:25Z
+  name: haystack-k8s.test.monitoring.expedia.com
+spec:
+  api:
+    loadBalancer:
+      type: Public
+  authorization:
+    alwaysAllow: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: s3://haystack-deployment-tf/haystack-k8s.test.monitoring.expedia.com
+  dnsZone: Z3HD2JQ3E1K3F8
+  etcdClusters:
+  - etcdMembers:
+    - instanceGroup: master-us-west-2c-1
+      name: "1"
+    - instanceGroup: master-us-west-2c-2
+      name: "2"
+    - instanceGroup: master-us-west-2c-3
+      name: "3"
+    name: main
+  - etcdMembers:
+    - instanceGroup: master-us-west-2c-1
+      name: "1"
+    - instanceGroup: master-us-west-2c-2
+      name: "2"
+    - instanceGroup: master-us-west-2c-3
+      name: "3"
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  kubernetesVersion: 1.8.4
+  masterPublicName: api.haystack-k8s.test.monitoring.expedia.com
+  networkID: vpc-de7925b9
+  networking:
+    calico: {}
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 0.0.0.0/0
+  subnets:
+  - name: us-west-2c
+    type: Private
+    zone: us-west-2c
+    id: subnet-33f0ea6b
+  - name: utility-us-west-2c
+    type: Utility
+    zone: us-west-2c
+    id: subnet-68f2e830
+
+
+
+  topology:
+    dns:
+      type: Public
+    masters: private
+    nodes: private
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2017-12-11T07:32:30Z
+  labels:
+    kops.k8s.io/cluster: haystack-k8s.test.monitoring.expedia.com
+  name: master-us-west-2c-1
+spec:
+  associatePublicIp: false
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  machineType: c4.large
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-west-2c-1
+  role: Master
+  subnets:
+  - us-west-2c
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2017-12-11T07:32:31Z
+  labels:
+    kops.k8s.io/cluster: haystack-k8s.test.monitoring.expedia.com
+  name: master-us-west-2c-2
+spec:
+  associatePublicIp: false
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  machineType: c4.large
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-west-2c-2
+  role: Master
+  subnets:
+  - us-west-2c
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2017-12-11T07:32:32Z
+  labels:
+    kops.k8s.io/cluster: haystack-k8s.test.monitoring.expedia.com
+  name: master-us-west-2c-3
+spec:
+  associatePublicIp: false
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  machineType: c4.large
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-west-2c-3
+  role: Master
+  subnets:
+  - us-west-2c
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2017-12-11T07:32:33Z
+  labels:
+    kops.k8s.io/cluster: haystack-k8s.test.monitoring.expedia.com
+  name: nodes
+spec:
+  associatePublicIp: false
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  machineType: m4.large
+  maxSize: 4
+  minSize: 4
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes
+  role: Node
+  subnets:
+  - us-west-2c
