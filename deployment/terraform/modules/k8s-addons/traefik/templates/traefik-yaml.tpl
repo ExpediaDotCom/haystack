@@ -170,6 +170,24 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: traefik-haystack-es
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${haytack_domain_name}
+     http:
+        paths:
+         - path: /kibana
+           backend:
+             serviceName: kibana-logging
+             servicePort: 5601
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: traefik-haystack-ui
   namespace: ${k8s_app_namespace}
   annotations:
@@ -183,4 +201,5 @@ spec:
          backend:
            serviceName: haystack-ui
            servicePort: 80
+
 

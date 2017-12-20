@@ -34,7 +34,7 @@ spec:
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
         - name: GF_SERVER_ROOT_URL
-          value: "{var.k8s_grafana_root_path}"
+          value: "/grafana"
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage
