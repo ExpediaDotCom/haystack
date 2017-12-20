@@ -2,7 +2,7 @@ locals {
   app_name = "elasticsearch"
   service_port = 9200
   container_port = 9200
-  es_docker_image = "elasticsearch:2.4.6-alpine"
+  es_docker_image = "elasticsearch:5-alpine"
 }
 resource "kubernetes_service" "haystack-service" {
   metadata {

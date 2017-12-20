@@ -3,7 +3,7 @@
 resource "null_resource" "add_local_domain" {
 
   provisioner "local-exec" {
-    command = " echo $(minikube ip) ${var.haystack_domain_name} | tee -a /etc/hosts"
+    command = " 'echo $(minikube ip) ${var.haystack_domain_name}' | tee -a /etc/hosts"
   }
   provisioner "local-exec" {
     command = "sed '/${var.haystack_domain_name}/d' /etc/hosts"
@@ -19,7 +19,6 @@ module "k8s-addons" {
   traefik_node_port = "${var.traefik_node_port}"
   k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${var.haystack_domain_name}"
-  k8s_logs_es_url = "elasticsearch"
 }
 
 module "haystack-infrastructure" {

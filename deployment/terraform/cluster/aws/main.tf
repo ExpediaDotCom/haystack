@@ -24,7 +24,6 @@ module "k8s-addons" {
   traefik_node_port = "${var.traefik_node_port}"
   k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${module.haystack-k8s.cluster_name}"
-  k8s_logs_es_url = "elasticsearch"
 }
 
 module "haystack-infrastructure" {
