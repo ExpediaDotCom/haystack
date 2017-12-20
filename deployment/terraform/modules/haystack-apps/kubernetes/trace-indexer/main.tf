@@ -12,7 +12,7 @@ resource "kubernetes_config_map" "haystack-ui" {
   }
 
   data {
-    "trace-indexer.conf" = "${file("${local.config_file_path}")}}"
+    "trace-indexer.conf" = "${file("${local.config_file_path}")}"
   }
 }
 

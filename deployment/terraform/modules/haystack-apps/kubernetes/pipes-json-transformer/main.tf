@@ -18,7 +18,7 @@ resource "kubernetes_replication_controller" "haystack-rc" {
         name = "${local.app_name}"
         env {
           name = "HAYSTACK_KAFKA_BROKERS"
-          value = "${var.kafka_endpoint}"
+          value = "${var.kafka_hostname}"
         }
         env {
           name = "HAYSTACK_GRAPHITE_HOST"
