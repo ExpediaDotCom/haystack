@@ -21,6 +21,7 @@
     "instance_type": "{{user `instance_type`}}",
     "ssh_username": "ec2-user",
     "ami_name": "{{user `ami_name`}}-{{timestamp}}",
+    "ami_groups": ["all"],
     "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
     "tags": {
       "type": "{{user `ami_name`}}",
