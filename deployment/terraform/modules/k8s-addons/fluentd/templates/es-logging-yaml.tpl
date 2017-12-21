@@ -10,7 +10,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 ---
 kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   name: ${elasticsearch-name}
   labels:
@@ -28,7 +28,7 @@ rules:
   - "get"
 ---
 kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
+apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
   namespace: kube-system
   name: ${elasticsearch-name}
@@ -47,7 +47,7 @@ roleRef:
   apiGroup: ""
 ---
 # Elasticsearch deployment itself
-apiVersion: apps/v1beta2
+apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
   name: ${elasticsearch-name}
@@ -127,7 +127,7 @@ spec:
   selector:
     k8s-app: ${elasticsearch-name}
 ---
-apiVersion: apps/v1beta2
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: kibana-logging
@@ -148,7 +148,7 @@ spec:
     spec:
       containers:
       - name: kibana-logging
-        image: docker.elastic.co/kibana/kibana:5.6.4
+        image: docker.elastic.co/kibana/kibana:5.6.5
         resources:
           # need more cpu upon initialization, therefore burstable class
           limits:
@@ -159,7 +159,7 @@ spec:
           - name: ELASTICSEARCH_URL
             value: http://${elasticsearch-name}:9200
           - name: SERVER_BASEPATH
-            value: /api/v1/proxy/namespaces/kube-system/services/kibana-logging
+            value: /kibana
           - name: XPACK_MONITORING_ENABLED
             value: "false"
           - name: XPACK_SECURITY_ENABLED
