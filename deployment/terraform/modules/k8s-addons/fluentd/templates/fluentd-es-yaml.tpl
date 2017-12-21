@@ -16,8 +16,6 @@ spec:
   selector:
     k8s-app: elasticsearch-logging
 ---
-
----
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
