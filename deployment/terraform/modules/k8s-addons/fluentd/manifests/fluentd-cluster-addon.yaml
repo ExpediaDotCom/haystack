@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: elasticsearch-logging
+  name: fluentd
   namespace: kube-system
   labels:
-    k8s-app: elasticsearch-logging
+    k8s-app: fluentd
     kubernetes.io/cluster-service: "true"
     addonmanager.kubernetes.io/mode: Reconcile
     kubernetes.io/name: "Elasticsearch"
@@ -14,7 +14,7 @@ spec:
     protocol: TCP
     targetPort: db
   selector:
-    k8s-app: elasticsearch-logging
+    k8s-app: fluentd
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1

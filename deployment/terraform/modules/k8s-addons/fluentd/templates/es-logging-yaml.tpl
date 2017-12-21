@@ -59,7 +59,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   serviceName: ${elasticsearch-name}
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       k8s-app: ${elasticsearch-name}
@@ -73,7 +73,7 @@ spec:
     spec:
       serviceAccountName: ${elasticsearch-name}
       containers:
-      - image: k8s.gcr.io/elasticsearch:v5.6.4
+      - image: k8s.gcr.io/elasticsearch:v5.6.5
         name: ${elasticsearch-name}
         resources:
           # need more cpu upon initialization, therefore burstable class
