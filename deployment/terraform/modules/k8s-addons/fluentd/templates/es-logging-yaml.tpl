@@ -1,51 +1,3 @@
-# RBAC authn and authz
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: ${elasticsearch-name}
-  namespace: kube-system
-  labels:
-    k8s-app: ${elasticsearch-name}
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
----
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  name: ${elasticsearch-name}
-  labels:
-    k8s-app: ${elasticsearch-name}
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - "services"
-  - "namespaces"
-  - "endpoints"
-  verbs:
-  - "get"
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1beta1
-metadata:
-  namespace: kube-system
-  name: ${elasticsearch-name}
-  labels:
-    k8s-app: ${elasticsearch-name}
-    kubernetes.io/cluster-service: "true"
-    addonmanager.kubernetes.io/mode: Reconcile
-subjects:
-- kind: ServiceAccount
-  name: ${elasticsearch-name}
-  namespace: kube-system
-  apiGroup: ""
-roleRef:
-  kind: ClusterRole
-  name: ${elasticsearch-name}
-  apiGroup: ""
----
 # Elasticsearch deployment itself
 apiVersion: apps/v1beta1
 kind: StatefulSet
@@ -54,7 +6,7 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: ${elasticsearch-name}
-    version: v5.6.4
+    version: v5.6.5
     kubernetes.io/cluster-service: "true"
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
@@ -63,17 +15,16 @@ spec:
   selector:
     matchLabels:
       k8s-app: ${elasticsearch-name}
-      version: v5.6.4
+      version: v5.6.5
   template:
     metadata:
       labels:
         k8s-app: ${elasticsearch-name}
-        version: v5.6.4
+        version: v5.6.5
         kubernetes.io/cluster-service: "true"
     spec:
-      serviceAccountName: ${elasticsearch-name}
       containers:
-      - image: k8s.gcr.io/elasticsearch:v5.6.5
+      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.5
         name: ${elasticsearch-name}
         resources:
           # need more cpu upon initialization, therefore burstable class
@@ -92,22 +43,29 @@ spec:
         - name: ${elasticsearch-name}
           mountPath: /data
         env:
-        - name: "NAMESPACE"
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-      volumes:
-      - name: ${elasticsearch-name}
-        emptyDir: {}
-      # Elasticsearch requires vm.max_map_count to be at least 262144.
-      # If your OS already sets up this number to a higher value, feel free
-      # to remove this init container.
+        - name: "ES_JAVA_OPTS"
+          value: "-Xms256m -Xmx256m"
+        - name: "XPACK_SECURITY_ENABLED"
+          value: "false"
       initContainers:
       - image: alpine:3.6
         command: ["/sbin/sysctl", "-w", "vm.max_map_count=262144"]
         name: ${elasticsearch-name}-init
         securityContext:
           privileged: true
+  volumeClaimTemplates:
+    - metadata:
+        name: ${elasticsearch-name}
+        annotations:
+          volume.beta.kubernetes.io/storage-class: "standard"
+      spec:
+        storageClassName: "standard"
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100Mi
+
+
 ---
 apiVersion: v1
 kind: Service
@@ -159,7 +117,7 @@ spec:
           - name: ELASTICSEARCH_URL
             value: http://${elasticsearch-name}:9200
           - name: SERVER_BASEPATH
-            value: /kibana
+            value: /logs
           - name: XPACK_MONITORING_ENABLED
             value: "false"
           - name: XPACK_SECURITY_ENABLED
@@ -186,3 +144,4 @@ spec:
     targetPort: ui
   selector:
     k8s-app: kibana-logging
+
