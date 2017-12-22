@@ -33,9 +33,10 @@
       "inline": [
         "sudo yum install -y java-1.8.0",
         "sudo yum install -y jna",
+        "sudo yum install -y wget",
         "sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java",
         "sudo mkdir /var/jmxtrans",
-        "sudo curl https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-1.2.6/jmxtrans-agent-1.2.6-sources.jar -o /var/jmxtrans/jmxtrans.jar",
+        "sudo wget -O /var/jmxtrans/jmxtrans.jar https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-1.2.6/jmxtrans-agent-1.2.6.jar",
         "sudo chmod a+w /etc/sysctl.conf",
         "sudo chmod a+w /etc/security/limits.conf",
         "sudo chmod a+w /var/jmxtrans",

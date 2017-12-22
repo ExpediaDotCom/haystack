@@ -31,8 +31,8 @@
         <query objectName="org.apache.cassandra.net:type=FailureDetector" attribute="DownEndpointCount" resultAlias="cass.Net.DownCount"/>
     </queries>
     <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
-        <host>${HAYSTACK_GRAPHITE_HOST}</host>
-        <port>${HAYSTACK_GRAPHITE_PORT}</port>
+        <host>_HAYSTACK_GRAPHITE_HOST</host>
+        <port>_HAYSTACK_GRAPHITE_PORT</port>
         <namePrefix>haystack.traces.reader.#hostname#.</namePrefix>
     </outputWriter>
     <collectIntervalInSeconds>30</collectIntervalInSeconds>

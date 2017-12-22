@@ -14,6 +14,8 @@ module "cassandra" {
   cassandra_node_count = "${var.cassandra_node_instance_count}"
   cassandra_node_instance_type = "${var.cassandra_node_instance_type}"
   cassandra_ssh_key_pair_name = "${var.aws_ssh_key}"
+  cassandra_graphite_host = "${local.graphite_hostname}"
+  cassandra_graphite_port = "${local.graphite_port}"
 }
 
 module "es" {
