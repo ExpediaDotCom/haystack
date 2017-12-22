@@ -6,7 +6,7 @@ data "aws_ami" "haystack-cassandra-base-ami" {
   }
 
   filter {
-    name   = "tag:role"
+    name   = "tag:type"
     values = ["haystack-cassandra-base"]
   }
 
@@ -26,11 +26,12 @@ module "cassandra-security-groups" {
   cassandra_aws_vpc_id= "${var.cassandra_aws_vpc_id}"
 }
 
-data "template_file" "cassandra_seed_config" {
-  template = "${file("${path.module}/data/cassandra_yaml.tpl")}"
+data "template_file" "cassandra_seed_user_data" {
+  template = "${file("${path.module}/data/seed_node_user_data_sh.tpl")}"
 
   vars {
-    seed_ip = "127.0.0.1"
+    haystack_graphite_host = "${var.cassandra_graphite_host}"
+    haystack_graphite_port = "${var.cassandra_graphite_port}"
   }
 }
 
@@ -53,27 +54,16 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
     delete_on_termination = false
   }
 
-  provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "${local.cassandra_ssh_user}"
-      private_key = "${file(var.cassandra_ssh_key_file_path)}"
-    }
-
-    inline = [
-      "echo \"127.0.0.1 $(hostname)\" | sudo tee -a /etc/hosts",
-      "sudo chmod a+w ${local.cassandra_config_yaml_path}",
-      "sudo cat > ${local.cassandra_config_yaml_path} <<EOL\n${data.template_file.cassandra_seed_config.rendered}EOL",
-      "sudo service cassandra start"
-    ]
-  }
+  user_data = "${data.template_file.cassandra_seed_user_data.rendered}"
 }
 
-data "template_file" "cassandra_non_seed_config" {
-  template = "${file("${path.module}/data/cassandra_yaml.tpl")}"
+data "template_file" "cassandra_non_seed_user_data" {
+  template = "${file("${path.module}/data/non_seed_node_user_data_sh.tpl")}"
 
   vars {
     seed_ip = "${aws_instance.haystack-cassandra-seed-node.private_ip}"
+    haystack_graphite_host = "${var.cassandra_graphite_host}"
+    haystack_graphite_port = "${var.cassandra_graphite_port}"
   }
 }
 
@@ -98,20 +88,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
     delete_on_termination = false
   }
 
-  provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "${local.cassandra_ssh_user}"
-      private_key = "${file(var.cassandra_ssh_key_file_path)}"
-    }
-
-    inline = [
-      "echo \"127.0.0.1 $(hostname)\" | sudo tee -a /etc/hosts",
-      "sudo chmod a+w ${local.cassandra_config_yaml_path}",
-      "sudo cat > ${local.cassandra_config_yaml_path} <<EOL\n${data.template_file.cassandra_non_seed_config.rendered}EOL",
-      "sudo service cassandra start"
-    ]
-  }
+  user_data = "${data.template_file.cassandra_non_seed_user_data.rendered}"
 }
 
 // create cname for newly created cassandra cluster
