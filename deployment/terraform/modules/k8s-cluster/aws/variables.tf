@@ -9,7 +9,7 @@ variable "k8s_node_instance_count" {}
 variable "k8s_master_instance_type" {}
 variable "k8s_hosted_zone_id" {}
 variable "k8s_base_domain_name" {}
-
+variable "reverse_proxy_port" {}
 variable "k8s_aws_region" {}
 
 variable "kops_executable_name" {

@@ -10,6 +10,6 @@ variable "k8s_app_name_space" {
 variable "haystack_domain_name" {
   default = "haystack.local"
 }
-variable "traefik_node_port" {
+variable "reverse_proxy_port" {
   default = "32300"
 }

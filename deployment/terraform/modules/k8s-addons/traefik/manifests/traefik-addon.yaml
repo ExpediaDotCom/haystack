@@ -122,8 +122,6 @@ spec:
   ports:
   - port: 80
     name: http
-  - port: 443
-    name: https
     targetPort: 80
     nodePort: 32300
   selector:

@@ -35,6 +35,8 @@ module "k8s_security_groups" {
 }
 module "k8s_iam_roles" {
   source = "iam-roles"
+  k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
+  k8s_s3_bucket_name = "${var.k8s_s3_bucket_name}"
 }
 
 
@@ -45,6 +47,7 @@ module "k8s_elbs" {
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   k8s_nodes_api_security_groups = "${module.k8s_security_groups.nodes-api-elb-security_group_ids}"
+  reverse_proxy_port = "${var.reverse_proxy_port}"
 }
 
 resource "aws_autoscaling_attachment" "master-1-masters-haystack-k8s" {
@@ -205,7 +208,6 @@ resource "aws_eip" "eip-haystack-k8s" {
   vpc = true
 }
 
-
 data "template_file" "master-1-user-data" {
   template = "${file("${path.module}/templates/k8s_master_user-data.tpl")}"
   vars {
@@ -235,7 +237,6 @@ resource "aws_launch_configuration" "master-1-masters-haystack-k8s" {
     create_before_destroy = true
   }
 }
-
 
 data "template_file" "master-2-user-data" {
   template = "${file("${path.module}/templates/k8s_master_user-data.tpl")}"
@@ -267,7 +268,6 @@ resource "aws_launch_configuration" "master-2-masters-haystack-k8s" {
     create_before_destroy = true
   }
 }
-
 
 data "template_file" "master-3-user-data" {
   template = "${file("${path.module}/templates/k8s_master_user-data.tpl")}"
@@ -326,9 +326,4 @@ resource "aws_launch_configuration" "nodes-haystack-k8s" {
   lifecycle = {
     create_before_destroy = true
   }
-}
-
-
-terraform = {
-  required_version = ">= 0.9.3"
 }
