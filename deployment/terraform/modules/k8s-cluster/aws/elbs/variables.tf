@@ -7,3 +7,4 @@ variable "k8s_cluster_name" {}
 variable "k8s_nodes_api_security_groups" {
   type = "list"
 }
+variable "reverse_proxy_port" {}

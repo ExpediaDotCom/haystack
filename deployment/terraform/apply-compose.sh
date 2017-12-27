@@ -131,15 +131,15 @@ function applyActionOnComponents() {
 
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
-   sudo $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
-   sudo $TERRAFORM destroy -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
+   $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
+   $TERRAFORM destroy -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
-    sudo $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
-    sudo $TERRAFORM apply -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
+    $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
+    $TERRAFORM apply -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
 }
 
 

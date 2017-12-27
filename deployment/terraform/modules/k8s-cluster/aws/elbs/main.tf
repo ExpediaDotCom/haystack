@@ -48,7 +48,7 @@ resource "aws_elb" "k8s-nodes-elb" {
   name = "haystack-k8s-nodes-elb"
 
   listener = {
-    instance_port = 32300
+    instance_port = "${var.reverse_proxy_port}"
     instance_protocol = "HTTP"
     lb_port = 80
     lb_protocol = "HTTP"

@@ -15,6 +15,7 @@ module "haystack-k8s" {
   k8s_s3_bucket_name = "${var.s3_bucket_name}"
   k8s_aws_region = "${var.aws_region}"
   k8s_node_instance_count = "${var.k8s_node_instance_count}"
+  reverse_proxy_port = "${var.reverse_proxy_port}"
 }
 
 module "k8s-addons" {
@@ -24,6 +25,8 @@ module "k8s-addons" {
   traefik_node_port = "${var.traefik_node_port}"
   k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${module.haystack-k8s.cluster_name}"
+  add_monitoring_addons = true
+  add_logging_addons = true
 }
 
 module "haystack-infrastructure" {
