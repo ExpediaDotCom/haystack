@@ -2,7 +2,24 @@ locals {
   app_name = "trace-reader"
 }
 
-resource "kubernetes_replication_controller" "haystack-rc" {
+
+resource "kubernetes_service" "haystack-service" {
+  metadata {
+    name = "${local.app_name}"
+    namespace = "${var.namespace}"
+  }
+  spec {
+    selector {
+      app = "${kubernetes_replication_controller.haystack-trace-reader-rc.metadata.0.labels.app}"
+    }
+    port {
+      port = "${var.service_port}"
+      target_port = "${var.container_port}"
+    }
+  }
+}
+
+resource "kubernetes_replication_controller" "haystack-trace-reader-rc" {
   metadata {
     name = "${local.app_name}"
     labels {
