@@ -26,4 +26,5 @@ module "haystack-apps" {
   elasticsearch_hostname = "${module.haystack-infrastructure.kafka_port}"
   graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"
+  pipes_enabled = "false"
 }
