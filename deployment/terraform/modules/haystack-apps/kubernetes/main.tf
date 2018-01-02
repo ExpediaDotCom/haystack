@@ -4,6 +4,7 @@ module "span-timeseries-transformer" {
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  enabled = "${var.trends_enabled}"
 }
 module "timeseries-transformer" {
   source = "timeseries-aggregator"
@@ -11,6 +12,7 @@ module "timeseries-transformer" {
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  enabled = "${var.trends_enabled}"
 }
 module "pipes-json-transformer" {
   source = "pipes-json-transformer"
@@ -19,6 +21,8 @@ module "pipes-json-transformer" {
   namespace = "${var.k8s_app_namespace}"
   graphite_hostname = "${var.kafka_hostname}"
   kafka_hostname = "${var.kafka_hostname}"
+  enabled = "${var.pipes_enabled}"
+
 }
 module "pipes-kafka-producer" {
   source = "pipes-kafka-producer"
@@ -27,6 +31,7 @@ module "pipes-kafka-producer" {
   namespace = "${var.k8s_app_namespace}"
   graphite_hostname = "${var.graphite_hostname}"
   kafka_hostname = "${var.kafka_hostname}"
+  enabled = "${var.pipes_enabled}"
 }
 
 module "trace-reader" {
@@ -34,6 +39,7 @@ module "trace-reader" {
   image = "expediadotcom/haystack-trace-reader:${var.traces_version}"
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
+  enabled = "${var.traces_enabled}"
 }
 module "trace-indexer" {
   source = "trace-indexer"
@@ -41,6 +47,7 @@ module "trace-indexer" {
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  enabled = "${var.traces_enabled}"
 }
 module "ui" {
   source = "ui"

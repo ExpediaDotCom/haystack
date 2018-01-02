@@ -1,5 +1,6 @@
 locals {
   app_name = "trace-reader"
+  count = "${var.enabled?1:0}"
 }
 
 
@@ -42,4 +43,5 @@ resource "kubernetes_replication_controller" "haystack-trace-reader-rc" {
       app = "${local.app_name}"
     }
   }
+  count = "${local.count}"
 }

@@ -20,7 +20,19 @@ variable "traces_version" {
   default = "92219da46ca3e3ee20f99eafe2939d8e7dfb004e"
 }
 
-
 variable "pipes_version" {
   default = "5c09d1162a17e7fc815493c6be888122a5372bd0"
+}
+
+
+variable "trends_enabled" {
+  default = true
+}
+
+variable "traces_enabled" {
+  default = true
+}
+
+variable "pipes_enabled" {
+  default = true
 }

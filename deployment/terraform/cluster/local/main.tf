@@ -7,7 +7,7 @@ module "k8s-addons" {
   traefik_node_port = "${var.reverse_proxy_port}"
   k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${var.haystack_domain_name}"
-  add_logging_addons = true
+  add_logging_addons = false
   add_monitoring_addons = false
 }
 
@@ -26,4 +26,5 @@ module "haystack-apps" {
   elasticsearch_hostname = "${module.haystack-infrastructure.kafka_port}"
   graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"
+  pipes_enabled = false
 }
