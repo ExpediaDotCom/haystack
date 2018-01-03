@@ -165,7 +165,7 @@ function verifyK8sCluster() {
 verifyArgs
 
 #verify minikube is running in local mode
-verifyK8sluster
+verifyK8sCluster
 
 # download third party softwares like kubectl, gomplate, jq etc.
 downloadThirdPartySoftwares
