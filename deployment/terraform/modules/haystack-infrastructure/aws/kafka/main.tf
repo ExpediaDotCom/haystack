@@ -86,7 +86,7 @@ resource "aws_elb" "kafka-broker-elb" {
 }
 
 
-resource "aws_autoscaling_attachment" "nodes-haystack-k8s" {
+resource "aws_autoscaling_attachment" "broker-haystack-kafka" {
   elb = "${aws_elb.kafka-broker-elb.id}"
   autoscaling_group_name = "${aws_autoscaling_group.brokers-haystack-kafka.id}"
 }
