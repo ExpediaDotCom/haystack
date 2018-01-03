@@ -28,12 +28,13 @@ module "es" {
 
 module "kafka" {
   source = "kafka"
-  kafka_aws_ssh_key = "${var.aws_ssh_key}"
-  kafka_aws_region = "${var.aws_region}"
-  kafka_broker_count = "${var.kafka_broker_count}"
-  kafka_aws_vpc_id = "${var.aws_vpc_id}"
-  kafka_broker_instance_type = "${var.kafka_broker_instance_type}"
-  kafka_aws_subnet = "${var.aws_nodes_subnet}"
+  aws_ssh_key = "${var.aws_ssh_key}"
+  aws_region = "${var.aws_region}"
+  broker_count = "${var.kafka_broker_count}"
+  aws_vpc_id = "${var.aws_vpc_id}"
+  broker_instance_type = "${var.kafka_broker_instance_type}"
+  aws_subnet = "${var.aws_nodes_subnet}"
+  aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
 }
 
 //metrictank is still deployed as a container might consider inside the k8s cluster
