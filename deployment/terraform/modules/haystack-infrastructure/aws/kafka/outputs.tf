@@ -1,6 +1,7 @@
 output "kafka_service_name" {
-  value = "test"
+  value = "${aws_route53_record.haystack-kafka-cname.fqdn}"
 }
+
 output "kafka_port" {
-  value = "9092"
+  value = "${local.kafka_port}"
 }
