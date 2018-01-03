@@ -35,7 +35,7 @@ data "template_file" "kafka_broker_user_data" {
 
 resource "aws_launch_configuration" "broker-haystack-kafka" {
   name_prefix = "broker.${var.cluster_name}"
-  image_id = "${var.kafka_base_ami["${var.kafka_aws_region}"]}"
+  image_id = "${var.kafka_base_ami["${var.aws_region}"]}"
   instance_type = "${var.broker_instance_type}"
   key_name = "${var.aws_ssh_key}"
   iam_instance_profile = "${module.kafka-iam-roles.iam-instance-profile_arn}"
