@@ -44,8 +44,3 @@ resource "aws_iam_role_policy" "nodes-haystack-k8s-policy" {
   role = "${aws_iam_role.nodes-haystack-k8s-role.name}"
   policy = "${data.template_file.nodes-iam-role-policy-template.rendered}"
 }
-resource "aws_iam_role_policy" "nodes-haystack-k8s-policy" {
-  name = "nodes.haystack-k8s"
-  role = "${aws_iam_role.nodes-haystack-k8s-role.name}"
-  policy = "${file("${path.module}/data/aws_iam_role_policy_nodes.haystack-k8s_policy")}"
-}

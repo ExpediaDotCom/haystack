@@ -55,7 +55,7 @@ resource "aws_launch_configuration" "broker-haystack-kafka" {
   }
 }
 resource "aws_elb" "kafka-broker-elb" {
-  name = "haystack-k8s-api-elb"
+  name = "haystack-kafka-broker-elb"
 
   listener = {
     instance_port = "${local.kafka_port}"
