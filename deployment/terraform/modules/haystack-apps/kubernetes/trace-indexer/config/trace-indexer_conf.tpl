@@ -9,7 +9,7 @@ span.accumulate {
   poll.ms = 2000
 }
 
-kafka-service {
+kafka {
   close.stream.timeout.ms = 15000
 
   topic.consume = "proto-spans"
