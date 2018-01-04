@@ -1,5 +1,5 @@
-data "aws_route53_zone" "haystack_dns_zone" {
-  zone_id = "${var.aws_hosted_zone_id}"
+locals {
+  container_log_path = "/var/lib/docker/containers"
 }
 module "haystack-k8s" {
   source = "../../modules/k8s-cluster/aws"
@@ -35,6 +35,8 @@ module "k8s-addons" {
   haystack_domain_name = "${module.haystack-k8s.cluster_name}"
   add_monitoring_addons = true
   add_logging_addons = true
+  container_log_path = "${local.container_log_path}"
+  logging_es_nodes = "2"
 }
 
 module "haystack-infrastructure" {

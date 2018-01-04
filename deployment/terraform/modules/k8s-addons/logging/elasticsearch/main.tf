@@ -10,6 +10,7 @@ data "template_file" "elasticsearch_addon_config" {
   template = "${file("${path.module}/templates/es-logging-yaml.tpl")}"
   vars {
     elasticsearch-name = "${local.elasticsearch-name}"
+    minimum_masters = "${var.minimum_masters}"
   }
   count = "${local.count}"
 }

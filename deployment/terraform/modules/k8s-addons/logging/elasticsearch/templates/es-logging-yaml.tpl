@@ -11,7 +11,7 @@ metadata:
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   serviceName: ${elasticsearch-name}
-  replicas: 1
+  replicas: ${minimum_masters}
   selector:
     matchLabels:
       k8s-app: ${elasticsearch-name}
@@ -24,7 +24,7 @@ spec:
         kubernetes.io/cluster-service: "true"
     spec:
       containers:
-      - image: docker.elastic.co/elasticsearch/elasticsearch:5.6.5
+      - image: gcr.io/google-containers/elasticsearch:v5.6.4
         name: ${elasticsearch-name}
         resources:
           # need more cpu upon initialization, therefore burstable class
@@ -45,8 +45,8 @@ spec:
         env:
         - name: "ES_JAVA_OPTS"
           value: "-Xms256m -Xmx256m"
-        - name: "XPACK_SECURITY_ENABLED"
-          value: "false"
+        - name: "MINIMUM_MASTER_NODES"
+          value: "${minimum_masters}"
       initContainers:
       - image: alpine:3.6
         command: ["/sbin/sysctl", "-w", "vm.max_map_count=262144"]

@@ -8,8 +8,10 @@ locals {
 data "template_file" "fluentd_cluster_addon_config" {
   template = "${file("${path.module}/templates/fluentd-es-yaml.tpl")}"
   vars {
-    aws_elastic_search_url = "${var.elasticsearch_http_endpoint}"
+    elasticsearch_host = "${var.elasticsearch_host}"
+    elasticsearch_port = "${var.elasticsearch_port}"
     fluentd_image = "${var.k8s_fluentd_image}"
+    container_log_path = "${var.container_log_path}"
   }
   count = "${local.count}"
 }

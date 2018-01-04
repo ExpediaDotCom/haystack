@@ -5,3 +5,5 @@ variable "haystack_domain_name" {}
 variable "traefik_node_port" {}
 variable "add_logging_addons" {}
 variable "add_monitoring_addons" {}
+variable "container_log_path" {}
+variable "logging_es_nodes" {}
