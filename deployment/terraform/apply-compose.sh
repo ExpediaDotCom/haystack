@@ -14,7 +14,7 @@ function display_help() {
     echo "   -a, --action               defines the action for deploying haystack components. possible values: install|uninstall, default: install"
     echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all (use separate -u for each unit)"
     echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
-    echo "   -c, --cloud-provider       choose the cloud-provider settings for cluster. possible values: aws default: aws"
+    echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
     echo "   -t, --terraform-parameters parameters which need to be passed to terraform eg : secret-key, access-key"
 
     echo
@@ -25,9 +25,9 @@ function display_help() {
 while :
 do
     case "$1" in
-      -c | --cloud-provider)
+      -c | --cluster-type)
           if [ $# -ne 0 ]; then
-            CLOUD_PROVIDER="$2"
+            CLUSTER_TYPE="$2"
           fi
           shift 2
           ;;
@@ -77,8 +77,8 @@ function verifyArgs() {
    UNIT_NAMES[0]=all
  fi
 
- if [[ -z $CLOUD_PROVIDER ]]; then
-   CLOUD_PROVIDER=local
+ if [[ -z $CLUSTER_TYPE ]]; then
+   CLUSTER_TYPE=local
  fi
 }
 
@@ -131,20 +131,20 @@ function applyActionOnComponents() {
 
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
-   $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
-   $TERRAFORM destroy -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
+   $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
+   $TERRAFORM destroy -var-file=cluster/$CLUSTER_TYPE/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=cluster/$CLOUD_PROVIDER/backend.tfvars cluster/$CLOUD_PROVIDER
-    $TERRAFORM apply -var-file=cluster/$CLOUD_PROVIDER/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLOUD_PROVIDER
+    $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
+    $TERRAFORM apply -var-file=cluster/$CLUSTER_TYPE/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
 }
 
 
 function verifyK8sCluster() {
-  if [[ $CLOUD_PROVIDER == 'local' ]]; then
+  if [[ $CLUSTER_TYPE == 'local' ]]; then
     if command_exists minikube; then
         `minikube status > /tmp/minikube_status`
         if grep -q -i 'Running' /tmp/minikube_status; then

@@ -1,19 +1,26 @@
 locals {
   app_name = "trace-indexer"
-  config_file_path = "${path.module}/config/trace-indexer.conf"
+  config_file_path = "${path.module}/config/trace-indexer_conf.tpl"
   container_config_path = "/config/trace-indexer.conf"
   count = "${var.enabled?1:0}"
 }
 
+data "template_file" "haystck_trace_indexer_config_data" {
+  template = "${file("${local.config_file_path}")}"
 
-resource "kubernetes_config_map" "haystack-ui" {
+  vars {
+    kafka_endpoint = "${var.kafka_endpoint}"
+  }
+}
+
+resource "kubernetes_config_map" "haystack-trace-indexer" {
   metadata {
     name = "${local.app_name}"
     namespace = "${var.namespace}"
   }
 
   data {
-    "trace-indexer.conf" = "${file("${local.config_file_path}")}"
+    "trace-indexer.conf" = "${data.template_file.haystck_trace_indexer_config_data.rendered}"
   }
 }
 
@@ -44,7 +51,7 @@ resource "kubernetes_replication_controller" "haystack-rc" {
       volume {
         name = "config-volume"
         config_map {
-          name = "${kubernetes_config_map.haystack-ui.metadata.0.name}"
+          name = "${kubernetes_config_map.haystack-trace-indexer.metadata.0.name}"
         }
       }
     }

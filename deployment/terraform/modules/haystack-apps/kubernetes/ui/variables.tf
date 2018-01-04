@@ -13,3 +13,11 @@ variable "container_port" {
 }
 
 variable "k8s_cluster_name" {}
+
+variable "trace_reader_hostname" {}
+
+variable "trace_reader_service_port" {}
+
+variable "metrictank_hostname" {}
+
+variable "metrictank_port" {}

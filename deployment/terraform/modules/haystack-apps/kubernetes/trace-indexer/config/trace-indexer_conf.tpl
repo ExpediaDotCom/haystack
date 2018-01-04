@@ -31,7 +31,7 @@ kafka-service {
   # consumer specific configurations
   consumer {
     group.id = "haystack-proto-trace-indexer"
-    bootstrap.servers = "kafka-service:9092"
+    bootstrap.servers = "${kafka_endpoint}"
     auto.offset.reset = "latest"
 
     # disable auto commit as the app manages offset itself
@@ -40,7 +40,7 @@ kafka-service {
 
   # producer specific configurations
   producer {
-    bootstrap.servers = "kafka-service:9092"
+    bootstrap.servers = "${kafka_endpoint}"
   }
 }
 
