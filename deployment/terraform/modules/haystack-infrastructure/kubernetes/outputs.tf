@@ -25,3 +25,9 @@ output "graphite_hostname" {
 output "graphite_port" {
   value = "${local.graphite_port}"
 }
+output "metrictank_hostname" {
+  value = "${module.metrictank.metrictank_hostname}"
+}
+output "metrictank_port" {
+  value = "${module.metrictank.metrictank_port}"
+}

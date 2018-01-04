@@ -1,7 +1,18 @@
 locals {
   app_name = "haystack-ui"
-  config_file_path = "${path.module}/config/haystack-ui.json"
+  config_file_path = "${path.module}/config/haystack-ui_json.tpl"
   container_config_path = "/config/haystack-ui.json"
+}
+
+data "template_file" "haystck_ui_config_data" {
+  template = "${file("${local.config_file_path}")}"
+
+  vars {
+    trace_reader_hostname = "${var.trace_reader_hostname}"
+    trace_reader_service_port = "${var.trace_reader_service_port}"
+    metrictank_hostname = "${var.metrictank_hostname}"
+    metrictank_port = "${var.metrictank_port}"
+  }
 }
 
 resource "kubernetes_config_map" "haystack-ui" {
@@ -11,7 +22,7 @@ resource "kubernetes_config_map" "haystack-ui" {
   }
 
   data {
-    "haystack-ui.json" = "${file("${local.config_file_path}")}"
+    "haystack-ui.json" = "${data.template_file.haystck_ui_config_data.rendered}"
   }
 }
 

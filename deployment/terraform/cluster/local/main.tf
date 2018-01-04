@@ -27,6 +27,8 @@ module "haystack-apps" {
   cassandra_hostname = "${module.haystack-infrastructure.cassandra_hostname}"
   kafka_hostname = "${module.haystack-infrastructure.kafka_hostname}"
   cassandra_port = "${module.haystack-infrastructure.kafka_port}"
+  metrictank_hostname = "${module.haystack-infrastructure.metrictank_hostname}"
+  metrictank_port = "${module.haystack-infrastructure.metrictank_port}"
   elasticsearch_hostname = "${module.haystack-infrastructure.kafka_port}"
   graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"

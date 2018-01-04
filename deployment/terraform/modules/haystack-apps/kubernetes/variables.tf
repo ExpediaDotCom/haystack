@@ -7,6 +7,8 @@ variable "cassandra_port" {}
 variable "graphite_hostname" {}
 variable "k8s_cluster_name" {}
 variable "k8s_app_namespace" {}
+variable "metrictank_hostname" {}
+variable "metrictank_port" {}
 
 variable "trends_version" {
   default = "df9b59950fb44a8257db1482cc2ae76a3688d12b"

@@ -55,4 +55,8 @@ module "ui" {
   replicas = "1"
   namespace = "${var.k8s_app_namespace}"
   k8s_cluster_name = "${var.k8s_cluster_name}"
+  trace_reader_hostname = "${module.trace-reader.trace_reader_hostname}"
+  trace_reader_service_port = "${module.trace-reader.trace_reader_service_port}"
+  metrictank_hostname = "${var.metrictank_hostname}"
+  metrictank_port = "${var.metrictank_port}"
 }
