@@ -28,6 +28,8 @@ module "logging-addongs" {
   k8s_cluster_name = "${var.k8s_cluster_name}"
   k8s_app_namespace = "${kubernetes_namespace.haystack-app-namespace.metadata.0.name}"
   enabled = "${var.add_logging_addons}"
+  container_log_path = "${var.container_log_path}"
+  es_nodes = "${var.logging_es_nodes}"
 }
 
 module "traefik-addon" {

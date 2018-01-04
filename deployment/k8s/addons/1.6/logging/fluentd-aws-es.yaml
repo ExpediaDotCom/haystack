@@ -60,10 +60,6 @@ spec:
           value: {{ (datasource "config").awsRegion }}
         - name: AWS_ELASTICSEARCH_URL
           value: {{ (datasource "config").awsElasticSearchUrl }}
-        - name: AWS_ACCESS_KEY_ID
-          value: {{ (datasource "config").awsAccessKey }}
-        - name: AWS_SECRET_ACCESS_KEY
-          value: {{ (datasource "config").awsSecretKey }}
         image: {{ (datasource "config").image }}
         imagePullPolicy: IfNotPresent
         name: fluentd-elasticsearch

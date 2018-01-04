@@ -1,0 +1,1 @@
+This is a marker document. The rendered kubectl yaml file is generated in this directory
