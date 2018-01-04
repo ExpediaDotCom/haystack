@@ -18,6 +18,7 @@ resource "kubernetes_service" "haystack-service" {
       target_port = "${var.container_port}"
     }
   }
+  count = "${local.count}"
 }
 
 resource "kubernetes_replication_controller" "haystack-trace-reader-rc" {
