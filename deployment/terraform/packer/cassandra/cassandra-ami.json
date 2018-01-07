@@ -38,6 +38,8 @@
         "sudo yum install -y wget",
         "sudo wget -O /var/jmxtrans/jmxtrans.jar https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-1.2.6/jmxtrans-agent-1.2.6.jar",
         "sudo chmod a+w /var/jmxtrans",
+        "sudo chmod a+w /etc/fstab",
+        "sudo sed -i '/ swap / s/^/#/' /etc/fstab",
         "sudo chmod a+w /etc/sysctl.conf",
         "sudo chmod a+w /etc/security/limits.conf",
         "sudo chmod a+w /etc/yum.repos.d/"
