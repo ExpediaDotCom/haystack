@@ -773,7 +773,7 @@ snapshot_before_compaction: false
 # or dropping of column families. The STRONGLY advised default of true 
 # should be used to provide data safety. If you set this flag to false, you will
 # lose data on truncation or drop.
-auto_snapshot: true
+auto_snapshot: false
 
 # Granularity of the collation index of rows within a partition.
 # Increase if your rows are large, or if you have a very large
