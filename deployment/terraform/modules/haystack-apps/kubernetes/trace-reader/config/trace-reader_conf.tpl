@@ -43,7 +43,7 @@ cassandra {
 }
 
 elasticsearch {
-  endpoint = "https://${elasticsearch_endpoint}"
+  endpoint = "http://${elasticsearch_endpoint}"
   conn.timeout.ms = 10000
   read.timeout.ms = 5000
 
@@ -76,7 +76,7 @@ reload {
     index.fields.config = "whitelist-index-fields"
   }
   config {
-    endpoint = "https://${elasticsearch_endpoint}"
+    endpoint = "http://${elasticsearch_endpoint}"
     database.name = "reload-configs"
   }
   startup.load = true
