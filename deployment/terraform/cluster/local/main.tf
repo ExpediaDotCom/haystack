@@ -22,6 +22,7 @@ module "haystack-infrastructure" {
 module "haystack-apps" {
   source = "../../modules/haystack-apps/kubernetes"
   kafka_port = "${module.haystack-infrastructure.kafka_port}"
+  elasticsearch_hostname = "${module.haystack-infrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${module.haystack-infrastructure.elasticsearch_port}"
   k8s_cluster_name = "${var.k8s_minikube_cluster_name}"
   cassandra_hostname = "${module.haystack-infrastructure.cassandra_hostname}"
@@ -29,7 +30,6 @@ module "haystack-apps" {
   cassandra_port = "${module.haystack-infrastructure.kafka_port}"
   metrictank_hostname = "${module.haystack-infrastructure.metrictank_hostname}"
   metrictank_port = "${module.haystack-infrastructure.metrictank_port}"
-  elasticsearch_hostname = "${module.haystack-infrastructure.kafka_port}"
   graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"
   pipes_enabled = false

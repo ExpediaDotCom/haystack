@@ -10,6 +10,8 @@ data "template_file" "haystck_trace_indexer_config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    elasticsearch_endpoint = "${var.elasticsearch_endpoint}"
+    cassandra_hostname = "${var.cassandra_hostname}"
   }
 }
 
