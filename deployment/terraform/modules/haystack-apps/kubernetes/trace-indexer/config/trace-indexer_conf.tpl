@@ -47,7 +47,7 @@ kafka {
 
 cassandra {
   # multiple endpoints can be provided as comma separated
-  endpoints: "cassandra"
+  endpoints: "${cassandra_hostname}"
 
   # defines the max inflight writes for cassandra
   max.inflight.requests = 100
@@ -86,7 +86,7 @@ cassandra {
 }
 
 elasticsearch {
-  endpoint = "http://elasticsearch:9200"
+  endpoint = "http://${elasticsearch_endpoint}"
 
   # defines settings for bulk operation like max inflight bulks, number of documents and the total size in a single bulk
   bulk.max {
@@ -115,7 +115,7 @@ reload {
     index.fields.config = "indexing-fields"
   }
   config {
-    endpoint = "http://elasticsearch:9200"
+    endpoint = "http://${elasticsearch_endpoint}"
     database.name = "reload-configs"
   }
   startup.load = true

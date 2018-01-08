@@ -5,6 +5,8 @@ module "trace-indexer" {
   replicas = "${var.traces_indexer_instances}"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
+  cassandra_hostname = "${var.cassandra_hostname}"
   enabled = "${var.traces_enabled}"
 }
 module "trace-reader" {
