@@ -32,6 +32,7 @@ module "k8s_aws_ebs" {
 module "k8s_security_groups" {
   source = "security-groups"
   k8s_vpc_id = "${var.k8s_aws_vpc_id}"
+  reverse_proxy_port = "${var.reverse_proxy_port}"
 }
 module "k8s_iam_roles" {
   source = "iam-roles"
