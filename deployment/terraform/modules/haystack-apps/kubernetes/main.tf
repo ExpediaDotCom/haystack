@@ -14,6 +14,8 @@ module "trace-reader" {
   image = "expediadotcom/haystack-trace-reader:${var.traces_version}"
   replicas = "${var.traces_reader_instances}"
   namespace = "${var.k8s_app_namespace}"
+  elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
+  cassandra_hostname = "${var.cassandra_hostname}"
   enabled = "${var.traces_enabled}"
 }
 
