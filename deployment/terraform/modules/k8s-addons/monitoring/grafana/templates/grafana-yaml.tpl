@@ -51,7 +51,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    kubernetes.io/cluster-service: 'true'
+    kubernetes.io/cluster-service: "true"
     kubernetes.io/name: monitoring-grafana
   name: monitoring-grafana
   namespace: kube-system

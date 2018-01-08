@@ -54,7 +54,7 @@ data:
     # 2016/02/04 06:52:38 filePurge: successfully removed file /var/etcd/data/member/wal/00000000000006d0-00000000010a23d1.wal
     <source>
       type tail
-      # Not parsing this, because it doesn't have anything particularly useful to
+      # Not parsing this, because it doesnt have anything particularly useful to
       # parse out of it (like severities).
       format none
       path /var/log/etcd.log
@@ -104,7 +104,7 @@ data:
       tag kube-apiserver
     </source>
     # Example:
-    # I0204 06:55:31.872680       5 servicecontroller.go:277] LB already exists and doesn't need update for service kube-system/kube-ui
+    # I0204 06:55:31.872680       5 servicecontroller.go:277] LB already exists and doesnt need update for service kube-system/kube-ui
     <source>
       type tail
       format multiline

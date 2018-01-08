@@ -137,7 +137,7 @@ kind: Service
 metadata:
   labels:
     task: monitoring
-    kubernetes.io/cluster-service: 'true'
+    kubernetes.io/cluster-service: "true"
     kubernetes.io/name: monitoring-influxdb
   name: monitoring-influxdb
   namespace: kube-system
@@ -153,7 +153,7 @@ kind: Service
 metadata:
   labels:
     task: monitoring
-    kubernetes.io/cluster-service: 'true'
+    kubernetes.io/cluster-service: "true"
     kubernetes.io/name: monitoring-influxdb
   name: monitoring-influxdb-graphite
   namespace: kube-system
