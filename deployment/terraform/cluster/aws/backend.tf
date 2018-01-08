@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "haystack-deployment-tf"
-    key = "terraform/us-west-2"
+    key = "terraform/state"
     region = "us-west-2"
   }
 }
