@@ -52,9 +52,12 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "KAFKA_CREATE_TOPICS"
           value = "${local.topics}"
         }
+        port {
+          container_port = 9092
+          host_port = 9092
+        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
-
     }
 
     "selector" {

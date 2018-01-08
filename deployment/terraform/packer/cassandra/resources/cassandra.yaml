@@ -773,7 +773,7 @@ snapshot_before_compaction: false
 # or dropping of column families. The STRONGLY advised default of true 
 # should be used to provide data safety. If you set this flag to false, you will
 # lose data on truncation or drop.
-auto_snapshot: true
+auto_snapshot: false
 
 # Granularity of the collation index of rows within a partition.
 # Increase if your rows are large, or if you have a very large
@@ -948,7 +948,7 @@ cross_node_timeout: false
 #
 # You can use a custom Snitch by setting this to the full class name
 # of the snitch, which will be assumed to be on your classpath.
-endpoint_snitch: SimpleSnitch
+endpoint_snitch: Ec2Snitch
 
 # controls how often to perform the more expensive part of host score
 # calculation
