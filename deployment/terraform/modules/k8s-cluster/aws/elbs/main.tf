@@ -36,6 +36,7 @@ resource "aws_route53_record" "k8s-api-elb-route53" {
   type = "CNAME"
   records = [
     "${aws_elb.k8s-nodes-elb.dns_name}"]
+  ttl = 300
   zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
 }
 
@@ -77,6 +78,6 @@ resource "aws_route53_record" "k8s-nodes-elb-route53" {
   type = "CNAME"
   records = [
     "${aws_elb.k8s-nodes-elb.dns_name}"]
-
+  ttl = 300
   zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
 }
