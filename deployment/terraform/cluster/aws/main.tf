@@ -18,13 +18,6 @@ module "haystack-k8s" {
   reverse_proxy_port = "${var.reverse_proxy_port}"
 }
 
-//Halting the terraform script to validate that the k8s cluster creation is complete,
-//TODO: have to find a better way to do this
-resource "null_resource" "terraform-wait" {
-  provisioner "local-exec" {
-    command = "sleep 120"
-  }
-}
 
 module "k8s-addons" {
   source = "../../modules/k8s-addons"

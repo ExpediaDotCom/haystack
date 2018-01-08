@@ -14,7 +14,7 @@ module "k8s-addons" {
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "1"
 }
-/*
+
 module "haystack-infrastructure" {
   source = "../../modules/haystack-infrastructure/kubernetes"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
@@ -34,4 +34,3 @@ module "haystack-apps" {
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"
   pipes_enabled = false
 }
-*/

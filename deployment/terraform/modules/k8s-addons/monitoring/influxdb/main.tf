@@ -1,5 +1,4 @@
 locals {
-  rendered_influxdb_addon_path = "${path.module}/manifests/influxdb-cluster-addon.yaml"
   count = "${var.enabled?1:0}"
 
 }
@@ -20,14 +19,10 @@ resource "null_resource" "k8s_influxdb_addons" {
     template = "${data.template_file.influxdb_cluster_addon_config.rendered}"
   }
   provisioner "local-exec" {
-    command = "cat > ${local.rendered_influxdb_addon_path} <<EOL\n${data.template_file.influxdb_cluster_addon_config.rendered}EOL"
+    command = "echo '${data.template_file.influxdb_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.k8s_cluster_name}"
   }
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} create -f ${local.rendered_influxdb_addon_path} --context ${var.k8s_cluster_name}"
-  }
-
-  provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} delete -f ${local.rendered_influxdb_addon_path} --context ${var.k8s_cluster_name}"
+    command = "echo '${data.template_file.influxdb_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.k8s_cluster_name}"
     when = "destroy"
   }
 

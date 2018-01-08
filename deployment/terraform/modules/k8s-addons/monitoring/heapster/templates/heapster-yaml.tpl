@@ -20,8 +20,8 @@ spec:
         k8s-app: heapster
         version: v1.6.0
       annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ''
-        scheduler.alpha.kubernetes.io/tolerations: '[{"key":"CriticalAddonsOnly", "operator":"Exists"}]'
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+        scheduler.alpha.kubernetes.io/tolerations: "[{\"key\":\"CriticalAddonsOnly\", \"operator\":\"Exists\"}]"
     spec:
       serviceAccountName: heapster
       containers:

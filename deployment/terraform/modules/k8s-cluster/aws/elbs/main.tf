@@ -15,7 +15,7 @@ resource "aws_elb" "k8s-api-elb" {
   internal = false
 
   health_check = {
-    target = "SSL:443"
+    target = "TCP:443"
     healthy_threshold = 2
     unhealthy_threshold = 2
     interval = 10
@@ -61,7 +61,7 @@ resource "aws_elb" "k8s-nodes-elb" {
   internal = false
 
   health_check = {
-    target = "SSL:22"
+    target = "TCP:${var.reverse_proxy_port}"
     healthy_threshold = 2
     unhealthy_threshold = 2
     interval = 10

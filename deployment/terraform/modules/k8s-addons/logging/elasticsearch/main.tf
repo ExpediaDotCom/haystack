@@ -1,5 +1,4 @@
 locals {
-  rendered_elasticsearch_addon_path = "${path.module}/manifests/elasticsearch-addon.yaml"
   elasticsearch-name = "elasticsearch-logging"
   elasticsearch-port = 9200
   count = "${var.enabled?1:0}"
@@ -19,13 +18,11 @@ resource "null_resource" "elasticsearch_addons" {
     template = "${data.template_file.elasticsearch_addon_config.rendered}"
   }
   provisioner "local-exec" {
-    command = "cat > ${local.rendered_elasticsearch_addon_path} <<EOL\n${data.template_file.elasticsearch_addon_config.rendered}EOL"
+    command = "echo '${data.template_file.elasticsearch_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.k8s_cluster_name}"
   }
+
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} create -f ${local.rendered_elasticsearch_addon_path}"
-  }
-  provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} delete -f ${local.rendered_elasticsearch_addon_path}"
+    command = "echo '${data.template_file.elasticsearch_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.k8s_cluster_name}"
     when = "destroy"
   }
   count = "${local.count}"
