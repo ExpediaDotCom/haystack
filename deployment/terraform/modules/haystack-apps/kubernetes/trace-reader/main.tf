@@ -39,7 +39,7 @@ resource "kubernetes_config_map" "haystack-trace-reader" {
   }
 
   data {
-    "trace-indexer.conf" = "${data.template_file.haystck_trace_reader_config_data.rendered}"
+    "trace-reader.conf" = "${data.template_file.haystck_trace_reader_config_data.rendered}"
   }
 }
 
