@@ -73,12 +73,12 @@ cassandra {
   }
 
   consistency.level = "one"
-  ttl.sec = 86400
+  ttl.sec = 259200
 
   keyspace: {
     # auto creates the keyspace and table name in cassandra(if absent)
     # if schema field is empty or not present, then no operation is performed
-    auto.create.schema = "CREATE KEYSPACE IF NOT EXISTS haystack WITH REPLICATION = { 'class': 'SimpleStrategy', 'replication_factor' : 1} AND durable_writes = false;\n\nuse haystack;\n\nCREATE TABLE traces (\nid varchar,\nts timestamp,\nspans blob,\nPRIMARY KEY ((id), ts)\n) WITH CLUSTERING ORDER BY (ts ASC);\n\nALTER TABLE traces WITH compaction = { 'class' :  'DateTieredCompactionStrategy'  };"
+    auto.create.schema = "CREATE KEYSPACE IF NOT EXISTS haystack WITH REPLICATION = { 'class': 'NetworkTopologyStrategy', 'us-west-2' : 2 } AND durable_writes = false; CREATE TABLE IF NOT EXISTS haystack.traces (id varchar, ts timestamp, spans blob, PRIMARY KEY ((id), ts)) WITH CLUSTERING ORDER BY (ts ASC) AND compaction = { 'class' :  'DateTieredCompactionStrategy', 'max_sstable_age_days': '3' } AND gc_grace_seconds = 86400;"
 
     name: "haystack"
     table.name: "traces"
