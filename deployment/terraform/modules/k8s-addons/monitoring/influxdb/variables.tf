@@ -1,5 +1,6 @@
 variable "kubectl_executable_name" {}
 variable "enabled" {}
+variable "k8s_cluster_name" {}
 
 variable "k8s_influxdb_storage" {
   default = "100Mi"

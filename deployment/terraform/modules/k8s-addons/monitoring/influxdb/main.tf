@@ -3,8 +3,6 @@ locals {
   count = "${var.enabled?1:0}"
 
 }
-
-
 //creating the influxdb cluster addon for pushing k8s logs to elastic search
 
 data "template_file" "influxdb_cluster_addon_config" {
@@ -25,12 +23,13 @@ resource "null_resource" "k8s_influxdb_addons" {
     command = "cat > ${local.rendered_influxdb_addon_path} <<EOL\n${data.template_file.influxdb_cluster_addon_config.rendered}EOL"
   }
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} create -f ${local.rendered_influxdb_addon_path}"
+    command = "${var.kubectl_executable_name} create -f ${local.rendered_influxdb_addon_path} --context ${var.k8s_cluster_name}"
   }
 
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} delete -f ${local.rendered_influxdb_addon_path}"
+    command = "${var.kubectl_executable_name} delete -f ${local.rendered_influxdb_addon_path} --context ${var.k8s_cluster_name}"
     when = "destroy"
   }
+
   count = "${local.count}"
 }

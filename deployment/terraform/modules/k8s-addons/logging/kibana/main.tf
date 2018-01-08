@@ -21,10 +21,10 @@ resource "null_resource" "kibana_addons" {
     command = "cat > ${local.rendered_kibana_addon_path} <<EOL\n${data.template_file.kibana_addon_config.rendered}EOL"
   }
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} create -f ${local.rendered_kibana_addon_path}"
+    command = "${var.kubectl_executable_name} create -f ${local.rendered_kibana_addon_path} --context ${var.k8s_cluster_name}"
   }
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} delete -f ${local.rendered_kibana_addon_path}"
+    command = "${var.kubectl_executable_name} delete -f ${local.rendered_kibana_addon_path} --context ${var.k8s_cluster_name}"
     when = "destroy"
   }
   count = "${local.count}"
