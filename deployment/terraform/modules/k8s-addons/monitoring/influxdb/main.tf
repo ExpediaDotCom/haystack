@@ -8,8 +8,8 @@ data "template_file" "influxdb_cluster_addon_config" {
   template = "${file("${path.module}/templates/influxdb-yaml.tpl")}"
   vars {
     influxdb_image = "${var.k8s_influxdb_image}"
-    influxdb_storage_class = "${var.k8s_influxdb_storage_class}"
-    influxdb_storage = "${var.k8s_influxdb_storage}"
+    influxdb_storage_class = "${var.storage_class}"
+    influxdb_storage = "${var.storage_volume}"
   }
   count = "${local.count}"
 }

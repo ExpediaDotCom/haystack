@@ -15,7 +15,7 @@ resource "aws_elb" "k8s-api-elb" {
   internal = false
 
   health_check = {
-    target = "TCP:443"
+    target = "SSL:443"
     healthy_threshold = 2
     unhealthy_threshold = 2
     interval = 10
@@ -35,7 +35,7 @@ resource "aws_route53_record" "k8s-api-elb-route53" {
   name = "api.${var.k8s_cluster_name}"
   type = "CNAME"
   records = [
-    "${aws_elb.k8s-nodes-elb.dns_name}"]
+    "${aws_elb.k8s-api-elb.dns_name}"]
   ttl = 300
   zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
 }
@@ -80,4 +80,31 @@ resource "aws_route53_record" "k8s-nodes-elb-route53" {
     "${aws_elb.k8s-nodes-elb.dns_name}"]
   ttl = 300
   zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
+  depends_on = [
+    "aws_autoscaling_attachment.master-1-masters-haystack-k8s",
+    "aws_autoscaling_attachment.master-2-masters-haystack-k8s",
+    "aws_autoscaling_attachment.master-3-masters-haystack-k8s",
+    "aws_autoscaling_attachment.nodes-haystack-k8s"]
+}
+
+
+resource "aws_autoscaling_attachment" "master-1-masters-haystack-k8s" {
+  elb = "${aws_elb.k8s-api-elb.id}"
+  autoscaling_group_name = "${var.master-1_asg_id}"
+}
+
+resource "aws_autoscaling_attachment" "master-2-masters-haystack-k8s" {
+  elb = "${aws_elb.k8s-api-elb.id}"
+  autoscaling_group_name = "${var.master-2_asg_id}"
+}
+
+resource "aws_autoscaling_attachment" "master-3-masters-haystack-k8s" {
+  elb = "${aws_elb.k8s-api-elb.id}"
+  autoscaling_group_name = "${var.master-3_asg_id}"
+}
+
+
+resource "aws_autoscaling_attachment" "nodes-haystack-k8s" {
+  elb = "${aws_elb.k8s-nodes-elb.id}"
+  autoscaling_group_name = "${var.nodes_asg_id}"
 }

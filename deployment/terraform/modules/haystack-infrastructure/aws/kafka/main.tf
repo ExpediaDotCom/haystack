@@ -95,7 +95,7 @@ resource "aws_autoscaling_attachment" "broker-haystack-kafka" {
 resource "aws_route53_record" "haystack-kafka-cname" {
   zone_id = "${var.aws_hosted_zone_id}"
   name = "${var.cluster_name}"
-  type = "A"
+  type = "CNAME"
   ttl = "300"
   records = [
     "${aws_elb.kafka-broker-elb.dns_name}"]

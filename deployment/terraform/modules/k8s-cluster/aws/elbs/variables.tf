@@ -8,3 +8,7 @@ variable "k8s_nodes_api_security_groups" {
   type = "list"
 }
 variable "reverse_proxy_port" {}
+variable "master-1_asg_id" {}
+variable "master-2_asg_id" {}
+variable "master-3_asg_id" {}
+variable "nodes_asg_id" {}

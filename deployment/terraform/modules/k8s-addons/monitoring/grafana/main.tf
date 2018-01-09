@@ -7,8 +7,8 @@ data "template_file" "grafana_cluster_addon_config" {
   template = "${file("${path.module}/templates/grafana-yaml.tpl")}"
   vars {
     grafana_image = "${var.k8s_grafana_image}"
-    grafana_storage_class = "${var.k8s_grafana_storage_class}"
-    grafana_storage = "${var.k8s_grafana_storage}"
+    grafana_storage_class = "${var.storage_class}"
+    grafana_storage = "${var.storage_volume}"
     grafana_root_path = "${var.k8s_grafana_root_path}"
 
   }

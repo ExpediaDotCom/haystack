@@ -10,6 +10,8 @@ data "template_file" "elasticsearch_addon_config" {
   vars {
     elasticsearch-name = "${local.elasticsearch-name}"
     minimum_masters = "${var.minimum_masters}"
+    storage_class = "${var.storage_class}"
+    storage_volume = "${var.storage_volume}"
   }
   count = "${local.count}"
 }
