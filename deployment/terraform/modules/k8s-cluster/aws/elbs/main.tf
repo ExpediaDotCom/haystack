@@ -33,14 +33,10 @@ resource "aws_elb" "k8s-api-elb" {
 
 resource "aws_route53_record" "k8s-api-elb-route53" {
   name = "api.${var.k8s_cluster_name}"
-  type = "A"
-
-  alias = {
-    name = "${aws_elb.k8s-api-elb.dns_name}"
-    zone_id = "${aws_elb.k8s-api-elb.zone_id}"
-    evaluate_target_health = false
-  }
-
+  type = "CNAME"
+  records = [
+    "${aws_elb.k8s-nodes-elb.dns_name}"]
+  ttl = 300
   zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
 }
 
@@ -79,13 +75,9 @@ resource "aws_elb" "k8s-nodes-elb" {
 
 resource "aws_route53_record" "k8s-nodes-elb-route53" {
   name = "${var.k8s_cluster_name}"
-  type = "A"
-
-  alias = {
-    name = "${aws_elb.k8s-nodes-elb.dns_name}"
-    zone_id = "${aws_elb.k8s-nodes-elb.zone_id}"
-    evaluate_target_health = false
-  }
-
+  type = "CNAME"
+  records = [
+    "${aws_elb.k8s-nodes-elb.dns_name}"]
+  ttl = 300
   zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
 }

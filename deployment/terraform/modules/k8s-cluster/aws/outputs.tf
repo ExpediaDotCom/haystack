@@ -1,5 +1,5 @@
 output "cluster_name" {
-  value = "${local.k8s_cluster_name}"
+  value = "${module.k8s_elbs.nodes-elb-dns_name}"
 }
 
 output "master_security_group_ids" {
