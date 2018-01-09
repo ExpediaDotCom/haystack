@@ -48,6 +48,14 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           mount_path = "/config"
           name = "config-volume"
         }
+        liveness_probe {
+          initial_delay_seconds = 15
+          failure_threshold = 2
+          period_seconds = 5
+          exec {
+            command = ["grep","true","/app/isHealthy"]
+          }
+        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
       volume {

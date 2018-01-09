@@ -9,8 +9,8 @@ module "k8s-addons" {
   traefik_node_port = "${var.reverse_proxy_port}"
   k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${var.haystack_domain_name}"
-  add_logging_addons = true
-  add_monitoring_addons = true
+  add_logging_addons = false
+  add_monitoring_addons = false
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "1"
 }
