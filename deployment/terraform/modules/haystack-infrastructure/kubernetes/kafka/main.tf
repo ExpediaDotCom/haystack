@@ -3,7 +3,7 @@ locals {
   service_port = 9092
   container_port = 9092
   image = "wurstmeister/kafka:0.10.2.1"
-  topics = "proto-spans:1:1,metricpoints:1:1,mdm:1:1"
+  topics = "proto-spans:1:1,metricpoints:1:1,mdm:1:1,span-buffer:1:1"
   host_name = "192.168.99.100"
 }
 resource "kubernetes_service" "haystack-service" {
