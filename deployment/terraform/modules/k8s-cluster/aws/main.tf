@@ -24,22 +24,17 @@ module "kops" {
   k8s_aws_utilities_subnet = "${var.k8s_aws_utility_subnet_ids}"
 }
 
-module "k8s_aws_ebs" {
-  source = "ebs"
-  k8s_cluster_name = "${local.k8s_cluster_name}"
-}
-
 module "k8s_security_groups" {
   source = "security-groups"
   k8s_vpc_id = "${var.k8s_aws_vpc_id}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
 }
+
 module "k8s_iam_roles" {
   source = "iam-roles"
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_s3_bucket_name = "${var.k8s_s3_bucket_name}"
 }
-
 
 module "k8s_elbs" {
   source = "elbs"
@@ -49,29 +44,11 @@ module "k8s_elbs" {
   k8s_cluster_name = "${local.k8s_cluster_name}"
   k8s_nodes_api_security_groups = "${module.k8s_security_groups.nodes-api-elb-security_group_ids}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
+  "master-1_asg_id" = "${aws_autoscaling_group.master-1-masters-haystack-k8s.id}"
+  "master-2_asg_id" = "${aws_autoscaling_group.master-2-masters-haystack-k8s.id}"
+  "master-3_asg_id" = "${aws_autoscaling_group.master-3-masters-haystack-k8s.id}"
+  nodes_asg_id = "${aws_autoscaling_group.nodes-haystack-k8s.id}"
 }
-
-resource "aws_autoscaling_attachment" "master-1-masters-haystack-k8s" {
-  elb = "${module.k8s_elbs.api-elb-id}"
-  autoscaling_group_name = "${aws_autoscaling_group.master-1-masters-haystack-k8s.id}"
-}
-
-resource "aws_autoscaling_attachment" "master-2-masters-haystack-k8s" {
-  elb = "${module.k8s_elbs.api-elb-id}"
-  autoscaling_group_name = "${aws_autoscaling_group.master-2-masters-haystack-k8s.id}"
-}
-
-resource "aws_autoscaling_attachment" "master-3-masters-haystack-k8s" {
-  elb = "${module.k8s_elbs.api-elb-id}"
-  autoscaling_group_name = "${aws_autoscaling_group.master-3-masters-haystack-k8s.id}"
-}
-
-
-resource "aws_autoscaling_attachment" "nodes-haystack-k8s" {
-  elb = "${module.k8s_elbs.nodes-elb-id}"
-  autoscaling_group_name = "${aws_autoscaling_group.nodes-haystack-k8s.id}"
-}
-
 
 resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
   name = "master-1.masters.haystack-k8s"
@@ -104,6 +81,13 @@ resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
     value = "1"
     propagate_at_launch = true
   }
+  depends_on = [
+    "aws_ebs_volume.1-etcd-events",
+    "aws_ebs_volume.1-etcd-main",
+    "aws_ebs_volume.2-etcd-events",
+    "aws_ebs_volume.2-etcd-main",
+    "aws_ebs_volume.3-etcd-events",
+    "aws_ebs_volume.3-etcd-main"]
 }
 
 resource "aws_autoscaling_group" "master-2-masters-haystack-k8s" {
@@ -137,6 +121,13 @@ resource "aws_autoscaling_group" "master-2-masters-haystack-k8s" {
     value = "1"
     propagate_at_launch = true
   }
+  depends_on = [
+    "aws_ebs_volume.1-etcd-events",
+    "aws_ebs_volume.1-etcd-main",
+    "aws_ebs_volume.2-etcd-events",
+    "aws_ebs_volume.2-etcd-main",
+    "aws_ebs_volume.3-etcd-events",
+    "aws_ebs_volume.3-etcd-main"]
 }
 
 resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
@@ -170,6 +161,13 @@ resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
     value = "1"
     propagate_at_launch = true
   }
+  depends_on = [
+    "aws_ebs_volume.1-etcd-events",
+    "aws_ebs_volume.1-etcd-main",
+    "aws_ebs_volume.2-etcd-events",
+    "aws_ebs_volume.2-etcd-main",
+    "aws_ebs_volume.3-etcd-events",
+    "aws_ebs_volume.3-etcd-main"]
 }
 
 resource "aws_autoscaling_group" "nodes-haystack-k8s" {
@@ -278,6 +276,7 @@ data "template_file" "master-3-user-data" {
     instance_group_name = "${local.k8s_master_3_instance_group_name}"
   }
 }
+
 resource "aws_launch_configuration" "master-3-masters-haystack-k8s" {
   name_prefix = "master-3.masters.haystack-k8s"
   image_id = "${var.k8s_master_ami}"
@@ -307,6 +306,7 @@ data "template_file" "nodes-user-data" {
     instance_group_name = "${local.k8s_nodes_instance_group_name}"
   }
 }
+
 resource "aws_launch_configuration" "nodes-haystack-k8s" {
   name_prefix = "nodes.haystack-k8s"
   image_id = "${var.k8s_node_ami}"
@@ -326,5 +326,89 @@ resource "aws_launch_configuration" "nodes-haystack-k8s" {
 
   lifecycle = {
     create_before_destroy = true
+  }
+}
+
+resource "aws_ebs_volume" "1-etcd-events" {
+  availability_zone = "us-west-2c"
+  size = 20
+  type = "gp2"
+  encrypted = false
+
+  tags = {
+    KubernetesCluster = "${local.k8s_cluster_name}"
+    Name = "1.etcd-events.${local.k8s_cluster_name}"
+    "k8s.io/etcd/events" = "1/1,2,3"
+    "k8s.io/role/master" = "1"
+  }
+}
+
+resource "aws_ebs_volume" "1-etcd-main" {
+  availability_zone = "us-west-2c"
+  size = 20
+  type = "gp2"
+  encrypted = false
+
+  tags = {
+    KubernetesCluster = "${local.k8s_cluster_name}"
+    Name = "1.etcd-main.${local.k8s_cluster_name}"
+    "k8s.io/etcd/main" = "1/1,2,3"
+    "k8s.io/role/master" = "1"
+  }
+}
+
+resource "aws_ebs_volume" "2-etcd-events" {
+  availability_zone = "us-west-2c"
+  size = 20
+  type = "gp2"
+  encrypted = false
+
+  tags = {
+    KubernetesCluster = "${local.k8s_cluster_name}"
+    Name = "2.etcd-events.${local.k8s_cluster_name}"
+    "k8s.io/etcd/events" = "2/1,2,3"
+    "k8s.io/role/master" = "1"
+  }
+}
+
+resource "aws_ebs_volume" "2-etcd-main" {
+  availability_zone = "us-west-2c"
+  size = 20
+  type = "gp2"
+  encrypted = false
+
+  tags = {
+    KubernetesCluster = "${local.k8s_cluster_name}"
+    Name = "2.etcd-main.${local.k8s_cluster_name}"
+    "k8s.io/etcd/main" = "2/1,2,3"
+    "k8s.io/role/master" = "1"
+  }
+}
+
+resource "aws_ebs_volume" "3-etcd-events" {
+  availability_zone = "us-west-2c"
+  size = 20
+  type = "gp2"
+  encrypted = false
+
+  tags = {
+    KubernetesCluster = "${local.k8s_cluster_name}"
+    Name = "3.etcd-events.${local.k8s_cluster_name}"
+    "k8s.io/etcd/events" = "3/1,2,3"
+    "k8s.io/role/master" = "1"
+  }
+}
+
+resource "aws_ebs_volume" "3-etcd-main" {
+  availability_zone = "us-west-2c"
+  size = 20
+  type = "gp2"
+  encrypted = false
+
+  tags = {
+    KubernetesCluster = "${local.k8s_cluster_name}"
+    Name = "3.etcd-main.${local.k8s_cluster_name}"
+    "k8s.io/etcd/main" = "3/1,2,3"
+    "k8s.io/role/master" = "1"
   }
 }

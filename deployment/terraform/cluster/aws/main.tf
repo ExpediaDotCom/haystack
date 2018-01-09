@@ -30,29 +30,17 @@ module "k8s-addons" {
   add_logging_addons = true
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "2"
+  k8s_storage_class = "default"
+  grafana_storage_volume = "2Gi"
+  influxdb_storage_volume = "2Gi"
+  es_storage_volume = "100Gi"
 }
 
 module "haystack-infrastructure" {
-  source = "../../modules/haystack-infrastructure/aws"
+  source = "../../modules/haystack-infrastructure/kubernetes"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
-  haystack_index_store_es_master_instance_type = "${var.haystack_index_store_es_master_instance_type}"
-  kafka_broker_instance_type = "${var.kafka_broker_instance_type}"
-  aws_utilities_subnet = "${var.aws_utilities_subnet}"
-  s3_bucket_name = "${var.s3_bucket_name}"
-  aws_region = "${var.aws_region}"
-  haystack_index_store_worker_instance_type = "${var.haystack_index_store_worker_instance_type}"
-  haystack_index_store_instance_count = "${var.haystack_index_store_instance_count}"
-  aws_ssh_key = "${var.aws_ssh_key}"
-  haystack_index_store_master_count = "${var.haystack_index_store_master_count}"
-  aws_vpc_id = "${var.aws_vpc_id}"
-  aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
-  kafka_broker_count = "${var.kafka_broker_count}"
-  aws_nodes_subnet = "${var.aws_nodes_subnet}"
-  cassandra_node_image = "${var.cassandra_node_image}"
-  cassandra_node_volume_size = "${var.cassandra_node_volume_size}"
-  cassandra_node_instance_count = "${var.cassandra_node_instance_count}"
-  cassandra_node_instance_type = "${var.cassandra_node_instance_type}"
 }
+
 module "haystack-apps" {
   source = "../../modules/haystack-apps/kubernetes"
   kafka_port = "${module.haystack-infrastructure.kafka_port}"

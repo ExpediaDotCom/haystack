@@ -4,6 +4,8 @@ module "elasticsearch-addon" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   enabled = "${var.enabled}"
   minimum_masters = "${var.es_nodes}"
+  storage_volume = "${var.es_storage_volume}"
+  storage_class = "${var.k8s_storage_class}"
 }
 module "fluentd-addon" {
   source = "fluentd"

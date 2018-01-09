@@ -57,13 +57,13 @@ spec:
     - metadata:
         name: ${elasticsearch-name}
         annotations:
-          volume.beta.kubernetes.io/storage-class: "standard"
+          volume.beta.kubernetes.io/storage-class: "${storage_class}"
       spec:
-        storageClassName: "standard"
+        storageClassName: "${storage_class}"
         accessModes: ["ReadWriteOnce"]
         resources:
           requests:
-            storage: 100Mi
+            storage: "${storage_volume}"
 ---
 apiVersion: v1
 kind: Service
