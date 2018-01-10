@@ -3,11 +3,10 @@ provider "aws" {
 }
 
 provider "kubernetes" {
-  config_context = "${module.haystack-k8s.cluster_name}"
   host = "${module.haystack-k8s.cluster_endpoint}"
   username = "admin"
   password = "Jm41PVbD5MddhhiAIeE76chMTpYyLsq8"
-
+  insecure = true
 }
 
 data "aws_route53_zone" "haystack_dns_zone" {
