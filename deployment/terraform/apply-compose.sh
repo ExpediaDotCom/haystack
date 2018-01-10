@@ -2,8 +2,6 @@
 set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-UNIT_NAMES_ARRAY_INDEX="0"
-declare -a UNIT_NAMES
 
 #########################
 # The command line help #
@@ -15,7 +13,7 @@ function display_help() {
     echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all (use separate -u for each unit)"
     echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
     echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
-    echo "   -t, --terraform-parameters parameters which need to be passed to terraform eg : secret-key, access-key"
+    echo "   -t, --tfvars-file-path     values which need to be passed to terraform in a tfvars file eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
 
     echo
     # echo some stuff here for the -a or --add-options 
@@ -37,10 +35,9 @@ do
           fi
           shift 2
           ;;
-       -u | --unit-name)
+       -t | --tfvars-file-path)
           if [ $# -ne 0 ]; then
-            UNIT_NAMES[UNIT_NAMES_ARRAY_INDEX]="$2"
-            UNIT_NAMES_ARRAY_INDEX=$(( UNIT_NAMES_ARRAY_INDEX + 1 ))
+            TF_VARS_FILE="$2"
           fi
           shift 2
           ;;
@@ -73,8 +70,8 @@ function verifyArgs() {
  if [[ -z $ACTION ]]; then
    ACTION=install
  fi
- if [[ -z $UNIT_NAMES ]]; then
-   UNIT_NAMES[0]=all
+ if [[ -z $TF_VARS_FILE ]]; then
+   TF_VARS_FILE=cluster/$CLUSTER_TYPE/variables.tfvars
  fi
 
  if [[ -z $CLUSTER_TYPE ]]; then
@@ -132,14 +129,14 @@ function applyActionOnComponents() {
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
    $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
-   $TERRAFORM destroy -var-file=cluster/$CLUSTER_TYPE/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+   $TERRAFORM destroy -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
-    $TERRAFORM apply -var-file=cluster/$CLUSTER_TYPE/variables.tfvars -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+    $TERRAFORM apply -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
 }
 
 

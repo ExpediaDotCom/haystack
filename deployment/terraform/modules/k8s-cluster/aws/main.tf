@@ -245,6 +245,7 @@ data "template_file" "master-2-user-data" {
     instance_group_name = "${local.k8s_master_2_instance_group_name}"
   }
 }
+
 resource "aws_launch_configuration" "master-2-masters-haystack-k8s" {
   name_prefix = "master-2.masters.haystack-k8s"
   image_id = "${var.k8s_master_ami}"
