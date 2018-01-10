@@ -70,12 +70,11 @@ function verifyArgs() {
  if [[ -z $ACTION ]]; then
    ACTION=install
  fi
- if [[ -z $TF_VARS_FILE ]]; then
-   TF_VARS_FILE=cluster/$CLUSTER_TYPE/variables.tfvars
- fi
-
  if [[ -z $CLUSTER_TYPE ]]; then
    CLUSTER_TYPE=local
+ fi
+ if [[ -z $TF_VARS_FILE ]]; then
+   TF_VARS_FILE=cluster/$CLUSTER_TYPE/variables.tfvars
  fi
 }
 
