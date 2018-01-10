@@ -146,17 +146,39 @@ function uninstallComponents() {
  fi
     echo "Deleting haystack infrastructure using terraform"
    $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
+
+   #setting the correct kubectl config for terraform
+   if [ "$CLUSTER_TYPE" = "aws" ];then
+       #setting the correct kubectl config for terraform
+        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        echo "setting kubectl context : $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME"
+        $KOPS export --name $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME
+    fi
+
    $TERRAFORM destroy $FORCE_FLAG -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
 }
 
 function installComponents() {
-if [ "$SKIP_APPROVAL" = "true" ];then
-   AUTO_APPROVE="-auto-approve"
-   else
-    echo "$SKIP_APPROVAL"
- fi
+    if [ "$SKIP_APPROVAL" = "true" ];then
+        AUTO_APPROVE="-auto-approve"
+        else
+        echo "$SKIP_APPROVAL"
+    fi
+
     echo "Creating haystack infrastructure using terraform"
+
     $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
+
+    #setting the correct kubectl config for terraform
+    if [ "$CLUSTER_TYPE" = "aws" ];then
+        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        echo "setting kubectl context : $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME"
+        $KUBECTL config set-context $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME
+    fi
+
     $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
 }
 

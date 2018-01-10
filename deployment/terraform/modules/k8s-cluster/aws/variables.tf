@@ -12,7 +12,7 @@ variable "k8s_base_domain_name" {}
 variable "reverse_proxy_port" {}
 variable "k8s_aws_region" {}
 variable "kops_executable_name" {}
-
+variable "haystack_cluster_name" {}
 variable "k8s_version" {
   default = "1.8.4"
 }
