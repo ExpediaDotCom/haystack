@@ -2,7 +2,7 @@ kafka {
   producer {
     topic = "proto-spans"
     props {
-      bootstrap.servers = "kafkasvc:9092"
+      bootstrap.servers = "${kafka_endpoint}"
     }
   }
 }

@@ -11,6 +11,7 @@ data "template_file" "haystck_kinesis_span_collector_config_data" {
   vars {
     kinesis_stream_region = "${var.kinesis_stream_region}"
     kinesis_stream_name = "${var.kinesis_stream_name}"
+    kafka_endpoint = "${var.kafka_endpoint}"
   }
 }
 

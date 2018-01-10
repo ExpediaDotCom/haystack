@@ -66,6 +66,7 @@ module "kinesis-span-collector" {
   namespace = "${var.k8s_app_namespace}"
   kinesis_stream_name = "${var.kinesis_stream_name}"
   kinesis_stream_region = "${var.kinesis_stream_region}"
+  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   enabled = "${var.kinesis_span_collector_enabled}"
 }
 

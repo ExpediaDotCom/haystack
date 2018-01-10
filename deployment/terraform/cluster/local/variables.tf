@@ -68,10 +68,10 @@ variable "kinesis_span_collector_version" {
   default = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
 }
 variable "kinesis_stream_region" {
-  default = "us-west-2"
+  default = ""
 }
 variable "kinesis_stream_name" {
-  default = "haystack-test-proto"
+  default = ""
 }
 
 # ui config
