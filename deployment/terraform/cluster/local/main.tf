@@ -32,5 +32,23 @@ module "haystack-apps" {
   metrictank_port = "${module.haystack-infrastructure.metrictank_port}"
   graphite_hostname = "${module.haystack-infrastructure.graphite_hostname}"
   k8s_app_namespace = "${module.k8s-addons.k8s_app_namespace}"
-  pipes_enabled = false
+
+  pipes_enabled = "${var.pipes_enabled}"
+  pipes_json_transformer_instances = "${var.pipes_json_transformer_instances}"
+  pipes_kafka_producer_instances = "${var.pipes_kafka_producer_instances}"
+  pipes_version = "${var.pipes_version}"
+
+  traces_enabled = "${var.traces_enabled}"
+  traces_version = "${var.traces_version}"
+  traces_indexer_instances = "${var.traces_indexer_instances}"
+  traces_reader_instances = "${var.traces_reader_instances}"
+
+  trends_enabled = "${var.trends_enabled}"
+  trends_version = "${var.trends_version}"
+  span_timeseries_transformer_instances = "${var.span_timeseries_transformer_instances}"
+  timeseries_aggregator_instances = "${var.timeseries_aggregator_instances}"
+
+  ui_version = "${var.ui_version}"
+  haystack_ui_instances = "${var.haystack_ui_instances}"
+
 }
