@@ -38,13 +38,13 @@ do
           fi
           shift 2
           ;;
-       -t | --backend-file-path)
+       -b | --backend-file-path)
           if [ $# -ne 0 ]; then
             BACKEND_VARS_FILE="$2"
           fi
           shift 2
           ;;
-       -b | --tfvars-file-path)
+       -t | --tfvars-file-path)
           if [ $# -ne 0 ]; then
             TF_VARS_FILE="$2"
           fi
