@@ -14,6 +14,7 @@ case "$(uname -s)" in
      rm $INSTALL_DIR/mac/x64/terraform.zip ;
      mkdir -p $INSTALL_DIR/mac/x64/kubectl/1.8.0
      curl -L https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/darwin/amd64/kubectl -o $INSTALL_DIR/mac/x64/kubectl/1.8.0/kubectl
+     curl -L https://github.com/kubernetes/kops/releases/download/1.8.0/kops-darwin-amd64 -o $INSTALL_DIR/mac/x64/kops
      ;;
 
    Linux)
@@ -24,6 +25,7 @@ case "$(uname -s)" in
      rm $INSTALL_DIR/linux/x64/terraform.zip;
      mkdir -p $INSTALL_DIR/linux/x64/kubectl/1.8.0
      curl -L https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/darwin/amd64/kubectl -o $INSTALL_DIR/linux/x64/kubectl/1.8.0/kubectl
+     curl -L https://github.com/kubernetes/kops/releases/download/1.8.0/kops-linux-amd64 -o $INSTALL_DIR/linux/x64/kops
 
      ;;
 

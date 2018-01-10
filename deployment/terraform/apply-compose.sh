@@ -108,8 +108,9 @@ function downloadThirdPartySoftwares() {
  # variable for accessing third party softwares
  TERRAFORM=$THIRD_PARTY_SOFTWARE_PATH/terraform
  KUBECTL=$THIRD_PARTY_SOFTWARE_PATH/kubectl/1.8.0/kubectl
+ KOPS=$THIRD_PARTY_SOFTWARE_PATH/kops
 
- if [ ! -f $TERRAFORM ]|| [ ! -f $KUBECTL ]; then
+ if [ ! -f $TERRAFORM ]|| [ ! -f $KUBECTL ]|| [ ! -f $KOPS ]; then
    $DIR/install-third-party-softwares.sh
  fi
 }
@@ -145,7 +146,7 @@ function uninstallComponents() {
  fi
     echo "Deleting haystack infrastructure using terraform"
    $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
-   $TERRAFORM destroy $FORCE_FLAG -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+   $TERRAFORM destroy $FORCE_FLAG -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
 }
 
 function installComponents() {
@@ -156,7 +157,7 @@ if [ "$SKIP_APPROVAL" = "true" ];then
  fi
     echo "Creating haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
-    $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+    $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
 }
 
 

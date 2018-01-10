@@ -16,6 +16,7 @@ module "haystack-k8s" {
   k8s_aws_region = "${var.aws_region}"
   k8s_node_instance_count = "${var.k8s_node_instance_count}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
+  kops_executable_name = "${var.kops_executable_name}"
 }
 
 
@@ -39,6 +40,7 @@ module "k8s-addons" {
 module "haystack-infrastructure" {
   source = "../../modules/haystack-infrastructure/kubernetes"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
+  k8s_cluster_name = "${module.haystack-k8s.cluster_name}"
 }
 
 module "haystack-apps" {

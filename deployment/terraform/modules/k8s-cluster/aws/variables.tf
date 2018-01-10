@@ -11,10 +11,8 @@ variable "k8s_hosted_zone_id" {}
 variable "k8s_base_domain_name" {}
 variable "reverse_proxy_port" {}
 variable "k8s_aws_region" {}
+variable "kops_executable_name" {}
 
-variable "kops_executable_name" {
-  default = "kops"
-}
 variable "k8s_version" {
   default = "1.8.4"
 }
