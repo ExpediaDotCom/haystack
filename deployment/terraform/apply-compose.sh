@@ -14,6 +14,8 @@ function display_help() {
     echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
     echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
     echo "   -t, --tfvars-file-path     values which need to be passed to terraform in a tfvars file eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
+    echo "   -s, --skip-approval         skips interactive approval of deployment plan before applying, default: false "
+
 
     echo
     # echo some stuff here for the -a or --add-options 
@@ -41,9 +43,9 @@ do
           fi
           shift 2
           ;;
-       --use-context)
+       -s | --skip-approval)
           if [ $# -ne 0 ]; then
-            USE_CONTEXT="$2"
+            AUTO_APPROVE="-auto-approve"
           fi
           shift 2
           ;;      
@@ -70,7 +72,7 @@ function verifyArgs() {
  if [[ -z $ACTION ]]; then
    ACTION=install
  fi
- if [[ -z $CLUSTER_TYPE ]]; then
+  if [[ -z $CLUSTER_TYPE ]]; then
    CLUSTER_TYPE=local
  fi
  if [[ -z $TF_VARS_FILE ]]; then
@@ -128,14 +130,14 @@ function applyActionOnComponents() {
 function uninstallComponents() {
     echo "Deleting haystack infrastructure using terraform"
    $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
-   $TERRAFORM destroy -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+   $TERRAFORM destroy $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
 }
 
 function installComponents() {
 
     echo "Creating haystack infrastructure using terraform"
     $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
-    $TERRAFORM apply -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+    $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
 }
 
 
