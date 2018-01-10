@@ -5,8 +5,8 @@ module "haystack-k8s" {
   source = "../../modules/k8s-cluster/aws"
   k8s_aws_nodes_subnet_ids = "${var.aws_nodes_subnet}"
   k8s_aws_ssh_key = "${var.aws_ssh_key}"
-  k8s_hosted_zone_id = "${var.aws_hosted_zone_id}"
-  k8s_base_domain_name = "${replace(data.aws_route53_zone.haystack_dns_zone.name, "/[.]$/", "")}"
+  k8s_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
+  k8s_base_domain_name = "${var.aws_domain_name}"
   k8s_master_instance_type = "${var.k8s_node_instance_type}"
   k8s_aws_vpc_id = "${var.aws_vpc_id}"
   k8s_aws_zone = "${var.aws_zone}"
@@ -17,6 +17,7 @@ module "haystack-k8s" {
   k8s_node_instance_count = "${var.k8s_node_instance_count}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
   kops_executable_name = "${var.kops_executable_name}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 

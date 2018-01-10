@@ -2,13 +2,15 @@ variable "s3_bucket_name" {}
 variable "aws_vpc_id" {}
 variable "aws_nodes_subnet" {}
 variable "aws_utilities_subnet" {}
-variable "aws_hosted_zone_id" {}
+variable "aws_domain_name" {}
 variable "kubectl_executable_name" {}
 variable "kops_executable_name" {}
 variable "reverse_proxy_port" {
   default = "32300"
 }
-
+variable "haystack_cluster_name" {
+  default = "haystack"
+}
 variable "k8s_app_name_space" {
   default = "haystack-apps"
 }
