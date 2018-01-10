@@ -28,6 +28,13 @@ variable "pipes_json_transformer_instances" {}
 variable "pipes_kafka_producer_instances" {}
 variable "pipes_version" {}
 
+# collectors config
+variable "kinesis_span_collector_instances" {}
+variable "kinesis_span_collector_enabled" {}
+variable "kinesis_span_collector_version" {}
+variable "kinesis_stream_region" {}
+variable "kinesis_stream_name" {}
+
 # ui config
 variable "haystack_ui_instances" {}
 variable "ui_version" {}

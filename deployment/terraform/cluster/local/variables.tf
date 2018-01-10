@@ -57,6 +57,23 @@ variable "pipes_version" {
   default = "5c09d1162a17e7fc815493c6be888122a5372bd0"
 }
 
+# collectors config
+variable "kinesis_span_collector_instances" {
+  default = "1"
+}
+variable "kinesis_span_collector_enabled" {
+  default = "true"
+}
+variable "kinesis_span_collector_version" {
+  default = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
+}
+variable "kinesis_stream_region" {
+  default = ""
+}
+variable "kinesis_stream_name" {
+  default = ""
+}
+
 # ui config
 variable "haystack_ui_instances" {
   default = "1"

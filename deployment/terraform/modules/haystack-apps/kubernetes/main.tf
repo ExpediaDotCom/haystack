@@ -58,6 +58,18 @@ module "pipes-kafka-producer" {
   enabled = "${var.pipes_enabled}"
 }
 
+# collectors
+module "kinesis-span-collector" {
+  source = "kinesis-span-collector"
+  image = "expediadotcom/haystack-kinesis-span-collector:${var.kinesis_span_collector_version}"
+  replicas = "${var.kinesis_span_collector_instances}"
+  namespace = "${var.k8s_app_namespace}"
+  kinesis_stream_name = "${var.kinesis_stream_name}"
+  kinesis_stream_region = "${var.kinesis_stream_region}"
+  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  enabled = "${var.kinesis_span_collector_enabled}"
+}
+
 # web ui
 module "ui" {
   source = "ui"
