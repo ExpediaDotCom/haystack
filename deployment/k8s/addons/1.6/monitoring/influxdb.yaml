@@ -88,7 +88,7 @@ data:
       separator = "."
       udp-read-buffer = 0
       templates = [
-       "haystack.errors.* system.subsystem.fqClass.host.lineNumber.measurement*",
+       "haystack.errors.* system.metricGroup.subsystem.fqClass.host.lineNumber.measurement*",
        "haystack.*        system.subsystem.application.host.class.measurement*",
       ]
 
