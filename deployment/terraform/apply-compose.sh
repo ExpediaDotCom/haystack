@@ -13,8 +13,9 @@ function display_help() {
     echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all (use separate -u for each unit)"
     echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
     echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
-    echo "   -t, --tfvars-file-path     values which need to be passed to terraform in a tfvars file eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
-    echo "   -s, --skip-approval         skips interactive approval of deployment plan before applying, default: false "
+    echo "   -t, --tfvars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
+    echo "   -b, --backend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
+    echo "   -s, --skip-approval         skips interactive approval of deployment plan before applying,default = false"
 
 
     echo
@@ -37,7 +38,13 @@ do
           fi
           shift 2
           ;;
-       -t | --tfvars-file-path)
+       -t | --backend-file-path)
+          if [ $# -ne 0 ]; then
+            BACKEND_VARS_FILE="$2"
+          fi
+          shift 2
+          ;;
+       -b | --tfvars-file-path)
           if [ $# -ne 0 ]; then
             TF_VARS_FILE="$2"
           fi
@@ -45,7 +52,7 @@ do
           ;;
        -s | --skip-approval)
           if [ $# -ne 0 ]; then
-            AUTO_APPROVE="-auto-approve"
+            SKIP_APPROVAL="$2"
           fi
           shift 2
           ;;      
@@ -78,6 +85,9 @@ function verifyArgs() {
  if [[ -z $TF_VARS_FILE ]]; then
    TF_VARS_FILE=cluster/$CLUSTER_TYPE/variables.tfvars
  fi
+ if [[ -z $BACKEND_VARS_FILE ]]; then
+   BACKEND_VARS_FILE=cluster/$CLUSTER_TYPE/backend.tfvars
+ fi
 }
 
 function setThirdPartySoftwareBasePath() {
@@ -97,9 +107,10 @@ function downloadThirdPartySoftwares() {
  setThirdPartySoftwareBasePath
  # variable for accessing third party softwares
  TERRAFORM=$THIRD_PARTY_SOFTWARE_PATH/terraform
- KUBECTL=$THIRD_PARTY_SOFTWARE_PATH/kubectl/1.8.0/kubectl
+ KUBECTL=$THIRD_PARTY_SOFTWARE_PATH/kubectl
+ KOPS=$THIRD_PARTY_SOFTWARE_PATH/kops
 
- if [ ! -f $TERRAFORM ]|| [ ! -f $KUBECTL ]; then
+ if [ ! -f $TERRAFORM ]|| [ ! -f $KUBECTL ]|| [ ! -f $KOPS ]; then
    $DIR/install-third-party-softwares.sh
  fi
 }
@@ -128,16 +139,25 @@ function applyActionOnComponents() {
 }
 
 function uninstallComponents() {
+ if [ "$SKIP_APPROVAL" = "true" ];then
+   FORCE_FLAG="-force"
+   else
+    echo "$SKIP_APPROVAL"
+ fi
     echo "Deleting haystack infrastructure using terraform"
-   $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
-   $TERRAFORM destroy $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+   $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
+   $TERRAFORM destroy $FORCE_FLAG -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
 }
 
 function installComponents() {
-
+if [ "$SKIP_APPROVAL" = "true" ];then
+   AUTO_APPROVE="-auto-approve"
+   else
+    echo "$SKIP_APPROVAL"
+ fi
     echo "Creating haystack infrastructure using terraform"
-    $TERRAFORM init -backend-config=cluster/$CLUSTER_TYPE/backend.tfvars cluster/$CLUSTER_TYPE
-    $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL  cluster/$CLUSTER_TYPE
+    $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
+    $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
 }
 
 

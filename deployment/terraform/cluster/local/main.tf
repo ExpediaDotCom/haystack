@@ -18,6 +18,7 @@ module "k8s-addons" {
 module "haystack-infrastructure" {
   source = "../../modules/haystack-infrastructure/kubernetes"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
+  k8s_cluster_name = "${var.k8s_minikube_cluster_name}"
 }
 module "haystack-apps" {
   source = "../../modules/haystack-apps/kubernetes"
