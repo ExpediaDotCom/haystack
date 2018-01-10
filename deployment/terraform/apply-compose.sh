@@ -107,7 +107,7 @@ function downloadThirdPartySoftwares() {
  setThirdPartySoftwareBasePath
  # variable for accessing third party softwares
  TERRAFORM=$THIRD_PARTY_SOFTWARE_PATH/terraform
- KUBECTL=$THIRD_PARTY_SOFTWARE_PATH/kubectl/1.8.0/kubectl
+ KUBECTL=$THIRD_PARTY_SOFTWARE_PATH/kubectl
  KOPS=$THIRD_PARTY_SOFTWARE_PATH/kops
 
  if [ ! -f $TERRAFORM ]|| [ ! -f $KUBECTL ]|| [ ! -f $KOPS ]; then
