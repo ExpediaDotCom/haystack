@@ -10,16 +10,14 @@ function display_help() {
     echo "Usage: $0 [option...] " >&2
     echo
     echo "   -a, --action               defines the action for deploying haystack components. possible values: install|uninstall, default: install"
-    echo "   -u, --unit-name            applies the action on a deployable unit by its name, possible values: all|<component-name>, default: all (use separate -u for each unit)"
-    echo "                              for example '-u zk -u kafka-service -u haystack-pipes-json-transformer' to start only the latter and the services on which it depends"
     echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
-    echo "   -t, --tfvars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
-    echo "   -b, --backend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
+    echo "   -if, --infravars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
+    echo "   -ib, --infrabackend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
+    echo "   -ab, --appvars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
+    echo "   -ab, --appbackend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
     echo "   -s, --skip-approval         skips interactive approval of deployment plan before applying,default = false"
 
 
-    echo
-    # echo some stuff here for the -a or --add-options 
     exit 1
 }
 
@@ -38,15 +36,27 @@ do
           fi
           shift 2
           ;;
-       -b | --backend-file-path)
+       -ib | --backend-file-path)
           if [ $# -ne 0 ]; then
-            BACKEND_VARS_FILE="$2"
+            INFRA_BACKEND_FILE="$2"
           fi
           shift 2
           ;;
-       -t | --tfvars-file-path)
+       -if | --infravars-file-path)
           if [ $# -ne 0 ]; then
-            TF_VARS_FILE="$2"
+            INFRA_VARS_FILE="$2"
+          fi
+          shift 2
+          ;;
+       -af | --appvars-file-path)
+          if [ $# -ne 0 ]; then
+            APP_VARS_FILE="$2"
+          fi
+          shift 2
+          ;;
+       -ab | --appbackend-file-path)
+          if [ $# -ne 0 ]; then
+            APP_BACKEND_FILE="$2"
           fi
           shift 2
           ;;
@@ -76,18 +86,26 @@ do
 done
 
 function verifyArgs() {
+
  if [[ -z $ACTION ]]; then
-   ACTION=install
+   ACTION=install-all
  fi
   if [[ -z $CLUSTER_TYPE ]]; then
    CLUSTER_TYPE=local
  fi
- if [[ -z $TF_VARS_FILE ]]; then
-   TF_VARS_FILE=cluster/$CLUSTER_TYPE/variables.tfvars
+ if [[ -z $APP_VARS_FILE ]]; then
+   APP_VARS_FILE=variables.tfvars
  fi
- if [[ -z $BACKEND_VARS_FILE ]]; then
-   BACKEND_VARS_FILE=cluster/$CLUSTER_TYPE/backend.tfvars
+ if [[ -z $APP_BACKEND_FILE ]]; then
+   APP_BACKEND_FILE=backend.tfvars
  fi
+  if [[ -z $INFRA_BACKEND_FILE ]]; then
+   INFRA_BACKEND_FILE=variables.tfvars
+ fi
+ if [[ -z $INFRA_VARS_FILE ]]; then
+   INFRA_VARS_FILE=backend.tfvars
+ fi
+
 }
 
 function setThirdPartySoftwareBasePath() {
@@ -122,11 +140,13 @@ function command_exists () {
 
 function applyActionOnComponents() {
     case "$ACTION" in
-       install)
+       install-all)
+          installInfrastructure
           installComponents
           echo "Congratulations! you've successfully created haystack infrastructure"
           ;;
-       uninstall)
+       uninstall-all)
+          uninstallInfrastructure
           uninstallComponents
           echo "Congratulations! you've successfully destroyed haystack infrastructure"
           ;;
@@ -139,49 +159,104 @@ function applyActionOnComponents() {
 }
 
 function uninstallComponents() {
+
+ cd $DIR/cluster/$CLUSTER_TYPE/apps
+ if [ "$SKIP_APPROVAL" = "true" ];then
+   FORCE_FLAG="-force"
+   else
+    echo "$SKIP_APPROVAL"
+ fi
+    echo "Deleting haystack apps using terraform"
+   $TERRAFORM init -backend-config=$APP_BACKEND_FILE
+
+   #setting the correct kubectl config for terraform
+   if [ "$CLUSTER_TYPE" = "aws" ];then
+       #setting the correct kubectl config for terraform
+        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
+        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
+        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
+        echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
+        $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
+    fi
+
+   $TERRAFORM destroy $FORCE_FLAG -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
+}
+
+
+function uninstallInfrastructure() {
+ cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
  if [ "$SKIP_APPROVAL" = "true" ];then
    FORCE_FLAG="-force"
    else
     echo "$SKIP_APPROVAL"
  fi
     echo "Deleting haystack infrastructure using terraform"
-   $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
+   $TERRAFORM init -backend-config=$INFRA_BACKEND_FILE
 
    #setting the correct kubectl config for terraform
    if [ "$CLUSTER_TYPE" = "aws" ];then
        #setting the correct kubectl config for terraform
-        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
-        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
-        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE)
+        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE )
+        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
         $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
     fi
 
-   $TERRAFORM destroy $FORCE_FLAG -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
+   $TERRAFORM destroy $FORCE_FLAG -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
 }
 
-function installComponents() {
+
+function installInfrastructure() {
+
+    cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
     if [ "$SKIP_APPROVAL" = "true" ];then
         AUTO_APPROVE="-auto-approve"
         else
         echo "$SKIP_APPROVAL"
     fi
 
-    echo "Creating haystack infrastructure using terraform"
+    echo "Creating haystack infrastructure using terraform "
 
-    $TERRAFORM init -backend-config=$BACKEND_VARS_FILE cluster/$CLUSTER_TYPE
+    $TERRAFORM init -backend-config=$INFRA_BACKEND_FILE
 
     #setting the correct kubectl config for terraform
    if [ "$CLUSTER_TYPE" = "aws" ];then
        #setting the correct kubectl config for terraform
-        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
-        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
-        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
+        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE )
+        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE )
+        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
         $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
     fi
 
-    $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
+    $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
+}
+
+function installComponents() {
+
+    cd $DIR/cluster/$CLUSTER_TYPE/apps
+    if [ "$SKIP_APPROVAL" = "true" ];then
+        AUTO_APPROVE="-auto-approve"
+        else
+        echo "$SKIP_APPROVAL"
+    fi
+
+    echo "deploying haystack-apps using terraform"
+
+    $TERRAFORM init -backend-config=$APP_BACKEND_FILE
+
+    #setting the correct kubectl config for terraform
+   if [ "$CLUSTER_TYPE" = "aws" ];then
+       #setting the correct kubectl config for terraform
+        CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
+        AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
+        S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
+        echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
+        $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
+    fi
+
+    $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
 }
 
 
