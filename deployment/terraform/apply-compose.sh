@@ -176,7 +176,8 @@ function installComponents() {
         CLUSTER_NAME=$(echo "var.haystack_cluster_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
         AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
-        $KUBECTL config set-context $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME
+        $KUBECTL config set-cluster $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME --server "http://localhost"
+        $KUBECTL config set-context $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME --cluster $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME
     fi
 
     $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
