@@ -154,7 +154,7 @@ function uninstallComponents() {
         AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
         S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME"
-        $KOPS export --name $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
+        $KOPS export kubecfg --name $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
     fi
 
    $TERRAFORM destroy $FORCE_FLAG -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
@@ -178,7 +178,7 @@ function installComponents() {
         AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
         S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$TF_VARS_FILE cluster/$CLUSTER_TYPE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME"
-        $KOPS export --name $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
+        $KOPS export kubecfg --name $CLUSTER_NAME-k8s-$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
     fi
 
     $TERRAFORM apply $AUTO_APPROVE -var-file=$TF_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS  cluster/$CLUSTER_TYPE
