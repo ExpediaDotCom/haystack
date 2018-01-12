@@ -8,13 +8,13 @@ data "terraform_remote_state" "haystack_inrastructure" {
 }
 
 module "haystack-infrastructure" {
-  source = "../../modules/haystack-infrastructure/kubernetes"
+  source = "../../../modules/haystack-infrastructure/kubernetes"
   k8s_app_name_space = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
   k8s_cluster_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"
 }
 
 module "haystack-apps" {
-  source = "../../modules/haystack-apps/kubernetes"
+  source = "../../../modules/haystack-apps/kubernetes"
   kafka_port = "${module.haystack-infrastructure.kafka_port}"
   elasticsearch_port = "${module.haystack-infrastructure.elasticsearch_port}"
   k8s_cluster_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"

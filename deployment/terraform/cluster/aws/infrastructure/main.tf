@@ -21,7 +21,7 @@ module "haystack-k8s" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
 }
 module "k8s-addons" {
-  source = "../../modules/k8s-addons"
+  source = "../../../modules/k8s-addons"
   k8s_cluster_name = "${module.haystack-k8s.cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   traefik_node_port = "${var.traefik_node_port}"
