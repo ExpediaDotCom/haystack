@@ -146,8 +146,8 @@ function applyActionOnComponents() {
           echo "Congratulations! you've successfully created haystack infrastructure"
           ;;
        uninstall-all)
-          uninstallInfrastructure
           uninstallComponents
+          uninstallInfrastructure
           echo "Congratulations! you've successfully destroyed haystack infrastructure"
           ;;
        *)

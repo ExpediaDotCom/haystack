@@ -11,9 +11,7 @@ variable "reverse_proxy_port" {
 variable "haystack_cluster_name" {
   default = "haystack"
 }
-variable "k8s_app_name_space" {
-  default = "haystack-apps"
-}
+
 variable "traefik_node_port" {
   default = "32300"
 }

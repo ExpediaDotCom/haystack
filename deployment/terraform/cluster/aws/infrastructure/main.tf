@@ -18,13 +18,13 @@ module "haystack-k8s" {
   reverse_proxy_port = "${var.reverse_proxy_port}"
   kops_executable_name = "${var.kops_executable_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
 }
 module "k8s-addons" {
-  source = "../../../modules/k8s-addons"
+  source = "../../modules/k8s-addons"
   k8s_cluster_name = "${module.haystack-k8s.cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   traefik_node_port = "${var.traefik_node_port}"
-  k8s_app_namespace = "${var.k8s_app_name_space}"
   haystack_domain_name = "${module.haystack-k8s.cluster_name}"
   add_monitoring_addons = true
   add_logging_addons = true
