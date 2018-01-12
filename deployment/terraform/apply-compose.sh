@@ -13,7 +13,7 @@ function display_help() {
     echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
     echo "   -if, --infravars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
     echo "   -ib, --infrabackend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
-    echo "   -ab, --appvars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
+    echo "   -af, --appvars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
     echo "   -ab, --appbackend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
     echo "   -s, --skip-approval         skips interactive approval of deployment plan before applying,default = false"
 
