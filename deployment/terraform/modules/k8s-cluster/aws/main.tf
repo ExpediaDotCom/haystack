@@ -48,6 +48,7 @@ module "k8s_elbs" {
   "master-2_asg_id" = "${aws_autoscaling_group.master-2-masters-haystack-k8s.id}"
   "master-3_asg_id" = "${aws_autoscaling_group.master-3-masters-haystack-k8s.id}"
   nodes_asg_id = "${aws_autoscaling_group.nodes-haystack-k8s.id}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
 }
 
 resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {

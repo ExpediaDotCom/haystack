@@ -1,8 +1,9 @@
-
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "s3"
   config {
-    path = "../infrastructure/terraform-infra.tfstate"
+    bucket = "${var.infra_backend_s3_bucket_name}"
+    key = "${var.infra_backend_s3_path}"
+    region = "${var.infra_backend_s3_region}"
   }
 }
 

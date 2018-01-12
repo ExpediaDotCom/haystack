@@ -31,15 +31,6 @@ resource "aws_elb" "k8s-api-elb" {
 }
 
 
-resource "aws_route53_record" "k8s-api-elb-route53" {
-  name = "api.${var.k8s_cluster_name}"
-  type = "CNAME"
-  records = [
-    "${aws_elb.k8s-api-elb.dns_name}"]
-  ttl = 300
-  zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
-}
-
 resource "aws_elb" "k8s-nodes-elb" {
   name = "haystack-k8s-nodes-elb"
 
@@ -73,6 +64,18 @@ resource "aws_elb" "k8s-nodes-elb" {
 }
 
 
+resource "aws_route53_record" "k8s-api-elb-route53" {
+  name = "api.${var.k8s_cluster_name}"
+  type = "CNAME"
+  records = [
+    "${aws_elb.k8s-api-elb.dns_name}"]
+  ttl = 300
+  zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
+  //this would ensure that the cluster is up and configured correctly
+  provisioner "local-exec" {
+    command = "for i in {1..50}; do ${var.kubectl_executable_name} get nodes --context ${var.k8s_cluster_name} -- && break || sleep 15; done"
+  }
+}
 resource "aws_route53_record" "k8s-nodes-elb-route53" {
   name = "${var.k8s_cluster_name}"
   type = "CNAME"
@@ -84,6 +87,7 @@ resource "aws_route53_record" "k8s-nodes-elb-route53" {
     "aws_autoscaling_attachment.master-1-masters-haystack-k8s",
     "aws_autoscaling_attachment.master-2-masters-haystack-k8s",
     "aws_autoscaling_attachment.master-3-masters-haystack-k8s",
+    "aws_route53_record.k8s-api-elb-route53",
     "aws_autoscaling_attachment.nodes-haystack-k8s"]
 }
 

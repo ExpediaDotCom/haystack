@@ -1,3 +1,8 @@
+#aws_infrastructure_state_details
+variable "infra_backend_s3_path" {}
+variable "infra_backend_s3_region" {}
+variable "infra_backend_s3_bucket_name" {}
+
 # traces config
 variable "traces_enabled" {
   default = true
