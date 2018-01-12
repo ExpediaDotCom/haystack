@@ -1,3 +1,11 @@
+##configs to setup kubectl context in case just apps is deployed in another host
+variable "haystack_cluster_name" {
+  default = "haystack"
+}
+variable "s3_bucket_name" {}
+variable "aws_domain_name" {}
+
+
 #aws_infrastructure_state_details
 variable "infra_backend_s3_path" {}
 variable "infra_backend_s3_region" {}
