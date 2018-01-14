@@ -1,0 +1,71 @@
+{
+  "variables": {
+    "region": null,
+    "vpc_id": null,
+    "subnet_id": null,
+    "aws_access_key": null,
+    "aws_secret_key": null,
+    "source_ami": null,
+    "ami_name": "haystack-kafka-base",
+    "kafka_version": "2.11.1",
+    "instance_type": "t2.micro"
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "region": "{{user `region`}}",
+    "vpc_id": "{{user `vpc_id`}}",
+    "subnet_id": "{{user `subnet_id`}}",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "source_ami": "{{user `source_ami`}}",
+    "instance_type": "{{user `instance_type`}}",
+    "ssh_username": "ec2-user",
+    "ami_name": "{{user `ami_name`}}-{{timestamp}}",
+    "ami_description": "{{user `ami_name`}}:{{user `kafka_version`}}:{{timestamp}}",
+    "tags": {
+      "type": "{{user `ami_name`}}",
+      "kafka_version": "{{user `kafka_version`}}"
+    }
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum install -y java-1.8.0",
+        "sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java",
+        "sudo yum install -y jna",
+        "sudo yum install -y wget",
+        "sudo mkdir /opt/jmxtrans",
+        "sudo chmod a+w /opt/jmxtrans",
+        "sudo wget -O /opt/jmxtrans/jmxtrans.jar https://github.com/jmxtrans/jmxtrans-agent/releases/download/jmxtrans-agent-1.2.6/jmxtrans-agent-1.2.6.jar",
+        "sudo chmod a+w /etc/sysctl.conf",
+        "sudo chmod a+w /etc/security/limits.conf"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "resources/sysctl.conf",
+      "destination": "/etc/sysctl.conf"
+    },
+    {
+      "type": "file",
+      "source": "resources/limits.conf",
+      "destination": "/etc/security/limits.conf"
+    },
+    {
+      "type": "file",
+      "source": "resources/jmxtrans-agent.xml",
+      "destination": "/opt/jmxtrans/jmxtrans-agent.xml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo wget http://redrockdigimark.com/apachemirror/kafka/1.0.0/kafka_2.11-1.0.0.tgz",
+        "sudo mkdir /opt/kafka",
+        "sudo chmod a+w /opt/kafka",
+        "sudo tar -xzf kafka_2.11-1.0.0.tgz -C /opt/kafka --strip-components=1",
+        "sudo rm kafka_2.11-1.0.0.tgz"
+      ]
+    }
+  ]
+}
