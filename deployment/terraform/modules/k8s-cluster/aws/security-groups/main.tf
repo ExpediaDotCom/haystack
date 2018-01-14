@@ -1,6 +1,6 @@
 //api elb security group
-resource "aws_security_group" "api-elb-haystack-k8s" {
-  name = "api-elb.haystack-k8s"
+resource "aws_security_group" "api-elb" {
+  name = "api-elb.${var.k8s_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for api ELB"
 
@@ -20,16 +20,15 @@ resource "aws_security_group" "api-elb-haystack-k8s" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "haystack-k8s"
-    Name = "api-elb.haystack-k8s"
+    KubernetesCluster = "${var.k8s_cluster_name}"
   }
 
 }
 
 
 //node elb security group
-resource "aws_security_group" "nodes-api-elb-haystack-k8s" {
-  name = "nodes-api-elb.haystack-k8s"
+resource "aws_security_group" "nodes-elb" {
+  name = "nodes-elb.${var.k8s_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for nodes ELB"
   ingress {
@@ -48,8 +47,7 @@ resource "aws_security_group" "nodes-api-elb-haystack-k8s" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "haystack-k8s"
-    Name = "nodes-api-elb.haystack-k8s"
+    KubernetesCluster = "${var.k8s_cluster_name}"
   }
 }
 
@@ -58,16 +56,24 @@ resource "aws_security_group" "nodes-api-elb-haystack-k8s" {
 
 //This is prevent the cyclic dependency
 resource "aws_security_group_rule" "all-master-to-node" {
-  type                     = "ingress"
-  security_group_id        = "${aws_security_group.nodes-haystack-k8s.id}"
-  source_security_group_id = "${aws_security_group.masters-haystack-k8s.id}"
-  from_port                = 0
-  to_port                  = 0
-  protocol                 = "-1"
+  type = "ingress"
+  security_group_id = "${aws_security_group.nodes.id}"
+  source_security_group_id = "${aws_security_group.masters.id}"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+}
+resource "aws_security_group_rule" "all-master-to-node" {
+  type = "ingress"
+  security_group_id = "${aws_security_group.nodes.id}"
+  source_security_group_id = "${aws_security_group.masters.id}"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
 }
 
-resource "aws_security_group" "nodes-haystack-k8s" {
-  name = "nodes.haystack-k8s"
+resource "aws_security_group" "nodes" {
+  name = "nodes.${var.k8s_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for nodes"
 
@@ -76,7 +82,7 @@ resource "aws_security_group" "nodes-haystack-k8s" {
     to_port = "${var.reverse_proxy_port}"
     protocol = "tcp"
     security_groups = [
-      "${aws_security_group.nodes-api-elb-haystack-k8s.id}"]
+      "${aws_security_group.nodes-elb.id}"]
   }
 
   ingress {
@@ -94,23 +100,22 @@ resource "aws_security_group" "nodes-haystack-k8s" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "haystack-k8s"
-    Name = "nodes.haystack-k8s"
+    KubernetesCluster = "${var.k8s_cluster_name}"
   }
 }
 
 
 //master instance security group
 resource "aws_security_group_rule" "all-master-to-master" {
-  type                     = "ingress"
-  security_group_id        = "${aws_security_group.masters-haystack-k8s.id}"
-  source_security_group_id = "${aws_security_group.masters-haystack-k8s.id}"
-  from_port                = 0
-  to_port                  = 0
-  protocol                 = "-1"
+  type = "ingress"
+  security_group_id = "${aws_security_group.masters.id}"
+  source_security_group_id = "${aws_security_group.masters.id}"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
 }
-resource "aws_security_group" "masters-haystack-k8s" {
-  name = "masters.haystack-k8s"
+resource "aws_security_group" "masters" {
+  name = "masters.${var.k8s_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for masters"
 
@@ -119,14 +124,14 @@ resource "aws_security_group" "masters-haystack-k8s" {
     to_port = "443"
     protocol = "tcp"
     security_groups = [
-      "${aws_security_group.api-elb-haystack-k8s.id}"]
+      "${aws_security_group.api-elb.id}"]
   }
   ingress {
     from_port = 0
     to_port = 65535
     protocol = "4"
     security_groups = [
-      "${aws_security_group.nodes-haystack-k8s.id}"]
+      "${aws_security_group.nodes.id}"]
   }
 
   ingress {
@@ -134,14 +139,14 @@ resource "aws_security_group" "masters-haystack-k8s" {
     to_port = 2379
     protocol = "tcp"
     security_groups = [
-      "${aws_security_group.nodes-haystack-k8s.id}"]
+      "${aws_security_group.nodes.id}"]
   }
   ingress {
     from_port = 2382
     to_port = 4001
     protocol = "tcp"
     security_groups = [
-      "${aws_security_group.nodes-haystack-k8s.id}"]
+      "${aws_security_group.nodes.id}"]
   }
 
   ingress {
@@ -149,14 +154,14 @@ resource "aws_security_group" "masters-haystack-k8s" {
     to_port = 65535
     protocol = "tcp"
     security_groups = [
-      "${aws_security_group.nodes-haystack-k8s.id}"]
+      "${aws_security_group.nodes.id}"]
   }
   ingress {
     from_port = 1
     to_port = 65535
     protocol = "udp"
     security_groups = [
-      "${aws_security_group.nodes-haystack-k8s.id}"]
+      "${aws_security_group.nodes.id}"]
   }
   ingress {
     from_port = 22
@@ -174,8 +179,8 @@ resource "aws_security_group" "masters-haystack-k8s" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "haystack-k8s"
-    Name = "masters.haystack-k8s"
+    KubernetesCluster = "${var.k8s_cluster_name}"
+    Name = "Haystack"
   }
 }
 

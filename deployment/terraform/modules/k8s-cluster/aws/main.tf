@@ -1,10 +1,10 @@
 //we can't currently update the cluster name, TODO: make it configurable
 locals {
   k8s_cluster_name = "${var.haystack_cluster_name}-k8s.${var.k8s_base_domain_name}"
-  k8s_master_1_instance_group_name = "master-${var.k8s_aws_zone}-1"
-  k8s_master_2_instance_group_name = "master-${var.k8s_aws_zone}-2"
-  k8s_master_3_instance_group_name = "master-${var.k8s_aws_zone}-3"
-  k8s_nodes_instance_group_name = "nodes"
+  k8s_master_1_instance_group_name = "master-${var.haystack_cluster_name}-1"
+  k8s_master_2_instance_group_name = "master-${var.haystack_cluster_name}-2"
+  k8s_master_3_instance_group_name = "master-${var.haystack_cluster_name}-3"
+  k8s_nodes_instance_group_name = "nodes-${var.haystack_cluster_name}"
 
 }
 
@@ -28,12 +28,14 @@ module "k8s_security_groups" {
   source = "security-groups"
   k8s_vpc_id = "${var.k8s_aws_vpc_id}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
+  k8s_cluster_name = "${local.k8s_cluster_name}"
 }
 
 module "k8s_iam_roles" {
   source = "iam-roles"
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_s3_bucket_name = "${var.k8s_s3_bucket_name}"
+  k8s_cluster_name = "${local.k8s_cluster_name}"
 }
 
 module "k8s_elbs" {
@@ -44,16 +46,16 @@ module "k8s_elbs" {
   k8s_cluster_name = "${local.k8s_cluster_name}"
   k8s_nodes_api_security_groups = "${module.k8s_security_groups.nodes-api-elb-security_group_ids}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
-  "master-1_asg_id" = "${aws_autoscaling_group.master-1-masters-haystack-k8s.id}"
-  "master-2_asg_id" = "${aws_autoscaling_group.master-2-masters-haystack-k8s.id}"
-  "master-3_asg_id" = "${aws_autoscaling_group.master-3-masters-haystack-k8s.id}"
-  nodes_asg_id = "${aws_autoscaling_group.nodes-haystack-k8s.id}"
+  "master-1_asg_id" = "${aws_autoscaling_group.master-1.id}"
+  "master-2_asg_id" = "${aws_autoscaling_group.master-2.id}"
+  "master-3_asg_id" = "${aws_autoscaling_group.master-3.id}"
+  nodes_asg_id = "${aws_autoscaling_group.nodes.id}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
 }
 
-resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
-  name = "master-1.masters.haystack-k8s"
-  launch_configuration = "${aws_launch_configuration.master-1-masters-haystack-k8s.id}"
+resource "aws_autoscaling_group" "master-1" {
+  name = "${local.k8s_master_1_instance_group_name}"
+  launch_configuration = "${aws_launch_configuration.master-1.id}"
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
@@ -67,7 +69,7 @@ resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
 
   tag = {
     key = "Name"
-    value = "master-1.masters.haystack-k8s"
+    value = "${local.k8s_master_2_instance_group_name}"
     propagate_at_launch = true
   }
 
@@ -91,9 +93,9 @@ resource "aws_autoscaling_group" "master-1-masters-haystack-k8s" {
     "aws_ebs_volume.3-etcd-main"]
 }
 
-resource "aws_autoscaling_group" "master-2-masters-haystack-k8s" {
-  name = "master-2.masters.haystack-k8s"
-  launch_configuration = "${aws_launch_configuration.master-2-masters-haystack-k8s.id}"
+resource "aws_autoscaling_group" "master-2" {
+  name = "${local.k8s_master_2_instance_group_name}"
+  launch_configuration = "${aws_launch_configuration.master-2.id}"
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
@@ -107,7 +109,7 @@ resource "aws_autoscaling_group" "master-2-masters-haystack-k8s" {
 
   tag = {
     key = "Name"
-    value = "master-2.masters.haystack-k8s"
+    value = "${local.k8s_master_2_instance_group_name}"
     propagate_at_launch = true
   }
 
@@ -131,9 +133,9 @@ resource "aws_autoscaling_group" "master-2-masters-haystack-k8s" {
     "aws_ebs_volume.3-etcd-main"]
 }
 
-resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
-  name = "master-3.masters.haystack-k8s"
-  launch_configuration = "${aws_launch_configuration.master-3-masters-haystack-k8s.id}"
+resource "aws_autoscaling_group" "master-3" {
+  name = "${local.k8s_master_3_instance_group_name}"
+  launch_configuration = "${aws_launch_configuration.master-3.id}"
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
@@ -147,7 +149,7 @@ resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
 
   tag = {
     key = "Name"
-    value = "master-3.masters.haystack-k8s"
+    value = "${local.k8s_master_3_instance_group_name}"
     propagate_at_launch = true
   }
 
@@ -171,9 +173,9 @@ resource "aws_autoscaling_group" "master-3-masters-haystack-k8s" {
     "aws_ebs_volume.3-etcd-main"]
 }
 
-resource "aws_autoscaling_group" "nodes-haystack-k8s" {
-  name = "nodes.haystack-k8s"
-  launch_configuration = "${aws_launch_configuration.nodes-haystack-k8s.id}"
+resource "aws_autoscaling_group" "nodes" {
+  name = "nodes.${local.k8s_cluster_name}"
+  launch_configuration = "${aws_launch_configuration.nodes.id}"
   max_size = "${var.k8s_node_instance_count}"
   min_size = "${var.k8s_node_instance_count}"
   vpc_zone_identifier = [
@@ -187,7 +189,7 @@ resource "aws_autoscaling_group" "nodes-haystack-k8s" {
 
   tag = {
     key = "Name"
-    value = "nodes.haystack-k8s"
+    value = "nodes.${local.k8s_cluster_name}"
     propagate_at_launch = true
   }
 
@@ -204,7 +206,7 @@ resource "aws_autoscaling_group" "nodes-haystack-k8s" {
   }
 }
 
-resource "aws_eip" "eip-haystack-k8s" {
+resource "aws_eip" "eip" {
   vpc = true
 }
 
@@ -216,8 +218,8 @@ data "template_file" "master-1-user-data" {
     instance_group_name = "${local.k8s_master_1_instance_group_name}"
   }
 }
-resource "aws_launch_configuration" "master-1-masters-haystack-k8s" {
-  name_prefix = "master-1.masters.haystack-k8s"
+resource "aws_launch_configuration" "master-1" {
+  name_prefix = "${local.k8s_master_1_instance_group_name}"
   image_id = "${var.k8s_master_ami}"
   instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
@@ -247,8 +249,8 @@ data "template_file" "master-2-user-data" {
   }
 }
 
-resource "aws_launch_configuration" "master-2-masters-haystack-k8s" {
-  name_prefix = "master-2.masters.haystack-k8s"
+resource "aws_launch_configuration" "master-2" {
+  name_prefix = "${local.k8s_master_2_instance_group_name}"
   image_id = "${var.k8s_master_ami}"
   instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
@@ -279,8 +281,8 @@ data "template_file" "master-3-user-data" {
   }
 }
 
-resource "aws_launch_configuration" "master-3-masters-haystack-k8s" {
-  name_prefix = "master-3.masters.haystack-k8s"
+resource "aws_launch_configuration" "master-3" {
+  name_prefix = "${local.k8s_master_3_instance_group_name}"
   image_id = "${var.k8s_master_ami}"
   instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
@@ -309,8 +311,8 @@ data "template_file" "nodes-user-data" {
   }
 }
 
-resource "aws_launch_configuration" "nodes-haystack-k8s" {
-  name_prefix = "nodes.haystack-k8s"
+resource "aws_launch_configuration" "nodes" {
+  name_prefix = "nodes"
   image_id = "${var.k8s_node_ami}"
   instance_type = "${var.k8s_node_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"

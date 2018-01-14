@@ -143,12 +143,20 @@ function applyActionOnComponents() {
        install-all)
           installInfrastructure
           installComponents
-          echo "Congratulations! you've successfully created haystack infrastructure"
+          echo "Congratulations! you've successfully created haystack infrastructure and deployed haystack apps"
+          ;;
+       install-apps)
+          installComponents
+          echo "Congratulations! you've successfully redeployed haystack apps"
+          ;;
+       uninstall-apps)
+          uninstallComponents
+          echo "Congratulations! you've successfully uninstalled haystack apps"
           ;;
        uninstall-all)
           uninstallComponents
           uninstallInfrastructure
-          echo "Congratulations! you've successfully destroyed haystack infrastructure"
+          echo "Congratulations! you've successfully and deleted haystack apps and destroyed haystack infrastructure"
           ;;
        *)
           echo "Error!!! Fail to understand the action type, see the help."
@@ -176,7 +184,7 @@ function uninstallComponents() {
         AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
         S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
-        $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
+        $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME
     fi
 
    $TERRAFORM destroy $FORCE_FLAG -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
@@ -253,7 +261,7 @@ function installComponents() {
         AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
         S3_BUCKET_NAME=$(echo "var.s3_bucket_name" | $TERRAFORM console -var-file=$APP_VARS_FILE )
         echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
-        $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME || true
+        $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET_NAME
     fi
 
     $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
