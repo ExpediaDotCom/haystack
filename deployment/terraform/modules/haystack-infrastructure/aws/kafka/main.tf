@@ -30,6 +30,10 @@ data "template_file" "kafka_broker_user_data" {
   vars {
     haystack_graphite_host = "${var.kafka_graphite_host}"
     haystack_graphite_port = "${var.kafka_graphite_port}"
+    zookeeper_hosts = "localhost:2181"
+    num_partitions = "96"
+    retention_hours = "24"
+    retention_bytes = "${var.kafka_broker_volume_size * 805306368}"
   }
 }
 

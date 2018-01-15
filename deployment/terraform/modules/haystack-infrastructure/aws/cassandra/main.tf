@@ -97,5 +97,5 @@ resource "aws_route53_record" "haystack-cassandra-cname" {
   name    = "${local.cassandra_cname}"
   type    = "A"
   ttl     = "300"
-  records = ["${aws_instance.haystack-cassandra-seed-node.private_ip}","${aws_instance.haystack-cassandra-non-seed-nodes.private_ip}"]
+  records = ["${aws_instance.haystack-cassandra-seed-node.private_ip}","${aws_instance.haystack-cassandra-non-seed-nodes.*.private_ip}"]
 }
