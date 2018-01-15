@@ -6,6 +6,15 @@ data "terraform_remote_state" "haystack_inrastructure" {
     region = "${var.infra_backend_s3_region}"
   }
 }
+//metrictank for haystack-apps
+module "metrictank" {
+  source = "../kubernetes/metrictank"
+  replicas = "1"
+  cassandra_address = "${data.terraform_remote_state.haystack_inrastructure.cassandra_hostname}:${data.terraform_remote_state.haystack_inrastructure.cassandra_port}"
+  kafka_address = "${data.terraform_remote_state.haystack_inrastructure.kafka_hostname}:${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
+  namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
+  graphite_address = "${data.terraform_remote_state.haystack_inrastructure.graphite_hostname}:${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
+}
 
 
 module "haystack-apps" {
@@ -16,7 +25,7 @@ module "haystack-apps" {
   cassandra_hostname = "${data.terraform_remote_state.haystack_inrastructure.cassandra_hostname}"
   kafka_hostname = "${data.terraform_remote_state.haystack_inrastructure.kafka_hostname}"
   kafka_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
-  cassandra_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
+  cassandra_port = "${data.terraform_remote_state.haystack_inrastructure.cassandra_port}"
   metrictank_hostname = "${data.terraform_remote_state.haystack_inrastructure.metrictank_hostname}"
   metrictank_port = "${data.terraform_remote_state.haystack_inrastructure.metrictank_port}"
   graphite_hostname = "${data.terraform_remote_state.haystack_inrastructure.graphite_hostname}"
