@@ -44,6 +44,7 @@ module "haystack-infrastructure" {
   aws_ssh_key = "${var.aws_ssh_key}"
   kafka_broker_instance_type = "${var.kafka_broker_instance_type}"
   kafka_broker_count = "${var.kafka_broker_count}"
+  kafka_broker_volume_size = "${var.kafka_broker_volume_size}"
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
   cassandra_node_volume_size = "${var.cassandra_node_volume_size}"
   cassandra_node_instance_count = "${var.cassandra_node_instance_count}"
@@ -52,7 +53,7 @@ module "haystack-infrastructure" {
   cassandra_node_image = "${var.cassandra_node_image}"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
   haystack_index_store_master_count = "${var.haystack_index_store_master_count}"
-  haystack_index_store_instance_count = "${var.haystack_index_store_worker_instance_type}"
+  haystack_index_store_instance_count = "${var.haystack_index_store_instance_count}"
   haystack_index_store_worker_instance_type = "${var.haystack_index_store_worker_instance_type}"
   haystack_index_store_es_master_instance_type = "${var.haystack_index_store_es_master_instance_type}"
 }
