@@ -30,15 +30,6 @@ output "cassandra_port" {
   value = "${module.haystack-infrastructure.cassandra_port}"
 }
 
-
-output "metrictank_hostname" {
-  value = "${module.haystack-infrastructure.metrictank_hostname}"
-}
-
-output "metrictank_port" {
-  value = "${module.haystack-infrastructure.metrictank_port}"
-}
-
 output "graphite_hostname" {
   value = "${module.haystack-infrastructure.graphite_hostname}"
 }
