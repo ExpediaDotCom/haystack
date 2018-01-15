@@ -18,4 +18,14 @@ if [ ! -f $PACKER ]; then
   $DIR/install-third-party-softwares.sh
 fi
 
-$PACKER build -var-file=variables.json cassandra-ami.json
+echo =============== building cassandra ami =========================
+cd cassandra
+$PACKER build -var-file=$DIR/variables.json cassandra-ami.json
+cd -
+
+echo =============== building kafka ami =============================
+cd kafka
+$PACKER build -var-file=$DIR/variables.json kafka-ami.json
+cd -
+
+echo ================================================================
