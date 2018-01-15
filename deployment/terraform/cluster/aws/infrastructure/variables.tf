@@ -44,7 +44,7 @@ variable "haystack_index_store_master_count" {
 }
 
 variable "kafka_broker_count" {
-  default = 4
+  default = 1
 }
 variable "kafka_broker_volume_size" {
   default = 32
