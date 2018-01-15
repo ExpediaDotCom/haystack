@@ -39,13 +39,3 @@ module "kafka" {
   kafka_graphite_host = "${local.graphite_hostname}"
   kafka_graphite_port = "${local.graphite_port}"
 }
-
-//metrictank is still deployed as a container might consider inside the k8s cluster
-module "metrictank" {
-  source = "../kubernetes/metrictank"
-  replicas = "1"
-  cassandra_address = "${module.cassandra.cassandra_hostname}:${module.cassandra.cassandra_port}"
-  kafka_address = "${module.kafka.kafka_service_name}:${module.kafka.kafka_port}"
-  namespace = "${var.k8s_app_name_space}"
-  graphite_address = "${local.graphite_hostname}:${local.graphite_port}"
-}
