@@ -3,8 +3,6 @@
     "region": null,
     "vpc_id": null,
     "subnet_id": null,
-    "aws_access_key": null,
-    "aws_secret_key": null,
     "source_ami": null,
     "ami_name": "haystack-kafka-base",
     "kafka_version": "2.11.1",
