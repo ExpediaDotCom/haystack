@@ -100,10 +100,10 @@ function verifyArgs() {
    APP_BACKEND_FILE=backend.tfvars
  fi
   if [[ -z $INFRA_BACKEND_FILE ]]; then
-   INFRA_BACKEND_FILE=variables.tfvars
+   INFRA_BACKEND_FILE=backend.tfvars
  fi
  if [[ -z $INFRA_VARS_FILE ]]; then
-   INFRA_VARS_FILE=backend.tfvars
+   INFRA_VARS_FILE=variables.tfvars
  fi
 
 }
