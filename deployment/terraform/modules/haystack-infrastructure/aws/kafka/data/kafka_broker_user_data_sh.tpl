@@ -11,6 +11,10 @@ sudo sed -i -e "s/_HAYSTACK_GRAPHITE_HOST/${haystack_graphite_host}/g" /var/jmxt
 sudo sed -i -e "s/_HAYSTACK_GRAPHITE_PORT/${haystack_graphite_port}/g" /var/jmxtrans/jmxtrans-agent.xml
 
 # start service
-sudo cd /opt
-sudo bin/zookeeper-server-start.sh config/zookeeper.properties
-sudo bin/kafka-server-start.sh config/server.properties
+sudo mkdir /var/log
+sudo chmod a+w /var/log
+KAFKA_CONSOLE_LOG=/var/log/kafka.log
+ZOOKEEPER_CONSOLE_LOG=/var/log/zookeeper.log
+
+sudo nohup sh /opt/kafka/bin/zookeeper-server-start.sh /opt/kafka/config/zookeeper.properties 2>&1 >> $ZOOKEEPER_CONSOLE_LOG 2>&1 &
+sudo nohup sh /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties 2>&1 >> $KAFKA_CONSOLE_LOG 2>&1 &

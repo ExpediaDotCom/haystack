@@ -1,10 +1,10 @@
 resource "aws_security_group" "haystack-kafka" {
-  name = "haystack-kafka-sg"
+  name = "haystack-kafka-brokers-sg"
   vpc_id = "${var.kafka_aws_vpc_id}"
   description = "Security group for haystack kafka brokers"
 
   tags = {
-    Name = "haystack-kafka"
+    Name = "haystack-kafka-brokers"
   }
 }
 
@@ -20,8 +20,8 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ssh-ingress" {
 resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
   type = "ingress"
   security_group_id = "${aws_security_group.haystack-kafka.id}"
-  from_port = 9042
-  to_port = 9042
+  from_port = 9092
+  to_port = 9092
   protocol = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 }
