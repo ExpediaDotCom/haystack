@@ -29,7 +29,7 @@ module "k8s-addons" {
   add_monitoring_addons = true
   add_logging_addons = true
   container_log_path = "${local.container_log_path}"
-  logging_es_nodes = "2"
+  logging_es_nodes = "1"
   k8s_storage_class = "default"
   grafana_storage_volume = "2Gi"
   influxdb_storage_volume = "2Gi"
