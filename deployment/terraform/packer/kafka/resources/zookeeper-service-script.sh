@@ -5,7 +5,7 @@ ZK_HOME=/opt/kafka
 ZK_USER=root
 ZK_SCRIPT=$ZK_HOME/bin/zookeeper-server-start.sh
 ZK_CONFIG=$ZK_HOME/config/zookeeper.properties
-ZK_CONSOLE_LOG=/var/log/console.log
+ZK_CONSOLE_LOG=/var/log/zookeeper.log
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
 
@@ -40,7 +40,6 @@ start() {
 
 	rm -f $ZK_CONSOLE_LOG
 	mkdir -p $(dirname $ZK_PIDFILE)
-	chown $ZK_USER $(dirname $ZK_PIDFILE) || true
 
 	# Run daemon
 	cd $ZK_HOME
