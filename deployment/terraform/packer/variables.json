@@ -2,7 +2,5 @@
   "source_ami": "ami-bf4193c7",
   "region": "",
   "vpc_id": "",
-  "subnet_id": "",
-  "aws_access_key": "",
-  "aws_secret_key": ""
+  "subnet_id": ""
 }
