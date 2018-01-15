@@ -1,4 +1,3 @@
-
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "local"
   config {
@@ -7,13 +6,14 @@ data "terraform_remote_state" "haystack_inrastructure" {
 }
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
-  kafka_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
+
   elasticsearch_hostname = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_port}"
   k8s_cluster_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"
   cassandra_hostname = "${data.terraform_remote_state.haystack_inrastructure.cassandra_hostname}"
+  cassandra_port = "${data.terraform_remote_state.haystack_inrastructure.cassandra_port}"
   kafka_hostname = "${data.terraform_remote_state.haystack_inrastructure.kafka_hostname}"
-  cassandra_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
+  kafka_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
   metrictank_hostname = "${data.terraform_remote_state.haystack_inrastructure.metrictank_hostname}"
   metrictank_port = "${data.terraform_remote_state.haystack_inrastructure.metrictank_port}"
   graphite_hostname = "${data.terraform_remote_state.haystack_inrastructure.graphite_hostname}"
