@@ -1,6 +1,6 @@
 {
   "source_ami": "ami-bf4193c7",
-  "region": "us-west-2",
-  "vpc_id": "vpc-de7925b9",
-  "subnet_id": "subnet-33f0ea6b"
+  "region": "",
+  "vpc_id": "",
+  "subnet_id": ""
 }
