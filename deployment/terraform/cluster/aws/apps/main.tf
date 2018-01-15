@@ -8,7 +8,7 @@ data "terraform_remote_state" "haystack_inrastructure" {
 }
 //metrictank for haystack-apps
 module "metrictank" {
-  source = "../kubernetes/metrictank"
+  source = "../../../modules/haystack-infrastructure/kubernetes/metrictank"
   replicas = "1"
   cassandra_address = "${data.terraform_remote_state.haystack_inrastructure.cassandra_hostname}:${data.terraform_remote_state.haystack_inrastructure.cassandra_port}"
   kafka_address = "${data.terraform_remote_state.haystack_inrastructure.kafka_hostname}:${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
