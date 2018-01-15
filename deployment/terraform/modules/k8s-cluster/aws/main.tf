@@ -1,10 +1,10 @@
 //we can't currently update the cluster name, TODO: make it configurable
 locals {
   k8s_cluster_name = "${var.haystack_cluster_name}-k8s.${var.k8s_base_domain_name}"
-  k8s_master_1_instance_group_name = "master-${var.haystack_cluster_name}-1"
-  k8s_master_2_instance_group_name = "master-${var.haystack_cluster_name}-2"
-  k8s_master_3_instance_group_name = "master-${var.haystack_cluster_name}-3"
-  k8s_nodes_instance_group_name = "nodes-${var.haystack_cluster_name}"
+  k8s_master_1_instance_group_name = "master-${var.k8s_aws_zone}-1"
+  k8s_master_2_instance_group_name = "master-${var.k8s_aws_zone}-2"
+  k8s_master_3_instance_group_name = "master-${var.k8s_aws_zone}-3"
+  k8s_nodes_instance_group_name = "nodes"
 
 }
 
