@@ -60,8 +60,30 @@
         "sudo mkdir /opt/kafka",
         "sudo chmod a+w /opt/kafka",
         "sudo tar -xzf kafka_2.11-1.0.0.tgz -C /opt/kafka --strip-components=1",
-        "sudo rm kafka_2.11-1.0.0.tgz"
+        "sudo rm kafka_2.11-1.0.0.tgz",
+        "sudo chmod -R a+w /opt/kafka",
+        "sudo chmod -R a+w /etc/init.d"
       ]
+    },
+    {
+      "type": "file",
+      "source": "resources/server.properties",
+      "destination": "/opt/kafka/config/server.properties"
+    },
+    {
+      "type": "file",
+      "source": "resources/kafka-run-class.sh",
+      "destination": "/opt/kafka/bin/kafka-run-class.sh"
+    },
+    {
+      "type": "file",
+      "source": "resources/kafka-service-script.sh",
+      "destination": "/etc/init.d/kafka"
+    },
+    {
+      "type": "file",
+      "source": "resources/zookeeper-service-script.sh",
+      "destination": "/etc/init.d/zookeeper"
     }
   ]
 }
