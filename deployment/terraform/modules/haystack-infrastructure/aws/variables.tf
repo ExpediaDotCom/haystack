@@ -10,6 +10,7 @@ variable "haystack_index_store_worker_instance_type" {}
 variable "haystack_index_store_instance_count" {}
 variable "haystack_index_store_master_count" {}
 variable "kafka_broker_count" {}
+variable "kafka_broker_volume_size" {}
 variable "kafka_broker_instance_type" {}
 variable "cassandra_node_image" {}
 variable "cassandra_node_volume_size" {}

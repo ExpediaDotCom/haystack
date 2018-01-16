@@ -1,5 +1,5 @@
 resource "aws_elb" "api-elb" {
-  name = "${var.k8s_cluster_name}-api-elb"
+  name = "${var.haystack_cluster_name}-api-elb"
 
   listener = {
     instance_port = 443
@@ -32,7 +32,7 @@ resource "aws_elb" "api-elb" {
 
 
 resource "aws_elb" "nodes-elb" {
-  name = "${var.k8s_cluster_name}-nodes-elb"
+  name = "${var.haystack_cluster_name}-nodes-elb"
 
   listener = {
     instance_port = "${var.reverse_proxy_port}"
@@ -59,7 +59,7 @@ resource "aws_elb" "nodes-elb" {
 
   tags = {
     KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "nodes.${var.k8s_cluster_name}"
+    Name = "${var.k8s_cluster_name}"
   }
 }
 
