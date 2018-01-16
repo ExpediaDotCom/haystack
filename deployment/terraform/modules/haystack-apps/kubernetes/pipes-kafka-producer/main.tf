@@ -25,6 +25,10 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "HAYSTACK_GRAPHITE_HOST"
           value = "${var.graphite_hostname}"
         }
+        env {
+          name = "HAYSTACK_GRAPHITE_PORT"
+          value = "${var.graphite_port}"
+        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
 
