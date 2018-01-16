@@ -27,7 +27,3 @@ sudo chmod a+w /var/log
 sudo chmod a+x /etc/init.d/kafka
 sudo chkconfig kafka on
 sudo service kafka start
-
-sudo chmod a+x /etc/init.d/zookeeper
-sudo chkconfig zookeeper on
-sudo service zookeeper start
