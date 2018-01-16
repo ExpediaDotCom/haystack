@@ -142,7 +142,6 @@ function applyActionOnComponents() {
     case "$ACTION" in
        install-all)
           installInfrastructure
-          installComponents
           echo "Congratulations! you've successfully created haystack infrastructure and deployed haystack apps"
           ;;
        install-apps)

@@ -63,6 +63,14 @@ resource "aws_security_group_rule" "all-master-to-node" {
   to_port = 0
   protocol = "-1"
 }
+resource "aws_security_group_rule" "all-node-to-node" {
+  type = "ingress"
+  security_group_id = "${aws_security_group.nodes.id}"
+  source_security_group_id = "${aws_security_group.nodes.id}"
+  from_port = 0
+  to_port = 0
+  protocol = "-1"
+}
 
 resource "aws_security_group" "nodes" {
   name = "nodes.${var.k8s_cluster_name}"
