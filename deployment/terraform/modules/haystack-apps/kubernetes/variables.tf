@@ -5,6 +5,7 @@ variable "kafka_port" {}
 variable "cassandra_hostname" {}
 variable "cassandra_port" {}
 variable "graphite_hostname" {}
+variable "graphite_port" {}
 variable "k8s_cluster_name" {}
 variable "k8s_app_namespace" {}
 variable "metrictank_hostname" {}

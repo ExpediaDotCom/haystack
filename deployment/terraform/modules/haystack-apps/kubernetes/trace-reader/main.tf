@@ -61,6 +61,14 @@ resource "kubernetes_replication_controller" "haystack-trace-reader-rc" {
           name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value = "${local.container_config_path}"
         }
+        env {
+          name = "HAYSTACK_GRAPHITE_HOST"
+          value = "${var.graphite_hostname}"
+        }
+        env {
+          name = "HAYSTACK_GRAPHITE_PORT"
+          value = "${var.graphite_port}"
+        }
         volume_mount {
           mount_path = "/config"
           name = "config-volume"
@@ -70,7 +78,10 @@ resource "kubernetes_replication_controller" "haystack-trace-reader-rc" {
           failure_threshold = 2
           period_seconds = 5
           exec {
-            command = ["grep","true","/app/isHealthy"]
+            command = [
+              "grep",
+              "true",
+              "/app/isHealthy"]
           }
         }
       }

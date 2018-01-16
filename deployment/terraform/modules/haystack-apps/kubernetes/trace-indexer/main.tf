@@ -5,7 +5,7 @@ locals {
   count = "${var.enabled?1:0}"
 }
 
-data "template_file" "haystck_trace_indexer_config_data" {
+data "template_file" "haystack_trace_indexer_config_data" {
   template = "${file("${local.config_file_path}")}"
 
   vars {
@@ -22,7 +22,7 @@ resource "kubernetes_config_map" "haystack-trace-indexer" {
   }
 
   data {
-    "trace-indexer.conf" = "${data.template_file.haystck_trace_indexer_config_data.rendered}"
+    "trace-indexer.conf" = "${data.template_file.haystack_trace_indexer_config_data.rendered}"
   }
 }
 
@@ -43,6 +43,14 @@ resource "kubernetes_replication_controller" "haystack-rc" {
         env {
           name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value = "${local.container_config_path}"
+        }
+        env {
+          name = "HAYSTACK_GRAPHITE_HOST"
+          value = "${var.graphite_hostname}"
+        }
+        env {
+          name = "HAYSTACK_GRAPHITE_PORT"
+          value = "${var.graphite_port}"
         }
         volume_mount {
           mount_path = "/config"

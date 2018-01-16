@@ -7,6 +7,8 @@ module "trace-indexer" {
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
   cassandra_hostname = "${var.cassandra_hostname}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.traces_enabled}"
 }
 module "trace-reader" {
@@ -16,6 +18,8 @@ module "trace-reader" {
   namespace = "${var.k8s_app_namespace}"
   elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
   cassandra_hostname = "${var.cassandra_hostname}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.traces_enabled}"
 }
 
@@ -26,6 +30,8 @@ module "span-timeseries-transformer" {
   replicas = "${var.span_timeseries_transformer_instances}"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.trends_enabled}"
 }
 module "timeseries-aggregator" {
@@ -34,6 +40,8 @@ module "timeseries-aggregator" {
   replicas = "${var.timeseries_aggregator_instances}"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.trends_enabled}"
 }
 
@@ -43,18 +51,20 @@ module "pipes-json-transformer" {
   image = "expediadotcom/haystack-pipes-json-transformer:${var.pipes_version}"
   replicas = "${var.pipes_json_transformer_instances}"
   namespace = "${var.k8s_app_namespace}"
-  graphite_hostname = "${var.kafka_hostname}"
   kafka_hostname = "${var.kafka_hostname}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.pipes_enabled}"
-
 }
+
 module "pipes-kafka-producer" {
   source = "pipes-kafka-producer"
   image = "expediadotcom/haystack-pipes-kafka-producer:${var.pipes_version}"
   replicas = "${var.pipes_kafka_producer_instances}"
   namespace = "${var.k8s_app_namespace}"
-  graphite_hostname = "${var.graphite_hostname}"
   kafka_hostname = "${var.kafka_hostname}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.pipes_enabled}"
 }
 
@@ -67,6 +77,8 @@ module "kinesis-span-collector" {
   kinesis_stream_name = "${var.kinesis_stream_name}"
   kinesis_stream_region = "${var.kinesis_stream_region}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_port = "${var.graphite_hostname}"
+  graphite_hostname = "${var.graphite_port}"
   enabled = "${var.kinesis_span_collector_enabled}"
 }
 

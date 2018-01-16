@@ -8,7 +8,7 @@ module "k8s-addons" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   traefik_node_port = "${var.reverse_proxy_port}"
   haystack_domain_name = "${var.haystack_domain_name}"
-  add_logging_addons = true
+  add_logging_addons = false
   add_monitoring_addons = false
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "2"

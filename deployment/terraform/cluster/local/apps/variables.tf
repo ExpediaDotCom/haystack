@@ -55,7 +55,7 @@ variable "kinesis_stream_region" {
   default = ""
 }
 variable "kinesis_stream_name" {
-  default = ""
+  default = "haystack-spans"
 }
 
 # ui config
