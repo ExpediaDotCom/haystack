@@ -17,9 +17,6 @@
     "instance_type": "{{user `instance_type`}}",
     "ssh_username": "ec2-user",
     "ami_name": "{{user `ami_name`}}-{{timestamp}}",
-    "ssh_bastion_host" : "bastion.us-west-2.test.monitoring.expedia.com",
-    "ssh_bastion_username" : "aysen",
-    "ssh_bastion_password": "Posto_3781",
     "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
     "tags": {
       "type": "{{user `ami_name`}}",
