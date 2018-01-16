@@ -46,7 +46,7 @@ variable "kinesis_span_collector_instances" {
   default = "1"
 }
 variable "kinesis_span_collector_enabled" {
-  default = "true"
+  default = false
 }
 variable "kinesis_span_collector_version" {
   default = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
@@ -55,7 +55,10 @@ variable "kinesis_stream_region" {
   default = ""
 }
 variable "kinesis_stream_name" {
-  default = "haystack-spans"
+  default = ""
+}
+variable "kinesis_span_collector_sts_role_arn" {
+  default = ""
 }
 
 # ui config

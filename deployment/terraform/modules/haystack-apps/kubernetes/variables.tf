@@ -35,6 +35,7 @@ variable "kinesis_span_collector_enabled" {}
 variable "kinesis_span_collector_version" {}
 variable "kinesis_stream_region" {}
 variable "kinesis_stream_name" {}
+variable "kinesis_span_collector_sts_role_arn" {}
 
 # ui config
 variable "haystack_ui_instances" {}
