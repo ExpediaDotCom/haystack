@@ -40,6 +40,8 @@ module "haystack-apps" {
   kinesis_span_collector_version = "${var.kinesis_span_collector_version}"
   kinesis_stream_region = "${var.kinesis_stream_region}"
   kinesis_stream_name = "${var.kinesis_stream_name}"
+  kinesis_span_collector_sts_role_arn = "${var.kinesis_span_collector_sts_role_arn}"
+
 
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"

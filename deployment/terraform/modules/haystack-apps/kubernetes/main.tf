@@ -69,6 +69,7 @@ module "pipes-kafka-producer" {
 }
 
 # collectors
+
 module "kinesis-span-collector" {
   source = "kinesis-span-collector"
   image = "expediadotcom/haystack-kinesis-span-collector:${var.kinesis_span_collector_version}"
@@ -80,6 +81,7 @@ module "kinesis-span-collector" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   enabled = "${var.kinesis_span_collector_enabled}"
+  sts_role_arn = "${var.kinesis_span_collector_sts_role_arn}"
 }
 
 # web ui
