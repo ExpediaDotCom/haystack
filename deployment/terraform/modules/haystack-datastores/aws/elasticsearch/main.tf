@@ -1,5 +1,5 @@
 locals {
-  haystack_index_store_domain_name = "haystack-index-store"
+  haystack_index_store_domain_name = "${var.haystack_cluster_name}-index-store"
   haystack_index_store_access_policy_file_path = "${path.module}/data/haystack-index-store-es-policy"
 }
 resource "aws_elasticsearch_domain" "haystack_index_store" {

@@ -16,6 +16,7 @@ module "cassandra" {
   cassandra_ssh_key_pair_name = "${var.aws_ssh_key}"
   cassandra_graphite_host = "${local.graphite_hostname}"
   cassandra_graphite_port = "${local.graphite_port}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 module "es" {
@@ -24,6 +25,7 @@ module "es" {
   haystack_index_store_master_instance_type = "${var.haystack_index_store_es_master_instance_type}"
   haystack_index_store_worker_instance_count = "${var.haystack_index_store_instance_count}"
   haystack_index_store_worker_instance_type = "${var.haystack_index_store_worker_instance_type}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 module "kafka" {
@@ -38,4 +40,5 @@ module "kafka" {
   kafka_ssh_key_pair_name = "${var.aws_ssh_key}"
   kafka_graphite_host = "${local.graphite_hostname}"
   kafka_graphite_port = "${local.graphite_port}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }

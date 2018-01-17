@@ -17,13 +17,14 @@ locals {
   cassandra_ami = "${var.cassandra_node_image == "" ? data.aws_ami.haystack-cassandra-base-ami.image_id : var.cassandra_node_image }"
   cassandra_config_yaml_path = "/etc/cassandra/default.conf/cassandra.yaml"
   cassandra_non_seed_node_count = "${var.cassandra_node_count - 1}"
-  cassandra_cname = "haystack-cassandra"
+  cassandra_cname = "${var.haystack_cluster_name}-cassandra"
   cassandra_ssh_user = "ec2-user"
 }
 
 module "cassandra-security-groups" {
   source = "security_groups"
   cassandra_aws_vpc_id= "${var.cassandra_aws_vpc_id}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 data "template_file" "cassandra_seed_user_data" {
@@ -44,7 +45,7 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
   key_name = "${var.cassandra_ssh_key_pair_name}"
 
   tags {
-    Name = "haystack-cassandra-instance"
+    Name = "${var.haystack_cluster_name}-cassandra-instance"
     NodeType = "seed"
   }
 
@@ -77,7 +78,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   key_name = "${var.cassandra_ssh_key_pair_name}"
 
   tags {
-    Name = "haystack-cassandra-instance"
+    Name = "${var.haystack_cluster_name}-cassandra-instance"
     NodeType = "non-seed"
     Seed = "${aws_instance.haystack-cassandra-seed-node.private_ip}"
   }

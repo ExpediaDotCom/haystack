@@ -15,13 +15,14 @@ data "aws_ami" "haystack-kafka-base-ami" {
 
 locals {
   kafka_broker_ami = "${var.kafka_broker_image == "" ? data.aws_ami.haystack-kafka-base-ami.image_id : var.kafka_broker_image }"
-  kafka_cname = "haystack-kafka"
+  kafka_cname = "${var.haystack_cluster_name}-kafka"
   kafka_port = "9092"
 }
 
 module "kafka-security-groups" {
   source = "security_groups"
   kafka_aws_vpc_id= "${var.kafka_aws_vpc_id}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 data "template_file" "kafka_broker_user_data" {
@@ -47,7 +48,7 @@ resource "aws_instance" "haystack-kafka-broker" {
   key_name = "${var.kafka_ssh_key_pair_name}"
 
   tags {
-    Name = "haystack-kafka-instance"
+    Name = "${var.haystack_cluster_name}-kafka-instance"
     NodeType = "seed"
   }
 

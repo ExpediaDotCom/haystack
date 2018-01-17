@@ -11,3 +11,4 @@ variable "cassandra_hosted_zone_id" {}
 variable "cassandra_ssh_key_pair_name" {}
 variable "cassandra_graphite_host" {}
 variable "cassandra_graphite_port" {}
+variable "haystack_cluster_name" {}

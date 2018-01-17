@@ -23,6 +23,7 @@ module "security_groups" {
   k8s_vpc_id = "${var.k8s_aws_vpc_id}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 module "iam_roles" {
@@ -30,6 +31,7 @@ module "iam_roles" {
   k8s_hosted_zone_id = "${var.k8s_hosted_zone_id}"
   k8s_s3_bucket_name = "${var.k8s_s3_bucket_name}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 module "asg" {
   source = "asg"
@@ -46,6 +48,7 @@ module "asg" {
   k8s_aws_nodes_subnet_ids = "${var.k8s_aws_nodes_subnet_ids}"
   master_security_groups = "${module.security_groups.master_security_group_ids}"
   master_iam-instance-profile_arn = "${module.iam_roles.masters_iam-instance-profile_arn}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 module "elbs" {

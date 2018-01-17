@@ -8,7 +8,7 @@ locals {
 
 
 resource "aws_autoscaling_group" "master-1" {
-  name = "${local.k8s_master_1_instance_group_name}"
+  name = "${var.haystack_cluster_name}-master-1}"
   launch_configuration = "${aws_launch_configuration.master-1.id}"
   max_size = 1
   min_size = 1
@@ -48,7 +48,7 @@ resource "aws_autoscaling_group" "master-1" {
 }
 
 resource "aws_autoscaling_group" "master-2" {
-  name = "${local.k8s_master_2_instance_group_name}"
+  name = "${var.haystack_cluster_name}-master-2}"
   launch_configuration = "${aws_launch_configuration.master-2.id}"
   max_size = 1
   min_size = 1
@@ -88,7 +88,7 @@ resource "aws_autoscaling_group" "master-2" {
 }
 
 resource "aws_autoscaling_group" "master-3" {
-  name = "${local.k8s_master_3_instance_group_name}"
+  name = "${var.haystack_cluster_name}-master-3}"
   launch_configuration = "${aws_launch_configuration.master-3.id}"
   max_size = 1
   min_size = 1
@@ -128,7 +128,7 @@ resource "aws_autoscaling_group" "master-3" {
 }
 
 resource "aws_autoscaling_group" "nodes" {
-  name = "nodes.${var.k8s_cluster_name}"
+  name = "${var.haystack_cluster_name}-nodes"
   launch_configuration = "${aws_launch_configuration.nodes.id}"
   max_size = "${var.k8s_node_instance_count}"
   min_size = "${var.k8s_node_instance_count}"
@@ -170,7 +170,7 @@ data "template_file" "master-1-user-data" {
   }
 }
 resource "aws_launch_configuration" "master-1" {
-  name_prefix = "${local.k8s_master_1_instance_group_name}"
+  name_prefix = "${var.haystack_cluster_name}-master-1}"
   image_id = "${var.k8s_master_ami}"
   instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
@@ -201,7 +201,7 @@ data "template_file" "master-2-user-data" {
 }
 
 resource "aws_launch_configuration" "master-2" {
-  name_prefix = "${local.k8s_master_2_instance_group_name}"
+  name_prefix = "${var.haystack_cluster_name}-master-2}"
   image_id = "${var.k8s_master_ami}"
   instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
@@ -233,7 +233,7 @@ data "template_file" "master-3-user-data" {
 }
 
 resource "aws_launch_configuration" "master-3" {
-  name_prefix = "${local.k8s_master_3_instance_group_name}"
+  name_prefix = "${var.haystack_cluster_name}-master-3}"
   image_id = "${var.k8s_master_ami}"
   instance_type = "${var.k8s_master_instance_type}"
   key_name = "${var.k8s_aws_ssh_key}"
