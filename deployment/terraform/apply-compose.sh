@@ -9,8 +9,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 function display_help() {
     echo "Usage: $0 [option...] " >&2
     echo
-    echo "   -a, --action               defines the action for deploying haystack components. possible values: install|uninstall, default: install"
-    echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws and local, default: local"
+    echo "   -a, --action               defines the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps. Default: install-all"
+    echo "   -c, --cluster-type         choose the cluster-type settings for cluster. possible values: aws | local, default: local"
     echo "   -if, --infravars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
     echo "   -ib, --infrabackend-file-path     values which need to be passed to terraform s3 backend in a tfvars file(required for aws deployment) eg : bucket, region, default:cluster/aws|local/backend.tfvars "
     echo "   -af, --appvars-file-path     values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.tfvars "
@@ -65,7 +65,7 @@ do
             SKIP_APPROVAL="$2"
           fi
           shift 2
-          ;;      
+          ;;
       -h | --help)
           display_help  # Call your function
           exit 0
@@ -77,7 +77,7 @@ do
       -*)
           echo "Error: Unknown option: $1" >&2
           ## or call function display_help
-          exit 1 
+          exit 1
           ;;
       *)  # No more options
           break
@@ -111,14 +111,13 @@ function verifyArgs() {
 function setThirdPartySoftwareBasePath() {
  case "$(uname -s)" in
     Darwin)
-      THIRD_PARTY_SOFTWARE_PATH=$DIR/third_party_softwares/mac/x64  
+      THIRD_PARTY_SOFTWARE_PATH=$DIR/third_party_softwares/mac/x64
       ;;
     Linux)
-      THIRD_PARTY_SOFTWARE_PATH=$DIR/third_party_softwares/linux/x64   
+      THIRD_PARTY_SOFTWARE_PATH=$DIR/third_party_softwares/linux/x64
       ;;
  esac
 }
-
 
 function downloadThirdPartySoftwares() {
 
@@ -136,7 +135,6 @@ function downloadThirdPartySoftwares() {
 function command_exists () {
     type "$1" &> /dev/null ;
 }
-
 
 function applyActionOnComponents() {
     case "$ACTION" in
@@ -190,7 +188,6 @@ function uninstallComponents() {
    $TERRAFORM destroy $FORCE_FLAG -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
 }
 
-
 function uninstallInfrastructure() {
  cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
  if [ "$SKIP_APPROVAL" = "true" ];then
@@ -213,7 +210,6 @@ function uninstallInfrastructure() {
 
    $TERRAFORM destroy $FORCE_FLAG -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
 }
-
 
 function installInfrastructure() {
 
@@ -267,7 +263,6 @@ function installComponents() {
     $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
 }
 
-
 function verifyK8sCluster() {
   if [[ $CLUSTER_TYPE == 'local' ]]; then
     if command_exists minikube; then
@@ -289,7 +284,7 @@ function verifyK8sCluster() {
 # sanitize the arguments passed to the script, and set the defaults correctly
 verifyArgs
 
-#verify minikube is running in local mode
+# verify minikube is running in local mode
 verifyK8sCluster
 
 # download third party softwares like kubectl, gomplate, jq etc.
