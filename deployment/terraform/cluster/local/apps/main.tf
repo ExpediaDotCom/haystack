@@ -14,8 +14,6 @@ module "haystack-apps" {
   cassandra_port = "${data.terraform_remote_state.haystack_inrastructure.cassandra_port}"
   kafka_hostname = "${data.terraform_remote_state.haystack_inrastructure.kafka_hostname}"
   kafka_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
-  metrictank_hostname = "${data.terraform_remote_state.haystack_inrastructure.metrictank_hostname}"
-  metrictank_port = "${data.terraform_remote_state.haystack_inrastructure.metrictank_port}"
   graphite_hostname = "${data.terraform_remote_state.haystack_inrastructure.graphite_hostname}"
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"

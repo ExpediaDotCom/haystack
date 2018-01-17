@@ -1,3 +1,9 @@
+module "zookeeper" {
+  source = "zookeeper"
+  replicas = "1"
+  namespace = "${var.namespace}"
+}
+
 locals {
   app_name = "kafka-service"
   service_port = 9092
@@ -46,7 +52,7 @@ resource "kubernetes_replication_controller" "haystack-rc" {
         }
         env {
           name = "KAFKA_ZOOKEEPER_CONNECT"
-          value = "${var.zk_connection_string}"
+          value = "${module.zookeeper.zookeeper_service_name}:${module.zookeeper.zookeeper_service_port}"
         }
         env {
           name = "KAFKA_CREATE_TOPICS"

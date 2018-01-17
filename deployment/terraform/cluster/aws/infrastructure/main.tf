@@ -36,7 +36,7 @@ module "k8s-addons" {
   es_storage_volume = "100Gi"
 }
 module "haystack-infrastructure" {
-  source = "../../../modules/haystack-infrastructure/aws"
+  source = "../../../modules/haystack-datastores/aws"
   aws_utilities_subnet = "${var.aws_utilities_subnet}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"

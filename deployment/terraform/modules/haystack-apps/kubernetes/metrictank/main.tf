@@ -2,7 +2,9 @@ locals {
   app_name = "metrictank"
   service_port = 6060
   container_port = 6060
-  image = "raintank/metrictank:latest"
+  image = "grafana/metrictank:latest"
+  count = "${var.enabled?1:0}"
+
 }
 
 resource "kubernetes_service" "haystack-service" {
