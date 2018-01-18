@@ -1,7 +1,7 @@
 //api elb security group
 resource "aws_security_group" "api-elb" {
   name = "api-elb.${var.haystack_cluster_name}"
-  vpc_id = "${var.k8s_vpc_id}"
+  vpc_id = "${var.aws_vpc_id}"
   description = "Security group for api ELB"
 
   ingress {
@@ -33,7 +33,7 @@ resource "aws_security_group" "api-elb" {
 //node elb security group
 resource "aws_security_group" "nodes-elb" {
   name = "nodes-elb.${var.haystack_cluster_name}"
-  vpc_id = "${var.k8s_vpc_id}"
+  vpc_id = "${var.aws_vpc_id}"
   description = "Security group for nodes ELB"
   ingress {
     from_port = 80
@@ -83,7 +83,7 @@ resource "aws_security_group_rule" "all-node-to-node" {
 
 resource "aws_security_group" "nodes" {
   name = "nodes.${var.haystack_cluster_name}"
-  vpc_id = "${var.k8s_vpc_id}"
+  vpc_id = "${var.aws_vpc_id}"
   description = "Security group for nodes"
 
   ingress {
@@ -129,7 +129,7 @@ resource "aws_security_group_rule" "all-master-to-master" {
 }
 resource "aws_security_group" "masters" {
   name = "masters.${var.haystack_cluster_name}"
-  vpc_id = "${var.k8s_vpc_id}"
+  vpc_id = "${var.aws_vpc_id}"
   description = "Security group for masters"
 
   ingress {

@@ -22,8 +22,8 @@ resource "aws_iam_role" "nodes-role" {
 data "template_file" "masters-iam-role-policy-template" {
   template = "${file("${path.module}/templates/masters_iam-role-policy.tpl")}"
   vars {
-    aws_hosted_zone_id = "${var.k8s_hosted_zone_id}"
-    s3_bucket_name = "${var.k8s_s3_bucket_name}"
+    aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
+    s3_bucket_name = "${var.s3_bucket_name}"
   }
 }
 resource "aws_iam_role_policy" "masters-policy" {
@@ -36,7 +36,7 @@ resource "aws_iam_role_policy" "masters-policy" {
 data "template_file" "nodes-iam-role-policy-template" {
   template = "${file("${path.module}/templates/nodes_iam-role-policy.tpl")}"
   vars {
-    s3_bucket_name = "${var.k8s_s3_bucket_name}"
+    s3_bucket_name = "${var.s3_bucket_name}"
   }
 }
 resource "aws_iam_role_policy" "nodes-policy" {

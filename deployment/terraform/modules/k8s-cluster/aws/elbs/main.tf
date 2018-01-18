@@ -9,9 +9,9 @@ resource "aws_elb" "api-elb" {
   }
 
   security_groups = [
-    "${var.k8s_elb_api_security_groups}"]
+    "${var.elb_api_security_groups}"]
   subnets = [
-    "${var.k8s_elb_subnet}"]
+    "${var.aws_elb_subnet}"]
   internal = false
 
   health_check = {
@@ -45,9 +45,9 @@ resource "aws_elb" "nodes-elb" {
   }
 
   security_groups = [
-    "${var.k8s_nodes_api_security_groups}"]
+    "${var.nodes_api_security_groups}"]
   subnets = [
-    "${var.k8s_elb_subnet}"]
+    "${var.aws_elb_subnet}"]
   internal = false
 
   health_check = {
@@ -76,7 +76,7 @@ resource "aws_route53_record" "api-elb-route53" {
   records = [
     "${aws_elb.api-elb.dns_name}"]
   ttl = 300
-  zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
+  zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   //this would ensure that the cluster is up and configured correctly
   provisioner "local-exec" {
     command = "for i in {1..50}; do ${var.kubectl_executable_name} get nodes --context ${var.k8s_cluster_name} -- && break || sleep 15; done"
@@ -93,7 +93,7 @@ resource "aws_route53_record" "nodes-elb-route53" {
   records = [
     "${aws_elb.nodes-elb.dns_name}"]
   ttl = 300
-  zone_id = "/hostedzone/${var.k8s_hosted_zone_id}"
+  zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   depends_on = [
     "aws_route53_record.api-elb-route53",
     "aws_autoscaling_attachment.nodes"]
