@@ -1,6 +1,6 @@
 resource "aws_security_group" "haystack-cassandra-nodes" {
   name = "${var.haystack_cluster_name}-cassandra-node-sg"
-  vpc_id = "${var.cassandra_aws_vpc_id}"
+  vpc_id = "${var.aws_vpc_id}"
   description = "Security group for haystack cassandra nodes"
 
   tags = {

@@ -14,16 +14,16 @@ data "aws_ami" "haystack-cassandra-base-ami" {
 }
 
 locals {
-  cassandra_ami = "${var.cassandra_node_image == "" ? data.aws_ami.haystack-cassandra-base-ami.image_id : var.cassandra_node_image }"
+  cassandra_ami = "${var.node_image == "" ? data.aws_ami.haystack-cassandra-base-ami.image_id : var.node_image }"
   cassandra_config_yaml_path = "/etc/cassandra/default.conf/cassandra.yaml"
-  cassandra_non_seed_node_count = "${var.cassandra_node_count - 1}"
+  cassandra_non_seed_node_count = "${var.node_count - 1}"
   cassandra_cname = "${var.haystack_cluster_name}-cassandra"
   cassandra_ssh_user = "ec2-user"
 }
 
 module "cassandra-security-groups" {
   source = "security_groups"
-  cassandra_aws_vpc_id= "${var.cassandra_aws_vpc_id}"
+  aws_vpc_id= "${var.aws_vpc_id}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
@@ -31,18 +31,18 @@ data "template_file" "cassandra_seed_user_data" {
   template = "${file("${path.module}/data/seed_node_user_data_sh.tpl")}"
 
   vars {
-    haystack_graphite_host = "${var.cassandra_graphite_host}"
-    haystack_graphite_port = "${var.cassandra_graphite_port}"
+    haystack_graphite_host = "${var.graphite_host}"
+    haystack_graphite_port = "${var.graphite_port}"
   }
 }
 
 // create seed node
 resource "aws_instance" "haystack-cassandra-seed-node" {
   ami = "${local.cassandra_ami}"
-  instance_type = "${var.cassandra_node_instance_type}"
-  subnet_id = "${var.cassandra_aws_subnet}"
+  instance_type = "${var.node_instance_type}"
+  subnet_id = "${var.aws_subnet}"
   security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
-  key_name = "${var.cassandra_ssh_key_pair_name}"
+  key_name = "${var.aws_ssh_key_pair_name}"
 
   tags = {
     Product = "Haystack"
@@ -55,7 +55,7 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = "${var.cassandra_node_volume_size}"
+    volume_size = "${var.node_volume_size}"
     delete_on_termination = false
   }
 
@@ -67,8 +67,8 @@ data "template_file" "cassandra_non_seed_user_data" {
 
   vars {
     seed_ip = "${aws_instance.haystack-cassandra-seed-node.private_ip}"
-    haystack_graphite_host = "${var.cassandra_graphite_host}"
-    haystack_graphite_port = "${var.cassandra_graphite_port}"
+    haystack_graphite_host = "${var.graphite_host}"
+    haystack_graphite_port = "${var.graphite_port}"
   }
 }
 
@@ -76,10 +76,10 @@ data "template_file" "cassandra_non_seed_user_data" {
 resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   count = "${local.cassandra_non_seed_node_count}"
   ami = "${local.cassandra_ami}"
-  instance_type = "${var.cassandra_node_instance_type}"
-  subnet_id = "${var.cassandra_aws_subnet}"
+  instance_type = "${var.node_instance_type}"
+  subnet_id = "${var.aws_subnet}"
   security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
-  key_name = "${var.cassandra_ssh_key_pair_name}"
+  key_name = "${var.aws_ssh_key_pair_name}"
 
   tags {
     Product = "Haystack"
@@ -93,7 +93,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = "${var.cassandra_node_volume_size}"
+    volume_size = "${var.node_volume_size}"
     delete_on_termination = false
   }
 
@@ -102,7 +102,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
 
 // create cname for newly created cassandra cluster
 resource "aws_route53_record" "haystack-cassandra-cname" {
-  zone_id = "${var.cassandra_hosted_zone_id}"
+  zone_id = "${var.aws_hosted_zone_id}"
   name    = "${local.cassandra_cname}"
   type    = "A"
   ttl     = "300"
