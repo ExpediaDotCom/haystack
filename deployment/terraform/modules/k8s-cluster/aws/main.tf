@@ -26,7 +26,6 @@ module "security_groups" {
   reverse_proxy_port = "${var.reverse_proxy_port}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-  common_tags = "${local.common_tags}"
 }
 
 module "iam_roles" {
