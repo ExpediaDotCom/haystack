@@ -3,6 +3,7 @@ data "terraform_remote_state" "haystack_inrastructure" {
   config {
     bucket = "${var.s3_bucket_name}"
     key = "terraform/${var.haystack_cluster_name}-infrastructure"
+    region = "us-west-2"
   }
 }
 
