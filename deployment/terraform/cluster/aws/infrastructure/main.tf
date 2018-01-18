@@ -22,12 +22,15 @@ module "haystack-k8s" {
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
-  k8s_cluster_name = "${module.haystack-k8s.cluster_name}"
+  kubectl_context_name = "${module.haystack-k8s.cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   traefik_node_port = "${var.traefik_node_port}"
+  base_domain_name = "${var.aws_domain_name}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
   haystack_domain_name = "${module.haystack-k8s.cluster_name}"
   add_monitoring_addons = true
   add_logging_addons = true
+  add_dashboard_addons = true
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "2"
   k8s_storage_class = "default"

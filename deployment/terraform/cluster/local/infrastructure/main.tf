@@ -4,12 +4,15 @@ locals {
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
-  k8s_cluster_name = "${var.k8s_minikube_cluster_name}"
+  kubectl_context_name = "${var.k8s_minikube_cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
+  haystack_cluster_name = "${var.k8s_minikube_cluster_name}"
+  base_domain_name = "${var.haystack_domain_name}"
   traefik_node_port = "${var.reverse_proxy_port}"
   haystack_domain_name = "${var.haystack_domain_name}"
   add_logging_addons = false
   add_monitoring_addons = false
+  add_dashboard_addons = false
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "2"
 }

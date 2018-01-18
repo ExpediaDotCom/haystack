@@ -15,11 +15,11 @@ data "template_file" "traefik_cluster_addon_config" {
 
 resource "null_resource" "haystack_app_namespace" {
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} create namespace ${local.k8s_app_namespace} --context ${var.k8s_cluster_name}"
+    command = "${var.kubectl_executable_name} create namespace ${local.k8s_app_namespace} --context ${var.kubectl_context_name}"
   }
 
   provisioner "local-exec" {
-    command = "${var.kubectl_executable_name} delete namespace ${local.k8s_app_namespace} --context ${var.k8s_cluster_name}"
+    command = "${var.kubectl_executable_name} delete namespace ${local.k8s_app_namespace} --context ${var.kubectl_context_name}"
     when = "destroy"
   }
 }
@@ -29,11 +29,11 @@ resource "null_resource" "traefik_cluster_addon" {
     template = "${data.template_file.traefik_cluster_addon_config.rendered}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.traefik_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.k8s_cluster_name}"
+    command = "echo '${data.template_file.traefik_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.kubectl_context_name}"
   }
 
   provisioner "local-exec" {
-    command = "echo '${data.template_file.traefik_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.k8s_cluster_name}"
+    command = "echo '${data.template_file.traefik_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
     when = "destroy"
   }
   depends_on = [
