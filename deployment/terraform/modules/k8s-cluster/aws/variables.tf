@@ -1,12 +1,10 @@
 variable "aws_ssh_key" {}
 variable "s3_bucket_name" {}
-variable "aws_zone" {}
 variable "aws_vpc_id" {}
-variable "aws_nodes_subnet_ids" {}
-variable "aws_utility_subnet_ids" {}
+variable "aws_nodes_subnet" {}
+variable "aws_utility_subnet" {}
 variable "aws_hosted_zone_id" {}
 variable "aws_domain_name" {}
-variable "aws_region" {}
 
 variable "node_instance_type" {}
 variable "node_instance_count" {}

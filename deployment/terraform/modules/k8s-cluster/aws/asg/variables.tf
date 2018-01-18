@@ -5,7 +5,6 @@ variable "aws_nodes_subnet_ids" {}
 variable "nodes_instance_type" {}
 variable "nodes_instance_count" {}
 variable "masters_instance_type" {}
-variable "aws_region" {}
 variable "k8s_cluster_name" {}
 variable "masters_iam-instance-profile_arn" {}
 variable "haystack_cluster_name" {}

@@ -5,7 +5,6 @@ locals {
 
 module "cassandra" {
   source = "cassandra"
-  aws_region = "${var.aws_region}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_subnet = "${var.aws_nodes_subnet}"
   aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
@@ -33,7 +32,6 @@ module "es" {
 module "kafka" {
   source = "kafka"
   aws_vpc_id = "${var.aws_vpc_id}"
-  aws_region = "${var.aws_region}"
   broker_count = "${var.kafka_broker_count}"
   broker_instance_type = "${var.kafka_broker_instance_type}"
   broker_volume_size = "${var.kafka_broker_volume_size}"

@@ -44,9 +44,9 @@ resource "aws_instance" "haystack-kafka-broker" {
   ami = "${local.kafka_broker_ami}"
   instance_type = "${var.broker_instance_type}"
   subnet_id = "${var.aws_subnet}"
-  security_groups = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
+  vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   key_name = "${var.aws_ssh_key_pair_name}"
-
+  associate_public_ip_address = false
   tags = {
     Product = "Haystack"
     Component = "Kafka"

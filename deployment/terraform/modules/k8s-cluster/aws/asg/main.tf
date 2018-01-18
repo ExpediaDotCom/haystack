@@ -8,7 +8,7 @@ locals {
 
 
 resource "aws_autoscaling_group" "master-1" {
-  name = "${var.haystack_cluster_name}-master-1}"
+  name = "${var.haystack_cluster_name}-master-1"
   launch_configuration = "${aws_launch_configuration.master-1.id}"
   max_size = 1
   min_size = 1
@@ -16,15 +16,39 @@ resource "aws_autoscaling_group" "master-1" {
     "${var.aws_nodes_subnet_ids}"]
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
-    Name = "${var.haystack_cluster_name}-k8s-masters-1"
+  tags =[
+    {
+      key = "Product"
+      value = "Haystack"
+      propagate_at_launch = true
+    },
+    {
+      key = "Component"
+      value = "K8s"
+      propagate_at_launch = true
+    },
+    {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+    },
+    {
+      key = "Role"
+      value = "${var.haystack_cluster_name}-k8s-masters"
+      propagate_at_launch = true
+    },
+    {
+      key = "Name"
+      value = "${var.haystack_cluster_name}-k8s-masters-1"
+      propagate_at_launch = true
+    },
     //this tag is required by protokube(kops) to set up kubecfg on that host, change with caution
-    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup" = "${local.k8s_master_1_instance_group_name}"
-  }
+    {
+      key =  "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
+      value = "${local.k8s_master_1_instance_group_name}"
+      propagate_at_launch = true
+    }
+  ]
 
 
 
@@ -39,22 +63,46 @@ resource "aws_autoscaling_group" "master-1" {
 }
 
 resource "aws_autoscaling_group" "master-2" {
-  name = "${var.haystack_cluster_name}-master-2}"
+  name = "${var.haystack_cluster_name}-master-2"
   launch_configuration = "${aws_launch_configuration.master-2.id}"
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet_ids}"]
-
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
-    Name = "${var.haystack_cluster_name}-k8s-masters-2"
+  tags =[
+    {
+      key = "Product"
+      value = "Haystack"
+      propagate_at_launch = true
+    },
+    {
+      key = "Component"
+      value = "K8s"
+      propagate_at_launch = true
+    },
+    {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+    },
+    {
+      key = "Role"
+      value = "${var.haystack_cluster_name}-k8s-masters"
+      propagate_at_launch = true
+    },
+    {
+      key = "Name"
+      value = "${var.haystack_cluster_name}-k8s-masters-2"
+      propagate_at_launch = true
+    },
     //this tag is required by protokube(kops) to set up kubecfg on that host, change with caution
-    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup" = "${local.k8s_master_2_instance_group_name}"
-  }
+    {
+      key =  "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
+      value = "${local.k8s_master_2_instance_group_name}"
+      propagate_at_launch = true
+    }
+  ]
+
 
 
 
@@ -68,23 +116,46 @@ resource "aws_autoscaling_group" "master-2" {
 }
 
 resource "aws_autoscaling_group" "master-3" {
-  name = "${var.haystack_cluster_name}-master-3}"
+  name = "${var.haystack_cluster_name}-master-3"
   launch_configuration = "${aws_launch_configuration.master-3.id}"
   max_size = 1
   min_size = 1
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet_ids}"]
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
-    Name = "${var.haystack_cluster_name}-k8s-masters-3"
-
+  tags =[
+    {
+      key = "Product"
+      value = "Haystack"
+      propagate_at_launch = true
+    },
+    {
+      key = "Component"
+      value = "K8s"
+      propagate_at_launch = true
+    },
+    {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+    },
+    {
+      key = "Role"
+      value = "${var.haystack_cluster_name}-k8s-masters"
+      propagate_at_launch = true
+    },
+    {
+      key = "Name"
+      value = "${var.haystack_cluster_name}-k8s-masters-3"
+      propagate_at_launch = true
+    },
     //this tag is required by protokube(kops) to set up kubecfg on that host, change with caution
-    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup" = "${local.k8s_master_3_instance_group_name}"
-  }
+    {
+      key =  "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
+      value = "${local.k8s_master_3_instance_group_name}"
+      propagate_at_launch = true
+    }
+  ]
 
 
   depends_on = [
@@ -104,15 +175,39 @@ resource "aws_autoscaling_group" "nodes" {
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet_ids}"]
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-nodes"
-    Name = "${var.haystack_cluster_name}-k8s-nodes"
+  tags =[
+    {
+      key = "Product"
+      value = "Haystack"
+      propagate_at_launch = true
+    },
+    {
+      key = "Component"
+      value = "K8s"
+      propagate_at_launch = true
+    },
+    {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+    },
+    {
+      key = "Role"
+      value = "${var.haystack_cluster_name}-k8s-nodes"
+      propagate_at_launch = true
+    },
+    {
+      key = "Name"
+      value = "${var.haystack_cluster_name}-k8s-nodes"
+      propagate_at_launch = true
+    },
     //this tag is required by protokube(kops) to set up kubecfg on that host, change with caution
-    "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup" = "${local.k8s_nodes_instance_group_name}"
-  }
+    {
+      key =  "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
+      value = "${local.k8s_nodes_instance_group_name}"
+      propagate_at_launch = true
+    }
+  ]
 
 
 }
@@ -240,7 +335,6 @@ resource "aws_launch_configuration" "nodes" {
     create_before_destroy = true
   }
 }
-
 
 
 resource "aws_ebs_volume" "1-etcd-events" {

@@ -16,13 +16,11 @@ variable "traefik_node_port" {
   default = "32300"
 }
 
+
 variable "aws_region" {
   default = "us-west-2"
 }
 
-variable "aws_zone" {
-  default = "us-west-2c"
-}
 variable "aws_ssh_key" {
   default = "haystack"
 }
@@ -39,6 +37,7 @@ variable "haystack_index_store_worker_instance_type" {
 variable "haystack_index_store_instance_count" {
   default = 3
 }
+
 variable "haystack_index_store_master_count" {
   default = 3
 }
