@@ -1,5 +1,5 @@
 variable "kubectl_executable_name" {}
-variable "k8s_cluster_name" {}
+variable "kubectl_context_name" {}
 variable "minimum_masters" {}
 variable "storage_volume" {}
 variable "storage_class" {}
