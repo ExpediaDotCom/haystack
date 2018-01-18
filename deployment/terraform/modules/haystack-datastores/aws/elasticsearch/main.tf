@@ -1,5 +1,7 @@
 locals {
   haystack_index_store_domain_name = "${var.haystack_cluster_name}-index-store"
+  haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
+
 }
 
 module "security_groups" {
