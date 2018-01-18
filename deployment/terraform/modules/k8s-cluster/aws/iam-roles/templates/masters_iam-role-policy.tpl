@@ -112,7 +112,7 @@
         "s3:ListBucket"
       ],
       "Resource": [
-        "arn:aws:s3:::haystack-deployment-tf"
+        "arn:aws:s3:::${s3_bucket_name}"
       ]
     },
     {
