@@ -1,7 +1,7 @@
 variable "aws_ssh_key" {}
 variable "s3_bucket_name" {}
 variable "aws_zone" {}
-variable "aws_nodes_subnet_ids" {}
+variable "aws_nodes_subnet" {}
 variable "nodes_instance_type" {}
 variable "nodes_instance_count" {}
 variable "masters_instance_type" {}
