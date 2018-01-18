@@ -2,7 +2,7 @@ locals {
   app_name = "metrictank"
   service_port = 6060
   container_port = 6060
-  image = "grafana/metrictank:latest"
+  image = "raintank/metrictank:latest"
   count = "${var.enabled?1:0}"
 
 }
