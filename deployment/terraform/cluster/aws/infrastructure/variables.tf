@@ -47,7 +47,7 @@ variable "kafka_broker_count" {
   default = 1
 }
 variable "kafka_broker_volume_size" {
-  default = 32
+  default = 512
 }
 variable "kafka_broker_instance_type" {
   default = "m4.xlarge"
@@ -68,7 +68,7 @@ variable "cassandra_node_image" {
   default = ""
 }
 variable "cassandra_node_volume_size" {
-  default = 32
+  default = 512
 }
 variable "cassandra_node_instance_count" {
   default = 2
