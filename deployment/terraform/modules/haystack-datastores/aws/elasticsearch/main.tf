@@ -23,9 +23,11 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
   snapshot_options {
     automated_snapshot_start_hour = 23
   }
-
-  tags {
-    Domain = "${local.haystack_index_store_domain_name}"
+  tags = {
     Product = "Haystack"
+    Component = "ES"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${local.haystack_index_store_domain_name}"
+    Name =  "${local.haystack_index_store_domain_name}"
   }
 }

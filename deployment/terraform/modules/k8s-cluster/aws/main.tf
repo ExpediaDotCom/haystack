@@ -2,6 +2,7 @@ locals {
   k8s_cluster_name = "${var.haystack_cluster_name}-k8s.${var.k8s_base_domain_name}"
 }
 
+
 module "kops" {
   source = "kops"
   k8s_version = "${var.k8s_version}"
@@ -16,6 +17,7 @@ module "kops" {
   k8s_aws_zone = "${var.k8s_aws_zone}"
   k8s_aws_nodes_subnet = "${var.k8s_aws_nodes_subnet_ids}"
   k8s_aws_utilities_subnet = "${var.k8s_aws_utility_subnet_ids}"
+
 }
 
 module "security_groups" {

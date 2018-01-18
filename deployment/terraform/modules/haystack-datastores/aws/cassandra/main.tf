@@ -44,8 +44,12 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
   security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
   key_name = "${var.cassandra_ssh_key_pair_name}"
 
-  tags {
-    Name = "${var.haystack_cluster_name}-cassandra-instance"
+  tags = {
+    Product = "Haystack"
+    Component = "Cassandra"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-cassandra"
+    Name = "${var.haystack_cluster_name}-cassandra"
     NodeType = "seed"
   }
 
@@ -78,9 +82,13 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   key_name = "${var.cassandra_ssh_key_pair_name}"
 
   tags {
-    Name = "${var.haystack_cluster_name}-cassandra-instance"
-    NodeType = "non-seed"
+    Product = "Haystack"
+    Component = "Cassandra"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-cassandra"
+    Name = "${var.haystack_cluster_name}-cassandra"
     Seed = "${aws_instance.haystack-cassandra-seed-node.private_ip}"
+    NodeType = "non-seed"
   }
 
   root_block_device = {

@@ -20,9 +20,11 @@ resource "aws_security_group" "api-elb" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-master-elb}"
-
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-masters-elb"
+    Name = "${var.haystack_cluster_name}-k8s-masters-elb"
   }
 
 }
@@ -49,8 +51,11 @@ resource "aws_security_group" "nodes-elb" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-node-elb}"
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-nodes-elb"
+    Name = "${var.haystack_cluster_name}-k8s-nodes-elb"
 
   }
 }
@@ -104,9 +109,11 @@ resource "aws_security_group" "nodes" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-node}"
-
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-nodes"
+    Name = "${var.haystack_cluster_name}-k8s-nodes"
   }
 }
 
@@ -185,8 +192,11 @@ resource "aws_security_group" "masters" {
       "0.0.0.0/0"]
   }
   tags = {
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-master}"
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Name = "${var.haystack_cluster_name}-k8s-masters"
   }
 }
 

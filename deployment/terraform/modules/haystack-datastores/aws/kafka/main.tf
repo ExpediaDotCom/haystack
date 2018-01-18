@@ -47,11 +47,13 @@ resource "aws_instance" "haystack-kafka-broker" {
   security_groups = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   key_name = "${var.kafka_ssh_key_pair_name}"
 
-  tags {
-    Name = "${var.haystack_cluster_name}-kafka-instance"
-    NodeType = "seed"
+  tags = {
+    Product = "Haystack"
+    Component = "Kafka"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-kafka-brokers"
+    Name = "${var.haystack_cluster_name}-kafka-brokers-${count.index}"
   }
-
   root_block_device = {
     volume_type = "gp2"
     volume_size = "${var.kafka_broker_volume_size}"
