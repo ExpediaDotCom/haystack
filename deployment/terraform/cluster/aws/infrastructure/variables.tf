@@ -26,7 +26,7 @@ variable "aws_ssh_key" {
 }
 
 variable "haystack_index_store_es_master_instance_type" {
-  default = "r3.large.elasticsearch"
+  default = "m4.large.elasticsearch"
 }
 
 

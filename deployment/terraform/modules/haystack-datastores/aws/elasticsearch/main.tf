@@ -7,6 +7,14 @@ module "security_groups" {
   haystack_cluster_name = "${var.haystack_cluster_name}"
   aws_vpc_id = "${var.aws_vpc_id}"
 }
+
+data "template_file" "es_access_policy" {
+  template = "${file("${local.haystack_index_store_access_policy_file_path}")}"
+
+  vars {
+    es_domain_name = "${local.haystack_index_store_domain_name}"
+  }
+}
 resource "aws_elasticsearch_domain" "haystack_index_store" {
   domain_name = "${local.haystack_index_store_domain_name}"
   elasticsearch_version = "${var.haystack_index_store_es_version}"
@@ -30,6 +38,8 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
   advanced_options {
     "rest.action.multi.allow_explicit_index" = "true"
   }
+
+  access_policies = "${data.template_file.es_access_policy.rendered}"
 
   snapshot_options {
     automated_snapshot_start_hour = 23
