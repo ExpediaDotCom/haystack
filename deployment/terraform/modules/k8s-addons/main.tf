@@ -27,3 +27,12 @@ module "traefik-addon" {
   haystack_domain_name = "${var.haystack_domain_name}"
   traefik_node_port = "${var.traefik_node_port}"
 }
+
+module "dashboard-addon" {
+  source = "dashboard"
+  base_domain_name = "${var.base_domain_name}"
+  enabled = "${var.add_dashboard_addons}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+}
