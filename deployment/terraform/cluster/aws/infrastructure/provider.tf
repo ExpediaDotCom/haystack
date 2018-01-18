@@ -6,3 +6,4 @@ provider "aws" {
 data "aws_route53_zone" "haystack_dns_zone" {
   name = "${var.aws_domain_name}"
 }
+

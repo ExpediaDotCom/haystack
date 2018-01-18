@@ -41,9 +41,9 @@ resource "aws_instance" "haystack-cassandra-seed-node" {
   ami = "${local.cassandra_ami}"
   instance_type = "${var.node_instance_type}"
   subnet_id = "${var.aws_subnet}"
-  security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
+  vpc_security_group_ids = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
   key_name = "${var.aws_ssh_key_pair_name}"
-
+  associate_public_ip_address = false
   tags = {
     Product = "Haystack"
     Component = "Cassandra"
@@ -78,7 +78,8 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   ami = "${local.cassandra_ami}"
   instance_type = "${var.node_instance_type}"
   subnet_id = "${var.aws_subnet}"
-  security_groups = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
+  vpc_security_group_ids = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
+  associate_public_ip_address = false
   key_name = "${var.aws_ssh_key_pair_name}"
 
   tags {

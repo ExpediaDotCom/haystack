@@ -182,7 +182,6 @@ function uninstallComponents() {
         echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
         $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME  --state s3://$S3_BUCKET
         $TERRAFORM destroy $FORCE_FLAG -var-file=$APP_VARS_FILE -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET
-       ';lkjb 4qwl;-'tersw
         ;;
 
     local)

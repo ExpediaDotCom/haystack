@@ -3,7 +3,6 @@ variable "aws_vpc_id" {}
 variable "aws_nodes_subnet" {}
 variable "aws_utilities_subnet" {}
 variable "aws_hosted_zone_id" {}
-variable "aws_region" {}
 variable "aws_ssh_key" {}
 variable "haystack_index_store_es_master_instance_type" {}
 variable "haystack_index_store_worker_instance_type" {}
