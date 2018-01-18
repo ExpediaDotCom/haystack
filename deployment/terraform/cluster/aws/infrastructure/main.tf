@@ -35,8 +35,8 @@ module "k8s-addons" {
   influxdb_storage_volume = "2Gi"
   es_storage_volume = "100Gi"
 }
-module "haystack-infrastructure" {
-  source = "../../../modules/haystack-infrastructure/aws"
+module "haystack-datastores" {
+  source = "../../../modules/haystack-datastores/aws"
   aws_utilities_subnet = "${var.aws_utilities_subnet}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
@@ -56,4 +56,5 @@ module "haystack-infrastructure" {
   haystack_index_store_instance_count = "${var.haystack_index_store_instance_count}"
   haystack_index_store_worker_instance_type = "${var.haystack_index_store_worker_instance_type}"
   haystack_index_store_es_master_instance_type = "${var.haystack_index_store_es_master_instance_type}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }

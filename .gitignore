@@ -5,5 +5,3 @@
 deployment/k8s/third_party_softwares/*
 *.iml
 target/
-**/*.tfvars
-**/variables.json

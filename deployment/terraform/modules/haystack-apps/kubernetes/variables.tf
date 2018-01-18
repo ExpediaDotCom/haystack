@@ -8,8 +8,6 @@ variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "k8s_cluster_name" {}
 variable "k8s_app_namespace" {}
-variable "metrictank_hostname" {}
-variable "metrictank_port" {}
 
 # traces config
 variable "traces_enabled" {}

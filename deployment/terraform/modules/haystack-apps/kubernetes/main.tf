@@ -24,6 +24,17 @@ module "trace-reader" {
 }
 
 # trends apps
+
+//metrictank for haystack-apps
+module "metrictank" {
+  source = "metrictank"
+  replicas = "1"
+  cassandra_address = "${var.cassandra_hostname}:${var.cassandra_port}"
+  kafka_address = "${var.kafka_hostname}:${var.kafka_port}"
+  namespace = "${var.k8s_app_namespace}"
+  graphite_address = "${var.graphite_hostname}:${var.graphite_port}"
+  enabled = "true"
+}
 module "span-timeseries-transformer" {
   source = "span-timeseries-transformer"
   image = "expediadotcom/haystack-span-timeseries-transformer:${var.trends_version}"
@@ -93,6 +104,6 @@ module "ui" {
   k8s_cluster_name = "${var.k8s_cluster_name}"
   trace_reader_hostname = "${module.trace-reader.trace_reader_hostname}"
   trace_reader_service_port = "${module.trace-reader.trace_reader_service_port}"
-  metrictank_hostname = "${var.metrictank_hostname}"
-  metrictank_port = "${var.metrictank_port}"
+  metrictank_hostname = "${module.metrictank.metrictank_hostname}"
+  metrictank_port = "${module.metrictank.metrictank_port}"
 }

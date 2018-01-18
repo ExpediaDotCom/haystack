@@ -1,6 +1,6 @@
 //api elb security group
 resource "aws_security_group" "api-elb" {
-  name = "api-elb.${var.k8s_cluster_name}"
+  name = "api-elb.${var.haystack_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for api ELB"
 
@@ -21,6 +21,8 @@ resource "aws_security_group" "api-elb" {
   }
   tags = {
     KubernetesCluster = "${var.k8s_cluster_name}"
+    Name = "${var.haystack_cluster_name}-k8s-master-elb}"
+
   }
 
 }
@@ -28,7 +30,7 @@ resource "aws_security_group" "api-elb" {
 
 //node elb security group
 resource "aws_security_group" "nodes-elb" {
-  name = "nodes-elb.${var.k8s_cluster_name}"
+  name = "nodes-elb.${var.haystack_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for nodes ELB"
   ingress {
@@ -48,6 +50,8 @@ resource "aws_security_group" "nodes-elb" {
   }
   tags = {
     KubernetesCluster = "${var.k8s_cluster_name}"
+    Name = "${var.haystack_cluster_name}-k8s-node-elb}"
+
   }
 }
 
@@ -73,7 +77,7 @@ resource "aws_security_group_rule" "all-node-to-node" {
 }
 
 resource "aws_security_group" "nodes" {
-  name = "nodes.${var.k8s_cluster_name}"
+  name = "nodes.${var.haystack_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for nodes"
 
@@ -101,6 +105,8 @@ resource "aws_security_group" "nodes" {
   }
   tags = {
     KubernetesCluster = "${var.k8s_cluster_name}"
+    Name = "${var.haystack_cluster_name}-k8s-node}"
+
   }
 }
 
@@ -115,7 +121,7 @@ resource "aws_security_group_rule" "all-master-to-master" {
   protocol = "-1"
 }
 resource "aws_security_group" "masters" {
-  name = "masters.${var.k8s_cluster_name}"
+  name = "masters.${var.haystack_cluster_name}"
   vpc_id = "${var.k8s_vpc_id}"
   description = "Security group for masters"
 
@@ -180,7 +186,7 @@ resource "aws_security_group" "masters" {
   }
   tags = {
     KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "Haystack"
+    Name = "${var.haystack_cluster_name}-k8s-master}"
   }
 }
 
