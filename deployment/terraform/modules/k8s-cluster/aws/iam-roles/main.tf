@@ -1,20 +1,20 @@
 resource "aws_iam_instance_profile" "masters-profile" {
-  name = "masters.${var.k8s_cluster_name}"
+  name = "${var.haystack_cluster_name}-k8s-masters"
   role = "${aws_iam_role.masters-role.name}"
 }
 
 resource "aws_iam_instance_profile" "nodes-profile" {
-  name = "nodes.${var.k8s_cluster_name}"
+  name = "${var.haystack_cluster_name}-k8s-nodes"
   role = "${aws_iam_role.nodes-role.name}"
 }
 
 resource "aws_iam_role" "masters-role" {
-  name = "masters.${var.k8s_cluster_name}"
+  name = "${var.haystack_cluster_name}-k8s-masters"
   assume_role_policy = "${file("${path.module}/manifests/masters_iam-role.json")}"
 }
 
 resource "aws_iam_role" "nodes-role" {
-  name = "nodes.${var.k8s_cluster_name}"
+  name = "${var.haystack_cluster_name}-k8s-nodes"
   assume_role_policy = "${file("${path.module}/manifests/nodes_iam-role.json")}"
 }
 

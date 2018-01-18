@@ -4,7 +4,12 @@ resource "aws_security_group" "haystack-cassandra-nodes" {
   description = "Security group for haystack cassandra nodes"
 
   tags = {
-    Name = "haystack-cassandra"
+    Product = "Haystack"
+    Component = "Cassandra"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-cassandra"
+    Name = "${var.haystack_cluster_name}-cassandra"
+    NodeType = "seed"
   }
 }
 

@@ -1,10 +1,14 @@
 resource "aws_security_group" "haystack-kafka" {
-  name = "${var.haystack_cluster_name}-kafka-brokers-sg"
+  name = "${var.haystack_cluster_name}-kafka-brokers"
   vpc_id = "${var.kafka_aws_vpc_id}"
   description = "Security group for haystack kafka brokers"
 
   tags = {
-    Name = "haystack-kafka-brokers"
+    Product = "Haystack"
+    Component = "Kafka"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-kafka-brokers"
+    Name = "${var.haystack_cluster_name}-kafka-brokers"
   }
 }
 

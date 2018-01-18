@@ -25,8 +25,11 @@ resource "aws_elb" "api-elb" {
   idle_timeout = 300
 
   tags = {
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "api.${var.k8s_cluster_name}"
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Name = "${var.haystack_cluster_name}-k8s-masters"
   }
 }
 
@@ -58,8 +61,11 @@ resource "aws_elb" "nodes-elb" {
   idle_timeout = 300
 
   tags = {
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    Name = "${var.k8s_cluster_name}"
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-nodes"
+    Name = "${var.haystack_cluster_name}-k8s-nodes"
   }
 }
 

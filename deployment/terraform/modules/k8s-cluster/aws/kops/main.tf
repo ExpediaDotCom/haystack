@@ -1,6 +1,6 @@
 locals {
   rendered_config_path = "${path.module}/manifests/cluster-config.yaml"
-  kops_public_key_path = "${path.module}/data/aws_key_pair_kubernetes.haystack-k8s.com-public_key"
+  kops_public_key_path = "${path.module}/manifests/aws_key_pair_kubernetes.haystack-k8s.com-public_key"
 }
 
 data "template_file" "cluster_config" {
@@ -18,13 +18,6 @@ data "template_file" "cluster_config" {
     aws_utilities_subnet = "${var.k8s_aws_utilities_subnet}"
     aws_dns_zone_id = "${var.k8s_hosted_zone_id}"
   }
-}
-
-resource "aws_s3_bucket_object" "kops_config_folder" {
-  bucket = "${var.k8s_s3_bucket_name}"
-  acl = "private"
-  key = "${var.k8s_cluster_name}/"
-  source = "/dev/null"
 }
 
 resource "null_resource" "export-cluster-rendered-template" {
