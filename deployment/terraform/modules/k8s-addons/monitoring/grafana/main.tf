@@ -21,10 +21,10 @@ resource "null_resource" "k8s_grafana_addons" {
     template = "${data.template_file.grafana_cluster_addon_config.rendered}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.grafana_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.k8s_cluster_name}"
+    command = "echo '${data.template_file.grafana_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.kubectl_context_name}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.grafana_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.k8s_cluster_name}"
+    command = "echo '${data.template_file.grafana_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
     when = "destroy"
   }
   count = "${local.count}"

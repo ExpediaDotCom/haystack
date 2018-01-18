@@ -1,9 +1,12 @@
-variable "k8s_cluster_name" {}
+variable "kubectl_context_name" {}
 variable "kubectl_executable_name" {}
+variable "base_domain_name" {}
+variable "haystack_cluster_name" {}
 variable "haystack_domain_name" {}
 variable "traefik_node_port" {}
 variable "add_logging_addons" {}
 variable "add_monitoring_addons" {}
+variable "add_dashboard_addons" {}
 variable "container_log_path" {}
 variable "logging_es_nodes" {}
 

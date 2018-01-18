@@ -1,5 +1,5 @@
 variable "kubectl_executable_name" {}
-variable "k8s_cluster_name" {}
+variable "kubectl_context_name" {}
 variable "elasticsearch_host" {}
 variable "elasticsearch_port" {}
 variable "container_log_path" {}

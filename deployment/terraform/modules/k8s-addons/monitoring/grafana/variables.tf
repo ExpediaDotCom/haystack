@@ -1,6 +1,6 @@
 variable "kubectl_executable_name" {}
 variable "enabled" {}
-variable "k8s_cluster_name" {}
+variable "kubectl_context_name" {}
 
 variable "storage_volume" {}
 

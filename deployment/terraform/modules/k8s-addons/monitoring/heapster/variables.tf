@@ -1,6 +1,6 @@
 variable "kubectl_executable_name" {}
 variable "enabled" {}
-variable "k8s_cluster_name" {}
+variable "kubectl_context_name" {}
 
 variable "k8s_heapster_image" {
   default = "gcr.io/google_containers/heapster-amd64:v1.5.0"
