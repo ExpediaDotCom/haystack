@@ -1,9 +1,9 @@
 locals {
   container_log_path = "/var/lib/docker/containers"
-  haystack_ui_cname = "${var.haystack_cluster_name}.${var.aws_domain_name}}"
-  metrics_cname = "${var.haystack_cluster_name}-metrics.${var.aws_domain_name}}"
-  logs_cname = "${var.haystack_cluster_name}-logs.${var.aws_domain_name}}"
-  k8s_dashboard_cname = "${var.haystack_cluster_name}-dashboard.${var.aws_domain_name}}"
+  haystack_ui_cname = "${var.haystack_cluster_name}.${var.aws_domain_name}"
+  metrics_cname = "${var.haystack_cluster_name}-metrics.${var.aws_domain_name}"
+  logs_cname = "${var.haystack_cluster_name}-logs.${var.aws_domain_name}"
+  k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.aws_domain_name}"
 }
 
 module "haystack-k8s" {
