@@ -33,8 +33,6 @@ spec:
           value: monitoring-influxdb
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
-        - name: GF_SERVER_ROOT_URL
-          value: "${grafana_root_path}"
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage
@@ -61,3 +59,21 @@ spec:
     targetPort: 3000
   selector:
     k8s-app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-haystack-grafana
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${metrics_cname}
+     http:
+        paths:
+         - path: /
+           backend:
+             serviceName: monitoring-grafana
+             servicePort: 80

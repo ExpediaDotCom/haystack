@@ -18,9 +18,12 @@ this will install required third party software, start the minikube and install 
 
 #### Verify
 
-The script sets the 'haystack.local' domain point to your local minikube ip. Use the below link access to haystack UI -
 ```
-http://haystack.local:32300
+ echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+```
+Once you have cname record to minikube, access traefik dashboard at
+```
+ https://haystack.local:32300
 ```
 
 Run the following command to see all the kubernetes pods which are deployed -
@@ -72,14 +75,25 @@ cd deployment/terraform
 We install required third party software, and terraform opens up an interactive console to suggest the components its going to create in AWS
 
 #### Verify
-We create an AWS Route53 entry with your haystack-k8s.<hosted_domain_name>. You can access haystack at -
+We create an AWS Route53 entry with your <haystack-cluster-name>.<hosted_domain_name>. You can access haystack at -
 ```
- http://haystack-k8s.<hosted_domain_name>
+ http://<haystack-cluster-name>.<hosted_domain_name>
 ```
 
 To check the health of the k8s cluster you can use grafana at -
 ```
- haystack-k8s.<hosted_domain_name>/grafana
+ http://<haystack-cluster-name>-metrics.<hosted_domain_name>
+```
+
+To check the logs of the k8s cluster you can use kibana at -
+```
+ http://<haystack-cluster-name>-logs.<hosted_domain_name>
+```
+
+
+To see the apps running in the kubernetes cluster you can use the kubernetes dashboard at -
+```
+ http://<haystack-cluster-name>-k8s.<hosted_domain_name>
 ```
 
 To see components deployed in kuberenets -

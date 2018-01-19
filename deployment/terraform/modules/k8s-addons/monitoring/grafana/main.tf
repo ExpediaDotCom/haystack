@@ -9,8 +9,7 @@ data "template_file" "grafana_cluster_addon_config" {
     grafana_image = "${var.k8s_grafana_image}"
     grafana_storage_class = "${var.storage_class}"
     grafana_storage = "${var.storage_volume}"
-    grafana_root_path = "${var.k8s_grafana_root_path}"
-
+    metrics_cname = "${var.metrics_cname}"
   }
   count = "${local.count}"
 

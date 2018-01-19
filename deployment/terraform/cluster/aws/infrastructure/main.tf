@@ -1,6 +1,11 @@
 locals {
   container_log_path = "/var/lib/docker/containers"
+  haystack_ui_cname = "${var.haystack_cluster_name}.${var.aws_domain_name}"
+  metrics_cname = "${var.haystack_cluster_name}-metrics.${var.aws_domain_name}"
+  logs_cname = "${var.haystack_cluster_name}-logs.${var.aws_domain_name}"
+  k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.aws_domain_name}"
 }
+
 module "haystack-k8s" {
   source = "../../../modules/k8s-cluster/aws"
   aws_ssh_key = "${var.aws_ssh_key}"
@@ -17,7 +22,15 @@ module "haystack-k8s" {
   kops_executable_name = "${var.kops_executable_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
+  metrics_cname_enabled = true
+  metrics_cname = "${local.metrics_cname}"
+  logs_cname_enabled = true
+  logs_cname = "${local.logs_cname}"
+  k8s_dashboard_cname_enabled = true
+  k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
+  haystack_ui_cname = "${local.haystack_ui_cname}"
 }
+
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
   kubectl_context_name = "${module.haystack-k8s.cluster_name}"
@@ -25,16 +38,19 @@ module "k8s-addons" {
   traefik_node_port = "${var.traefik_node_port}"
   base_domain_name = "${var.aws_domain_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-  haystack_domain_name = "${module.haystack-k8s.cluster_name}"
   add_monitoring_addons = true
   add_logging_addons = true
-  add_dashboard_addons = true
+  add_k8s_dashboard_addons = true
   container_log_path = "${local.container_log_path}"
-  logging_es_nodes = "2"
+  logging_es_nodes = "1"
   k8s_storage_class = "default"
   grafana_storage_volume = "2Gi"
   influxdb_storage_volume = "2Gi"
   es_storage_volume = "100Gi"
+  logs_cname = "${local.logs_cname}"
+  k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
+  haystack_ui_cname = "${local.haystack_ui_cname}"
+  metrics_cname = "${local.metrics_cname}"
 }
 module "haystack-datastores" {
   source = "../../../modules/haystack-datastores/aws"

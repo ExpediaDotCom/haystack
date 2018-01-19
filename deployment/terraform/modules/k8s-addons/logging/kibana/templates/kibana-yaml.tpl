@@ -29,8 +29,6 @@ spec:
         env:
           - name: ELASTICSEARCH_URL
             value: ${elasticsearch_http_endpoint}
-          - name: SERVER_BASEPATH
-            value: /logs
           - name: XPACK_MONITORING_ENABLED
             value: "false"
           - name: XPACK_SECURITY_ENABLED
@@ -57,4 +55,22 @@ spec:
     targetPort: ui
   selector:
     k8s-app: kibana-logging
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-haystack-es
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${logs_cname}
+     http:
+        paths:
+         - path: /
+           backend:
+             serviceName: kibana-logging
+             servicePort: 5601
 

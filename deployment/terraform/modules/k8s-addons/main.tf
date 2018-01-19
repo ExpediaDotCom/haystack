@@ -7,6 +7,7 @@ module "monitoring-addons" {
   grafana_storage_volume = "${var.grafana_storage_volume}"
   k8s_storage_class = "${var.k8s_storage_class}"
   influxdb_storage_volume = "${var.influxdb_storage_volume}"
+  metrics_cname = "${var.metrics_cname}"
 }
 
 module "logging-addongs" {
@@ -18,21 +19,21 @@ module "logging-addongs" {
   es_nodes = "${var.logging_es_nodes}"
   k8s_storage_class = "${var.k8s_storage_class}"
   es_storage_volume = "${var.es_storage_volume}"
+  logs_cname = "${var.logs_cname}"
 }
 
 module "traefik-addon" {
   source = "traefik"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  haystack_domain_name = "${var.haystack_domain_name}"
+  haystack_ui_cname = "${var.haystack_ui_cname}"
   traefik_node_port = "${var.traefik_node_port}"
 }
 
 module "dashboard-addon" {
   source = "dashboard"
-  base_domain_name = "${var.base_domain_name}"
-  enabled = "${var.add_dashboard_addons}"
-  haystack_cluster_name = "${var.haystack_cluster_name}"
+  enabled = "${var.add_k8s_dashboard_addons}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
+  k8s_dashboard_cname = "${var.k8s_dashboard_cname}"
 }

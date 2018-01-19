@@ -22,4 +22,5 @@ module "kibana-addon" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   enabled = "${var.enabled}"
   elasticsearch_http_endpoint = "${module.elasticsearch-addon.http_endpoint}"
+  logs_cname = "${var.logs_cname}"
 }

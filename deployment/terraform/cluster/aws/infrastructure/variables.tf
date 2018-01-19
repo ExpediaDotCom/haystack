@@ -8,9 +8,7 @@ variable "kops_executable_name" {}
 variable "reverse_proxy_port" {
   default = "32300"
 }
-variable "haystack_cluster_name" {
-  default = "haystack"
-}
+variable "haystack_cluster_name" {}
 
 variable "traefik_node_port" {
   default = "32300"

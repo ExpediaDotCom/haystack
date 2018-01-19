@@ -9,6 +9,7 @@ data "template_file" "kibana_addon_config" {
   template = "${file("${path.module}/templates/kibana-yaml.tpl")}"
   vars {
     elasticsearch_http_endpoint = "${var.elasticsearch_http_endpoint}"
+    logs_cname = "${var.logs_cname}"
   }
   count = "${local.count}"
 

@@ -137,7 +137,7 @@ metadata:
     traefik.frontend.rule.type: PathPrefixStrip
 spec:
   rules:
-  - host: ${haytack_domain_name}
+  - host: ${haystack_ui_cname}
     http:
       paths:
        - path: /metrictank
@@ -148,49 +148,13 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: traefik-haystack-grafana
-  namespace: kube-system
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haytack_domain_name}
-     http:
-        paths:
-         - path: /metrics
-           backend:
-             serviceName: monitoring-grafana
-             servicePort: 80
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-haystack-es
-  namespace: kube-system
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haytack_domain_name}
-     http:
-        paths:
-         - path: /logs
-           backend:
-             serviceName: kibana-logging
-             servicePort: 5601
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
   name: traefik-haystack-ui
   namespace: ${k8s_app_namespace}
   annotations:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: ${haytack_domain_name}
+  - host: ${haystack_ui_cname}
     http:
       paths:
        - path: /
