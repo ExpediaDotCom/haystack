@@ -1,0 +1,42 @@
+<jmxtrans-agent>
+    <queries>
+        <!-- OS -->
+        <query objectName="java.lang:type=OperatingSystem" attribute="SystemLoadAverage" resultAlias="os.systemLoadAverage"/>
+
+        <!-- JVM -->
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used" resultAlias="jvm.heapMemoryUsage.used"/>
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="committed" resultAlias="jvm.heapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used" resultAlias="jvm.nonHeapMemoryUsage.used"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="committed" resultAlias="jvm.nonHeapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=GarbageCollector,name=ParNew" resultAlias="gc.young.#attribute#"/>
+        <query objectName="java.lang:type=GarbageCollector,name=ConcurrentMarkSweep" resultAlias="gc.old.#attribute#"/>
+        <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.loadedClasses"/>
+        <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.thread"/>
+
+        <!-- KAFKA -->
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=BytesInPerSec" resultAlias="server.BrokerTopicMetrics.BytesInPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=BytesOutPerSec" resultAlias="server.BrokerTopicMetrics.BytesOutPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec" resultAlias="server.BrokerTopicMetrics.TotalProduceRequestsPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=TotalFetchRequestsPerSec" resultAlias="server.BrokerTopicMetrics.TotalFetchRequestsPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=FailedProduceRequestsPerSec" resultAlias="server.BrokerTopicMetrics.FailedProduceRequestsPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=FailedFetchRequestsPerSec" resultAlias="server.BrokerTopicMetrics.FailedFetchRequestsPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=MessagesInPerSec" resultAlias="server.BrokerTopicMetrics.MessagesInPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions" resultAlias="server.ReplicaManager.UnderReplicatedPartitions.#attribute#"/>
+        <query objectName="kafka.server:type=ReplicaManager,name=PartitionCount" resultAlias="server.ReplicaManager.PartitionCount.#attribute#"/>
+        <query objectName="kafka.server:type=ReplicaManager,name=LeaderCount" resultAlias="server.ReplicaManager.LeaderCount.#attribute#"/>
+        <query objectName="kafka.server:type=ReplicaManager,name=LeaderCount" resultAlias="server.ReplicaManager.LeaderCount.#attribute#"/>
+        <query objectName="kafka.server:type=ReplicaManager,name=IsrShrinksPerSec " resultAlias="server.ReplicaManager.IsrShrinksPerSec.#attribute#"/>
+        <query objectName="kafka.server:type=ReplicaManager,name=IsrExpandsPerSec " resultAlias="server.ReplicaManager.IsrExpandsPerSec.#attribute#"/>
+        <query objectName="kafka.controller:type=KafkaController,name=OfflinePartitionsCount" resultAlias="controller.KafkaController.OfflinePartitionsCount.#attribute#"/>
+        <query objectName="kafka.controller:type=KafkaController,name=ActiveControllerCount" resultAlias="controller.KafkaController.ActiveControllerCount.#attribute#"/>
+        <query objectName="kafka.network:type=RequestMetrics,name=TotalTimeMs,request=Produce" resultAlias="network.RequestMetrics.Produce.#attribute#"/>
+        <query objectName="kafka.network:type=RequestMetrics,name=TotalTimeMs,request=FetchConsumer" resultAlias="network.RequestMetrics.FetchConsumer.#attribute#"/>
+        <query objectName="kafka.network:type=RequestMetrics,name=TotalTimeMs,request=FetchFollower" resultAlias="network.RequestMetrics.FetchFollower.#attribute#"/>
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <host>_HAYSTACK_GRAPHITE_HOST</host>
+        <port>_HAYSTACK_GRAPHITE_PORT</port>
+        <namePrefix>haystack.datastore.kafka.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+</jmxtrans-agent>
