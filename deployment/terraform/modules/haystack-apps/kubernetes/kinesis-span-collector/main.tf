@@ -13,6 +13,7 @@ data "template_file" "haystck_kinesis_span_collector_config_data" {
     kinesis_stream_name = "${var.kinesis_stream_name}"
     kafka_endpoint = "${var.kafka_endpoint}"
     sts_role_arn = "${var.sts_role_arn}"
+    haystack_cluster_name = "${var.haystack_cluster_name}"
   }
 }
 

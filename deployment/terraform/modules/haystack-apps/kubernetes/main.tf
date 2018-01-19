@@ -93,6 +93,7 @@ module "kinesis-span-collector" {
   graphite_port = "${var.graphite_port}"
   enabled = "${var.kinesis_span_collector_enabled}"
   sts_role_arn = "${var.kinesis_span_collector_sts_role_arn}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
 # web ui
@@ -101,7 +102,7 @@ module "ui" {
   image = "expediadotcom/haystack-ui:${var.ui_version}"
   replicas = "${var.haystack_ui_instances}"
   namespace = "${var.k8s_app_namespace}"
-  k8s_cluster_name = "${var.k8s_cluster_name}"
+  k8s_cluster_name = "${var.kubectl_context_name}"
   trace_reader_hostname = "${module.trace-reader.trace_reader_hostname}"
   trace_reader_service_port = "${module.trace-reader.trace_reader_service_port}"
   metrictank_hostname = "${module.metrictank.metrictank_hostname}"
