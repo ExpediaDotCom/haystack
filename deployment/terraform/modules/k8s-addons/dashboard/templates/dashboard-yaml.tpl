@@ -84,7 +84,7 @@ spec:
     spec:
       containers:
       - name: haystack-kubernetes-dashboard
-        image: k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.2
+        image: ${dashboard_image}
         ports:
         - containerPort: 9090
           protocol: TCP
@@ -140,7 +140,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: ${haystack_cluster_name}-dashboard.${base_domain_name}
+  - host: ${dashboard_cname}
     http:
       paths:
        - path: /

@@ -6,8 +6,7 @@ data "template_file" "dashboard_cluster_addon_config" {
   template = "${file("${path.module}/templates/dashboard-yaml.tpl")}"
   vars {
     dashboard_image = "${var.k8s_dashboard_image}"
-    base_domain_name = "${var.base_domain_name}"
-    haystack_cluster_name = "${var.haystack_cluster_name}"
+    dashboard_cname = "${var.k8s_dashboard_cname}"
   }
   count = "${local.count}"
 }

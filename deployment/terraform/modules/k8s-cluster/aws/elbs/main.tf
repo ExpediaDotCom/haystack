@@ -68,38 +68,6 @@ resource "aws_elb" "nodes-elb" {
     Name = "${var.haystack_cluster_name}-k8s-nodes"
   }
 }
-
-
-resource "aws_route53_record" "api-elb-route53" {
-  name = "api.${var.k8s_cluster_name}"
-  type = "CNAME"
-  records = [
-    "${aws_elb.api-elb.dns_name}"]
-  ttl = 300
-  zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
-  //this would ensure that the cluster is up and configured correctly
-  provisioner "local-exec" {
-    command = "for i in {1..50}; do ${var.kubectl_executable_name} get nodes --context ${var.k8s_cluster_name} -- && break || sleep 15; done"
-  }
-  depends_on = [
-    "aws_autoscaling_attachment.master-1",
-    "aws_autoscaling_attachment.master-2",
-    "aws_autoscaling_attachment.master-3",
-    ]
-}
-resource "aws_route53_record" "nodes-elb-route53" {
-  name = "${var.k8s_cluster_name}"
-  type = "CNAME"
-  records = [
-    "${aws_elb.nodes-elb.dns_name}"]
-  ttl = 300
-  zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
-  depends_on = [
-    "aws_route53_record.api-elb-route53",
-    "aws_autoscaling_attachment.nodes"]
-}
-
-
 resource "aws_autoscaling_attachment" "master-1" {
   elb = "${aws_elb.api-elb.id}"
   autoscaling_group_name = "${var.master-1_asg_id}"

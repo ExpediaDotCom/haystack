@@ -58,7 +58,6 @@ module "elbs" {
   source = "elbs"
   elb_api_security_groups = "${module.security_groups.api-elb-security_group_ids}"
   aws_elb_subnet = "${var.aws_utility_subnet}"
-  aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   nodes_api_security_groups = "${module.security_groups.nodes-api-elb-security_group_ids}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
@@ -66,9 +65,25 @@ module "elbs" {
   "master-2_asg_id" = "${module.asg.master-2_asg_id}"
   "master-3_asg_id" = "${module.asg.master-3_asg_id}"
   nodes_asg_id = "${module.asg.nodes_asg_id}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 }
+
+module "route53" {
+  source = "route53"
+  master_elb_dns_name = "${module.elbs.master-elb-dns_name}"
+  nodes_elb_dns_name = "${module.elbs.nodes-elb-dns_name}"
+  k8s_cluster_name = "${local.k8s_cluster_name}"
+  haystack_ui_cname = "${var.haystack_ui_cname}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
+  k8s_dashboard_cname_enabled = "${var.k8s_dashboard_cname_enabled}"
+  k8s_dashboard_cname = "${var.k8s_dashboard_cname}"
+  metrics_cname_enabled = "${var.metrics_cname_enabled}"
+  metrics_cname = "${var.metrics_cname}"
+  logs_cname = "${var.logs_cname}"
+  logs_cname_enabled = "${var.logs_cname_enabled}"
+}
+
 resource "aws_eip" "eip" {
   vpc = true
 }

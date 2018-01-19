@@ -5,7 +5,7 @@ data "template_file" "traefik_cluster_addon_config" {
   template = "${file("${path.module}/templates/traefik-yaml.tpl")}"
   vars {
     traefik_image = "${var.k8s_traefik_image}"
-    haytack_domain_name = "${var.haystack_domain_name}"
+    haystack_ui_cname = "${var.haystack_ui_cname}"
     traefik_name = "${var.traefik_name}",
     node_port = "${var.traefik_node_port}",
     k8s_app_namespace = "${local.k8s_app_namespace}"

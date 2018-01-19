@@ -1,5 +1,5 @@
 variable "kubectl_executable_name" {}
-variable "haystack_domain_name" {}
+variable "haystack_ui_cname" {}
 variable "traefik_node_port" {}
 variable "kubectl_context_name" {}
 

@@ -1,3 +1,3 @@
 output "cluster_name" {
-  value = "${module.elbs.nodes-elb-dns_name}"
+  value = "${module.route53.haystack_ui_cname}"
 }

@@ -6,3 +6,4 @@ variable "k8s_fluentd_image" {
   default = "cheungpat/fluentd-elasticsearch-aws:1.22"
 }
 variable "enabled" {}
+variable "logs_cname" {}

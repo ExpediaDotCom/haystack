@@ -1,8 +1,9 @@
-output "api-elb-id" {
+output "master-elb-id" {
   value = "${aws_elb.api-elb.id}"
 }
-output "api-elb-dns_name" {
-  value = "${aws_route53_record.api-elb-route53.name}"
+
+output "master-elb-dns_name" {
+  value = "${aws_elb.api-elb.dns_name}"
 }
 
 output "nodes-elb-id" {
@@ -10,5 +11,5 @@ output "nodes-elb-id" {
 }
 
 output "nodes-elb-dns_name" {
-  value = "${aws_route53_record.nodes-elb-route53.name}"
+  value = "${aws_elb.nodes-elb.dns_name}"
 }

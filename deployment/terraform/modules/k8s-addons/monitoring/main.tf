@@ -23,4 +23,5 @@ module "grafana-addon" {
   kubectl_context_name = "${var.kubectl_context_name}"
   storage_class = "${var.k8s_storage_class}"
   storage_volume = "${var.grafana_storage_volume}"
+  metrics_cname = "${var.metrics_cname}"
 }
