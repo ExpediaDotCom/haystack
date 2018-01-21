@@ -50,12 +50,12 @@
     },
     {
       "type": "file",
-      "source": "resources/jmxtrans-agent.xml",
+      "source": "resources/jmxtrans-agent-kafka.xml",
       "destination": "/opt/jmxtrans/jmxtrans-agent-kafka.xml"
     },
     {
       "type": "file",
-      "source": "resources/jmxtrans-agent.xml",
+      "source": "resources/jmxtrans-agent-zookeeper.xml",
       "destination": "/opt/jmxtrans/jmxtrans-agent-zookeeper.xml"
     },
     {
