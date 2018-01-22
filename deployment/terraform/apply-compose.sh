@@ -153,7 +153,6 @@ function applyActionOnComponents() {
           echo "Congratulations! you've successfully uninstalled haystack apps"
           ;;
        uninstall-all)
-          uninstallComponents
           uninstallInfrastructure
           echo "Congratulations! you've successfully and deleted haystack apps and destroyed haystack infrastructure"
           ;;

@@ -11,7 +11,7 @@ module "haystack-k8s" {
   aws_ssh_key = "${var.aws_ssh_key}"
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
   aws_domain_name = "${var.aws_domain_name}"
-  master_instance_type = "${var.k8s_node_instance_type}"
+  master_instance_type = "${var.k8s_master_instance_type}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
   aws_utility_subnet = "${var.aws_utilities_subnet}"
