@@ -87,7 +87,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
     Component = "Cassandra"
     ClusterName = "${var.haystack_cluster_name}"
     Role = "${var.haystack_cluster_name}-cassandra"
-    Name = "${var.haystack_cluster_name}-cassandra"
+    Name = "${var.haystack_cluster_name}-cassandra-${count.index}"
     Seed = "${aws_instance.haystack-cassandra-seed-node.private_ip}"
     NodeType = "non-seed"
   }

@@ -198,6 +198,35 @@ if [ "x$KAFKA_DEBUG" != "x" ]; then
     KAFKA_OPTS="$JAVA_DEBUG_OPTS $KAFKA_OPTS"
 fi
 
+
+calculate_heap_sizes()
+{
+    system_memory_in_mb=`free -m | awk '/:/ {print $2;exit}'`
+
+    # set max heap size based on the following
+    # max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
+    # calculate 1/2 ram and cap to 1024MB
+    # calculate 1/4 ram and cap to 8192MB
+    # pick the max
+    half_system_memory_in_mb=`expr $system_memory_in_mb / 2`
+    quarter_system_memory_in_mb=`expr $half_system_memory_in_mb / 2`
+    if [ "$half_system_memory_in_mb" -gt "1024" ]
+    then
+        half_system_memory_in_mb="1024"
+    fi
+    if [ "$quarter_system_memory_in_mb" -gt "8192" ]
+    then
+        quarter_system_memory_in_mb="8192"
+    fi
+    if [ "$half_system_memory_in_mb" -gt "$quarter_system_memory_in_mb" ]
+    then
+        max_heap_size_in_mb="$half_system_memory_in_mb"
+    else
+        max_heap_size_in_mb="$quarter_system_memory_in_mb"
+    fi
+    MAX_HEAP_SIZE="${max_heap_size_in_mb}M"
+}
+
 # Which java to use
 if [ -z "$JAVA_HOME" ]; then
   JAVA="java"
@@ -207,7 +236,8 @@ fi
 
 # Memory options
 if [ -z "$KAFKA_HEAP_OPTS" ]; then
-  KAFKA_HEAP_OPTS="-Xms4g -Xmx4g"
+  calculate_heap_sizes
+  KAFKA_HEAP_OPTS="-Xms${MAX_HEAP_SIZE} -Xmx${MAX_HEAP_SIZE}"
 fi
 
 # JVM performance options
@@ -215,6 +245,8 @@ if [ -z "$KAFKA_JVM_PERFORMANCE_OPTS" ]; then
   KAFKA_JVM_PERFORMANCE_OPTS="-server -XX:+UseG1GC -XX:G1HeapRegionSize=16M -XX:MetaspaceSize=96m -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80 -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+DisableExplicitGC -Djava.awt.headless=true"
 fi
 
+# Agents
+JMX_TRANS_AGENT="-javaagent:/opt/jmxtrans/jmxtrans.jar=/opt/jmxtrans/jmxtrans-agent-${DAEMON_NAME}.xml"
 
 while [ $# -gt 0 ]; do
   COMMAND=$1
@@ -253,7 +285,7 @@ fi
 
 # Launch mode
 if [ "x$DAEMON_MODE" = "xtrue" ]; then
-  nohup $JAVA $KAFKA_HEAP_OPTS $KAFKA_JVM_PERFORMANCE_OPTS $KAFKA_GC_LOG_OPTS $KAFKA_JMX_OPTS $KAFKA_LOG4J_OPTS -cp $CLASSPATH $KAFKA_OPTS "$@" > "$CONSOLE_OUTPUT_FILE" 2>&1 < /dev/null &
+  nohup $JAVA $KAFKA_HEAP_OPTS $KAFKA_JVM_PERFORMANCE_OPTS $JMX_TRANS_AGENT $KAFKA_GC_LOG_OPTS $KAFKA_JMX_OPTS $KAFKA_LOG4J_OPTS -cp $CLASSPATH $KAFKA_OPTS "$@" > "$CONSOLE_OUTPUT_FILE" 2>&1 < /dev/null &
 else
-  exec $JAVA $KAFKA_HEAP_OPTS $KAFKA_JVM_PERFORMANCE_OPTS $KAFKA_GC_LOG_OPTS $KAFKA_JMX_OPTS $KAFKA_LOG4J_OPTS -cp $CLASSPATH $KAFKA_OPTS "$@"
+  exec $JAVA $KAFKA_HEAP_OPTS $KAFKA_JVM_PERFORMANCE_OPTS $JMX_TRANS_AGENT $KAFKA_GC_LOG_OPTS $KAFKA_JMX_OPTS $KAFKA_LOG4J_OPTS -cp $CLASSPATH $KAFKA_OPTS "$@"
 fi
