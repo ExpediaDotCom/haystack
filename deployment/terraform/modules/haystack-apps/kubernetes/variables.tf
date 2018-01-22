@@ -6,7 +6,8 @@ variable "cassandra_hostname" {}
 variable "cassandra_port" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
-variable "k8s_cluster_name" {}
+variable "haystack_cluster_name" {}
+variable "kubectl_context_name" {}
 variable "k8s_app_namespace" {}
 
 # traces config

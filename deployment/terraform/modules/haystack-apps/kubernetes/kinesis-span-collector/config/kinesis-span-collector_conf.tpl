@@ -10,7 +10,7 @@ kafka {
 kinesis {
   sts.role.arn = "${sts_role_arn}"
   aws.region = "${kinesis_stream_region}"
-  app.group.name = "haystack-tf-kinesis-proto-span-collector"
+  app.group.name = "${haystack_cluster_name}-tf-kinesis-proto-span-collector"
 
   stream {
     name = "${kinesis_stream_name}"

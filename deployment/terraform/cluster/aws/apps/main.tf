@@ -11,7 +11,7 @@ module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
   elasticsearch_hostname = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_port}"
-  k8s_cluster_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"
+  kubectl_context_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"
   cassandra_hostname = "${data.terraform_remote_state.haystack_inrastructure.cassandra_hostname}"
   kafka_hostname = "${data.terraform_remote_state.haystack_inrastructure.kafka_hostname}"
   kafka_port = "${data.terraform_remote_state.haystack_inrastructure.kafka_port}"
@@ -19,6 +19,7 @@ module "haystack-apps" {
   graphite_hostname = "${data.terraform_remote_state.haystack_inrastructure.graphite_hostname}"
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 
   pipes_enabled = "${var.pipes_enabled}"
   pipes_json_transformer_instances = "${var.pipes_json_transformer_instances}"

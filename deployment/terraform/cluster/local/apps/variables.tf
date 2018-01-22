@@ -1,3 +1,7 @@
+
+variable "haystack_cluster_name" {
+  default = "haystack"
+}
 # traces config
 variable "traces_enabled" {
   default = true
