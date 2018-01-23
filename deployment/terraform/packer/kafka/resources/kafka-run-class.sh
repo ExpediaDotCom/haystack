@@ -246,7 +246,7 @@ if [ -z "$KAFKA_JVM_PERFORMANCE_OPTS" ]; then
 fi
 
 # Agents
-JMX_TRANS_AGENT="-javaagent:/opt/jmxtrans/jmxtrans.jar=/opt/jmxtrans/jmxtrans-agent.xml"
+JMX_TRANS_AGENT="-javaagent:/opt/jmxtrans/jmxtrans.jar=/opt/jmxtrans/jmxtrans-agent-${DAEMON_NAME}.xml"
 
 while [ $# -gt 0 ]; do
   COMMAND=$1
