@@ -1,7 +1,4 @@
-locals {
-  graphite_hostname = "monitoring-influxdb-graphite.kube-system.svc"
-  graphite_port = 2003
-}
+
 
 module "cassandra" {
   source = "cassandra"
@@ -13,8 +10,8 @@ module "cassandra" {
   node_count = "${var.cassandra_node_instance_count}"
   node_instance_type = "${var.cassandra_node_instance_type}"
   aws_ssh_key_pair_name = "${var.aws_ssh_key}"
-  graphite_host = "${local.graphite_hostname}"
-  graphite_port = "${local.graphite_port}"
+  graphite_host = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
@@ -38,7 +35,7 @@ module "kafka" {
   aws_subnet = "${var.aws_nodes_subnet}"
   aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
   aws_ssh_key_pair_name = "${var.aws_ssh_key}"
-  aws_graphite_host = "${local.graphite_hostname}"
-  aws_graphite_port = "${local.graphite_port}"
+  aws_graphite_host = "${var.graphite_hostname}"
+  aws_graphite_port = "${var.graphite_port}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 }

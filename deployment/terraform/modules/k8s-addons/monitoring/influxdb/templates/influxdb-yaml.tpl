@@ -158,9 +158,12 @@ metadata:
   name: monitoring-influxdb-graphite
   namespace: kube-system
 spec:
+  type: NodePort
   ports:
    - port: 2003
+     name: tcp
      targetPort: 2003
+     nodePort: ${graphite_node_port}
   selector:
     k8s-app: monitoring-influxdb
 ---

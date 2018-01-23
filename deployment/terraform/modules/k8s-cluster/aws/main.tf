@@ -28,6 +28,7 @@ module "security_groups" {
   reverse_proxy_port = "${var.reverse_proxy_port}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  graphite_node_port = "${var.graphite_node_port}"
 }
 
 module "iam_roles" {
@@ -61,11 +62,13 @@ module "elbs" {
   k8s_cluster_name = "${local.k8s_cluster_name}"
   nodes_api_security_groups = "${module.security_groups.nodes-api-elb-security_group_ids}"
   reverse_proxy_port = "${var.reverse_proxy_port}"
-  "master-1_asg_id" = "${module.asg.master-1_asg_id}"
-  "master-2_asg_id" = "${module.asg.master-2_asg_id}"
-  "master-3_asg_id" = "${module.asg.master-3_asg_id}"
+  master-1_asg_id = "${module.asg.master-1_asg_id}"
+  master-2_asg_id = "${module.asg.master-2_asg_id}"
+  master-3_asg_id = "${module.asg.master-3_asg_id}"
   nodes_asg_id = "${module.asg.nodes_asg_id}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  monitoring_security_groups = "${module.security_groups.monitoring-elb-security_group_ids}"
+  graphite_node_port = "${var.graphite_node_port}"
 }
 
 module "route53" {

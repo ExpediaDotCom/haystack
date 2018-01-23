@@ -10,6 +10,7 @@ data "template_file" "influxdb_cluster_addon_config" {
     influxdb_image = "${var.k8s_influxdb_image}"
     influxdb_storage_class = "${var.storage_class}"
     influxdb_storage = "${var.storage_volume}"
+    graphite_node_port = "${var.graphite_node_port}"
   }
   count = "${local.count}"
 }

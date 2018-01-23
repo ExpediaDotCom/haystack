@@ -13,3 +13,7 @@ output "nodes-elb-id" {
 output "nodes-elb-dns_name" {
   value = "${aws_elb.nodes-elb.dns_name}"
 }
+
+output "monitoring-elb-dns_name" {
+  value = "${aws_elb.monitoring-elb.dns_name}"
+}

@@ -19,9 +19,4 @@ output "cassandra_hostname" {
 output "cassandra_port" {
   value = "${module.cassandra.cassandra_port}"
 }
-output "graphite_hostname" {
-  value = "${local.graphite_hostname}"
-}
-output "graphite_port" {
-  value = "${local.graphite_port}"
-}
+

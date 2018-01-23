@@ -61,6 +61,37 @@ resource "aws_security_group" "nodes-elb" {
 }
 
 
+
+//node elb security group
+resource "aws_security_group" "monitoring-elb" {
+  name = "monitoring-elb.${var.haystack_cluster_name}"
+  vpc_id = "${var.aws_vpc_id}"
+  description = "Security group for nodes ELB"
+  ingress {
+    from_port = 2300
+    to_port = 2300
+    protocol = "tcp"
+    cidr_blocks = [
+      "0.0.0.0/0"]
+  }
+
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [
+      "0.0.0.0/0"]
+  }
+  tags = {
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-monitoring-elb"
+    Name = "${var.haystack_cluster_name}-k8s-monitoring-elb"
+
+  }
+}
+
 //node instance security group
 
 //This is prevent the cyclic dependency
@@ -92,6 +123,14 @@ resource "aws_security_group" "nodes" {
     protocol = "tcp"
     security_groups = [
       "${aws_security_group.nodes-elb.id}"]
+  }
+
+  ingress {
+    from_port = "${var.graphite_node_port}"
+    to_port = "${var.graphite_node_port}"
+    protocol = "tcp"
+    security_groups = [
+      "${aws_security_group.monitoring-elb.id}"]
   }
 
   ingress {

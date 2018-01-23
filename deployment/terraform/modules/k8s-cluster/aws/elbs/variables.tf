@@ -12,3 +12,7 @@ variable "master-1_asg_id" {}
 variable "master-2_asg_id" {}
 variable "master-3_asg_id" {}
 variable "nodes_asg_id" {}
+variable "graphite_node_port" {}
+variable "monitoring_security_groups" {
+  type = "list"
+}
