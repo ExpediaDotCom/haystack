@@ -2,6 +2,7 @@ variable "elb_api_security_groups" {
   type = "list"
 }
 variable "aws_elb_subnet" {}
+variable "aws_nodes_subnet" {}
 variable "k8s_cluster_name" {}
 variable "haystack_cluster_name" {}
 variable "nodes_api_security_groups" {

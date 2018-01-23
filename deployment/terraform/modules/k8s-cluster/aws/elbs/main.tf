@@ -46,7 +46,7 @@ resource "aws_elb" "monitoring-elb" {
   security_groups = [
     "${var.monitoring_security_groups}"]
   subnets = [
-    "${var.aws_elb_subnet}"]
+    "${var.aws_nodes_subnet}"]
   internal = true
 
   health_check = {

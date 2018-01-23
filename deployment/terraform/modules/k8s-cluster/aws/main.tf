@@ -69,6 +69,7 @@ module "elbs" {
   haystack_cluster_name = "${var.haystack_cluster_name}"
   monitoring_security_groups = "${module.security_groups.monitoring-elb-security_group_ids}"
   graphite_node_port = "${var.graphite_node_port}"
+  aws_nodes_subnet = "${var.aws_nodes_subnet}"
 }
 
 module "route53" {
