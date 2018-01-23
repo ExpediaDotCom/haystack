@@ -5,14 +5,17 @@ variable "aws_utilities_subnet" {}
 variable "aws_domain_name" {}
 variable "kubectl_executable_name" {}
 variable "kops_executable_name" {}
-variable "reverse_proxy_port" {
-  default = "32300"
-}
+
 variable "haystack_cluster_name" {}
 
 variable "traefik_node_port" {
   default = "32300"
 }
+
+variable "graphite_node_port" {
+  default = "32301"
+}
+
 
 
 variable "aws_region" {

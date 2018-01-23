@@ -31,9 +31,9 @@ output "cassandra_port" {
 }
 
 output "graphite_hostname" {
-  value = "${module.haystack-datastores.graphite_hostname}"
+  value = "${module.k8s-addons.graphite_hostname}"
 }
 
 output "graphite_port" {
-  value = "${module.haystack-datastores.graphite_port}"
+  value = "${module.k8s-addons.graphite_port}"
 }

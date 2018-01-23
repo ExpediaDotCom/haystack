@@ -10,6 +10,7 @@ variable "node_instance_type" {}
 variable "node_instance_count" {}
 variable "master_instance_type" {}
 
+variable "graphite_node_port" {}
 variable "reverse_proxy_port" {}
 variable "haystack_ui_cname" {}
 variable "k8s_dashboard_cname" {}

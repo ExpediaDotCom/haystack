@@ -13,8 +13,10 @@ module "k8s-addons" {
   haystack_cluster_name = "${var.k8s_minikube_cluster_name}"
   base_domain_name = "${var.haystack_domain_name}"
   traefik_node_port = "${var.reverse_proxy_port}"
+  graphite_node_port = "${var.graphite_node_port}"
+
   add_logging_addons = false
-  add_monitoring_addons = false
+  add_monitoring_addons = true
   add_k8s_dashboard_addons = false
   container_log_path = "${local.container_log_path}"
   logging_es_nodes = "1"

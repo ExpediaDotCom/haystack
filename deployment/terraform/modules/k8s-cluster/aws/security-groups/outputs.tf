@@ -8,6 +8,11 @@ output "nodes-api-elb-security_group_ids" {
     "${aws_security_group.nodes-elb.id}"]
 }
 
+output "monitoring-elb-security_group_ids" {
+  value = [
+    "${aws_security_group.monitoring-elb.id}"]
+}
+
 
 output "master_security_group_ids" {
   value = [

@@ -1,4 +1,7 @@
-
+locals {
+  graphite_hostname = "monitoring-influxdb-graphite.kube-system.svc"
+  graphite_port = 2003
+}
 module "monitoring-addons" {
   source = "monitoring"
   kubectl_executable_name = "${var.kubectl_executable_name}"
@@ -8,6 +11,7 @@ module "monitoring-addons" {
   k8s_storage_class = "${var.k8s_storage_class}"
   influxdb_storage_volume = "${var.influxdb_storage_volume}"
   metrics_cname = "${var.metrics_cname}"
+  graphite_node_port = "${var.graphite_node_port}"
 }
 
 module "logging-addongs" {

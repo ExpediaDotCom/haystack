@@ -33,6 +33,40 @@ resource "aws_elb" "api-elb" {
   }
 }
 
+resource "aws_elb" "monitoring-elb" {
+  name = "${var.haystack_cluster_name}-monitoring-elb"
+
+  listener = {
+    instance_port = "${var.graphite_node_port}"
+    instance_protocol = "TCP"
+    lb_port = 2003
+    lb_protocol = "TCP"
+  }
+
+  security_groups = [
+    "${var.monitoring_security_groups}"]
+  subnets = [
+    "${var.aws_elb_subnet}"]
+  internal = true
+
+  health_check = {
+    target = "TCP:${var.graphite_node_port}"
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    interval = 10
+    timeout = 5
+  }
+
+  idle_timeout = 300
+
+  tags = {
+    Product = "Haystack"
+    Component = "K8s"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-k8s-monitoring"
+    Name = "${var.haystack_cluster_name}-k8s-monitoring"
+  }
+}
 
 resource "aws_elb" "nodes-elb" {
   name = "${var.haystack_cluster_name}-nodes-elb"
@@ -68,6 +102,8 @@ resource "aws_elb" "nodes-elb" {
     Name = "${var.haystack_cluster_name}-k8s-nodes"
   }
 }
+
+
 resource "aws_autoscaling_attachment" "master-1" {
   elb = "${aws_elb.api-elb.id}"
   autoscaling_group_name = "${var.master-1_asg_id}"
@@ -84,7 +120,12 @@ resource "aws_autoscaling_attachment" "master-3" {
 }
 
 
-resource "aws_autoscaling_attachment" "nodes" {
+resource "aws_autoscaling_attachment" "nodes-api" {
   elb = "${aws_elb.nodes-elb.id}"
+  autoscaling_group_name = "${var.nodes_asg_id}"
+}
+
+resource "aws_autoscaling_attachment" "nodes-monitoring" {
+  elb = "${aws_elb.monitoring-elb.id}"
   autoscaling_group_name = "${var.nodes_asg_id}"
 }

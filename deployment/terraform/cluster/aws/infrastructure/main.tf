@@ -18,7 +18,7 @@ module "haystack-k8s" {
   node_instance_type = "${var.k8s_node_instance_type}"
   s3_bucket_name = "${var.s3_bucket_name}"
   node_instance_count = "${var.k8s_node_instance_count}"
-  reverse_proxy_port = "${var.reverse_proxy_port}"
+  reverse_proxy_port = "${var.traefik_node_port}"
   kops_executable_name = "${var.kops_executable_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
@@ -29,6 +29,7 @@ module "haystack-k8s" {
   k8s_dashboard_cname_enabled = true
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   haystack_ui_cname = "${local.haystack_ui_cname}"
+  graphite_node_port = "${var.graphite_node_port}"
 }
 
 module "k8s-addons" {
@@ -36,6 +37,7 @@ module "k8s-addons" {
   kubectl_context_name = "${module.haystack-k8s.cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   traefik_node_port = "${var.traefik_node_port}"
+  graphite_node_port = "${var.graphite_node_port}"
   base_domain_name = "${var.aws_domain_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   add_monitoring_addons = true
@@ -73,4 +75,6 @@ module "haystack-datastores" {
   haystack_index_store_worker_instance_type = "${var.haystack_index_store_worker_instance_type}"
   haystack_index_store_es_master_instance_type = "${var.haystack_index_store_es_master_instance_type}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  graphite_hostname = "${module.haystack-k8s.external_graphite_hostname}"
+  graphite_port = "${module.k8s-addons.graphite_port}"
 }

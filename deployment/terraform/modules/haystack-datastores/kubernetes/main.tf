@@ -1,8 +1,3 @@
-locals {
-  graphite_hostname = "monitoring-influxdb-graphite.kube-system.svc"
-  graphite_port = 2003
-}
-
 module "cassandra" {
   source = "cassandra"
   replicas = "1"

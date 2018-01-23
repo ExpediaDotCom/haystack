@@ -3,6 +3,7 @@ variable "kubectl_executable_name" {}
 variable "base_domain_name" {}
 variable "haystack_cluster_name" {}
 variable "traefik_node_port" {}
+variable "graphite_node_port" {}
 variable "add_logging_addons" {}
 variable "logs_cname" {}
 

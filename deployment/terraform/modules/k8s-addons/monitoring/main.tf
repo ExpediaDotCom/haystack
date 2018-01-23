@@ -5,6 +5,7 @@ module "influxdb-addon" {
   kubectl_context_name = "${var.kubectl_context_name}"
   storage_volume = "${var.influxdb_storage_volume}"
   storage_class = "${var.k8s_storage_class}"
+  graphite_node_port = "${var.graphite_node_port}"
 }
 
 
