@@ -17,7 +17,7 @@
     <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
         <host>_HAYSTACK_GRAPHITE_HOST</host>
         <port>_HAYSTACK_GRAPHITE_PORT</port>
-        <namePrefix>haystack.datastore.cassandra.#hostname#.</namePrefix>
+        <namePrefix>haystack.datastore.cassandra.${HOSTNAME}.</namePrefix>
     </outputWriter>
     <collectIntervalInSeconds>30</collectIntervalInSeconds>
 </jmxtrans-agent>

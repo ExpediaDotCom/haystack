@@ -246,7 +246,6 @@ if [ -z "$KAFKA_JVM_PERFORMANCE_OPTS" ]; then
 fi
 
 # Agents
-JMX_TRANS_AGENT="-javaagent:/opt/jmxtrans/jmxtrans.jar=/opt/jmxtrans/jmxtrans-agent-${DAEMON_NAME}.xml"
 
 while [ $# -gt 0 ]; do
   COMMAND=$1
@@ -271,6 +270,8 @@ while [ $# -gt 0 ]; do
       ;;
   esac
 done
+
+JMX_TRANS_AGENT="-javaagent:/opt/jmxtrans/jmxtrans.jar=/opt/jmxtrans/jmxtrans-agent-${DAEMON_NAME}.xml"
 
 # GC options
 GC_FILE_SUFFIX='-gc.log'

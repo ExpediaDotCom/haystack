@@ -1,5 +1,6 @@
 #! /bin/sh
 # /etc/init.d/zookeeper: start the zookeeper daemon.
+export HOSTNAME=$(hostname)
 
 ZK_HOME=/opt/kafka
 ZK_USER=root
