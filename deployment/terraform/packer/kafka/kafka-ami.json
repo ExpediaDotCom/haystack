@@ -50,8 +50,8 @@
     },
     {
       "type": "file",
-      "source": "resources/jmxtrans-agent-kafka.xml",
-      "destination": "/opt/jmxtrans/jmxtrans-agent-kafka.xml"
+      "source": "resources/jmxtrans-agent-kafkaServer.xml",
+      "destination": "/opt/jmxtrans/jmxtrans-agent-kafkaServer.xml"
     },
     {
       "type": "file",
