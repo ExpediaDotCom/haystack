@@ -70,8 +70,11 @@ variable "cassandra_node_image" {
 variable "cassandra_node_volume_size" {
   default = 512
 }
-variable "cassandra_node_instance_count" {
+variable "cassandra_seed_node_instance_count" {
   default = 2
+}
+variable "cassandra_non_seed_node_instance_count" {
+  default = 1
 }
 variable "cassandra_node_instance_type" {
   default = "c4.xlarge"
