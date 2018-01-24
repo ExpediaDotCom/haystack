@@ -1,6 +1,8 @@
 #! /bin/sh
 # /etc/init.d/kafka: start the kafka daemon.
 
+export HOSTNAME=$(hostname)
+
 KAFKA_HOME=/opt/kafka
 KAFKA_SCRIPT=$KAFKA_HOME/bin/kafka-server-start.sh
 KAFKA_CONFIG=$KAFKA_HOME/config/server.properties
