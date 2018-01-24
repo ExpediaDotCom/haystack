@@ -68,8 +68,8 @@ resource "aws_security_group" "monitoring-elb" {
   vpc_id = "${var.aws_vpc_id}"
   description = "Security group for nodes ELB"
   ingress {
-    from_port = 2300
-    to_port = 2300
+    from_port = 2003
+    to_port = 2003
     protocol = "tcp"
     cidr_blocks = [
       "0.0.0.0/0"]
