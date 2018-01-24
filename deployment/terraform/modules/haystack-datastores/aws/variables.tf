@@ -8,6 +8,8 @@ variable "haystack_index_store_es_master_instance_type" {}
 variable "haystack_index_store_worker_instance_type" {}
 variable "haystack_index_store_instance_count" {}
 variable "haystack_index_store_master_count" {}
+variable "zookeeper_count" {}
+variable "zookeeper_volume_size" {}
 variable "kafka_broker_count" {}
 variable "kafka_broker_volume_size" {}
 variable "kafka_broker_instance_type" {}

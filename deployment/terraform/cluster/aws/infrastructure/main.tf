@@ -61,6 +61,8 @@ module "haystack-datastores" {
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
   s3_bucket_name = "${var.s3_bucket_name}"
   aws_ssh_key = "${var.aws_ssh_key}"
+  zookeeper_count = "${var.zookeeper_count}"
+  zookeeper_volume_size = "${var.zookeeper_volume_size}"
   kafka_broker_instance_type = "${var.kafka_broker_instance_type}"
   kafka_broker_count = "${var.kafka_broker_count}"
   kafka_broker_volume_size = "${var.kafka_broker_volume_size}"

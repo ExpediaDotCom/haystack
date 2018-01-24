@@ -43,6 +43,12 @@ variable "haystack_index_store_master_count" {
   default = 3
 }
 
+variable "zookeeper_count" {
+  default = 3
+}
+variable "zookeeper_volume_size" {
+  default = 512
+}
 variable "kafka_broker_count" {
   default = 1
 }
