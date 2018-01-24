@@ -13,6 +13,7 @@
 
         <!-- CASSANDRA -->
         <query objectName="org.apache.cassandra.metrics:type=*,name=*" resultAlias="%type%.%name%.#attribute#"/>
+        <query objectName="org.apache.cassandra.metrics:type=*,scope=*,name=*" resultAlias="%type%.%scope%-%name%.#attribute#"/>
     </queries>
     <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
         <host>_HAYSTACK_GRAPHITE_HOST</host>

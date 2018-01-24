@@ -204,25 +204,13 @@ calculate_heap_sizes()
     system_memory_in_mb=`free -m | awk '/:/ {print $2;exit}'`
 
     # set max heap size based on the following
-    # max(min(1/2 ram, 1024MB), min(1/4 ram, 8GB))
-    # calculate 1/2 ram and cap to 1024MB
-    # calculate 1/4 ram and cap to 8192MB
-    # pick the max
+    # min(1/2 ram, 4096MB)
     half_system_memory_in_mb=`expr $system_memory_in_mb / 2`
-    quarter_system_memory_in_mb=`expr $half_system_memory_in_mb / 2`
-    if [ "$half_system_memory_in_mb" -gt "1024" ]
-    then
-        half_system_memory_in_mb="1024"
-    fi
-    if [ "$quarter_system_memory_in_mb" -gt "8192" ]
-    then
-        quarter_system_memory_in_mb="8192"
-    fi
-    if [ "$half_system_memory_in_mb" -gt "$quarter_system_memory_in_mb" ]
+    if [ "$half_system_memory_in_mb" -lt "4096" ]
     then
         max_heap_size_in_mb="$half_system_memory_in_mb"
     else
-        max_heap_size_in_mb="$quarter_system_memory_in_mb"
+        max_heap_size_in_mb="4096"
     fi
     MAX_HEAP_SIZE="${max_heap_size_in_mb}M"
 }

@@ -15,7 +15,7 @@
     "subnet_id": "{{user `subnet_id`}}",
     "source_ami": "{{user `source_ami`}}",
     "instance_type": "{{user `instance_type`}}",
-    "ssh_username": "ec2-user",
+    "ssh_username": "admin",
     "ami_name": "{{user `ami_name`}}-{{timestamp}}",
     "ami_description": "{{user `ami_name`}}:{{user `cassandra_version`}}:{{timestamp}}",
     "tags": {
