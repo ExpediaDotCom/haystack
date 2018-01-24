@@ -44,9 +44,12 @@ resource "aws_instance" "zookeeper_instance" {
   associate_public_ip_address = false
   key_name = "${var.aws_ssh_key_pair_name}"
 
-  tags {
-    Name = "haystack-zookeeper-instance"
-    NodeType = "zookeeper"
+  tags = {
+    Product = "Haystack"
+    Component = "Kafka"
+    ClusterName = "${var.haystack_cluster_name}"
+    Role = "${var.haystack_cluster_name}-kafka-zookeeper"
+    Name = "${var.haystack_cluster_name}-kafka-zookeeper-${count.index}"
   }
 
   root_block_device = {
