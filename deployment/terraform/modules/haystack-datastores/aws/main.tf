@@ -30,6 +30,8 @@ module "es" {
 module "kafka" {
   source = "kafka"
   aws_vpc_id = "${var.aws_vpc_id}"
+  zookeeper_count = "${var.zookeeper_count}"
+  zookeeper_volume_size = "${var.zookeeper_volume_size}"
   broker_count = "${var.kafka_broker_count}"
   broker_instance_type = "${var.kafka_broker_instance_type}"
   broker_volume_size = "${var.kafka_broker_volume_size}"
