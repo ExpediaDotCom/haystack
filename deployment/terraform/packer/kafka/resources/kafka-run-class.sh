@@ -223,10 +223,8 @@ else
 fi
 
 # Memory options
-if [ -z "$KAFKA_HEAP_OPTS" ]; then
-  calculate_heap_sizes
-  KAFKA_HEAP_OPTS="-Xms${MAX_HEAP_SIZE} -Xmx${MAX_HEAP_SIZE}"
-fi
+calculate_heap_sizes
+KAFKA_HEAP_OPTS="-Xms${MAX_HEAP_SIZE} -Xmx${MAX_HEAP_SIZE}"
 
 # JVM performance options
 if [ -z "$KAFKA_JVM_PERFORMANCE_OPTS" ]; then
