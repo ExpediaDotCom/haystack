@@ -9,6 +9,11 @@ local_ip=`curl -s http://169.254.169.254/latest/meta-data/local-ipv4`
 # setup local ip in hosts
 echo "127.0.0.1 $(hostname)" | sudo tee -a /etc/hosts
 
+# if non-seed, wait for a while for seeds to come up, before starting services
+if [ "${isSeed}" == "false" ]
+then
+    sleep 120
+fi
 
 ### Seed logic
 getNodes()
