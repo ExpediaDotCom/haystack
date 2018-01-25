@@ -97,6 +97,7 @@ resource "aws_instance" "haystack-cassandra-seed-nodes" {
     Role = "${var.haystack_cluster_name}-cassandra"
     Name = "${var.haystack_cluster_name}-cassandra-${count.index}"
     ClusterRole = "${var.haystack_cluster_name}-cassandra-seed"
+    isSeed = "true"
   }
 
   root_block_device = {
@@ -125,6 +126,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
     Role = "${var.haystack_cluster_name}-cassandra"
     Name = "${var.haystack_cluster_name}-cassandra-${var.seed_node_count + count.index}"
     ClusterRole = "${var.haystack_cluster_name}-cassandra-non-seed"
+    isSeed = "false"
   }
 
   root_block_device = {
