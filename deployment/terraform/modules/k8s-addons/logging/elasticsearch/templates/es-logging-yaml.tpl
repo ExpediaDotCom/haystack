@@ -44,7 +44,7 @@ spec:
           mountPath: /data
         env:
         - name: "ES_JAVA_OPTS"
-          value: "-Xms256m -Xmx256m"
+          value: "-Xms2048m -Xmx2048m"
         - name: "MINIMUM_MASTER_NODES"
           value: "${minimum_masters}"
       initContainers:
