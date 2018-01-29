@@ -32,11 +32,11 @@ variable "haystack_index_store_es_master_instance_type" {
 
 
 variable "haystack_index_store_worker_instance_type" {
-  default = "r3.large.elasticsearch"
+  default = "i3.2xlarge.elasticsearch"
 }
 
 variable "haystack_index_store_instance_count" {
-  default = 3
+  default = 8
 }
 
 variable "haystack_index_store_master_count" {
