@@ -10,6 +10,8 @@
         <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="committed" resultAlias="jvm.nonHeapMemoryUsage.committed"/>
         <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.loadedClasses"/>
         <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.thread"/>
+        <query objectName="java.lang:type=OperatingSystem,name=*" resultAlias="jvm.os.%name%"/>
+
 
         <!-- CASSANDRA -->
         <query objectName="org.apache.cassandra.metrics:type=*,name=*" resultAlias="%type%.%name%.#attribute#"/>
