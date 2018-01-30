@@ -9,7 +9,11 @@ output "master-3_asg_id" {
   value = "${aws_autoscaling_group.master-3.id}"
 }
 
-output "nodes_asg_id" {
-  value = "${aws_autoscaling_group.nodes.id}"
+output "app-nodes_asg_id" {
+  value = "${aws_autoscaling_group.app-nodes.id}"
+}
 
+
+output "monitoring-nodes_asg_id" {
+  value = "${aws_autoscaling_group.monitoring-nodes.id}"
 }

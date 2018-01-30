@@ -33,6 +33,8 @@ spec:
           value: monitoring-influxdb
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
+      nodeSelector:
+        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage

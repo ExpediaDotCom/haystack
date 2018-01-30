@@ -46,6 +46,8 @@ spec:
             - /heapster
             - --source=kubernetes:https://kubernetes.default
             - --sink=influxdb:http://${influxdb_service_name}.kube-system.svc:8086
+      nodeSelector:
+        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
 ---
 apiVersion: v1
 kind: Service

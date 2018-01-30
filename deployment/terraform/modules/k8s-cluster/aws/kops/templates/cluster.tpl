@@ -136,15 +136,36 @@ metadata:
   creationTimestamp: 2017-12-11T07:32:33Z
   labels:
     kops.k8s.io/cluster: ${cluster_name}
-  name: nodes
+  name: app-nodes
 spec:
   associatePublicIp: false
   image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
-  machineType: ${node_instance_type}
-  maxSize: ${node_instance_count}
-  minSize: ${node_instance_count}
+  machineType: ${app-node_instance_type}
+  maxSize: ${app-node_instance_count}
+  minSize: ${app-node_instance_count}
   nodeLabels:
-    kops.k8s.io/instancegroup: nodes
+    kops.k8s.io/instancegroup: app-nodes
+  role: Node
+  subnets:
+  - ${aws_zone}
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: 2017-12-11T07:32:33Z
+  labels:
+    kops.k8s.io/cluster: ${cluster_name}
+  name: monitoring-nodes
+spec:
+  associatePublicIp: false
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  machineType: ${monitoring-node_instance_type}
+  maxSize: ${monitoring-node_instance_count}
+  minSize: ${monitoring-node_instance_count}
+  nodeLabels:
+    kops.k8s.io/instancegroup: monitoring-nodes
   role: Node
   subnets:
   - ${aws_zone}

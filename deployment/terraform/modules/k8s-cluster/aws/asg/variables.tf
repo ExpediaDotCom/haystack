@@ -2,8 +2,10 @@ variable "aws_ssh_key" {}
 variable "s3_bucket_name" {}
 variable "aws_zone" {}
 variable "aws_nodes_subnet" {}
-variable "nodes_instance_type" {}
-variable "nodes_instance_count" {}
+variable "app-nodes_instance_type" {}
+variable "app-nodes_instance_count" {}
+variable "monitoring-nodes_instance_type" {}
+variable "monitoring-nodes_instance_count" {}
 variable "masters_instance_type" {}
 variable "k8s_cluster_name" {}
 variable "masters_iam-instance-profile_arn" {}

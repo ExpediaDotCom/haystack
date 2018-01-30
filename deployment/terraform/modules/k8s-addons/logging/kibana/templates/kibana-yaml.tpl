@@ -37,6 +37,8 @@ spec:
         - containerPort: 5601
           name: ui
           protocol: TCP
+      nodeSelector:
+        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
 ---
 apiVersion: v1
 kind: Service

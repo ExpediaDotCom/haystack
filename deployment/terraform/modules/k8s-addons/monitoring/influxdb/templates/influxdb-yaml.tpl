@@ -204,6 +204,8 @@ spec:
           name: influxdb-persistent-storage
         - name: config-volume
           mountPath: "/etc"
+      nodeSelector:
+        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
       volumes:
          - name: config-volume
            configMap:

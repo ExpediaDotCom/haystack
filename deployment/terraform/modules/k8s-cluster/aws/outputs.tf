@@ -3,5 +3,5 @@ output "cluster_name" {
 }
 
 output "external_graphite_hostname" {
-  value = "${module.elbs.monitoring-elb-dns_name}"
+  value = "${module.elbs.monitoring-nodes-elb-dns_name}"
 }

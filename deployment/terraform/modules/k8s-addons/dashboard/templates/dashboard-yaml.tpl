@@ -103,6 +103,8 @@ spec:
             port: 9090
           initialDelaySeconds: 30
           timeoutSeconds: 30
+      nodeSelector:
+        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
       volumes:
       - name: tmp-volume
         emptyDir: {}
