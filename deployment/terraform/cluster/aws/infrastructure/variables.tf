@@ -60,7 +60,7 @@ variable "kafka_broker_instance_type" {
 }
 
 variable "k8s_master_instance_type" {
-  default = "c5.large"
+  default = "c4.large"
 }
 
 variable "k8s_app-nodes_instance_type" {
