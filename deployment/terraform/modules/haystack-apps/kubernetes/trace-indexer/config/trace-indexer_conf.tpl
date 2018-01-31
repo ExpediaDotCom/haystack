@@ -3,7 +3,7 @@ health.status.path = "/app/isHealthy"
 span.accumulate {
   store {
     min.traces.per.cache = 1000 # this defines the minimum traces in each cache before eviction check is applied. This is also useful for testing the code
-    all.max.entries = 400000 # this is the maximum number of spans that can live across all the stores
+    all.max.entries = 100000 # this is the maximum number of spans that can live across all the stores
   }
   window.ms = 10000
   poll.ms = 2000
@@ -13,7 +13,7 @@ kafka {
   close.stream.timeout.ms = 15000
 
   topic.consume = "proto-spans"
-  topic.produce = "span-buffer"
+  topic.produce = "${span_produce_topic}"
 
   num.stream.threads = 2
   poll.timeout.ms = 100
