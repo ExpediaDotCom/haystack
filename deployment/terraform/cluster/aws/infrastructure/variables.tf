@@ -70,7 +70,7 @@ variable "k8s_app-nodes_instance_count" {
   default = 4
 }
 variable "k8s_monitoring-nodes_instance_type" {
-  default = "m5.xlarge"
+  default = "m4.xlarge"
 }
 variable "k8s_monitoring-nodes_instance_count" {
   default = 2
