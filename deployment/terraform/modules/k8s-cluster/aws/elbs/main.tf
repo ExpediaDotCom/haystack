@@ -63,8 +63,8 @@ resource "aws_elb" "monitoring-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-monitoring"
-    Name = "${var.haystack_cluster_name}-k8s-monitoring"
+    Role = "${var.haystack_cluster_name}-k8s-monitoring-nodes"
+    Name = "${var.haystack_cluster_name}-k8s-monitoring-nodes"
   }
 }
 
@@ -98,8 +98,8 @@ resource "aws_elb" "nodes-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-nodes"
-    Name = "${var.haystack_cluster_name}-k8s-nodes"
+    Role = "${var.haystack_cluster_name}-k8s-app-nodes"
+    Name = "${var.haystack_cluster_name}-k8s-app-nodes"
   }
 }
 
@@ -122,10 +122,10 @@ resource "aws_autoscaling_attachment" "master-3" {
 
 resource "aws_autoscaling_attachment" "nodes-api" {
   elb = "${aws_elb.nodes-elb.id}"
-  autoscaling_group_name = "${var.nodes_asg_id}"
+  autoscaling_group_name = "${var.app-nodes_asg_id}"
 }
 
 resource "aws_autoscaling_attachment" "nodes-monitoring" {
   elb = "${aws_elb.monitoring-elb.id}"
-  autoscaling_group_name = "${var.nodes_asg_id}"
+  autoscaling_group_name = "${var.monitoring-nodes_asg_id}"
 }

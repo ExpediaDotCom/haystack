@@ -47,6 +47,8 @@ spec:
           value: "-Xms2048m -Xmx2048m"
         - name: "MINIMUM_MASTER_NODES"
           value: "${minimum_masters}"
+      nodeSelector:
+        ${node_selecter_label}
       initContainers:
       - image: alpine:3.6
         command: ["/sbin/sysctl", "-w", "vm.max_map_count=262144"]

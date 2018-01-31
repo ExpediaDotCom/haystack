@@ -12,3 +12,4 @@ variable "traefik_replicas" {
 variable "traefik_name" {
   default = "traefik-ingress-controller"
 }
+variable "app-node_selecter_label" {}

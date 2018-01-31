@@ -103,6 +103,8 @@ spec:
             port: 9090
           initialDelaySeconds: 30
           timeoutSeconds: 30
+      nodeSelector:
+        ${node_selecter_label}
       volumes:
       - name: tmp-volume
         emptyDir: {}

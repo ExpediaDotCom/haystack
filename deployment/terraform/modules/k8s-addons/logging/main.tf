@@ -6,6 +6,7 @@ module "elasticsearch-addon" {
   minimum_masters = "${var.es_nodes}"
   storage_volume = "${var.es_storage_volume}"
   storage_class = "${var.k8s_storage_class}"
+  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
 module "fluentd-addon" {
   source = "fluentd"
@@ -22,5 +23,6 @@ module "kibana-addon" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   enabled = "${var.enabled}"
   elasticsearch_http_endpoint = "${module.elasticsearch-addon.http_endpoint}"
+  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
   logs_cname = "${var.logs_cname}"
 }

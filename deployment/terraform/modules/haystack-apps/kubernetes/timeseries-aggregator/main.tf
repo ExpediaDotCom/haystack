@@ -73,6 +73,7 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "${kubernetes_config_map.haystack-timeseries-aggregator.metadata.0.name}"
         }
       }
+      node_selector = "${var.node_selecter_label}"
     }
     "selector" {
       app = "${local.app_name}"

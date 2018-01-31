@@ -66,6 +66,7 @@ resource "kubernetes_replication_controller" "haystack-kinesis-span-collector-rc
           name = "${kubernetes_config_map.haystack-kinesis-span-collector.metadata.0.name}"
         }
       }
+      node_selector = "${var.node_selecter_label}"
     }
 
     "selector" {

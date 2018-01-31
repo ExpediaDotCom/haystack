@@ -37,6 +37,8 @@ spec:
         - containerPort: 5601
           name: ui
           protocol: TCP
+      nodeSelector:
+        ${node_selecter_label}
 ---
 apiVersion: v1
 kind: Service

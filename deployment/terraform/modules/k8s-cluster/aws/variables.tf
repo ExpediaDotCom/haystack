@@ -5,9 +5,10 @@ variable "aws_nodes_subnet" {}
 variable "aws_utility_subnet" {}
 variable "aws_hosted_zone_id" {}
 variable "aws_domain_name" {}
-
-variable "node_instance_type" {}
-variable "node_instance_count" {}
+variable "monitoring-nodes_instance_type" {}
+variable "monitoring-nodes_instance_count" {}
+variable "app-node_instance_type" {}
+variable "app-node_instance_count" {}
 variable "master_instance_type" {}
 
 variable "graphite_node_port" {}

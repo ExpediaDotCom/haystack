@@ -9,6 +9,7 @@ module "trace-indexer" {
   cassandra_hostname = "${var.cassandra_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.traces_enabled}"
 }
 module "trace-reader" {
@@ -20,6 +21,7 @@ module "trace-reader" {
   cassandra_hostname = "${var.cassandra_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.traces_enabled}"
 }
 
@@ -33,6 +35,7 @@ module "metrictank" {
   kafka_address = "${var.kafka_hostname}:${var.kafka_port}"
   namespace = "${var.k8s_app_namespace}"
   graphite_address = "${var.graphite_hostname}:${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "true"
 }
 module "span-timeseries-transformer" {
@@ -43,6 +46,7 @@ module "span-timeseries-transformer" {
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.trends_enabled}"
 }
 module "timeseries-aggregator" {
@@ -53,6 +57,7 @@ module "timeseries-aggregator" {
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.trends_enabled}"
 }
 
@@ -65,6 +70,7 @@ module "pipes-json-transformer" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.pipes_enabled}"
 }
 
@@ -76,6 +82,7 @@ module "pipes-kafka-producer" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.pipes_enabled}"
 }
 
@@ -91,9 +98,10 @@ module "kinesis-span-collector" {
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  enabled = "${var.kinesis_span_collector_enabled}"
   sts_role_arn = "${var.kinesis_span_collector_sts_role_arn}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  node_selecter_label = "${var.app-node_selecter_label}"
+  enabled = "${var.kinesis_span_collector_enabled}"
 }
 
 # web ui
@@ -107,4 +115,5 @@ module "ui" {
   trace_reader_service_port = "${module.trace-reader.trace_reader_service_port}"
   metrictank_hostname = "${module.metrictank.metrictank_hostname}"
   metrictank_port = "${module.metrictank.metrictank_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
 }

@@ -33,6 +33,8 @@ spec:
           value: monitoring-influxdb
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
+      nodeSelector:
+        ${node_selecter_label}
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage

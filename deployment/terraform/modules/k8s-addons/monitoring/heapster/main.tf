@@ -11,6 +11,7 @@ data "template_file" "heapster_cluster_addon_config" {
   vars {
     influxdb_service_name = "${var.influxdb_servicename}"
     heapster_image = "${var.k8s_heapster_image}"
+    node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
   count = "${local.count}"
 
