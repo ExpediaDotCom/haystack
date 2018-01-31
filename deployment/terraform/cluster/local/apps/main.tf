@@ -1,3 +1,8 @@
+locals {
+  app-node_selecter_label = {
+    "kubernetes.io/hostname" = "minikube"
+  }
+}
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "local"
   config {
@@ -18,6 +23,7 @@ module "haystack-apps" {
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  app-node_selecter_label = "${local.app-node_selecter_label}"
 
   pipes_enabled = "${var.pipes_enabled}"
   pipes_json_transformer_instances = "${var.pipes_json_transformer_instances}"

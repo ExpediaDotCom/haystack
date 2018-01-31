@@ -38,7 +38,7 @@ spec:
           name: ui
           protocol: TCP
       nodeSelector:
-        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
+        ${node_selecter_label}
 ---
 apiVersion: v1
 kind: Service

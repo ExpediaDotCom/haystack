@@ -1,3 +1,8 @@
+locals {
+  app-node_selecter_label = {
+    "kops.k8s.io/instancegroup" = "app-nodes"
+  }
+}
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "s3"
   config {
@@ -45,4 +50,5 @@ module "haystack-apps" {
 
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
+  app-node_selecter_label = "${local.app-node_selecter_label}"
 }

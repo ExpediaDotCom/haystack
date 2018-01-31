@@ -10,6 +10,7 @@ data "template_file" "kibana_addon_config" {
   vars {
     elasticsearch_http_endpoint = "${var.elasticsearch_http_endpoint}"
     logs_cname = "${var.logs_cname}"
+    node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
   count = "${local.count}"
 

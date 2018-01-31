@@ -91,46 +91,6 @@ data:
        "haystack.errors.* system.metricGroup.subsystem.fqClass.host.lineNumber.measurement*",
        "haystack.*        system.subsystem.application.host.class.measurement*",
       ]
-
-    [[collectd]]
-      enabled = false
-      bind-address = ":25826"
-      database = "collectd"
-      retention-policy = ""
-      batch-size = 5000
-      batch-pending = 10
-      batch-timeout = "10s"
-      read-buffer = 0
-      typesdb = "/usr/share/collectd/types.db"
-
-    [[opentsdb]]
-      enabled = false
-      bind-address = ":4242"
-      database = "opentsdb"
-      retention-policy = ""
-      consistency-level = "one"
-      tls-enabled = false
-      certificate = "/etc/ssl/influxdb.pem"
-      batch-size = 1000
-      batch-pending = 5
-      batch-timeout = "1s"
-      log-point-errors = true
-
-    [[udp]]
-      enabled = false
-      bind-address = ":8089"
-      database = "udp"
-      retention-policy = ""
-      batch-size = 5000
-      batch-pending = 10
-      read-buffer = 0
-      batch-timeout = "1s"
-      precision = ""
-
-    [continuous_queries]
-      log-enabled = true
-      enabled = true
-      run-interval = "1s"
 ---
 apiVersion: v1
 kind: Service
@@ -205,7 +165,7 @@ spec:
         - name: config-volume
           mountPath: "/etc"
       nodeSelector:
-        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
+        ${node_selecter_label}
       volumes:
          - name: config-volume
            configMap:

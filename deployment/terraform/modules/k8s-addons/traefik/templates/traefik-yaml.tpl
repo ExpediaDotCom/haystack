@@ -111,6 +111,8 @@ spec:
         - containerPort: 443
         args:
         - --configfile=/config/traefik.toml
+      nodeSelector:
+        ${node_selecter_label}
 ---
 apiVersion: v1
 kind: Service

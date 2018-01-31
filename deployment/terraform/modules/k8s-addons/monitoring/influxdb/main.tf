@@ -11,6 +11,7 @@ data "template_file" "influxdb_cluster_addon_config" {
     influxdb_storage_class = "${var.storage_class}"
     influxdb_storage = "${var.storage_volume}"
     graphite_node_port = "${var.graphite_node_port}"
+    node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
   count = "${local.count}"
 }

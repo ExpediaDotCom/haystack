@@ -181,7 +181,7 @@ __EOF_CLUSTER_SPEC
 cat > ig_spec.yaml << '__EOF_IG_SPEC'
 kubelet: null
 nodeLabels:
-  kops.k8s.io/instancegroup: nodes
+  kops.k8s.io/instancegroup: ${nodes_instance_group}
 taints: null
 
 __EOF_IG_SPEC
@@ -194,7 +194,7 @@ Assets:
 - f62360d3351bed837ae3ffcdee65e9d57511695a@https://kubeupv2.s3.amazonaws.com/kops/1.8.0/linux/amd64/utils.tar.gz
 ClusterName: ${cluster_name}
 ConfigBase: s3://${s3_bucket_name}/${cluster_name}
-InstanceGroupName: nodes
+InstanceGroupName: ${nodes_instance_group}
 Tags:
 - _automatic_upgrades
 - _aws

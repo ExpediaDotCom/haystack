@@ -17,6 +17,8 @@ variable "container_log_path" {}
 variable "logging_es_nodes" {}
 variable "haystack_ui_cname" {}
 
+variable "monitoring-node_selecter_label" {}
+variable "app-node_selecter_label" {}
 
 variable "grafana_storage_volume" {
   default = "100Mi"

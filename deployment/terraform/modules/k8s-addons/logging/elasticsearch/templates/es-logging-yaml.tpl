@@ -48,7 +48,7 @@ spec:
         - name: "MINIMUM_MASTER_NODES"
           value: "${minimum_masters}"
       nodeSelector:
-        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
+        ${node_selecter_label}
       initContainers:
       - image: alpine:3.6
         command: ["/sbin/sysctl", "-w", "vm.max_map_count=262144"]

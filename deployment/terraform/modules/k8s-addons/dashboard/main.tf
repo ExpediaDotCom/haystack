@@ -7,6 +7,7 @@ data "template_file" "dashboard_cluster_addon_config" {
   vars {
     dashboard_image = "${var.k8s_dashboard_image}"
     dashboard_cname = "${var.k8s_dashboard_cname}"
+    node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
   count = "${local.count}"
 }

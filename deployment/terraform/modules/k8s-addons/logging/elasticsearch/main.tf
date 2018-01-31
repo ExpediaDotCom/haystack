@@ -12,6 +12,7 @@ data "template_file" "elasticsearch_addon_config" {
     minimum_masters = "${var.minimum_masters}"
     storage_class = "${var.storage_class}"
     storage_volume = "${var.storage_volume}"
+    node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
   count = "${local.count}"
 }

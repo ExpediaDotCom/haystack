@@ -5,6 +5,8 @@ locals {
   metrics_cname = "${var.haystack_cluster_name}-metrics.${var.haystack_domain_name}"
   logs_cname = "${var.haystack_cluster_name}-logs.${var.haystack_domain_name}"
   k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.haystack_domain_name}"
+  monitoring-node_selecter_label = "kubernetes.io/hostname: minikube"
+  app-node_selecter_label  = "kubernetes.io/hostname: minikube"
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
@@ -24,6 +26,8 @@ module "k8s-addons" {
   haystack_ui_cname = "${local.haystack_ui_cname}"
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   logs_cname = "${local.logs_cname}"
+  "app-node_selecter_label" = "${local.app-node_selecter_label}"
+  "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
 }
 module "haystack-infrastructure" {
   source = "../../../modules/haystack-datastores/kubernetes"

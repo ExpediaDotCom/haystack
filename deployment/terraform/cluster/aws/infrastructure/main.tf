@@ -4,6 +4,8 @@ locals {
   metrics_cname = "${var.haystack_cluster_name}-metrics.${var.aws_domain_name}"
   logs_cname = "${var.haystack_cluster_name}-logs.${var.aws_domain_name}"
   k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.aws_domain_name}"
+  monitoring-node_selecter_label = "kops.k8s.io/instancegroup: monitoring-nodes"
+  app-node_selecter_label  = "kops.k8s.io/instancegroup: app-nodes"
 }
 
 module "haystack-k8s" {
@@ -18,8 +20,8 @@ module "haystack-k8s" {
   s3_bucket_name = "${var.s3_bucket_name}"
   app-node_instance_count = "${var.k8s_app-nodes_instance_count}"
   app-node_instance_type = "${var.k8s_app-nodes_instance_type}"
-  "monitoring-nodes_instance_count" = "${var.k8s_monitoring-nodes_instance_count}"
-  "monitoring-nodes_instance_type" = "${var.k8s_monitoring-nodes_instance_type}"
+  monitoring-nodes_instance_count = "${var.k8s_monitoring-nodes_instance_count}"
+  monitoring-nodes_instance_type = "${var.k8s_monitoring-nodes_instance_type}"
   reverse_proxy_port = "${var.traefik_node_port}"
   kops_executable_name = "${var.kops_executable_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
@@ -55,6 +57,8 @@ module "k8s-addons" {
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   haystack_ui_cname = "${local.haystack_ui_cname}"
   metrics_cname = "${local.metrics_cname}"
+  "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
+  "app-node_selecter_label" = "${local.app-node_selecter_label}"
 }
 
 module "haystack-datastores" {

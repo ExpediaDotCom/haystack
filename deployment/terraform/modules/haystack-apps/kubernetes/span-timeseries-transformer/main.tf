@@ -70,6 +70,7 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "${kubernetes_config_map.haystack-span-timeseries-transformer.metadata.0.name}"
         }
       }
+      node_selector = "${var.node_selecter_label}"
     }
 
     "selector" {

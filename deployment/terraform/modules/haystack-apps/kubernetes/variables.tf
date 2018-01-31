@@ -9,6 +9,9 @@ variable "graphite_port" {}
 variable "haystack_cluster_name" {}
 variable "kubectl_context_name" {}
 variable "k8s_app_namespace" {}
+variable "app-node_selecter_label" {
+  type = "map"
+}
 
 # traces config
 variable "traces_enabled" {}

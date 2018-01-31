@@ -119,6 +119,8 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   associate_public_ip_address = false
   key_name = "${var.aws_ssh_key_pair_name}"
 
+
+
   tags {
     Product = "Haystack"
     Component = "Cassandra"

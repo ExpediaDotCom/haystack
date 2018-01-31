@@ -10,6 +10,7 @@ data "template_file" "traefik_cluster_addon_config" {
     node_port = "${var.traefik_node_port}",
     k8s_app_namespace = "${local.k8s_app_namespace}"
     traefik_replicas = "${var.traefik_replicas}"
+    node_selecter_label = "${var.app-node_selecter_label}"
   }
 }
 

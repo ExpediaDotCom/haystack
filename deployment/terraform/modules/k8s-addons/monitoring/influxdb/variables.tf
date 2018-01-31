@@ -3,7 +3,7 @@ variable "enabled" {}
 variable "kubectl_context_name" {}
 variable "graphite_node_port" {}
 variable "storage_volume" {}
-
+variable "monitoring-node_selecter_label" {}
 variable "storage_class" {}
 
 variable "k8s_influxdb_image" {

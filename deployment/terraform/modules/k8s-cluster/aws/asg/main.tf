@@ -234,7 +234,7 @@ resource "aws_autoscaling_group" "app-nodes" {
 
 resource "aws_autoscaling_group" "monitoring-nodes" {
   name = "${var.haystack_cluster_name}-monitoring-nodes"
-  launch_configuration = "${aws_launch_configuration.app-nodes.id}"
+  launch_configuration = "${aws_launch_configuration.monitoring-nodes.id}"
   max_size = "${var.monitoring-nodes_instance_count}"
   min_size = "${var.monitoring-nodes_instance_count}"
   vpc_zone_identifier = [
@@ -373,12 +373,14 @@ resource "aws_launch_configuration" "master-3" {
   }
 }
 
-data "template_file" "nodes-user-data" {
+
+data "template_file" "app-nodes-user-data" {
   template = "${file("${path.module}/templates/k8s_nodes_user-data.tpl")}"
   vars {
     cluster_name = "${var.k8s_cluster_name}"
     s3_bucket_name = "${var.s3_bucket_name}"
     instance_group_name = "${local.k8s_app-nodes_instance_group_name}"
+    nodes_instance_group = "${local.k8s_app-nodes_instance_group_name}"
   }
 }
 
@@ -391,7 +393,7 @@ resource "aws_launch_configuration" "app-nodes" {
   security_groups = [
     "${var.nodes_security_groups}"]
   associate_public_ip_address = false
-  user_data = "${data.template_file.nodes-user-data.rendered}"
+  user_data = "${data.template_file.app-nodes-user-data.rendered}"
 
   root_block_device = {
     volume_type = "gp2"
@@ -404,7 +406,15 @@ resource "aws_launch_configuration" "app-nodes" {
   }
 }
 
-
+data "template_file" "monitoring-nodes-user-data" {
+  template = "${file("${path.module}/templates/k8s_nodes_user-data.tpl")}"
+  vars {
+    cluster_name = "${var.k8s_cluster_name}"
+    s3_bucket_name = "${var.s3_bucket_name}"
+    instance_group_name = "${local.k8s_app-nodes_instance_group_name}"
+    nodes_instance_group = "${local.k8s_monitoring-nodes_instance_group_name}"
+  }
+}
 resource "aws_launch_configuration" "monitoring-nodes" {
   name_prefix = "monitoring-nodes"
   image_id = "${var.nodes_ami}"
@@ -414,7 +424,7 @@ resource "aws_launch_configuration" "monitoring-nodes" {
   security_groups = [
     "${var.nodes_security_groups}"]
   associate_public_ip_address = false
-  user_data = "${data.template_file.nodes-user-data.rendered}"
+  user_data = "${data.template_file.monitoring-nodes-user-data.rendered}"
 
   root_block_device = {
     volume_type = "gp2"

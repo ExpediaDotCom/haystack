@@ -60,16 +60,21 @@ variable "kafka_broker_instance_type" {
 }
 
 variable "k8s_master_instance_type" {
-  default = "c4.large"
+  default = "c5.large"
 }
 
-variable "k8s_node_instance_type" {
-  default = "m4.large"
+variable "k8s_app-nodes_instance_type" {
+  default = "c5.large"
 }
-variable "k8s_node_instance_count" {
+variable "k8s_app-nodes_instance_count" {
   default = 4
 }
-
+variable "k8s_monitoring-nodes_instance_type" {
+  default = "m5.xlarge"
+}
+variable "k8s_monitoring-nodes_instance_count" {
+  default = 2
+}
 variable "cassandra_node_image" {
   default = ""
 }

@@ -144,8 +144,6 @@ spec:
         - name: config-volume
           mountPath: /etc/fluent/config.d
       restartPolicy: Always
-      nodeSelector:
-        kops.k8s.io/instancegroup: ${monitoring-nodes-instance-group-name}
       volumes:
       - hostPath:
           path: /var/log

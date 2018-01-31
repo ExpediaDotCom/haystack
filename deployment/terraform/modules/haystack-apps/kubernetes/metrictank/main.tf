@@ -66,6 +66,7 @@ resource "kubernetes_replication_controller" "haystack-rc" {
         }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
+      node_selector = "${var.node_selecter_label}"
     }
 
     "selector" {

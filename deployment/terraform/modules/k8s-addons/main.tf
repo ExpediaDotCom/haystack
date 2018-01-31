@@ -12,6 +12,7 @@ module "monitoring-addons" {
   influxdb_storage_volume = "${var.influxdb_storage_volume}"
   metrics_cname = "${var.metrics_cname}"
   graphite_node_port = "${var.graphite_node_port}"
+  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
 
 module "logging-addongs" {
@@ -24,6 +25,7 @@ module "logging-addongs" {
   k8s_storage_class = "${var.k8s_storage_class}"
   es_storage_volume = "${var.es_storage_volume}"
   logs_cname = "${var.logs_cname}"
+  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
 
 module "traefik-addon" {
@@ -32,6 +34,7 @@ module "traefik-addon" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   haystack_ui_cname = "${var.haystack_ui_cname}"
   traefik_node_port = "${var.traefik_node_port}"
+  app-node_selecter_label = "${var.app-node_selecter_label}"
 }
 
 module "dashboard-addon" {
@@ -40,4 +43,5 @@ module "dashboard-addon" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   k8s_dashboard_cname = "${var.k8s_dashboard_cname}"
+  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }

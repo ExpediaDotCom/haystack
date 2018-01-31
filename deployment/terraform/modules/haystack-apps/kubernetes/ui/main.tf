@@ -66,6 +66,9 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "config-volume"
         }
       }
+      node_selector = "${var.node_selecter_label}"
+
+
       termination_grace_period_seconds = "${var.termination_grace_period}"
       volume {
         name = "config-volume"
