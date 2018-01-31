@@ -8,10 +8,6 @@ variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "enabled"{}
 
-variable "enable_kafka_sink" {
-  default = false
-}
-
 variable "node_selecter_label" {
   type = "map"
 }
