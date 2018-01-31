@@ -184,7 +184,7 @@ resource "aws_autoscaling_group" "master-3" {
 }
 
 resource "aws_autoscaling_group" "app-nodes" {
-  name = "${var.haystack_cluster_name}--app-nodes"
+  name = "${var.haystack_cluster_name}-app-nodes"
   launch_configuration = "${aws_launch_configuration.app-nodes.id}"
   max_size = "${var.app-nodes_instance_count}"
   min_size = "${var.app-nodes_instance_count}"
