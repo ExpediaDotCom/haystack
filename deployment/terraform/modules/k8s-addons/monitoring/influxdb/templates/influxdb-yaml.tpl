@@ -152,11 +152,11 @@ spec:
         resources:
           # keep request = limit to keep this container in guaranteed class
           limits:
-            cpu: 100m
-            memory: 500Mi
+            cpu: 1000m
+            memory: 2048Mi
           requests:
-            cpu: 100m
-            memory: 500Mi
+            cpu: 1000m
+            memory: 2048Mi
         ports:
           - containerPort: 8083
         volumeMounts:
