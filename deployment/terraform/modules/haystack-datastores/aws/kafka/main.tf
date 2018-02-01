@@ -116,8 +116,8 @@ data "template_file" "kafka_broker_user_data" {
     haystack_graphite_port = "${var.aws_graphite_port}"
     zookeeper_hosts = "${join(",", formatlist("%s:2181", aws_instance.haystack-zookeeper-nodes.*.private_ip))}"
     num_partitions = "96"
-    retention_hours = "24"
-    retention_bytes = "${var.broker_volume_size * 805306368}"
+    retention_hours = "6"
+    retention_bytes = "${var.broker_volume_size * 536870912}"
   }
 }
 
