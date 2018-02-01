@@ -41,8 +41,11 @@ variable "pipes_json_transformer_instances" {
 variable "pipes_kafka_producer_instances" {
   default = "1"
 }
+variable "pipes_http_poster_instances" {
+  default = "1"
+}
 variable "pipes_version" {
-  default = "5c09d1162a17e7fc815493c6be888122a5372bd0"
+  default = "728dbf3dae509bfb6219e9f61f3e3e57a39e30af"
 }
 
 # collectors config

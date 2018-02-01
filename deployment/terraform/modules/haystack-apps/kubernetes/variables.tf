@@ -29,6 +29,7 @@ variable "trends_version" {}
 variable "pipes_enabled" {}
 variable "pipes_json_transformer_instances" {}
 variable "pipes_kafka_producer_instances" {}
+variable "pipes_http_poster_instances" {}
 variable "pipes_version" {}
 
 # collectors config
