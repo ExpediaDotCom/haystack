@@ -51,7 +51,7 @@ module "k8s-addons" {
   logging_es_nodes = "1"
   k8s_storage_class = "default"
   grafana_storage_volume = "2Gi"
-  influxdb_storage_volume = "2Gi"
+  influxdb_storage_volume = "50Gi"
   es_storage_volume = "100Gi"
   logs_cname = "${local.logs_cname}"
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
