@@ -12,7 +12,7 @@ echo "127.0.0.1 $(hostname)" | sudo tee -a /etc/hosts
 # if non-seed, wait for a while for seeds to come up, before starting services
 if [ "$${isSeed}" == "false" ]
 then
-    sleep 120
+    sleep 300
 fi
 
 ### Seed logic

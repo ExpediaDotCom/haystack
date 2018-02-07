@@ -78,7 +78,7 @@ cassandra {
   keyspace: {
     # auto creates the keyspace and table name in cassandra(if absent)
     # if schema field is empty or not present, then no operation is performed
-    auto.create.schema = "CREATE KEYSPACE IF NOT EXISTS haystack WITH REPLICATION = { 'class': 'NetworkTopologyStrategy', 'us-west-2' : 2 } AND durable_writes = false; CREATE TABLE IF NOT EXISTS haystack.traces (id varchar, ts timestamp, spans blob, PRIMARY KEY ((id), ts)) WITH CLUSTERING ORDER BY (ts ASC) AND compaction = { 'class' :  'DateTieredCompactionStrategy', 'max_sstable_age_days': '3' } AND gc_grace_seconds = 86400;"
+    auto.create.schema = "CREATE KEYSPACE IF NOT EXISTS haystack WITH REPLICATION = { 'class': 'NetworkTopologyStrategy', 'us-west-2' : 1 } AND durable_writes = false; CREATE TABLE IF NOT EXISTS haystack.traces (id varchar, ts timestamp, spans blob, PRIMARY KEY ((id), ts)) WITH CLUSTERING ORDER BY (ts ASC) AND compaction = { 'class' :  'DateTieredCompactionStrategy', 'max_sstable_age_days': '3' } AND gc_grace_seconds = 86400;"
 
     name: "haystack"
     table.name: "traces"
