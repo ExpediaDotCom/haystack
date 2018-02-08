@@ -32,7 +32,16 @@ variable "trends_version" {
 }
 
 # pipes config
-variable "pipes_enabled" {
+variable "pipes_json_transformer_enabled" {
+  default = false
+}
+variable "pipes_kafka_producer_enabled" {
+  default = false
+}
+variable "pipes_http_poster_enabled" {
+  default = true
+}
+variable "pipes_firehose_writer_enabled" {
   default = true
 }
 variable "pipes_json_transformer_instances" {
@@ -45,7 +54,7 @@ variable "pipes_http_poster_instances" {
   default = "1"
 }
 variable "pipes_version" {
-  default = "728dbf3dae509bfb6219e9f61f3e3e57a39e30af"
+  default = "e1cc1b6b0bbde427d927869903bcf79d2e29ea4c"
 }
 
 # collectors config

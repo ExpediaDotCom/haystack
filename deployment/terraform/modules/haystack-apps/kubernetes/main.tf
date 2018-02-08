@@ -73,7 +73,7 @@ module "pipes-json-transformer" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
-  enabled = "${var.pipes_enabled}"
+  enabled = "${var.pipes_json_transformer_enabled}"
 }
 
 module "pipes-kafka-producer" {
@@ -85,7 +85,7 @@ module "pipes-kafka-producer" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
-  enabled = "${var.pipes_enabled}"
+  enabled = "${var.pipes_kafka_producer_enabled}"
 }
 
 # collectors
