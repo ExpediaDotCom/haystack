@@ -7,6 +7,6 @@ output "external_graphite_hostname" {
 }
 
 
-output "nodes_iam-instance-profile_arn" {
-  value = "${module.iam_roles.nodes_iam-instance-profile_arn}"
+output "nodes_iam-role_arn" {
+  value = "${module.iam_roles.nodes_role_arn}"
 }

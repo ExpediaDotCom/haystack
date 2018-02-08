@@ -24,7 +24,7 @@ module "es" {
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_subnet = "${var.aws_nodes_subnet}"
   aws_region = "${var.aws_region}"
-  k8s_nodes_iam-instance-profile_arn = "${var.k8s_nodes_iam-instance-profile_arn}"
+  k8s_nodes_iam-role_arn = "${var.k8s_nodes_iam-role_arn}"
 }
 
 module "kafka" {

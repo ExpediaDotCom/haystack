@@ -16,7 +16,7 @@ data "template_file" "es_access_policy" {
   template = "${file("${local.haystack_index_store_access_policy_file_path}")}"
 
   vars {
-    k8s_nodes_iam-instance-profile_arn = "${var.k8s_nodes_iam-instance-profile_arn}"
+    k8s_nodes_iam-role_arn = "${var.k8s_nodes_iam-role_arn}"
     aws_region = "${var.aws_region}"
     aws_account_id = "${data.aws_caller_identity.current.account_id}"
     es_domain_name = "${local.haystack_index_store_domain_name}"
