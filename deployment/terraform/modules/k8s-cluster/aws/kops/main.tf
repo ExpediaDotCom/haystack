@@ -3,6 +3,11 @@ locals {
   kops_public_key_path = "${path.module}/manifests/aws_key_pair_kubernetes.haystack-k8s.com-public_key"
 }
 
+data "aws_vpc" "haystack_deployment_vpc" {
+  id = "${var.aws_vpc_id}"
+
+}
+
 data "template_file" "cluster_config" {
   template = "${file("${path.module}/templates/cluster.tpl")}"
   vars {
@@ -19,17 +24,12 @@ data "template_file" "cluster_config" {
     aws_node_subnet = "${var.aws_nodes_subnet}"
     aws_utilities_subnet = "${var.aws_utilities_subnet}"
     aws_dns_zone_id = "${var.aws_hosted_zone_id}"
+    aws_network_cidr = "${data.aws_vpc.haystack_deployment_vpc.cidr_block}"
   }
 }
 
-resource "null_resource" "export-cluster-rendered-template" {
-  triggers {
-    template = "${data.template_file.cluster_config.rendered}"
-  }
-  //The --unregister flag just deletes the kops configurations stored in s3
-  provisioner "local-exec" {
-    command = "${var.kops_executable_name} delete cluster ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name} --unregister --yes || true"
-  }
+//creating the cluster for the first time
+resource "null_resource" "create_cluster_configuration" {
   provisioner "local-exec" {
     command = "cat > ${local.rendered_config_path} <<EOL\n${data.template_file.cluster_config.rendered}EOL"
   }
@@ -37,13 +37,34 @@ resource "null_resource" "export-cluster-rendered-template" {
   provisioner "local-exec" {
     command = "${var.kops_executable_name} create -f ${local.rendered_config_path} --state s3://${var.s3_bucket_name}"
   }
+  //generating certs using kops
   provisioner "local-exec" {
     command = "${var.kops_executable_name} create secret --name ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name} sshpublickey admin -i ${local.kops_public_key_path}"
   }
-  //generating certs using kops
   provisioner "local-exec" {
     command = "${var.kops_executable_name} update cluster ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name} --target terraform"
   }
 
+  //The --unregister flag just deletes the kops configurations stored in s3
+  provisioner "local-exec" {
+    command = "${var.kops_executable_name} delete cluster ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name} --unregister --yes"
+    when = "destroy"
+  }
+}
 
+
+//runs each time the cluster configuration is updated
+resource "null_resource" "update_cluster" {
+  triggers {
+    template = "${data.template_file.cluster_config.rendered}"
+  }
+  provisioner "local-exec" {
+    command = "cat > ${local.rendered_config_path} <<EOL\n${data.template_file.cluster_config.rendered}EOL"
+  }
+  //updating the cluster config in S3
+  provisioner "local-exec" {
+    command = "${var.kops_executable_name} replace -f ${local.rendered_config_path} --state s3://${var.s3_bucket_name} --force"
+  }
+  depends_on = [
+    "null_resource.create_cluster_configuration"]
 }
