@@ -8,6 +8,16 @@ module "elasticsearch-addon" {
   storage_class = "${var.k8s_storage_class}"
   monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
+
+module "curator-addon" {
+  source = "curator"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  enabled = "${var.enabled}"
+  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  elasticsearch_host = "${module.elasticsearch-addon.host}"
+}
+
 module "fluentd-addon" {
   source = "fluentd"
   kubectl_context_name = "${var.kubectl_context_name}"
