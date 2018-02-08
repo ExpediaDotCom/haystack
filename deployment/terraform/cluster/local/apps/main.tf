@@ -51,4 +51,5 @@ module "haystack-apps" {
 
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
 }
