@@ -24,7 +24,7 @@ variable "kops_executable_name" {}
 variable "kubectl_executable_name" {}
 variable "haystack_cluster_name" {}
 variable "k8s_version" {
-  default = "1.8.4"
+  default = "1.8.6"
 }
 variable "node_ami" {
   default = "ami-06a57e7e"

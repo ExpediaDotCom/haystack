@@ -42,6 +42,7 @@ spec:
   kubernetesVersion: ${k8s_version}
   masterPublicName: api.${cluster_name}
   networkID: ${aws_vpc_id}
+  networkCIDR: ${aws_network_cidr}
   networking:
     calico: {}
   nonMasqueradeCIDR: 100.64.0.0/10
