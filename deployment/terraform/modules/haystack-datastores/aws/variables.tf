@@ -22,6 +22,6 @@ variable "k8s_app_name_space" {}
 variable "haystack_cluster_name" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
-variable "k8s_nodes_iam-instance-profile_arn" {}
+variable "k8s_nodes_iam-role_arn" {}
 variable "aws_region" {}
 
