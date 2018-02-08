@@ -1,5 +1,3 @@
-
-
 module "cassandra" {
   source = "cassandra"
   aws_vpc_id = "${var.aws_vpc_id}"
@@ -18,13 +16,15 @@ module "cassandra" {
 
 module "es" {
   source = "elasticsearch"
-  haystack_index_store_master_instance_count = "${var.haystack_index_store_master_count}"
-  haystack_index_store_master_instance_type = "${var.haystack_index_store_es_master_instance_type}"
-  haystack_index_store_worker_instance_count = "${var.haystack_index_store_instance_count}"
-  haystack_index_store_worker_instance_type = "${var.haystack_index_store_worker_instance_type}"
+  master_instance_count = "${var.es_master_instance_count}"
+  master_instance_type = "${var.es_master_instance_type}"
+  worker_instance_count = "${var.es_worker_instance_count}"
+  worker_instance_type = "${var.es_worker_instance_type}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_subnet = "${var.aws_nodes_subnet}"
+  aws_region = "${var.aws_region}"
+  k8s_nodes_iam-instance-profile_arn = "${var.k8s_nodes_iam-instance-profile_arn}"
 }
 
 module "kafka" {

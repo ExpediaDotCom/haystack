@@ -5,3 +5,8 @@ output "cluster_name" {
 output "external_graphite_hostname" {
   value = "${module.elbs.monitoring-nodes-elb-dns_name}"
 }
+
+
+output "nodes_iam-instance-profile_arn" {
+  value = "${module.iam_roles.nodes_iam-instance-profile_arn}"
+}

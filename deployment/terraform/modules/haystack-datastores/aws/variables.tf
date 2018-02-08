@@ -4,10 +4,10 @@ variable "aws_nodes_subnet" {}
 variable "aws_utilities_subnet" {}
 variable "aws_hosted_zone_id" {}
 variable "aws_ssh_key" {}
-variable "haystack_index_store_es_master_instance_type" {}
-variable "haystack_index_store_worker_instance_type" {}
-variable "haystack_index_store_instance_count" {}
-variable "haystack_index_store_master_count" {}
+variable "es_master_instance_type" {}
+variable "es_worker_instance_type" {}
+variable "es_worker_instance_count" {}
+variable "es_master_instance_count" {}
 variable "zookeeper_count" {}
 variable "zookeeper_volume_size" {}
 variable "kafka_broker_count" {}
@@ -22,4 +22,6 @@ variable "k8s_app_name_space" {}
 variable "haystack_cluster_name" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
+variable "k8s_nodes_iam-instance-profile_arn" {}
+variable "aws_region" {}
 

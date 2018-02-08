@@ -26,20 +26,20 @@ variable "aws_ssh_key" {
   default = "haystack"
 }
 
-variable "haystack_index_store_es_master_instance_type" {
+variable "es_master_instance_type" {
   default = "m4.large.elasticsearch"
 }
 
 
-variable "haystack_index_store_worker_instance_type" {
+variable "es_worker_instance_type" {
   default = "i3.2xlarge.elasticsearch"
 }
 
-variable "haystack_index_store_instance_count" {
-  default = 8
+variable "es_worker_instance_count" {
+  default = 3
 }
 
-variable "haystack_index_store_master_count" {
+variable "es_master_instance_count" {
   default = 3
 }
 
