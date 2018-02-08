@@ -3,7 +3,11 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Principal": "${k8s_nodes_iam-instance-profile_arn}",
+      "Principal": {
+        "AWS": [
+          "${k8s_nodes_iam-instance-profile_arn}"
+        ]
+      },
       "Action": "es:*",
       "Resource": "arn:aws:es:${aws_region}:${aws_account_id}:domain/${es_domain_name}/*"
     }
