@@ -5,12 +5,14 @@ module "trace-indexer" {
   replicas = "${var.traces_indexer_instances}"
   namespace = "${var.k8s_app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
-  elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
+  elasticsearch_port = "${var.elasticsearch_port}"
+  elasticsearch_hostname = "${var.elasticsearch_hostname}"
   cassandra_hostname = "${var.cassandra_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.traces_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
 }
 module "trace-reader" {
   source = "trace-reader"

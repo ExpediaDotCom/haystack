@@ -4,6 +4,7 @@ locals {
   container_config_path = "/config/trace-indexer.conf"
   count = "${var.enabled?1:0}"
   span_produce_topic = "${var.enable_kafka_sink?"span-buffer":""}"
+  elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
 }
 
 data "template_file" "haystack_trace_indexer_config_data" {
@@ -11,7 +12,7 @@ data "template_file" "haystack_trace_indexer_config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
-    elasticsearch_endpoint = "${var.elasticsearch_endpoint}"
+    elasticsearch_endpoint = "${local.elasticsearch_endpoint}"
     cassandra_hostname = "${var.cassandra_hostname}"
     span_produce_topic = "${local.span_produce_topic}"
   }
@@ -82,4 +83,13 @@ resource "kubernetes_replication_controller" "haystack-rc" {
     }
   }
   count = "${local.count}"
+}
+
+module "curator" {
+  source = "curator"
+  kubectl_context_name = ""
+  enabled = "${var.enabled}"
+  elasticsearch_host = "${var.elasticsearch_hostname}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  "monitoring-node_selecter_label" = "${var.node_selecter_label}"
 }

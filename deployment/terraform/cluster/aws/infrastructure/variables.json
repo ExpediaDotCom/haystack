@@ -1,1 +1,11 @@
-{}
+{
+  "region": "us-west-2",
+  "aws_vpc_id": "vpc-de7925b9",
+  "aws_nodes_subnet": "subnet-33f0ea6b",
+  "aws_utilities_subnet": "subnet-68f2e830",
+  "aws_domain_name": "test.monitoring.expedia.com",
+  "kafka_broker_count": 4,
+  "cassandra_node_instance_count": 4,
+  "k8s_app-nodes_instance_count": 9,
+  "k8s_app-nodes_instance_type": "c5.large"
+}
