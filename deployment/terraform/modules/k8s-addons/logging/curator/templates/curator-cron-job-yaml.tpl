@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: curator-es
+  name: curator-es-logs
   namespace: kube-system
   labels:
-    app:  curator-es
+    app:  curator-es-logs
 data:
-  curator.yaml: |-
+  curator.yml: |-
     client:
       hosts:
-        - ${elasticsearch_host}
+        - ${es_endpoint}
       port: 9200
       url_prefix:
       use_ssl: False
@@ -23,19 +23,15 @@ data:
       http_auth:
       timeout: 30
       master_only: False
-
     logging:
       loglevel: INFO
       logfile:
       logformat: default
       blacklist: ['elasticsearch', 'urllib3']
+  actions.yml: |-
     actions:
       1:
         action: delete_indices
-        description: >-
-          Delete indices older than 45 days (based on index name), for logstash-
-          prefixed indices. Ignore the error if the filter does not result in an
-          actionable list of indices (ignore_empty_list) and exit cleanly.
         options:
           ignore_empty_list: True
           timeout_override:
@@ -57,7 +53,7 @@ data:
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: curator-es
+  name: curator-es-logs
   namespace: kube-system
 
 spec:
@@ -67,10 +63,11 @@ spec:
       template:
         spec:
           containers:
-          - name: curator-es
-            image: bobrik/curator:4.0.4
-            args:
-            - /config/curator.yaml
+          - name: curator-es-logs
+            image: bobrik/curator:5.4.0
+            - --config
+            - /config/curator.yml
+            - /config/actions.yml
             volumeMounts:
              - mountPath: /config
                name: config
@@ -80,4 +77,4 @@ spec:
           volumes:
           - name: config
             configMap:
-              name: curator-es
+              name: curator-es-logs
