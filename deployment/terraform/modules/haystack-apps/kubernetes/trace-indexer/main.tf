@@ -94,4 +94,5 @@ module "curator" {
   elasticsearch_hostname = "${var.elasticsearch_hostname}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   "monitoring-node_selecter_label" = "${var.node_selecter_label}"
+  namespace = "${var.namespace}"
 }

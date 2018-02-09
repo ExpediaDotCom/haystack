@@ -8,6 +8,7 @@ data "template_file" "curator_cron_job" {
   vars {
     elasticsearch_host = "${var.elasticsearch_hostname}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
+    app_namespace = "${var.namespace}"
   }
   count = "${local.count}"
 }

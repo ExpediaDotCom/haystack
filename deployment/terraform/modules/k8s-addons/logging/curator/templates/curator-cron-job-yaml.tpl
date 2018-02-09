@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: curator-es
+  name: curator-es-logs
   namespace: kube-system
   labels:
-    app:  curator-es
+    app:  curator-es-logs
 data:
   curator.yml: |-
     client:
@@ -53,7 +53,7 @@ data:
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: curator-es
+  name: curator-es-logs
   namespace: kube-system
 
 spec:
@@ -63,7 +63,7 @@ spec:
       template:
         spec:
           containers:
-          - name: curator-es
+          - name: curator-es-logs
             image: bobrik/curator:5.4.0
             - --config
             - /config/curator.yml
@@ -77,4 +77,4 @@ spec:
           volumes:
           - name: config
             configMap:
-              name: curator-es
+              name: curator-es-logs
