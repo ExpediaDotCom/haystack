@@ -57,7 +57,7 @@ metadata:
   namespace: kube-system
 
 spec:
-  schedule: "*/1 * * * *"
+  schedule: "0 0 12 * *"
   jobTemplate:
     spec:
       template:
