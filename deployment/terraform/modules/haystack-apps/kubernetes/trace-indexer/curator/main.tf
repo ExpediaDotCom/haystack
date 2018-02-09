@@ -6,12 +6,12 @@ locals {
 data "template_file" "curator_cron_job" {
   template = "${file("${path.module}/templates/curator-cron-job-yaml.tpl")}"
   vars {
-    elasticsearch_host = "${var.elasticsearch_host}"
+    elasticsearch_host = "${var.elasticsearch_hostname}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
   count = "${local.count}"
 }
-resource "null_resource" "elasticsearch_addons" {
+resource "null_resource" "curator_addons" {
   triggers {
     template = "${data.template_file.curator_cron_job.rendered}"
   }

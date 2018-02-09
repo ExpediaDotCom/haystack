@@ -29,7 +29,8 @@ resource "kubernetes_config_map" "haystack-trace-indexer" {
   }
 }
 
-resource "kubernetes_replication_controller" "haystack-rc" {
+resource "kubernetes_replication_controller" "haystack-rc"
+{
   metadata {
     name = "${local.app_name}"
     labels {
@@ -85,11 +86,12 @@ resource "kubernetes_replication_controller" "haystack-rc" {
   count = "${local.count}"
 }
 
+
 module "curator" {
   source = "curator"
   kubectl_context_name = ""
   enabled = "${var.enabled}"
-  elasticsearch_host = "${var.elasticsearch_hostname}"
+  elasticsearch_hostname = "${var.elasticsearch_hostname}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   "monitoring-node_selecter_label" = "${var.node_selecter_label}"
 }
