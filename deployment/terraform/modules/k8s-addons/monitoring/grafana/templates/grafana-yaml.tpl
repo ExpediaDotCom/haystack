@@ -28,6 +28,8 @@ spec:
         volumeMounts:
         - mountPath: /var
           name: grafana-persistent-storage
+        - mountPath: /etc/ssl/certs
+          name: etc-ssl-certs
         env:
         - name: INFLUXDB_HOST
           value: monitoring-influxdb
@@ -35,6 +37,10 @@ spec:
           value: "3000"
       nodeSelector:
         ${node_selecter_label}
+      volumes:
+      - name: etc-ssl-certs
+        hostPath:
+          path: /etc/ssl/certs
   volumeClaimTemplates:
    - metadata:
        name: grafana-persistent-storage
