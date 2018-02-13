@@ -5,7 +5,6 @@ variable "aws_utilities_subnet" {}
 variable "aws_domain_name" {}
 variable "kubectl_executable_name" {}
 variable "kops_executable_name" {}
-
 variable "haystack_cluster_name" {}
 
 variable "traefik_node_port" {
@@ -62,6 +61,10 @@ variable "kafka_broker_instance_type" {
 variable "k8s_master_instance_type" {
   default = "c4.large"
 }
+variable "kafka_default_partition_count" {
+  default = 96
+}
+
 
 variable "k8s_app-nodes_instance_type" {
   default = "c5.large"
