@@ -43,10 +43,12 @@ this will uninstall all haystack components, but will leave minikube running. To
 minikube stop
 ``` 
 Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
-during the install process.
-
-
-
+during the install process. If you choose to take down minikube, you should delete the tfstate files by running, from 
+the directory containing apply-compose.sh, the following command:
+```
+find . -name "*tfstate*" -exec rm {} \;
+```
+This command removes the files that Terraform uses to [keep track of state.](https://www.terraform.io/docs/state/)
 ## AWS Cluster
 We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws.
 Here are the list of components we install : 
