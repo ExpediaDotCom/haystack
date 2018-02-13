@@ -89,10 +89,9 @@ resource "kubernetes_replication_controller" "haystack-rc"
 
 module "curator" {
   source = "curator"
-  kubectl_context_name = ""
+  kubectl_context_name = "${var.kubectl_context_name}"
   enabled = "${var.enabled}"
   elasticsearch_hostname = "${var.elasticsearch_hostname}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  "monitoring-node_selecter_label" = "${var.node_selecter_label}"
   namespace = "${var.namespace}"
 }

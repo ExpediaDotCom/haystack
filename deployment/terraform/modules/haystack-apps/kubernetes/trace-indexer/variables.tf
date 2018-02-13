@@ -9,6 +9,7 @@ variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "enabled"{}
 variable "kubectl_executable_name" {}
+variable "kubectl_context_name" {}
 variable "enable_kafka_sink" {
   default = false
 }
