@@ -9,7 +9,7 @@ data:
   curator.yml: |-
     client:
       hosts:
-        - ${es_endpoint}
+        - ${elasticsearch_host}
       port: 9200
       url_prefix:
       use_ssl: False
@@ -65,15 +65,13 @@ spec:
           containers:
           - name: curator-es-index-store
             image: bobrik/curator:5.4.0
-            - --config
-            - /config/curator.yml
-            - /config/actions.yml
+             - --config
+             - /config/curator.yml
+             - /config/actions.yml
             volumeMounts:
              - mountPath: /config
                name: config
           restartPolicy: OnFailure
-          nodeSelector:
-            ${node_selecter_label}
           volumes:
           - name: config
             configMap:

@@ -13,6 +13,7 @@ module "trace-indexer" {
   node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.traces_enabled}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
 }
 module "trace-reader" {
   source = "trace-reader"

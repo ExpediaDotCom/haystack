@@ -24,7 +24,7 @@ output "kafka_port" {
 }
 
 output "elasticsearch_hostname" {
-  value = "${module.haystack-infrastructure.elasticsearch_port}"
+  value = "${module.haystack-infrastructure.elasticsearch_hostname}"
 }
 output "elasticsearch_port" {
   value = "${module.haystack-infrastructure.elasticsearch_port}"
