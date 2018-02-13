@@ -15,3 +15,29 @@ output "graphite_port" {
 }
 
 
+output "kafka_hostname" {
+  value = "${module.haystack-infrastructure.kafka_hostname}"
+}
+
+output "kafka_port" {
+  value = "${module.haystack-infrastructure.kafka_port}"
+}
+
+output "elasticsearch_hostname" {
+  value = "${module.haystack-infrastructure.elasticsearch_hostname}"
+}
+output "elasticsearch_port" {
+  value = "${module.haystack-infrastructure.elasticsearch_port}"
+}
+
+
+output "cassandra_hostname" {
+  value = "${module.haystack-infrastructure.cassandra_hostname}"
+}
+
+output "cassandra_port" {
+  value = "${module.haystack-infrastructure.cassandra_port}"
+}
+
+
+
