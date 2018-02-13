@@ -9,7 +9,7 @@ data:
   curator.yml: |-
     client:
       hosts:
-        - ${es_endpoint}
+        - ${elasticsearch_host}
       port: 9200
       url_prefix:
       use_ssl: False
