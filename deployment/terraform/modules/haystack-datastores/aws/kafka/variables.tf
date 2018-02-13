@@ -2,6 +2,7 @@ variable "zookeeper_count" {}
 variable "zookeeper_volume_size" {}
 variable "broker_count" {}
 variable "broker_volume_size" {}
+variable "default_partition_count" {}
 variable "broker_instance_type" {}
 variable "broker_image" {
   default = ""

@@ -41,4 +41,5 @@ module "kafka" {
   aws_graphite_host = "${var.graphite_hostname}"
   aws_graphite_port = "${var.graphite_port}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  default_partition_count = "${var.kafka_default_partition_count}"
 }
