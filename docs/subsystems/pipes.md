@@ -5,8 +5,6 @@ Packages to send ("pipe") Haystack data to external data sources (like AWS S3). 
 human-friendly version of Haystack messages to zero or more "durable" locations for more permanent storage. 
 
 # High Level Block Diagram
-![High Level Block Diagram](images/haystack_pipes.png)
-
 The **haystack-pipes** module is used to send data to an external source. In our case, we will be sending our data into
 S3, which will enable users to create tables for adhoc queries using Athena and run mapreduce jobs using Spark. As part
 of our implementation, we provide a connector which transforms data into a JSON format to send to internal tools like
@@ -59,5 +57,48 @@ that wires the deserializer and serializer into a Kafka Streams pipeline.
 that provides an HTTP endpoint, used for health checks.
 3. [Unit tests](https://github.com/ExpediaDotCom/haystack-pipes/tree/master/kafka-producer/src/test/java/com/expedia/www/haystack/pipes).
 
+### kafka-poster
+The `http-poster` service uses [Kafka Streams](https://kafka.apache.org/documentation/streams/) to read protobuf
+records from Kafka, transform them to tags-flattened JSON, and send the transformed record to an HTTP endpoint as a
+[POST](https://en.wikipedia.org/wiki/POST_(HTTP)) message with the Span JSON in the
+[HTTP message body](https://en.wikipedia.org/wiki/HTTP_message_body).
+The code is simple and self-explanatory and consists of the following classes:
+1. A [collector](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/http-poster/src/main/java/com/expedia/www/haystack/pipes/httpPoster/ContentCollector.java)
+that collects spans into a "batch" until the batch is full (after which it is posted to the HTTP endpoint and a new
+batch is started). Configurations control what text is used for the batch prefix, batch suffix, span prefix, and span 
+suffix.
+2. An [HTTP Poster](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/http-poster/src/main/java/com/expedia/www/haystack/pipes/httpPoster/ProtobufToHttpPoster.java)
+that wires serializers and deserializers into a
+[Kafka Streams](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams) pipeline.
+3. A simple Spring Boot [application](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/http-poster/src/main/java/com/expedia/www/haystack/pipes/httpPoster/HttpPostIsActiveController.java)
+that provides an HTTP endpoint, used for health checks.
+4. [Configurations](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/http-poster/src/main/java/com/expedia/www/haystack/pipes/httpPoster/HttpPostConfigurationProvider.java)
+for the HTTP endpoint to which the Spans' JSON is posted.
+5. A [Kafka for/each action](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/http-poster/src/main/java/com/expedia/www/haystack/pipes/httpPoster/HttpPostAction.java)
+at the end the Kafka Streams pipeline that posts to the HTTP endpoint.
+6. [Unit tests](https://github.com/ExpediaDotCom/haystack-pipes/tree/master/http-poster/src/test/java/com/expedia/www/haystack/pipes/httpPoster)
+
+Various classes from the [commons](https://github.com/ExpediaDotCom/haystack-pipes/tree/master/commons)
+package are also used.
+
 ### firehose-writer
-TODO
+The `firehose-writer` service uses [Kafka Streams](https://kafka.apache.org/documentation/streams/) to read protobuf
+records from Kafka, transform them to tags-flattened JSON, batch multiple requests into a batch request, and send the
+batched request to [AWS Firehose](https://aws.amazon.com/kinesis/data-firehose/).
+The code is simple and self-explanatory and consists of the following classes:
+1. A [collector](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/firehose-writer/src/main/java/com/expedia/www/haystack/pipes/firehoseWriter/FirehoseCollector.java)
+that collects spans into a "batch" until the batch is full (after which it is sent to Firehose and a new batch is 
+started).
+2. An [producer](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/firehose-writer/src/main/java/com/expedia/www/haystack/pipes/firehoseWriter/ProtobufToFirehoseProducer.java)
+that wires serializers and deserializers into a
+[Kafka Streams](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams) pipeline.
+2. A simple Spring Boot [application](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/firehose-writer/src/main/java/com/expedia/www/haystack/pipes/firehoseWriter/FirehoseIsActiveController.java)
+that provides an HTTP endpoint, used for health checks.
+3. [Configurations](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/firehose-writer/src/main/java/com/expedia/www/haystack/pipes/firehoseWriter/FirehoseConfigurationProvider.java)
+for the Firehose S3 bucket to which the Spans' JSON is sent.
+4. A [Kafka for/each action](https://github.com/ExpediaDotCom/haystack-pipes/blob/master/firehose-writer/src/main/java/com/expedia/www/haystack/pipes/firehoseWriter/FirehoseAction.java)
+at the end the Kafka Streams pipeline that writes to the Firehose S3 bucket.
+5. [Unit tests](https://github.com/ExpediaDotCom/haystack-pipes/tree/master/firehose-writer/src/test/java/com/expedia/www/haystack/pipes/firehoseWriter)
+
+Various classes from the [commons](https://github.com/ExpediaDotCom/haystack-pipes/tree/master/commons)
+package are also used.

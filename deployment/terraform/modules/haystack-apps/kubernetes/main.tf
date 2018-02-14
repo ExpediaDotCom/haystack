@@ -89,6 +89,18 @@ module "pipes-kafka-producer" {
   enabled = "${var.pipes_kafka_producer_enabled}"
 }
 
+module "pipes-http-poster" {
+  source = "pipes-http-poster"
+  image = "expediadotcom/haystack-pipes-http-poster:${var.pipes_version}"
+  replicas = "${var.pipes_http_poster_instances}"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
+  enabled = "${var.pipes_http_poster_enabled}"
+}
+
 # collectors
 
 module "kinesis-span-collector" {

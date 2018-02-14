@@ -44,9 +44,6 @@ variable "pipes_kafka_producer_enabled" {
 variable "pipes_http_poster_enabled" {
   default = true
 }
-variable "pipes_firehose_writer_enabled" {
-  default = true
-}
 variable "pipes_json_transformer_instances" {
   default = "1"
 }

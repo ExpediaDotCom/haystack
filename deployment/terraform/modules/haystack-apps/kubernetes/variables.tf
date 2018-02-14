@@ -30,7 +30,6 @@ variable "trends_version" {}
 variable "pipes_json_transformer_enabled" {}
 variable "pipes_kafka_producer_enabled" {}
 variable "pipes_http_poster_enabled" {}
-variable "pipes_firehose_writer_enabled" {}
 variable "pipes_json_transformer_instances" {}
 variable "pipes_kafka_producer_instances" {}
 variable "pipes_http_poster_instances" {}

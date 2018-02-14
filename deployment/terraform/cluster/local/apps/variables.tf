@@ -41,9 +41,6 @@ variable "pipes_kafka_producer_enabled" {
 variable "pipes_http_poster_enabled" {
   default = true
 }
-variable "pipes_firehose_writer_enabled" {
-  default = true
-}
 variable "pipes_json_transformer_instances" {
   default = "1"
 }
@@ -54,7 +51,7 @@ variable "pipes_http_poster_instances" {
   default = "1"
 }
 variable "pipes_version" {
-  default = "e1cc1b6b0bbde427d927869903bcf79d2e29ea4c"
+  default = "1b3bfc2805c570da7de4f2afacdaed09ab1bf38b"
 }
 
 # collectors config
