@@ -185,6 +185,7 @@ resource "aws_security_group" "masters" {
 resource "aws_security_group_rule" "all-master-to-master" {
   type = "ingress"
   security_group_id = "${aws_security_group.masters.id}"
+  source_security_group_id = "${aws_security_group.masters.id}"
   from_port = 0
   to_port = 0
   protocol = "-1"
