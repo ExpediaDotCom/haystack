@@ -89,4 +89,5 @@ module "haystack-datastores" {
   graphite_port = "${module.k8s-addons.graphite_port}"
   k8s_nodes_iam-role_arn = "${module.haystack-k8s.nodes_iam-role_arn}"
   aws_region = "${var.aws_region}"
+  kafka_default_partition_count = "${var.kafka_default_partition_count}"
 }
