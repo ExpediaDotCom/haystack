@@ -27,7 +27,7 @@
     {
       "type": "shell",
       "inline": [
-        "sudo yum install -y java-1.8.0",
+        "sudo yum install -y java-1.8.0-openjdk-1:1.8.0.151-1.b12.35.amzn1.x86_64",
         "sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java",
         "sudo yum install -y jna",
         "sudo mkdir /var/jmxtrans",
