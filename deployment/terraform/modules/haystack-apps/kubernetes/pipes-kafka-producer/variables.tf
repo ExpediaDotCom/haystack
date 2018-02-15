@@ -4,6 +4,7 @@ variable "namespace" {}
 variable "kafka_hostname" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
+variable "httppost_url" {}
 variable "enabled" {}
 
 variable "node_selecter_label" {
