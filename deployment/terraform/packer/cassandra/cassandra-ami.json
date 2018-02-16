@@ -27,9 +27,11 @@
     {
       "type": "shell",
       "inline": [
-        "sudo yum install -y java-1.8.0-openjdk-1:1.8.0.151-1.b12.35.amzn1.x86_64",
-        "sudo yum install -y java-1.8.0-openjdk-headless-1:1.8.0.151-1.b12.35.amzn1.x86_64",
-        "sudo alternatives --set java /usr/lib/jvm/jre-1.8.0-openjdk.x86_64/bin/java",
+        "sudo yum install -y wget",
+        "sudo wget -c -O '/tmp/jre-8-linux-x64.tar.gz' --no-check-certificate --no-cookies --header 'Cookie: oraclelicense=accept-securebackup-cookie' http://download.oracle.com/otn-pub/java/jdk/8u141-b15/336fa29ff2bb4ef291e347e091f7f4a7/jre-8u141-linux-x64.tar.gz",
+        "sudo mkdir /opt/jre-8",
+        "sudo chmod a+w /opt/jre-8",
+        "sudo tar -xzf /tmp/jre-8-linux-x64.tar.gz -C /opt/jre-8 --strip-components=1",
         "sudo yum install -y jna",
         "sudo mkdir /var/jmxtrans",
         "sudo yum install -y wget",
