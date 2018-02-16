@@ -82,7 +82,8 @@ We can provide these overrides as configuration files for instance 'configs/test
 Then we mount them inside the container under say /configs/span-stitcher.yaml using Kubernetes' [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap)
 
 ### Scheduled Jobs
-We run scheduled jobs to remove the old indices created on ElasticSearch for logs collected by Fluentd. However, we don not setup one in dev environment.
+We run scheduled jobs to remove the old indices created on ElasticSearch for logs collected by Fluentd. 
+However, we do not setup one in the dev environment.
 
 ### Verify haystack components
 Once scripts gets completed,  
