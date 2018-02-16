@@ -12,6 +12,9 @@ variable "masters_iam-instance-profile_arn" {}
 variable "haystack_cluster_name" {}
 variable "nodes_iam-instance-profile_arn" {}
 
+variable "monitoring-nodes_instance_volume" {}
+variable "master_instance_volume" {}
+variable "app-nodes_instance_volume" {}
 variable "masters_security_groups" {
   type = "list"
 }
