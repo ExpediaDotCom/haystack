@@ -428,7 +428,7 @@ resource "aws_launch_configuration" "monitoring-nodes" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = 128
+    volume_size = 256
     delete_on_termination = true
   }
 
