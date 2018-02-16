@@ -22,6 +22,9 @@ module "kops" {
   aws_zone = "${data.aws_subnet.haystack_node_subnet.availability_zone}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
   aws_utilities_subnet = "${var.aws_utility_subnet}"
+  master_instance_volume = "${var.master_instance_volume}"
+  app-nodes_instance_volume = "${var.app-nodes_instance_volume}"
+  monitoring-nodes_instance_volume = "${var.monitoring-nodes_instance_volume}"
 }
 
 module "security_groups" {
@@ -57,6 +60,9 @@ module "asg" {
   masters_security_groups = "${module.security_groups.master_security_group_ids}"
   masters_iam-instance-profile_arn = "${module.iam_roles.masters_iam-instance-profile_arn}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  master_instance_volume = "${var.master_instance_volume}"
+  app-nodes_instance_volume = "${var.app-nodes_instance_volume}"
+  monitoring-nodes_instance_volume = "${var.monitoring-nodes_instance_volume}"
 }
 
 module "elbs" {

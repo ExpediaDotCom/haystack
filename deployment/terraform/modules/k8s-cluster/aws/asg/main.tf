@@ -302,7 +302,7 @@ resource "aws_launch_configuration" "master-1" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = 64
+    volume_size = "${var.master_instance_volume}"
     delete_on_termination = true
   }
 
@@ -333,7 +333,7 @@ resource "aws_launch_configuration" "master-2" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = 64
+    volume_size = "${var.master_instance_volume}"
     delete_on_termination = true
   }
 
@@ -365,7 +365,7 @@ resource "aws_launch_configuration" "master-3" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = 64
+    volume_size = "${var.master_instance_volume}"
     delete_on_termination = true
   }
   lifecycle = {
@@ -397,7 +397,7 @@ resource "aws_launch_configuration" "app-nodes" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = 128
+    volume_size = "${var.app-nodes_instance_volume}"
     delete_on_termination = true
   }
 
@@ -428,7 +428,7 @@ resource "aws_launch_configuration" "monitoring-nodes" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = 256
+    volume_size = "${var.monitoring-nodes_instance_volume}"
     delete_on_termination = true
   }
 

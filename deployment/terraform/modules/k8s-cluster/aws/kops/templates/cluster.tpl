@@ -81,6 +81,8 @@ spec:
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
+  rootVolumeSize: ${master_instance_volume}
+  rootVolumeType: gp2
   nodeLabels:
     kops.k8s.io/instancegroup: master-${aws_zone}-1
   role: Master
@@ -102,6 +104,8 @@ spec:
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
+  rootVolumeSize: ${master_instance_volume}
+  rootVolumeType: gp2
   nodeLabels:
     kops.k8s.io/instancegroup: master-${aws_zone}-2
   role: Master
@@ -123,6 +127,8 @@ spec:
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
+  rootVolumeSize: ${master_instance_volume}
+  rootVolumeType: gp2
   nodeLabels:
     kops.k8s.io/instancegroup: master-${aws_zone}-3
   role: Master
@@ -144,6 +150,8 @@ spec:
   machineType: ${app-node_instance_type}
   maxSize: ${app-node_instance_count}
   minSize: ${app-node_instance_count}
+  rootVolumeSize: ${app-node_instance_volume}
+  rootVolumeType: gp2
   nodeLabels:
     kops.k8s.io/instancegroup: app-nodes
   role: Node
@@ -165,6 +173,9 @@ spec:
   machineType: ${monitoring-node_instance_type}
   maxSize: ${monitoring-node_instance_count}
   minSize: ${monitoring-node_instance_count}
+  rootVolumeSize: ${monitoring-node_instance_volume}
+  rootVolumeType: gp2
+
   nodeLabels:
     kops.k8s.io/instancegroup: monitoring-nodes
   role: Node
