@@ -25,7 +25,7 @@ cd -
 
 echo =============== building kafka ami =============================
 cd kafka
-#$PACKER build -var-file=$DIR/variables.json kafka-ami.json
+$PACKER build -var-file=$DIR/variables.json kafka-ami.json
 cd -
 
 echo ================================================================
