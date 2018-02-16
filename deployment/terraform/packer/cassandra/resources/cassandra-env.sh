@@ -89,7 +89,7 @@ calculate_heap_sizes()
 }
 
 # Determine the sort of JVM we'll be running on.
-JAVA="/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.151-1.b12.35.amzn1.x86_64/jre/bin/java"
+JAVA="/opt/jre-8/bin/java"
 
 java_ver_output=`"${JAVA:-java}" -version 2>&1`
 jvmver=`echo "$java_ver_output" | grep '[openjdk|java] version' | awk -F'"' 'NR==1 {print $2}' | cut -d\- -f1`
