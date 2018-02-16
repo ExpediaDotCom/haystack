@@ -57,7 +57,7 @@ metadata:
   namespace: ${app_namespace}
 
 spec:
-  schedule: "0 0 12 * *"
+  schedule: "0 0 * * *"
   jobTemplate:
     spec:
       template:
