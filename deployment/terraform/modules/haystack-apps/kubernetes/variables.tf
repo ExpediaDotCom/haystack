@@ -33,6 +33,8 @@ variable "pipes_http_poster_enabled" {}
 variable "pipes_json_transformer_instances" {}
 variable "pipes_kafka_producer_instances" {}
 variable "pipes_http_poster_instances" {}
+variable "pipes_http_poster_httppost_url" {}
+variable "pipes_http_poster_httppost_pollpercent" {}
 variable "pipes_version" {}
 
 # collectors config

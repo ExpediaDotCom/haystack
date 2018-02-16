@@ -29,6 +29,14 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "HAYSTACK_GRAPHITE_PORT"
           value = "${var.graphite_port}"
         }
+        env {
+          name = "HAYSTACK_HTTPPOST_URL"
+          value = "${var.httppost_url}"
+        }
+        env {
+          name = "HAYSTACK_HTTPPOST_POLLPERCENT"
+          value = "${var.httppost_pollpercent}"
+        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
       node_selector = "${var.node_selecter_label}"

@@ -99,6 +99,8 @@ module "pipes-http-poster" {
   graphite_port = "${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.pipes_http_poster_enabled}"
+  httppost_url = "${var.pipes_http_poster_httppost_url}"
+  httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
 }
 
 # collectors
