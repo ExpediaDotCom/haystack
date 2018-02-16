@@ -11,6 +11,7 @@ haystack-trace-reader | https://hub.docker.com/u/expediadotcom/haystack-trace-re
 haystack-timeseries-aggregator | https://hub.docker.com/u/expediadotcom/haystack-timeseries-aggregator 
 haystack-kinesis-span-collector | https://hub.docker.com/u/expediadotcom/haystack-kinesis-span-collector 
 haystack-span-timeseries-transformer | https://hub.docker.com/u/expediadotcom/haystack-span-timeseries-transformer 
+haystack-pipes-http-poster | https://hub.docker.com/u/expediadotcom/haystack-pipes-http-poster
 haystack-pipes-kafka-producer | https://hub.docker.com/u/expediadotcom/haystack-pipes-kafka-producer
 haystack-pipes-json-transformer | https://hub.docker.com/u/expediadotcom/haystack-pipes-json-transformer 
 
@@ -81,7 +82,8 @@ We can provide these overrides as configuration files for instance 'configs/test
 Then we mount them inside the container under say /configs/span-stitcher.yaml using Kubernetes' [ConfigMaps](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap)
 
 ### Scheduled Jobs
-We run scheduled jobs to remove the old indices created on ElasticSearch for logs collected by Fluentd. Howeever, we don not setup one in dev envivonment.
+We run scheduled jobs to remove the old indices created on ElasticSearch for logs collected by Fluentd. 
+However, we do not setup one in the dev environment.
 
 ### Verify haystack components
 Once scripts gets completed,  
@@ -114,4 +116,4 @@ To learn more about `apply-compose.sh`, type :
 ```
 ./k8s/apply-compose.sh --help
 ```
-and by looking at the `apply-compose.sh` [source](k8s/apply-compose.sh).
+and by looking at the `apply-compose.sh` [source](../../deployment/k8s/apply-compose.sh).

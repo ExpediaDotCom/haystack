@@ -65,7 +65,7 @@ deployable_units:
         failureThreshold: 1
 
      - name: haystack-pipes-json-transformer
-       image: expediadotcom/haystack-pipes-json-transformer:a9faee13c3e0f5069c2af24bb1a6456815580357
+       image: expediadotcom/haystack-pipes-json-transformer:eecefedeb7c07349636d3556a8f7502d6f40e24c
        replicas: 1
        terminationGracePeriodSeconds: 30
        env:
@@ -75,7 +75,7 @@ deployable_units:
           value: monitoring-influxdb-graphite.kube-system.svc
 
      - name: haystack-pipes-kafka-producer
-       image: expediadotcom/haystack-pipes-kafka-producer:a9faee13c3e0f5069c2af24bb1a6456815580357
+       image: expediadotcom/haystack-pipes-kafka-producer:eecefedeb7c07349636d3556a8f7502d6f40e24c
        replicas: 1
        terminationGracePeriodSeconds: 30
        env:
@@ -85,6 +85,16 @@ deployable_units:
           value: monitoring-influxdb-graphite.kube-system.svc
         - name: HAYSTACK_EXTERNALKAFKA_BROKERS
           value: kafka-service
+
+     - name: haystack-pipes-http-poster
+       image: expediadotcom/haystack-pipes-http-poster:eecefedeb7c07349636d3556a8f7502d6f40e24c
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafka-service
+        - name: HAYSTACK_GRAPHITE_HOST
+          value: monitoring-influxdb-graphite.kube-system.svc
 
      - name: haystack-trace-reader
        image: expediadotcom/haystack-trace-reader:61d53c1cf8d9a8363ab08d73d6815bb6acf1a982
