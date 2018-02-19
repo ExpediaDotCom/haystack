@@ -29,7 +29,6 @@ module "haystack-apps" {
   pipes_json_transformer_enabled = "${var.pipes_json_transformer_enabled}"
   pipes_kafka_producer_enabled = "${var.pipes_kafka_producer_enabled}"
   pipes_http_poster_enabled = "${var.pipes_http_poster_enabled}"
-  pipes_firehose_writer_enabled = "${var.pipes_firehose_writer_enabled}"
   pipes_json_transformer_instances = "${var.pipes_json_transformer_instances}"
   pipes_kafka_producer_instances = "${var.pipes_kafka_producer_instances}"
   pipes_http_poster_instances = "${var.pipes_http_poster_instances}"

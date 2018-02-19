@@ -2,6 +2,10 @@
 .idea/
 .DS_Store
 .node_modules
-deployment/k8s/third_party_softwares/*
-*.iml
 target/
+deployment/k8s/third_party_softwares/
+deployment/terraform/cluster/local/apps/.terraform/
+deployment/terraform/cluster/local/infrastructure/.terraform/
+deployment/terraform/third_party_softwares
+**/*.tfstate
+**/*.tfstate.backup

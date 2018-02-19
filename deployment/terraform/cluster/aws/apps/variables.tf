@@ -44,9 +44,6 @@ variable "pipes_kafka_producer_enabled" {
 variable "pipes_http_poster_enabled" {
   default = true
 }
-variable "pipes_firehose_writer_enabled" {
-  default = true
-}
 variable "pipes_json_transformer_instances" {
   default = "1"
 }
@@ -56,8 +53,14 @@ variable "pipes_kafka_producer_instances" {
 variable "pipes_http_poster_instances" {
   default = "1"
 }
+variable "pipes_http_poster_httppost_url" {
+  default = "https://collector.test.expedia.com/haystack-spans.json?stream=true&persist=false&multilines=true"
+}
+variable "pipes_http_poster_httppost_pollpercent" {
+  default = "1"
+}
 variable "pipes_version" {
-  default = "728dbf3dae509bfb6219e9f61f3e3e57a39e30af"
+  default = "d7db731f63f799f32c290d1c3f2b76648d542ae1"
 }
 
 # collectors config

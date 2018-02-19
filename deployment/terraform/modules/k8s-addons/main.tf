@@ -15,7 +15,7 @@ module "monitoring-addons" {
   monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
 
-module "logging-addongs" {
+module "logging-addons" {
   source = "logging"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
