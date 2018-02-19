@@ -68,6 +68,15 @@ resource "kubernetes_replication_controller" "haystack-rc"
             command = ["grep","true","/app/isHealthy"]
           }
         }
+        resources {
+          limits {
+            memory = "1500Mi"
+          }
+          requests {
+            cpu = "500m"
+            memory = "1500Mi"
+          }
+        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
       volume {

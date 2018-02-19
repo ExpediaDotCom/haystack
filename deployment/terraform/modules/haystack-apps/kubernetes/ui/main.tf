@@ -65,6 +65,15 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           mount_path = "/config"
           name = "config-volume"
         }
+        resources {
+          limits {
+            memory = "1500Mi"
+          }
+          requests {
+            cpu = "500m"
+            memory = "1500Mi"
+          }
+        }
       }
       node_selector = "${var.node_selecter_label}"
 
