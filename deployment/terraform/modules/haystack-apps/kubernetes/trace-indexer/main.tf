@@ -73,7 +73,7 @@ resource "kubernetes_replication_controller" "haystack-rc"
             memory = "1500Mi"
           }
           requests {
-            cpu = "500m"
+            cpu = "1000m"
             memory = "1500Mi"
           }
         }
