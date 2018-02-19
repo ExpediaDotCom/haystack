@@ -42,7 +42,7 @@ variable "pipes_kafka_producer_enabled" {
   default = false
 }
 variable "pipes_http_poster_enabled" {
-  default = true
+  default = false
 }
 variable "pipes_json_transformer_instances" {
   default = "1"
