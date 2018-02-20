@@ -61,4 +61,6 @@ module "haystack-apps" {
   external_metric_tank_hostname = "${var.external_metric_tank_hostname}"
   external_metric_tank_port = "${var.external_metric_tank_port}"
   external_metric_tank_kafka_broker_hostname = "${var.external_metric_tank_kafka_broker_hostname}"
+  metric_tank_instances = "${var.metric_tank_instances}"
+  metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
 }
