@@ -63,11 +63,18 @@ trace {
   }
 
   transformers {
-    sequence = [
-      "com.expedia.www.haystack.trace.reader.readers.transformers.PartialSpanTransformer"
-      "com.expedia.www.haystack.trace.reader.readers.transformers.ClockSkewTransformer"
-      "com.expedia.www.haystack.trace.reader.readers.transformers.SortSpanTransformer"
-    ]
+    pre {
+      sequence = [
+        "com.expedia.www.haystack.trace.reader.readers.transformers.DeDuplicateSpanTransformer"
+      ]
+    }
+    post {
+      sequence = [
+        "com.expedia.www.haystack.trace.reader.readers.transformers.PartialSpanTransformer"
+        "com.expedia.www.haystack.trace.reader.readers.transformers.ClockSkewTransformer"
+        "com.expedia.www.haystack.trace.reader.readers.transformers.SortSpanTransformer"
+      ]
+    }
   }
 }
 
@@ -80,5 +87,5 @@ reload {
     database.name = "reload-configs"
   }
   startup.load = true
-  interval.ms = 300000 # -1 will imply 'no reload'
+  interval.ms = 600000 # -1 will imply 'no reload'
 }
