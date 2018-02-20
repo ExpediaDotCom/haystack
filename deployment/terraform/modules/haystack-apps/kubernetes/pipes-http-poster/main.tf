@@ -37,6 +37,15 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           name = "HAYSTACK_HTTPPOST_POLLPERCENT"
           value = "${var.httppost_pollpercent}"
         }
+        resources {
+          limits {
+            memory = "1500Mi"
+          }
+          requests {
+            cpu = "500m"
+            memory = "1500Mi"
+          }
+        }
       }
       termination_grace_period_seconds = "${var.termination_grace_period}"
       node_selector = "${var.node_selecter_label}"

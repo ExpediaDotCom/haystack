@@ -39,7 +39,7 @@ variable "pipes_kafka_producer_enabled" {
   default = false
 }
 variable "pipes_http_poster_enabled" {
-  default = true
+  default = false
 }
 variable "pipes_json_transformer_instances" {
   default = "1"
@@ -51,7 +51,7 @@ variable "pipes_http_poster_instances" {
   default = "1"
 }
 variable "pipes_http_poster_httppost_url" {
-  default = "https://collector.test.expedia.com/haystack-spans.json?stream=true&persist=false&multilines=true"
+  default = ""
 }
 variable "pipes_http_poster_httppost_pollpercent" {
   default = "1"
