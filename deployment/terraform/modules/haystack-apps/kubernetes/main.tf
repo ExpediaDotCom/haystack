@@ -1,4 +1,10 @@
 # tracing apps
+
+locals {
+  external_metric_tank_enabled =  "${var.external_metric_tank_hostname != "" && var.external_metric_tank_port != "" && var.external_metric_tank_kafka_broker_hostname != "" && var.external_metric_tank_kafka_broker_port != "" ? "true" : "false"}"
+}
+
+
 module "trace-indexer" {
   source = "trace-indexer"
   image = "expediadotcom/haystack-trace-indexer:${var.traces_version}"
@@ -39,7 +45,7 @@ module "metrictank" {
   namespace = "${var.k8s_app_namespace}"
   graphite_address = "${var.graphite_hostname}:${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
-  enabled = "true"
+  enabled = "${local.external_metric_tank_enabled == "true" ? "false" : "true" }"
 }
 module "span-timeseries-transformer" {
   source = "span-timeseries-transformer"
@@ -130,7 +136,7 @@ module "ui" {
   k8s_cluster_name = "${var.kubectl_context_name}"
   trace_reader_hostname = "${module.trace-reader.trace_reader_hostname}"
   trace_reader_service_port = "${module.trace-reader.trace_reader_service_port}"
-  metrictank_hostname = "${module.metrictank.metrictank_hostname}"
-  metrictank_port = "${module.metrictank.metrictank_port}"
+  metrictank_hostname = "${local.external_metric_tank_enabled == "true" ? var.external_metric_tank_hostname : module.metrictank.metrictank_hostname}"
+  metrictank_port = "${local.external_metric_tank_enabled == "true" ? var.external_metric_tank_port : module.metrictank.metrictank_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
 }

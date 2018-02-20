@@ -87,3 +87,16 @@ variable "haystack_ui_instances" {
 variable "ui_version" {
   default = "459278787c9979855c653c53d66bd181af8aedaa"
 }
+
+variable "external_metric_tank_kafka_broker_hostname" {
+  default = ""
+}
+variable "external_metric_tank_kafka_broker_port" {
+  default = ""
+}
+variable "external_metric_tank_hostname" {
+  default = ""
+}
+variable "external_metric_tank_port" {
+  default = ""
+}

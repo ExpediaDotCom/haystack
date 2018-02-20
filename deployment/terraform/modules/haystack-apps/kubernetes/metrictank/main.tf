@@ -3,7 +3,7 @@ locals {
   service_port = 6060
   container_port = 6060
   image = "raintank/metrictank:latest"
-  count = "${var.enabled?1:0}"
+  count = "${var.enabled == "true" ? 1:0}"
 
 }
 
@@ -21,6 +21,7 @@ resource "kubernetes_service" "haystack-service" {
       target_port = "${local.container_port}"
     }
   }
+  count = "${local.count}"
 }
 resource "kubernetes_replication_controller" "haystack-rc" {
   metadata {
@@ -82,4 +83,5 @@ resource "kubernetes_replication_controller" "haystack-rc" {
       app = "${local.app_name}"
     }
   }
+  count = "${local.count}"
 }

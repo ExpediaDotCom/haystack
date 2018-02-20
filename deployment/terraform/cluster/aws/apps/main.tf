@@ -57,4 +57,9 @@ module "haystack-apps" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   pipes_http_poster_httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
   pipes_http_poster_httppost_url = "${var.pipes_http_poster_httppost_url}"
+
+  external_metric_tank_kafka_broker_port = "${var.external_metric_tank_kafka_broker_port}"
+  external_metric_tank_hostname = "${var.external_metric_tank_hostname}"
+  external_metric_tank_port = "${var.external_metric_tank_port}"
+  external_metric_tank_kafka_broker_hostname = "${var.external_metric_tank_kafka_broker_hostname}"
 }
