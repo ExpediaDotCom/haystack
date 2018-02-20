@@ -67,11 +67,11 @@ resource "kubernetes_replication_controller" "haystack-rc" {
         }
         resources {
           limits {
-            memory = "4000Mi"
+            memory = "${var.memory_limit}"
           }
           requests {
             cpu = "500m"
-            memory = "4000Mi"
+            memory = "${var.memory_limit}"
           }
         }
       }

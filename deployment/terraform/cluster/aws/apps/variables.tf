@@ -99,3 +99,9 @@ variable "external_metric_tank_hostname" {
 variable "external_metric_tank_port" {
   default = ""
 }
+variable "metric_tank_instances" {
+  default = 3
+}
+variable "metric_tank_memory_limit" {
+  default = "4000Mi"
+}

@@ -13,3 +13,4 @@ variable "termination_grace_period" {
 variable "enabled" {}
 
 
+variable "memory_limit" {}

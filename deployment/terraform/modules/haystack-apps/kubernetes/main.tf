@@ -39,13 +39,14 @@ module "trace-reader" {
 //metrictank for haystack-apps
 module "metrictank" {
   source = "metrictank"
-  replicas = "1"
+  replicas = "${var.metric_tank_instances}"
   cassandra_address = "${var.cassandra_hostname}:${var.cassandra_port}"
   kafka_address = "${var.kafka_hostname}:${var.kafka_port}"
   namespace = "${var.k8s_app_namespace}"
   graphite_address = "${var.graphite_hostname}:${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${local.external_metric_tank_enabled == "true" ? "false" : "true" }"
+  memory_limit = "${var.metric_tank_memory_limit}"
 }
 module "span-timeseries-transformer" {
   source = "span-timeseries-transformer"
