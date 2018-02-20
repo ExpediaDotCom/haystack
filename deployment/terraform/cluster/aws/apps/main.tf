@@ -55,4 +55,9 @@ module "haystack-apps" {
   haystack_ui_instances = "${var.haystack_ui_instances}"
   app-node_selecter_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
+
+  external_metric_tank_kafka_broker_port = "${var.external_metric_tank_kafka_broker_port}"
+  external_metric_tank_hostname = "${var.external_metric_tank_hostname}"
+  external_metric_tank_port = "${var.external_metric_tank_port}"
+  external_metric_tank_kafka_broker_hostname = "${var.external_metric_tank_kafka_broker_hostname}"
 }

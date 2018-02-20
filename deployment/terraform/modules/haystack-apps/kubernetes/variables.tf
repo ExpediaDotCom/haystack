@@ -49,3 +49,8 @@ variable "kinesis_span_collector_sts_role_arn" {}
 variable "haystack_ui_instances" {}
 variable "ui_version" {}
 
+# external kafka broker and metric tank endpoint
+variable "external_metric_tank_kafka_broker_hostname" {}
+variable "external_metric_tank_kafka_broker_port" {}
+variable "external_metric_tank_hostname" {}
+variable "external_metric_tank_port" {}

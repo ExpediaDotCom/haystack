@@ -9,13 +9,13 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 function display_help() {
     echo "Usage: $0 [option...] " >&2
     echo
-    echo "   -ac, --action                  choose the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps. Default: install-all"
-    echo "   -ct, --cluster-type            choose the cluster-type settings for cluster. possible values: aws | local, default: local"
+    echo "   -a , --action                  choose the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps. Default: install-all"
+    echo "   -c , --cluster-type            choose the cluster-type settings for cluster. possible values: aws | local, default: local"
     echo "   -cn, --cluster-name            name of the cluster. must be unique for every cluster created in aws,default: haystack"
     echo "   -sb, --s3-bucket               name of the s3 bucket where the deployment state would be stored, its mandatory when the cluster type is aws"
     echo "   -af, --appvars-file-path       app configuration values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : trends_version, traces_version, default:cluster/aws|local/variables.json "
     echo "   -if, --infravars-file-path     infrastructure configuration which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.json "
-    echo "   -sa, --skip-approval           skips interactive approval of deployment plan before applying,default = false"
+    echo "   -s , --skip-approval           skips interactive approval of deployment plan before applying,default = false"
 
 
     exit 1
