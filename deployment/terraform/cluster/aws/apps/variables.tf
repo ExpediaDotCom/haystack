@@ -75,7 +75,7 @@ variable "pipes_firehose_writer_firehose_signingregion" {
   default = ""
 }
 variable "pipes_version" {
-  default = "fac5c5c7a0be5f7bacbcd703b0c9ec07a70516ca"
+  default = "d38d528d88210107c26a173ead045bcc16c632ef"
 }
 
 # collectors config
