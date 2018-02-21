@@ -66,8 +66,8 @@ cassandra {
   }
 
   connections {
-    max.per.host = 100
-    read.timeout.ms = 5000
+    max.per.host = 50
+    read.timeout.ms = 30000
     conn.timeout.ms = 10000
     keep.alive = true
   }
@@ -98,7 +98,7 @@ elasticsearch {
   }
 
   conn.timeout.ms = 10000
-  read.timeout.ms = 5000
+  read.timeout.ms = 30000
   consistency.level = "one"
 
   index {

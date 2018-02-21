@@ -31,7 +31,7 @@ cassandra {
 
   connections {
     max.per.host = 10
-    read.timeout.ms = 5000
+    read.timeout.ms = 30000
     conn.timeout.ms = 10000
     keep.alive = true
   }
@@ -45,7 +45,7 @@ cassandra {
 elasticsearch {
   endpoint = "http://${elasticsearch_endpoint}"
   conn.timeout.ms = 10000
-  read.timeout.ms = 5000
+  read.timeout.ms = 30000
 
   index {
     name.prefix = "haystack-traces"
