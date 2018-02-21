@@ -50,7 +50,7 @@ cassandra {
   endpoints: "${cassandra_hostname}"
 
   # defines the max inflight writes for cassandra
-  max.inflight.requests = 100
+  max.inflight.requests = 300
 
   # enable the auto.discovery mode, if true then we ignore the endpoints(above) and use auto discovery
   # mechanism to find cassandra nodes. For today we only support aws node discovery provider
@@ -66,7 +66,7 @@ cassandra {
   }
 
   connections {
-    max.per.host = 10
+    max.per.host = 100
     read.timeout.ms = 5000
     conn.timeout.ms = 10000
     keep.alive = true
@@ -91,7 +91,7 @@ elasticsearch {
   # defines settings for bulk operation like max inflight bulks, number of documents and the total size in a single bulk
   bulk.max {
     docs {
-      count = 100
+      count = 200
       size.kb = 1000
     }
     inflight = 10
@@ -103,8 +103,8 @@ elasticsearch {
 
   index {
     # apply the template before starting the client, if json is empty, no operation is performed
-    template.json = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":20,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":true,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":true,\"norms\":false}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
-
+    template.json = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":16,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":true,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":true,\"norms\":false}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
+    
     name.prefix = "haystack-traces"
     type = "spans"
   }
