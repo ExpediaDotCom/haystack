@@ -110,6 +110,21 @@ module "pipes-http-poster" {
   httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
 }
 
+module "pipes-firehose-writer" {
+  source = "pipes-firehose-writer"
+  image = "expediadotcom/haystack-pipes-firehose-writer:${var.pipes_version}"
+  replicas = "${var.pipes_firehose_writer_instances}"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  node_selecter_label = "${var.app-node_selecter_label}"
+  enabled = "${var.pipes_firehose_writer_enabled}"
+  firehose_url = "${var.pipes_firehose_writer_firehose_url}"
+  firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
+  firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
+}
+
 # collectors
 
 module "kinesis-span-collector" {
