@@ -13,6 +13,9 @@ variable "metrics_cname" {}
 variable "add_k8s_dashboard_addons" {}
 variable "k8s_dashboard_cname" {}
 
+variable "add_kubewatch_addon" {}
+variable "kubewatch_config_yaml_base64" {}
+
 variable "container_log_path" {}
 variable "logging_es_nodes" {}
 variable "haystack_ui_cname" {}
