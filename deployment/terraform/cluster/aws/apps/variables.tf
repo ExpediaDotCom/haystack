@@ -44,6 +44,9 @@ variable "pipes_kafka_producer_enabled" {
 variable "pipes_http_poster_enabled" {
   default = false
 }
+variable "pipes_firehose_writer_enabled" {
+  default = false
+}
 variable "pipes_json_transformer_instances" {
   default = "1"
 }
@@ -53,14 +56,26 @@ variable "pipes_kafka_producer_instances" {
 variable "pipes_http_poster_instances" {
   default = "1"
 }
+variable "pipes_firehose_writer_instances" {
+  default = "1"
+}
 variable "pipes_http_poster_httppost_url" {
   default = ""
 }
 variable "pipes_http_poster_httppost_pollpercent" {
   default = "1"
 }
+variable "pipes_firehose_writer_firehose_url" {
+  default = ""
+}
+variable "pipes_firehose_writer_firehose_streamname" {
+  default = ""
+}
+variable "pipes_firehose_writer_firehose_signingregion" {
+  default = ""
+}
 variable "pipes_version" {
-  default = "d7db731f63f799f32c290d1c3f2b76648d542ae1"
+  default = "d38d528d88210107c26a173ead045bcc16c632ef"
 }
 
 # collectors config

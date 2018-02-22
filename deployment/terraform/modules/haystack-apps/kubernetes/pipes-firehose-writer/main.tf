@@ -1,5 +1,5 @@
 locals {
-  app_name = "pipes-http-poster"
+  app_name = "pipes-firehose-writer"
   count = "${var.enabled?1:0}"
 }
 
@@ -30,12 +30,16 @@ resource "kubernetes_replication_controller" "haystack-rc" {
           value = "${var.graphite_port}"
         }
         env {
-          name = "HAYSTACK_HTTPPOST_URL"
-          value = "${var.httppost_url}"
+          name = "HAYSTACK_FIREHOSE_URL"
+          value = "${var.firehose_url}"
         }
         env {
-          name = "HAYSTACK_HTTPPOST_POLLPERCENT"
-          value = "${var.httppost_pollpercent}"
+          name = "HAYSTACK_FIREHOSE_STREAMNAME"
+          value = "${var.firehose_streamname}"
+        }
+        env {
+          name = "HAYSTACK_FIREHOSE_SIGNINGREGION"
+          value = "${var.firehose_signingregion}"
         }
         resources {
           limits {
