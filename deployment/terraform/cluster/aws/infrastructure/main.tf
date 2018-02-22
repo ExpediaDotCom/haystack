@@ -45,6 +45,8 @@ module "k8s-addons" {
   base_domain_name = "${var.aws_domain_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   add_monitoring_addons = true
+  add_kubewatch_addon = "${var.kubewatch_enabled}" 
+  kubewatch_config_yaml_base64 = "${var.kubewatch_config_yaml_base64}"
   add_logging_addons = true
   add_k8s_dashboard_addons = true
   container_log_path = "${local.container_log_path}"
