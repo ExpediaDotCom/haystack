@@ -53,16 +53,6 @@ resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ssl-ingress" {
     "0.0.0.0/0"]
 }
 
-resource "aws_security_group_rule" "haytack-cassandra-node-rpc-ingress" {
-  type = "ingress"
-  security_group_id = "${aws_security_group.haystack-cassandra-nodes.id}"
-  from_port = 9160
-  to_port = 9160
-  protocol = "tcp"
-  cidr_blocks = [
-    "0.0.0.0/0"]
-}
-
 resource "aws_security_group_rule" "haytack-cassandra-node-egress" {
   type = "egress"
   security_group_id = "${aws_security_group.haystack-cassandra-nodes.id}"
