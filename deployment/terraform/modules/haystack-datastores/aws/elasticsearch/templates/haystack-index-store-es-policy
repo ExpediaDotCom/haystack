@@ -5,7 +5,7 @@
       "Effect": "Allow",
       "Principal": {
         "AWS": [
-          "${k8s_nodes_iam-role_arn}"
+          "*"
         ]
       },
       "Action": "es:*",
