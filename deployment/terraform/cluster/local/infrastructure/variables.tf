@@ -3,10 +3,6 @@ variable "k8s_minikube_cluster_name" {
   default = "minikube"
 }
 
-variable "kubewatch_config_yaml_base64" {
-  default = ""
-}
-
 variable "haystack_cluster_name" {
   default = "haystack"
 }

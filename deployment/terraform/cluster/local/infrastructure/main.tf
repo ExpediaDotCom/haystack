@@ -21,7 +21,7 @@ module "k8s-addons" {
   add_monitoring_addons = false
 
   add_kubewatch_addon = false
-  kubewatch_config_yaml_base64 = "${var.kubewatch_config_yaml_base64}"
+  kubewatch_config_yaml_base64 = ""
 
   add_k8s_dashboard_addons = false
   container_log_path = "${local.container_log_path}"
