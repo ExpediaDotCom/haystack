@@ -7,6 +7,14 @@ variable "kubectl_executable_name" {}
 variable "kops_executable_name" {}
 variable "haystack_cluster_name" {}
 
+variable "kubewatch_enabled" {
+  default = false
+}
+
+variable "kubewatch_config_yaml_base64" {
+  default = ""
+}
+
 variable "traefik_node_port" {
   default = "32300"
 }

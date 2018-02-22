@@ -2,6 +2,16 @@ locals {
   graphite_hostname = "monitoring-influxdb-graphite.kube-system.svc"
   graphite_port = 2003
 }
+
+module "kubewatch-addon" {
+   source = "kubewatch"
+   kubectl_executable_name = "${var.kubectl_executable_name}"
+   enabled = "${var.add_kubewatch_addon}"
+   kubectl_context_name = "${var.kubectl_context_name}"
+   node_selecter_label = "${var.monitoring-node_selecter_label}"
+   kubewatch_config_yaml_base64 = "${var.kubewatch_config_yaml_base64}"
+}
+
 module "monitoring-addons" {
   source = "monitoring"
   kubectl_executable_name = "${var.kubectl_executable_name}"
