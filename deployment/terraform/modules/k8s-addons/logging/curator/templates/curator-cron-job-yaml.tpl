@@ -65,6 +65,7 @@ spec:
           containers:
           - name: curator-es-logs
             image: bobrik/curator:5.4.0
+            args:
              - --config
              - /config/curator.yml
              - /config/actions.yml
