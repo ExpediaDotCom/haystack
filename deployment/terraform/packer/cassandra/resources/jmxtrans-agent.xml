@@ -8,6 +8,8 @@
         <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="committed" resultAlias="jvm.heapMemoryUsage.committed"/>
         <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used" resultAlias="jvm.nonHeapMemoryUsage.used"/>
         <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="committed" resultAlias="jvm.nonHeapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=GarbageCollector,name=*" attribute="CollectionCount" resultAlias="jvm.gc-%name%.CollectionCount"/>
+        <query objectName="java.lang:type=GarbageCollector,name=*" attribute="CollectionTime" resultAlias="jvm.gc-%name%.CollectionTime"/>
         <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.loadedClasses"/>
         <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.thread"/>
         <query objectName="java.lang:type=OperatingSystem,name=*" resultAlias="jvm.os.%name%"/>
@@ -16,11 +18,14 @@
         <!-- CASSANDRA -->
         <query objectName="org.apache.cassandra.metrics:type=*,name=*" resultAlias="%type%.%name%.#attribute#"/>
         <query objectName="org.apache.cassandra.metrics:type=*,scope=*,name=*" resultAlias="%type%.%scope%-%name%.#attribute#"/>
+        <query objectName="org.apache.cassandra.metrics:type=ThreadPools,scope=*,type=*,name=*" resultAlias="ThreadPools.%scope%-%type%-%name%.#attribute#"/>
+        <query objectName="org.apache.cassandra.metrics:type=*,path=*,scope=*,name=*" resultAlias="%type%.%path%-%scope%-%name%.#attribute#"/>
+        <query objectName="org.apache.cassandra.metrics:type=*,keyspace=*,scope=*,name=*" resultAlias="%type%.%keyspace%-%scope%-%name%.#attribute#"/>
     </queries>
     <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
         <host>_HAYSTACK_GRAPHITE_HOST</host>
         <port>_HAYSTACK_GRAPHITE_PORT</port>
         <namePrefix>haystack.datastore.cassandra.${HOSTNAME}.</namePrefix>
     </outputWriter>
-    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+    <collectIntervalInSeconds>60</collectIntervalInSeconds>
 </jmxtrans-agent>
