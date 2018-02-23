@@ -10,6 +10,8 @@ data "template_file" "haystck_timeseries_aggregator_config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    enable_external_kafka_producer = "${var.enable_external_kafka_producer}"
+    external_kafka_producer_endpoint = "${var.external_kafka_producer_endpoint}"
   }
 }
 

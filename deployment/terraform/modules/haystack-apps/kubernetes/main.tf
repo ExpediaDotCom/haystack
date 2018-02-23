@@ -69,6 +69,8 @@ module "timeseries-aggregator" {
   graphite_port = "${var.graphite_port}"
   node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.trends_enabled}"
+  enable_external_kafka_producer = "${local.external_metric_tank_enabled}"
+  external_kafka_producer_endpoint = "${var.external_metric_tank_kafka_broker_hostname}:${var.external_metric_tank_kafka_broker_port}"
 }
 
 # pipe apps
