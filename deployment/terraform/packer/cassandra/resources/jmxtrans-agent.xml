@@ -18,7 +18,6 @@
         <!-- CASSANDRA -->
         <query objectName="org.apache.cassandra.metrics:type=*,name=*" resultAlias="%type%.%name%.#attribute#"/>
         <query objectName="org.apache.cassandra.metrics:type=*,scope=*,name=*" resultAlias="%type%.%scope%-%name%.#attribute#"/>
-        <query objectName="org.apache.cassandra.metrics:type=ThreadPools,scope=*,type=*,name=*" resultAlias="ThreadPools.%scope%-%type%-%name%.#attribute#"/>
         <query objectName="org.apache.cassandra.metrics:type=*,path=*,scope=*,name=*" resultAlias="%type%.%path%-%scope%-%name%.#attribute#"/>
         <query objectName="org.apache.cassandra.metrics:type=*,keyspace=*,scope=*,name=*" resultAlias="%type%.%keyspace%-%scope%-%name%.#attribute#"/>
     </queries>
