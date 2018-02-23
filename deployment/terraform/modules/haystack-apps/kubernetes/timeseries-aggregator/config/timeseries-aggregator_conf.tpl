@@ -37,8 +37,4 @@ statestore {
   logging.delay.seconds = 60
 }
 
-health.status.path = "./isHealthy"
-
-haystack.graphite.host = "monitoring-influxdb-graphite.kube-system.svc"
-
 enable.metricpoint.period.replacement = true
