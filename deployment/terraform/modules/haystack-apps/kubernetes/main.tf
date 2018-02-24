@@ -1,9 +1,9 @@
-# tracing apps
 
 locals {
-  external_metric_tank_enabled =  "${var.external_metric_tank_hostname != "" && var.external_metric_tank_port != "" && var.external_metric_tank_kafka_broker_hostname != "" && var.external_metric_tank_kafka_broker_port != "" ? "true" : "false"}"
+  external_metric_tank_enabled = "${var.external_metric_tank_hostname != "" && var.external_metric_tank_port != "" && var.external_metric_tank_kafka_broker_hostname != "" && var.external_metric_tank_kafka_broker_port != "" ? "true" : "false"}"
 }
 
+# tracing apps
 
 module "trace-indexer" {
   source = "trace-indexer"
@@ -16,11 +16,14 @@ module "trace-indexer" {
   cassandra_hostname = "${var.cassandra_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
+  node_selecter_label = "${var.app_node_selector_label}"
   enabled = "${var.traces_enabled}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
+
 module "trace-reader" {
   source = "trace-reader"
   image = "expediadotcom/haystack-trace-reader:${var.traces_version}"
@@ -30,8 +33,13 @@ module "trace-reader" {
   cassandra_hostname = "${var.cassandra_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${var.traces_enabled}"
+  node_selecter_label = "${var.app_node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
+
 }
 
 # trends apps
@@ -44,9 +52,13 @@ module "metrictank" {
   kafka_address = "${var.kafka_hostname}:${var.kafka_port}"
   namespace = "${var.k8s_app_namespace}"
   graphite_address = "${var.graphite_hostname}:${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
   enabled = "${local.external_metric_tank_enabled == "true" ? "false" : "true" }"
   memory_limit = "${var.metric_tank_memory_limit}"
+
+  node_selecter_label = "${var.app_node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
 }
 module "span-timeseries-transformer" {
   source = "span-timeseries-transformer"
@@ -56,8 +68,12 @@ module "span-timeseries-transformer" {
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
+  node_selecter_label = "${var.app_node_selector_label}"
   enabled = "${var.trends_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 module "timeseries-aggregator" {
   source = "timeseries-aggregator"
@@ -67,10 +83,14 @@ module "timeseries-aggregator" {
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
-  enabled = "${var.trends_enabled}"
   enable_external_kafka_producer = "${local.external_metric_tank_enabled}"
   external_kafka_producer_endpoint = "${var.external_metric_tank_kafka_broker_hostname}:${var.external_metric_tank_kafka_broker_port}"
+  node_selecter_label = "${var.app_node_selector_label}"
+  enabled = "${var.trends_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 
 # pipe apps
@@ -82,8 +102,12 @@ module "pipes-json-transformer" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
+  node_selecter_label = "${var.app_node_selector_label}"
   enabled = "${var.pipes_json_transformer_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 
 module "pipes-kafka-producer" {
@@ -94,8 +118,12 @@ module "pipes-kafka-producer" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
+  node_selecter_label = "${var.app_node_selector_label}"
   enabled = "${var.pipes_kafka_producer_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 
 module "pipes-http-poster" {
@@ -106,10 +134,15 @@ module "pipes-http-poster" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
-  enabled = "${var.pipes_http_poster_enabled}"
-  httppost_url = "${var.pipes_http_poster_httppost_url}"
+  httppost_url = "${var.pipes_http_poster_enabled}"
   httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
+
+  node_selecter_label = "${var.app_node_selector_label}"
+  enabled = "${var.kinesis_span_collector_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 
 module "pipes-firehose-writer" {
@@ -120,11 +153,15 @@ module "pipes-firehose-writer" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
-  enabled = "${var.pipes_firehose_writer_enabled}"
   firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
   firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
+  node_selecter_label = "${var.app_node_selector_label}"
+  enabled = "${var.pipes_firehose_writer_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 
 # collectors
@@ -141,8 +178,12 @@ module "kinesis-span-collector" {
   graphite_port = "${var.graphite_port}"
   sts_role_arn = "${var.kinesis_span_collector_sts_role_arn}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-  node_selecter_label = "${var.app-node_selecter_label}"
+  node_selecter_label = "${var.app_node_selector_label}"
   enabled = "${var.kinesis_span_collector_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }
 
 # web ui
@@ -156,5 +197,9 @@ module "ui" {
   trace_reader_service_port = "${module.trace-reader.trace_reader_service_port}"
   metrictank_hostname = "${local.external_metric_tank_enabled == "true" ? var.external_metric_tank_hostname : module.metrictank.metrictank_hostname}"
   metrictank_port = "${local.external_metric_tank_enabled == "true" ? var.external_metric_tank_port : module.metrictank.metrictank_port}"
-  node_selecter_label = "${var.app-node_selecter_label}"
+  node_selecter_label = "${var.app_node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
 }

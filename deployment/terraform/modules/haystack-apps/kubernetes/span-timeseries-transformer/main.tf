@@ -1,11 +1,11 @@
 locals {
   app_name = "span-timeseries-transformer"
-  config_file_path = "${path.module}/config/span-timeseries-transformer_conf.tpl"
+  config_file_path = "${path.module}/templates/span-timeseries-transformer_conf.tpl"
   container_config_path = "/config/span-timeseries-transformer.conf"
   count = "${var.enabled?1:0}"
 }
 
-data "template_file" "haystck_span_timeseries_transformer_config_data" {
+data "template_file" "config_data" {
   template = "${file("${local.config_file_path}")}"
 
   vars {
@@ -13,78 +13,35 @@ data "template_file" "haystck_span_timeseries_transformer_config_data" {
   }
 }
 
-resource "kubernetes_config_map" "haystack-span-timeseries-transformer" {
-  metadata {
-    name = "${local.app_name}"
+data "template_file" "deployment_yaml" {
+  template = "${file("${local.deployment_yaml_file_path}")}"
+  vars {
+    app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-  }
-
-  data {
-    "span-timeseries-transformer.conf" = "${data.template_file.haystck_span_timeseries_transformer_config_data.rendered}"
-  }
-}
-
-resource "kubernetes_replication_controller" "haystack-rc" {
-  metadata {
-    name = "${local.app_name}"
-    labels {
-      app = "${local.app_name}"
-    }
-    namespace = "${var.namespace}"
-  }
-  "spec" {
+    config = "${replace("${data.template_file.config_data.rendered}","\"","\\\"")}"
+    graphite_port = "${var.graphite_port}"
+    graphite_host = "${var.graphite_hostname}"
+    node_selecter_label = "${var.node_selecter_label}"
+    image = "${var.image}"
     replicas = "${var.replicas}"
-    template {
-      container {
-        image = "${var.image}"
-        name = "${local.app_name}"
-        env {
-          name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
-          value = "${local.container_config_path}"
-        }
-        env {
-          name = "HAYSTACK_GRAPHITE_HOST"
-          value = "${var.graphite_hostname}"
-        }
-        env {
-          name = "HAYSTACK_GRAPHITE_PORT"
-          value = "${var.graphite_port}"
-        }
-        volume_mount {
-          mount_path = "/config"
-          name = "config-volume"
-        }
-        liveness_probe {
-          initial_delay_seconds = 15
-          failure_threshold = 2
-          period_seconds = 5
-          exec {
-            command = ["grep","true","/app/isHealthy"]
-          }
-        }
-        resources {
-          limits {
-            memory = "1500Mi"
-          }
-          requests {
-            cpu = "500m"
-            memory = "1500Mi"
-          }
-        }
-      }
-      termination_grace_period_seconds = "${var.termination_grace_period}"
-      volume {
-        name = "config-volume"
-        config_map {
-          name = "${kubernetes_config_map.haystack-span-timeseries-transformer.metadata.0.name}"
-        }
-      }
-      node_selector = "${var.node_selecter_label}"
+    memory_limit = "${var.memory_limit}"
+    cpu_limit = "${var.cpu_limit}"
+  }
+  }
+
+
+  resource "null_resource" "kubectl_apply" {
+    triggers {
+      template = "${data.template_file.deployment_yaml.rendered}"
+    }
+    provisioner "local-exec" {
+      command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
     }
 
-    "selector" {
-      app = "${local.app_name}"
+    provisioner "local-exec" {
+      command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+      when = "destroy"
     }
+    count = "${local.count}"
   }
-  count = "${local.count}"
-}
+

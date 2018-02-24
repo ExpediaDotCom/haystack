@@ -1,10 +1,11 @@
 locals {
   app_name = "trace-indexer"
   config_file_path = "${path.module}/config/trace-indexer_conf.tpl"
-  container_config_path = "/config/trace-indexer.conf"
+  container_config_path = "/templates/trace-indexer.conf"
   count = "${var.enabled?1:0}"
   span_produce_topic = "${var.enable_kafka_sink?"span-buffer":""}"
   elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
+
 }
 
 data "template_file" "haystack_trace_indexer_config_data" {

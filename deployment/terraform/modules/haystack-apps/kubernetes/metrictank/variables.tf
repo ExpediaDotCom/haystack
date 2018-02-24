@@ -3,9 +3,11 @@ variable "replicas" {}
 variable "cassandra_address" {}
 variable "kafka_address" {}
 variable "graphite_address" {}
-variable "node_selecter_label" {
-  type = "map"
-}
+variable "kubectl_executable_name" {}
+variable "kubectl_context_name" {}
+variable "node_selecter_label"{}
+variable "memory_limit"{}
+variable "cpu_limit"{}
 
 variable "termination_grace_period" {
   default = 30
@@ -13,4 +15,3 @@ variable "termination_grace_period" {
 variable "enabled" {}
 
 
-variable "memory_limit" {}

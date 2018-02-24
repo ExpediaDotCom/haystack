@@ -2,6 +2,9 @@ locals {
   app-node_selecter_label = {
     "kops.k8s.io/instancegroup" = "app-nodes"
   }
+  app-node_selecter_label_string = "kops.k8s.io/instancegroup: app-nodes"
+  default_cpu_limit = "500m"
+  default_memory_limit = "1500Mi"
 }
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "s3"
@@ -69,4 +72,7 @@ module "haystack-apps" {
   external_metric_tank_kafka_broker_hostname = "${var.external_metric_tank_kafka_broker_hostname}"
   metric_tank_instances = "${var.metric_tank_instances}"
   metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
+  default_cpu_limit = ""
+  default_memory_limit = ""
+  app_node_selector_label = ""
 }

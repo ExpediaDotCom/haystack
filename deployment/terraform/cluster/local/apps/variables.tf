@@ -80,7 +80,7 @@ variable "kinesis_span_collector_instances" {
   default = "1"
 }
 variable "kinesis_span_collector_enabled" {
-  default = false
+  default = true
 }
 variable "kinesis_span_collector_version" {
   default = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"

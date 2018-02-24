@@ -2,86 +2,42 @@ locals {
   app_name = "metrictank"
   service_port = 6060
   container_port = 6060
+  deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   image = "grafana/metrictank:latest"
   count = "${var.enabled == "true" ? 1:0}"
 
 }
 
-resource "kubernetes_service" "haystack-service" {
-  metadata {
-    name = "${local.app_name}"
+data "template_file" "deployment_yaml" {
+  template = "${file("${local.deployment_yaml_file_path}")}"
+  vars {
+    app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-  }
-  spec {
-    selector {
-      app = "${kubernetes_replication_controller.haystack-rc.metadata.0.labels.app}"
-    }
-    port {
-      port = "${local.service_port}"
-      target_port = "${local.container_port}"
-    }
-  }
-  count = "${local.count}"
-}
-resource "kubernetes_replication_controller" "haystack-rc" {
-  metadata {
-    name = "${local.app_name}"
-    labels {
-      app = "${local.app_name}"
-    }
-    namespace = "${var.namespace}"
-  }
-  "spec" {
+    gra = "${var.graphite_address}"
+    graphite_address = "${var.graphite_address}"
+    node_selecter_label = "${var.node_selecter_label}"
+    kafka_address = "${var.kafka_address}"
+    cassandra_address = "${var.cassandra_address}"
     replicas = "${var.replicas}"
-    template {
-      container {
-        image = "${local.image}"
-        name = "${local.app_name}"
-        env {
-          name = "MT_HTTP_MULTI_TENANT"
-          value = "false"
-        }
-        env {
-          name = "MT_CARBON_IN_ENABLED"
-          value = "false"
-        }
-        env {
-          name = "MT_KAFKA_MDM_IN_ENABLED"
-          value = "true"
-        }
-        env {
-          name = "MT_CASSANDRA_ADDRS"
-          value = "${var.cassandra_address}"
-        }
-        env {
-          name = "MT_KAFKA_MDM_IN_BROKERS"
-          value = "${var.kafka_address}"
-        }
-        env {
-          name = "MT_CASSANDRA_IDX_HOSTS"
-          value = "${var.cassandra_address}"
-        }
-        env {
-          name = "MT_STATS_ADDR"
-          value = "${var.graphite_address}"
-        }
-        resources {
-          limits {
-            memory = "${var.memory_limit}"
-          }
-          requests {
-            cpu = "500m"
-            memory = "${var.memory_limit}"
-          }
-        }
-      }
-      termination_grace_period_seconds = "${var.termination_grace_period}"
-      node_selector = "${var.node_selecter_label}"
-    }
+    memory_limit = "${var.memory_limit}"
+    cpu_limit = "${var.cpu_limit}"
+    service_port = "${local.service_port}"
+    container_port = "${local.container_port}"
+  }
+}
 
-    "selector" {
-      app = "${local.app_name}"
-    }
+
+resource "null_resource" "kubectl_apply" {
+  triggers {
+    template = "${data.template_file.deployment_yaml.rendered}"
+  }
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
+  }
+
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    when = "destroy"
   }
   count = "${local.count}"
 }
