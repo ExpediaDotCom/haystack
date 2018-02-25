@@ -7,7 +7,7 @@ kafka {
     application.id = "haystack-timeseries-aggregator"
     bootstrap.servers = "${kafka_endpoint}"
     num.stream.threads = 1
-    commit.interval.ms = 3000
+    commit.interval.ms = 5000
     auto.offset.reset = latest
     timestamp.extractor = "com.expedia.www.haystack.trends.kstream.MetricPointTimestampExtractor"
   }
@@ -19,6 +19,9 @@ kafka {
     enable.external.kafka.produce = ${enable_external_kafka_producer}
      props {
        bootstrap.servers = "${external_kafka_producer_endpoint}"
+      retries = 50,
+      batch.size = 65536,
+      linger.ms = 250
      }
   }
 

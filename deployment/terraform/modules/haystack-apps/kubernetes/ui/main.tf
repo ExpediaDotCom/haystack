@@ -1,10 +1,23 @@
 locals {
   app_name = "haystack-ui"
-  config_file_path = "${path.module}/config/haystack-ui_json.tpl"
+  config_file_path = "${path.module}/templates/haystack-ui_json.tpl"
   container_config_path = "/config/haystack-ui.json"
+  deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
+  checksum = "${sha1("${data.template_file.config_data.rendered}")}"
+  configmap_name = "ui-${local.checksum}"}
+
+
+resource "kubernetes_config_map" "haystack-config" {
+  metadata {
+    name = "${local.configmap_name}"
+    namespace = "${var.namespace}"
+  }
+  data {
+    "haystack-ui.json" = "${data.template_file.config_data.rendered}"
+  }
 }
 
-data "template_file" "haystck_ui_config_data" {
+data "template_file" "config_data" {
   template = "${file("${local.config_file_path}")}"
 
   vars {
@@ -15,79 +28,36 @@ data "template_file" "haystck_ui_config_data" {
   }
 }
 
-resource "kubernetes_config_map" "haystack-ui" {
-  metadata {
-    name = "${local.app_name}"
+data "template_file" "deployment_yaml" {
+  template = "${file("${local.deployment_yaml_file_path}")}"
+  vars {
+    app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-  }
-
-  data {
-    "haystack-ui.json" = "${data.template_file.haystck_ui_config_data.rendered}"
-  }
-}
-
-resource "kubernetes_service" "haystack-service" {
-  metadata {
-    name = "${local.app_name}"
-    namespace = "${var.namespace}"
-  }
-  spec {
-    selector {
-      app = "${kubernetes_replication_controller.haystack-rc.metadata.0.labels.app}"
-    }
-    port {
-      port = "${var.service_port}"
-      target_port = "${var.container_port}"
-    }
-  }
-}
-
-
-resource "kubernetes_replication_controller" "haystack-rc" {
-  metadata {
-    name = "${local.app_name}"
-    labels {
-      app = "${local.app_name}"
-    }
-    namespace = "${var.namespace}"
-  }
-  "spec" {
+    node_selecter_label = "${var.node_selecter_label}"
+    image = "${var.image}"
     replicas = "${var.replicas}"
-    template {
-      container {
-        image = "${var.image}"
-        name = "${local.app_name}"
-        env {
-          name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
-          value = "${local.container_config_path}"
-        }
-        volume_mount {
-          mount_path = "/config"
-          name = "config-volume"
-        }
-        resources {
-          limits {
-            memory = "1024Mi"
-          }
-          requests {
-            cpu = "500m"
-            memory = "1024Mi"
-          }
-        }
-      }
-      node_selector = "${var.node_selecter_label}"
+    memory_limit = "${var.memory_limit}"
+    cpu_limit = "${var.cpu_limit}"
+    service_port = "${var.service_port}"
+    container_port = "${var.container_port}"
+    configmap_name = "${local.configmap_name}"
+  }
+}
+
+resource "null_resource" "kubectl_apply" {
+  triggers {
+    template = "${data.template_file.deployment_yaml.rendered}"
+  }
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
+  }
+}
 
 
-      termination_grace_period_seconds = "${var.termination_grace_period}"
-      volume {
-        name = "config-volume"
-        config_map {
-          name = "${kubernetes_config_map.haystack-ui.metadata.0.name}"
-        }
-      }
-    }
-    "selector" {
-      app = "${local.app_name}"
-    }
+resource "null_resource" "kubectl_destroy" {
+
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    when = "destroy"
   }
 }
