@@ -3,17 +3,8 @@ locals {
   config_file_path = "${path.module}/templates/kinesis-span-collector_conf.tpl"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   count = "${var.enabled?1:0}"
-  configmap_name = "${local.app_name}-${random_integer.id.id}"
-}
-
-
-resource "random_integer" "id" {
-  min = 1
-  max = 9999
-  keepers = {
-    # Generate a new integer each time the configuration changes
-    config_change = "${data.template_file.config_data.rendered}"
-  }
+  checksum = "${sha1("${data.template_file.config_data.rendered}")}"
+  configmap_name = "kinesis-collector-${local.checksum}"
 }
 
 resource "kubernetes_config_map" "haystack-config" {

@@ -3,18 +3,9 @@ locals {
   config_file_path = "${path.module}/templates/haystack-ui_json.tpl"
   container_config_path = "/config/haystack-ui.json"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
-  configmap_name = "${local.app_name}-${random_integer.id.id}"
-}
+  checksum = "${sha1("${data.template_file.config_data.rendered}")}"
+  configmap_name = "ui-${local.checksum}"}
 
-
-resource "random_integer" "id" {
-  min = 1
-  max = 9999
-  keepers = {
-    # Generate a new integer each time the configuration changes
-    config_change = "${data.template_file.config_data.rendered}"
-  }
-}
 
 resource "kubernetes_config_map" "haystack-config" {
   metadata {

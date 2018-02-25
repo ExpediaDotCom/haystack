@@ -18,7 +18,7 @@ variable "traces_version" {
 
 # trends config
 variable "trends_enabled" {
-  default = false
+  default = true
 }
 variable "span_timeseries_transformer_instances" {
   default = "1"
@@ -33,16 +33,16 @@ variable "trends_version" {
 
 # pipes config
 variable "pipes_json_transformer_enabled" {
-  default = true
+  default = false
 }
 variable "pipes_kafka_producer_enabled" {
-  default = true
+  default = false
 }
 variable "pipes_http_poster_enabled" {
-  default = true
+  default = false
 }
 variable "pipes_firehose_writer_enabled" {
-  default = true
+  default = false
 }
 variable "pipes_json_transformer_instances" {
   default = "1"
@@ -80,7 +80,7 @@ variable "kinesis_span_collector_instances" {
   default = "1"
 }
 variable "kinesis_span_collector_enabled" {
-  default = true
+  default = false
 }
 variable "kinesis_span_collector_version" {
   default = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"

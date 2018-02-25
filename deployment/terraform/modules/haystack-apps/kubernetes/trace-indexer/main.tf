@@ -5,17 +5,8 @@ locals {
   count = "${var.enabled?1:0}"
   span_produce_topic = "${var.enable_kafka_sink?"span-buffer":""}"
   elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
-  configmap_name = "${local.app_name}-${random_integer.id.id}"
-}
-
-
-resource "random_integer" "id" {
-  min = 1
-  max = 9999
-  keepers = {
-    # Generate a new integer each time the configuration changes
-    config_change = "${data.template_file.config_data.rendered}"
-  }
+  checksum = "${sha1("${data.template_file.config_data.rendered}")}"
+  configmap_name = "indexer-${local.checksum}"
 }
 
 resource "kubernetes_config_map" "haystack-config" {
