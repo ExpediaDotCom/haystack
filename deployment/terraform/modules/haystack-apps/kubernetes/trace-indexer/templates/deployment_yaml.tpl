@@ -33,7 +33,7 @@ spec:
             memory: ${memory_limit}
         env:
         - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
-          value: "/config/trace_indexer.conf"
+          value: "/config/trace-indexer.conf"
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
