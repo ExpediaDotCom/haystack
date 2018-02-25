@@ -4,7 +4,7 @@ variable "haystack_cluster_name" {
 }
 # traces config
 variable "traces_enabled" {
-  default = true
+  default = false
 }
 variable "traces_indexer_instances" {
   default = "1"
@@ -18,7 +18,7 @@ variable "traces_version" {
 
 # trends config
 variable "trends_enabled" {
-  default = true
+  default = false
 }
 variable "span_timeseries_transformer_instances" {
   default = "1"
@@ -33,16 +33,16 @@ variable "trends_version" {
 
 # pipes config
 variable "pipes_json_transformer_enabled" {
-  default = false
+  default = true
 }
 variable "pipes_kafka_producer_enabled" {
-  default = false
+  default = true
 }
 variable "pipes_http_poster_enabled" {
-  default = false
+  default = true
 }
 variable "pipes_firehose_writer_enabled" {
-  default = false
+  default = true
 }
 variable "pipes_json_transformer_instances" {
   default = "1"

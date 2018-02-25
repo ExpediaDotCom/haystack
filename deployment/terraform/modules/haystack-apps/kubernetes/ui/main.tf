@@ -3,6 +3,27 @@ locals {
   config_file_path = "${path.module}/templates/haystack-ui_json.tpl"
   container_config_path = "/config/haystack-ui.json"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
+  configmap_name = "${local.app_name}-${random_integer.id.id}"
+}
+
+
+resource "random_integer" "id" {
+  min = 1
+  max = 9999
+  keepers = {
+    # Generate a new integer each time the configuration changes
+    config_change = "${data.template_file.config_data.rendered}"
+  }
+}
+
+resource "kubernetes_config_map" "haystack-config" {
+  metadata {
+    name = "${local.configmap_name}"
+    namespace = "${var.namespace}"
+  }
+  data {
+    "haystack-ui.json" = "${data.template_file.config_data.rendered}"
+  }
 }
 
 data "template_file" "config_data" {
@@ -21,7 +42,6 @@ data "template_file" "deployment_yaml" {
   vars {
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-    config = "${replace("${data.template_file.config_data.rendered}","\"","\\\"")}"
     node_selecter_label = "${var.node_selecter_label}"
     image = "${var.image}"
     replicas = "${var.replicas}"
@@ -29,23 +49,24 @@ data "template_file" "deployment_yaml" {
     cpu_limit = "${var.cpu_limit}"
     service_port = "${var.service_port}"
     container_port = "${var.container_port}"
-
+    configmap_name = "${local.configmap_name}"
   }
+}
+
+resource "null_resource" "kubectl_apply" {
+  triggers {
+    template = "${data.template_file.deployment_yaml.rendered}"
   }
-
-
-
-  resource "null_resource" "kubectl_apply" {
-    triggers {
-      template = "${data.template_file.deployment_yaml.rendered}"
-    }
-    provisioner "local-exec" {
-      command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
-    }
-
-    provisioner "local-exec" {
-      command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
-      when = "destroy"
-    }
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
+}
 
+
+resource "null_resource" "kubectl_destroy" {
+
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    when = "destroy"
+  }
+}

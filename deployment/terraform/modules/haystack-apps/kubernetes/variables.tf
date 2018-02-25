@@ -10,7 +10,7 @@ variable "haystack_cluster_name" {}
 variable "kubectl_context_name" {}
 variable "kubectl_executable_name" {}
 variable "k8s_app_namespace" {}
-variable "app_node_selector_label"{}
+variable "app-node_selector_label"{}
 
 variable "default_memory_limit"{}
 variable "default_cpu_limit"{}

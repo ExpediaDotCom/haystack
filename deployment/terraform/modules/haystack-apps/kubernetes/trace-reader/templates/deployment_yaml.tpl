@@ -1,12 +1,3 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: ${app_name}
-  namespace: ${namespace}
-data:
-  trace-reader.conf: "${config}"
-
----
 # ------------------- Deployment ------------------- #
 
 kind: Deployment
@@ -61,7 +52,7 @@ spec:
       volumes:
       - name: config-volume
         configMap:
-          name: ${app_name}
+          name: ${configmap_name}
 
 # ------------------- Service ------------------- #
 ---

@@ -10,7 +10,6 @@ data "terraform_remote_state" "haystack_inrastructure" {
     path = "../infrastructure/terraform-infra.tfstate"
   }
 }
-
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
 
@@ -25,7 +24,7 @@ module "haystack-apps" {
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-  app_node_selector_label = "${local.app-node_selecter_label}"
+  app-node_selector_label = "${local.app-node_selecter_label}"
   pipes_json_transformer_enabled = "${var.pipes_json_transformer_enabled}"
   pipes_kafka_producer_enabled = "${var.pipes_kafka_producer_enabled}"
   pipes_http_poster_enabled = "${var.pipes_http_poster_enabled}"

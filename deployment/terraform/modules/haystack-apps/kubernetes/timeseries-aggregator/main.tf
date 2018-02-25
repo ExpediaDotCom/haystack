@@ -2,8 +2,17 @@ locals {
   app_name = "timeseries-aggregator"
   config_file_path = "${path.module}/templates/timeseries-aggregator_conf.tpl"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
-
+  configmap_name = "${local.app_name}-${random_integer.id.id}"
   count = "${var.enabled?1:0}"
+}
+
+resource "random_integer" "id" {
+  min     = 1
+  max     = 9999
+  keepers = {    # Generate a new integer each time the configuration changes
+    config_change = "${data.template_file.config_data.rendered}"
+  }
+
 }
 
 data "template_file" "config_data" {
@@ -17,35 +26,56 @@ data "template_file" "config_data" {
 }
 
 
+resource "kubernetes_config_map" "haystack-config" {
+  metadata {
+    name = "${local.configmap_name}"
+    namespace = "${var.namespace}"
+  }
+  data {
+    "timeseries-aggregator.conf" ="${data.template_file.config_data.rendered}"
+  }
+  count = "${local.count}"
+
+}
+
+//using kubectl to craete deployment construct since its not natively support by the kubernetes provider
 data "template_file" "deployment_yaml" {
   template = "${file("${local.deployment_yaml_file_path}")}"
   vars {
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-    config = "${replace("${data.template_file.config_data.rendered}","\"","\\\"")}"
     graphite_port = "${var.graphite_port}"
     graphite_host = "${var.graphite_hostname}"
+    config = "${data.template_file.config_data.rendered}"
     node_selecter_label = "${var.node_selecter_label}"
     image = "${var.image}"
     replicas = "${var.replicas}"
     memory_limit = "${var.memory_limit}"
     cpu_limit = "${var.cpu_limit}"
+    configmap_name = "${local.configmap_name}"
   }
+}
+
+
+resource "null_resource" "kubectl_apply" {
+
+  triggers {
+    template = "${data.template_file.deployment_yaml.rendered}"
   }
 
-
-
-  resource "null_resource" "kubectl_apply" {
-    triggers {
-      template = "${data.template_file.deployment_yaml.rendered}"
-    }
-    provisioner "local-exec" {
-      command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
-    }
-
-    provisioner "local-exec" {
-      command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
-      when = "destroy"
-    }
-    count = "${local.count}"
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
+
+  count = "${local.count}"
+}
+
+
+resource "null_resource" "kubectl_destroy" {
+
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    when = "destroy"
+  }
+  count = "${local.count}"
+}
