@@ -9,7 +9,6 @@ data "template_file" "curator_cron_job" {
     elasticsearch_host = "${var.elasticsearch_hostname}"
     app_namespace = "${var.namespace}"
   }
-  count = "${local.count}"
 }
 resource "null_resource" "curator_addons" {
   triggers {

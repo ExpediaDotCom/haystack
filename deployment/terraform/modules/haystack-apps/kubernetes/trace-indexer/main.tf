@@ -1,13 +1,26 @@
 locals {
   app_name = "trace-indexer"
-  config_file_path = "${path.module}/config/trace-indexer_conf.tpl"
-  container_config_path = "/config/trace-indexer.conf"
+  config_file_path = "${path.module}/templates/trace-indexer_conf.tpl"
+  deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   count = "${var.enabled?1:0}"
   span_produce_topic = "${var.enable_kafka_sink?"span-buffer":""}"
   elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
+  checksum = "${sha1("${data.template_file.config_data.rendered}")}"
+  configmap_name = "indexer-${local.checksum}"
 }
 
-data "template_file" "haystack_trace_indexer_config_data" {
+resource "kubernetes_config_map" "haystack-config" {
+  metadata {
+    name = "${local.configmap_name}"
+    namespace = "${var.namespace}"
+  }
+  data {
+    "trace-indexer.conf" = "${data.template_file.config_data.rendered}"
+  }
+  count = "${local.count}"
+}
+
+data "template_file" "config_data" {
   template = "${file("${local.config_file_path}")}"
 
   vars {
@@ -18,79 +31,38 @@ data "template_file" "haystack_trace_indexer_config_data" {
   }
 }
 
-resource "kubernetes_config_map" "haystack-trace-indexer" {
-  metadata {
-    name = "${local.app_name}"
+data "template_file" "deployment_yaml" {
+  template = "${file("${local.deployment_yaml_file_path}")}"
+  vars {
+    app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-  }
-
-  data {
-    "trace-indexer.conf" = "${data.template_file.haystack_trace_indexer_config_data.rendered}"
+    graphite_port = "${var.graphite_port}"
+    graphite_host = "${var.graphite_hostname}"
+    node_selecter_label = "${var.node_selecter_label}"
+    image = "${var.image}"
+    replicas = "${var.replicas}"
+    memory_limit = "${var.memory_limit}"
+    cpu_limit = "${var.cpu_limit}"
+    configmap_name = "${local.configmap_name}"
   }
 }
 
-resource "kubernetes_replication_controller" "haystack-rc"
-{
-  metadata {
-    name = "${local.app_name}"
-    labels {
-      app = "${local.app_name}"
-    }
-    namespace = "${var.namespace}"
+resource "null_resource" "kubectl_apply" {
+  triggers {
+    template = "${data.template_file.deployment_yaml.rendered}"
   }
-  "spec" {
-    replicas = "${var.replicas}"
-    template {
-      container {
-        image = "${var.image}"
-        name = "${local.app_name}"
-        env {
-          name = "HAYSTACK_OVERRIDES_CONFIG_PATH"
-          value = "${local.container_config_path}"
-        }
-        env {
-          name = "HAYSTACK_GRAPHITE_HOST"
-          value = "${var.graphite_hostname}"
-        }
-        env {
-          name = "HAYSTACK_GRAPHITE_PORT"
-          value = "${var.graphite_port}"
-        }
-        volume_mount {
-          mount_path = "/config"
-          name = "config-volume"
-        }
-        liveness_probe {
-          initial_delay_seconds = 15
-          failure_threshold = 2
-          period_seconds = 5
-          exec {
-            command = ["grep","true","/app/isHealthy"]
-          }
-        }
-        resources {
-          limits {
-            memory = "1500Mi"
-          }
-          requests {
-            cpu = "500m"
-            memory = "1500Mi"
-          }
-        }
-      }
-      termination_grace_period_seconds = "${var.termination_grace_period}"
-      volume {
-        name = "config-volume"
-        config_map {
-          name = "${kubernetes_config_map.haystack-trace-indexer.metadata.0.name}"
-        }
-      }
-      node_selector = "${var.node_selecter_label}"
-    }
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
+  }
+  count = "${local.count}"
+}
 
-    "selector" {
-      app = "${local.app_name}"
-    }
+
+resource "null_resource" "kubectl_destroy" {
+
+  provisioner "local-exec" {
+    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    when = "destroy"
   }
   count = "${local.count}"
 }

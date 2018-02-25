@@ -4,7 +4,7 @@ variable "haystack_cluster_name" {
 }
 # traces config
 variable "traces_enabled" {
-  default = true
+  default = false
 }
 variable "traces_indexer_instances" {
   default = "1"

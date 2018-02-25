@@ -1,7 +1,7 @@
 locals {
-  app-node_selecter_label = {
-    "kops.k8s.io/instancegroup" = "app-nodes"
-  }
+  app-node_selecter_label = "kops.k8s.io/instancegroup: app-nodes"
+  default_cpu_limit = "500m"
+  default_memory_limit = "1500Mi"
 }
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "s3"
@@ -25,6 +25,9 @@ module "haystack-apps" {
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  default_cpu_limit = "${local.default_cpu_limit}"
+  default_memory_limit = "${local.default_memory_limit}"
+  app-node_selector_label = "${local.app-node_selecter_label}"
 
   pipes_json_transformer_enabled = "${var.pipes_json_transformer_enabled}"
   pipes_kafka_producer_enabled = "${var.pipes_kafka_producer_enabled}"
@@ -55,7 +58,6 @@ module "haystack-apps" {
 
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
-  app-node_selecter_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   pipes_http_poster_httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
   pipes_http_poster_httppost_url = "${var.pipes_http_poster_httppost_url}"
