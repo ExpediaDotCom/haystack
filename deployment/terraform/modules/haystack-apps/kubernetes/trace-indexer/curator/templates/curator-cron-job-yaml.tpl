@@ -45,7 +45,7 @@ data:
         - filtertype: age
           source: name
           direction: older
-          timestring: '%Y-%m-%d*'
+          timestring: '%Y-%m-%d'
           unit: days
           unit_count: 3
           exclude:
