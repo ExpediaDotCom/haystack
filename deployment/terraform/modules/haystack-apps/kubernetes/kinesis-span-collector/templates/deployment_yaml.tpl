@@ -47,16 +47,10 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 9090
-          initialDelaySeconds: 30
-          timeoutSeconds: 30
       nodeSelector:
         ${node_selecter_label}
       volumes:
-      - name: config_volume
+      - name: config-volume
         configMap:
           name: ${app_name}
 

@@ -1,7 +1,7 @@
 locals {
   app_name = "span-timeseries-transformer"
   config_file_path = "${path.module}/templates/span-timeseries-transformer_conf.tpl"
-  container_config_path = "/config/span-timeseries-transformer.conf"
+  deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   count = "${var.enabled?1:0}"
 }
 

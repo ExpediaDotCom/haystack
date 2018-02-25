@@ -21,10 +21,6 @@ spec:
       containers:
       - name: ${app_name}
         image: ${image}
-        volumeMounts:
-          # Create on-disk volume to store exec logs
-        - mountPath: /config
-          name: config-volume
         resources:
           limits:
             memory: ${memory_limit}
@@ -48,11 +44,6 @@ spec:
           value: "${graphite_address}"
       nodeSelector:
         ${node_selecter_label}
-      volumes:
-      - name: config-volume
-        configMap:
-          name: ${app_name}
-
 
 # ------------------- Service ------------------- #
 ---

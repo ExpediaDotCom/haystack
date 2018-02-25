@@ -4,7 +4,7 @@ metadata:
   name: ${app_name}
   namespace: ${namespace}
 data:
-  kinesis-span-collector.conf: "${config}"
+  trace-reader.conf: "${config}"
 
 ---
 # ------------------- Deployment ------------------- #
@@ -42,17 +42,20 @@ spec:
             memory: ${memory_limit}
         env:
         - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
-          value: "/config/kinesis-span-collector.conf"
+          value: "/config/trace-reader.conf"
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
         livenessProbe:
-          httpGet:
-            path: /
-            port: 9090
+          exec:
+            command:
+            - grep
+            - "true"
+            - /app/isHealthy
           initialDelaySeconds: 30
-          timeoutSeconds: 30
+          periodSeconds: 5
+          failureThreshold: 1
       nodeSelector:
         ${node_selecter_label}
       volumes:
@@ -60,3 +63,18 @@ spec:
         configMap:
           name: ${app_name}
 
+# ------------------- Service ------------------- #
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  ports:
+  - port: ${service_port}
+    targetPort: ${container_port}
+  selector:
+    k8s-app: ${app_name}

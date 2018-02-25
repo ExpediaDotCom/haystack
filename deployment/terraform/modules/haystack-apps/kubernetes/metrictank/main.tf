@@ -19,6 +19,7 @@ data "template_file" "deployment_yaml" {
     kafka_address = "${var.kafka_address}"
     cassandra_address = "${var.cassandra_address}"
     replicas = "${var.replicas}"
+    image = "${local.image}"
     memory_limit = "${var.memory_limit}"
     cpu_limit = "${var.cpu_limit}"
     service_port = "${local.service_port}"

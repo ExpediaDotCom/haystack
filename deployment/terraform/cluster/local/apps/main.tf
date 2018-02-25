@@ -1,18 +1,16 @@
 locals {
-  app-node_selecter_label = {
-    "kubernetes.io/hostname" = "minikube"
-  }
-  app-node_selecter_label_string = "kubernetes.io/hostname: minikube"
+  app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
   default_memory_limit = "100Mi"
-
 }
+
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "local"
   config {
     path = "../infrastructure/terraform-infra.tfstate"
   }
 }
+
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
 
@@ -27,8 +25,7 @@ module "haystack-apps" {
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-  app-node_selecter_label = "${local.app-node_selecter_label}"
-
+  app_node_selector_label = "${local.app-node_selecter_label}"
   pipes_json_transformer_enabled = "${var.pipes_json_transformer_enabled}"
   pipes_kafka_producer_enabled = "${var.pipes_kafka_producer_enabled}"
   pipes_http_poster_enabled = "${var.pipes_http_poster_enabled}"
@@ -72,7 +69,6 @@ module "haystack-apps" {
   external_metric_tank_kafka_broker_hostname = "${var.external_metric_tank_kafka_broker_hostname}"
   metric_tank_instances = "${var.metric_tank_instances}"
   metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
-  app_node_selector_label = "${local.app-node_selecter_label_string}"
   default_cpu_limit = "${local.default_cpu_limit}"
   default_memory_limit = "${local.default_memory_limit}"
 }
