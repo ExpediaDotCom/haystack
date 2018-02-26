@@ -43,6 +43,8 @@ data "template_file" "deployment_yaml" {
     service_port = "${var.service_port}"
     container_port = "${var.container_port}"
     configmap_name = "${local.configmap_name}"
+    env_vars= "${indent(9,"${var.env_vars}")}"
+
   }
 }
 

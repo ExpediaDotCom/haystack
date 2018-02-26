@@ -5,6 +5,7 @@ locals {
 
 # tracing apps
 
+
 module "trace-indexer" {
   source = "trace-indexer"
   image = "expediadotcom/haystack-trace-indexer:${var.traces_version}"
@@ -22,6 +23,7 @@ module "trace-indexer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.trace_indexer_environment_overrides}"
 }
 
 module "trace-reader" {
@@ -39,6 +41,7 @@ module "trace-reader" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.trace_reader_environment_overrides}"
 
 }
 
@@ -59,6 +62,8 @@ module "metrictank" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
+  env_vars = "${var.metrictank_environment_overrides}"
+
 }
 module "span-timeseries-transformer" {
   source = "span-timeseries-transformer"
@@ -74,6 +79,7 @@ module "span-timeseries-transformer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.span_timeseries_transformer_environment_overrides}"
 }
 module "timeseries-aggregator" {
   source = "timeseries-aggregator"
@@ -91,6 +97,7 @@ module "timeseries-aggregator" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.timeseries_aggregator_environment_overrides}"
 }
 
 # pipe apps
@@ -108,6 +115,8 @@ module "pipes-json-transformer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.pipes_json_transformer_environment_overrides}"
+
 }
 
 module "pipes-kafka-producer" {
@@ -124,6 +133,8 @@ module "pipes-kafka-producer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.pipes_kafka_producer_environment_overrides}"
+
 }
 
 module "pipes-http-poster" {
@@ -143,6 +154,7 @@ module "pipes-http-poster" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.pipes_http_poster_environment_overrides}"
 }
 
 module "pipes-firehose-writer" {
@@ -162,6 +174,7 @@ module "pipes-firehose-writer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.pipes_firehose_writer_environment_overrides}"
 }
 
 # collectors
@@ -184,6 +197,8 @@ module "kinesis-span-collector" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.kinesis_span_collector_environment_overrides}"
+
 }
 
 # web ui

@@ -13,6 +13,7 @@ variable "kubectl_context_name" {}
 variable "node_selecter_label"{}
 variable "memory_limit"{}
 variable "cpu_limit"{}
+variable "env_vars" {}
 variable "enable_kafka_sink" {
   default = false
 }
