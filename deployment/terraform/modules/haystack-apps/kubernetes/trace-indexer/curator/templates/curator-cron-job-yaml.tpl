@@ -10,7 +10,7 @@ data:
     client:
       hosts:
         - ${elasticsearch_host}
-      port: 9200
+      port: ${elasticsearch_port}
       url_prefix:
       use_ssl: False
       certificate:
@@ -24,7 +24,7 @@ data:
       timeout: 30
       master_only: False
     logging:
-      loglevel: INFO
+      loglevel: DEBUG
       logfile:
       logformat: default
       blacklist: ['elasticsearch', 'urllib3']
@@ -57,7 +57,7 @@ metadata:
   namespace: ${app_namespace}
 
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 */4 * * *"
   jobTemplate:
     spec:
       template:

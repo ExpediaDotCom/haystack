@@ -6,6 +6,8 @@ variable "kubectl_context_name" {}
 variable "node_selecter_label"{}
 variable "memory_limit"{}
 variable "cpu_limit"{}
+variable "graphite_hostname" {}
+variable "graphite_port" {}
 
 variable "termination_grace_period" {
   default = 30

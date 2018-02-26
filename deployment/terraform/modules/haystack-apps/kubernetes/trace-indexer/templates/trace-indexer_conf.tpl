@@ -72,7 +72,21 @@ cassandra {
     keep.alive = true
   }
 
+  retries {
+    max = 10
+    backoff {
+      initial.ms = 100
+      factor = 2
+    }
+  }
+
   consistency.level = "one"
+
+  on.error.consistency.level = [
+    "com.datastax.driver.core.exceptions.UnavailableException",
+    "any"
+  ]
+
   ttl.sec = 259200
 
   keyspace: {
@@ -94,12 +108,20 @@ elasticsearch {
       count = 200
       size.kb = 1000
     }
-    inflight = 10
+    inflight = 25
   }
 
   conn.timeout.ms = 10000
   read.timeout.ms = 30000
   consistency.level = "one"
+
+  retries {
+    max = 10
+    backoff {
+      initial.ms = 100
+      factor = 2
+    }
+  }
 
   index {
     # apply the template before starting the client, if json is empty, no operation is performed

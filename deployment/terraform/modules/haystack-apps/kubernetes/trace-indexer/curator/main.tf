@@ -7,6 +7,7 @@ data "template_file" "curator_cron_job" {
   template = "${file("${path.module}/templates/curator-cron-job-yaml.tpl")}"
   vars {
     elasticsearch_host = "${var.elasticsearch_hostname}"
+    elasticsearch_port = "${var.elasticsearch_port}"
     app_namespace = "${var.namespace}"
   }
 }
