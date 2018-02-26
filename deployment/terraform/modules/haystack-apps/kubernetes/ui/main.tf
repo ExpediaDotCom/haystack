@@ -26,7 +26,7 @@ data "template_file" "config_data" {
     metrictank_hostname = "${var.metrictank_hostname}"
     metrictank_port = "${var.metrictank_port}"
     graphite_port = "${var.graphite_port}"
-    graphite_host = "${var.graphite_hostname}"
+    graphite_hostname = "${var.graphite_hostname}"
   }
 }
 
