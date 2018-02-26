@@ -2,7 +2,7 @@
   "port": 8080,
   "cluster": true,
   "upstreamTimeout": 30000,
-  "enableServicePerformance": true,
+  "enableServicePerformance": false,
   "enableServiceLevelTrends": true,
   "enableLatencyCostViewer": false,
   "graphite": {
