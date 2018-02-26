@@ -25,6 +25,8 @@ data "template_file" "config_data" {
     trace_reader_service_port = "${var.trace_reader_service_port}"
     metrictank_hostname = "${var.metrictank_hostname}"
     metrictank_port = "${var.metrictank_port}"
+    graphite_port = "${var.graphite_port}"
+    graphite_host = "${var.graphite_hostname}"
   }
 }
 

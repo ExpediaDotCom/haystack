@@ -202,4 +202,6 @@ module "ui" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
 }
