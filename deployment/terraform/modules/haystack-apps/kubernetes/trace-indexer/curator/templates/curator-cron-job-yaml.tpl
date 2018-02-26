@@ -57,7 +57,7 @@ metadata:
   namespace: ${app_namespace}
 
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 */4 * * *"
   jobTemplate:
     spec:
       template:
@@ -72,7 +72,7 @@ spec:
             volumeMounts:
              - mountPath: /config
                name: config
-          restartPolicy: OnFailure
+          restartPolicy: Never
           volumes:
           - name: config
             configMap:
