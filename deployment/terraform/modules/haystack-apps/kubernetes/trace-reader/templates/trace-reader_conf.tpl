@@ -57,8 +57,6 @@ trace {
   validators {
     sequence = [
       "com.expedia.www.haystack.trace.reader.readers.validators.TraceIdValidator"
-      "com.expedia.www.haystack.trace.reader.readers.validators.ParentIdValidator"
-      "com.expedia.www.haystack.trace.reader.readers.validators.RootValidator"
     ]
   }
 
@@ -70,6 +68,8 @@ trace {
     }
     post {
       sequence = [
+        "com.expedia.www.haystack.trace.reader.readers.transformers.InvalidRootTransformer"
+        "com.expedia.www.haystack.trace.reader.readers.transformers.InvalidParentTransformer"
         "com.expedia.www.haystack.trace.reader.readers.transformers.PartialSpanTransformer"
         "com.expedia.www.haystack.trace.reader.readers.transformers.ClockSkewTransformer"
         "com.expedia.www.haystack.trace.reader.readers.transformers.SortSpanTransformer"
