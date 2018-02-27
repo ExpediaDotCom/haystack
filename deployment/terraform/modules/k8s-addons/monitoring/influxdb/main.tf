@@ -1,6 +1,5 @@
 locals {
   count = "${var.enabled?1:0}"
-
 }
 //creating the influxdb cluster addon for pushing k8s logs to elastic search
 
@@ -21,10 +20,26 @@ resource "null_resource" "k8s_influxdb_addons" {
     template = "${data.template_file.influxdb_cluster_addon_config.rendered}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.influxdb_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.kubectl_context_name}"
+    command = "echo '${data.template_file.influxdb_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
   provisioner "local-exec" {
     command = "echo '${data.template_file.influxdb_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    when = "destroy"
+  }
+
+  count = "${local.count}"
+}
+
+
+resource "null_resource" "k8s_influxdb_retention" {
+  triggers {
+    template = "${data.template_file.influxdb_cluster_addon_config.rendered}"
+  }
+  provisioner "local-exec" {
+    command = "echo '${file("${path.module}/manifests/influx_db_retention.yaml")}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
+  }
+  provisioner "local-exec" {
+    command = "echo '${file("${path.module}/manifests/influx_db_retention.yaml")}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
     when = "destroy"
   }
 

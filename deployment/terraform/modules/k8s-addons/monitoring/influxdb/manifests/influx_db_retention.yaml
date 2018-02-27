@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: influxdb-retention
+  namespace: kube-system
+data:
+  retention_queries.txt: |-
+   CREATE RETENTION POLICY "7_days" ON "k8s" DURATION 7d REPLICATION 1 DEFAULT;
+   CREATE RETENTION POLICY "7_days" ON "graphite" DURATION 7d REPLICATION 1 DEFAULT;
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: influxdb-retention
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      containers:
+      - name: influxdb-retention
+        image: yauritux/busybox-curl
+        command:
+        - curl
+        args:
+        - -XPOST
+        - -F
+        - "q=@/data/retention_queries.txt"
+        - "http://monitoring-influxdb:8086/query"
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      initContainers:
+      - name: init-mydb
+        image: busybox
+        command: ["sh", "-c", "until nslookup monitoring-influxdb-graphite.kube-system; do echo waiting for monitoring-influxdb-graphite.kube-system; sleep 2; done;"]
+      restartPolicy: OnFailure
+      volumes:
+        - name: data
+          configMap:
+            name: influxdb-retention
