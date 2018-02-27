@@ -18,5 +18,6 @@ data "template_file" "deployment_yaml" {
     cpu_limit = "${var.cpu_limit}"
     graphite_host = "${var.graphite_hostname}"
     graphite_port = "${var.graphite_port}"
+    env_vars= "${indent(9,"${var.env_vars}")}"
   }
 }

@@ -42,6 +42,7 @@ spec:
           value: "${cassandra_address}"
         - name: "MT_STATS_ADDR"
           value: "${graphite_address}"
+        ${env_vars}
       nodeSelector:
         ${node_selecter_label}
 

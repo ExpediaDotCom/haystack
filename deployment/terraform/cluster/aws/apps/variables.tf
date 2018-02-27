@@ -19,6 +19,13 @@ variable "traces_version" {
   default = "92219da46ca3e3ee20f99eafe2939d8e7dfb004e"
 }
 
+variable "trace_indexer_environment_overrides" {
+  default = ""
+}
+variable "trace_reader_environment_overrides" {
+  default = ""
+}
+
 # trends config
 variable "trends_enabled" {
   default = true
@@ -33,6 +40,14 @@ variable "timeseries_aggregator_instances" {
 variable "trends_version" {
   default = "df9b59950fb44a8257db1482cc2ae76a3688d12b"
 }
+variable "timeseries_aggregator_environment_overrides" {
+  default = ""
+}
+variable "span_timeseries_transformer_environment_overrides" {
+  default = ""
+}
+
+
 
 # pipes config
 variable "pipes_json_transformer_enabled" {
@@ -78,6 +93,19 @@ variable "pipes_version" {
   default = "d38d528d88210107c26a173ead045bcc16c632ef"
 }
 
+variable "pipes_firehose_writer_environment_overrides" {
+  default = ""
+}
+variable "pipes_http_poster_environment_overrides" {
+  default = ""
+}
+variable "pipes_kafka_producer_environment_overrides" {
+  default = ""
+}
+variable "pipes_json_transformer_environment_overrides" {
+  default = ""
+}
+
 # collectors config
 variable "kinesis_span_collector_instances" {
   default = "1"
@@ -93,6 +121,10 @@ variable "kinesis_stream_name" {}
 variable "kinesis_span_collector_sts_role_arn" {
   default = ""
 }
+variable "kinesis_span_collector_environment_overrides" {
+  default = ""
+}
+
 
 # ui config
 variable "haystack_ui_instances" {
@@ -119,4 +151,7 @@ variable "metric_tank_instances" {
 }
 variable "metric_tank_memory_limit" {
   default = "4000Mi"
+}
+variable "metrictank_environment_overrides" {
+  default = ""
 }

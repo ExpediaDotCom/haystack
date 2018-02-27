@@ -7,6 +7,7 @@ variable "graphite_port" {}
 variable "enabled"{}
 variable "enable_external_kafka_producer" {}
 variable "external_kafka_producer_endpoint" {}
+variable "env_vars" {}
 
 variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {}

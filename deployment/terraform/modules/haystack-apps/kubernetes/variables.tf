@@ -20,12 +20,17 @@ variable "traces_enabled" {}
 variable "traces_indexer_instances" {}
 variable "traces_reader_instances" {}
 variable "traces_version" {}
+variable "trace_indexer_environment_overrides" {}
+variable "trace_reader_environment_overrides" {}
 
 # trends config
 variable "trends_enabled" {}
 variable "span_timeseries_transformer_instances" {}
 variable "timeseries_aggregator_instances" {}
 variable "trends_version" {}
+variable "timeseries_aggregator_environment_overrides" {}
+variable "span_timeseries_transformer_environment_overrides" {}
+
 
 # pipes config
 variable "pipes_json_transformer_enabled" {}
@@ -42,6 +47,11 @@ variable "pipes_firehose_writer_firehose_url" {}
 variable "pipes_firehose_writer_firehose_streamname" {}
 variable "pipes_firehose_writer_firehose_signingregion" {}
 variable "pipes_version" {}
+variable "pipes_firehose_writer_environment_overrides" {}
+variable "pipes_http_poster_environment_overrides" {}
+variable "pipes_kafka_producer_environment_overrides" {}
+variable "pipes_json_transformer_environment_overrides" {}
+
 
 # collectors config
 variable "kinesis_span_collector_instances" {}
@@ -50,6 +60,8 @@ variable "kinesis_span_collector_version" {}
 variable "kinesis_stream_region" {}
 variable "kinesis_stream_name" {}
 variable "kinesis_span_collector_sts_role_arn" {}
+variable "kinesis_span_collector_environment_overrides" {}
+
 
 # ui config
 variable "haystack_ui_instances" {}
@@ -64,4 +76,5 @@ variable "external_metric_tank_kafka_broker_hostname" {}
 variable "external_metric_tank_kafka_broker_port" {}
 variable "external_metric_tank_hostname" {}
 variable "external_metric_tank_port" {}
+variable "metrictank_environment_overrides" {}
 

@@ -38,6 +38,7 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
+        ${env_vars}
       nodeSelector:
         ${node_selecter_label}
       volumes:
