@@ -30,7 +30,7 @@ spec:
         env:
         - name: "HAYSTACK_FIREHOSE_SIGNINGREGION"
           value: "${firehose_region}"
-        - name: "HAYSTACK_FIREHOSE_STREAM_NAME"
+        - name: "HAYSTACK_FIREHOSE_STREAMNAME"
           value: "${firehose_stream_name}"
         - name: "HAYSTACK_FIREHOSE_URL"
           value: "${firehose_url}"
