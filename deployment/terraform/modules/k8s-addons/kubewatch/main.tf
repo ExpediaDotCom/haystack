@@ -18,7 +18,7 @@ resource "null_resource" "k8s_kubewatch_addons" {
     template = "${data.template_file.kubewatch_addon_config.rendered}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.kubewatch_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.kubectl_context_name}"
+    command = "echo '${data.template_file.kubewatch_addon_config.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
   provisioner "local-exec" {
     command = "echo '${data.template_file.kubewatch_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
