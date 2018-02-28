@@ -145,11 +145,11 @@ module "pipes-http-poster" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  httppost_url = "${var.pipes_http_poster_enabled}"
+  httppost_url = "${var.pipes_http_poster_httppost_url}"
   httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
 
   node_selecter_label = "${var.app-node_selector_label}"
-  enabled = "${var.kinesis_span_collector_enabled}"
+  enabled = "${var.pipes_http_poster_enabled}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
