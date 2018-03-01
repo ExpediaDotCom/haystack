@@ -66,6 +66,7 @@ variable "kinesis_span_collector_environment_overrides" {}
 # ui config
 variable "haystack_ui_instances" {}
 variable "ui_version" {}
+variable "whitelisted_fields" {}
 
 
 #metrictank

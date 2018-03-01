@@ -134,6 +134,10 @@ variable "ui_version" {
   default = "459278787c9979855c653c53d66bd181af8aedaa"
 }
 
+variable "whitelisted_fields" {
+  default = ""
+}
+
 variable "external_metric_tank_kafka_broker_hostname" {
   default = ""
 }

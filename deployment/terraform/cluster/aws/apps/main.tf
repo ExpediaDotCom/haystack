@@ -63,6 +63,8 @@ module "haystack-apps" {
 
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
+  whitelisted_fields = "${var.whitelisted_fields}"
+
   kubectl_executable_name = "${var.kubectl_executable_name}"
   pipes_http_poster_httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
   pipes_http_poster_httppost_url = "${var.pipes_http_poster_httppost_url}"
