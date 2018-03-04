@@ -1,3 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: ${app_name}
+ namespace: ${namespace}
+data:
+  haystack-metric-schemas.conf: |-
+
+    [haystack_metrics]
+    pattern = ^([a-z\-]+)\.([^.]+)\.haystack.*
+    retentions = 1m:1d,5m:7d,15m:30d,1h:1y
+    reorderBuffer = 20
+
+    [default]
+    pattern = .*
+    retentions = 1m:1d,5m:7d,15m:30d,1h:1y
+    reorderBuffer = 20
+---
 # ------------------- Deployment ------------------- #
 
 kind: Deployment
@@ -42,9 +60,20 @@ spec:
           value: "${cassandra_address}"
         - name: "MT_STATS_ADDR"
           value: "${graphite_address}"
+        - name: "MT_SCHEMAS-FILE"
+          value: "/etc/metrictank/storage-config/haystack-metric-schemas.conf"
         ${env_vars}
+        volumeMounts:
+          # Create on-disk volume to store exec logs
+        - mountPath: /etc/metrictank/storage-config
+          name: storage-config-volume
       nodeSelector:
         ${node_selecter_label}
+      volumes:
+      - name: storage-config-volume
+        configMap:
+          name: ${app_name}
+
 
 # ------------------- Service ------------------- #
 ---
