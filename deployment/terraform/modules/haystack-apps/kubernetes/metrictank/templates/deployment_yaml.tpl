@@ -15,7 +15,7 @@ data:
     pattern = .*
     retentions = 1m:1d,5m:7d,15m:30d,1h:1y
     reorderBuffer = 20
-
+---
 # ------------------- Deployment ------------------- #
 
 kind: Deployment
