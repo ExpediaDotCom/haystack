@@ -77,6 +77,11 @@
     },
     {
       "type": "file",
+      "source": "resources/log4j.properties",
+      "destination": "/opt/kafka/config/log4j.properties"
+    },
+    {
+      "type": "file",
       "source": "resources/kafka-run-class.sh",
       "destination": "/opt/kafka/bin/kafka-run-class.sh"
     },
