@@ -13,8 +13,6 @@ data "template_file" "heapster_cluster_addon_config" {
     heapster_image = "${var.k8s_heapster_image}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
-  count = "${local.count}"
-
 }
 
 resource "null_resource" "k8s_heapster_addons" {

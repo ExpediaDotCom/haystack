@@ -6,7 +6,7 @@ kafka {
   streams {
     application.id = "haystack-span-timeseries-transformer"
     bootstrap.servers = "${kafka_endpoint}"
-    num.stream.threads = 1
+    num.stream.threads = 2
     commit.interval.ms = 3000
     auto.offset.reset = latest
     timestamp.extractor = "org.apache.kafka.streams.processor.WallclockTimestampExtractor"
