@@ -13,8 +13,6 @@ data "template_file" "grafana_cluster_addon_config" {
     node_selecter_label = "${var.monitoring-node_selecter_label}"
 
   }
-  count = "${local.count}"
-
 }
 
 resource "null_resource" "k8s_grafana_addons" {

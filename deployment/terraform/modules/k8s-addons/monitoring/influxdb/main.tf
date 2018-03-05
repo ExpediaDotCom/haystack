@@ -12,7 +12,6 @@ data "template_file" "influxdb_cluster_addon_config" {
     graphite_node_port = "${var.graphite_node_port}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
-  count = "${local.count}"
 }
 
 resource "null_resource" "k8s_influxdb_addons" {

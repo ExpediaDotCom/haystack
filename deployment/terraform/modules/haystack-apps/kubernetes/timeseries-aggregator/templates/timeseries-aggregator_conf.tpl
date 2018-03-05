@@ -6,7 +6,7 @@ kafka {
   streams {
     application.id = "haystack-timeseries-aggregator"
     bootstrap.servers = "${kafka_endpoint}"
-    num.stream.threads = 1
+    num.stream.threads = 2
     commit.interval.ms = 5000
     auto.offset.reset = latest
     timestamp.extractor = "com.expedia.www.haystack.trends.kstream.MetricPointTimestampExtractor"
