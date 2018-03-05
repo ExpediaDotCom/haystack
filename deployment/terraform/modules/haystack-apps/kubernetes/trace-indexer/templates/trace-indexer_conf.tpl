@@ -129,7 +129,7 @@ elasticsearch {
 
     name.prefix = "haystack-traces"
     type = "spans"
-    hour.bucket = 12 
+    hour.bucket = 6
   }
 }
 
