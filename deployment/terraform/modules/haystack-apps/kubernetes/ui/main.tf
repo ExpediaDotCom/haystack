@@ -27,6 +27,7 @@ data "template_file" "config_data" {
     metrictank_port = "${var.metrictank_port}"
     graphite_port = "${var.graphite_port}"
     graphite_hostname = "${var.graphite_hostname}"
+    whitelisted_fields = "${var.whitelisted_fields}"
   }
 }
 

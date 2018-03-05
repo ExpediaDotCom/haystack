@@ -28,3 +28,5 @@ variable "trace_reader_service_port" {}
 variable "metrictank_hostname" {}
 
 variable "metrictank_port" {}
+
+variable "whitelisted_fields" {}

@@ -219,4 +219,5 @@ module "ui" {
   memory_limit = "${var.default_memory_limit}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  whitelisted_fields = "${var.whitelisted_fields}"
 }

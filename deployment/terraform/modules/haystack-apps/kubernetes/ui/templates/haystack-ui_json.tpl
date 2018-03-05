@@ -13,7 +13,8 @@
     "traces": {
       "connectorName": "haystack",
       "haystackHost": "${trace_reader_hostname}",
-      "haystackPort": ${trace_reader_service_port}
+      "haystackPort": ${trace_reader_service_port},
+      "fieldKeys": [${whitelisted_fields}]
     },
     "trends": {
       "connectorName": "haystack",
