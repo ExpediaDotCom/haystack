@@ -117,7 +117,7 @@ data "template_file" "kafka_broker_user_data" {
     zookeeper_hosts = "${join(",", formatlist("%s:2181", aws_instance.haystack-zookeeper-nodes.*.private_ip))}"
     num_partitions = "${var.default_partition_count}"
     retention_hours = "24"
-    retention_bytes = "53687091200"
+    retention_bytes = "1073741824"
   }
 }
 
