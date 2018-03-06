@@ -64,6 +64,8 @@ module "haystack-apps" {
   timeseries_aggregator_instances = "${var.timeseries_aggregator_instances}"
   timeseries_aggregator_environment_overrides = "${var.timeseries_aggregator_environment_overrides}"
   span_timeseries_transformer_environment_overrides = "${var.span_timeseries_transformer_environment_overrides}"
+  timeseries_aggregator_java_memory_limit = "${var.timeseries_aggregator_java_memory_limit}"
+  timeseries_aggregator_memory_limit = "${var.timeseries_aggregator_memory_limit}"
 
   #collector configuration_overrides
   kinesis_span_collector_instances = "${var.kinesis_span_collector_instances}"
@@ -88,4 +90,6 @@ module "haystack-apps" {
   metric_tank_instances = "${var.metric_tank_instances}"
   metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
   metrictank_environment_overrides = "${var.metrictank_environment_overrides}"
+  whitelisted_fields = "${var.whitelisted_fields}"
+
 }

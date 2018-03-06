@@ -96,8 +96,9 @@ module "timeseries-aggregator" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
-  memory_limit = "${var.default_memory_limit}"
+  memory_limit = "${var.timeseries_aggregator_memory_limit}"
   env_vars = "${var.timeseries_aggregator_environment_overrides}"
+  java_process_memory_limit = "${var.timeseries_aggregator_java_memory_limit}"
 }
 
 # pipe apps

@@ -47,6 +47,15 @@ variable "span_timeseries_transformer_environment_overrides" {
   default = ""
 }
 
+variable "timeseries_aggregator_memory_limit" {
+  default = "2048Mi"
+}
+
+variable "timeseries_aggregator_java_memory_limit" {
+  default = "1536m"
+}
+
+
 
 
 # pipes config
