@@ -38,6 +38,7 @@ state.store {
 statestore {
   enable.logging = true
   logging.delay.seconds = 60
+  cache.size = 32767
 }
 
 enable.metricpoint.period.replacement = true
