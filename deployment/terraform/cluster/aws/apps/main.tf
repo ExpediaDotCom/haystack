@@ -83,4 +83,6 @@ module "haystack-apps" {
   metric_tank_instances = "${var.metric_tank_instances}"
   metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
   metrictank_environment_overrides = "${var.metrictank_environment_overrides}"
+  timeseries_aggregator_java_memory_limit = "${var.timeseries_aggregator_java_memory_limit}"
+  timeseries_aggregator_memory_limit = "${var.timeseries_aggregator_memory_limit}"
 }

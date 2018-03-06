@@ -30,6 +30,8 @@ variable "timeseries_aggregator_instances" {}
 variable "trends_version" {}
 variable "timeseries_aggregator_environment_overrides" {}
 variable "span_timeseries_transformer_environment_overrides" {}
+variable "timeseries_aggregator_memory_limit" {}
+variable "timeseries_aggregator_java_memory_limit" {}
 
 
 # pipes config

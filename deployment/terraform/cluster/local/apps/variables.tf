@@ -41,6 +41,15 @@ variable "trends_version" {
 variable "timeseries_aggregator_environment_overrides" {
   default = ""
 }
+
+
+variable "timeseries_aggregator_memory_limit" {
+  default = "250Mi"
+}
+variable "timeseries_aggregator_java_memory_limit" {
+  default = "175m"
+}
+
 variable "span_timeseries_transformer_environment_overrides" {
   default = ""
 }
@@ -133,6 +142,10 @@ variable "haystack_ui_instances" {
 }
 variable "ui_version" {
   default = "459278787c9979855c653c53d66bd181af8aedaa"
+}
+
+variable "whitelisted_fields" {
+  default = ""
 }
 
 #metrictank
