@@ -151,6 +151,10 @@ variable "whitelisted_fields" {
   default = ""
 }
 
+variable "whitelisted_fields" {
+  default = ""
+}
+
 #metrictank
 variable "external_metric_tank_kafka_broker_hostname" {
   default = ""
