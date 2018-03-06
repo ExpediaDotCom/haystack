@@ -143,6 +143,17 @@ variable "haystack_ui_instances" {
 variable "ui_version" {
   default = "459278787c9979855c653c53d66bd181af8aedaa"
 }
+variable "whitelisted_fields" {
+  default = ""
+}
+
+variable "whitelisted_fields" {
+  default = ""
+}
+
+variable "whitelisted_fields" {
+  default = ""
+}
 
 variable "whitelisted_fields" {
   default = ""

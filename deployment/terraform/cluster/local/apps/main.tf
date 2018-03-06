@@ -80,6 +80,7 @@ module "haystack-apps" {
   #ui configuration_overrides
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
+  whitelisted_fields = "${var.whitelisted_fields}"
 
   #metrictank configuration_overrides
   external_metric_tank_kafka_broker_port = "${var.external_metric_tank_kafka_broker_port}"

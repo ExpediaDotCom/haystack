@@ -58,6 +58,8 @@ spec:
           value: "${kafka_address}"
         - name: "MT_CASSANDRA_IDX_HOSTS"
           value: "${cassandra_address}"
+        - name: "MT_CASSANDRA_IDX_TIMEOUT"
+          value: "100s"
         - name: "MT_STATS_ADDR"
           value: "${graphite_address}"
         - name: "MT_SCHEMAS-FILE"

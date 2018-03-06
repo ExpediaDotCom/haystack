@@ -2,6 +2,7 @@
     <queries>
         <!-- OS -->
         <query objectName="java.lang:type=OperatingSystem" attribute="SystemLoadAverage" resultAlias="os.systemLoadAverage"/>
+        <query objectName="java.lang:type=OperatingSystem" attribute="SystemCpuLoad" resultAlias="os.SystemCpuLoad"/>
 
         <!-- JVM -->
         <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used" resultAlias="jvm.heapMemoryUsage.used"/>
@@ -12,15 +13,18 @@
         <query objectName="java.lang:type=GarbageCollector,name=ConcurrentMarkSweep" resultAlias="gc.old.#attribute#"/>
         <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.loadedClasses"/>
         <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.thread"/>
+
         <!-- KAFKA -->
         <query objectName="kafka.server:type=*,name=*" resultAlias="server.%type%.%name%.#attribute#"/>
         <query objectName="kafka.controller:type=*,name=*" resultAlias="controller.%type%.%name%.#attribute#"/>
         <query objectName="kafka.network:type=*,name=*" resultAlias="network.%type%.%name%.#attribute#"/>
+        <query objectName="kafka.network:type=*,name=*,request=*" resultAlias="network.%type%.%name%-%request%.#attribute#"/>
+        <query objectName="kafka.log:type=*,name=*" resultAlias="log.%type%.%name%.#attribute#"/>
     </queries>
     <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
         <host>_HAYSTACK_GRAPHITE_HOST</host>
         <port>_HAYSTACK_GRAPHITE_PORT</port>
         <namePrefix>haystack.datastore.kafka.${HOSTNAME}.</namePrefix>
     </outputWriter>
-    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+    <collectIntervalInSeconds>60</collectIntervalInSeconds>
 </jmxtrans-agent>
