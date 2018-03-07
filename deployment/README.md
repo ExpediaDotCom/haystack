@@ -23,6 +23,10 @@ To get a feel of haystack you can start haystack locally inside minikube
 
 ###Pre-requisite 
 1. install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box
+2. Start minikube, optionally increasing its memory and/or CPUs if necessary:
+```
+minikube start --memory 8192 --cpus 4
+```
 
 ###Start
 From the root of the location to which haystack has been cloned:
