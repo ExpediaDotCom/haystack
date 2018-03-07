@@ -21,7 +21,7 @@ kafka {
   }
 }
 blacklist.services = [
-  "lshot-content-service",
+  "lshop-content-service",
   "cs-deposits-distribution",
   "lty-awards-service",
   "cs-tcs-gateway"
