@@ -36,6 +36,8 @@ spec:
           value: "/config/timeseries-aggregator.conf"
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
+        - name: "HAYSTACK_GRAPHITE_PORT"
+          value: "${graphite_port}"
         - name: "JAVA_XMS"
           value: "${java_process_memory_limit}"
         - name: "JAVA_XMX"

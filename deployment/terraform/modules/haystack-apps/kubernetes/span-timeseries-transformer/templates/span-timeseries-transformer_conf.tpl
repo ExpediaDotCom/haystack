@@ -20,3 +20,9 @@ kafka {
     topic = "proto-spans"
   }
 }
+blacklist.services = [
+  "lshot-content-service",
+  "cs-deposits-distribution",
+  "lty-awards-service",
+  "cs-tcs-gateway"
+]
