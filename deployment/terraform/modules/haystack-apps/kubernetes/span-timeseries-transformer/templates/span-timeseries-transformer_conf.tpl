@@ -25,5 +25,6 @@ blacklist.services = [
   "cs-deposits-distribution",
   "lty-awards-service",
   "cs-tcs-gateway",
-  "ews-booking-service"
+  "ews-booking-service",
+  "lshop-search-service"
 ]
