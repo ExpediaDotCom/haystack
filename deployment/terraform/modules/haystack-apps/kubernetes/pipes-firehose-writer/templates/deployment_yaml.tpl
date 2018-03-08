@@ -28,6 +28,8 @@ spec:
             cpu: ${cpu_limit}
             memory: ${memory_limit}
         env:
+        - name: "HAYSTACK_FIREHOSE_RETRYCOUNT"
+          value: "${firehose_retrycount}"
         - name: "HAYSTACK_FIREHOSE_SIGNINGREGION"
           value: "${firehose_region}"
         - name: "HAYSTACK_FIREHOSE_STREAMNAME"

@@ -169,6 +169,7 @@ module "pipes-firehose-writer" {
   firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
   firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
+  firehose_retrycount = "${var.pipes_firehose_writer_firehose_retrycount}"
   node_selecter_label = "${var.app-node_selector_label}"
   enabled = "${var.pipes_firehose_writer_enabled}"
   kubectl_executable_name = "${var.kubectl_executable_name}"

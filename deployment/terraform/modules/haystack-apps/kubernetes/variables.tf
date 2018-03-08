@@ -48,6 +48,7 @@ variable "pipes_firehose_writer_instances" {}
 variable "pipes_firehose_writer_firehose_url" {}
 variable "pipes_firehose_writer_firehose_streamname" {}
 variable "pipes_firehose_writer_firehose_signingregion" {}
+variable "pipes_firehose_writer_firehose_retrycount" {}
 variable "pipes_version" {}
 variable "pipes_firehose_writer_environment_overrides" {}
 variable "pipes_http_poster_environment_overrides" {}
