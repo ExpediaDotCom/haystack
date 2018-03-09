@@ -5,7 +5,7 @@ locals {
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   checksum = "${sha1("${data.template_file.config_data.rendered}")}"
   configmap_name = "ui-${local.checksum}"
-  trends_connector_name = "trends_connector_js"
+  trends_connector_name = "trends-connector-js"
 }
 
 
