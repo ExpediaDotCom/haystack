@@ -42,6 +42,7 @@ module "haystack-apps" {
   pipes_firehose_writer_instances = "${var.pipes_firehose_writer_instances}"
   pipes_firehose_writer_firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   pipes_firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
+  firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
   pipes_firehose_writer_firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
   pipes_firehose_writer_firehose_retrycount = "${var.pipes_firehose_writer_firehose_retrycount}"
   pipes_version = "${var.pipes_version}"

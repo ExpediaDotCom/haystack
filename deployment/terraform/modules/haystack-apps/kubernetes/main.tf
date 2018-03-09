@@ -168,6 +168,7 @@ module "pipes-firehose-writer" {
   graphite_port = "${var.graphite_port}"
   firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
+  firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
   firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
   firehose_retrycount = "${var.pipes_firehose_writer_firehose_retrycount}"
   node_selecter_label = "${var.app-node_selector_label}"

@@ -70,6 +70,7 @@ module "haystack-apps" {
   pipes_http_poster_httppost_url = "${var.pipes_http_poster_httppost_url}"
   pipes_firehose_writer_firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   pipes_firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
+  firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
   pipes_firehose_writer_firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
   pipes_firehose_writer_firehose_retrycount = "${var.pipes_firehose_writer_firehose_retrycount}"
   pipes_http_poster_environment_overrides = "${var.pipes_http_poster_environment_overrides}"
