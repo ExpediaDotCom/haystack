@@ -8,6 +8,7 @@ variable "enabled" {}
 variable "firehose_url" {}
 variable "firehose_streamname" {}
 variable "firehose_signingregion" {}
+variable "firehose_retrycount" {}
 
 variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {}

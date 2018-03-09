@@ -98,6 +98,9 @@ variable "pipes_firehose_writer_firehose_streamname" {
 variable "pipes_firehose_writer_firehose_signingregion" {
   default = ""
 }
+variable "pipes_firehose_writer_firehose_retrycount" {
+  default = "3"
+}
 variable "pipes_version" {
   default = "d38d528d88210107c26a173ead045bcc16c632ef"
 }

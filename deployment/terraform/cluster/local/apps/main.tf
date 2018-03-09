@@ -43,6 +43,7 @@ module "haystack-apps" {
   pipes_firehose_writer_firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   pipes_firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
   pipes_firehose_writer_firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
+  pipes_firehose_writer_firehose_retrycount = "${var.pipes_firehose_writer_firehose_retrycount}"
   pipes_version = "${var.pipes_version}"
   pipes_kafka_producer_environment_overrides = "${var.pipes_kafka_producer_environment_overrides}"
   pipes_json_transformer_environment_overrides = "${var.pipes_json_transformer_environment_overrides}"
@@ -90,6 +91,5 @@ module "haystack-apps" {
   metric_tank_instances = "${var.metric_tank_instances}"
   metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
   metrictank_environment_overrides = "${var.metrictank_environment_overrides}"
-  whitelisted_fields = "${var.whitelisted_fields}"
 
 }
