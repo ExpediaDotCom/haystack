@@ -11,6 +11,7 @@ kafka {
     auto.offset.reset = latest
     timestamp.extractor = "com.expedia.www.haystack.trends.kstream.MetricPointTimestampExtractor"
     producer.retries = 50,
+    replication.factor = 2
     producer.batch.size = 65536,
     producer.linger.ms = 250
   }
