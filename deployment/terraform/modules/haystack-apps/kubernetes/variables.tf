@@ -47,6 +47,7 @@ variable "pipes_http_poster_httppost_pollpercent" {}
 variable "pipes_firehose_writer_instances" {}
 variable "pipes_firehose_writer_firehose_url" {}
 variable "pipes_firehose_writer_firehose_streamname" {}
+variable "firehose_kafka_threadcount" {}
 variable "pipes_firehose_writer_firehose_signingregion" {}
 variable "pipes_firehose_writer_firehose_retrycount" {}
 variable "pipes_version" {}

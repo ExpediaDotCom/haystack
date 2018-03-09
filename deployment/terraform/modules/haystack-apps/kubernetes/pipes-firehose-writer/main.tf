@@ -14,6 +14,7 @@ data "template_file" "deployment_yaml" {
     firehose_retrycount = "${var.firehose_retrycount}"
     firehose_region = "${var.firehose_signingregion}"
     firehose_stream_name = "${var.firehose_streamname}"
+    firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
     firehose_url = "${var.firehose_url}"
     kafka_hostname = "${var.kafka_hostname}"
     node_selecter_label = "${var.node_selecter_label}"

@@ -92,6 +92,9 @@ variable "pipes_firehose_writer_firehose_url" {
 variable "pipes_firehose_writer_firehose_streamname" {
   default = ""
 }
+variable "firehose_kafka_threadcount" {
+  default = ""
+}
 variable "pipes_firehose_writer_firehose_signingregion" {
   default = ""
 }

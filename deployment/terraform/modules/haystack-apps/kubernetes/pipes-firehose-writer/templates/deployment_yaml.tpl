@@ -38,6 +38,8 @@ spec:
           value: "${firehose_url}"
         - name: "HAYSTACK_KAFKA_BROKERS"
           value: "${kafka_hostname}"
+        - name: "HAYSTACK_KAFKA_THREADCOUNT"
+          value: "${firehose_kafka_threadcount}"
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
