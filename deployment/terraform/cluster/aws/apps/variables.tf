@@ -163,7 +163,7 @@ variable "external_metric_tank_port" {
   default = ""
 }
 variable "metric_tank_instances" {
-  default = 3
+  default = 1
 }
 variable "metric_tank_memory_limit" {
   default = "4000Mi"
