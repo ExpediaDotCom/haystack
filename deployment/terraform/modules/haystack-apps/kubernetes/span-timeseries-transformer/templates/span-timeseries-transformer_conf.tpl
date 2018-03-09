@@ -4,7 +4,7 @@ kafka {
   close.timeout.ms = 30000
 
   streams {
-    application.id = "haystack-span-timeseries-transformer"
+    application.id = "span-timeseries-transformer"
     bootstrap.servers = "${kafka_endpoint}"
     num.stream.threads = 2
     commit.interval.ms = 3000
