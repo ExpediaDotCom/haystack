@@ -16,9 +16,9 @@
 
 const axios = require('axios');
 const Q = require('q');
-const config = require('../../../config/config');
+const config = require('../../../../config/config');
 const _ = require('lodash');
-const logger = require('../../../utils/logger').withIdentifier('support:doppler');
+const logger = require('../../../../utils/logger').withIdentifier('support:doppler');
 
 const store = {};
 const dtsUrl = config.connectors.trends.dopplerUrl;
