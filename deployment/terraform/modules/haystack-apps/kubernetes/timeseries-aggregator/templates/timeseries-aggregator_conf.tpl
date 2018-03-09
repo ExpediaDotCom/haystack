@@ -10,6 +10,9 @@ kafka {
     commit.interval.ms = 5000
     auto.offset.reset = latest
     timestamp.extractor = "com.expedia.www.haystack.trends.kstream.MetricPointTimestampExtractor"
+    producer.retries = 50,
+    producer.batch.size = 65536,
+    producer.linger.ms = 250
   }
 
   // For producing data to external kafka: set enable.external.kafka.produce to true and uncomment the props.
@@ -18,7 +21,7 @@ kafka {
     topic = "mdm"
     enable.external.kafka.produce = ${enable_external_kafka_producer}
      props {
-       bootstrap.servers = "${external_kafka_producer_endpoint}"
+      bootstrap.servers = "${external_kafka_producer_endpoint}"
       retries = 50,
       batch.size = 65536,
       linger.ms = 250
