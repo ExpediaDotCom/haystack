@@ -101,8 +101,11 @@ variable "firehose_kafka_threadcount" {
 variable "pipes_firehose_writer_firehose_signingregion" {
   default = ""
 }
-variable "pipes_firehose_writer_firehose_retrycount" {
-  default = "3"
+variable "pipes_firehose_writer_firehose_initialretrysleep" {
+  default = 10
+}
+variable "pipes_firehose_writer_firehose_maxretrysleep" {
+  default = 5000
 }
 variable "pipes_version" {
   default = "d38d528d88210107c26a173ead045bcc16c632ef"
