@@ -1,1 +1,27 @@
-{  "port": 8080,  "cluster": true,  "upstreamTimeout": 30000,  "enableServicePerformance": false,  "enableServiceLevelTrends": true,  "enableLatencyCostViewer": false,  "graphite": {    "host": "monitoring-influxdb-graphite.kube-system.svc",    "port": 2003  },  "connectors": {    "traces": {      "connectorName": "haystack",      "haystackHost": "trace-reader",      "haystackPort": 8080,      "fieldKeys": ["traceId", "error", "minDuration", "tpid", "tuid", "du", "Client-Id", "msterrorlist", "companycode", "JurisdictionCode", "managementunitcode", "userguid"],      "grpcOptions": {        "grpc.max_receive_message_length": 52428800      }    },    "trends": {      "connectorName": "haystack",      "metricTankUrl": "http://metrictank:6060"    }  }}
+{
+  "port": 8080,
+  "cluster": true,
+  "upstreamTimeout": 30000,
+  "enableServicePerformance": false,
+  "enableServiceLevelTrends": true,
+  "enableLatencyCostViewer": false,
+  "graphite": {
+    "host": "${graphite_hostname}",
+    "port": ${graphite_port}
+  },
+  "connectors": {
+    "traces": {
+      "connectorName": "haystack",
+      "haystackHost": "${trace_reader_hostname}",
+      "haystackPort": ${trace_reader_service_port},
+      "fieldKeys": [${whitelisted_fields}],
+      "grpcOptions": {
+        "grpc.max_receive_message_length": 52428800
+      }
+    },
+    "trends": {
+      "connectorName": "haystack",
+      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}"
+    }
+  }
+}

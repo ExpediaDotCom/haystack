@@ -1,50 +1,20 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
- name: haystack-ui-trends-test
- namespace: haystack-apps
+ name: ${app_name}
+ namespace: ${namespace}
 data:
-  haystack-ui.json: |-
-    {
-      "port": 8080,
-      "cluster": true,
-      "upstreamTimeout": 30000,
-      "enableServicePerformance": false,
-      "enableServiceLevelTrends": true,
-      "enableLatencyCostViewer": false,
-      "graphite": {
-        "host": "monitoring-influxdb-graphite.kube-system.svc",
-        "port": 2003
-      },
-      "connectors": {
-        "traces": {
-          "connectorName": "haystack",
-          "haystackHost": "trace-reader",
-          "haystackPort": 8080,
-          "fieldKeys": [
-            "traceId",
-            "error",
-            "minDuration",
-            "tpid",
-            "tuid",
-            "du",
-            "Client-Id",
-            "msterrorlist",
-            "companycode",
-            "JurisdictionCode",
-            "managementunitcode",
-            "userguid"
-          ],
-          "grpcOptions": {
-            "grpc.max_receive_message_length": 52428800
-          }
-        },
-        "trends": {
-          "connectorName": "haystack",
-          "metricTankUrl": "http://metrictank.stockyard.us-west-2.prod.monitoring.expedia.com"
-        }
-      }
-    }
+  haystack-metric-schemas.conf: |-
+
+    [haystack_metrics]
+    pattern = ^([a-z\-]+)\.([^.]+)\.haystack.*
+    retentions = 1m:1d:1sec:1,5m:7d:1sec:1,15m:30d:1sec:1,1h:1y:1sec:1
+    reorderBuffer = 20
+
+    [default]
+    pattern = .*
+    retentions = 1m:1d:1sec:1,5m:7d:1sec:1,15m:30d:1sec:1,1h:1y:1sec:1
+    reorderBuffer = 20
 ---
 # ------------------- Deployment ------------------- #
 
