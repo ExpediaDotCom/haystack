@@ -58,7 +58,7 @@ This should open up the kubernetes dashboard and you can find your apps under th
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -a uninstall
+./apply-compose.sh -a uninstall-all
 ```
 this will uninstall all haystack components, but will leave minikube running. To bring down minikube:
 
