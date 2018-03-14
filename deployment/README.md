@@ -66,7 +66,7 @@ this will uninstall all haystack components, but will leave minikube running. To
 minikube stop
 ``` 
 
-Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
+Taking down minikube before running `./apply-compose.sh -a install-all` may prove helpful if minikube is returning errors
 during the install process.
 
 
