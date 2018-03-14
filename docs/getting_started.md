@@ -6,40 +6,44 @@ All of Haystack's backend components are released as [Docker images](https://exp
 
 ### How to run these components?
 
-We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). Entire haystack runs locally on minikube(k8s), with a 1 click deployment and Kubernetes on the rest of the environments. Deployment scripts are not tied up with minikube(local development),we can use the same script to deploy in production and that is what we use in Expedia
+We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). Entire haystack runs locally on minikube(k8s), with a 1 click deployment on the rest of the environments. Deployment scripts are not tied up with minikube(local development),we can use the same script to deploy in production and that is what we use in Expedia
 
 #### Installation
 
 Clone this repository and run the script, as documented in the next section.
 
-#### Versioning of components
+## Local Cluster
+To get a feel of haystack you can run haystack locally inside minikube.
 
-All components and their docker images will be semantically versioned and they will be compatible with each other unless major version is different.
+#### Pre-requisite 
+Install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box and make sure it is running `minikube start`.
 
-for e.g. 0.1.1 of trace-indexer will be compatible with 0.1.3 of trends components
-
-#### Usage
-
+#### Start
 From the root of the location to which haystack has been cloned:
-
 ```
-cd deployment/k8s
+cd deployment/terraform
 ./apply-compose.sh -a install
 ```
-will install required third party software, start the minikube and install all haystack components in dev mode.
+this will install required third party software, start the minikube and install all haystack components in dev mode.
 
-
+#### Verify
+```
+ echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+```
+Once you have cname record to minikube, access the haystack ui at 
+```
+ http://haystack.local:32300
+ ```
+ 
 #### What components get installed ?
 
-The list of components that get installed in dev mode can be found at k8s/compose/dev.yaml. 'dev' is a logic name of an environment, one can create compose files for different environments namely staging, test, prod etc. The script understands the environment name with '-e' option. 'dev' is used as default.
+The list of components that get installed can be seen at the minikube dashboard inside the haystack-apps namespace 
+To open minikube dashboard type `minikube start` 
 
 
 #### How to deploy haystack on AWS?
 
-This script does not create/delete the kubernetes cluster whether local(minikube) or cloud. We recommend to use open source tools like [kops](https://github.com/kubernetes/kops) to manage your cluster on AWS. Once you have your cluster up and running, configure the 'kubectl' to point to your cluster. 
-
-Please note the default context for all environments will be minikube. In other words, --use-context will always point to minikube. This is done intentionally to safeguard developers from pushing their local dev changes to other environments.
-
+We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws in a single zone at the moment.
 For details, go [here](https://github.com/ExpediaDotCom/haystack/tree/master/deployment)
 
 ### How to send spans?
