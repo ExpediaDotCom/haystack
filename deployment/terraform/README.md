@@ -50,7 +50,7 @@ find . -name "*tfstate*" -exec rm {} \;
 ```
 This command removes the files that Terraform uses to [keep track of state.](https://www.terraform.io/docs/state/)
 ## AWS Cluster
-We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws.
+We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws in a single zone at the moment.
 Here are the list of components we install : 
 1. Kubernetes cluster - version 1.8 (using kops)
 2. Apache Cassandra
