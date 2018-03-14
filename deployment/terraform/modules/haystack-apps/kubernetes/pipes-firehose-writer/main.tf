@@ -11,7 +11,8 @@ data "template_file" "deployment_yaml" {
   vars {
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-    firehose_retrycount = "${var.firehose_retrycount}"
+    firehose_initialretrysleep = "${var.firehose_initialretrysleep}"
+    firehose_maxretrysleep = "${var.firehose_maxretrysleep}"
     firehose_region = "${var.firehose_signingregion}"
     firehose_stream_name = "${var.firehose_streamname}"
     firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
