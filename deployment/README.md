@@ -32,10 +32,10 @@ minikube start --memory 8192 --cpus 4
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -a install
+./apply-compose.sh -a install-all
 ```
 This will install required third party software, start the minikube and install all haystack components in dev mode.
-###### Note : not all logging and monitoring addons are not deployed when run locally due to resource constraints in the local minikube cluster.
+###### Note : not all logging and monitoring addons are deployed when running locally due to resource constraints in the local minikube cluster.
 
 ###Verify
 
@@ -43,7 +43,7 @@ This will install required third party software, start the minikube and install 
 The script sets the 'haystack.local' domain to your minikube ip.
 use the below link access haystack at
 ```
- https://haystack.local:32300
+ http://haystack.local:32300
 ```
 
 Once scripts gets completed run the following command to see all the apps which are deployed
