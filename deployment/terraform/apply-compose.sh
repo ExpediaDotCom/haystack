@@ -94,17 +94,27 @@ function verifyArgs() {
    CLUSTER_TYPE=local
  fi
  if [[ -z $APP_VARS_FILE ]]; then
-   APP_VARS_FILE=variables.json
+   APP_VARS_FILE=$DIR/cluster/$CLUSTER_TYPE/apps/variables.json
  fi
  if [[ -z $CLUSTER_NAME ]]; then
    CLUSTER_NAME=haystack
  fi
  if [[ -z $INFRA_VARS_FILE ]]; then
-   INFRA_VARS_FILE=variables.json
+   INFRA_VARS_FILE=$DIR/cluster/$CLUSTER_TYPE/infrastructure/variables.json
  fi
  if [[ (-z $S3_BUCKET)  && "$CLUSTER_TYPE" = "aws"  ]] ; then
    echo "flag --s3-bucket|-sb needs to be passed when cluster_type is aws"
    exit 1
+ fi
+ if [[ -z ${SKIP_APPROVAL} ]]; then
+   SKIP_APPROVAL="false"
+ fi
+
+ if [ ! -f ${APP_VARS_FILE} ]; then
+    echo "{}" >> ${APP_VARS_FILE}
+ fi
+ if [ ! -f ${INFRA_VARS_FILE} ]; then
+    echo "{}" >> ${INFRA_VARS_FILE}
  fi
 
 }
