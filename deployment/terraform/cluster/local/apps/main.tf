@@ -1,7 +1,7 @@
 locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
-  default_memory_limit = "100Mi"
+  default_memory_limit = "250Mi"
 }
 
 data "terraform_remote_state" "haystack_inrastructure" {
