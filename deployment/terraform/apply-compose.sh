@@ -117,6 +117,17 @@ function verifyArgs() {
     echo "{}" >> ${INFRA_VARS_FILE}
  fi
 
+    echo
+    echo "Starting ${0} with arguments"
+    echo
+    echo "action = ${ACTION}"
+    echo "cluster-type = ${CLUSTER_TYPE}"
+    echo "cluster-name = ${CLUSTER_NAME}"
+    echo "appvars-file-path = ${APP_VARS_FILE}"
+    echo "infravars-file-path = ${INFRA_VARS_FILE}"
+    echo "skip-approval = ${SKIP_APPROVAL}"
+    echo
+
 }
 
 function setThirdPartySoftwareBasePath() {
