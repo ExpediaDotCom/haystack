@@ -4,7 +4,7 @@
   "upstreamTimeout": 30000,
   "enableServicePerformance": false,
   "enableServiceLevelTrends": true,
-  "enableLatencyCostViewer": false,
+  "enableLatencyCostViewer": true,
   "graphite": {
     "host": "${graphite_hostname}",
     "port": ${graphite_port}
