@@ -18,7 +18,7 @@ module "k8s-addons" {
   graphite_node_port = "${var.graphite_node_port}"
 
   add_logging_addons = false
-  add_monitoring_addons = false
+  add_monitoring_addons = "${var.monitoring_addons_enabled}"
 
   add_kubewatch_addon = false
   kubewatch_config_yaml_base64 = ""
