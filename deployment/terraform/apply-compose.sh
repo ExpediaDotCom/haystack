@@ -44,7 +44,7 @@ function verifyArgs() {
         CLUSTER_NAME=haystack
     fi
 
-    if ! [[ ${CLUSTER_NAME} =~ ^[a-z]+[a-z0-9]*$ ]]; then
+    if ! [[ ${CLUSTER_NAME} =~ ^[a-z]+[a-z0-9-]*$ ]]; then
         echo "Invalid cluster name format ${CLUSTER_NAME}, special characters and starting with numeric values are not allowed"
         display_help
         exit 1
