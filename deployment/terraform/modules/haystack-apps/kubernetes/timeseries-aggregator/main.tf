@@ -2,7 +2,7 @@ locals {
   app_name = "timeseries-aggregator"
   config_file_path = "${path.module}/templates/timeseries-aggregator_conf.tpl"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
-  count = "${var.enabled?1:0}"
+  count = "${var.enabled == "true" ?1:0}"
   checksum = "${sha1("${data.template_file.config_data.rendered}")}"
   configmap_name = "aggregator-${local.checksum}"
 }
