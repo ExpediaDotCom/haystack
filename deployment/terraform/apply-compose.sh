@@ -44,7 +44,7 @@ function verifyArgs() {
         CLUSTER_NAME=haystack
     fi
 
-    if ! [[ ${CLUSTER_NAME} =~ ^[a-z]+[a-z0-9]*$ ]]; then
+    if ! [[ ${CLUSTER_NAME} =~ ^[a-z]+[a-z0-9-]*$ ]]; then
         echo "Invalid cluster name format ${CLUSTER_NAME}, special characters and starting with numeric values are not allowed"
         display_help
         exit 1
@@ -238,7 +238,7 @@ function installComponents() {
 
         local)
             $TERRAFORM init
-            $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL
         ;;
 
         ?)
