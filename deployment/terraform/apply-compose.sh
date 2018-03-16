@@ -238,7 +238,7 @@ function installComponents() {
 
         local)
             $TERRAFORM init
-            $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL
         ;;
 
         ?)
