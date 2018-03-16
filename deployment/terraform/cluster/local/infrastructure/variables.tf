@@ -16,3 +16,7 @@ variable "reverse_proxy_port" {
 variable "graphite_node_port" {
   default = "32301"
 }
+
+variable "monitoring_addons_enabled" {
+  default = "false"
+}
