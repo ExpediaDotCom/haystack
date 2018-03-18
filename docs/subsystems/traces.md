@@ -23,7 +23,7 @@ The traces subsystem comprises of following components:
 
 The 'indexer' groups the spans together in-memory for every traceId with a purpose. Besides storing them in Cassandra and ElasticSearch, they are also published to a different kafka topic that may help solving newer usecases in future with this enriched data.  
 
-The indexer also controls the attributes to be indexed through a whitelist configuration. The indexer reads the whitelist from external store and applies them dynamically. The goal is to help organizations in protecting and scaling their infrastructure esp. ElasticSearch more proactively. 
+The indexer also controls the attributes to be indexed through a whitelist configuration. The indexer reads the whitelist from an external store and applies them dynamically. The goal is to help organizations in protecting and scaling their infrastructure esp. ElasticSearch more proactively. 
 
 
 - **Reader**: The reader runs as a grpc server and serves Haystack UI to fetch traces directly from Cassandra for a TraceId or use ElasticSearch for contextual searches. For a search, the 'reader' component queries ElasticSearch that responds with a set of TraceIds. It then pulls all spans from Cassandra for every unique TraceId. The reader applies the following transformations on the spans associated with a TraceId to build a complete representation.
