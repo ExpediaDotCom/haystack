@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Trends
+---
 # Haystack Trends
 
 The trends subsystem is responsible for reading the spans and generating the vital service health trends.

@@ -1,3 +1,7 @@
+---
+layout: default
+title: Client Libraries
+---
 # Haystack Client
 
 ## Why OpenTracing?

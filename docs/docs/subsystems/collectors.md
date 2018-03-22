@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Collectors
+---
 # Haystack Collectors
 
 Collector is a subsystem included in Haystack that ingests the [spans](https://github.com/ExpediaDotCom/haystack-idl) from other data sources. Its purpose is to make it easy to integrate existing data streams of spans with Haystack.

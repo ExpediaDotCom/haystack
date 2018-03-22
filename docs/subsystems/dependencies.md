@@ -1,3 +1,0 @@
-# Haystack Dependencies
-
-Coming Soon.

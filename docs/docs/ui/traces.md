@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Traces UI
+---
 # Traces 
 
 Visualization for tracing sub-system of Haystack.

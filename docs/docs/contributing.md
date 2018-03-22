@@ -1,3 +1,7 @@
+---
+layout: default
+title: Contributing
+---
 # Contributing to Haystack
 
 ### Bugs

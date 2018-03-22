@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Traces
+---
 # Haystack Traces
 
 Traces is a subsystem included in Haystack that provides a distributed tracing system to troubleshoot the problems in microservice architectures. Its design is based on the [Google Dapper](http://research.google.com/pubs/pub36356.html) paper.

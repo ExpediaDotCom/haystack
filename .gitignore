@@ -11,3 +11,6 @@ deployment/terraform/cluster/local/infrastructure/.terraform/
 deployment/terraform/third_party_softwares
 **/*.tfstate
 **/*.tfstate.backup
+docs/_book/
+docs/_site/
+docs/node_modules/

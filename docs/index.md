@@ -1,4 +1,9 @@
-<img src="images/logo.png" style="width: 600px; align=center; "/>
+---
+layout: title-page
+title: Front Page
+---
+
+![Haystack Logo](/docs/images/logo.png)
 
 
 ## Resilient, scalable enterprise tracing and analysis 
@@ -24,3 +29,4 @@ With so much information spread across many different places, it can be challeng
 
 ### The Solution
 Haystack uses tracing data from a central store to help you locate the source of the problem -- to drill down to the precise part of a service transaction where failures or latency are occurring -- and find the proverbial "needle in a haystack". Once you know specifically where the problem is happening, it's much easier to identify the appropriate diagnostic data, understand the data, find the problem, and fix it.
+

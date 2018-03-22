@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Trends UI
+---
 # Trends
 
 Visualization for vital service health trends. Haystack trends 3 metrices for each operation of all services - count, duration(tp95, tp99, median) and success %.
