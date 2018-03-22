@@ -18,9 +18,9 @@ If you see a feature that you would like to be added, please open an issue in th
 
 ### Contributing in Documentation
 
-For contributing in documentation, you can use `Edit this page` button on any page in [https://expediadotcom.github.io/haystack](https://expediadotcom.github.io/haystack), or directly modify the corresponding .md files in https://github.com/ExpediaDotCom/haystack/docs. Once you update docs and your PR is merged in the changes are automatically deployed to  [https://expediadotcom.github.io/haystack](https://expediadotcom.github.io/haystack) through a travis job pipeline.
+For contributing in documentation, you can directly modify the corresponding .md files in the `docs` directory under the [base haystack repository](https://github.com/ExpediaDotCom/haystack/) and submit a pull request. Once your PR is merged in, the changes are automatically deployed to  <https://expediadotcom.github.io/haystack>.
  
-The documentation site on  [https://expediadotcom.github.io/haystack](https://expediadotcom.github.io/haystack) is based on [Gitbook](https://www.gitbook.com/) organizational framework. The documentation source can be found on the gh-pages branch in the [base haystack repository](https://github.com/ExpediaDotCom/haystack/).
+The documentation site on <https://expediadotcom.github.io/haystack> uses [Github Pages](https://pages.github.com/) to render the documentation. Note that the Table of Contents is maintained manually, in the _includes/sidebar.html file. Update that file if you add new topics or relocate topics in the Table of Contents. 
 
 ### License
 
