@@ -2,6 +2,7 @@
 layout: default
 title: Getting Started
 ---
+# Getting Started
 
 All of Haystack's backend components are released as [Docker images](https://expediadotcom.github.io/haystack/deployment/sub_systems.html) on the ExpediaDotCom Docker Hub.
 
