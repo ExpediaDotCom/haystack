@@ -8,7 +8,7 @@ At the top, Current health of Service is displayed by total number of unhealthy 
 
 <img src="../images/alerts.png" style="width: 800px;"/>
 
-Columns for OperationName, Alert Type, Status and Status Changed are sortable. Also, you can easily apply filter on OperationName, Alert Type and Status columns to quickly narrow down the desired operations you are looking for. You can change the duration of trend column which you want summaries by changing `Showing summary for` dropdown.
+Columns for OperationName, Alert Type, Status and Status Changed are sortable. Also, you can easily apply filter on OperationName, Alert Type and Status columns to quickly narrow down the desired operations you are looking for. You can change the duration of trend column by changing `Show trends for` dropdown.
 
 ### Alert Details 
 History and Subscriptions of selected alert.
