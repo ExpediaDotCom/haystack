@@ -181,6 +181,27 @@ module "pipes-firehose-writer" {
   env_vars = "${var.pipes_firehose_writer_environment_overrides}"
 }
 
+module "pipes-secret-detector" {
+  source = "pipes-secret-detector"
+  image = "expediadotcom/haystack-pipes-secret-detector:${var.pipes_version}"
+  replicas = "${var.pipes_secret_detector_instances}"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  pipes_secret_detector_secretsnotifications_email_from = "${var.pipes_secret_detector_secretsnotifications_email_from}"
+  pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
+  pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
+  pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
+  node_selecter_label = "${var.app-node_selector_label}"
+  enabled = "${var.pipes_secret_detector_enabled}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
+  env_vars = "${var.pipes_secret_detector_environment_overrides}"
+}
+
 # collectors
 
 module "kinesis-span-collector" {
