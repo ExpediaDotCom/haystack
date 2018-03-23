@@ -31,9 +31,21 @@ Here are details about how each column in search results is calculated -
   
   
 ### Trace Details
+Along with the main Timeline representation of a trace, haystack comes with 2 more sub-view digging deeper in a trace.
+
+#### Timeline
 Waterfall for the trace, it shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
 
-<img src="../images/trace_details.png" style="width: 800px;"/>
+<img src="../images/trace_timeline.png" style="width: 800px;"/>
 
 You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. Also, clicking on `Share Trace` copies a sharable persistent link for the trace.
 
+#### Latency Cost
+Latency cost view is a handy tool to analyze how much time a trace is consuming in network and if it there are cross datacenter calls involved. Nodes in this call graph represent a service in a datacenter. Edges represent network calls, edge value is network latency for the call(or average network latency if there were multiple calls between services). Red edges mark cross region network calls.
+
+<img src="../images/trace_latency.png" style="width: 800px;"/>
+
+#### Trends
+Trace-Trends view is simply list of all operations involved in a single trace along with their current count, duration & success trends. One quickly compare involved trends and spot if any of these trends have changed recently causing issue with the trace.
+
+<img src="../images/trace_trends.png" style="width: 800px;"/>
