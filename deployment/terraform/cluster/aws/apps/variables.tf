@@ -71,6 +71,9 @@ variable "pipes_http_poster_enabled" {
 variable "pipes_firehose_writer_enabled" {
   default = false
 }
+variable "pipes_secret_detector_enabled" {
+  default = false
+}
 variable "pipes_json_transformer_instances" {
   default = "1"
 }
@@ -83,6 +86,9 @@ variable "pipes_http_poster_instances" {
 variable "pipes_firehose_writer_instances" {
   default = "1"
 }
+variable "pipes_secret_detector_instances" {
+  default = "1"
+}
 variable "pipes_http_poster_httppost_url" {
   default = ""
 }
@@ -93,6 +99,21 @@ variable "pipes_firehose_writer_firehose_url" {
   default = ""
 }
 variable "pipes_firehose_writer_firehose_streamname" {
+  default = ""
+}
+variable "pipes_secret_detector_secretsnotifications_email_from" {
+  default = ""
+}
+variable "pipes_secret_detector_secretsnotifications_email_tos" {
+  default = ""
+}
+variable "pipes_secret_detector_secretsnotifications_email_subject" {
+  default = ""
+}
+variable "pipes_secret_detector_secretsnotifications_email_host" {
+  default = ""
+}
+variable "pipes_secret_detector_environment_overrides" {
   default = ""
 }
 variable "firehose_kafka_threadcount" {

@@ -1,5 +1,5 @@
 locals {
-  app_name = "pipes-firehose-writer"
+  app_name = "pipes-secret-detector"
   count = "${var.enabled?1:0}"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
 }
@@ -10,12 +10,10 @@ data "template_file" "deployment_yaml" {
   vars {
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-    firehose_initialretrysleep = "${var.firehose_initialretrysleep}"
-    firehose_maxretrysleep = "${var.firehose_maxretrysleep}"
-    firehose_region = "${var.firehose_signingregion}"
-    firehose_stream_name = "${var.firehose_streamname}"
-    firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
-    firehose_url = "${var.firehose_url}"
+    pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
+    pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
+    pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
+    pipes_secret_detector_secretsnotifications_email_from = "${var.pipes_secret_detector_secretsnotifications_email_from}"
     kafka_hostname = "${var.kafka_hostname}"
     node_selecter_label = "${var.node_selecter_label}"
     replicas = "${var.replicas}"
