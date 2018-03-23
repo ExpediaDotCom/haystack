@@ -4,6 +4,7 @@ Visualization for tracing sub-system of Haystack.
 
 ### Traces Search  
 User can search for Traces going through a service. Operation can be 'all' or any specific operation from the given service. Any fields you want to filter on can be specified `key=value` format. Time Picker allows selecting presets and any time range you want. 
+
 Here are the available search options -
 - **Service**: Service through which trace must go through
 - **Operation**: Operation of the given service through which trace must go through
@@ -34,7 +35,22 @@ Waterfall for the trace, it shows span timelines using horizontal bars and paren
 
 <img src="../images/trace_timeline.png" style="width: 800px;"/>
 
-You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. Also, clicking on `Share Trace` copies a sharable persistent link for the trace.
+You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. There is an option to view the raw trace, as well as creating a persistent, sharable link to the trace by clicking on `Share Trace`.
+
+### Latency Cost
+
+The Latency Cost tab contains a visualization of the time it took for the trace's spans to move between data centers.
+
+<img src="../images/latency_cost.png" style="width: 800px;"/> 
+
+- Edges represent network calls, edge value is network latency for the call, or average network latency if there were multiple calls between services
+- Red edges represent cross datacenter calls
+- Nodes represent a service (in a datacenter) calls
+- Network delta value are best estimates
+
+Please note that `enableLatencyCostViewer` must be marked as true in config to view this tab.
+
+### Trends
 
 #### Latency Cost
 Latency cost view is a handy tool to analyze how much time a trace is consuming in network and if it there are cross datacenter calls involved. Nodes in this call graph represent a service in a datacenter. Edges represent network calls, edge value is network latency for the call(or average network latency if there were multiple calls between services). Red edges mark cross region network calls.
