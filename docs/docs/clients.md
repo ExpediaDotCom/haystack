@@ -10,22 +10,23 @@ Haystack implements the [OpenTracing](http://opentracing.io/) standard tracing A
 
 ## Haystack Agent
 
-The Agent is a GRPC server that accepts span data from clients and then sends it via *dispatchers* to the rest of the Haystack system for storage or analysis. A dispatcher connects an agent to a particular data sink, with code written specifically ot use that data sink. In this release, Haystack includes two dispatchers, one for Kafka and one for AWS Kinesis. The Haystack team invites you to contribute to this repo any dispatchers that you develop for other services and choose to share. Use the Haystack agent libraries in the Maven Central Repository to write custom agents or dispatchers.
+The Agent is a server that accepts span data from clients and then sends it via *dispatchers* to the rest of the Haystack system for storage or analysis. A dispatcher connects an agent to a particular data sink, with code written specifically to use that data sink. An agent can either run as a standalone service locally with the application (where the application and the service communicate via GRPC), or as a "sidecar container" connected with the application. (A sidecar container is deployed alongside the application, but runs as a separate process. The application communicates with the sidecar via a REST-like API over HTTP. The sidecar takes the burden of discovering and configuring platform services off of every client, and provides a language-agnostic interface to the application.)
+
+In this release, Haystack includes one agent (a local GRPC agent) and two dispatchers: one for Kafka and one for AWS Kinesis. Code for the agent and both dispatchers is in the repo. The Haystack team invites you to contribute to this repo any dispatchers that you develop for other services. The Haystack agent libraries are in the Maven Central Repository for your convenience in writing custom agents or dispatchers.
 
 Your application or microservice code uses the [Haystack client library](https://github.com/ExpediaDotCom/haystack-client-java) to push spans to the agent.
-Agent can either run as a standalone service locally with the application (where the application and the service communicate via GRPC), or as a "sidecar container" connected with the application. (A sidecar container is deployed alongside the application, but runs as a separate process. The application communicates with the sidecar via a REST-like API over HTTP. The sidecar takes the burden of discovering and configuring platform services, and provides a language-agnostic interface to the application.)
 
-Currently, we offer one agent, a GRPC server on a configurable port that accepts [span data](https://github.com/ExpediaDotCom/haystack-idl/tree/master/proto/agent) from clients. The span agent is implemented in the open source repo and it supports both Kinesis and Kafka dispatchers. Please note that our fat jar only bundles the span agent and the Kinesis dispatcher.
+Please note that our fat jar only bundles the span agent and the Kinesis dispatcher, not the Kafka dispatcher.
 
-You configure the agent as described in the following section. The configuration file defines which dispatchers the agent will use, and contains the necessary configuration information for those dispatchers in addition to the configuration for the Agent. The configuration can be provided via either a local file or an HTTP endpoint. For example, the following command line invokes the agent using a local configuration file named `myAgentConfigFile`.
-
-```java -jar target/haystack-agent.jar --config-provider myAgentConfigFile --file-path docker/dev-config.yaml```
+You configure the agent as described in the following section. 
 
 ### Haystack Agent Configuration
 
-The configuration readers are implemented using the ([SPI](https://docs.oracle.com/javase/tutorial/ext/basics/spi.html)) design model. For now, we are only using a file config provider that is implemented [here](https://github.com/ExpediaDotCom/haystack-agent/tree/master/config-providers/file).
+The configuration file defines which dispatchers the agent will use, and contains the necessary configuration information for those dispatchers in addition to the configuration for the Agent. The configuration can be provided via either a local file or an HTTP endpoint. For example, the following command line invokes the agent using a local configuration file named `myAgentConfigFile`.
 
-The following example configuration loads a single agent provider that reads accepts spans over GRPC (thus it is named 'spans'). This agent acts as a GRPC server listening for requests on port 34000. It publishes spans to both Kinesis and Kafka, using the settings in the appropriate sections of the config.
+```java -jar target/haystack-agent.jar --config-provider myAgentConfigFile --file-path docker/dev-config.yaml```
+
+The following example configuration loads our span agent provider, which accepts spans over GRPC at the configured port. This agent listens for GRPC requests on port 34000. It publishes spans to both Kinesis and Kafka, using the settings specified in the appropriate sections of the config (details below).
 
 ```
 agents:
@@ -43,22 +44,17 @@ agents:
       producer.topic: spans
 ```
 
-## Dispatchers
-
-A dispatcher is how the Agent communicates with a particular instance of a data sink. We offer two agents out of the box: one dispatcher communicates with Apache Kafka, and the second dispatcher communicates with AWS Kinesis. You must configure the Agent appropriately to use the appropriate Dispatcher(s) as described in the previous section. 
-* WHAT GOES TO WHICH DISPATCHER, when you configure two? Everything to both?
-
-### Kafka dispatcher configuration
+#### Kafka dispatcher configuration
 
  The Apache Kafka dispatcher uses the Kafka Producer API to write span data to a Kafka topic. (A *topic* in Kafka is a stream of *records*. A *record* is a key, a value, and a timestamp.) The Haystack Agent uses the [TraceId](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/span.proto) in each span object as the key, and the complete Span as the value.
 
-You must set the following configuration entries for the Producer config in your config file:
-* `producer.topic` - The Kafka Topic for sharing span data.
+You must set the following configuration file entries for the Kafka dispatcher in your config file:
+* `producer.topic` - The Kafka Topic ID for sharing span data.
 * `bootstrap.servers` - A list of host/port pairs for connecting to your Kafka cluster.
 
-You can specify other Kafka producer properties in the config file by placing them in the same section of the config file where the sample above puts the `bootstratp.servers` setting.
+You can specify other Kafka producer properties in the config file by placing them in the same section of the config file where the sample above puts the `bootstrap.servers` setting.
 
-### Kinesis dispatcher configuration
+#### Kinesis dispatcher configuration
 The Kinesis dispatcher uses the Amazon Kinesis Producer Library ([KPL](https://github.com/awslabs/amazon-kinesis-producer)), and requires the following configuration properties be set properly in order to work:
 
 a. `Region` - The AWS region where the Kinesis server is located. For example, 'us-west-2'.
@@ -66,6 +62,7 @@ b. `StreamName` - The name of the Kinesis stream where spans will be published.
 c. `OutstandingRecordsLimit` - The maximum number of pending records that are allowed to be not yet published to Kinesis by the Agent. If a request to the Agent would cause it have more pending records for Kinesis than this limit, then the Agent sends back 'RATE_LIMIT_ERROR' in its response and does not store the records for publishing to Kinesis.
 
 If you are using Kinesis, then in addition to the configuration file entries above, you also need to provide AWS_ACCESS_KEY and AWS_SECRET_KEY as Java system properties or environment variables, or (use the IAM role)[https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html] for connecting to Kinesis.
+
 Kinesis dispatcher can be configured with other [KPL properties](https://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer-sample/default_config.properties) in addition to `Region` by including them in the same part of the config file where `Region` is set.
 
 ## Metrics
