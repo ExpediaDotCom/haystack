@@ -38,7 +38,7 @@ for reading metric points, aggregating them based on rules and pushing the aggre
 
 The timeseries metric points are metrictank complient and can be directly consumed by metrictank. 
 
- ### Extensions
+### Extensions
  
  1. Trends - Other than the four default trends more trends can be computed by adding a [transformer](https://github.com/ExpediaDotCom/haystack-trends/tree/master/span-timeseries-transformer/src/main/scala/com/expedia/www/haystack/metricpoints/transformer)
 to create the metric point and adding an [aggregation-rule](https://github.com/ExpediaDotCom/haystack-trends/tree/master/timeseries-aggregator/src/main/scala/com/expedia/www/haystack/metricpoints/aggregation/rules) for it. 

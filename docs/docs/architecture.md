@@ -10,7 +10,7 @@ title: Architecture
 The Haystack architecture is designed on the distributed design principles of building decentralized and decoupled systems.
 To enable that, we have used [Apache Kafka](http://kafka.apache.org/) as the nervous system that helps us achieve the following:
 
-* **Componentized, Docker-like Design**: Haystack includes all of the necessary subsystems to make the system ready to use. But we have also ensured that the overall system is designed in such a way that you can replace any given subsystem to better meet your own needs. 
+* **Componentized**: Haystack includes all of the necessary subsystems to make the system ready to use. But we have also ensured that the overall system is designed in such a way that you can replace any given subsystem to better meet your own needs. 
 * **Highly Resilient**: There is no single point of failure. 
 * **Highly Scalable**: We have completely decentralized our system which helps us to scale every component individually. 
 
@@ -23,3 +23,5 @@ We provide the following six subsystems:
 5. [Dependencies](/docs/subsystems/dependencies.html)
 6. [Anomaly Detection](/docs/subsystems/anomaly_detection.html)
 
+
+DESCRIBE ALL THE BOXES IN THE DIAGRAM. SURROUND THE DIAGRAM WITH TEXT.

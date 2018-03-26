@@ -61,7 +61,7 @@ a. `Region` - The AWS region where the Kinesis server is located. For example, '
 b. `StreamName` - The name of the Kinesis stream where spans will be published.
 c. `OutstandingRecordsLimit` - The maximum number of pending records that are allowed to be not yet published to Kinesis by the Agent. If a request to the Agent would cause it have more pending records for Kinesis than this limit, then the Agent sends back 'RATE_LIMIT_ERROR' in its response and does not store the records for publishing to Kinesis.
 
-If you are using Kinesis, then in addition to the configuration file entries above, you also need to provide AWS_ACCESS_KEY and AWS_SECRET_KEY as Java system properties or environment variables, or (use the IAM role)[https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html] for connecting to Kinesis.
+If you are using Kinesis, then in addition to the configuration file entries above, you also need to provide AWS_ACCESS_KEY and AWS_SECRET_KEY as Java system properties or environment variables, or [use the IAM role](https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html) for connecting to Kinesis.
 
 Kinesis dispatcher can be configured with other [KPL properties](https://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer-sample/default_config.properties) in addition to `Region` by including them in the same part of the config file where `Region` is set.
 
