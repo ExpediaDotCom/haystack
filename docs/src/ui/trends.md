@@ -9,7 +9,7 @@ The Trends view in the UI provides visualization for vital service health trends
 ## Main view
 When you open the Trends page in the UI, the Trends view shows summary stats for count, duration and success % for all operations.
 
-![Trends page](/src/images/trends.png)
+![Trends page](../images/trends.png)
 
 All 3 columns are sortable. You can change the duration for which you want summaries by changing the `Showing summary for` dropdown.
 
@@ -17,7 +17,7 @@ All 3 columns are sortable. You can change the duration for which you want summa
 ## Detail view 
 When you choose to show details for one operation by clicking on the operation name, the Trend Details view shows graphs for count, duration and success % trends. 
 
-![Trends detail](/src/images/trend_details.png)
+![Trends detail](../images/trend_details.png)
 
 Use these controls in the Trend Details view:
 
