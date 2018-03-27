@@ -1,9 +1,7 @@
 name: Haystack
 markdown: kramdown
 url: http://expediadotcom.github.io/haystack
-root: /haystack
 
-source_dir: docs
 encoding: utf-8
 
 exclude: ["README.md" ]
