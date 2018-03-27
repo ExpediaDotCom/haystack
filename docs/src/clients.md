@@ -6,7 +6,7 @@ title: Client Libraries
 
 The Haystack server components are designed to provide a resilient, scalable system for gathering, storing, and retrieving tracing data. Your client components must send tracing data (spans) to the Haystack server in order for the data about how your client is working to be stored. This topic describes the server components that gather and store your client's trace data spans.
 
-Haystack implements the [OpenTracing](http://opentracing.io/) standard tracing API for collecting trace data. OpenTracing is a vendor-neutral, open standard for distributed tracing. It's designed from the start for tracing in highly concurrent, distributed systems. OpenTracing sets common terminology and a common, [standard tracing API](http://opentracing.io/documentation/pages/api/) across various back-end products, so that you can add or switch tracing implementations with a simple configuration change rather than having to reimplement your client code to use a different proprietary API for each new tracing implementation.
+Haystack implements the [OpenTracing](http://opentracing.io/) standard tracing API for collecting trace data. OpenTracing is a vendor-neutral, open standard for distributed tracing. It's designed from the start for tracing in highly concurrent, distributed systems. OpenTracing sets common terminology and a common, [standard tracing API](http://opentracing.io/documentation/pages/api/) across various back-end products, so that you can add or switch tracing implementations with a simple configuration change rather than having to rewrite your client code to use a different proprietary API for each new tracing implementation.
 
 ## Haystack Agent
 
