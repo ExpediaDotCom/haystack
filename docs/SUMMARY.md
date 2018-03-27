@@ -13,6 +13,7 @@
 * [UI](ui/ui.md)
     * [Traces View](ui/traces.md)
     * [Trends View](ui/trends.md)
+    * [Alerts View](ui/alerts.md)
 * [Clients](clients.md)
 * [Deployment](deployment/deployment.md)
     * [Subsystems](deployment/sub_systems.md)
