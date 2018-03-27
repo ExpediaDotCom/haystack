@@ -1,7 +1,8 @@
 name: Haystack
 markdown: kramdown
-url: http://expediadotcom.github.io/haystack
-baseurl: /haystack
+url: 'http://expediadotcom.github.io/haystack'
+baseurl: ''
+lang: 'en'
 
 encoding: utf-8
 
