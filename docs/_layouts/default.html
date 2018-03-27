@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<div class="book">
+	{% include header.html %}
+
+	<body>
+		<div class="header">
+			{{ page.title }}
+			<!-- <img class="logo" src="/docs/images/ExpediaInc_small.jpg" alt="Expedia logo">
+				<div class="clearfix"></div> -->
+		</div>
+
+		{% include sidebar.html %}
+
+		<div class="container">
+
+			{{ content }} 
+			{% include footer.html %}
+		</div>
+
+	</body>
+</div>
+
+</html>
