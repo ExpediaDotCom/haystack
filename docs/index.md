@@ -3,7 +3,7 @@ layout: title-page
 title: Front Page
 ---
 
-![Haystack Logo](src/images/logo.png)
+![Haystack Logo](./src/images/logo.png)
 
 ## Resilient, scalable enterprise tracing and analysis 
 
