@@ -1,8 +1,8 @@
 variable "kubectl_executable_name" {}
-variable "k8s_minikube_cluster_name" {
+
+variable "kubectl_context_name" {
   default = "minikube"
 }
-
 variable "haystack_cluster_name" {
   default = "haystack"
 }
