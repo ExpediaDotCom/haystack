@@ -1,0 +1,570 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Getting Started · Haystack Documentation</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-forkmegithub/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-disqus/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="architecture.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="getting_started.html">
+            
+                <a href="getting_started.html">
+            
+                    
+                    Getting Started
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="architecture.html">
+            
+                <a href="architecture.html">
+            
+                    
+                    Architecture
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="subsystems/subsystems.html">
+            
+                <a href="subsystems/subsystems.html">
+            
+                    
+                    Subsystems
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="subsystems/traces.html">
+            
+                <a href="subsystems/traces.html">
+            
+                    
+                    Traces
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="subsystems/trends.html">
+            
+                <a href="subsystems/trends.html">
+            
+                    
+                    Trends
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="subsystems/collectors.html">
+            
+                <a href="subsystems/collectors.html">
+            
+                    
+                    Collectors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="subsystems/pipes.html">
+            
+                <a href="subsystems/pipes.html">
+            
+                    
+                    Pipes
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.5" data-path="subsystems/dependencies.html">
+            
+                <a href="subsystems/dependencies.html">
+            
+                    
+                    Dependencies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.6" data-path="subsystems/anomaly_detection.html">
+            
+                <a href="subsystems/anomaly_detection.html">
+            
+                    
+                    Anomaly Detection
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="ui/ui.html">
+            
+                <a href="ui/ui.html">
+            
+                    
+                    UI
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="ui/traces.html">
+            
+                <a href="ui/traces.html">
+            
+                    
+                    Traces View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="ui/trends.html">
+            
+                <a href="ui/trends.html">
+            
+                    
+                    Trends View
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="ui/alerts.html">
+            
+                <a href="ui/alerts.html">
+            
+                    
+                    Alerts View
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="clients.html">
+            
+                <a href="clients.html">
+            
+                    
+                    Clients
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="deployment/deployment.html">
+            
+                <a href="deployment/deployment.html">
+            
+                    
+                    Deployment
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="deployment/sub_systems.html">
+            
+                <a href="deployment/sub_systems.html">
+            
+                    
+                    Subsystems
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="deployment/clients.html">
+            
+                <a href="deployment/clients.html">
+            
+                    
+                    Clients
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="contributing.html">
+            
+                <a href="contributing.html">
+            
+                    
+                    Contributing
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Getting Started</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="getting-started">Getting Started</h1>
+<h3 id="where-are-the-components">Where are the components?</h3>
+<p>All of Haystack&apos;s backend components are released as <a href="https://expediadotcom.github.io/haystack/deployment/sub_systems.html" target="_blank">Docker images</a> on <strong>ExpediaDotCom Docker Hub</strong></p>
+<h3 id="how-to-run-these-components">How to run these components?</h3>
+<p>We have automated deployment of Haystack components using <a href="github.com/jaegertracing/jaeger-kubernetes">Kubernetes</a>. Entire haystack runs locally on minikube(k8s), with a 1 click deployment on the rest of the environments. Deployment scripts are not tied up with minikube(local development),we can use the same script to deploy in production and that is what we use in Expedia</p>
+<h4 id="installation">Installation</h4>
+<p>Clone this repository and run the script, as documented in the next section.</p>
+<h2 id="local-cluster">Local Cluster</h2>
+<p>To get a feel of haystack you can run haystack locally inside minikube.</p>
+<h4 id="pre-requisite">Pre-requisite</h4>
+<p>Install <a href="https://kubernetes.io/docs/tasks/tools/install-minikube/" target="_blank">minikube</a> on your box and make sure it is running <code>minikube start</code>.</p>
+<h4 id="start">Start</h4>
+<p>From the root of the location to which haystack has been cloned:</p>
+<pre><code>cd deployment/terraform
+./apply-compose.sh -a install
+</code></pre><p>this will install required third party software, start the minikube and install all haystack components in dev mode.</p>
+<h4 id="verify">Verify</h4>
+<pre><code> echo &quot;$(minikube ip) haystack.local&quot; | sudo tee -a /etc/hosts
+</code></pre><p>Once you have cname record to minikube, access the haystack ui at </p>
+<pre><code> http://haystack.local:32300
+</code></pre><h4 id="what-components-get-installed-">What components get installed ?</h4>
+<p>The list of components that get installed can be seen at the minikube dashboard inside the haystack-apps namespace 
+To open minikube dashboard type <code>minikube start</code> </p>
+<h4 id="how-to-deploy-haystack-on-aws">How to deploy haystack on AWS?</h4>
+<p>We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws in a single zone at the moment.
+For details, go <a href="https://github.com/ExpediaDotCom/haystack/tree/master/deployment" target="_blank">here</a></p>
+<h3 id="how-to-send-spans">How to send spans?</h3>
+<p>Span is the unit of telemetry data. A span typically represents a service call or a block of code. Lets look at the former for now, it starts from the time client sent a request to the time client received a response along with metadata associated with the service call.</p>
+<h4 id="creating-test-data-in-kafka">Creating test data in kafka</h4>
+<p>fakespans is a simple go app which can generate random spans and push to kafka</p>
+<h4 id="using-fakespans">Using fakespans</h4>
+<p>Run the following commands on your terminal to start using fake spans you should have golang installed on your box</p>
+<pre><code>export $GOPATH=location where you want your go binaries
+export $GOBIN=$GOPATH/bin
+cd fakespans
+go install
+$GOPATH/bin/fakespans
+##fakespans options
+
+./fake_metrics -h
+Usage of fakespans:
+  -interval int
+        period in seconds between spans (default 1)
+  -kafka-broker string
+        kafka TCP address for Span-Proto messages. e.g. localhost:9092 (default &quot;localhost:9092&quot;)
+  -span-count int
+        total number of unique spans you want to generate (default 120)
+  -topic string
+        Kafka Topic (default &quot;spans&quot;)
+  -trace-count int
+        total number of unique traces you want to generate (default 20)
+</code></pre><p>For details, click <a href="https://github.com/ExpediaDotCom/haystack-idl" target="_blank">here</a></p>
+<h3 id="how-to-see-on-ui">How to see on UI?</h3>
+<p>Once you have cname record to minikube, access haystack UI at-</p>
+<pre><code> https://haystack.local:32300
+</code></pre><div class="gitbook-share"></div>
+
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="architecture.html" class="navigation navigation-next " aria-label="Next page: Architecture">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Getting Started","level":"1.2","depth":1,"next":{"title":"Architecture","level":"1.3","depth":1,"path":"architecture.md","ref":"architecture.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["share","edit-link","github","forkmegithub","disqus"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"disqus":{"useIdentifier":false,"shortName":"haystack-2"},"github":{"url":"https://github.com/ExpediaDotCom/haystack"},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"edit-link":{"label":"Edit This Page","base":"https://github.com/ExpediaDotCom/haystack/tree/master/docs"},"forkmegithub":{"color":"darkblue","url":"https://github.com/ExpediaDotCom/haystack"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"share":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"Haystack Documentation","gitbook":"3.2.3"},"file":{"path":"getting_started.md","mtime":"2018-03-27T11:47:14.414Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2018-03-27T11:48:11.878Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-share/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-forkmegithub/plugin.js"></script>
+        
+    
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/URI.js/1.16.1/URI.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-disqus/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
