@@ -5,7 +5,7 @@ title: User Interface
 # Haystack UI
 Haystack-ui is the web UI for haystack. It is the central place for visualizing processed data from various haystack sub-systems. 
 
-<img src="../images/demo.gif" style="width: 800px;"/>
+![Demo](../images/demo.gif)
 
 Visualization tools in haystack-ui include -
 * **Traces** - Distributed tracing visualization for easy root cause analysis 

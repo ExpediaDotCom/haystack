@@ -1,6 +1,7 @@
 name: Haystack
 markdown: kramdown
 
+source: 'docs'
 encoding: utf-8
 
 exclude: ["README.md" ]

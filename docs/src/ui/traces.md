@@ -20,7 +20,7 @@ Here are the available search options -
 ### Search Results
 Trace search results are presented in tabluar format for easy visualization of the data. All the columns are sortable.
 
-<img src="../images/traces.png" style="width: 800px;"/>
+![Traces](../images/traces.png)
 
 Here are details about how each column in search results is calculated -
 - **Start Time** - Start time of the first span in local timezone.
@@ -37,7 +37,7 @@ Here are details about how each column in search results is calculated -
 ### Trace Details
 Waterfall for the trace, it shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
 
-<img src="../images/trace_details.png" style="width: 800px;"/>
+![Traces](../images/trace_details.png)
 
 You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. Also, clicking on `Share Trace` copies a sharable persistent link for the trace.
 
