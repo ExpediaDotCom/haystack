@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Subsystem Deployment
+---
 # Subsystems Deployment
 
 All the Haystack components are released as Docker images on Expedia Docker Hub:

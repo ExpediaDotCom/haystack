@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Deployment
+---
 # Deployment
 Haystack uses terraform to automates deployment of Haystack components using [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes) and [aws](https://aws.amazon.com/). You can use this module to setup haystack cluster on your local(Mac/Linux Machine) or on AWS.
 

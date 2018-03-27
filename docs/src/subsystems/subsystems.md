@@ -1,3 +1,7 @@
+---
+layout: title-page
+title: Subsystems
+---
 # Haystack Subsystems
 
 All our subsystems are included and ready to use. The design, however, is in such a way that makes them replaceable as well. The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/deployment.md), based on

@@ -1,8 +1,12 @@
+---
+layout: title-page
+title: Traces UI
+---
 # Traces 
 
 Visualization for tracing sub-system of Haystack.
 
-## Search  
+### Search  
 User can search for Traces going through a service. Operation can be 'all' or any specific operation from the given service. Time Picker allows presets and time range. 
 Here are the available search options -
 - **Service**: Service through which trace must go through
@@ -30,28 +34,10 @@ Here are details about how each column in search results is calculated -
 - **Total Duration** - Duration of the span. It is the difference between the start time of earliest operation and the end time of last operation in the trace
   
   
-## Trace Details
-
-### Timeline
-The timeline tab is the waterfall view for the trace. It shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
+### Trace Details
+Waterfall for the trace, it shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
 
 <img src="../images/trace_details.png" style="width: 800px;"/>
 
-You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. There is an option to view the raw trace, as well as creating a persistent, sharable link to the trace by clicking on `Share Trace`.
+You can see more details about an individual span like Logs and Tags for that span and raw spans by clicking on the span. Also, clicking on `Share Trace` copies a sharable persistent link for the trace.
 
-### Latency Cost
-
-The Latency Cost tab contains a visualization of the time it took for the trace's spans to move between data centers.
-
-<img src="../images/latency_cost.png" style="width: 800px;"/> 
-
-- Edges represent network calls, edge value is network latency for the call, or average network latency if there were multiple calls between services
-- Red edges represent cross datacenter calls
-- Nodes represent a service (in a datacenter) calls
-- Network delta value are best estimates
-
-Please note that `enableLatencyCostViewer` must be marked as true in config to view this tab.
-
-### Trends
-
-The Trends tab of the Trace Details view provides a high level view of the trends for the operations that make up the trace. Selecting a trend from this list will take you to the trend view for that operation. 
