@@ -1,8 +1,5 @@
 name: Haystack
 markdown: kramdown
-url: ''
-baseurl: '/haystack'
-lang: 'en'
 
 encoding: utf-8
 
