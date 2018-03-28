@@ -1,5 +1,5 @@
 ---
-layout: title-page
+layout: default
 title: Client Deployment
 ---
 # Clients Deployment
