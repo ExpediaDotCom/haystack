@@ -1,5 +1,5 @@
 ---
-layout: title-page
+layout: default
 title: Dependencies
 ---
 # Haystack Dependencies

@@ -5,7 +5,7 @@ title: Front Page
 
 ![Haystack Logo](./src/images/logo.png)
 
-## Resilient, scalable enterprise tracing and analysis 
+## A resilient, scalable enterprise tracing and analysis system 
 
 [Haystack](https://github.com/ExpediaDotCom/haystack) is an Expedia-backed open source project to facilitate detection
 and remediation of problems with enterprise-level web services and websites. It combines an [OpenTracing](http://opentracing.io/documentation/)-compliant trace engine with
