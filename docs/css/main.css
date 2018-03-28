@@ -85,4 +85,4 @@ img { display: block; margin: auto; max-width: 600px; }
 .footer {width: 100%; }
 .footer { border-top: 1px solid #d5d5d5; font-size: 1em;  text-align: center; font-family: 'Helvetica', 'Arial', 'Sans-Serif';  padding: 5px; }
 
-
+.note { border: 1px solid #d5d5d5; background-color: #fff5f5; }
