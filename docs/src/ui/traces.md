@@ -43,7 +43,7 @@ You can see more details about an individual span like Logs and Tags for that sp
 #### Latency Cost
 Latency cost view is a handy tool to analyze how much time a trace is consuming in network and if it there are cross datacenter calls involved. Nodes in this call graph represent a service in a datacenter. Edges represent network calls, edge value is network latency for the call(or average network latency if there were multiple calls between services). Red edges mark cross region network calls.
 
-![Trace Latency](../images/latency.png)
+![Trace Latency](../images/trace_latency.png)
 
 #### Trends
 Trace-Trends view is simply list of all operations involved in a single trace along with their current count, duration & success trends. One quickly compare involved trends and spot if any of these trends have changed recently causing issue with the trace.
