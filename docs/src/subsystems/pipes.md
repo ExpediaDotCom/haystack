@@ -6,7 +6,7 @@ title: Pipes
 
 Packages to send or "pipe" Haystack data to external sinks like AWS Firehose or another Kafka queue.
 
-![High Level Block Diagram](/src/images/haystack_pipes.png)
+![High Level Block Diagram](haystack/src/images/haystack_pipes.png)
 
 The `haystack-pipes` unit delivers a human-friendly version of Haystack messages to zero or more "durable" locations for more permanent storage.
 Current plug-in implementations are:
