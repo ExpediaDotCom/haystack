@@ -6,7 +6,7 @@ title: Contributing
 
 ### Bugs
 
-We use [Github Issues](https://github.com/ExpediaDotCom/haystack-ui/issues) for our bug reporting. Please make sure the bug isn't already listed before opening a new issue.
+We use [Github Issues](https://github.com/ExpediaDotCom/haystack/issues) for our bug reporting. Please make sure the bug isn't already listed before opening a new issue.
 
 ### Development
 
