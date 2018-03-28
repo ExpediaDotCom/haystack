@@ -27,15 +27,15 @@ The traces subsystem comprises of following components:
 
 The 'indexer' groups the spans together in-memory for every traceId with a purpose. Besides storing them in Cassandra and ElasticSearch, they are also published to a different kafka topic that may help solving newer usecases in future with this enriched data.  
 
-The indexer also controls the attributes to be indexed throught a whitelist configuration. The indexer reads the whitelist from external store and applies them dynamically. The goal is to help organizations in protecting and scaling their infrastructure esp. ElasticSearch more proactively. 
+The indexer also controls the attributes to be indexed through a whitelist configuration. The indexer reads the whitelist from an external store and applies them dynamically. The goal is to help organizations in protecting and scaling their infrastructure esp. ElasticSearch more proactively. 
 
 
-- **Reader**: The reader runs as a grpc server and serves Haystack UI to fetch traces directly from Cassandra for a TraceId or use ElasticSearch for contextual searches. For a search, the 'reader' component queries ElasticSearch that responds with a set of TraceIds. It then pulls all spans from Cassandra for every unique TraceId. The reader applies following transformations on the spans associated with a TraceId to build a complete representation.
-     - TraceValidation: Validates if required fields in the span exist, for e.g. serviceName, operationName. Only one span ie root span has ParentMessageId as `null`
-     - Partial Span Merge: Indexer component may miss grouping all spans together for every TraceID in one go and can spit multiple span-groups. This can happen due to an outage or the in-memory cache of indexer forcing an early eviction and many more. This transformer takes care of merging them correctly.
-     - Deduplication: Duplicate span can exist due to kafka at-least once guarantees, hence this transformer removes the duplicates with same SpanID    
-     - ClockSkew: This fixes the clock skew between parent and child span. If any child span reports a startTime earlier then parent span's startTime, corresponding delta gets added in the subtree with child span as root. We are evaluating better strategies to fix the clock skew problem in a distributed system.
+- **Reader**: The reader runs as a grpc server and serves Haystack UI to fetch traces directly from Cassandra for a TraceId or use ElasticSearch for contextual searches. For a search, the 'reader' component queries ElasticSearch that responds with a set of TraceIds. It then pulls all spans from Cassandra for every unique TraceId. The reader applies the following transformations on the spans associated with a TraceId to build a complete representation.
+     - **TraceValidation**: Validates if required fields in the span exist, for e.g. serviceName, operationName. Only one span ie root span has ParentMessageId as `null`
+     - **Partial Span Merge**: Indexer component may miss grouping all spans together for every TraceID in one go and can spit multiple span-groups. This can happen due to an outage or the in-memory cache of indexer forcing an early eviction and many more. This transformer takes care of merging them correctly.
+     - **Deduplication**: Duplicate span can exist due to kafka at-least once guarantees, hence this transformer removes the duplicates with the same SpanID    
+     - **ClockSkew**: This fixes the clock skew between parent and child span. If any child span reports a startTime earlier then the parent span's startTime, then the corresponding delta gets added in the subtree with the child span as root. We are evaluating better strategies to fix the clock skew problem in a distributed system.
      
-The UI finally reads the  stitched view of all the spans and renders it as following for a given TraceID.
+The UI finally reads the  stitched view of all the spans and renders it as follows for a given TraceID:
 
 <img src="../images/trace_details.png" style="width: 800px;"/>
