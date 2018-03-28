@@ -6,21 +6,19 @@ locals {
   logs_cname = "${var.haystack_cluster_name}-logs.${var.haystack_domain_name}"
   k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.haystack_domain_name}"
   monitoring-node_selecter_label = "kubernetes.io/hostname: minikube"
-  app-node_selecter_label = "kubernetes.io/hostname: minikube"
-  default_cpu_limit = "100m"
-  memory_limit_in_mb = "250"
+  app-node_selecter_label  = "kubernetes.io/hostname: minikube"
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
-  kubectl_context_name = "${var.kubectl_context_name}"
+  kubectl_context_name = "${var.k8s_minikube_cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  haystack_cluster_name = "${var.haystack_cluster_name}"
+  haystack_cluster_name = "${var.k8s_minikube_cluster_name}"
   base_domain_name = "${var.haystack_domain_name}"
   traefik_node_port = "${var.reverse_proxy_port}"
   graphite_node_port = "${var.graphite_node_port}"
 
   add_logging_addons = false
-  add_monitoring_addons = "${var.monitoring_addons_enabled}"
+  add_monitoring_addons = false
 
   add_kubewatch_addon = false
   kubewatch_config_yaml_base64 = ""
@@ -38,11 +36,5 @@ module "k8s-addons" {
 module "haystack-infrastructure" {
   source = "../../../modules/haystack-datastores/kubernetes"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
-  k8s_cluster_name = "${var.kubectl_context_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  node_selecter_label = "${local.app-node_selecter_label}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  cpu_limit = "${local.default_cpu_limit}"
-  memory_limit = "${local.memory_limit_in_mb}"
-
+  k8s_cluster_name = "${var.k8s_minikube_cluster_name}"
 }

@@ -13,7 +13,7 @@ variable "traces_reader_instances" {
   default = "1"
 }
 variable "traces_version" {
-  default = "aa62f556c8d28c371a1bdd0b40a6ec115820101a"
+  default = "92219da46ca3e3ee20f99eafe2939d8e7dfb004e"
 }
 
 variable "trace_indexer_environment_overrides" {
@@ -35,21 +35,12 @@ variable "timeseries_aggregator_instances" {
 }
 
 variable "trends_version" {
-  default = "4ddaf49005a4a90baf4abd1637d397dd0dfd552b"
+  default = "df9b59950fb44a8257db1482cc2ae76a3688d12b"
 }
 
 variable "timeseries_aggregator_environment_overrides" {
   default = ""
 }
-
-
-variable "timeseries_aggregator_memory_limit" {
-  default = "250Mi"
-}
-variable "timeseries_aggregator_java_memory_limit" {
-  default = "175m"
-}
-
 variable "span_timeseries_transformer_environment_overrides" {
   default = ""
 }
@@ -68,9 +59,6 @@ variable "pipes_http_poster_enabled" {
 variable "pipes_firehose_writer_enabled" {
   default = false
 }
-variable "pipes_secret_detector_enabled" {
-  default = false
-}
 variable "pipes_json_transformer_instances" {
   default = "1"
 }
@@ -83,9 +71,6 @@ variable "pipes_http_poster_instances" {
 variable "pipes_firehose_writer_instances" {
   default = "1"
 }
-variable "pipes_secret_detector_instances" {
-  default = "1"
-}
 variable "pipes_http_poster_httppost_url" {
   default = ""
 }
@@ -95,38 +80,14 @@ variable "pipes_http_poster_httppost_pollpercent" {
 variable "pipes_firehose_writer_firehose_url" {
   default = ""
 }
-variable "pipes_secret_detector_secretsnotifications_email_from" {
-  default = ""
-}
-variable "pipes_secret_detector_environment_overrides" {
-  default = ""
-}
 variable "pipes_firehose_writer_firehose_streamname" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_host" {
-  default = ""
-}
-variable "firehose_kafka_threadcount" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_subject" {
   default = ""
 }
 variable "pipes_firehose_writer_firehose_signingregion" {
   default = ""
 }
-variable "pipes_secret_detector_secretsnotifications_email_tos" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_initialretrysleep" {
-  default = 10
-}
-variable "pipes_firehose_writer_firehose_maxretrysleep" {
-  default = 5000
-}
 variable "pipes_version" {
-  default = "f48a026554636555fc3cb20ac760e4315857f949"
+  default = "d38d528d88210107c26a173ead045bcc16c632ef"
 }
 
 variable "pipes_firehose_writer_environment_overrides" {
@@ -171,10 +132,7 @@ variable "haystack_ui_instances" {
   default = "1"
 }
 variable "ui_version" {
-  default = "c7be950888aef83fa1709c40a62b9ce68066b85b"
-}
-variable "whitelisted_fields" {
-  default = ""
+  default = "459278787c9979855c653c53d66bd181af8aedaa"
 }
 
 #metrictank

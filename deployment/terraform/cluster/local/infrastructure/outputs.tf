@@ -1,5 +1,5 @@
 output "k8s_cluster_name" {
-  value = "${var.kubectl_context_name}"
+  value = "${var.k8s_minikube_cluster_name}"
 }
 
 output "k8s_app_namespace" {

@@ -21,29 +21,25 @@ Haystack infrastructure consists of the following four components
 To get a feel of haystack you can start haystack locally inside minikube 
 
 
-### Pre-requisite 
+###Pre-requisite 
 1. install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box
-2. Start minikube, optionally increasing its memory and/or CPUs if necessary:
-```
-minikube start --memory 8192 --cpus 4
-```
 
-### Start
+###Start
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -a install-all
+./apply-compose.sh -a install
 ```
 This will install required third party software, start the minikube and install all haystack components in dev mode.
-###### Note : not all logging and monitoring addons are deployed when running locally due to resource constraints in the local minikube cluster.
+###### Note : not all logging and monitoring addons are not deployed when run locally due to resource constraints in the local minikube cluster.
 
-### Verify
+###Verify
 
 #### How to access haystack-ui
 The script sets the 'haystack.local' domain to your minikube ip.
 use the below link access haystack at
 ```
- http://haystack.local:32300
+ https://haystack.local:32300
 ```
 
 Once scripts gets completed run the following command to see all the apps which are deployed
@@ -53,12 +49,12 @@ minikube dashboard
 
 This should open up the kubernetes dashboard and you can find your apps under the haystack-apps namespace.
 
-### Stop
+###Stop
 
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -a uninstall-all
+./apply-compose.sh -a uninstall
 ```
 this will uninstall all haystack components, but will leave minikube running. To bring down minikube:
 
@@ -66,7 +62,7 @@ this will uninstall all haystack components, but will leave minikube running. To
 minikube stop
 ``` 
 
-Taking down minikube before running `./apply-compose.sh -a install-all` may prove helpful if minikube is returning errors
+Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
 during the install process.
 
 
@@ -84,7 +80,7 @@ Here are the list of components we install :
 6. Haystack-Apps inside kubernetes
 
 
-### Pre-requisite 
+###Pre-requisite 
 Haystack-AWS deployment requires you to create the following resources in aws and pass it as a parameter before you can trigger a deploy
 1. AWS VPC
 2. AWS Subnet
@@ -92,7 +88,7 @@ Haystack-AWS deployment requires you to create the following resources in aws an
 4. S3 Bucket
 5. IAM User
 
-### Start
+###Start
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
@@ -100,7 +96,7 @@ cd deployment/terraform
 ```
 We install required third party software, and terraform opens up an interactive console to suggest the components its going to create in AWS
 
-### Verify
+###Verify
 
 #### How to access haystack-ui
 
@@ -133,7 +129,7 @@ kubectl config use-context haystack-k8s.<hosted_domain_name>
 kubectl get deployments --namespace=haystack-apps
 ```
 
-### Stop
+###Stop
 
 From the root of the location to which haystack has been cloned:
 ```

@@ -4,7 +4,7 @@
   "upstreamTimeout": 30000,
   "enableServicePerformance": false,
   "enableServiceLevelTrends": true,
-  "enableLatencyCostViewer": true,
+  "enableLatencyCostViewer": false,
   "graphite": {
     "host": "${graphite_hostname}",
     "port": ${graphite_port}
@@ -14,10 +14,7 @@
       "connectorName": "haystack",
       "haystackHost": "${trace_reader_hostname}",
       "haystackPort": ${trace_reader_service_port},
-      "fieldKeys": [${whitelisted_fields}],
-      "grpcOptions": {
-        "grpc.max_receive_message_length": 52428800
-      }
+      "fieldKeys": [${whitelisted_fields}]
     },
     "trends": {
       "connectorName": "haystack",

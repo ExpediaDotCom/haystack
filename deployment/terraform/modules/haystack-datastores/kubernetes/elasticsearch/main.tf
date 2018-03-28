@@ -2,35 +2,49 @@ locals {
   app_name = "elasticsearch"
   service_port = 9200
   container_port = 9200
-  deployment_yaml_file_path = "${path.module}/templates/deployment-yaml.tpl"
   es_docker_image = "elasticsearch:5-alpine"
 }
-
-data "template_file" "deployment_yaml" {
-  template = "${file("${local.deployment_yaml_file_path}")}"
-  vars {
-    app_name = "${local.app_name}"
+resource "kubernetes_service" "haystack-service" {
+  metadata {
+    name = "${local.app_name}"
     namespace = "${var.namespace}"
-    node_selecter_label = "${var.node_selecter_label}"
-    replicas = "${var.replicas}"
-    image = "${local.es_docker_image}"
-    memory_limit = "${var.memory_limit}"
-    cpu_limit = "${var.cpu_limit}"
-    service_port = "${local.service_port}"
-    container_port = "${local.container_port}"
+  }
+  spec {
+    selector {
+      app = "${kubernetes_replication_controller.haystack-rc.metadata.0.labels.app}"
+    }
+    port {
+      port = "${local.service_port}"
+      target_port = "${local.container_port}"
+    }
   }
 }
 
-resource "null_resource" "kubectl_apply" {
-  triggers {
-    template = "${data.template_file.deployment_yaml.rendered}"
-  }
-  provisioner "local-exec" {
-    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
-  }
 
-  provisioner "local-exec" {
-    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
-    when = "destroy"
+resource "kubernetes_replication_controller" "haystack-rc" {
+  metadata {
+    name = "${local.app_name}"
+    labels {
+      app = "${local.app_name}"
+    }
+    namespace = "${var.namespace}"
+  }
+  "spec" {
+    replicas = "${var.replicas}"
+    template {
+      container {
+        image = "${local.es_docker_image}"
+        name = "${local.app_name}"
+        env {
+          name = "ES_JAVA_OPTS"
+          value = "-Xms256m -Xmx256m"
+        }
+      }
+      termination_grace_period_seconds = "${var.termination_grace_period}"
+    }
+
+    "selector" {
+      app = "${local.app_name}"
+    }
   }
 }

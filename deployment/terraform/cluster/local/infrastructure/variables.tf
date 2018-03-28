@@ -1,8 +1,8 @@
 variable "kubectl_executable_name" {}
-
-variable "kubectl_context_name" {
+variable "k8s_minikube_cluster_name" {
   default = "minikube"
 }
+
 variable "haystack_cluster_name" {
   default = "haystack"
 }
@@ -15,8 +15,4 @@ variable "reverse_proxy_port" {
 
 variable "graphite_node_port" {
   default = "32301"
-}
-
-variable "monitoring_addons_enabled" {
-  default = "false"
 }

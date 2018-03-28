@@ -12,7 +12,7 @@ Install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on 
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -r install-all
+./apply-compose.sh -a install
 ```
 this will install required third party software, start the minikube and install all haystack components in dev mode.
 
@@ -21,13 +21,10 @@ this will install required third party software, start the minikube and install 
 ```
  echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
 ```
-
-Once you have cname record to minikube, access haystack UI at
-
+Once you have cname record to minikube, access traefik dashboard at
 ```
- http://haystack.local:32300
+ https://haystack.local:32300
 ```
-**NOTE**: UI will work only with the name `haystack.local`
 
 Run the following command to see all the kubernetes pods which are deployed -
 ```
@@ -38,14 +35,14 @@ kubectl get pods --namespace=haystack-apps
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -r uninstall-all
+./apply-compose.sh -a uninstall
 ```
 
 this will uninstall all haystack components, but will leave minikube running. To bring down minikube:
 ```
 minikube stop
 ``` 
-Taking down minikube before running `./apply-compose.sh -r install-all` may prove helpful if minikube is returning errors
+Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
 during the install process. If you choose to take down minikube, you should delete the tfstate files by running, from 
 the directory containing apply-compose.sh, the following command:
 ```
@@ -53,7 +50,7 @@ find . -name "*tfstate*" -exec rm {} \;
 ```
 This command removes the files that Terraform uses to [keep track of state.](https://www.terraform.io/docs/state/)
 ## AWS Cluster
-We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws in a single zone at the moment.
+We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws.
 Here are the list of components we install : 
 1. Kubernetes cluster - version 1.8 (using kops)
 2. Apache Cassandra
@@ -75,7 +72,7 @@ Make sure the machine where you are running this script has sufficient permissio
 From the root of the location to which haystack has been cloned:
 ```
 cd deployment/terraform
-./apply-compose.sh -r install-all -c aws
+./apply-compose.sh -a install - c aws
 ```
 We install required third party software, and terraform opens up an interactive console to suggest the components its going to create in AWS
 
@@ -111,7 +108,7 @@ kubectl get pods --namespace=haystack-apps
 Our terraform deployments are declarative. Thus, updation(eg. to deploy a new version of any haystack-app or increase number of instances in kubernetes cluster), uses the same command as create. After making changes in your terraform configs for updating cluster, run: 
 ```
 cd deployment/terraform
-./apply-compose.sh -r install-all -c aws
+./apply-compose.sh -a install - c aws
 ```
 This will apply only the delta on existing cluster, without affect the existing components.
 
@@ -119,6 +116,6 @@ This will apply only the delta on existing cluster, without affect the existing 
 To teardown your AWS cluster, from the root of the location to which haystack has been cloned run:
 ```
 cd deployment/terraform
-./apply-compose.sh -r uninstall-all -c aws
+./apply-compose.sh -a -c aws uninstall
 ```
 this will uninstall all haystack components, along with the infrastructure created in aws

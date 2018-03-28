@@ -1,7 +1,7 @@
 locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
-  default_memory_limit = "250Mi"
+  default_memory_limit = "100Mi"
 }
 
 data "terraform_remote_state" "haystack_inrastructure" {
@@ -34,30 +34,20 @@ module "haystack-apps" {
   pipes_kafka_producer_enabled = "${var.pipes_kafka_producer_enabled}"
   pipes_http_poster_enabled = "${var.pipes_http_poster_enabled}"
   pipes_firehose_writer_enabled = "${var.pipes_firehose_writer_enabled}"
-  pipes_secret_detector_enabled = "${var.pipes_secret_detector_enabled}"
   pipes_json_transformer_instances = "${var.pipes_json_transformer_instances}"
   pipes_kafka_producer_instances = "${var.pipes_kafka_producer_instances}"
   pipes_http_poster_instances = "${var.pipes_http_poster_instances}"
   pipes_http_poster_httppost_url = "${var.pipes_http_poster_httppost_url}"
   pipes_http_poster_httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
   pipes_firehose_writer_instances = "${var.pipes_firehose_writer_instances}"
-  pipes_secret_detector_instances = "${var.pipes_secret_detector_instances}"
   pipes_firehose_writer_firehose_url = "${var.pipes_firehose_writer_firehose_url}"
   pipes_firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
-  firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
   pipes_firehose_writer_firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
-  pipes_firehose_writer_firehose_initialretrysleep = "${var.pipes_firehose_writer_firehose_initialretrysleep}"
-  pipes_firehose_writer_firehose_maxretrysleep = "${var.pipes_firehose_writer_firehose_maxretrysleep}"
   pipes_version = "${var.pipes_version}"
   pipes_kafka_producer_environment_overrides = "${var.pipes_kafka_producer_environment_overrides}"
   pipes_json_transformer_environment_overrides = "${var.pipes_json_transformer_environment_overrides}"
   pipes_firehose_writer_environment_overrides = "${var.pipes_firehose_writer_environment_overrides}"
   pipes_http_poster_environment_overrides = "${var.pipes_http_poster_environment_overrides}"
-  pipes_secret_detector_secretsnotifications_email_from = "${var.pipes_secret_detector_secretsnotifications_email_from}"
-  pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
-  pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
-  pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
-  pipes_secret_detector_environment_overrides = "${var.pipes_secret_detector_environment_overrides}"
 
   #trace configuration_overrides
   traces_enabled = "${var.traces_enabled}"
@@ -74,8 +64,6 @@ module "haystack-apps" {
   timeseries_aggregator_instances = "${var.timeseries_aggregator_instances}"
   timeseries_aggregator_environment_overrides = "${var.timeseries_aggregator_environment_overrides}"
   span_timeseries_transformer_environment_overrides = "${var.span_timeseries_transformer_environment_overrides}"
-  timeseries_aggregator_java_memory_limit = "${var.timeseries_aggregator_java_memory_limit}"
-  timeseries_aggregator_memory_limit = "${var.timeseries_aggregator_memory_limit}"
 
   #collector configuration_overrides
   kinesis_span_collector_instances = "${var.kinesis_span_collector_instances}"
@@ -90,7 +78,6 @@ module "haystack-apps" {
   #ui configuration_overrides
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
-  whitelisted_fields = "${var.whitelisted_fields}"
 
   #metrictank configuration_overrides
   external_metric_tank_kafka_broker_port = "${var.external_metric_tank_kafka_broker_port}"
@@ -100,5 +87,4 @@ module "haystack-apps" {
   metric_tank_instances = "${var.metric_tank_instances}"
   metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
   metrictank_environment_overrides = "${var.metrictank_environment_overrides}"
-
 }

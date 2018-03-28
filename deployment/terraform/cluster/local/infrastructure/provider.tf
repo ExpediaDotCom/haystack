@@ -1,5 +1,5 @@
 provider "null" {}
 provider "template" {}
 provider "kubernetes" {
-  config_context = "${var.kubectl_context_name}"
+  config_context = "${var.k8s_minikube_cluster_name}"
 }

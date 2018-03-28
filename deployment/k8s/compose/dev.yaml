@@ -1,0 +1,227 @@
+# defines the configuration for components and services that are deployed as containers
+deployable_units:
+     - name: zk
+       image: wurstmeister/zookeeper:3.4.6
+       replicas: 1
+       ports:
+          containerPort: 2181
+          servicePort: 2181
+     - name: elasticsearch
+       image: elasticsearch:2.4.6-alpine
+       env:
+         - name: "ES_JAVA_OPTS"
+           value: "-Xms256m -Xmx256m"
+       replicas: 1
+       ports:
+        containerPort: 9200
+        servicePort: 9200
+     - name: cassandra
+       image: cassandra:3.11.0
+       replicas: 1
+       env:
+         - name: "MAX_HEAP_SIZE"
+           value: "256m"
+         - name: "HEAP_NEWSIZE"
+           value: "256m"
+       ports:
+         containerPort: 9042
+         servicePort: 9042
+     - name: kafka-service
+       image: wurstmeister/kafka:0.10.2.1
+       replicas: 1
+       env:
+         - name: "KAFKA_ADVERTISED_HOST_NAME"
+           value: "replace_with_minikube_ip"
+         - name: "KAFKA_ADVERTISED_PORT"
+           value: "9092"
+         - name: "KAFKA_ZOOKEEPER_CONNECT"
+           value: "zk:2181"
+         - name: "KAFKA_CREATE_TOPICS"
+           value: "proto-spans:1:1,metricpoints:1:1,mdm:1:1"
+       ports:
+          containerPort: 9092
+          servicePort: 9092
+          hostPort: 9092
+
+     - name: haystack-trace-indexer
+       image: expediadotcom/haystack-trace-indexer:61d53c1cf8d9a8363ab08d73d6815bb6acf1a982
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/trace-indexer.conf
+         mountPath: /configs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/trace-indexer.conf
+       livenessProbe: 
+        exec: 
+         command: 
+         - grep
+         - "true"
+         - /app/isHealthy
+        initialDelaySeconds: 30
+        periodSeconds: 5
+        failureThreshold: 1
+
+     - name: haystack-pipes-json-transformer
+       image: expediadotcom/haystack-pipes-json-transformer:eecefedeb7c07349636d3556a8f7502d6f40e24c
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafka-service
+        - name: HAYSTACK_GRAPHITE_HOST
+          value: monitoring-influxdb-graphite.kube-system.svc
+
+     - name: haystack-pipes-kafka-producer
+       image: expediadotcom/haystack-pipes-kafka-producer:eecefedeb7c07349636d3556a8f7502d6f40e24c
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafka-service
+        - name: HAYSTACK_GRAPHITE_HOST
+          value: monitoring-influxdb-graphite.kube-system.svc
+        - name: HAYSTACK_EXTERNALKAFKA_BROKERS
+          value: kafka-service
+
+     - name: haystack-pipes-http-poster
+       image: expediadotcom/haystack-pipes-http-poster:eecefedeb7c07349636d3556a8f7502d6f40e24c
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       env:
+        - name: HAYSTACK_KAFKA_BROKERS
+          value: kafka-service
+        - name: HAYSTACK_GRAPHITE_HOST
+          value: monitoring-influxdb-graphite.kube-system.svc
+
+     - name: haystack-trace-reader
+       image: expediadotcom/haystack-trace-reader:61d53c1cf8d9a8363ab08d73d6815bb6acf1a982
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/trace-reader.conf
+         mountPath: /configs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/trace-reader.conf
+       ports:
+        containerPort: 8088
+        servicePort: 8088
+
+     - name: haystack-span-timeseries-transformer
+       image: expediadotcom/haystack-span-timeseries-transformer:6d320e806e63a2809b71a5c3e86c535a842789a4
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       autoscale:
+         maxReplicas: 1
+         targetCPUUtilizationPercentage: 75
+       env:
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_NUM_STREAM_THREADS
+           value: "1"
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+           value: kafka-service
+       livenessProbe:
+         exec:
+          command:
+          - "grep"
+          - "true"
+          - "/app/isHealthy"
+         initialDelaySeconds: 15
+         periodSeconds: 5
+         failureThreshold: 2
+
+     - name:  haystack-timeseries-aggregator
+       image: expediadotcom/haystack-timeseries-aggregator:6d320e806e63a2809b71a5c3e86c535a842789a4
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       autoscale:
+         maxReplicas: 2
+         targetCPUUtilizationPercentage: 75
+       env:
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_NUM_STREAM_THREADS
+           value: "1"
+         - name: HAYSTACK_PROP_KAFKA_STREAMS_BOOTSTRAP_SERVERS
+           value: kafka-service
+       initCommand: "sleep 30"
+
+     - name: metrictank
+       image: raintank/metrictank:latest
+       replicas: 1
+       ports:
+         containerPort: 6060
+         servicePort: 6060
+         hostPort: 6060
+       env:
+        - name: MT_HTTP_MULTI_TENANT
+          value: "false"
+        - name: MT_CARBON_IN_ENABLED
+          value: "false"
+        - name: MT_CASSANDRA_ADDRS
+          value: cassandra:9042
+        - name: MT_KAFKA_MDM_IN_BROKERS
+          value: "kafka-service:9092"
+        - name: MT_KAFKA_MDM_IN_ENABLED
+          value: "true"
+        - name: MT_CASSANDRA_IDX_HOSTS
+          value: cassandra:9042
+        - name: MT_HTTP_MULTI_TENANT
+          value: "false"
+        - name: MT_STATS_ADDR
+          value: monitoring-influxdb-graphite.kube-system.svc:2003
+
+     - name: haystack-ui
+       image: expediadotcom/haystack-ui:581338e50631ce327bcb9db0ab07484d6b0338ec
+       replicas: 1
+       terminationGracePeriodSeconds: 30
+       volumes:
+        appConfig:
+         path: configs/dev/haystack-ui.json
+         mountPath: /configs
+       env:
+        - name: HAYSTACK_OVERRIDES_CONFIG_PATH
+          value: /configs/haystack-ui.json
+       ports:
+         containerPort: 8080
+         servicePort: 8080
+
+secrets:
+   - path: secrets/ssl-certs.yaml
+     params:
+      name: haystack-default-certs
+      cert: "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM0akNDQWNvQ0NRQ0xNeitZZU4rdTJEQU5CZ2txaGtpRzl3MEJBUXNGQURBek1Rc3dDUVlEVlFRR0V3SlYKVXpFVE1CRUdBMVVFQ0JNS1EyRnNhV1p2Y201cFlURVBNQTBHQTFVRUNoTUdUWGxJYjIxbE1CNFhEVEUzTURrdwpNekl3TURJME9Wb1hEVEU0TURrd016SXdNREkwT1Zvd016RUxNQWtHQTFVRUJoTUNWVk14RXpBUkJnTlZCQWdUCkNrTmhiR2xtYjNKdWFXRXhEekFOQmdOVkJBb1RCazE1U0c5dFpUQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQUQKZ2dFUEFEQ0NBUW9DZ2dFQkFLb2RRVjI4blNxZ1pLSFh2SFhpV1krNkN0UkNPY1dBRGxvV1ZDUFltcDZZZ1FwUgpjcE05bW1BbjVZWGpZb21RMG5PR0s4MUFvdXBEQkZZN0c2WHc4RENqNEpBUlFvajdmZDlhZFVkeXhudnlnRHZCCmxBQzlDMkR2T2JhYjlTWlB5d3RsVkN1SXhvVytib01oSGlqckcvMDJhRll1bERiVXZ4UVkzNWZBdk5VbFd0TXYKVGlMMUlpTWN3YS9OU21GMC9qNlpHVXExWTMvUi94dUV4TFJXTVN3MkQrOGYzaXFHS1BMdUtGbmMzQTh3OFdKbgpOcHdDRHBPUVRDdURKUmQ3U3F2RloreXNEcmdxQlNPbHlaNjZOc3RNUzkvVTBzT3V3ZzNBYktXOE5KQkI2MnBhCmJlMXBlOXpEQVJOVWlheXU4K0U0cHptRTV1QlA0U2xxRDlMSlZwc0NBd0VBQVRBTkJna3Foa2lHOXcwQkFRc0YKQUFPQ0FRRUFab1Fsc2pGYTRvczdwYnRXNVFoa2xyQ2hpekIxd1E2MDRKeERpTmRKYmthN1VqK3E3djIzZXROQQpjbU9ORFk4U0VvSUc0ZDlkekJ1N0JuNG1BVVpacFJDelZBbFFUdHd0MU8yL1c3QVowRytrTUVHemZiWHkyVzBiCjVXYnJRNDlyNy9URVBYNDVndzdLTzlZODNqR1A2dTc2Y0pwOVV2bWZyWEtsb1Z0M0hOckR2UmtaVDExK252SWkKUDE1R2d2eHNJZ2FGVERyWlVoaHNhZkVFQTdTWmp3QkYzOGVORyt3Tlhia2xrbk1sNWp0UmdwM1BlY0VtWGJVbApnT21DanNtT2l0MXNhSm9JV3J4N1d3bGpHcitrWnpvYktVbHd0RklXbUhHZUxSa3RMcHA1VlFIbTBodEZUaWtQCnlYZnY0dUxHTkRXZnJtaHZYcVNqZFliR1dtR0kwdz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+      key: "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBcWgxQlhieWRLcUJrb2RlOGRlSlpqN29LMUVJNXhZQU9XaFpVSTlpYW5waUJDbEZ5Cmt6MmFZQ2ZsaGVOaWlaRFNjNFlyelVDaTZrTUVWanNicGZEd01LUGdrQkZDaVB0OTMxcDFSM0xHZS9LQU84R1UKQUwwTFlPODV0cHYxSmsvTEMyVlVLNGpHaGI1dWd5RWVLT3NiL1Rab1ZpNlVOdFMvRkJqZmw4QzgxU1ZhMHk5TwpJdlVpSXh6QnI4MUtZWFQrUHBrWlNyVmpmOUgvRzRURXRGWXhMRFlQN3gvZUtvWW84dTRvV2R6Y0R6RHhZbWMyCm5BSU9rNUJNSzRNbEYzdEtxOFZuN0t3T3VDb0ZJNlhKbnJvMnkweEwzOVRTdzY3Q0RjQnNwYncwa0VIcmFscHQKN1dsNzNNTUJFMVNKcks3ejRUaW5PWVRtNEUvaEtXb1Awc2xXbXdJREFRQUJBb0lCQUNSSkJ6ZFNVd2ZUbklOMAorK3I5TS9OWFVKWUQ1a1M5VXRKZWJ1WVNmckNUZ1ByTmNxMzdkdUZKd1VoMHZ3RHUxaVQwR29XMllzbXJMOUtnCjJ2M2pUYWhpWERUK3FYMkVmMDNVQXE0UnlrcUg2RmhXcXhZWlBNTVpZK3NTaXhEMzlpeGhHYm9MZTZUdGdLOFIKc2xneUJnOVZ1cDJmWTlmcU96T3pOb1l0QTFwSE8zTEltU1Ryc0QyY1JJbk5STDIwejhjM09EUTI4NVkveW9xVAp2RDVNQ2JHZjcwNDJUbjRRWUJHeHl2cTJiZUlvdDdvcDBnZEc5K1UrcDZPaVJUbVhGOVMyTk1ZTXFTeGpDaTJlCmdXZS9MMlhRTXlCSGVlaFdwU1A2Y0N1MlV3aEcxd01sSGMvUGNJUkUwMnVYSWFUekJqdkE1WHdYV2NtTzUvUHMKTjJpaHVCa0NnWUVBMVhzTGxIeThuWlR6dDRyVkpKZEVCV2NCQ1l6NlA3RGJ4eWZVMzVzUGhTUzNCMkp0SU9CYgptQjZuYjZEOStJNWNUVGlmdWRxRXV4QnFxSHF2QnRSbmJrOFVWaU1pOXB0ZWxXalhYd2lYUTBTR05XUTc4VElhClloTURtWW9tTUF0MC9sQWZmamdIbWJjYThqMElranpuM0tkSEFVeFpPVHNPWDlsTnBkRFZwMDBDZ1lFQXkvOEwKaU9pTjMySWJtRk9paGdhcmJHWFowUUt5RkJlUkQzUm54K2dzV3lvWXZMcjI0MS9WVEEvYUFJNDJOcDJ6RTBWKwowUzJFNHVzL1ZiNmFETGgxa24yQ0d3ZmRtdjcxWm1DL2REdWZPTTRseXl1VGE1M3BuVEJpZHZQNzNLaURkM29tCi9uMFZRVW9YNjZzTW1VQWRVdnlBTmtDOGw3NmdFS2RDcFYwS0VZY0NnWUFkZVJkb01MQjVzUTdVMEQ0TkJ6VkUKNmF1aS9ldXV6MlFJWXQ5bzM2ZU00anpDc0R3UXhlamZYNXdPTlZQYTlReVpQTEFRb0xLaWdPbTR5UGRSSWhJRgprTFZtRHdQTXVEYWV1aExCOUJXdUc4L0xuME1IVWJ1Q3ZzMUliV0pJVDh5Zkw4Q3BWR0w0UGVkaWVqcXN0ZXZzCjhzdEN5cCttM3hoazgwTmRHUy9tSVFLQmdDOS81NU90Y3J0OUFLZnJjWUI3dFJhOGNJZDJkVGl3ZEJxQkpGa3IKK29nUHVVcll6ZndMcUlMWmZnMTdENnlQODg2YzgvYUkvdFJIcXF1d2dmWk1UVFFhL1Z5RjdGZlczaFZFbWMvYQp3aXhiOC9qbTRLRENXRTg5b08vSngrK05YVzlJaGlQanhEczdvVzVDbWVCbFNXNjFWTFZOUlp5ZnltMldSTEowCmc0K3BBb0dBWVA2c1dINnM0ckhMVFd2Rm0wTTFwSENHNmdlTmVkellncklIZTNVQ2xCU1BJazNNY2JJb0VEenYKMXQ2NmNEM01oeEZhbURrZzNrS1hmNWdsRVdMWGJnNE4vd0tXYWIxcXNDOG9vTTA1Z2N2c0NFdDhXdE9YVm5hUwp3ZStPcVhSUHdUTkM3WEkwSXJkQXMrZTZiN2kzN2VtRFBLRHdlQUdLanlmNjRGTWZsWjg9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg=="
+
+cluster:
+  addons:
+   - path: addons/1.6/monitoring/influxdb.yaml
+     params:
+       image: gcr.io/google_containers/heapster-influxdb-amd64:v1.1.1
+       storage: 100Mi
+       storageClass: standard
+       hostAdminPort: 8083 # opens up admin on port 8083 locally
+       hostHttpPort: 8086 # can access influxdb locally http://$(minikube ip):8086
+       hostGraphitePort: 2003 # this helps to test locally if graphite port is working good for influxdb
+   - path: addons/1.6/monitoring/grafana.yaml
+     params:
+       image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.1
+       rootUrl: "http://haystack.local/grafana"
+       storage: 50Mi
+       storageClass: standard
+   - path: addons/1.6/monitoring/heapster.yaml
+     params:
+       image: gcr.io/google_containers/heapster-amd64:v1.4.0
+   - path: addons/traefik/traefik.yaml
+     params:
+       name: traefik-ingress-controller
+       image: traefik:v1.3.7
+       ssl:
+        enabled: true
+        certsSecretName: haystack-default-certs # points to the name of secret to be used
+       replicas: 1
+       hostName: haystack.local # echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+       haystackUiCname: haystack.local
+       nodePort: 32300
+

@@ -8,12 +8,12 @@ data:
 
     [haystack_metrics]
     pattern = ^([a-z\-]+)\.([^.]+)\.haystack.*
-    retentions = 1m:1d:1sec:1,5m:7d:1sec:1,15m:30d:1sec:1,1h:1y:1sec:1
+    retentions = 1m:1d,5m:7d,15m:30d,1h:1y
     reorderBuffer = 20
 
     [default]
     pattern = .*
-    retentions = 1m:1d:1sec:1,5m:7d:1sec:1,15m:30d:1sec:1,1h:1y:1sec:1
+    retentions = 1m:1d,5m:7d,15m:30d,1h:1y
     reorderBuffer = 20
 ---
 # ------------------- Deployment ------------------- #
@@ -58,16 +58,10 @@ spec:
           value: "${kafka_address}"
         - name: "MT_CASSANDRA_IDX_HOSTS"
           value: "${cassandra_address}"
-        - name: "MT_CASSANDRA_IDX_TIMEOUT"
-          value: "100s"
-        - name: "MT_CASSANDRA_WRITE_QUEUE_SIZE"
-          value: "50"
         - name: "MT_STATS_ADDR"
           value: "${graphite_address}"
-        - name: "MT_RETENTION_SCHEMAS_FILE"
+        - name: "MT_SCHEMAS-FILE"
           value: "/etc/metrictank/storage-config/haystack-metric-schemas.conf"
-        - name: "MT_CHUNK_CACHE_MAX_SIZE"
-          value: "536870912"
         ${env_vars}
         volumeMounts:
           # Create on-disk volume to store exec logs

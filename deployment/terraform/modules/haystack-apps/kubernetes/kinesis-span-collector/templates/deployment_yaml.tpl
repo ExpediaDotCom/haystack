@@ -38,16 +38,7 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
-        ${env_vars}
-        livenessProbe:
-          exec:
-            command:
-            - grep
-            - "true"
-            - /app/isHealthy
-          initialDelaySeconds: 30
-          periodSeconds: 5
-          failureThreshold: 1
+        ${env_vars}  
       nodeSelector:
         ${node_selecter_label}
       volumes:
