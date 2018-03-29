@@ -65,8 +65,3 @@ If you are using Kinesis, then in addition to the configuration file entries abo
 
 Kinesis dispatcher can be configured with other [KPL properties](https://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer-sample/default_config.properties) in addition to `Region` by including them in the same part of the config file where `Region` is set.
 
-## Metrics
-Coming soon.
-
-## Integration
-Content is coming.
