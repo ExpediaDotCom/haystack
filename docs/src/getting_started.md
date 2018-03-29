@@ -20,7 +20,11 @@ To do so, clone this repository and run the script, as described below.
 
 ## Install pre-requisites
 
-Before you install the Haystack Docker images, you must first install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Make sure that Minikube is running, using `minikube start`.
+1. install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box
+2. Start minikube, optionally increasing its memory and/or CPUs if necessary:
+```
+minikube start --memory 4096 --cpus 2
+```
 
 ## Install the software
 
@@ -28,7 +32,7 @@ From the root of the location to which haystack has been cloned:
 
 ```bash
 cd deployment/terraform
-./apply-compose.sh -a install
+./apply-compose.sh -r install-all
 ```
 
 this will install required third party software, start the minikube and install all haystack components in dev mode.
@@ -46,11 +50,25 @@ Once the CName record for the minikube appears in `/etc/hosts`, you can access t
 The list of components that were installed can be seen in the minikube dashboard, inside the `haystack-apps` namespace.
 To open the minikube dashboard type `minikube start`.
 
-# To deploy Haystack on AWS
 
-We support out-of-the-box deployment in AWS for Haystack. The script uses Terraform to create a Kubernetes cluster and the rest of the dependent infrastructure for Haystack in AWS in a single zone.
-For details about deploying on AWS, see the [haystack-deployment project](https://github.com/ExpediaDotCom/haystack/tree/master/deployment).
 
+## Uninstall the software
+From the root of the location to which haystack has been cloned:
+```
+cd deployment/terraform
+./apply-compose.sh -a uninstall
+```
+
+this will uninstall all haystack components, but will leave minikube running. To bring down minikube:
+```
+minikube stop
+``` 
+Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
+during the install process. If you choose to take down minikube, you should delete the tfstate files by running, from 
+the directory containing apply-compose.sh, the following command:
+```
+find . -name "*tfstate*" -exec rm {} \;
+```
 # How to send spans
 
 A *span* is one unit of telemetry data. A span typically represents a service call or a block of code.

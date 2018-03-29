@@ -40,7 +40,7 @@ The time series metric points are [MetricTank](https://github.com/grafana/metric
  1. Trends - Other than the four default trends more trends can be computed by adding a [transformer](https://github.com/ExpediaDotCom/haystack-trends/tree/master/span-timeseries-transformer/src/main/scala/com/expedia/www/haystack/metricpoints/transformer)
 to create the metric point and adding an [aggregation-rule](https://github.com/ExpediaDotCom/haystack-trends/tree/master/timeseries-aggregator/src/main/scala/com/expedia/www/haystack/metricpoints/aggregation/rules) for it. 
 
- 2. TimeSeries Database - Haystack supports MetricTank as its time series store by default. If you use another time series database, you can write another [adapter](https://github.com/ExpediaDotCom/haystack-trends/blob/master/commons/src/main/scala/com/expedia/www/haystack/trends/commons/serde/metricpoint/MetricTankSerde.scala) for that database, and configure Trends to use it.
+ 2. TimeSeries Database - Haystack supports MetricTank as its time series store by default. If you use another time series database, you can write another [adapter](https://github.com/ExpediaDotCom/haystack-commons/blob/master/src/main/scala/com/expedia/www/haystack/commons/serde/metricpoint/MetricTankSerde.scala) for that database, and configure Trends to use it.
 
 
 
