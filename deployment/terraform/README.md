@@ -4,9 +4,8 @@ This is a deployment module which uses terraform to automates deployment of Hays
 We currently support for deployment of haystack on a local sandbox and aws
 
 ## Local Cluster
-To get a feel of haystack you can run haystack locally inside minikube. please refer to the getting started guide [here](https://expediadotcom.github.io/haystack/src/getting_started.html)
+To get a feel of haystack you can run haystack locally inside minikube. For details on local deployment refer to the getting started guide [here](https://expediadotcom.github.io/haystack/src/getting_started.html)
 
 
 ## AWS Cluster
-
-We support out of the box deployment in aws for haystack. Refer to the following [wiki](./docs/aws-deployment.md) for the details on deploying haystack on aws
+We support out of the box deployment in aws for haystack. For the details on deploying haystack on aws Refer to the following [wiki](./docs/aws-deployment.md) f
