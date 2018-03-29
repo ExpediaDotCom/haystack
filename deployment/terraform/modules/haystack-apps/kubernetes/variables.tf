@@ -35,34 +35,35 @@ variable "timeseries_aggregator_java_memory_limit" {}
 
 
 # pipes config
-variable "pipes_json_transformer_enabled" {}
-variable "pipes_kafka_producer_enabled" {}
-variable "pipes_http_poster_enabled" {}
-variable "pipes_firehose_writer_enabled" {}
-variable "pipes_secret_detector_enabled" {}
-variable "pipes_json_transformer_instances" {}
-variable "pipes_kafka_producer_instances" {}
-variable "pipes_http_poster_instances" {}
-variable "pipes_http_poster_httppost_url" {}
-variable "pipes_http_poster_httppost_pollpercent" {}
-variable "pipes_firehose_writer_instances" {}
-variable "pipes_secret_detector_instances" {}
-variable "pipes_firehose_writer_firehose_url" {}
-variable "pipes_firehose_writer_firehose_streamname" {}
 variable "firehose_kafka_threadcount" {}
-variable "pipes_firehose_writer_firehose_signingregion" {}
+variable "pipes_firehose_writer_enabled" {}
+variable "pipes_firehose_writer_environment_overrides" {}
 variable "pipes_firehose_writer_firehose_initialretrysleep" {}
 variable "pipes_firehose_writer_firehose_maxretrysleep" {}
-variable "pipes_version" {}
-variable "pipes_firehose_writer_environment_overrides" {}
+variable "pipes_firehose_writer_firehose_signingregion" {}
+variable "pipes_firehose_writer_firehose_streamname" {}
+variable "pipes_firehose_writer_firehose_url" {}
+variable "pipes_firehose_writer_instances" {}
+variable "pipes_http_poster_enabled" {}
 variable "pipes_http_poster_environment_overrides" {}
-variable "pipes_kafka_producer_environment_overrides" {}
+variable "pipes_http_poster_httppost_pollpercent" {}
+variable "pipes_http_poster_httppost_url" {}
+variable "pipes_http_poster_instances" {}
+variable "pipes_json_transformer_enabled" {}
 variable "pipes_json_transformer_environment_overrides" {}
+variable "pipes_json_transformer_instances" {}
+variable "pipes_kafka_producer_enabled" {}
+variable "pipes_kafka_producer_environment_overrides" {}
+variable "pipes_kafka_producer_instances" {}
+variable "pipes_secret_detector_enabled" {}
+variable "pipes_secret_detector_environment_overrides" {}
+variable "pipes_secret_detector_instances" {}
 variable "pipes_secret_detector_secretsnotifications_email_from" {}
-variable "pipes_secret_detector_secretsnotifications_email_tos" {}
 variable "pipes_secret_detector_secretsnotifications_email_host" {}
 variable "pipes_secret_detector_secretsnotifications_email_subject" {}
-variable "pipes_secret_detector_environment_overrides" {}
+variable "pipes_secret_detector_secretsnotifications_email_tos" {}
+variable "pipes_secret_detector_secretsnotifications_ignores_ips_servicenames" {}
+variable "pipes_version" {}
 
 
 # collectors config
