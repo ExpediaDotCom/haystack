@@ -2,9 +2,11 @@
 layout: default
 title: Subsystems
 ---
-# Haystack Subsystems
+# Subsystems
 
-All our subsystems are included and ready to use. The design, however, is in such a way that makes them replaceable as well. The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/deployment.md), based on
+All our subsystems are included and ready to use. 
+The system is designed in such a way that subsystems are replaceable as well, if you have requirements that the current components don't meet. 
+The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/deployment.md) based on
 [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes), that deploys a working development environment with working
 implementations of all of the services in the block diagram above. This same mechanism, with different configurations,
 deploys to test and production environments as well. See the collection of scripts, CloudFormation templates, and YAML
@@ -20,14 +22,14 @@ each other via this message bus.
 Traces is a subsystem included in Haystack that provides a distributed tracing system to troubleshoot the problems in microservice architectures. Its design is based on the [Google Dapper](https://research.google.com/pubs/pub36356.html) paper. The Spans module writes Span objects into a persistent store. That persistent store consists of two pieces: the Span data is stored in Cassandra, and the Span metadata is stored in ElasticSearch. Sampling, with the ability to force storing a particular Span, will be available (under configuration) to keep the size of the Cassandra and ElasticSearch stores reasonable, given the large volume of Span objects in a production system.
 
 #### Trends
-The trends subsystem is responsible for reading the spans and generating the vital service health trends. Haystack collects all the data from the various services and creates the distributed call graph and depicts the time taken by that call across various services. This information can be hard to make sense of unless we have a trend to compare this against. The Trends module stores its data in a Metric Tank, which stores Time Series metrics.
+The trends subsystem is responsible for reading span data and computing service health trends. Haystack collects all the data from the various services, creates the distributed call graph, and depicts the time taken by that call across various services. This information can be hard to make sense of unless we have a trend to compare this against. The Trends module stores its data in a Metric Tank, which stores Time Series metrics.
 
 #### Collector
-Collector is a subsystem included in Haystack that ingests the spans from other data sources. Its purpose is to make it easy to integrate existing data streams of spans with Haystack. The idea of collectors is to simplify the integration of such existing data ecosystems with Haystack.
+Collector is a subsystem included in Haystack that ingests span data from data sources outside Haystack. Its purpose is to make it easy to integrate your existing streams of span data into Haystack.
 
 #### Pipes
 The Pipes module delivers a human-friendly JSON version of Haystack spans to zero or more "durable" locations for more
-permanent storage. The haystack-pipes module is used to send data to an external source. In our case, we will be sending our data into Athena, which will enable users to create tables to run map reduce and run reports. As part of our implementation, we provide a connector which transforms data into a JSON format to send to internal tools like Doppler.
+permanent storage. The `haystack-pipes` module is used to send data to an external source. In our case, we will be sending our data into Athena, which will enable users to create tables to run map reduce and run reports. As part of our implementation, we provide a connector which transforms data into a JSON format that we use to send data to our proprietary analysis tools, so that you can do the same with your own tools.
 
 #### Dependencies
 The Dependencies module uses the parent/child relationships of Span objects to create dependency graphs for each

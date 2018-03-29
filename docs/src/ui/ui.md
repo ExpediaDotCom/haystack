@@ -2,8 +2,8 @@
 layout: default
 title: User Interface
 ---
-# Haystack UI
-Haystack-ui is the web UI for haystack. It is the central place for visualizing processed data from various haystack sub-systems. 
+#  UI
+The `haystack-ui` project is the web UI for haystack. It is the central place for visualizing processed data from various haystack sub-systems. 
 
 ![Demo](../images/demo.gif)
 
@@ -13,12 +13,10 @@ Visualization tools in haystack-ui include -
 * **Service Dependency** [coming soon] - Real time dependency graph with health and connectivity indicators 
 * **Alerts and Anomaly Detection** [coming soon] - UI for configuring and subscribing alerts 
 
-Haystack-ui's navigation is pivoted around services. On selecting a service, you will get various visualizations tools each corresponding to a haystack sub-systems. Next sections provide list of major tools/pages available in Haystack UI.
+Navigation in `haystack-ui` is pivoted around services. On selecting a service, you will get various visualizations tools each corresponding to a haystack sub-system. 
 
 
 ## Code, Deployment and Configuration
 Refer the source repo - [https://github.com/ExpediaDotCom/haystack-ui](https://github.com/ExpediaDotCom/haystack-ui)
 
 
-## Architecture
-[TODO]
