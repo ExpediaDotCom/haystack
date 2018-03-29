@@ -8,4 +8,4 @@ To get a feel of haystack you can run haystack locally inside minikube. For deta
 
 
 ## AWS Cluster
-We support out of the box deployment in aws for haystack. For the details on deploying haystack on aws Refer to the following [wiki](./docs/aws-deployment.md) f
+We support out of the box deployment in aws for haystack. For the details on deploying haystack on aws Refer to the following [wiki](https://expediadotcom.github.io/haystack/src/deployment/deployment.html)
