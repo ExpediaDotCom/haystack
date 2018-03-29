@@ -67,13 +67,11 @@ Kinesis dispatcher can be configured with other [KPL properties](https://github.
 
 ## Metrics
 
-The client has a stand-alone metrics interface, that is based on [micrometer][micrometer]'s api.  Supplied with the base library, is a `NoopMetricsRegistry` that collects nothing as expected.
+The client has a stand-alone metrics interface that is based on [Micrometer's API][micrometer].  We supply a `NoopMetricsRegistry` with the base library that collects nothing.
 
-There is an optional integration for micrometer's registry, `GlobalMetricsRegistry` and `MicrometerMetricsRegistry`.  Depending on your project's needs you can using the `Metrics.globalRegistry` from micrometer or supply your own custom registry instance, respectively.
+There is an optional integration for Micrometer's registry, `GlobalMetricsRegistry` and `MicrometerMetricsRegistry`.  Depending on your project's needs you can use the `Metrics.globalRegistry` from Micrometer or supply your own custom registry instance, respectively.
 
-There isn't yet an extension, but dropwizard registries are supported.  You can see how those are currently being used in the dropwizard integration and example within this project.
+There isn't yet an extension, but Dropwizard registries are supported.  You can see how those are currently being used in the Dropwizard integration and example within this project.
 
 [micrometer]: http://micrometer.io/
 
-## Integration
-Content is coming.

@@ -9,88 +9,84 @@ If you need to package the components yourself, fat jars are available from the 
 Haystack is designed so that all of its components can be deployed selectively. 
 
 We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes).
-The entire Haystack server runs locally on minikube (k8s), and with a 1 click deployment on the rest of the environments.
-The deployment scripts are not tied up with minikube for local development.
-We can use the same script to deploy in production and that is what we use in Expedia
+The entire Haystack server runs locally on Minikube (k8s), and with a 1 click deployment on other environments.
+The deployment scripts are not tied up with Minikube for local development.
+You can use the same script to deploy in production (and that is how we deploy at Expedia.)
 
-# To install the local server
+## To install the local server
 
-To get a feel of haystack you can run haystack locally inside minikube.
-To do so, clone this repository and run the script, as described below.
+To get a feel of Haystack you can run Haystack locally inside Minikube.
+To do so, clone the `ExpediaDotCom/haystack` repository and run the installer script, as described below.
 
-## Install pre-requisites
+### Install pre-requisites
 
-1. install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box
-2. Start minikube, optionally increasing its memory and/or CPUs if necessary:
-```
+1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
+2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
+```shell
 minikube start --memory 4096 --cpus 2
 ```
 
-## Install the software
+### Install the software
 
-From the root of the location to which haystack has been cloned:
-
-```bash
+From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
+```shell
 cd deployment/terraform
 ./apply-compose.sh -r install-all
 ```
+This will install required third party software, then start the Minikube and install all Haystack components in dev mode.
 
-this will install required third party software, start the minikube and install all haystack components in dev mode.
+Run the following command to verify that a CName record has been created for your Minikube server:
 
-Run the following command to verify that a CName record has been created for your minikube server:
-
-```bash
+```shell
  echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
 ```
+Once the CName record for the Minikube appears in `/etc/hosts`, you can access the Haystack ui at `http://haystack.local:32300`.
 
-Once the CName record for the minikube appears in `/etc/hosts`, you can access the haystack ui at `http://haystack.local:32300`.
+### Installed components list
 
-## Installed components list
+The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
+To open the Minikube dashboard type `minikube start`.
 
-The list of components that were installed can be seen in the minikube dashboard, inside the `haystack-apps` namespace.
-To open the minikube dashboard type `minikube start`.
-
-
-
-## Uninstall the software
-From the root of the location to which haystack has been cloned:
-```
+### Uninstall the software
+From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
+```shell
 cd deployment/terraform
 ./apply-compose.sh -a uninstall
 ```
 
-this will uninstall all haystack components, but will leave minikube running. To bring down minikube:
-```
+this will uninstall all Haystack components, but will leave Minikube running. To bring down Minikube:
+```shell
 minikube stop
 ``` 
-Taking down minikube before running `./apply-compose.sh -a install` may prove helpful if minikube is returning errors
-during the install process. If you choose to take down minikube, you should delete the tfstate files by running, from 
+Taking down Minikube before running `./apply-compose.sh -a install` may prove helpful if Minikube is returning errors
+during the install process. If you choose to take down Minikube, you should delete the tfstate files by running, from 
 the directory containing apply-compose.sh, the following command:
-```
+```shell
 find . -name "*tfstate*" -exec rm {} \;
 ```
-# How to send spans
+## How to send spans
 
 A *span* is one unit of telemetry data. A span typically represents a service call or a block of code.
 A span for a service call starts from the time a client sends a request, ends at the time that the client receives a response, and includes metadata associated with the service call.
 
-## Creating test data in kafka
+### Creating test data in kafka with fakespans
 
-fakespans is a simple app written in the Go language, which can generate random spans and push them to the the Haystack messge bus, Kafka.
-You can find the source for fakespans [in the haystack-idl repo](https://github.com/ExpediaDotCom/haystack-idl/tree/master/fakespans).
+`fakespans` is a simple app written in the Go language, which can generate random spans and push them to the the Haystack messge bus, Kafka.
+You can find the source for `fakespans` [in the haystack-idl repository](https://github.com/ExpediaDotCom/haystack-idl/tree/master/fakespans).
 
-### Using fakespans
+#### Using fakespans
 
 Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fake_spans`.
 
- ```bash
+ ```shell
 export $GOPATH=location where you want your go binaries
 export $GOBIN=$GOPATH/bin
 cd fakespans
 go install
 $GOPATH/bin/fakespans
-##fakespans options
-
+```
+#### fakespans command line options
+```
 ./fakespans -h
 Usage of fakespans:
   -interval int
@@ -105,9 +101,9 @@ Usage of fakespans:
         total number of unique traces you want to generate (default 20)
 ```
 
-For details, click [here](https://github.com/ExpediaDotCom/haystack-idl).
+For details, see [ExpediaDotCom/haystack-idl](https://github.com/ExpediaDotCom/haystack-idl).
 
 ### How to view span data
 
 You can see span data in the Haystack UI at `https://haystack.local:32300`.
-See the [UI](https://expediadotcom.github.io/haystack/ui/ui.html) page for details.
+See the [UI](https://expediadotcom.github.io/haystack/ui/ui.html) page for more information about how the data is presented and what you can do with the UI.
