@@ -65,3 +65,13 @@ If you are using Kinesis, then in addition to the configuration file entries abo
 
 Kinesis dispatcher can be configured with other [KPL properties](https://github.com/awslabs/amazon-kinesis-producer/blob/master/java/amazon-kinesis-producer-sample/default_config.properties) in addition to `Region` by including them in the same part of the config file where `Region` is set.
 
+## Metrics
+
+The client has a stand-alone metrics interface that is based on [Micrometer's API][micrometer].  We supply a `NoopMetricsRegistry` with the base library that collects nothing.
+
+There is an optional integration for Micrometer's registry, `GlobalMetricsRegistry` and `MicrometerMetricsRegistry`.  Depending on your project's needs you can use the `Metrics.globalRegistry` from Micrometer or supply your own custom registry instance, respectively.
+
+There isn't yet an extension, but Dropwizard registries are supported.  You can see how those are currently being used in the Dropwizard integration and example within this project.
+
+[micrometer]: http://micrometer.io/
+
