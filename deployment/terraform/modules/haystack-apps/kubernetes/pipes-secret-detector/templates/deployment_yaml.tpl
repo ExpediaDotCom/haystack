@@ -42,8 +42,6 @@ spec:
           value: "${pipes_secret_detector_secretsnotifications_email_subject}"
         - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_TOS"
           value: "${pipes_secret_detector_secretsnotifications_email_tos}"
-        - name: "HAYSTACK_SECRETSNOTIFICATION_IGNORES_IPS_SERVICENAMES"
-          value: "${pipes_secret_detector_secretsnotifications_ignores_ips_servicenames}"
         ${env_vars}
         livenessProbe:
           exec:

@@ -62,7 +62,6 @@ variable "pipes_secret_detector_secretsnotifications_email_from" {}
 variable "pipes_secret_detector_secretsnotifications_email_host" {}
 variable "pipes_secret_detector_secretsnotifications_email_subject" {}
 variable "pipes_secret_detector_secretsnotifications_email_tos" {}
-variable "pipes_secret_detector_secretsnotifications_ignores_ips_servicenames" {}
 variable "pipes_version" {}
 
 

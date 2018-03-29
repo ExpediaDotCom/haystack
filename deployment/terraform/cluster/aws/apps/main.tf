@@ -44,7 +44,6 @@ module "haystack-apps" {
   pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
   pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
   pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
-  pipes_secret_detector_secretsnotifications_ignores_ips_servicenames = "${var.pipes_secret_detector_secretsnotifications_ignores_ips_servicenames}"
   pipes_version = "${var.pipes_version}"
 
   traces_enabled = "${var.traces_enabled}"

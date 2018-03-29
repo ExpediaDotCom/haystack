@@ -198,7 +198,6 @@ module "pipes-secret-detector" {
   pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
   pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
   pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
-  pipes_secret_detector_secretsnotifications_ignores_ips_servicenames = "${var.pipes_secret_detector_secretsnotifications_ignores_ips_servicenames}"
   replicas = "${var.pipes_secret_detector_instances}"
   source = "pipes-secret-detector"
 }

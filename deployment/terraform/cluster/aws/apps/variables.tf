@@ -86,7 +86,6 @@ variable "pipes_secret_detector_secretsnotifications_email_from" { default = "" 
 variable "pipes_secret_detector_secretsnotifications_email_host" { default = "" }
 variable "pipes_secret_detector_secretsnotifications_email_subject" { default = "" }
 variable "pipes_secret_detector_secretsnotifications_email_tos" { default = "" }
-variable "pipes_secret_detector_secretsnotifications_ignores_ips_servicenames" { default = "" }
 variable "pipes_version" { default = "d38d528d88210107c26a173ead045bcc16c632ef" }
 
 # collectors config
