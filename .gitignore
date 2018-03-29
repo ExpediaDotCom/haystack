@@ -13,3 +13,5 @@ deployment/terraform/third_party_softwares
 **/*.tfstate.backup
 docs/_site/*
 docs/_site/index.html
+.vscode/*
+
