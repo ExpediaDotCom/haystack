@@ -4,7 +4,7 @@ title: Subsystem Deployment
 ---
 # Subsystems Deployment
 
-All the Haystack components are released as Docker images on the Docker Hub:
+All the Haystack components are released as Docker images on the Docker Hub:-
 
 Component | Repository 
 ----------- | ---- |
@@ -22,12 +22,12 @@ haystack-pipes-json-transformer | https://hub.docker.com/u/expediadotcom/haystac
 
 ## Installation
 
-Clone the [ExpediaDotCom/haystack-deployment](https://github.com/ExpediaInc/haystack-deployment) repository and run the script, as documented in the next section.
+Clone the [ExpediaDotCom/haystack](https://github.com/ExpediaInc/haystack) repository and run the `apply-compose.sh` script, as documented in the next section.
 
 ### Usage
-From the root of the location to which haystack-deployment has been cloned:
+From the root of the location to which haystack has been cloned:
 ```shell
-./k8s/apply-compose.sh -a install
+./deployment/terraform/apply-compose.sh -a install
 ```
 will install required third party software, start the minikube and install all haystack components in dev mode.
 
@@ -39,7 +39,7 @@ you can create addition files in the `compose` subdirectory for different enviro
 The `apply-compose.sh` script deploys the Haystack components for a given environment under a dedicated namespace. Namespaces are named using the pattern, `haystack-<environment name>`.
 
 ### Deploying on AWS
-This script does not create or delete the Kubernetes cluster, whether local (using Minikube) or on AWS. We recommend that you use open source tools like [kops](https://github.com/kubernetes/kops)to manage your cluster on AWS. Once you have your cluster up and running, configure the 'kubectl' to point to your cluster.
+This script does not create or delete the Kubernetes cluster, whether local (using Minikube) or on AWS. We recommend that you use open source tools like [kops](https://github.com/kubernetes/kops) to manage your cluster on AWS. Once you have your cluster up and running, configure the 'kubectl' to point to your cluster.
 
 If using kops, the command:
 ```
@@ -51,7 +51,7 @@ kubectl config get-contexts
 ```
 list all the available contexts. Choose your cluster context, and deploy Haystack with:
 ```
-./k8s/apply-compose.sh -a install -e test --use-context <context-name>
+./deployment/terraform/apply-compose.sh -a install -e test --use-context <context-name>
 ```
 Please note the default context for all environments will be minikube. This is done intentionally to safeguard developers
 from pushing their local dev changes to other environments.
@@ -113,10 +113,10 @@ to see the text you gave to the producer.
 
 To uninstall all haystack components:
 ```shell
-./k8s/apply-compose.sh -a uninstall
+./deployment/terraform/apply-compose.sh -a uninstall
 ```
 To learn more about `apply-compose.sh`, type :
 ``` shell
-./k8s/apply-compose.sh --help
+./deployment/terraform/apply-compose.sh --help
 ```
-and by looking at the `apply-compose.sh` [source](../../deployment/k8s/apply-compose.sh).
+and by looking at the `apply-compose.sh` [source](https://github.com/ExpediaDotCom/haystack/blob/master/deployment/terraform/apply-compose.sh).
