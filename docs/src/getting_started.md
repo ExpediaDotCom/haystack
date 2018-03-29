@@ -4,11 +4,11 @@ title: Getting Started
 ---
 # Getting Started
 
-All of Haystack's backend components are released as [Docker images](https://expediadotcom.github.io/haystack/deployment/sub_systems.html) on the ExpediaDotCom Docker Hub.
+All of Haystack's backend components are released as [Docker images](./deployment/sub_systems.html) on the ExpediaDotCom Docker Hub.
 If you need to package the components yourself, fat jars are available from the Maven Central Repository.
 Haystack is designed so that all of its components can be deployed selectively. 
 
-We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes).
+We have automated deployment of Haystack components using [Kubernetes](https://github.com/jaegertracing/jaeger-kubernetes).
 The entire Haystack server runs locally on Minikube (k8s), and with a 1 click deployment on other environments.
 The deployment scripts are not tied up with Minikube for local development.
 You can use the same script to deploy in production (and that is how we deploy at Expedia.)

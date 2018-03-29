@@ -2,7 +2,7 @@
 layout: default
 title: Pipes
 ---
-# haystack-pipes
+# Pipes
 
 Packages to send or "pipe" Haystack data to external sinks like AWS Firehose or another Kafka queue.
 
