@@ -79,7 +79,11 @@ variable "kinesis_span_collector_environment_overrides" {}
 variable "haystack_ui_instances" {}
 variable "ui_version" {}
 variable "whitelisted_fields" {}
-
+variable "ui_enable_sso" {}
+variable "ui_saml_callback_url" {}
+variable "ui_saml_entry_point" {}
+variable "ui_saml_issuer" {}
+variable "ui_session_secret" {}
 
 #metrictank
 variable "metric_tank_instances" {}

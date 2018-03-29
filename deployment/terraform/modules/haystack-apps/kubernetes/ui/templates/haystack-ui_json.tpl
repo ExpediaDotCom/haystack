@@ -22,6 +22,18 @@
     "trends": {
       "connectorName": "haystack",
       "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}"
+    },
+    "alerts": {
+      "connectorName": "haystack",
+      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}"
     }
-  }
+  },
+  "enableSSO": ${ui_enable_sso},
+  "saml": {
+    "callbackUrl": "${ui_saml_callback_url}",
+    "entry_point": "${ui_saml_entry_point}",
+    "issuer": "${ui_saml_issuer}"
+  },
+  "sessionTimeout": 3600000,
+  "sessionSecret": "${ui_session_secret}"
 }

@@ -40,6 +40,11 @@ data "template_file" "config_data" {
     graphite_port = "${var.graphite_port}"
     graphite_hostname = "${var.graphite_hostname}"
     whitelisted_fields = "${var.whitelisted_fields}"
+    ui_enable_sso = "${var.ui_enable_sso}"
+    ui_saml_callback_url = "${var.ui_saml_callback_url}"
+    ui_saml_entry_point = "${var.ui_saml_entry_point}"
+    ui_saml_issuer = "${var.ui_saml_issuer}"
+    ui_session_secret = "${var.ui_session_secret}"
   }
 }
 

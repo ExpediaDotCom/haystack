@@ -245,4 +245,9 @@ module "ui" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   whitelisted_fields = "${var.whitelisted_fields}"
+  ui_saml_issuer = "${var.ui_saml_issuer}"
+  ui_saml_callback_url = "${var.ui_saml_callback_url}"
+  ui_session_secret = "${var.ui_session_secret}"
+  ui_saml_entry_point = "${var.ui_saml_entry_point}"
+  ui_enable_sso = "${var.ui_enable_sso}"
 }
