@@ -30,3 +30,15 @@ variable "metrictank_hostname" {}
 variable "metrictank_port" {}
 
 variable "whitelisted_fields" {}
+
+variable "ui_enable_sso" {
+  default = false
+}
+
+variable "ui_saml_callback_url" {}
+
+variable "ui_saml_entry_point" {}
+
+variable "ui_saml_issuer" {}
+
+variable "ui_session_secret" {}
