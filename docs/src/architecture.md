@@ -17,16 +17,16 @@ To enable that, we have used [Apache Kafka](http://kafka.apache.org/) as the ner
 
 We provide client components for the client applications or microservices that send trace data to be recorded by the `haystack-agent` subsystem:
 
-* [Clients](/src/clients.html)
+* [Clients](./clients.html)
 
 We provide the following six subsystems within the server:
 
-* [Traces](/src/subsystems/traces.html)
-* [Trends](/src/subsystems/trends.html)
-* [Collectors](/src/subsystems/collectors.html)
-* [Pipes](/src/subsystems/pipes.html)
-* [Dependencies](/src/subsystems/dependencies.html)
-* [Anomaly Detection](/src/subsystems/anomaly_detection.html)
+* [Traces](./subsystems/traces.html)
+* [Trends](./subsystems/trends.html)
+* [Collectors](./subsystems/collectors.html)
+* [Pipes](./subsystems/pipes.html)
+* [Dependencies](./subsystems/dependencies.html)
+* [Anomaly Detection](./subsystems/anomaly_detection.html)
 
 Trace data is stored using different services, including:
 
@@ -37,7 +37,7 @@ Trace data is stored using different services, including:
 
 And we provide User Interface components for viewing and analyzing trace data:
 
-* [Traces View](/src/ui/traces.html)
-* [Trends View](/src/ui/trends.html)
-* [Alerts View](/src/ui/alerts.html)
+* [Traces View](./ui/traces.html)
+* [Trends View](./ui/trends.html)
+* [Alerts View](./ui/alerts.html)
 
