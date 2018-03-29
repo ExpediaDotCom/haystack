@@ -91,6 +91,11 @@ module "haystack-apps" {
   ui_version = "${var.ui_version}"
   haystack_ui_instances = "${var.haystack_ui_instances}"
   whitelisted_fields = "${var.whitelisted_fields}"
+  ui_saml_issuer = "${var.ui_saml_issuer}"
+  ui_saml_callback_url = "${var.ui_saml_callback_url}"
+  ui_session_secret = "${var.ui_session_secret}"
+  ui_saml_entry_point = "${var.ui_saml_entry_point}"
+  ui_enable_sso = "${var.ui_enable_sso}"
 
   #metrictank configuration_overrides
   external_metric_tank_kafka_broker_port = "${var.external_metric_tank_kafka_broker_port}"

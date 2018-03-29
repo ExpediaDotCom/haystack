@@ -177,6 +177,26 @@ variable "whitelisted_fields" {
   default = ""
 }
 
+variable "ui_enable_sso" {
+  default = false
+}
+
+variable "ui_saml_callback_url" {
+  default = ""
+}
+
+variable "ui_saml_entry_point" {
+  default = ""
+}
+
+variable "ui_saml_issuer" {
+  default = ""
+}
+
+variable "ui_session_secret" {
+  default = ""
+}
+
 #metrictank
 variable "external_metric_tank_kafka_broker_hostname" {
   default = ""
