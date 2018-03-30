@@ -1,8 +1,10 @@
 [![Build Status](https://travis-ci.org/ExpediaDotCom/haystack.svg?branch=master)](https://travis-ci.org/ExpediaDotCom/haystack)
 [![Docs](https://img.shields.io/badge/docs-current-brightgreen.svg)](https://expediadotcom.github.io/haystack/)
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/ExpediaDotCom/haystack/blob/master/LICENSE)
+[![Join the chat at https://gitter.im/expedia-haystack/Lobby](https://badges.gitter.im/expedia-haystack/Lobby.svg)](https://gitter.im/expedia-haystack/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # haystack
+
 Topmost level repository for public open source Haystack
 
 ## Overview
