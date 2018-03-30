@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/ExpediaDotCom/haystack/blob/master/LICENSE)
 
 # haystack
+
+[![Join the chat at https://gitter.im/expedia-haystack/Lobby](https://badges.gitter.im/expedia-haystack/Lobby.svg)](https://gitter.im/expedia-haystack/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Topmost level repository for public open source Haystack
 
 ## Overview
