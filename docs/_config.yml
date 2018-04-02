@@ -4,4 +4,3 @@ markdown: kramdown
 encoding: utf-8
 
 exclude: ["README.md" ]
-theme: jekyll-theme-minimal
