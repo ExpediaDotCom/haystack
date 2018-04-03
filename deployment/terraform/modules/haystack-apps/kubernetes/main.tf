@@ -182,24 +182,24 @@ module "pipes-firehose-writer" {
 }
 
 module "pipes-secret-detector" {
-  source = "pipes-secret-detector"
-  image = "expediadotcom/haystack-pipes-secret-detector:${var.pipes_version}"
-  replicas = "${var.pipes_secret_detector_instances}"
-  namespace = "${var.k8s_app_namespace}"
-  kafka_hostname = "${var.kafka_hostname}"
+  cpu_limit = "${var.default_cpu_limit}"
+  enabled = "${var.pipes_secret_detector_enabled}"
+  env_vars = "${var.pipes_secret_detector_environment_overrides}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  image = "expediadotcom/haystack-pipes-secret-detector:${var.pipes_version}"
+  kafka_hostname = "${var.kafka_hostname}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  memory_limit = "${var.default_memory_limit}"
+  namespace = "${var.k8s_app_namespace}"
+  node_selecter_label = "${var.app-node_selector_label}"
   pipes_secret_detector_secretsnotifications_email_from = "${var.pipes_secret_detector_secretsnotifications_email_from}"
-  pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
   pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
   pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
-  node_selecter_label = "${var.app-node_selector_label}"
-  enabled = "${var.pipes_secret_detector_enabled}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  cpu_limit = "${var.default_cpu_limit}"
-  memory_limit = "${var.default_memory_limit}"
-  env_vars = "${var.pipes_secret_detector_environment_overrides}"
+  pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
+  replicas = "${var.pipes_secret_detector_instances}"
+  source = "pipes-secret-detector"
 }
 
 # collectors
@@ -245,4 +245,9 @@ module "ui" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   whitelisted_fields = "${var.whitelisted_fields}"
+  ui_saml_issuer = "${var.ui_saml_issuer}"
+  ui_saml_callback_url = "${var.ui_saml_callback_url}"
+  ui_session_secret = "${var.ui_session_secret}"
+  ui_saml_entry_point = "${var.ui_saml_entry_point}"
+  ui_enable_sso = "${var.ui_enable_sso}"
 }

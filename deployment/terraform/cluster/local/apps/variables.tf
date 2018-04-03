@@ -56,91 +56,34 @@ variable "span_timeseries_transformer_environment_overrides" {
 
 
 # pipes config
-variable "pipes_json_transformer_enabled" {
-  default = false
-}
-variable "pipes_kafka_producer_enabled" {
-  default = false
-}
-variable "pipes_http_poster_enabled" {
-  default = false
-}
-variable "pipes_firehose_writer_enabled" {
-  default = false
-}
-variable "pipes_secret_detector_enabled" {
-  default = false
-}
-variable "pipes_json_transformer_instances" {
-  default = "1"
-}
-variable "pipes_kafka_producer_instances" {
-  default = "1"
-}
-variable "pipes_http_poster_instances" {
-  default = "1"
-}
-variable "pipes_firehose_writer_instances" {
-  default = "1"
-}
-variable "pipes_secret_detector_instances" {
-  default = "1"
-}
-variable "pipes_http_poster_httppost_url" {
-  default = ""
-}
-variable "pipes_http_poster_httppost_pollpercent" {
-  default = "1"
-}
-variable "pipes_firehose_writer_firehose_url" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_from" {
-  default = ""
-}
-variable "pipes_secret_detector_environment_overrides" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_streamname" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_host" {
-  default = ""
-}
-variable "firehose_kafka_threadcount" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_subject" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_signingregion" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_tos" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_initialretrysleep" {
-  default = 10
-}
-variable "pipes_firehose_writer_firehose_maxretrysleep" {
-  default = 5000
-}
-variable "pipes_version" {
-  default = "f48a026554636555fc3cb20ac760e4315857f949"
-}
-
-variable "pipes_firehose_writer_environment_overrides" {
-  default = ""
-}
-variable "pipes_http_poster_environment_overrides" {
-  default = ""
-}
-variable "pipes_kafka_producer_environment_overrides" {
-  default = ""
-}
-variable "pipes_json_transformer_environment_overrides" {
-  default = ""
-}
+variable "firehose_kafka_threadcount" { default = "" }
+variable "pipes_firehose_writer_enabled" { default = false }
+variable "pipes_firehose_writer_environment_overrides" { default = "" }
+variable "pipes_firehose_writer_firehose_initialretrysleep" { default = 10 }
+variable "pipes_firehose_writer_firehose_maxretrysleep" { default = 5000 }
+variable "pipes_firehose_writer_firehose_signingregion" { default = "" }
+variable "pipes_firehose_writer_firehose_streamname" { default = "" }
+variable "pipes_firehose_writer_firehose_url" { default = "" }
+variable "pipes_firehose_writer_instances" { default = "1" }
+variable "pipes_http_poster_enabled" { default = false }
+variable "pipes_http_poster_environment_overrides" { default = "" }
+variable "pipes_http_poster_httppost_pollpercent" { default = "1" }
+variable "pipes_http_poster_httppost_url" { default = "" }
+variable "pipes_http_poster_instances" { default = "1" }
+variable "pipes_json_transformer_enabled" { default = false }
+variable "pipes_json_transformer_environment_overrides" { default = "" }
+variable "pipes_json_transformer_instances" { default = "1" }
+variable "pipes_kafka_producer_enabled" { default = false }
+variable "pipes_kafka_producer_environment_overrides" { default = "" }
+variable "pipes_kafka_producer_instances" { default = "1" }
+variable "pipes_secret_detector_enabled" { default = false }
+variable "pipes_secret_detector_environment_overrides" { default = "" }
+variable "pipes_secret_detector_instances" { default = "1" }
+variable "pipes_secret_detector_secretsnotifications_email_from" { default = "" }
+variable "pipes_secret_detector_secretsnotifications_email_host" { default = "" }
+variable "pipes_secret_detector_secretsnotifications_email_subject" { default = "" }
+variable "pipes_secret_detector_secretsnotifications_email_tos" { default = "" }
+variable "pipes_version" { default = "f48a026554636555fc3cb20ac760e4315857f949" }
 
 # collectors config
 variable "kinesis_span_collector_instances" {
@@ -174,6 +117,26 @@ variable "ui_version" {
   default = "c7be950888aef83fa1709c40a62b9ce68066b85b"
 }
 variable "whitelisted_fields" {
+  default = ""
+}
+
+variable "ui_enable_sso" {
+  default = false
+}
+
+variable "ui_saml_callback_url" {
+  default = ""
+}
+
+variable "ui_saml_entry_point" {
+  default = ""
+}
+
+variable "ui_saml_issuer" {
+  default = ""
+}
+
+variable "ui_session_secret" {
   default = ""
 }
 
