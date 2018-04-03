@@ -51,19 +51,33 @@ To open the Minikube dashboard type `minikube start`.
 From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
 ```shell
 cd deployment/terraform
-./apply-compose.sh -a uninstall
+./apply-compose.sh -r uninstall-all
 ```
 
 this will uninstall all Haystack components, but will leave Minikube running. To bring down Minikube:
 ```shell
 minikube stop
 ``` 
-Taking down Minikube before running `./apply-compose.sh -a install` may prove helpful if Minikube is returning errors
-during the install process. If you choose to take down Minikube, you should delete the tfstate files by running, from 
-the directory containing apply-compose.sh, the following command:
-```shell
-find . -name "*tfstate*" -exec rm {} \;
-```
+
+
+### Troubleshooting deployment errors
+
+If Minikube is returning errors during the install process it could be due to inconsistent terraform state. To fix this issue run the following commands in order of sequence.
+
+1. Delete Deployment state
+    ```shell
+    ./apply-compose.sh -r delete-state
+    ```
+2. Recreate the Minikube VM
+    ```shell
+    minikube delete
+    minikube start
+    ```
+3. Retrigger Deployment
+    ```shell
+    ./apply-compose.sh -r install-all
+    ```
+
 ## How to send spans
 
 A *span* is one unit of telemetry data. A span typically represents a service call or a block of code.

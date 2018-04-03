@@ -7,7 +7,7 @@ locals {
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "local"
   config {
-    path = "../infrastructure/terraform-infra.tfstate"
+    path = "../state/terraform-infra.tfstate"
   }
 }
 module "haystack-apps" {
