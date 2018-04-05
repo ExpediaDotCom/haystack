@@ -5,7 +5,7 @@ node_js:
 
 # generate doc pages and move generated resources to out folder
 script:
-  - ./docsite/generate_docsite.sh
+  - cd ./docsite && ./generate_docsite.sh
 
 notifications:
   email:
