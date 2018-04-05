@@ -14,7 +14,7 @@ To get a feel for Haystack you can run it locally inside minikube. Please refer 
 
 ## AWS Cluster
 
-We support out of the box deployment in AWS for Haystack. The current version of the script uses Terraform to create a Kubernetes cluster and the rest of the dependent infrastructure for Haystack in AWS in a single zone.
+We support out of the box deployment in AWS for Haystack. The current version of the apply_compose script uses Terraform to create a Kubernetes cluster and the rest of the dependent infrastructure for Haystack in AWS in a single zone.
 We install the following components: 
 * Kubernetes cluster - version 1.8 (using kops)
 * Apache Cassandra

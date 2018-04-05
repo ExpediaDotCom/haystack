@@ -37,6 +37,7 @@ const siteConfig = {
     scripts: ['https://buttons.github.io/buttons.js'],
     repoUrl: 'https://github.com/ExpediaDotCom/haystack',
     onPageNav: 'separate',
+    gaTrackingId: 'UA-109460835-4'
 };
 
 module.exports = siteConfig;
