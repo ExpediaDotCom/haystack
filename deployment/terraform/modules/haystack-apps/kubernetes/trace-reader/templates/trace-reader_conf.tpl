@@ -1,3 +1,5 @@
+health.status.path = "/app/isHealthy"
+
 service {
     port = 8080
     ssl {
