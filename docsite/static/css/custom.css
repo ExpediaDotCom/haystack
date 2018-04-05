@@ -1,0 +1,141 @@
+/* your custom css */
+
+.fixedHeaderContainer {
+    min-height: 55px;
+}
+
+footer .footer__logo {
+    display: block;
+    margin: 1em auto;
+    width: 170px;
+    opacity: 1;
+}
+
+footer.nav-footer {
+    background: #333333;
+}
+
+.darkBackground {
+    background: #F2F4FB;
+    color: $primaryColor;
+}
+.darkBackground a {
+    color: $primaryColor;
+}
+.darkBackground code {
+    color: $primaryColor;
+}
+
+.container.darkBackground .wrapper h1,
+.container.darkBackground .wrapper h2,
+.container.darkBackground .wrapper h3,
+.container.darkBackground .wrapper h4,
+.container.darkBackground .wrapper h5 {
+    border-color: white;
+    color: $primaryColor;
+}
+
+.lightBackground {
+    background: #ffffff;
+}
+
+.imageAlignSide .blockImage {
+    max-width: 200px;
+    flex: 0 1 200px;
+    height: 200px;
+}
+
+.imageAlignSide .blockContent {
+    flex: 1 1;
+    max-width: 600px;
+}
+
+.container .wrapper .imageAlignSide p {
+    margin-bottom: 40px;
+    max-width: none;
+    margin: 0;
+}
+
+.container .wrapper .gridBlock  .imageAlignRight {
+    justify-content: flex-end;
+}
+
+.mainContainer .wrapper .post .postHeader h1 {
+    color: $postHeaderColor;
+}
+.mainContainer .wrapper .post .postHeader h1 a {
+    color: $postHeaderColor;
+}
+
+.mainContainer .wrapper .post h1 {
+    color: $postHeaderColor;
+}
+.mainContainer .wrapper .post h2 {
+    color: $postHeaderColor;
+}
+.mainContainer .wrapper .post h3 {
+    color: $postHeaderColor;
+}
+.mainContainer .wrapper .post h5 {
+    color: $postHeaderColor;
+}
+.mainContainer .wrapper .post h5 strong {
+    color: $postHeaderColor;
+}
+
+.container .gridBlock .blockContent p {
+    font-size: 14px;
+}
+
+.container .gridBlock .blockContent h2 {
+    padding: 0;
+}
+
+.container .gridBlock .blockContent h2 p {
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.container.paddingTop {
+    padding-top: 50px;
+}
+
+.container.paddingBottom {
+    padding-bottom: 50px;
+}
+
+.homeContainer {
+    background: #2d3750;
+}
+
+.homeContainer .homeWrapper {
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.projectTitle {
+    color: white;
+}
+
+.homeContainer .button {
+    border: 1px solid white;
+    color: white;
+}
+.homeContainer .button:hover {
+    background: white;
+    color: #2d3750;
+}
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}

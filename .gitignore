@@ -11,7 +11,15 @@ deployment/terraform/cluster/local/infrastructure/.terraform/
 deployment/terraform/third_party_softwares
 **/*.tfstate
 **/*.tfstate.backup
-docs/_site/*
-docs/_site/index.html
 .vscode/*
+docsite/node_modules
+docsite/i18n/*
+!docsite/i18n/en.json
+docsite/lib/core/metadata.js
+docsite/lib/core/MetadataBlog.js
+docsite/translated_docs
+docsite/build/
+docsite/yarn.lock
+
+
 
