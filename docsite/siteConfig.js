@@ -1,7 +1,7 @@
 const siteConfig = {
     title: 'Haystack',
     tagline: 'A resilient, scalable tracing and analysis system',
-    url: 'https://github.com/ExpediaDotCom/haystack',
+    url: 'https://expediadotcom.github.io',
     baseUrl: '/haystack/',
     projectName: 'haystack',
     headerLinks: [
