@@ -40,18 +40,24 @@ footer.nav-footer {
 }
 
 .imageAlignSide .blockImage {
-    max-width: 400px;
+    max-width: 200px;
     flex: 0 1 200px;
+    height: 200px;
 }
 
 .imageAlignSide .blockContent {
     flex: 1 1;
+    max-width: 600px;
 }
 
 .container .wrapper .imageAlignSide p {
     margin-bottom: 40px;
     max-width: none;
     margin: 0;
+}
+
+.container .wrapper .gridBlock  .imageAlignRight {
+    justify-content: flex-end;
 }
 
 .mainContainer .wrapper .post .postHeader h1 {
@@ -90,6 +96,35 @@ footer.nav-footer {
     font-weight: 400;
 }
 
+.container.paddingTop {
+    padding-top: 50px;
+}
+
+.container.paddingBottom {
+    padding-bottom: 50px;
+}
+
+.homeContainer {
+    background: #2d3750;
+}
+
+.homeContainer .homeWrapper {
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.projectTitle {
+    color: white;
+}
+
+.homeContainer .button {
+    border: 1px solid white;
+    color: white;
+}
+.homeContainer .button:hover {
+    background: white;
+    color: #2d3750;
+}
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 

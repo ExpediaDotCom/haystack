@@ -60,7 +60,7 @@ class HomeSplash extends React.Component {
         return (
             <SplashContainer>
                 <div className="inner">
-                    <img width="632" height="373" src={imgUrl('/logo/logo_with_title_transparent.png')} />
+                    <img width="632" height="373" src={imgUrl('/logo/logo_with_title_white.png')} />
                     <h2 className="projectTitle">
                         <small>
                             A resilient, scalable tracing and analysis system
@@ -137,10 +137,10 @@ const Feature2 = props => (
     <Block background="dark" layout="twoColumn" align="left">
         {[
             {
-                content: 'Why just stop at distributed tracing when you can leverage the opentracing data to create operation trends, setup anomaly detection and build service dependency graphs.',
-                image: imgUrl('demo.gif'),
+                content: 'Haystack is designed to be easily enhanceable. Built around a Kafka backbone, its easy to spin off a new streams app for building your own Haystack subsystem.',
+                image: imgUrl('logo/logo.png'),
                 imageAlign: 'right',
-                title: 'Why stop at Tracing?',
+                title: 'Designed for Extensibility',
             },
         ]}
     </Block>
@@ -150,10 +150,10 @@ const Feature3 = props => (
     <Block background="light" layout="twoColumn" align="left">
         {[
             {
-                content: 'Haystack is designed to be easily enhanceable. Built around a Kafka backbone, its easy to spin off a new streams app for building your own Haystack subsystem.',
-                image: imgUrl('logo/logo.png'),
+                content: 'Why just stop at distributed tracing when you can leverage the opentracing data to create operation trends, setup anomaly detection and build service dependency graphs.',
+                image: imgUrl('demo.gif'),
                 imageAlign: 'left',
-                title: 'Open for enhancements',
+                title: 'Why stop at Tracing?',
             },
         ]}
     </Block>
