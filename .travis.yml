@@ -5,7 +5,10 @@ node_js:
 
 # generate doc pages and move generated resources to out folder
 script:
-  - cd ./docsite && ./generate_docsite.sh
+  - git config --global user.email "absrivastava@users.noreply.github.com"
+  - git config --global user.name "absrivastava"
+  - echo "machine github.com login absrivastava password $GITHUB_TOKEN" > ~/.netrc
+  - cd ./docsite && GIT_USER=$GITHUB_USER ./generate_docsite.sh
 
 notifications:
   email:
