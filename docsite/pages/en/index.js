@@ -55,6 +55,7 @@ const PromoSection = props => (
 );
 
 class HomeSplash extends React.Component {
+
     render() {
         let language = this.props.language || '';
         return (
@@ -67,7 +68,7 @@ class HomeSplash extends React.Component {
                         </small>
                     </h2>
                     <PromoSection>
-                        <Button href={docUrl('getting_started.html', language)}>
+                        <Button href={docUrl('introduction.html', language)}>
                             Get Started
                         </Button>
                         <Button target="_blank" href="https://github.com/ExpediaDotCom/haystack">
@@ -93,7 +94,7 @@ const Features = props => (
     <Block background="dark" layout="fourColumn" align="center">
         {[
             {
-                content: 'Distributed tracing at scale using OpenTracing compliant tracing engine',
+                content: 'Distributed tracing at scale',
                 image: imgUrl('align-left.svg'),
                 imageAlign: 'top',
                 title: 'Traces',
@@ -105,13 +106,13 @@ const Features = props => (
                 title: 'Trends',
             },
             {
-                content: 'Identifying anomalies in services’ health and trigger alerts',
+                content: 'Identifying anomalies in services’ health',
                 image: imgUrl('bell.svg'),
                 imageAlign: 'top',
                 title: 'Anomaly Detection',
             },
             {
-                content: 'Visualize dependencies and call flow across services',
+                content: 'Visualize dependencies and call flow',
                 image: imgUrl('vector.svg'),
                 imageAlign: 'top',
                 title: 'Dependencies',
