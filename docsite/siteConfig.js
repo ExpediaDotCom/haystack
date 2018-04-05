@@ -29,7 +29,7 @@ const siteConfig = {
     copyright: 'Copyright © ' +
     new Date().getFullYear() +
     'Expedia',
-    organizationName: 'expediadotcom',
+    organizationName: 'ExpediaDotCom',
     highlight: {
         theme: 'solarized-dark',
     },
