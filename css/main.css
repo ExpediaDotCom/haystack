@@ -1999,7 +1999,7 @@ footer.nav-footer {
 }
 
 .homeContainer .homeWrapper {
-    padding-top: 150px;
+    padding-top: 145px;
     padding-bottom: 150px;
 }
 
@@ -2011,10 +2011,12 @@ footer.nav-footer {
     border: 1px solid white;
     color: white;
 }
+
 .homeContainer .button:hover {
     background: white;
     color: #2d3750;
 }
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 
