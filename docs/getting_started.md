@@ -92,8 +92,11 @@ You can find the source for `fakespans` [in the haystack-idl repository](https:/
 Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fake_spans`.
 
  ```shell
-export $GOPATH=location where you want your go binaries
-export $GOBIN=$GOPATH/bin
+export $GOPATH=location where you want your go binaries (should end in /bin)
+export $GOBIN=$GOPATH
+go get github.com/Shopify/sarama
+go get github.com/codeskyblue/go-uuid
+go get github.com/golang/protobuf/proto
 cd fakespans
 go install
 $GOPATH/bin/fakespans
