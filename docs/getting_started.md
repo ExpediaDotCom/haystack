@@ -99,7 +99,7 @@ go get github.com/codeskyblue/go-uuid
 go get github.com/golang/protobuf/proto
 cd fakespans
 go install
-$GOPATH/bin/fakespans
+$GOPATH/fakespans
 ```
 #### fakespans command line options
 ```
