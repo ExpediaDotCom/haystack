@@ -1,6 +1,0 @@
-name: Haystack
-markdown: kramdown
-
-encoding: utf-8
-
-exclude: ["README.md" ]
