@@ -16,11 +16,9 @@ All work on Haystack happens directly on Github. Core Haystack team members will
 
 If you see a feature that you would like to be added, please open an issue in the respective repository or in the general [Haystack](https://github.com/ExpediaDotCom/haystack/issues) repo.
 
-### Contributing in Documentation
+### Contributing to Documentation
 
-For contributing in documentation, you can directly modify the corresponding .md files in the `docs` directory under the [base haystack repository](https://github.com/ExpediaDotCom/haystack/) and submit a pull request. Once your PR is merged in, the changes are automatically deployed to  <https://expediadotcom.github.io/haystack>.
- 
-The documentation site on <https://expediadotcom.github.io/haystack> uses [Github Pages](https://pages.github.com/) to render the documentation. Note that the Table of Contents is maintained manually, in the _includes/sidebar.html file. Update that file if you add new topics or relocate topics in the Table of Contents. 
+To contribute to documentation, you can directly modify the corresponding .md files in the `docs` directory under the [base haystack repository](https://github.com/ExpediaDotCom/haystack/), and submit a pull request. Once your PR is merged, the documentation is automatically built and deployed to <https://expediadotcom.github.io/haystack>.
 
 ### License
 
