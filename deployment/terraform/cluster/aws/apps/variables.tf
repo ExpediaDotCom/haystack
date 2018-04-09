@@ -76,7 +76,7 @@ variable "collector" {
   default = {
     version = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
     kinesis_span_collector_instances = 1,
-    kinesis_span_collector_enabled = false,
+    kinesis_span_collector_enabled = true,
     kinesis_stream_region = "",
     kinesis_stream_name = "",
     kinesis_span_collector_sts_role_arn = "",
