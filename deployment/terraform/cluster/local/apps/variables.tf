@@ -108,8 +108,8 @@ variable "metrictank" {
     memory_limit = "250Mi",
     environment_overrides = ""
     external_kafka_broker_hostname = ""
-    external_kafka_broker_port = 1,
+    external_kafka_broker_port = 9092,
     external_hostname = "",
-    external_port = 1,
+    external_port = 6060,
   }
 }

@@ -1,5 +1,5 @@
 locals {
-  external_metric_tank_enabled = "${var.metrictank["external_hostname"] != "" && var.metrictank["external_port"] != "" && var.metrictank["external_kafka_broker_hostname"] != "" && var.metrictank["external_kafka_broker_port"] != "" ? "true" : "false"}"
+  external_metric_tank_enabled = "${var.metrictank["external_hostname"] != "" && var.metrictank["external_kafka_broker_hostname"] != ""? "true" : "false"}"
 }
 
 //metrictank for haystack-apps
