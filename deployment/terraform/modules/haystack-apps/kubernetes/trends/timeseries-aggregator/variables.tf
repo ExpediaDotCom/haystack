@@ -14,7 +14,6 @@ variable "kubectl_context_name" {}
 variable "node_selecter_label" {}
 variable "memory_limit" {}
 variable "cpu_limit" {}
-variable "java_process_memory_limit" {}
 
 variable "termination_grace_period" {
   default = 30

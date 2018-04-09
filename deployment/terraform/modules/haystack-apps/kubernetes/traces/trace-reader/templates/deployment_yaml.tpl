@@ -31,6 +31,15 @@ spec:
           requests:
             cpu: ${cpu_limit}
             memory: ${memory_limit}
+        livenessProbe:
+          exec:
+            command:
+            - grep
+            - "true"
+            - /app/isHealthy
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          failureThreshold: 1
         env:
         - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value: "/config/trace-reader.conf"
