@@ -1,0 +1,21 @@
+module "kinesis-span-collector" {
+  source = "kinesis-span-collector"
+  image = "expediadotcom/haystack-kinesis-span-collector:${var.collector["version"]}"
+  replicas = "${var.collector["kinesis_span_collector_instances"]}"
+  enabled = "${var.collector["kinesis_span_collector_enabled"]}"
+  kinesis_stream_name = "${var.collector["kinesis_stream_name"]}"
+  kinesis_stream_region = "${var.collector["kinesis_stream_region"]}"
+  sts_role_arn = "${var.collector["kinesis_span_collector_sts_role_arn"]}"
+  env_vars = "${var.collector["kinesis_span_collector_environment_overrides"]}"
+
+  namespace = "${var.app_namespace}"
+  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
+  node_selecter_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.default_cpu_limit}"
+  memory_limit = "${var.default_memory_limit}"
+}

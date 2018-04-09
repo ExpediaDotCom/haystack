@@ -16,7 +16,7 @@ resource "null_resource" "curator_addons" {
     template = "${data.template_file.curator_cron_job.rendered}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.curator_cron_job.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.kubectl_context_name}"
+    command = "echo '${data.template_file.curator_cron_job.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
 
   provisioner "local-exec" {

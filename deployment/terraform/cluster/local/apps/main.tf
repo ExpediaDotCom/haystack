@@ -30,80 +30,21 @@ module "haystack-apps" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
 
   #pipes configuration_overrides
-  firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
-  pipes_firehose_writer_enabled = "${var.pipes_firehose_writer_enabled}"
-  pipes_firehose_writer_environment_overrides = "${var.pipes_firehose_writer_environment_overrides}"
-  pipes_firehose_writer_firehose_initialretrysleep = "${var.pipes_firehose_writer_firehose_initialretrysleep}"
-  pipes_firehose_writer_firehose_maxretrysleep = "${var.pipes_firehose_writer_firehose_maxretrysleep}"
-  pipes_firehose_writer_firehose_signingregion = "${var.pipes_firehose_writer_firehose_signingregion}"
-  pipes_firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
-  pipes_firehose_writer_firehose_url = "${var.pipes_firehose_writer_firehose_url}"
-  pipes_firehose_writer_instances = "${var.pipes_firehose_writer_instances}"
-  pipes_http_poster_enabled = "${var.pipes_http_poster_enabled}"
-  pipes_http_poster_environment_overrides = "${var.pipes_http_poster_environment_overrides}"
-  pipes_http_poster_httppost_pollpercent = "${var.pipes_http_poster_httppost_pollpercent}"
-  pipes_http_poster_httppost_url = "${var.pipes_http_poster_httppost_url}"
-  pipes_http_poster_instances = "${var.pipes_http_poster_instances}"
-  pipes_json_transformer_enabled = "${var.pipes_json_transformer_enabled}"
-  pipes_json_transformer_environment_overrides = "${var.pipes_json_transformer_environment_overrides}"
-  pipes_json_transformer_instances = "${var.pipes_json_transformer_instances}"
-  pipes_kafka_producer_enabled = "${var.pipes_kafka_producer_enabled}"
-  pipes_kafka_producer_environment_overrides = "${var.pipes_kafka_producer_environment_overrides}"
-  pipes_kafka_producer_instances = "${var.pipes_kafka_producer_instances}"
-  pipes_secret_detector_enabled = "${var.pipes_secret_detector_enabled}"
-  pipes_secret_detector_environment_overrides = "${var.pipes_secret_detector_environment_overrides}"
-  pipes_secret_detector_instances = "${var.pipes_secret_detector_instances}"
-  pipes_secret_detector_secretsnotifications_email_from = "${var.pipes_secret_detector_secretsnotifications_email_from}"
-  pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
-  pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
-  pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
-  pipes_version = "${var.pipes_version}"
+  pipes = "${var.pipes}"
 
-  #trace configuration_overrides
-  traces_enabled = "${var.traces_enabled}"
-  traces_version = "${var.traces_version}"
-  traces_indexer_instances = "${var.traces_indexer_instances}"
-  traces_reader_instances = "${var.traces_reader_instances}"
-  trace_reader_environment_overrides = "${var.trace_reader_environment_overrides}"
-  trace_indexer_environment_overrides = "${var.trace_indexer_environment_overrides}"
+  #trace configuration
+  traces = "${var.traces}"
 
-  #trends configuration_overrides
-  trends_enabled = "${var.trends_enabled}"
-  trends_version = "${var.trends_version}"
-  span_timeseries_transformer_instances = "${var.span_timeseries_transformer_instances}"
-  timeseries_aggregator_instances = "${var.timeseries_aggregator_instances}"
-  timeseries_aggregator_environment_overrides = "${var.timeseries_aggregator_environment_overrides}"
-  span_timeseries_transformer_environment_overrides = "${var.span_timeseries_transformer_environment_overrides}"
-  timeseries_aggregator_java_memory_limit = "${var.timeseries_aggregator_java_memory_limit}"
-  timeseries_aggregator_memory_limit = "${var.timeseries_aggregator_memory_limit}"
+  #trends configuration
+  trends = "${var.trends}"
 
   #collector configuration_overrides
-  kinesis_span_collector_instances = "${var.kinesis_span_collector_instances}"
-  kinesis_span_collector_enabled = "${var.kinesis_span_collector_enabled}"
-  kinesis_span_collector_version = "${var.kinesis_span_collector_version}"
-  kinesis_stream_region = "${var.kinesis_stream_region}"
-  kinesis_stream_name = "${var.kinesis_stream_name}"
-  kinesis_span_collector_sts_role_arn = "${var.kinesis_span_collector_sts_role_arn}"
-  kinesis_span_collector_environment_overrides = "${var.kinesis_span_collector_environment_overrides}"
-
+  collector = "${var.collector}"
 
   #ui configuration_overrides
-  ui_version = "${var.ui_version}"
-  haystack_ui_instances = "${var.haystack_ui_instances}"
-  whitelisted_fields = "${var.whitelisted_fields}"
-  ui_saml_issuer = "${var.ui_saml_issuer}"
-  ui_saml_callback_url = "${var.ui_saml_callback_url}"
-  ui_session_secret = "${var.ui_session_secret}"
-  ui_saml_entry_point = "${var.ui_saml_entry_point}"
-  ui_enable_sso = "${var.ui_enable_sso}"
+  ui = "${var.ui}"
 
   #metrictank configuration_overrides
-  external_metric_tank_kafka_broker_port = "${var.external_metric_tank_kafka_broker_port}"
-  external_metric_tank_hostname = "${var.external_metric_tank_hostname}"
-  external_metric_tank_port = "${var.external_metric_tank_port}"
-  external_metric_tank_kafka_broker_hostname = "${var.external_metric_tank_kafka_broker_hostname}"
-  metric_tank_instances = "${var.metric_tank_instances}"
-  metric_tank_memory_limit = "${var.metric_tank_memory_limit}"
-  metrictank_environment_overrides = "${var.metrictank_environment_overrides}"
+  metrictank = "${var.metrictank}"
 
 }

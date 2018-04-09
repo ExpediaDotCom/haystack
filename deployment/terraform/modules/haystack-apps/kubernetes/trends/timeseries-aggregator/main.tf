@@ -45,7 +45,7 @@ data "template_file" "deployment_yaml" {
     memory_limit = "${var.memory_limit}"
     cpu_limit = "${var.cpu_limit}"
     configmap_name = "${local.configmap_name}"
-    java_process_memory_limit = "${var.java_process_memory_limit}"
+    java_process_memory_limit = "2G"
     env_vars= "${indent(9,"${var.env_vars}")}"
   }
 }
