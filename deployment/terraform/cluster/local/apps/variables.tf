@@ -88,6 +88,7 @@ variable "collector" {
 variable "ui" {
   type = "map"
   default = {
+    enabled = true
     version = "c7be950888aef83fa1709c40a62b9ce68066b85b"
     instances = 1,
     whitelisted_fields = "",
