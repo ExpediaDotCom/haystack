@@ -6,7 +6,7 @@ variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "enabled" {}
 variable "httppost_url" {}
-variable "httppost_pollpercent" {}
+variable "http_poster_httppost_pollpercent" {}
 
 variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {}

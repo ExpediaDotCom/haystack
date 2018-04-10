@@ -29,7 +29,7 @@ spec:
             memory: ${memory_limit}
         env:
         - name: "HAYSTACK_HTTPPOST_POLLPERCENT"
-          value: "${httppost_pollpercent}"
+          value: "${http_poster_httppost_pollpercent}"
         - name: "HAYSTACK_HTTPPOST_URL"
           value: "${httppost_url}"
         - name: "HAYSTACK_KAFKA_BROKERS"
