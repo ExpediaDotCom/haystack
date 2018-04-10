@@ -5,7 +5,6 @@ locals {
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   checksum = "${sha1("${data.template_file.config_data.rendered}")}"
   configmap_name = "ui-${local.checksum}"
-  trends_connector_name = "trends-connector-js"
 }
 
 
@@ -16,16 +15,6 @@ resource "kubernetes_config_map" "haystack-config" {
   }
   data {
     "haystack-ui.json" = "${data.template_file.config_data.rendered}"
-  }
-}
-
-resource "kubernetes_config_map" "trends_connector" {
-  metadata {
-    name = "${local.trends_connector_name}"
-    namespace = "${var.namespace}"
-  }
-  data {
-    "trendsConnector.js" = "${file("${path.module}/templates/trendsConnector.js")}"
   }
 }
 
@@ -61,7 +50,6 @@ data "template_file" "deployment_yaml" {
     service_port = "${var.service_port}"
     container_port = "${var.container_port}"
     configmap_name = "${local.configmap_name}"
-    trends_connector_name = "${local.trends_connector_name}"
   }
 }
 
