@@ -1,3 +1,7 @@
+variable "enabled" {
+  default = true
+}
+
 variable "image" {}
 variable "replicas" {}
 variable "namespace" {}
