@@ -32,7 +32,7 @@ module "trends" {
   cassandra_port = "${var.cassandra_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-
+  graphite_enabled = "${var.graphite_enabled}"
   trends = "${var.trends}"
   metrictank = "${var.metrictank}"
 }

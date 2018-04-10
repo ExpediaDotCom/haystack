@@ -38,6 +38,8 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
+        - name: "HAYSTACK_GRAPHITE_ENABLED"
+          value: "${graphite_enabled}"
         - name: "JAVA_XMS"
           value: "${java_process_memory_limit}"
         - name: "JAVA_XMX"

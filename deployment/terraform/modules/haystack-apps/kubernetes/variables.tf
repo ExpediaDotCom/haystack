@@ -6,6 +6,7 @@ variable "cassandra_hostname" {}
 variable "cassandra_port" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
+variable "graphite_enabled" {}
 variable "haystack_cluster_name" {}
 variable "kubectl_context_name" {}
 variable "kubectl_executable_name" {}

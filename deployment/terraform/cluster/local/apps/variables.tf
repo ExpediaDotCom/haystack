@@ -21,7 +21,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true,
-    version = "4ddaf49005a4a90baf4abd1637d397dd0dfd552b"
+    version = "40600a6963971d99362629c03bd6aa74a2bc4b40"
     span_timeseries_transformer_instances = 1,
     timeseries_aggregator_instances = 1,
     timeseries_aggregator_environment_overrides = "",
