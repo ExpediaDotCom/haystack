@@ -42,11 +42,6 @@ spec:
       - name: config-volume
         configMap:
           name: ${configmap_name}
-      - name: trends-connector-volume
-        configMap:
-          name: ${trends_connector_name}
-
-
 
 # ------------------- Service ------------------- #
 ---
