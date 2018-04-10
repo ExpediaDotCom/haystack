@@ -48,7 +48,7 @@ class Footer extends React.Component {
                     <div>
                         <h5>Related</h5>
                         <a href="https://gitter.im/expedia-haystack/Lobby">Chat on Gitter</a>
-                        <a href={this.docUrl('contributing.html', this.props.language)}>Contributing on Haystack</a>
+                        <a href={this.docUrl('contributing.html', this.props.language)}>Contributing to Haystack</a>
                     </div>
                     <div>
                         <h5>More</h5>

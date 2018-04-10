@@ -100,19 +100,19 @@ const Features = props => (
                 title: 'Traces',
             },
             {
-                content: 'Trends on vital service health parameters',
+                content: 'Trends in vital service health parameters',
                 image: imgUrl('stats-up.svg'),
                 imageAlign: 'top',
                 title: 'Trends',
             },
             {
-                content: 'Identifying anomalies in services’ health',
+                content: 'Anomaly detection in service health parameters',
                 image: imgUrl('bell.svg'),
                 imageAlign: 'top',
                 title: 'Anomaly Detection',
             },
             {
-                content: 'Visualize dependencies and call flow',
+                content: 'Dependency and call flow visualization',
                 image: imgUrl('vector.svg'),
                 imageAlign: 'top',
                 title: 'Dependencies',
@@ -125,7 +125,7 @@ const Feature1 = props => (
     <Block background="light" layout="twoColumn" align="left">
         {[
             {
-                content: 'Based on Google\'s dapper paper and full OpenTracing compliant, Haystack has distributed tracing at its core. Designed to ingest large volume of production traces with high resiliency and scalability.',
+                content: 'Based on Google\'s Dapper paper and fully OpenTracing compliant, Haystack has distributed tracing at its core. It is designed to ingest a large volume of production trace data with high resiliency and scalability.',
                 image: imgUrl('opentracing.png'),
                 imageAlign: 'left',
                 title: 'Open Tracing'
@@ -138,7 +138,7 @@ const Feature2 = props => (
     <Block background="dark" layout="twoColumn" align="left">
         {[
             {
-                content: 'Haystack is designed to be easily enhanceable. Built around a Kafka backbone, its easy to spin off a new streams app for building your own Haystack subsystem.',
+                content: 'Haystack is designed to be easily extended. Built around a Kafka backbone, it\'s easy to spin off a new Streams app for building your own Haystack subsystem.',
                 image: imgUrl('logo/logo.png'),
                 imageAlign: 'right',
                 title: 'Designed for Extensibility',
@@ -151,10 +151,10 @@ const Feature3 = props => (
     <Block background="light" layout="twoColumn" align="left">
         {[
             {
-                content: 'Why just stop at distributed tracing when you can leverage the opentracing data to create operation trends, setup anomaly detection and build service dependency graphs.',
+                content: 'Analyze beyond simple distributed tracing when you can leverage your OpenTracing data to create operation trends, setup anomaly detection and build service dependency graphs.',
                 image: imgUrl('demo.gif'),
                 imageAlign: 'left',
-                title: 'Why stop at Tracing?',
+                title: 'Beyond Tracing',
             },
         ]}
     </Block>
