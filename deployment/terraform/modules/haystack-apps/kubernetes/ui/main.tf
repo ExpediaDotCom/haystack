@@ -1,5 +1,6 @@
 locals {
   app_name = "haystack-ui"
+  count = "${var.enabled?1:0}"
   config_file_path = "${path.module}/templates/haystack-ui_json.tpl"
   container_config_path = "/config/haystack-ui.json"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
@@ -16,6 +17,7 @@ resource "kubernetes_config_map" "haystack-config" {
   data {
     "haystack-ui.json" = "${data.template_file.config_data.rendered}"
   }
+  count = "${local.count}"
 }
 
 data "template_file" "config_data" {
@@ -60,6 +62,7 @@ resource "null_resource" "kubectl_apply" {
   provisioner "local-exec" {
     command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
+  count = "${local.count}"
 }
 
 
@@ -69,4 +72,5 @@ resource "null_resource" "kubectl_destroy" {
     command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
     when = "destroy"
   }
+  count = "${local.count}"
 }

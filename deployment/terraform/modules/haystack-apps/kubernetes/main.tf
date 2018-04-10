@@ -76,6 +76,7 @@ module "collectors" {
 
 module "ui" {
   source = "ui"
+  enabled = "${var.ui["enabled"]}"
   image = "expediadotcom/haystack-ui:${var.ui["version"]}"
   replicas = "${var.ui["instances"]}"
   namespace = "${var.k8s_app_namespace}"
