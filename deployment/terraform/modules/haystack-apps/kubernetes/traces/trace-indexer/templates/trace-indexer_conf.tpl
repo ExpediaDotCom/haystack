@@ -7,6 +7,7 @@ span.accumulate {
   }
   window.ms = 10000
   poll.ms = 2000
+  packer = snappy
 }
 
 kafka {
