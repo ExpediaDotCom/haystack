@@ -5,6 +5,7 @@ variable "elasticsearch_endpoint" {}
 variable "cassandra_hostname" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
+variable "graphite_enabled" {}
 variable "enabled"{}
 variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {}

@@ -9,6 +9,7 @@ module "traces" {
   cassandra_port = "${var.cassandra_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
   node_selector_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
