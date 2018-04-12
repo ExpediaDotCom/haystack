@@ -17,6 +17,17 @@ variable "traces" {
   }
 }
 
+# service-graph config
+variable "service-graph" {
+  type = "map"
+  default = {
+    enabled = false,
+    version = ""
+    node_finder_instances = 1,
+    node_finder_environment_overrides = ""
+  }
+}
+
 variable "trends" {
   type = "map"
   default = {

@@ -41,6 +41,9 @@ module "haystack-apps" {
   #collector configuration_overrides
   collector = "${var.collector}"
 
+  #service-graph configuration_overrides
+  service-graph = "${var.service-graph}"
+
   #ui configuration_overrides
   ui = "${var.ui}"
 
