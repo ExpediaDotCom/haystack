@@ -7,7 +7,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true,
-    version = "aa62f556c8d28c371a1bdd0b40a6ec115820101a"
+    version = "6bf751efc8b0e87d062067a4d3df61ecb8ec0a11"
     traces_indexer_instances = 1,
     traces_reader_instances = 1,
     trace_indexer_environment_overrides = "",
