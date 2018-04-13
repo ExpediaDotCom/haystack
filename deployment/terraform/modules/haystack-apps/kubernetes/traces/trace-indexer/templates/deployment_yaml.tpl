@@ -38,6 +38,8 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
+        - name: "HAYSTACK_GRAPHITE_ENABLED"
+          value: "${graphite_enabled}"
         ${env_vars}
         livenessProbe:
           exec:

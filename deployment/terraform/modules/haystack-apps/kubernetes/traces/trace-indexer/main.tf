@@ -38,6 +38,7 @@ data "template_file" "deployment_yaml" {
     namespace = "${var.namespace}"
     graphite_port = "${var.graphite_port}"
     graphite_host = "${var.graphite_hostname}"
+    graphite_enabled = "${var.graphite_enabled}"
     node_selecter_label = "${var.node_selecter_label}"
     image = "${var.image}"
     replicas = "${var.replicas}"

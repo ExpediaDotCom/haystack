@@ -7,7 +7,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true,
-    version = "aa62f556c8d28c371a1bdd0b40a6ec115820101a"
+    version = "6bf751efc8b0e87d062067a4d3df61ecb8ec0a11"
     traces_indexer_instances = 1,
     traces_reader_instances = 1,
     trace_indexer_environment_overrides = "",
@@ -21,7 +21,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true,
-    version = "4ddaf49005a4a90baf4abd1637d397dd0dfd552b"
+    version = "40600a6963971d99362629c03bd6aa74a2bc4b40"
     span_timeseries_transformer_instances = 1,
     timeseries_aggregator_instances = 1,
     timeseries_aggregator_environment_overrides = "",
@@ -109,8 +109,8 @@ variable "metrictank" {
     memory_limit = "250Mi",
     environment_overrides = ""
     external_kafka_broker_hostname = ""
-    external_kafka_broker_port = 1,
+    external_kafka_broker_port = 9092,
     external_hostname = "",
-    external_port = 1,
+    external_port = 6060,
   }
 }

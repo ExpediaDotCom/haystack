@@ -2,6 +2,8 @@ locals {
   app-node_selecter_label = "kops.k8s.io/instancegroup: app-nodes"
   default_cpu_limit = "500m"
   default_memory_limit = "1500Mi"
+  //always setting to true for aws deployment
+  graphite_enabled = "true"
 }
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "s3"
@@ -30,6 +32,7 @@ module "haystack-apps" {
   cassandra_port = "${data.terraform_remote_state.haystack_inrastructure.cassandra_port}"
   graphite_hostname = "${data.terraform_remote_state.haystack_inrastructure.graphite_hostname}"
   graphite_port = "${data.terraform_remote_state.haystack_inrastructure.graphite_port}"
+  graphite_enabled = "${local.graphite_enabled}"
 
   #pipes configuration_overrides
   pipes = "${var.pipes}"

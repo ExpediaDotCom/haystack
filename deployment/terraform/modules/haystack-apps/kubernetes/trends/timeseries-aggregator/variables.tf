@@ -4,6 +4,8 @@ variable "namespace" {}
 variable "kafka_endpoint" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
+variable "graphite_enabled" {}
+
 variable "enabled" {}
 variable "enable_external_kafka_producer" {}
 variable "external_kafka_producer_endpoint" {}
