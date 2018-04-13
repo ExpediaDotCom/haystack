@@ -4,197 +4,113 @@ variable "s3_bucket_name" {}
 variable "aws_domain_name" {}
 variable "kubectl_executable_name" {}
 
-
 # traces config
-variable "traces_enabled" {
-  default = true
-}
-variable "traces_indexer_instances" {
-  default = "1"
-}
-variable "traces_reader_instances" {
-  default = "1"
-}
-variable "traces_version" {
-  default = "92219da46ca3e3ee20f99eafe2939d8e7dfb004e"
-}
-
-variable "trace_indexer_environment_overrides" {
-  default = ""
-}
-variable "trace_reader_environment_overrides" {
-  default = ""
+variable "traces" {
+  type = "map"
+  default = {
+    enabled = true,
+    version = "aa62f556c8d28c371a1bdd0b40a6ec115820101a"
+    traces_indexer_instances = 1,
+    traces_reader_instances = 1,
+    trace_indexer_environment_overrides = "",
+    trace_reader_environment_overrides = ""
+  }
 }
 
-# trends config
-variable "trends_enabled" {
-  default = true
+variable "trends" {
+  type = "map"
+  default = {
+    enabled = true,
+    version = "4ddaf49005a4a90baf4abd1637d397dd0dfd552b"
+    span_timeseries_transformer_instances = 1,
+    timeseries_aggregator_instances = 1,
+    timeseries_aggregator_environment_overrides = "",
+    span_timeseries_transformer_environment_overrides = ""
+  }
 }
-variable "span_timeseries_transformer_instances" {
-  default = "1"
-}
-variable "timeseries_aggregator_instances" {
-  default = "1"
-}
-
-variable "trends_version" {
-  default = "df9b59950fb44a8257db1482cc2ae76a3688d12b"
-}
-variable "timeseries_aggregator_environment_overrides" {
-  default = ""
-}
-variable "span_timeseries_transformer_environment_overrides" {
-  default = ""
-}
-
-variable "timeseries_aggregator_memory_limit" {
-  default = "2048Mi"
-}
-
-variable "timeseries_aggregator_java_memory_limit" {
-  default = "1536m"
-}
-
-
-
 
 # pipes config
-variable "pipes_json_transformer_enabled" {
-  default = false
-}
-variable "pipes_kafka_producer_enabled" {
-  default = false
-}
-variable "pipes_http_poster_enabled" {
-  default = false
-}
-variable "pipes_firehose_writer_enabled" {
-  default = false
-}
-variable "pipes_secret_detector_enabled" {
-  default = false
-}
-variable "pipes_json_transformer_instances" {
-  default = "1"
-}
-variable "pipes_kafka_producer_instances" {
-  default = "1"
-}
-variable "pipes_http_poster_instances" {
-  default = "1"
-}
-variable "pipes_firehose_writer_instances" {
-  default = "1"
-}
-variable "pipes_secret_detector_instances" {
-  default = "1"
-}
-variable "pipes_http_poster_httppost_url" {
-  default = ""
-}
-variable "pipes_http_poster_httppost_pollpercent" {
-  default = "1"
-}
-variable "pipes_firehose_writer_firehose_url" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_streamname" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_from" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_tos" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_subject" {
-  default = ""
-}
-variable "pipes_secret_detector_secretsnotifications_email_host" {
-  default = ""
-}
-variable "pipes_secret_detector_environment_overrides" {
-  default = ""
-}
-variable "firehose_kafka_threadcount" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_signingregion" {
-  default = ""
-}
-variable "pipes_firehose_writer_firehose_initialretrysleep" {
-  default = 10
-}
-variable "pipes_firehose_writer_firehose_maxretrysleep" {
-  default = 3000
-}
-variable "pipes_version" {
-  default = "d38d528d88210107c26a173ead045bcc16c632ef"
-}
 
-variable "pipes_firehose_writer_environment_overrides" {
-  default = ""
-}
-variable "pipes_http_poster_environment_overrides" {
-  default = ""
-}
-variable "pipes_kafka_producer_environment_overrides" {
-  default = ""
-}
-variable "pipes_json_transformer_environment_overrides" {
-  default = ""
-}
+variable "pipes" {
+  type = "map"
+  default = {
+    version = "f48a026554636555fc3cb20ac760e4315857f949"
 
+    firehose_writer_enabled = false
+    firehose_writer_instances = 1
+    firehose_writer_environment_overrides = "",
+    firehose_kafka_threadcount = 1,
+    firehose_writer_firehose_initialretrysleep = 10,
+    firehose_writer_firehose_maxretrysleep = 3000,
+    firehose_writer_firehose_signingregion = ""
+    firehose_writer_firehose_streamname = ""
+    firehose_writer_firehose_url = ""
+
+    http_poster_enabled = false
+    http_poster_environment_overrides = ""
+    http_poster_httppost_pollpercent = ""
+    http_poster_httppost_url = ""
+    http_poster_instances = 1
+
+    json_transformer_enabled = false
+    json_transformer_environment_overrides = ""
+    json_transformer_instances = 1
+
+    kafka_producer_enabled = false
+    kafka_producer_environment_overrides = ""
+    kafka_producer_instances = 1
+
+    secret_detector_enabled = false
+    secret_detector_environment_overrides = ""
+    secret_detector_instances = 1
+    secret_detector_secretsnotifications_email_from = ""
+    secret_detector_secretsnotifications_email_host = ""
+    secret_detector_secretsnotifications_email_subject = ""
+    secret_detector_secretsnotifications_email_tos = ""
+  }
+}
 # collectors config
-variable "kinesis_span_collector_instances" {
-  default = "1"
-}
-variable "kinesis_span_collector_enabled" {
-  default = true
-}
-variable "kinesis_span_collector_version" {
-  default = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
-}
-variable "kinesis_stream_region" {}
-variable "kinesis_stream_name" {}
-variable "kinesis_span_collector_sts_role_arn" {
-  default = ""
-}
-variable "kinesis_span_collector_environment_overrides" {
-  default = ""
-}
 
+variable "collector" {
+  type = "map"
+  default = {
+    version = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
+    kinesis_span_collector_instances = 1,
+    kinesis_span_collector_enabled = true,
+    kinesis_stream_region = "",
+    kinesis_stream_name = "",
+    kinesis_span_collector_sts_role_arn = "",
+    kinesis_span_collector_environment_overrides = ""
+  }
+}
 
 # ui config
-variable "haystack_ui_instances" {
-  default = "1"
-}
-variable "ui_version" {
-  default = "459278787c9979855c653c53d66bd181af8aedaa"
+variable "ui" {
+  type = "map"
+  default = {
+    enabled = true
+    version = "c7be950888aef83fa1709c40a62b9ce68066b85b"
+    instances = 1,
+    whitelisted_fields = "",
+    enable_sso = false,
+    saml_callback_url = "",
+    saml_entry_point = "",
+    saml_issuer = "",
+    session_secret = ""
+  }
 }
 
-variable "whitelisted_fields" {
-  default = ""
-}
+#metrictank
 
-variable "external_metric_tank_kafka_broker_hostname" {
-  default = ""
-}
-variable "external_metric_tank_kafka_broker_port" {
-  default = ""
-}
-variable "external_metric_tank_hostname" {
-  default = ""
-}
-variable "external_metric_tank_port" {
-  default = ""
-}
-variable "metric_tank_instances" {
-  default = 1
-}
-variable "metric_tank_memory_limit" {
-  default = "4000Mi"
-}
-variable "metrictank_environment_overrides" {
-  default = ""
+variable "metrictank" {
+  type = "map"
+  default = {
+    instances = 1,
+    memory_limit = "4000Mi",
+    environment_overrides = ""
+    external_kafka_broker_hostname = ""
+    external_kafka_broker_port = 1,
+    external_hostname = "",
+    external_port = 1,
+  }
 }

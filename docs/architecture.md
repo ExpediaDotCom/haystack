@@ -1,21 +1,42 @@
-# Architecture
+---
+title: Architecture
+sidebar_label: Architecture
+---
 
 ## Haystack Components Architecture Diagram
-<img src="./images/Haystack_Components.png"/>
 
-**Haystack Architecture** is designed on the distributed design principles of building a decentralized and decoupled system.
-To enable that, we have used **Kafka** as our nervous system that helps us achieve the following:
+The Haystack architecture is designed on the distributed design principles of building decentralized and decoupled systems.
+To enable that, we have used [Apache Kafka](http://kafka.apache.org/) as the nervous system that helps us achieve the following architectural principles in the Haystack server:
 
-1. **"batteries included but removable" Docker like Design**: If we consider all our subsystems as 'Batteries', then we have included them making the system ready to use, but have also ensured that the design is in such a way that makes them replaceable as well. 
-1. **Highly Resilient**: There is no single point of failure. 
-3. **Highly Scalable**: We have completely decentralized our system which helps us to scale every component individually. 
+* Haystack is **Componentized**: Haystack includes all of the necessary subsystems to make the system ready to use. But we have also ensured that the overall system is designed in such a way that you can replace any given subsystem to better meet your own needs. 
+* Haystack is **Highly Resilient**: There is no single point of failure. 
+* Haystack is **Highly Scalable**: We have completely decentralized our system which helps us to scale every component individually. 
 
-We provide the following **6 subsystems**:
+![Haystack architecture diagram](/haystack/img/Haystack_Components.png)
 
-1. [Traces](https://expediadotcom.github.io/haystack/subsystems/traces.html)
-2. [Trends](https://expediadotcom.github.io/haystack/subsystems/trends.html)
-3. [Collectors](https://expediadotcom.github.io/haystack/subsystems/collectors.html)
-4. [Pipes](https://expediadotcom.github.io/haystack/subsystems/pipes.html)
-5. [Dependencies](https://expediadotcom.github.io/haystack/subsystems/dependencies.html)
-6. [Anomaly Detection](https://expediadotcom.github.io/haystack/subsystems/anomaly_detection.html)
+We provide client components for the client applications or microservices that send trace data to be recorded by the `haystack-agent` subsystem:
+
+* [Clients](./clients.html)
+
+We provide the following six subsystems within the server:
+
+* [Traces](./subsystems_traces.html)
+* [Trends](./subsystems_trends.html)
+* [Collectors](./subsystems_collectors.html)
+* [Pipes](./subsystems_pipes.html)
+* [Dependencies](./subsystems_dependencies.html)
+* [Anomaly Detection](./subsystems_anomaly_detection.html)
+
+Trace data is stored using different services, including:
+
+* [Amazon Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose/) to external durable storage.
+* [Grafana MetricTank](https://github.com/grafana/metrictank) for time series metrics.
+* [Apache Cassandra](http://cassandra.apache.org/) for raw traces and for trends data.
+* [AWS ElasticSearch](https://aws.amazon.com/elasticsearch-service/) is used as a metadata indexer.
+
+And we provide User Interface components for viewing and analyzing trace data:
+
+* [Traces View](./ui_traces.html)
+* [Trends View](./ui_trends.html)
+* [Alerts View](./ui_alerts.html)
 

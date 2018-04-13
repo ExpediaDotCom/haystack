@@ -10,7 +10,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 function display_help() {
     echo "Usage: $0 [option...] " >&2
     echo
-    echo "   -r     choose the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps. Default: install-all"
+    echo "   -r     choose the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps | delete-state. Default: install-all"
     echo "   -c     choose the cluster-type settings for cluster. possible values: aws | local, default: local"
     echo "   -n     name of the cluster. must be unique for every cluster created in aws,default: haystack"
     echo "   -b     name of the s3 bucket where the deployment state would be stored, its mandatory when the cluster type is aws"
@@ -108,6 +108,22 @@ function downloadThirdPartySoftwares() {
     fi
 }
 
+function deleteState() {
+
+case "$CLUSTER_TYPE" in
+        local)
+            rm -rf $DIR/cluster/$CLUSTER_TYPE/state
+        ;;
+
+        ?)
+            echo "state deletion is currently only supported for local deployment"
+            display_help
+            exit 1
+        ;;
+    esac
+
+}
+
 function command_exists() {
     type "$1" &> /dev/null;
 }
@@ -131,6 +147,10 @@ function applyActionOnComponents() {
             uninstallComponents
             uninstallInfrastructure
             echo "Congratulations! you've successfully and deleted haystack apps and destroyed haystack infrastructure"
+        ;;
+        delete-state)
+            deleteState
+            echo "Congratulations! you've successfully deleted the deployment state"
         ;;
         *)
             echo "Error!!! Fail to understand the action type, see the help."

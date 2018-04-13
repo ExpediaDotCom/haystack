@@ -1,71 +1,109 @@
-# Getting Started
+---
+title: Getting Started
+sidebar_label: Getting Started
+---
 
-### Where are the components?
+All of Haystack's backend components are released as [Docker images](./deployment/sub_systems.html) on the ExpediaDotCom Docker Hub.
+If you need to package the components yourself, fat jars are available from the Maven Central Repository.
+Haystack is designed so that all of its components can be deployed selectively. 
 
-All of Haystack's backend components are released as [Docker images](https://expediadotcom.github.io/haystack/deployment/sub_systems.html) on **ExpediaDotCom Docker Hub**
+We have automated deployment of Haystack components using [Kubernetes](https://github.com/jaegertracing/jaeger-kubernetes).
+The entire Haystack server runs locally on Minikube (k8s), and with a 1 click deployment on other environments.
+The deployment scripts are not tied up with Minikube for local development.
+You can use the same script to deploy in production (and that is how we deploy at Expedia.)
 
-### How to run these components?
+## To install the local server
 
-We have automated deployment of Haystack components using [Kubernetes](github.com/jaegertracing/jaeger-kubernetes). Entire haystack runs locally on minikube(k8s), with a 1 click deployment on the rest of the environments. Deployment scripts are not tied up with minikube(local development),we can use the same script to deploy in production and that is what we use in Expedia
+To get a feel of Haystack you can run Haystack locally inside Minikube.
+To do so, clone the `ExpediaDotCom/haystack` repository and run the installer script, as described below.
 
-#### Installation
+### Install pre-requisites
 
-Clone this repository and run the script, as documented in the next section.
-
-## Local Cluster
-To get a feel of haystack you can run haystack locally inside minikube.
-
-#### Pre-requisite 
-Install [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box and make sure it is running `minikube start`.
-
-#### Start
-From the root of the location to which haystack has been cloned:
+1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
+2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
+```shell
+minikube start --memory 4096 --cpus 2
 ```
+
+### Install the software
+
+From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
+```shell
 cd deployment/terraform
-./apply-compose.sh -a install
+./apply-compose.sh -r install-all
 ```
-this will install required third party software, start the minikube and install all haystack components in dev mode.
+This will install required third party software, then start the Minikube and install all Haystack components in dev mode.
 
-#### Verify
-```
+Run the following command to verify that a CName record has been created for your Minikube server:
+
+```shell
  echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
 ```
-Once you have cname record to minikube, access the haystack ui at 
+Once the CName record for the Minikube appears in `/etc/hosts`, you can access the Haystack ui at `http://haystack.local:32300`.
+
+### Installed components list
+
+The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
+To open the Minikube dashboard type `minikube start`.
+
+### Uninstall the software
+From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
+```shell
+cd deployment/terraform
+./apply-compose.sh -r uninstall-all
 ```
- http://haystack.local:32300
- ```
- 
-#### What components get installed ?
 
-The list of components that get installed can be seen at the minikube dashboard inside the haystack-apps namespace 
-To open minikube dashboard type `minikube start` 
+this will uninstall all Haystack components, but will leave Minikube running. To bring down Minikube:
+```shell
+minikube stop
+``` 
 
 
-#### How to deploy haystack on AWS?
+### Troubleshooting deployment errors
 
-We support out of the box deployment in aws for haystack. The script uses terraform to create a kubernetes cluster and the rest of the dependent-infrastructure for haystack in aws in a single zone at the moment.
-For details, go [here](https://github.com/ExpediaDotCom/haystack/tree/master/deployment)
+If Minikube is returning errors during the install process it could be due to inconsistent terraform state. To fix this issue run the following commands in order of sequence.
 
-### How to send spans?
+1. Delete Deployment state
+    ```shell
+    ./apply-compose.sh -r delete-state
+    ```
+2. Recreate the Minikube VM
+    ```shell
+    minikube delete
+    minikube start
+    ```
+3. Retrigger Deployment
+    ```shell
+    ./apply-compose.sh -r install-all
+    ```
 
-Span is the unit of telemetry data. A span typically represents a service call or a block of code. Lets look at the former for now, it starts from the time client sent a request to the time client received a response along with metadata associated with the service call.
+## How to send spans
 
-#### Creating test data in kafka
+A *span* is one unit of telemetry data. A span typically represents a service call or a block of code.
+A span for a service call starts from the time a client sends a request, ends at the time that the client receives a response, and includes metadata associated with the service call.
 
-fakespans is a simple go app which can generate random spans and push to kafka
+### Creating test data in kafka with fakespans
+
+`fakespans` is a simple app written in the Go language, which can generate random spans and push them to the the Haystack messge bus, Kafka.
+You can find the source for `fakespans` [in the haystack-idl repository](https://github.com/ExpediaDotCom/haystack-idl/tree/master/fakespans).
 
 #### Using fakespans
 
-Run the following commands on your terminal to start using fake spans you should have golang installed on your box
-```
-export $GOPATH=location where you want your go binaries
-export $GOBIN=$GOPATH/bin
+Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fake_spans`.
+
+ ```shell
+export $GOPATH=location where you want your go binaries (should end in /bin)
+export $GOBIN=$GOPATH
+go get github.com/Shopify/sarama
+go get github.com/codeskyblue/go-uuid
+go get github.com/golang/protobuf/proto
 cd fakespans
 go install
-$GOPATH/bin/fakespans
-##fakespans options
-
-./fake_metrics -h
+$GOPATH/fakespans
+```
+#### fakespans command line options
+```
+./fakespans -h
 Usage of fakespans:
   -interval int
         period in seconds between spans (default 1)
@@ -79,12 +117,9 @@ Usage of fakespans:
         total number of unique traces you want to generate (default 20)
 ```
 
-For details, click [here](https://github.com/ExpediaDotCom/haystack-idl)
+For details, see [ExpediaDotCom/haystack-idl](https://github.com/ExpediaDotCom/haystack-idl).
 
-### How to see on UI?
+### How to view span data
 
-Once you have cname record to minikube, access haystack UI at-
-
- ```
- https://haystack.local:32300
- ```
+You can see span data in the Haystack UI at `https://haystack.local:32300`.
+See the [UI](https://expediadotcom.github.io/haystack/ui/ui.html) page for more information about how the data is presented and what you can do with the UI.

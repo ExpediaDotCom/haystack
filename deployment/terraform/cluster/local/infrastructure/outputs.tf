@@ -14,6 +14,10 @@ output "graphite_port" {
   value = "${module.k8s-addons.graphite_port}"
 }
 
+output "graphite_enabled" {
+  value = "${var.monitoring_addons_enabled ? "true" : "false"}"
+}
+
 
 output "kafka_hostname" {
   value = "${module.haystack-infrastructure.kafka_hostname}"

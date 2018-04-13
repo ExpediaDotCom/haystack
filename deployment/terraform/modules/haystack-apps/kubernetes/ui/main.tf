@@ -1,11 +1,11 @@
 locals {
   app_name = "haystack-ui"
+  count = "${var.enabled?1:0}"
   config_file_path = "${path.module}/templates/haystack-ui_json.tpl"
   container_config_path = "/config/haystack-ui.json"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   checksum = "${sha1("${data.template_file.config_data.rendered}")}"
   configmap_name = "ui-${local.checksum}"
-  trends_connector_name = "trends-connector-js"
 }
 
 
@@ -17,16 +17,7 @@ resource "kubernetes_config_map" "haystack-config" {
   data {
     "haystack-ui.json" = "${data.template_file.config_data.rendered}"
   }
-}
-
-resource "kubernetes_config_map" "trends_connector" {
-  metadata {
-    name = "${local.trends_connector_name}"
-    namespace = "${var.namespace}"
-  }
-  data {
-    "trendsConnector.js" = "${file("${path.module}/templates/trendsConnector.js")}"
-  }
+  count = "${local.count}"
 }
 
 data "template_file" "config_data" {
@@ -40,6 +31,11 @@ data "template_file" "config_data" {
     graphite_port = "${var.graphite_port}"
     graphite_hostname = "${var.graphite_hostname}"
     whitelisted_fields = "${var.whitelisted_fields}"
+    ui_enable_sso = "${var.ui_enable_sso}"
+    ui_saml_callback_url = "${var.ui_saml_callback_url}"
+    ui_saml_entry_point = "${var.ui_saml_entry_point}"
+    ui_saml_issuer = "${var.ui_saml_issuer}"
+    ui_session_secret = "${var.ui_session_secret}"
   }
 }
 
@@ -56,7 +52,6 @@ data "template_file" "deployment_yaml" {
     service_port = "${var.service_port}"
     container_port = "${var.container_port}"
     configmap_name = "${local.configmap_name}"
-    trends_connector_name = "${local.trends_connector_name}"
   }
 }
 
@@ -67,6 +62,7 @@ resource "null_resource" "kubectl_apply" {
   provisioner "local-exec" {
     command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
+  count = "${local.count}"
 }
 
 
@@ -76,4 +72,5 @@ resource "null_resource" "kubectl_destroy" {
     command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
     when = "destroy"
   }
+  count = "${local.count}"
 }

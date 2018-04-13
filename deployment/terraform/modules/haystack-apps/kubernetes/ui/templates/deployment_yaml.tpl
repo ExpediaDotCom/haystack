@@ -25,8 +25,6 @@ spec:
           # Create on-disk volume to store exec logs
         - mountPath: /config
           name: config-volume
-        - mountPath: /app/server/connectors/trends/doppler
-          name: trends-connector-volume
         resources:
           limits:
             memory: ${memory_limit}
@@ -42,11 +40,6 @@ spec:
       - name: config-volume
         configMap:
           name: ${configmap_name}
-      - name: trends-connector-volume
-        configMap:
-          name: ${trends_connector_name}
-
-
 
 # ------------------- Service ------------------- #
 ---
