@@ -10,20 +10,21 @@ Topmost level repository for public open source Haystack
 and remediation of problems with enterprise-level web services and websites.
 
 ### The Problem
-Modern websites rely on dozens or even hundreds of services to function. These services are often spread across many
-platforms, data centers, and teams. Each service logs information. There are different types of logs (they can be 
-categorized in different ways; the list below is one such way) 
-1. Metrics (typically counts and durations), 
-2. Application logs (interesting information emitted by the service, usually via log4j or a similar system)
-3. Transaction logs (key/value pairs of significant events in the system)
-4. Request/response logs (the XML, JSON, etc. sent to and from the service)
 
-Haystack is intended to help users make sense of the information in these logs, particularly when things are not
-working quite right (too slow, failing service calls, etc.): to find "the needle in the haystack" (thus the name).
+Modern websites rely on dozens or even hundreds of services to function. These services are often spread across many platforms, data centers, and teams. Each service logs information of various kinds:
+
+* Telemetry data with tags or key/value pairs associated with the event
+* Request/response logs (the XML, JSON, etc. sent to and received from the service)
+* Application logs (typically errors logged via log4j or a similar system)
+* Metrics
+
+With so much information spread across many different places, it can be challenging and time consuming to figure out where to look for the cause of a failure or slowdown.
 
 ### The Solution
+
+Haystack uses tracing data from a central store to help you locate the source of the problem -- to drill down to the precise part of a service transaction where failures or latency are occurring -- and find the proverbial "needle in a haystack". Once you know specifically where the problem is happening, it's much easier to identify the appropriate diagnostic data, understand the data, find the problem, and fix it.
+
 ![High Level Block Diagram](docs/images/Haystack_Components.png)
-Below find information about components in the block diagram above.
 
 #### Infrastructure
 The Haystack system includes an easy-to-use "one click" deployment mechanism, based on 
@@ -77,7 +78,7 @@ stores reasonable, given the large volume of Span objects in a production system
 
 #### Dependencies
 The Dependencies module uses the parent/child relationships of Span objects to create dependency graphs for each
-service, stored in a [Neo4j](https://en.wikipedia.org/wiki/Neo4j) graph database.
+service, stored in a graph database.
 
 #### haystack-ui
 The [haystack-ui](https://github.com/ExpediaDotCom/haystack-ui) (User Interface) module exposes (through a website) the
