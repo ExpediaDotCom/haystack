@@ -34,12 +34,12 @@ cd deployment/terraform
 ```
 This will install required third party software, then start the Minikube and install all Haystack components in dev mode.
 
-Run the following command to verify that a CName record has been created for your Minikube server:
-
+Run the following commands to add a valid local resolver record for your Minikube server:
 ```shell
- echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
+grep -v 'haystack\.local' /etc/hosts | sudo tee /etc/hosts
+echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
 ```
-Once the CName record for the Minikube appears in `/etc/hosts`, you can access the Haystack ui at `http://haystack.local:32300`.
+Once the record for the Minikube appears in `/etc/hosts`, you can access the Haystack ui at `http://haystack.local:32300`.
 
 ### Installed components list
 
