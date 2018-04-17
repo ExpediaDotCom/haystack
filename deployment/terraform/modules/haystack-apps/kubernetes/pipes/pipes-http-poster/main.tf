@@ -11,7 +11,7 @@ data "template_file" "deployment_yaml" {
   vars {
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
-    httppost_pollpercent = "${var.httppost_pollpercent}"
+    http_poster_httppost_pollpercent = "${var.http_poster_httppost_pollpercent}"
     httppost_url = "${var.httppost_url}"
     kafka_hostname = "${var.kafka_hostname}"
     node_selecter_label = "${var.node_selecter_label}"

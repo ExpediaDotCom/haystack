@@ -43,7 +43,7 @@ module "pipes-http-poster" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   httppost_url = "${var.pipes["http_poster_httppost_url"]}"
-  httppost_pollpercent = "${var.pipes["http_poster_httppost_pollpercent"]}"
+  http_poster_httppost_pollpercent = "${var.pipes["http_poster_httppost_pollpercent"]}"
 
   node_selecter_label = "${var.node_selector_label}"
   enabled = "${var.pipes["http_poster_enabled"]}"

@@ -88,8 +88,9 @@ data:
       separator = "."
       udp-read-buffer = 0
       templates = [
-       "haystack.errors.* system.metricGroup.subsystem.fqClass.host.lineNumber.measurement*",
-       "haystack.*        system.subsystem.application.host.class.measurement*",
+       "haystack.buckets.* system.metricGroup.subsystem.application.host.bucket.measurement*",
+       "haystack.errors.*  system.metricGroup.subsystem.fqClass.host.lineNumber.measurement*",
+       "haystack.*         system.subsystem.application.host.class.measurement*",
       ]
 ---
 apiVersion: v1
