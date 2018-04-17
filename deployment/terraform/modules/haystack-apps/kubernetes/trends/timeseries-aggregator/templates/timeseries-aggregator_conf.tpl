@@ -45,4 +45,14 @@ statestore {
   cache.size = 32767
 }
 
-enable.metricpoint.period.replacement = true
+
+// there are three types of encoders that are used on service and operation names:
+// 1) periodreplacement: replaces all periods with 3 underscores
+// 2) base64: base64 encodes the full name with a padding of _
+// 3) noop: does not perform any encoding
+metricpoint.encoder.type = "periodreplacement"
+
+histogram {
+  max.value = 2147483647
+  precision = 0
+}
