@@ -54,5 +54,5 @@ metricpoint.encoder.type = "periodreplacement"
 
 histogram {
   max.value = 2147483647
-  precision = 2
+  precision = 0
 }
