@@ -64,6 +64,22 @@ resource "aws_iam_role_policy" "zookeeper-policy" {
   EOF
 }
 
+resource "aws_iam_role_policy_attachment" "zookeeper-policy-attach" {
+  role       = "${aws_iam_role.haystack-zookeeper-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "zookeeper-policy-attach" {
+  role       = "${aws_iam_role.haystack-zookeeper-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
+}
+
+resource "aws_iam_role_policy_attachment" "zookeeper-policy-attach" {
+  role       = "${aws_iam_role.haystack-zookeeper-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+}
+
+
 resource "aws_iam_instance_profile" "haystack-zookeeper-profile" {
   name = "${var.haystack_cluster_name}-zookeeper"
   role = "${aws_iam_role.haystack-zookeeper-role.name}"
@@ -108,6 +124,70 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   user_data = "${data.template_file.zookeeper_user_data.rendered}"
 }
 
+//create Kafka role and policies
+resource "aws_iam_role" "haystack-kafka-role" {
+  name = "${var.haystack_cluster_name}-kafka-role"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": { "Service": "ec2.amazonaws.com"},
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+  EOF
+}
+
+resource "aws_iam_role_policy" "kafka-policy" {
+  name = "kafka-policy"
+  role = "${aws_iam_role.haystack-kafka-role.name}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "kafkaRoute53ListZones",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+  EOF
+}
+
+//resource "aws_iam_role_policy_attachment" "kafka-policy-attach" {
+//  role       = "${aws_iam_role.haystack-kafka-role.name}"
+//  policy_arn = "${aws_iam_role_policy.kafka-policy.arn}"
+//}
+
+resource "aws_iam_role_policy_attachment" "kafka-policy-attach" {
+  role       = "${aws_iam_role.haystack-kafka-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
+}
+
+resource "aws_iam_role_policy_attachment" "kafka-policy-attach" {
+  role       = "${aws_iam_role.haystack-kafka-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
+}
+
+resource "aws_iam_role_policy_attachment" "kafka-policy-attach" {
+  role       = "${aws_iam_role.haystack-kafka-role.name}"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
+}
+
+resource "aws_iam_instance_profile" "haystack-kafka-profile" {
+  name = "${var.haystack_cluster_name}-kafka"
+  role = "${aws_iam_role.haystack-kafka-role.name}"
+}
+
 data "template_file" "kafka_broker_user_data" {
   template = "${file("${path.module}/data/kafka_broker_user_data_sh.tpl")}"
 
@@ -130,6 +210,8 @@ resource "aws_instance" "haystack-kafka-broker" {
   vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   key_name = "${var.aws_ssh_key_pair_name}"
   associate_public_ip_address = false
+  iam_instance_profile = "${aws_iam_instance_profile.haystack-kafka-profile.name}"
+
   tags = {
     Product = "Haystack"
     Component = "Kafka"
