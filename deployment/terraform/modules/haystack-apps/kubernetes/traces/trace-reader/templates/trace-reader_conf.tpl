@@ -80,7 +80,7 @@ trace {
 
 reload {
   tables {
-    index.fields.config = "whitelist-index-fields"
+    index.fields.config = "indexing-fields"
   }
   config {
     endpoint = "http://${elasticsearch_endpoint}"
