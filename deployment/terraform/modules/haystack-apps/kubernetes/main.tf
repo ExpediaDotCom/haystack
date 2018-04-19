@@ -75,6 +75,21 @@ module "collectors" {
   collector = "${var.collector}"
 }
 
+module "service-graph" {
+  source = "service-graph"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  kafka_port = "${var.kafka_port}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  default_cpu_limit = "${var.default_cpu_limit}"
+  default_memory_limit = "${var.default_memory_limit}"
+  service-graph = "${var.service-graph}"
+}
+
 module "ui" {
   source = "ui"
   enabled = "${var.ui["enabled"]}"

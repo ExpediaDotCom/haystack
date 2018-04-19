@@ -84,6 +84,17 @@ variable "collector" {
   }
 }
 
+# service-graph config
+variable "service-graph" {
+  type = "map"
+  default = {
+    enabled = false,
+    version = "df2750bcdb19203b3ed3647c52cf679319d340dd"
+    node_finder_instances = 1,
+    node_finder_environment_overrides = ""
+  }
+}
+
 # ui config
 variable "ui" {
   type = "map"

@@ -38,6 +38,11 @@ variable "collector" {
   type = "map"
 }
 
+# service-graph config
+variable "service-graph" {
+  type = "map"
+}
+
 # ui config
 variable "ui" {
   type = "map"
