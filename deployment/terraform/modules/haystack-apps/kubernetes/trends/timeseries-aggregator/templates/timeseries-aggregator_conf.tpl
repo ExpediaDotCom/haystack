@@ -9,7 +9,7 @@ kafka {
     num.stream.threads = 2
     commit.interval.ms = 5000
     auto.offset.reset = latest
-    timestamp.extractor = "com.expedia.www.haystack.trends.kstream.MetricPointTimestampExtractor"
+    timestamp.extractor = "com.expedia.www.haystack.commons.kstreams.MetricPointTimestampExtractor"
     producer.retries = 50,
     replication.factor = 2
     producer.batch.size = 65536,
