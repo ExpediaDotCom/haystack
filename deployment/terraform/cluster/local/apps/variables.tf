@@ -63,6 +63,7 @@ variable "pipes" {
     secret_detector_enabled = false
     secret_detector_environment_overrides = ""
     secret_detector_instances = 1
+    secret_detector_kafka_threadcount = 1
     secret_detector_secretsnotifications_email_from = ""
     secret_detector_secretsnotifications_email_host = ""
     secret_detector_secretsnotifications_email_subject = ""

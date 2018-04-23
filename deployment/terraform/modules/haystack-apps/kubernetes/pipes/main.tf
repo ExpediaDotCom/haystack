@@ -95,5 +95,6 @@ module "pipes-secret-detector" {
   pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes["secret_detector_secretsnotifications_email_subject"]}"
   pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes["secret_detector_secretsnotifications_email_tos"]}"
   replicas = "${var.pipes["secret_detector_instances"]}"
+  secret_detector_kafka_threadcount = "${var.pipes["secret_detector_kafka_threadcount"]}"
   source = "pipes-secret-detector"
 }
