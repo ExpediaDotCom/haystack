@@ -66,11 +66,6 @@ resource "aws_iam_role_policy" "zookeeper-policy" {
 
 resource "aws_iam_role_policy_attachment" "zookeeper-policy-attach" {
   role       = "${aws_iam_role.haystack-zookeeper-role.name}"
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-}
-
-resource "aws_iam_role_policy_attachment" "zookeeper-policy-attach" {
-  role       = "${aws_iam_role.haystack-zookeeper-role.name}"
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"
 }
 
@@ -167,11 +162,6 @@ resource "aws_iam_role_policy" "kafka-policy" {
 //  role       = "${aws_iam_role.haystack-kafka-role.name}"
 //  policy_arn = "${aws_iam_role_policy.kafka-policy.arn}"
 //}
-
-resource "aws_iam_role_policy_attachment" "kafka-policy-attach" {
-  role       = "${aws_iam_role.haystack-kafka-role.name}"
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2FullAccess"
-}
 
 resource "aws_iam_role_policy_attachment" "kafka-policy-attach" {
   role       = "${aws_iam_role.haystack-kafka-role.name}"
