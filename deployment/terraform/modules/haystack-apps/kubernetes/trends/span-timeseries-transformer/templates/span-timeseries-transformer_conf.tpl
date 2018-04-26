@@ -26,7 +26,7 @@ kafka {
 // 2) base64: base64 encodes the full name with a padding of _
 // 3) noop: does not perform any encoding
 metricpoint.encoder.type = "periodreplacement"
-enable.metricpoint.service.level.generation = true
+enable.metricpoint.service.level.generation = false
 
 blacklist.services = [
   "cs-deposits-distribution",
