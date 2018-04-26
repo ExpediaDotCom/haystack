@@ -9,6 +9,7 @@ variable "pipes_secret_detector_secretsnotifications_email_from" {}
 variable "pipes_secret_detector_secretsnotifications_email_host" {}
 variable "pipes_secret_detector_secretsnotifications_email_subject" {}
 variable "pipes_secret_detector_secretsnotifications_email_tos" {}
+variable "secret_detector_kafka_threadcount" {}
 
 variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {}

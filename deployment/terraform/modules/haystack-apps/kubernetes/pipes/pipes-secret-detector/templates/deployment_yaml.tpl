@@ -34,6 +34,8 @@ spec:
           value: "${graphite_port}"
         - name: "HAYSTACK_KAFKA_BROKERS"
           value: "${kafka_hostname}"
+        - name: "HAYSTACK_KAFKA_THREADCOUNT"
+          value: "${secret_detector_kafka_threadcount}"
         - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_FROM"
           value: "${pipes_secret_detector_secretsnotifications_email_from}"
         - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_HOST"
