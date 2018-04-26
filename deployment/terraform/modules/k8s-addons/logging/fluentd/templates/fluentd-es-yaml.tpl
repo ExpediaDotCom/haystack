@@ -25,7 +25,13 @@ data:
     <filter kubernetes.**>
       type kubernetes_metadata
     </filter>
-    <match **>
+    <match kubernetes.var.log.containers.**fluentd**.log>
+      @type null
+    </match>
+    <match kubernetes.var.log.containers.**kube-system**.log>
+      @type null
+    </match>
+    <match kubernetes.**>
        type elasticsearch
        log_level info
        include_tag_key true
