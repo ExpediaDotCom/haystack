@@ -10,12 +10,12 @@ const React = require('react');
 class Footer extends React.Component {
     docUrl(doc, language) {
         const baseUrl = this.props.config.baseUrl;
-        return baseUrl + 'docs/' + (language ? language + '/' : '') + doc;
+        return baseUrl + 'docs/' + doc;
     }
 
     pageUrl(doc, language) {
         const baseUrl = this.props.config.baseUrl;
-        return baseUrl + (language ? language + '/' : '') + doc;
+        return baseUrl + doc;
     }
 
     render() {
@@ -35,20 +35,20 @@ class Footer extends React.Component {
                     </a>
                     <div>
                         <h5>Docs</h5>
-                        <a href={this.docUrl('introduction.html', this.props.language)}>
+                        <a href={this.docUrl('introduction.html'}>
                             Introduction
                         </a>
-                        <a href={this.docUrl('getting_started.html', this.props.language)}>
+                        <a href={this.docUrl('getting_started.html'}>
                             Getting Started
                         </a>
-                        <a href={this.docUrl('architecture.html', this.props.language)}>
+                        <a href={this.docUrl('architecture.html'}>
                             Architecture
                         </a>
                     </div>
                     <div>
                         <h5>Related</h5>
                         <a href="https://gitter.im/expedia-haystack/Lobby">Chat on Gitter</a>
-                        <a href={this.docUrl('contributing.html', this.props.language)}>Contributing to Haystack</a>
+                        <a href={this.docUrl('contributing.html'}>Contributing to Haystack</a>
                     </div>
                     <div>
                         <h5>More</h5>
