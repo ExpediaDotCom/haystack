@@ -63,6 +63,8 @@ module "asg" {
   master_instance_volume = "${var.master_instance_volume}"
   app-nodes_instance_volume = "${var.app-nodes_instance_volume}"
   monitoring-nodes_instance_volume = "${var.monitoring-nodes_instance_volume}"
+  nodes_ami = "${var.node_ami}"
+  masters_ami = "${var.master_ami}"
 }
 
 module "elbs" {
