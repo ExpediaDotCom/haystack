@@ -28,11 +28,11 @@ variable "k8s_version" {
   default = "1.8.6"
 }
 variable "node_ami" {
-  default = "ami-06a57e7e"
+  default = "ami-7ee37206"
 }
 
 variable "master_ami" {
-  default = "ami-06a57e7e"
+  default = "ami-7ee37206"
 }
 
 variable "monitoring-nodes_instance_volume" {

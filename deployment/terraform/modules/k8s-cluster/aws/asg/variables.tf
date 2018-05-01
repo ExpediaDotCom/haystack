@@ -15,15 +15,12 @@ variable "nodes_iam-instance-profile_arn" {}
 variable "monitoring-nodes_instance_volume" {}
 variable "master_instance_volume" {}
 variable "app-nodes_instance_volume" {}
+variable "nodes_ami" {}
+variable "masters_ami" {}
+
 variable "masters_security_groups" {
   type = "list"
 }
 variable "nodes_security_groups" {
   type = "list"
-}
-variable "nodes_ami" {
-  default = "ami-06a57e7e"
-}
-variable "masters_ami" {
-  default = "ami-06a57e7e"
 }
