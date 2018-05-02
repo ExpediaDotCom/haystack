@@ -90,9 +90,11 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = false,
-    version = "df2750bcdb19203b3ed3647c52cf679319d340dd"
+    version = "e407d22f377a6baa2aae24b184d0dd7d23c7486d"
     node_finder_instances = 1,
     node_finder_environment_overrides = ""
+    graph_builder_instances = 1,
+    graph_builder_environment_overrides = ""
   }
 }
 
