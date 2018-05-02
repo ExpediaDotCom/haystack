@@ -60,14 +60,15 @@ variable "pipes" {
     kafka_producer_environment_overrides = ""
     kafka_producer_instances = 1
 
-    secret_detector_enabled = false
-    secret_detector_environment_overrides = ""
-    secret_detector_instances = 1
-    secret_detector_kafka_threadcount = 1
-    secret_detector_secretsnotifications_email_from = ""
-    secret_detector_secretsnotifications_email_host = ""
-    secret_detector_secretsnotifications_email_subject = ""
-    secret_detector_secretsnotifications_email_tos = ""
+    pipes_secret_detector_enabled = false
+    pipes_secret_detector_environment_overrides = ""
+    pipes_secret_detector_instances = 1
+    pipes_secret_detector_kafka_threadcount = 1
+    pipes_secret_detector_secretsnotifications_email_from = ""
+    pipes_secret_detector_secretsnotifications_email_host = ""
+    pipes_secret_detector_secretsnotifications_email_subject = ""
+    pipes_secret_detector_secretsnotifications_email_tos = ""
+    pipes_secret_detector_secretsnotifications_whitelist_bucket = ""
   }
 }
 # collectors config

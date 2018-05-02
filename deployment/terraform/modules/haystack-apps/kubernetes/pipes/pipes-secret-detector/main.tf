@@ -22,7 +22,8 @@ data "template_file" "deployment_yaml" {
     pipes_secret_detector_secretsnotifications_email_host = "${var.pipes_secret_detector_secretsnotifications_email_host}"
     pipes_secret_detector_secretsnotifications_email_subject = "${var.pipes_secret_detector_secretsnotifications_email_subject}"
     pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes_secret_detector_secretsnotifications_email_tos}"
-    secret_detector_kafka_threadcount = "${var.secret_detector_kafka_threadcount}"
+    pipes_secret_detector_secretsnotifications_whitelist_bucket = "${var.pipes_secret_detector_secretsnotifications_whitelist_bucket}"
+    pipes_secret_detector_kafka_threadcount = "${var.pipes_secret_detector_kafka_threadcount}"
     replicas = "${var.replicas}"
   }
 }
