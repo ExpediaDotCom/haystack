@@ -36,7 +36,7 @@ spec:
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
         - name: GF_SERVER_ROOT_URL
-          value: "http://${metrics_cname}"
+          value: "https://${metrics_cname}"
       nodeSelector:
         ${node_selecter_label}
       volumes:
