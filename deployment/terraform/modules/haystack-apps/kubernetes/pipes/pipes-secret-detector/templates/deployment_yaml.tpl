@@ -35,15 +35,17 @@ spec:
         - name: "HAYSTACK_KAFKA_BROKERS"
           value: "${kafka_hostname}"
         - name: "HAYSTACK_KAFKA_THREADCOUNT"
-          value: "${secret_detector_kafka_threadcount}"
-        - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_FROM"
+          value: "${pipes_secret_detector_kafka_threadcount}"
+        - name: "HAYSTACK_SECRETSNOTIFICATIONS_EMAIL_FROM"
           value: "${pipes_secret_detector_secretsnotifications_email_from}"
-        - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_HOST"
+        - name: "HAYSTACK_SECRETSNOTIFICATIONS_EMAIL_HOST"
           value: "${pipes_secret_detector_secretsnotifications_email_host}"
-        - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_SUBJECT"
+        - name: "HAYSTACK_SECRETSNOTIFICATIONS_EMAIL_SUBJECT"
           value: "${pipes_secret_detector_secretsnotifications_email_subject}"
-        - name: "HAYSTACK_SECRETSNOTIFICATION_EMAIL_TOS"
+        - name: "HAYSTACK_SECRETSNOTIFICATIONS_EMAIL_TOS"
           value: "${pipes_secret_detector_secretsnotifications_email_tos}"
+        - name: "HAYSTACK_SECRETSNOTIFICATIONS_WHITELIST_BUCKET"
+          value: "${pipes_secret_detector_secretsnotifications_whitelist_bucket}"
         ${env_vars}
         livenessProbe:
           exec:
