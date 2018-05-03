@@ -59,3 +59,19 @@ spec:
         configMap:
           name: ${configmap_name}
 
+
+# ------------------- Service ------------------- #
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  ports:
+  - port: ${service_port}
+    targetPort: ${container_port}
+  selector:
+    k8s-app: ${app_name}
