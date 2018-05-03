@@ -69,18 +69,29 @@ footer.nav-footer {
 
 .mainContainer .wrapper .post h1 {
     color: $postHeaderColor;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h2 {
     color: $postHeaderColor;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h3 {
     color: $postHeaderColor;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h5 {
     color: $postHeaderColor;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h5 strong {
     color: $postHeaderColor;
+    font-weight: bolder;
+}
+
+.mainContainer .wrapper a:not(.button) {
+    text-decoration: underline !important;
+    font-weight: bold;
+    color: $secondaryColor
 }
 
 .container .gridBlock .blockContent p {
