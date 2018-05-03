@@ -38,7 +38,7 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
-        - name: "HAYSTACK_PROP_KAFKA_STREAMS_APPLICATION_SERVER"
+        - name: "HAYSTACK_SERVICE_GRAPH"
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
