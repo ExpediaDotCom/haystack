@@ -1951,26 +1951,37 @@ footer.nav-footer {
 }
 
 .mainContainer .wrapper .post .postHeader h1 {
-    color: #e23474;
+    color: #3f4d71;
 }
 .mainContainer .wrapper .post .postHeader h1 a {
-    color: #e23474;
+    color: #3f4d71;
 }
 
 .mainContainer .wrapper .post h1 {
-    color: #e23474;
+    color: #3f4d71;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h2 {
-    color: #e23474;
+    color: #3f4d71;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h3 {
-    color: #e23474;
+    color: #3f4d71;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h5 {
-    color: #e23474;
+    color: #3f4d71;
+    font-weight: bold;
 }
 .mainContainer .wrapper .post h5 strong {
-    color: #e23474;
+    color: #3f4d71;
+    font-weight: bolder;
+}
+
+.mainContainer .wrapper a:not(.button) {
+    text-decoration: underline !important;
+    font-weight: bold;
+    color: #3f4d71
 }
 
 .container .gridBlock .blockContent p {
