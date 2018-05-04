@@ -6,7 +6,6 @@ kafka {
   streams {
     application.id = "haystack-service-graph-graph-builder"
     bootstrap.servers = "${kafka_endpoint}"
-    application.server = "localhost:8080"
     num.stream.threads = 4
     request.timeout.ms = 60000
     commit.interval.ms = 3000
