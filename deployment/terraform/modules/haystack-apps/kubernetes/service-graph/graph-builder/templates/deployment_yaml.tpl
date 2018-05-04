@@ -38,7 +38,7 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
-        - name: "HAYSTACK_SERVICE_HOST"
+        - name: "HAYSTACK_PROP_SERVICE_HOST"
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
