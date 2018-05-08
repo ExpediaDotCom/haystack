@@ -110,8 +110,11 @@ function downloadThirdPartySoftwares() {
 
 function deleteState() {
 
-case "$CLUSTER_TYPE" in
+    case "$CLUSTER_TYPE" in
         local)
+	    echo "deleting .terraform folders..."
+	    find $DIR -iname ".terraform" -exec rm {} \;
+	    echo "deleting state folder..."
             rm -rf $DIR/cluster/$CLUSTER_TYPE/state
         ;;
 
@@ -129,6 +132,7 @@ function command_exists() {
 }
 
 function applyActionOnComponents() {
+    echo "Applying action ${ACTION}"
     case "$ACTION" in
         install-all)
             installInfrastructure
