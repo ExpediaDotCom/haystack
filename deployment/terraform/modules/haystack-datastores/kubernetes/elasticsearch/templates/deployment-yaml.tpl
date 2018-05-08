@@ -23,7 +23,7 @@ spec:
             memory: ${memory_limit}Mi
           requests:
             cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "ES_JAVA_OPTS"
           value: "-Xms${memory_limit}m -Xmx${memory_limit}m"
