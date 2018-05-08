@@ -22,8 +22,7 @@ spec:
           limits:
             memory: ${memory_limit}Mi
           requests:
-            cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "MAX_HEAP_SIZE"
           value: "${memory_limit}m"
