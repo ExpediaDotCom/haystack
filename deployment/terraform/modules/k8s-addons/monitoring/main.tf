@@ -6,6 +6,7 @@ module "influxdb-addon" {
   storage_volume = "${var.influxdb_storage_volume}"
   storage_class = "${var.k8s_storage_class}"
   graphite_node_port = "${var.graphite_node_port}"
+  heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
   monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
 

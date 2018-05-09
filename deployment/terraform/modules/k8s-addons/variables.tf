@@ -15,6 +15,7 @@ variable "k8s_dashboard_cname" {}
 
 variable "add_kubewatch_addon" {}
 variable "kubewatch_config_yaml_base64" {}
+variable "datastores_heap_memory_in_mb" {}
 
 variable "container_log_path" {}
 variable "logging_es_nodes" {}

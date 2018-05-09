@@ -6,6 +6,7 @@ module "elasticsearch-addon" {
   minimum_masters = "${var.es_nodes}"
   storage_volume = "${var.es_storage_volume}"
   storage_class = "${var.k8s_storage_class}"
+  heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
   monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
 

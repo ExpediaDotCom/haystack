@@ -9,6 +9,7 @@ data "template_file" "influxdb_cluster_addon_config" {
     influxdb_image = "${var.k8s_influxdb_image}"
     influxdb_storage_class = "${var.storage_class}"
     influxdb_storage = "${var.storage_volume}"
+    heap_memory_in_mb = "${var.heap_memory_in_mb}"
     graphite_node_port = "${var.graphite_node_port}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }

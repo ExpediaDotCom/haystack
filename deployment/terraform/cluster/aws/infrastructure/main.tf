@@ -6,6 +6,8 @@ locals {
   k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.aws_domain_name}"
   monitoring-node_selecter_label = "kops.k8s.io/instancegroup: monitoring-nodes"
   app-node_selecter_label  = "kops.k8s.io/instancegroup: app-nodes"
+  k8s_datastores_heap_memory_in_mb = "2048"
+
 }
 
 module "haystack-k8s" {
@@ -61,6 +63,7 @@ module "k8s-addons" {
   metrics_cname = "${local.metrics_cname}"
   "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
   "app-node_selecter_label" = "${local.app-node_selecter_label}"
+  datastores_heap_memory_in_mb = "${local.k8s_datastores_heap_memory_in_mb}"
 }
 
 module "haystack-datastores" {
