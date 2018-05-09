@@ -9,7 +9,7 @@ locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
   memory_limit_in_mb = "250"
-  k8s_datastores_heap_memory_in_mb = "512"
+  k8s_datastores_heap_memory_in_mb = "1024"
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
