@@ -30,9 +30,6 @@ spec:
           # need more cpu upon initialization, therefore burstable class
           limits:
             memory: ${heap_memory_in_mb}Mi
-          requests:
-            cpu: 100m
-            memory: ${heap_memory_in_mb}Mi
         ports:
         - containerPort: 9200
           name: db

@@ -147,10 +147,16 @@ spec:
         - mountPath: ${container_log_path}
           name: varlibdockercontainers
           readOnly: true
+        - name: varlibdocker
+          mountPath: /var/lib/docker/
+          readOnly: true
         - name: config-volume
           mountPath: /etc/fluent/config.d
       restartPolicy: Always
       volumes:
+      - name: varlibdocker
+        hostPath:
+          path: /var/lib/docker/
       - hostPath:
           path: /var/log
         name: varlog

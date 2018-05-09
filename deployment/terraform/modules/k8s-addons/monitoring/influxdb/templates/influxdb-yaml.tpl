@@ -154,9 +154,6 @@ spec:
           # keep request = limit to keep this container in guaranteed class
           limits:
             memory: ${heap_memory_in_mb}Mi
-          requests:
-            cpu: 100m
-            memory: ${heap_memory_in_mb}Mi
         ports:
           - containerPort: 8083
         volumeMounts:
