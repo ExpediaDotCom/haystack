@@ -19,7 +19,7 @@ module "k8s-addons" {
   traefik_node_port = "${var.reverse_proxy_port}"
   graphite_node_port = "${var.graphite_node_port}"
 
-  add_logging_addons = false
+  add_logging_addons = "${var.logging_addons_enabled}"
   add_monitoring_addons = "${var.monitoring_addons_enabled}"
 
   add_kubewatch_addon = false

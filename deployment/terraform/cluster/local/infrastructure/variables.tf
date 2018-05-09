@@ -20,3 +20,7 @@ variable "graphite_node_port" {
 variable "monitoring_addons_enabled" {
   default = "false"
 }
+
+variable "logging_addons_enabled" {
+  default = "false"
+}
