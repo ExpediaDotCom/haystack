@@ -9,6 +9,7 @@ locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
   memory_limit_in_mb = "250"
+  k8s_datastores_heap_memory_in_mb = "250"
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
@@ -34,6 +35,7 @@ module "k8s-addons" {
   logs_cname = "${local.logs_cname}"
   "app-node_selecter_label" = "${local.app-node_selecter_label}"
   "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
+  "datastores_heap_memory_in_mb" = "${local.k8s_datastores_heap_memory_in_mb}"
 }
 module "haystack-infrastructure" {
   source = "../../../modules/haystack-datastores/kubernetes"

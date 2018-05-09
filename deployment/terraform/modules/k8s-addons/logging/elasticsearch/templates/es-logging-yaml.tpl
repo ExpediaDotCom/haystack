@@ -29,9 +29,10 @@ spec:
         resources:
           # need more cpu upon initialization, therefore burstable class
           limits:
-            cpu: 1000m
+            memory: ${heap_memory_in_mb}Mi
           requests:
             cpu: 100m
+            memory: ${heap_memory_in_mb}Mi
         ports:
         - containerPort: 9200
           name: db
@@ -44,7 +45,7 @@ spec:
           mountPath: /data
         env:
         - name: "ES_JAVA_OPTS"
-          value: "-Xms2048m -Xmx2048m"
+          value: "-Xms${heap_memory_in_mb}m -Xmx${heap_memory_in_mb}m"
         - name: "MINIMUM_MASTER_NODES"
           value: "${minimum_masters}"
       nodeSelector:
