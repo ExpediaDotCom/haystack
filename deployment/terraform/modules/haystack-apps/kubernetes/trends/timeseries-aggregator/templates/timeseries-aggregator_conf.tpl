@@ -10,9 +10,6 @@ kafka {
     commit.interval.ms = 5000
     auto.offset.reset = latest
     timestamp.extractor = "com.expedia.www.haystack.commons.kstreams.MetricPointTimestampExtractor"
-    producer.retries = 50,
-    producer.batch.size = 65536,
-    producer.linger.ms = 250
   }
 
   // For producing data to external kafka: set enable.external.kafka.produce to true and uncomment the props.
@@ -34,14 +31,13 @@ kafka {
 }
 
 state.store {
-  cleanup.policy = "compact,delete"
-  retention.ms = 14400000 // 4Hrs
-}
-
-statestore {
   enable.logging = true
   logging.delay.seconds = 60
   cache.size = 32767
+  changelog.topic {
+    cleanup.policy = "compact,delete"
+    retention.ms = 14400000 // 4Hrs
+  }
 }
 
 
