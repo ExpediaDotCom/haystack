@@ -16,7 +16,6 @@ data "template_file" "elasticsearch_addon_config" {
     heap_memory_in_mb = "${var.heap_memory_in_mb}"
 
   }
-  count = "${local.count}"
 }
 resource "null_resource" "elasticsearch_addons" {
   triggers {
