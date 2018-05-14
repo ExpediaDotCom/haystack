@@ -9,7 +9,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true,
-    version = "aa62f556c8d28c371a1bdd0b40a6ec115820101a"
+    version = "00754f095eef7926418e68d5ee47630a47be6c94"
     traces_indexer_instances = 1,
     traces_reader_instances = 1,
     trace_indexer_environment_overrides = "",
@@ -22,7 +22,7 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = true,
-    version = "e407d22f377a6baa2aae24b184d0dd7d23c7486d"
+    version = "ffedf1ee5649b31ef411f8f2e45fe356f32e4aae"
     node_finder_instances = 1,
     node_finder_environment_overrides = ""
     graph_builder_instances = 1,
@@ -34,7 +34,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true,
-    version = "10039dc9afa5d2db1b6d93a7540fb6d485192f02"
+    version = "8bc88c839930923d26ed688e5680009aad7a0e1d"
     span_timeseries_transformer_instances = 1,
     timeseries_aggregator_instances = 1,
     timeseries_aggregator_environment_overrides = "",
@@ -47,7 +47,7 @@ variable "trends" {
 variable "pipes" {
   type = "map"
   default = {
-    version = "f48a026554636555fc3cb20ac760e4315857f949"
+    version = "a20a8087f5ddc3fbf1a1c72dcff840608accadbf"
 
     firehose_writer_enabled = false
     firehose_writer_instances = 1
@@ -89,7 +89,7 @@ variable "pipes" {
 variable "collector" {
   type = "map"
   default = {
-    version = "e1d967e30a9a87122d8c332700cc4a3152db7f8a"
+    version = "08534fa97ffb723ef6f138bddecd9dfbce0b9dd2"
     kinesis_span_collector_instances = 1,
     kinesis_span_collector_enabled = true,
     kinesis_stream_region = "",

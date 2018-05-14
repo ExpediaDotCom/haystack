@@ -12,8 +12,6 @@ data "template_file" "kibana_addon_config" {
     logs_cname = "${var.logs_cname}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
-  count = "${local.count}"
-
 }
 resource "null_resource" "kibana_addons" {
   triggers {

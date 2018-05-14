@@ -9,7 +9,6 @@ data "template_file" "curator_cron_job" {
     elasticsearch_host = "${var.elasticsearch_host}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
-  count = "${local.count}"
 }
 resource "null_resource" "elasticsearch_addons" {
   triggers {

@@ -12,7 +12,6 @@ data "template_file" "fluentd_cluster_addon_config" {
     fluentd_image = "${var.k8s_fluentd_image}"
     container_log_path = "${var.container_log_path}"
   }
-  count = "${local.count}"
 }
 
 resource "null_resource" "k8s_fluentd_addons" {
