@@ -4,7 +4,6 @@ locals {
   container_port = 9042
   deployment_yaml_file_path = "${path.module}/templates/deployment-yaml.tpl"
   image = "cassandra:3.11.0"
-  jvm_memory_limit=250
 }
 
 data "template_file" "deployment_yaml" {
