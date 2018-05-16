@@ -4,6 +4,7 @@ locals {
   container_port = 9200
   deployment_yaml_file_path = "${path.module}/templates/deployment-yaml.tpl"
   es_docker_image = "elasticsearch:5-alpine"
+  jvm_memory_limit=250
 }
 
 data "template_file" "deployment_yaml" {
@@ -15,6 +16,7 @@ data "template_file" "deployment_yaml" {
     replicas = "${var.replicas}"
     image = "${local.es_docker_image}"
     memory_limit = "${var.memory_limit}"
+    jvm_memory_limit = "${local.jvm_memory_limit}"
     cpu_limit = "${var.cpu_limit}"
     service_port = "${local.service_port}"
     container_port = "${local.container_port}"
