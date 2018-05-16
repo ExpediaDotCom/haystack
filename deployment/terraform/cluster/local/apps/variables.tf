@@ -91,7 +91,7 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = false,
-    version = "ffedf1ee5649b31ef411f8f2e45fe356f32e4aae"
+    version = "59a101cc9abba5a3f6f17305be4207ea350f3170"
     node_finder_instances = 1,
     node_finder_environment_overrides = ""
     graph_builder_instances = 1,
