@@ -5,7 +5,7 @@ module "cassandra" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   node_selecter_label = "${var.node_selecter_label}"
-  memory_limit = "${var.memory_limit}"
+  memory_limit = "400"
   cpu_limit = "${var.cpu_limit}"
 }
 

@@ -25,9 +25,9 @@ spec:
             memory: ${memory_limit}Mi
         env:
         - name: "MAX_HEAP_SIZE"
-          value: "${memory_limit}m"
+          value: "${jvm_memory_limit}m"
         - name: "HEAP_NEWSIZE"
-          value: "${memory_limit}m"
+          value: "${jvm_memory_limit}m"
       nodeSelector:
         ${node_selecter_label}
 
