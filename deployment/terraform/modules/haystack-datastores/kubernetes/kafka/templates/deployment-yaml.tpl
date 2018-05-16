@@ -38,6 +38,8 @@ spec:
           value: "${topics}"
         - name: "KAFKA_LOG_MESSAGE_TIMESTAMP_TYPE"
           value: "LogAppendTime"
+        - name: "KAFKA_HEAP_OPTS"
+          value: "-Xmx{jvm_memory_limit}m -Xms{jvm_memory_limit}m"
       nodeSelector:
         ${node_selecter_label}
 
