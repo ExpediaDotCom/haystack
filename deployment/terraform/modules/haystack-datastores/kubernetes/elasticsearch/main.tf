@@ -15,6 +15,7 @@ data "template_file" "deployment_yaml" {
     replicas = "${var.replicas}"
     image = "${local.es_docker_image}"
     memory_limit = "${var.memory_limit}"
+    jvm_memory_limit = "${var.memory_limit - 200}"
     cpu_limit = "${var.cpu_limit}"
     service_port = "${local.service_port}"
     container_port = "${local.container_port}"
