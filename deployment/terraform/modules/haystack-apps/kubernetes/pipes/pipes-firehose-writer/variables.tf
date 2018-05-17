@@ -21,3 +21,9 @@ variable "env_vars" {}
 variable "termination_grace_period" {
   default = 30
 }
+variable "firehose_usestringbuffering" {
+  default = true
+}
+variable "firehose_maxbatchinterval" {
+  default = 3000
+}

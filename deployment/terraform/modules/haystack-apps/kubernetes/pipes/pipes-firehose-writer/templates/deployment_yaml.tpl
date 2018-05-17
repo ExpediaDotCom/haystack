@@ -46,6 +46,10 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
+        - name: "HAYSTACK_FIREHOSE_USESTRINGBUFFERING"
+          value: "${firehose_usestringbuffering}"
+        - name: "HAYSTACK_FIREHOSE_MAXBATCHINTERVAL"
+          value: "${firehose_maxbatchinterval}"
         ${env_vars}
         livenessProbe:
           exec:
