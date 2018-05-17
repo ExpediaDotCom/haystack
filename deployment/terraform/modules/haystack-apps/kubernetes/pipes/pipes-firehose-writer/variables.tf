@@ -22,7 +22,7 @@ variable "termination_grace_period" {
   default = 30
 }
 variable "firehose_usestringbuffering" {
-  default = "false"
+  default = "true"
 }
 variable "firehose_maxbatchinterval" {
   default = 0
