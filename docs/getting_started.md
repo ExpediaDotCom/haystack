@@ -44,7 +44,7 @@ Once the record for the Minikube appears in `/etc/hosts`, you can access the Hay
 ### Installed components list
 
 The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
-To open the Minikube dashboard type `minikube start`.
+To open the Minikube dashboard type `minikube dashboard`.
 
 ### Uninstall the software
 From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
