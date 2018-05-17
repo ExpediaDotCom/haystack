@@ -25,5 +25,5 @@ variable "firehose_usestringbuffering" {
   default = true
 }
 variable "firehose_maxbatchinterval" {
-  default = 3000
+  default = 0
 }
