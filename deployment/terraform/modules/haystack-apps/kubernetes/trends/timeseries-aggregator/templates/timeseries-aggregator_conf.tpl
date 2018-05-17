@@ -11,6 +11,7 @@ kafka {
     auto.offset.reset = latest
     timestamp.extractor = "com.expedia.www.haystack.commons.kstreams.MetricPointTimestampExtractor"
     consumer.heartbeat.interval.ms = 30000
+    consumer.session.timeout.ms = 100000
     consumer.max.partition.fetch.bytes = 262144
   }
 
