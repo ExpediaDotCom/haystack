@@ -3,7 +3,7 @@ locals {
   service_port = 6060
   container_port = 6060
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
-  image = "grafana/metrictank:latest"
+  image = "grafana/metrictank:0.9.0"
   count = "${var.enabled == "true" ? 1:0}"
 
 }
