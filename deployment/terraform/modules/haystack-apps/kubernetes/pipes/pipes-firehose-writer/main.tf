@@ -25,6 +25,8 @@ data "template_file" "deployment_yaml" {
     graphite_host = "${var.graphite_hostname}"
     graphite_port = "${var.graphite_port}"
     env_vars= "${indent(9,"${var.env_vars}")}"
+    firehose_usestringbuffering = "${var.firehose_usestringbuffering}"
+    firehose_maxbatchinterval = "${var.firehose_maxbatchinterval}"
   }
 }
 
