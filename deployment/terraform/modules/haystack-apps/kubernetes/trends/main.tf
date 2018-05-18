@@ -35,6 +35,7 @@ module "span-timeseries-transformer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.trends["span_timeseries_transformer_environment_overrides"]}"
 }
 module "timeseries-aggregator" {
@@ -54,5 +55,6 @@ module "timeseries-aggregator" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.trends["timeseries_aggregator_environment_overrides"]}"
 }

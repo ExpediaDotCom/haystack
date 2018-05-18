@@ -1,7 +1,8 @@
 locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
-  default_memory_limit = "250Mi"
+  default_memory_limit = "250"
+  jvm_memory_limit = "200"
 }
 
 data "terraform_remote_state" "haystack_inrastructure" {
@@ -15,6 +16,7 @@ module "haystack-apps" {
 
   default_cpu_limit = "${local.default_cpu_limit}"
   default_memory_limit = "${local.default_memory_limit}"
+  jvm_memory_limit = "${local.jvm_memory_limit}"
   elasticsearch_hostname = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_port}"
   kubectl_context_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"

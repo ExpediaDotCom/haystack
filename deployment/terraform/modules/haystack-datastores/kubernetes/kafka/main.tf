@@ -15,6 +15,7 @@ module "zookeeper" {
   kubectl_context_name = "${var.kubectl_context_name}"
   node_selecter_label = "${var.node_selecter_label}"
   memory_limit = "${var.memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   cpu_limit = "${var.cpu_limit}"
 }
 
@@ -29,7 +30,7 @@ data "template_file" "deployment_yaml" {
     image = "${local.image}"
     memory_limit = "${var.memory_limit}"
     cpu_limit = "${var.cpu_limit}"
-    jvm_memory_limit = "${var.memory_limit - 200}"
+    jvm_memory_limit = "${var.jvm_memory_limit}"
     service_port = "${local.service_port}"
     container_port = "${local.container_port}"
     host_name = "${var.docker_host_ip}"

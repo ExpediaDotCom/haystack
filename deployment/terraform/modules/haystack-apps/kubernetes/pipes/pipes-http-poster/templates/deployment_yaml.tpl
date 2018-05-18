@@ -23,10 +23,10 @@ spec:
         image: ${image}
         resources:
           limits:
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
           requests:
             cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "HAYSTACK_HTTPPOST_POLLPERCENT"
           value: "${http_poster_httppost_pollpercent}"
@@ -38,6 +38,10 @@ spec:
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
           value: "${graphite_port}"
+        - name: "JAVA_XMS"
+          value: "${jvm_memory_limit}m"
+        - name: "JAVA_XMX"
+          value: "${jvm_memory_limit}m"
         ${env_vars}
       nodeSelector:
         ${node_selecter_label}

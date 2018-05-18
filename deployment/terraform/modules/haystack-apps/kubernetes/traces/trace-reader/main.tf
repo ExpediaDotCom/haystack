@@ -40,6 +40,7 @@ data "template_file" "deployment_yaml" {
     image = "${var.image}"
     replicas = "${var.replicas}"
     memory_limit = "${var.memory_limit}"
+    jvm_memory_limit = "${var.jvm_memory_limit}"
     cpu_limit = "${var.cpu_limit}"
     service_port = "${var.service_port}"
     container_port = "${var.container_port}"

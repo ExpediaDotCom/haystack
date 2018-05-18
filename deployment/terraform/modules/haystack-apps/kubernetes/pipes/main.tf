@@ -12,6 +12,7 @@ module "pipes-json-transformer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.pipes["json_transformer_environment_overrides"]}"
 
 }
@@ -30,6 +31,7 @@ module "pipes-kafka-producer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.pipes["kafka_producer_environment_overrides"]}"
 
 }
@@ -51,6 +53,7 @@ module "pipes-http-poster" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.pipes["http_poster_environment_overrides"]}"
 }
 
@@ -74,6 +77,7 @@ module "pipes-firehose-writer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.pipes["firehose_writer_environment_overrides"]}"
 }
 
@@ -88,6 +92,7 @@ module "pipes-secret-detector" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   namespace = "${var.app_namespace}"
   node_selecter_label = "${var.node_selector_label}"
   pipes_secret_detector_kafka_threadcount = "${var.pipes["pipes_secret_detector_kafka_threadcount"]}"

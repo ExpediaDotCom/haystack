@@ -23,10 +23,10 @@ spec:
         image: ${image}
         resources:
           limits:
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
           requests:
             cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "HAYSTACK_FIREHOSE_INITIALRETRYSLEEP"
           value: "${firehose_initialretrysleep}"
@@ -50,6 +50,10 @@ spec:
           value: "${firehose_usestringbuffering}"
         - name: "HAYSTACK_FIREHOSE_MAXBATCHINTERVAL"
           value: "${firehose_maxbatchinterval}"
+        - name: "JAVA_XMS"
+          value: "${jvm_memory_limit}m"
+        - name: "JAVA_XMX"
+          value: "${jvm_memory_limit}m"
         ${env_vars}
         livenessProbe:
           exec:

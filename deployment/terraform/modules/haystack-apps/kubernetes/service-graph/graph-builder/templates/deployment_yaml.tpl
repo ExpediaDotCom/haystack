@@ -27,10 +27,10 @@ spec:
           name: config-volume
         resources:
           limits:
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
           requests:
             cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value: "/config/graph-builder.conf"
@@ -42,6 +42,10 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: "JAVA_XMS"
+          value: "${jvm_memory_limit}m"
+        - name: "JAVA_XMX"
+          value: "${jvm_memory_limit}m"
         ${env_vars}
       nodeSelector:
         ${node_selecter_label}

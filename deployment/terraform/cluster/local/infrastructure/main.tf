@@ -9,6 +9,7 @@ locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
   default_cpu_limit = "100m"
   memory_limit_in_mb = "400"
+  jvm_memory_limit = "250"
   k8s_datastores_heap_memory_in_mb = "1024"
 }
 module "k8s-addons" {
@@ -46,5 +47,5 @@ module "haystack-infrastructure" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   cpu_limit = "${local.default_cpu_limit}"
   memory_limit = "${local.memory_limit_in_mb}"
-
+  jvm_memory_limit = "${local.jvm_memory_limit}"
 }

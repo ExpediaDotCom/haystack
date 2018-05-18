@@ -37,6 +37,7 @@ data "template_file" "deployment_yaml" {
     image = "${var.image}"
     replicas = "${var.replicas}"
     memory_limit = "${var.memory_limit}"
+    jvm_memory_limit = "${var.jvm_memory_limit}"
     cpu_limit = "${var.cpu_limit}"
     configmap_name = "${local.configmap_name}"
     env_vars= "${indent(9,"${var.env_vars}")}"

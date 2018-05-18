@@ -23,10 +23,10 @@ spec:
         image: ${image}
         resources:
           limits:
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
           requests:
             cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
@@ -46,6 +46,10 @@ spec:
           value: "${pipes_secret_detector_secretsnotifications_email_tos}"
         - name: "HAYSTACK_SECRETSNOTIFICATIONS_WHITELIST_BUCKET"
           value: "${pipes_secret_detector_secretsnotifications_whitelist_bucket}"
+        - name: "JAVA_XMS"
+          value: "${jvm_memory_limit}m"
+        - name: "JAVA_XMX"
+          value: "${jvm_memory_limit}m"
         ${env_vars}
         livenessProbe:
           exec:

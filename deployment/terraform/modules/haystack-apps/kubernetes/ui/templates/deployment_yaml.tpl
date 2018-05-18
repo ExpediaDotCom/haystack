@@ -27,10 +27,10 @@ spec:
           name: config-volume
         resources:
           limits:
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
           requests:
             cpu: ${cpu_limit}
-            memory: ${memory_limit}
+            memory: ${memory_limit}Mi
         env:
         - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value: "/config/haystack-ui.json"
