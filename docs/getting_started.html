@@ -51,7 +51,7 @@ To open the Minikube dashboard type <code>minikube dashboard</code>.</p>
 </code></pre></li>
 <li>Recreate the Minikube VM
 <pre><code class="hljs css shell">minikube delete
-minikube start
+minikube start --memory 4096 --cpus 2
 </code></pre></li>
 <li>Retrigger Deployment
 <pre><code class="hljs css shell">./apply-compose.sh -r install-all
