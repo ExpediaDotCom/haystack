@@ -21,7 +21,7 @@ data:
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: traefik-cluster-addon
+  name: ${traefik_name}
 rules:
   - apiGroups:
       - ""
@@ -46,7 +46,7 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: traefik-haystack
+  name: ${traefik_name}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
