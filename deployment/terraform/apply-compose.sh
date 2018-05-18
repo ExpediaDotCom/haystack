@@ -229,8 +229,7 @@ function installInfrastructure() {
             AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE)
             echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
             $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME --state s3://$S3_BUCKET || true
-            $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET -
-
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET
         ;;
 
         local)
