@@ -12,6 +12,7 @@ variable "haystack_domain_name" {
 variable "reverse_proxy_port" {
   default = "32300"
 }
+variable "docker_host_ip" {}
 
 variable "graphite_node_port" {
   default = "32301"

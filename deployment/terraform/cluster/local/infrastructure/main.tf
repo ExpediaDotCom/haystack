@@ -48,4 +48,5 @@ module "haystack-infrastructure" {
   cpu_limit = "${local.default_cpu_limit}"
   memory_limit = "${local.memory_limit_in_mb}"
   jvm_memory_limit = "${local.jvm_memory_limit}"
+  docker_host_ip = "${var.docker_host_ip}"
 }
