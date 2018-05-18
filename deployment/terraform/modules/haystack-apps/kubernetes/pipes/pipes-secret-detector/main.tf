@@ -16,6 +16,7 @@ data "template_file" "deployment_yaml" {
     image = "${var.image}"
     kafka_hostname = "${var.kafka_hostname}"
     memory_limit = "${var.memory_limit}"
+    jvm_memory_limit = "${var.jvm_memory_limit}"
     namespace = "${var.namespace}"
     node_selecter_label = "${var.node_selecter_label}"
     pipes_secret_detector_secretsnotifications_email_from = "${var.pipes_secret_detector_secretsnotifications_email_from}"

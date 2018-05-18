@@ -1,7 +1,8 @@
 locals {
   app-node_selecter_label = "kops.k8s.io/instancegroup: app-nodes"
   default_cpu_limit = "500m"
-  default_memory_limit = "1500Mi"
+  default_memory_limit = "1500"
+  jvm_memory_limit = "1024"
   //always setting to true for aws deployment
   graphite_enabled = "true"
 }
@@ -20,6 +21,7 @@ module "haystack-apps" {
   haystack_cluster_name = "${var.haystack_cluster_name}"
   default_cpu_limit = "${local.default_cpu_limit}"
   default_memory_limit = "${local.default_memory_limit}"
+  jvm_memory_limit = "${local.jvm_memory_limit}"
   app-node_selector_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
 

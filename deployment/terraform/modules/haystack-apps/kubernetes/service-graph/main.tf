@@ -12,6 +12,7 @@ module "node-finder" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.service-graph["node_finder_environment_overrides"]}"
 }
 
@@ -29,5 +30,6 @@ module "graph-builder" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.service-graph["graph_builder_environment_overrides"]}"
 }

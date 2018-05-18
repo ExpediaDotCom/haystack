@@ -7,6 +7,7 @@ module "cassandra" {
   node_selecter_label = "${var.node_selecter_label}"
   memory_limit = "${var.memory_limit}"
   cpu_limit = "${var.cpu_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
 }
 
 module "es" {
@@ -18,6 +19,7 @@ module "es" {
   node_selecter_label = "${var.node_selecter_label}"
   memory_limit = "${var.memory_limit}"
   cpu_limit = "${var.cpu_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
 }
 
 
@@ -31,4 +33,5 @@ module "kafka" {
   node_selecter_label = "${var.node_selecter_label}"
   memory_limit = "${var.memory_limit}"
   cpu_limit = "${var.cpu_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
 }

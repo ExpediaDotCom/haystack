@@ -1,3 +1,7 @@
+locals {
+
+}
+
 module "traces" {
   source = "traces"
   namespace = "${var.k8s_app_namespace}"
@@ -15,6 +19,7 @@ module "traces" {
   kubectl_context_name = "${var.kubectl_context_name}"
   default_cpu_limit = "${var.default_cpu_limit}"
   default_memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   traces = "${var.traces}"
 }
 
@@ -24,6 +29,7 @@ module "trends" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   default_memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   default_cpu_limit = "${var.default_cpu_limit}"
   node_selector_label = "${var.app-node_selector_label}"
 
@@ -44,6 +50,7 @@ module "pipes" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   default_memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   default_cpu_limit = "${var.default_cpu_limit}"
   node_selector_label = "${var.app-node_selector_label}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
@@ -63,6 +70,7 @@ module "collectors" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   default_memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   default_cpu_limit = "${var.default_cpu_limit}"
   node_selector_label = "${var.app-node_selector_label}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
@@ -87,6 +95,7 @@ module "service-graph" {
   kubectl_context_name = "${var.kubectl_context_name}"
   default_cpu_limit = "${var.default_cpu_limit}"
   default_memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   service-graph = "${var.service-graph}"
 }
 

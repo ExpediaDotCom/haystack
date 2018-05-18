@@ -16,6 +16,7 @@ module "trace-indexer" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.traces["trace_indexer_environment_overrides"]}"
 }
 
@@ -35,5 +36,6 @@ module "trace-reader" {
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.default_cpu_limit}"
   memory_limit = "${var.default_memory_limit}"
+  jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.traces["trace_reader_environment_overrides"]}"
 }

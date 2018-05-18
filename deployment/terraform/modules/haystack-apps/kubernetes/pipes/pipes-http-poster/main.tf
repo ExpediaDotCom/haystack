@@ -18,6 +18,7 @@ data "template_file" "deployment_yaml" {
     replicas = "${var.replicas}"
     image = "${var.image}"
     memory_limit = "${var.memory_limit}"
+    jvm_memory_limit = "${var.jvm_memory_limit}"
     cpu_limit = "${var.cpu_limit}"
     graphite_host = "${var.graphite_hostname}"
     graphite_port = "${var.graphite_port}"
