@@ -70,7 +70,7 @@ If Minikube is returning errors during the install process it could be due to in
 2. Recreate the Minikube VM
     ```shell
     minikube delete
-    minikube start
+    minikube start --memory 4096 --cpus 2
     ```
 3. Retrigger Deployment
     ```shell

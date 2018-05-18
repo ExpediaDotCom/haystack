@@ -34,5 +34,4 @@ module "kafka" {
   memory_limit = "${var.memory_limit}"
   cpu_limit = "${var.cpu_limit}"
   jvm_memory_limit = "${var.jvm_memory_limit}"
-  docker_host_ip = "${var.docker_host_ip}"
 }
