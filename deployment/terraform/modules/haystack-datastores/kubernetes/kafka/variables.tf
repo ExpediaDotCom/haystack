@@ -6,9 +6,7 @@ variable "node_selecter_label" {}
 variable "memory_limit" {}
 variable "jvm_memory_limit"{}
 variable "cpu_limit" {}
-variable "docker_host_ip" {
-  default = "192.168.99.100"
-}
+variable "docker_host_ip" {}
 variable "termination_grace_period" {
   default = 30
 }
