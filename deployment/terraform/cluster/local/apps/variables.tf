@@ -36,15 +36,17 @@ variable "pipes" {
   default = {
     version = "a20a8087f5ddc3fbf1a1c72dcff840608accadbf"
 
-    firehose_writer_enabled = false
-    firehose_writer_instances = 1
-    firehose_writer_environment_overrides = "",
     firehose_kafka_threadcount = 1,
+    firehose_writer_enabled = false
+    firehose_writer_environment_overrides = "",
+    firehose_writer_firehose_fromtopic = ""
     firehose_writer_firehose_initialretrysleep = 1,
     firehose_writer_firehose_maxretrysleep = "",
     firehose_writer_firehose_signingregion = ""
     firehose_writer_firehose_streamname = ""
+    firehose_writer_firehose_totopic = ""
     firehose_writer_firehose_url = ""
+    firehose_writer_instances = 1
 
     http_poster_enabled = false
     http_poster_environment_overrides = ""
