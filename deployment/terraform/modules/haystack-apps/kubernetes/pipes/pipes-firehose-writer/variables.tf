@@ -9,6 +9,7 @@ variable "firehose_url" {}
 variable "firehose_streamname" {}
 variable "firehose_kafka_threadcount" {}
 variable "firehose_signingregion" {}
+variable "firehose_fromtopic" {}
 variable "firehose_initialretrysleep" {}
 variable "firehose_maxretrysleep" {}
 
