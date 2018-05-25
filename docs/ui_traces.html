@@ -14,7 +14,6 @@ Here are the available search options -</p>
 <li><strong>Tags</strong>: User can specify white space separated list of tags in <code>key=value</code> format(eg. <code>success=false</code>), it will fetch Traces who have all the specified tags for provided service and operation combination. Please note that <em>only the tags whitelisted in haystack tracing subsystem will be eligible for search</em>, others will be ignored. Some special case for Tags search -
 <ul>
 <li>In case of <code>traceId</code> tag search, haystack will search for the given id across all services and ignore the provided service</li>
-<li>You can provide <code>minDuration=&lt;x_milliseconds&gt;</code> for searching for traces who took &gt; x_milliseconds in total.</li>
 </ul></li>
 <li><strong>Time Range Picker</strong>: User can select any presets or specify a custom time window.</li>
 </ul>
