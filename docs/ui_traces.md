@@ -12,7 +12,6 @@ Here are the available search options -
 - **Operation**: Operation of the given service through which trace must go through
 - **Tags**: User can specify white space separated list of tags in `key=value` format(eg. `success=false`), it will fetch Traces who have all the specified tags for provided service and operation combination. Please note that *only the tags whitelisted in haystack tracing subsystem will be eligible for search*, others will be ignored. Some special case for Tags search -
     - In case of `traceId` tag search, haystack will search for the given id across all services and ignore the provided service 
-    - You can provide `minDuration=<x_milliseconds>` for searching for traces who took > x_milliseconds in total.
 - **Time Range Picker**: User can select any presets or specify a custom time window.
 
 ![Traces](/haystack/img/traces.png)
