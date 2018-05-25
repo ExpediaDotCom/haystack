@@ -39,7 +39,7 @@ spec:
         - name: "HAYSTACK_FIREHOSE_URL"
           value: "${firehose_url}"
         - name: "HAYSTACK_KAFKA_FROMTOPIC"
-          value: "${firehose_fromtopic}"
+          value: "${firehose_writer_haystack_kafka_fromtopic}"
         - name: "HAYSTACK_KAFKA_THREADCOUNT"
           value: "${firehose_kafka_threadcount}"
         - name: "HAYSTACK_KAFKA_BROKERS"

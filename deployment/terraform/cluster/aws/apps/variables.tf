@@ -52,12 +52,12 @@ variable "pipes" {
     firehose_kafka_threadcount = 1,
     firehose_writer_enabled = false
     firehose_writer_environment_overrides = "",
-    firehose_writer_firehose_fromtopic = ""
     firehose_writer_firehose_initialretrysleep = 10,
     firehose_writer_firehose_maxretrysleep = 3000,
     firehose_writer_firehose_signingregion = ""
     firehose_writer_firehose_streamname = ""
     firehose_writer_firehose_url = ""
+    firehose_writer_haystack_kafka_fromtopic = ""
     firehose_writer_instances = 1
 
     http_poster_enabled = false
