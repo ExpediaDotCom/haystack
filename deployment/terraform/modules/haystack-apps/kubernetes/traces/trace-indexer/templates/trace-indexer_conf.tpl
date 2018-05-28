@@ -134,6 +134,33 @@ elasticsearch {
   }
 }
 
+service.metadata {
+  enabled = true
+  max.inflight.requests = 100
+  flush {
+    interval.sec = 60
+    operation.count = 10000
+  }
+
+  ttl.sec = 259200 # 3 days
+
+  cassandra {
+    keyspace {
+      auto.create.schema = "CREATE KEYSPACE IF NOT EXISTS haystack_metadata WITH REPLICATION = { 'class': 'SimpleStrategy', 'replication_factor' : 1 } AND durable_writes = false; CREATE TABLE IF NOT EXISTS haystack_metadata.services (service_name varchar, operation_name varchar, ts timestamp, PRIMARY KEY ((service_name), operation_name)) WITH CLUSTERING ORDER BY (operation_name ASC) AND compaction = { 'class' :  'DateTieredCompactionStrategy', 'max_sstable_age_days': '3' } AND gc_grace_seconds = 86400;"
+      name = "haystack_metadata"
+      table.name = "services"
+    }
+  }
+
+  retries {
+    max = 10
+    backoff {
+      initial.ms = 100
+      factor = 2
+    }
+  }
+}
+
 reload {
   tables {
     index.fields.config = "indexing-fields"
