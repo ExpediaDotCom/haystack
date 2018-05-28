@@ -78,6 +78,17 @@ trace {
   }
 }
 
+service.metadata {
+  enabled = true
+
+  cassandra {
+    keyspace {
+      name = "haystack_metadata"
+      table.name = "services"
+    }
+  }
+}
+
 reload {
   tables {
     index.fields.config = "indexing-fields"
