@@ -18,6 +18,7 @@ module "trace-indexer" {
   memory_limit = "${var.default_memory_limit}"
   jvm_memory_limit = "${var.jvm_memory_limit}"
   env_vars = "${var.traces["trace_indexer_environment_overrides"]}"
+  elasticsearch_template = "${var.traces["elasticsearch_template"]}"
 }
 
 module "trace-reader" {
