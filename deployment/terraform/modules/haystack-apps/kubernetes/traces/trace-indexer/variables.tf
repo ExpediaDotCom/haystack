@@ -4,6 +4,7 @@ variable "namespace" {}
 variable "kafka_endpoint" {}
 variable "elasticsearch_hostname" {}
 variable "elasticsearch_port" {}
+variable "elasticsearch_template" {}
 variable "cassandra_hostname" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
