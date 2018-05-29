@@ -5,7 +5,6 @@ locals {
   count = "${var.enabled?1:0}"
   span_produce_topic = "${var.enable_kafka_sink?"span-buffer":""}"
   elasticsearch_endpoint = "${var.elasticsearch_hostname}:${var.elasticsearch_port}"
-  elasticsearch_template = "${var.elasticsearch_template}"
   checksum = "${sha1("${data.template_file.config_data.rendered}")}"
   configmap_name = "indexer-${local.checksum}"
 }
@@ -27,7 +26,7 @@ data "template_file" "config_data" {
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
     elasticsearch_endpoint = "${local.elasticsearch_endpoint}"
-    elasticsearch_template = "${local.elasticsearch_template}"
+    elasticsearch_template = "${var.elasticsearch_template}"
     cassandra_hostname = "${var.cassandra_hostname}"
     span_produce_topic = "${local.span_produce_topic}"
   }

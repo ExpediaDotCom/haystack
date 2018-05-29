@@ -126,7 +126,7 @@ elasticsearch {
 
   index {
     # apply the template before starting the client, if json is empty, no operation is performed
-    template.json = "${elasticsearch_template}"
+    template.json = """${elasticsearch_template}"""
 
     name.prefix = "haystack-traces"
     type = "spans"
