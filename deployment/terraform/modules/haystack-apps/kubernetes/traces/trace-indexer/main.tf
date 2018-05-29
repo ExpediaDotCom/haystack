@@ -27,6 +27,7 @@ data "template_file" "config_data" {
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
     elasticsearch_endpoint = "${local.elasticsearch_endpoint}"
+    elasticsearch_template = "${local.elasticsearch_template}"
     cassandra_hostname = "${var.cassandra_hostname}"
     span_produce_topic = "${local.span_produce_topic}"
   }
