@@ -12,11 +12,10 @@ module "metrictank" {
   graphite_address = "${var.graphite_hostname}:${var.graphite_port}"
   enabled = "${local.external_metric_tank_enabled == "true" ? "false" : "true" }"
   memory_limit = "${var.metrictank["memory_limit"]}"
-
+  cpu_limit = "${var.metrictank["cpu_limit"]}"
   node_selecter_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  cpu_limit = "${var.default_cpu_limit}"
   env_vars = "${var.metrictank["environment_overrides"]}"
 
 }
@@ -33,9 +32,9 @@ module "span-timeseries-transformer" {
   enabled = "${var.trends["enabled"]}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  cpu_limit = "${var.default_cpu_limit}"
-  memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
+  cpu_limit = "${var.trends["span_timeseries_transformer_cpu_limit"]}"
+  memory_limit = "${var.trends["span_timeseries_transformer_memory_limit"]}"
+  jvm_memory_limit = "${var.trends["span_timeseries_transformer_jvm_memory_limit"]}"
   env_vars = "${var.trends["span_timeseries_transformer_environment_overrides"]}"
 }
 module "timeseries-aggregator" {
@@ -53,8 +52,8 @@ module "timeseries-aggregator" {
   enabled = "${var.trends["enabled"]}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  cpu_limit = "${var.default_cpu_limit}"
-  memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
+  cpu_limit = "${var.trends["timeseries_aggregator_cpu_limit"]}"
+  memory_limit = "${var.trends["timeseries_aggregator_memory_limit"]}"
+  jvm_memory_limit = "${var.trends["timeseries_aggregator_jvm_memory_limit"]}"
   env_vars = "${var.trends["timeseries_aggregator_environment_overrides"]}"
 }

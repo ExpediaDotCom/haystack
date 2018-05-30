@@ -16,7 +16,7 @@ module "kinesis-span-collector" {
   node_selecter_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  cpu_limit = "${var.default_cpu_limit}"
-  memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
+  cpu_limit = "${var.collector["kinesis_span_collector_cpu_limit"]}"
+  memory_limit = "${var.collector["kinesis_span_collector_memory_limit"]}"
+  jvm_memory_limit = "${var.collector["kinesis_span_collector_jvm_memory_limit"]}"
 }
