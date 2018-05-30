@@ -108,7 +108,6 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   user_data = "${data.template_file.zookeeper_user_data.rendered}"
 }
 
-
 data "template_file" "kafka_broker_user_data" {
   template = "${file("${path.module}/data/kafka_broker_user_data_sh.tpl")}"
 
@@ -131,7 +130,6 @@ resource "aws_instance" "haystack-kafka-broker" {
   vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   key_name = "${var.aws_ssh_key_pair_name}"
   associate_public_ip_address = false
-
   tags = {
     Product = "Haystack"
     Component = "Kafka"
