@@ -1,7 +1,3 @@
-locals {
-
-}
-
 module "traces" {
   source = "traces"
   namespace = "${var.k8s_app_namespace}"
@@ -17,9 +13,6 @@ module "traces" {
   node_selector_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  default_cpu_limit = "${var.default_cpu_limit}"
-  default_memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
   traces = "${var.traces}"
 }
 
@@ -28,9 +21,6 @@ module "trends" {
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  default_memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
-  default_cpu_limit = "${var.default_cpu_limit}"
   node_selector_label = "${var.app-node_selector_label}"
 
   kafka_port = "${var.kafka_port}"
@@ -49,9 +39,6 @@ module "pipes" {
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  default_memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
-  default_cpu_limit = "${var.default_cpu_limit}"
   node_selector_label = "${var.app-node_selector_label}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 
@@ -69,9 +56,6 @@ module "collectors" {
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  default_memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
-  default_cpu_limit = "${var.default_cpu_limit}"
   node_selector_label = "${var.app-node_selector_label}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 
@@ -93,9 +77,6 @@ module "service-graph" {
   node_selector_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  default_cpu_limit = "${var.default_cpu_limit}"
-  default_memory_limit = "${var.default_memory_limit}"
-  jvm_memory_limit = "${var.jvm_memory_limit}"
   service-graph = "${var.service-graph}"
 }
 
@@ -109,8 +90,6 @@ module "ui" {
   node_selecter_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  cpu_limit = "${var.default_cpu_limit}"
-  memory_limit = "${var.default_memory_limit}"
 
   trace_reader_hostname = "${module.traces.reader_hostname}"
   trace_reader_service_port = "${module.traces.reader_port}"
@@ -118,7 +97,8 @@ module "ui" {
   metrictank_port = "${module.trends.metrictank_port}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-
+  cpu_limit = "${var.ui["cpu_limit"]}"
+  memory_limit = "${var.ui["memory_limit"]}"
   whitelisted_fields = "${var.ui["whitelisted_fields"]}"
   ui_enable_sso = "${var.ui["enable_sso"]}"
   ui_saml_issuer = "${var.ui["saml_issuer"]}"
