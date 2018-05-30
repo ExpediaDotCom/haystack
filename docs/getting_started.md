@@ -22,7 +22,7 @@ To do so, clone the `ExpediaDotCom/haystack` repository and run the installer sc
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
 2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
 ```shell
-minikube start --memory 4096 --cpus 2
+minikube start --memory 8192 --cpus 4
 ```
 
 ### Install the software
@@ -40,6 +40,8 @@ grep -v 'haystack\.local' /etc/hosts | sudo tee /etc/hosts
 echo "$(minikube ip) haystack.local" | sudo tee -a /etc/hosts
 ```
 Once the record for the Minikube appears in `/etc/hosts`, you can access the Haystack ui at `http://haystack.local:32300`.
+
+You can access the Kubernetes console at `http://haystack.local:30000`.
 
 ### Installed components list
 
@@ -70,7 +72,7 @@ If Minikube is returning errors during the install process it could be due to in
 2. Recreate the Minikube VM
     ```shell
     minikube delete
-    minikube start --memory 4096 --cpus 2
+    minikube start --memory 8192 --cpus 4
     ```
 3. Retrigger Deployment
     ```shell
