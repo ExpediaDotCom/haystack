@@ -1,6 +1,4 @@
-locals {
-  app-node_selecter_label = "kubernetes.io/hostname: minikube"
-}
+
 
 variable "kubectl_executable_name" {}
 variable "haystack_cluster_name" {
