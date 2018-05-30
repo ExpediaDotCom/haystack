@@ -10,7 +10,7 @@ variable "traces" {
   default = {
     enabled = true,
     version = "00754f095eef7926418e68d5ee47630a47be6c94"
-
+    indexer_instances = 1
     indexer_cpu_limit = "500m"
     indexer_memory_limit = "1500"
     indexer_jvm_memory_limit = "1024"
