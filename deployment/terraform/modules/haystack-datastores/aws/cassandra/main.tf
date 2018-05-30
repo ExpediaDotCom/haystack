@@ -83,7 +83,7 @@ resource "aws_iam_instance_profile" "haystack-cassandra-nodes-profile" {
 resource "aws_instance" "haystack-cassandra-seed-nodes" {
   count = "${var.seed_node_count}"
   ami = "${local.cassandra_ami}"
-  instance_type = "${var.node_instance_type}"
+  instance_type = "${var.seed_node_instance_type}"
   subnet_id = "${var.aws_subnet}"
   iam_instance_profile = "${aws_iam_instance_profile.haystack-cassandra-nodes-profile.name}"
   vpc_security_group_ids = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
@@ -102,7 +102,7 @@ resource "aws_instance" "haystack-cassandra-seed-nodes" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = "${var.node_volume_size}"
+    volume_size = "${var.seed_node_volume_size}"
     delete_on_termination = false
   }
 
@@ -112,7 +112,7 @@ resource "aws_instance" "haystack-cassandra-seed-nodes" {
 resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
   count = "${var.non_seed_node_count}"
   ami = "${local.cassandra_ami}"
-  instance_type = "${var.node_instance_type}"
+  instance_type = "${var.non_seed_node_instance_type}"
   subnet_id = "${var.aws_subnet}"
   iam_instance_profile = "${aws_iam_instance_profile.haystack-cassandra-nodes-profile.name}"
   vpc_security_group_ids = [ "${module.cassandra-security-groups.nodes_security_group_ids}"]
@@ -133,7 +133,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
 
   root_block_device = {
     volume_type = "gp2"
-    volume_size = "${var.node_volume_size}"
+    volume_size = "${var.non_seed_node_volume_size}"
     delete_on_termination = false
   }
 
