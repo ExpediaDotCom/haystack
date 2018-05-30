@@ -1,9 +1,7 @@
 variable "seed_node_count" {}
 variable "non_seed_node_count" {}
-#variable "node_volume_size" {}
 variable "seed_node_volume_size" {}
 variable "non_seed_node_volume_size" {}
-#variable "node_instance_type" {}
 variable "seed_node_instance_type" {}
 variable "non_seed_node_instance_type" {}
 variable "node_image" {

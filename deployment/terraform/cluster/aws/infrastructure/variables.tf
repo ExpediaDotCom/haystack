@@ -89,9 +89,6 @@ variable "k8s_monitoring-nodes_instance_count" {
 variable "cassandra_node_image" {
   default = ""
 }
-/*variable "cassandra_node_volume_size" {
-  default = 512
-}*/
 variable "cassandra_seed_node_volume_size" {
   default = 512
 }
@@ -104,9 +101,6 @@ variable "cassandra_seed_node_instance_count" {
 variable "cassandra_non_seed_node_instance_count" {
   default = 1
 }
-/*variable "cassandra_node_instance_type" {
-  default = "c4.xlarge"
-}*/
 variable "cassandra_seed_node_instance_type" {
   default = "c4.xlarge"
 }

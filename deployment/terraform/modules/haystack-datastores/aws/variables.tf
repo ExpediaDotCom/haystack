@@ -15,12 +15,10 @@ variable "kafka_broker_volume_size" {}
 variable "kafka_broker_instance_type" {}
 variable "kafka_default_partition_count" {}
 variable "cassandra_node_image" {}
-#variable "cassandra_node_volume_size" {}
 variable "cassandra_seed_node_volume_size" {}
 variable "cassandra_non_seed_node_volume_size" {}
 variable "cassandra_seed_node_instance_count" {}
 variable "cassandra_non_seed_node_instance_count" {}
-#variable "cassandra_node_instance_type" {}
 variable "cassandra_seed_node_instance_type" {}
 variable "cassandra_non_seed_node_instance_type" {}
 variable "k8s_app_name_space" {}
