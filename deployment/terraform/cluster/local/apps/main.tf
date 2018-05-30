@@ -1,4 +1,6 @@
-
+locals {
+  app-node_selecter_label = "kubernetes.io/hostname: minikube"
+}
 
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "local"
