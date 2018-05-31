@@ -64,6 +64,7 @@ trace {
     pre {
       sequence = [
         "com.expedia.www.haystack.trace.reader.readers.transformers.DeDuplicateSpanTransformer"
+        "com.expedia.www.haystack.trace.reader.readers.transformers.ClientServerEventLogTransformer"
       ]
     }
     post {
