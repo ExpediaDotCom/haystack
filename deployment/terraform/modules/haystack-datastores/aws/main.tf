@@ -8,7 +8,7 @@ module "cassandra" {
   non_seed_node_count = "${var.cassandra_non_seed_node_instance_count}"
   seed_node_volume_size = "${var.cassandra_seed_node_volume_size}"
   non_seed_node_volume_size = "${var.cassandra_non_seed_node_volume_size}"
-  seed_node_instance_type = "${var.cassandra_seed_node_instance_count}"
+  seed_node_instance_type = "${var.cassandra_seed_node_instance_type}"
   non_seed_node_instance_type = "${var.cassandra_non_seed_node_instance_type}"
   aws_ssh_key_pair_name = "${var.aws_ssh_key}"
   graphite_host = "${var.graphite_hostname}"
