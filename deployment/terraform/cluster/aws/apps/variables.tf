@@ -9,7 +9,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true,
-    version = "00754f095eef7926418e68d5ee47630a47be6c94"
+    version = "dc903fac9e1c424e0343ea1c052b6d379b903b7e"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_limit = "500m"
