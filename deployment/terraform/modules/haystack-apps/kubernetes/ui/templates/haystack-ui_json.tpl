@@ -25,7 +25,11 @@
     },
     "alerts": {
       "connectorName": "haystack",
-      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}"
+      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}",
+      "subscriptions": {
+          "connectorName": "stub",
+          "enabled": false
+      }
     }
   },
   "enableSSO": ${ui_enable_sso},

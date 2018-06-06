@@ -149,7 +149,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "c7be950888aef83fa1709c40a62b9ce68066b85b"
+    version = "8266f60ee9f8177b5b1304388e6cb19af5e15e2f"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
