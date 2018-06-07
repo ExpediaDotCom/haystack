@@ -40,7 +40,7 @@ data "template_file" "deployment_yaml" {
     graphite_port = "${var.graphite_port}"
     graphite_host = "${var.graphite_hostname}"
     graphite_enabled = "${var.graphite_enabled}"
-    node_selecter_label = "${var.node_selecter_label}"
+    node_selecter_label = "${var.node_selector_label}"
     image = "${var.image}"
     replicas = "${var.replicas}"
     memory_limit = "${var.memory_limit}"
@@ -70,15 +70,4 @@ resource "null_resource" "kubectl_destroy" {
     when = "destroy"
   }
   count = "${local.count}"
-}
-
-
-module "curator" {
-  source = "curator"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  enabled = "${var.enabled}"
-  elasticsearch_hostname = "${var.elasticsearch_hostname}"
-  elasticsearch_port = "${var.elasticsearch_port}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  namespace = "${var.namespace}"
 }
