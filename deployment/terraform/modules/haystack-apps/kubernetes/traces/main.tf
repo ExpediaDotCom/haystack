@@ -16,7 +16,7 @@ module "trace-indexer" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
-  node_selecter_label = "${var.node_selector_label}"
+  node_selector_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
 }
@@ -32,11 +32,22 @@ module "trace-reader" {
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
   enabled = "${var.traces["enabled"]}"
-  node_selecter_label = "${var.node_selector_label}"
+  node_selector_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.traces["reader_cpu_limit"]}"
   memory_limit = "${var.traces["reader_memory_limit"]}"
   jvm_memory_limit = "${var.traces["reader_jvm_memory_limit"]}"
   env_vars = "${var.traces["reader_environment_overrides"]}"
+}
+
+module "es-indices" {
+  source = "es-indices"
+  enabled = "${var.traces["enabled"]}"
+  namespace = "${var.namespace}"
+  node_selector_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  elasticsearch_port = "${var.elasticsearch_port}"
+  elasticsearch_hostname = "${var.elasticsearch_hostname}"
 }
