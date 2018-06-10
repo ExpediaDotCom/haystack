@@ -59,8 +59,10 @@ variable "trends" {
     enabled = true,
     version = "77351a0028a2f644fedc7a7899e79a5b41d8273e"
     span_timeseries_transformer_instances = 1
-    span_timeseries_transformer_cpu_limit = "500m"
-    span_timeseries_transformer_memory_limit = "1500"
+    span_timeseries_transformer_cpu_request = "500m"
+    span_timeseries_transformer_cpu_limit = "2000m"
+    span_timeseries_transformer_memory_request = "1536"
+    span_timeseries_transformer_memory_limit = "1536"
     span_timeseries_transformer_jvm_memory_limit = "1024"
     span_timeseries_transformer_environment_overrides = ""
 
