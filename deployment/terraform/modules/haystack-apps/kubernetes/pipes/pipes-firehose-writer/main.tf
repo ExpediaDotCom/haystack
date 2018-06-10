@@ -27,7 +27,7 @@ data "template_file" "deployment_yaml" {
     jvm_memory_limit = "${var.jvm_memory_limit}"
     kafka_hostname = "${var.kafka_hostname}"
     memory_limit = "${var.memory_limit}"
-    memory_limit = "${var.memory_request}"
+    memory_request = "${var.memory_request}"
     namespace = "${var.namespace}"
     node_selecter_label = "${var.node_selecter_label}"
     replicas = "${var.replicas}"
