@@ -8,7 +8,9 @@ variable "namespace" {}
 variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {}
 variable "node_selecter_label"{}
+variable "memory_request"{}
 variable "memory_limit"{}
+variable "cpu_request"{}
 variable "cpu_limit"{}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
