@@ -23,10 +23,11 @@ spec:
         image: ${image}
         resources:
           limits:
-            memory: ${memory_limit}Mi
-          requests:
             cpu: ${cpu_limit}
             memory: ${memory_limit}Mi
+          requests:
+            cpu: ${cpu_request}
+            memory: ${memory_request}Mi
         env:
         - name: "MT_HTTP_MULTI_TENANT"
           value: "false"

@@ -23,10 +23,11 @@ spec:
         image: ${image}
         resources:
           limits:
-            memory: ${memory_limit}Mi
-          requests:
             cpu: ${cpu_limit}
             memory: ${memory_limit}Mi
+          requests:
+            cpu: ${cpu_request}
+            memory: ${memory_request}Mi
         env:
         - name: "HAYSTACK_HTTPPOST_POLLPERCENT"
           value: "${http_poster_httppost_pollpercent}"
