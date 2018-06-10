@@ -27,10 +27,11 @@ spec:
           name: config-volume
         resources:
           limits:
-            memory: ${memory_limit}Mi
-          requests:
             cpu: ${cpu_limit}
             memory: ${memory_limit}Mi
+          requests:
+            cpu: ${cpu_request}
+            memory: ${memory_request}Mi
         livenessProbe:
           exec:
             command:

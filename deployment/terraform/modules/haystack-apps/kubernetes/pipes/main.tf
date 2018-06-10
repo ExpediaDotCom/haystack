@@ -30,7 +30,9 @@ module "pipes-kafka-producer" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.pipes["kafka_producer_cpu_limit"]}"
+  cpu_request = "${var.pipes["kafka_producer_cpu_request"]}"
   memory_limit = "${var.pipes["kafka_producer_memory_limit"]}"
+  memory_request = "${var.pipes["kafka_producer_memory_request"]}"
   jvm_memory_limit = "${var.pipes["kafka_producer_jvm_memory_limit"]}"
   env_vars = "${var.pipes["kafka_producer_environment_overrides"]}"
 
@@ -52,7 +54,9 @@ module "pipes-http-poster" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.pipes["http_poster_cpu_limit"]}"
+  cpu_request = "${var.pipes["http_poster_cpu_request"]}"
   memory_limit = "${var.pipes["http_poster_memory_limit"]}"
+  memory_request = "${var.pipes["http_poster_memory_request"]}"
   jvm_memory_limit = "${var.pipes["http_poster_jvm_memory_limit"]}"
   env_vars = "${var.pipes["http_poster_environment_overrides"]}"
 }
@@ -77,7 +81,9 @@ module "pipes-firehose-writer" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   cpu_limit = "${var.pipes["firehose_writer_cpu_limit"]}"
+  cpu_request = "${var.pipes["firehose_writer_cpu_request"]}"
   memory_limit = "${var.pipes["firehose_writer_memory_limit"]}"
+  memory_request = "${var.pipes["firehose_writer_memory_request"]}"
   jvm_memory_limit = "${var.pipes["firehose_writer_jvm_memory_limit"]}"
   kafka_hostname = "${var.kafka_hostname}"
 
@@ -103,6 +109,8 @@ module "pipes-secret-detector" {
   pipes_secret_detector_secretsnotifications_email_tos = "${var.pipes["secret_detector_secretsnotifications_email_tos"]}"
   pipes_secret_detector_secretsnotifications_whitelist_bucket = "${var.pipes["secret_detector_secretsnotifications_whitelist_bucket"]}"
   cpu_limit = "${var.pipes["secret_detector_cpu_limit"]}"
+  cpu_request = "${var.pipes["secret_detector_cpu_request"]}"
   memory_limit = "${var.pipes["secret_detector_memory_limit"]}"
+  memory_request = "${var.pipes["secret_detector_memory_request"]}"
   jvm_memory_limit = "${var.pipes["secret_detector_jvm_memory_limit"]}"
 }

@@ -12,15 +12,19 @@ variable "traces" {
     version = "dc903fac9e1c424e0343ea1c052b6d379b903b7e"
     indexer_instances = 1
     indexer_environment_overrides = ""
-    indexer_cpu_limit = "500m"
-    indexer_memory_limit = "1500"
+    indexer_cpu_request = "500m"
+    indexer_cpu_limit = "2000m"
+    indexer_memory_limit = "1536"
+    indexer_memory_request = "1536"
     indexer_jvm_memory_limit = "1024"
     indexer_elasticsearch_template = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":16,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"type\":\"long\",\"doc_values\":true}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
 
     reader_instances = 1
     reader_environment_overrides = ""
-    reader_cpu_limit = "500m"
-    reader_memory_limit = "1500"
+    reader_cpu_request = "500m"
+    reader_cpu_limit = "2000m"
+    reader_memory_request = "1536"
+    reader_memory_limit = "1536"
     reader_jvm_memory_limit = "1024"
   }
 }
@@ -33,14 +37,18 @@ variable "service-graph" {
     version = "59a101cc9abba5a3f6f17305be4207ea350f3170"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
-    node_finder_cpu_limit = "500m"
-    node_finder_memory_limit = "1500"
+    node_finder_cpu_request = "500m"
+    node_finder_cpu_limit = "2000m"
+    node_finder_memory_limit = "1536"
+    node_finder_memory_request = "1536"
     node_finder_jvm_memory_limit = "1024"
 
     graph_builder_instances = 1
     graph_builder_environment_overrides = ""
-    graph_builder_cpu_limit = "500m"
-    graph_builder_memory_limit = "1500"
+    graph_builder_cpu_request = "500m"
+    graph_builder_cpu_limit = "2000m"
+    graph_builder_memory_request = "1536"
+    graph_builder_memory_limit = "1536"
     graph_builder_jvm_memory_limit = "1024"
   }
 }
@@ -58,8 +66,10 @@ variable "trends" {
 
     timeseries_aggregator_instances = 1
     timeseries_aggregator_environment_overrides = ""
-    timeseries_aggregator_cpu_limit = "500m"
-    timeseries_aggregator_memory_limit = "1500"
+    timeseries_aggregator_cpu_request = "500m"
+    timeseries_aggregator_cpu_limit = "2000m"
+    timeseries_aggregator_memory_request = "1536"
+    timeseries_aggregator_memory_limit = "1536"
     timeseries_aggregator_jvm_memory_limit = "1024"
   }
 }
@@ -81,8 +91,10 @@ variable "pipes" {
     firehose_writer_firehose_url = ""
     firehose_writer_haystack_kafka_fromtopic = ""
     firehose_writer_instances = 1
-    firehose_writer_cpu_limit = "500m"
-    firehose_writer_memory_limit = "1500"
+    firehose_writer_cpu_request = "500m"
+    firehose_writer_cpu_limit = "2000m"
+    firehose_writer_memory_request = "1536"
+    firehose_writer_memory_limit = "1536"
     firehose_writer_jvm_memory_limit = "1024"
 
     http_poster_enabled = false
@@ -90,22 +102,28 @@ variable "pipes" {
     http_poster_httppost_pollpercent = ""
     http_poster_httppost_url = ""
     http_poster_instances = 1
-    http_poster_cpu_limit = "500m"
-    http_poster_memory_limit = "1500"
+    http_poster_cpu_request = "500m"
+    http_poster_cpu_limit = "2000m"
+    http_poster_memory_request = "1536"
+    http_poster_memory_limit = "1536"
     http_poster_jvm_memory_limit = "1024"
 
     json_transformer_enabled = false
     json_transformer_environment_overrides = ""
     json_transformer_instances = 1
-    json_transformer_cpu_limit = "500m"
-    json_transformer_memory_limit = "1500"
+    json_transformer_cpu_request = "500m"
+    json_transformer_cpu_limit = "2000m"
+    json_transformer_memory_request = "1536"
+    json_transformer_memory_limit = "1536"
     json_transformer_jvm_memory_limit = "1024"
 
     kafka_producer_enabled = false
     kafka_producer_environment_overrides = ""
     kafka_producer_instances = 1
-    kafka_producer_cpu_limit = "500m"
-    kafka_producer_memory_limit = "1500"
+    kafka_producer_cpu_request = "500m"
+    kafka_producer_cpu_limit = "2000m"
+    kafka_producer_memory_request = "1536"
+    kafka_producer_memory_limit = "1536"
     kafka_producer_jvm_memory_limit = "1024"
 
     secret_detector_enabled = false
@@ -117,8 +135,10 @@ variable "pipes" {
     secret_detector_secretsnotifications_email_subject = ""
     secret_detector_secretsnotifications_email_tos = ""
     secret_detector_secretsnotifications_whitelist_bucket = ""
-    secret_detector_cpu_limit = "500m"
-    secret_detector_memory_limit = "1500"
+    secret_detector_cpu_request = "500m"
+    secret_detector_cpu_limit = "2000m"
+    secret_detector_memory_request = "1536"
+    secret_detector_memory_limit = "1536"
     secret_detector_jvm_memory_limit = "1024"
   }
 }
@@ -134,8 +154,10 @@ variable "collector" {
     kinesis_stream_name = ""
     kinesis_span_collector_sts_role_arn = ""
     kinesis_span_collector_environment_overrides = ""
-    kinesis_span_collector_cpu_limit = "500m"
-    kinesis_span_collector_memory_limit = "1500"
+    kinesis_span_collector_cpu_request = "500m"
+    kinesis_span_collector_cpu_limit = "2000m"
+    kinesis_span_collector_memory_request = "1536"
+    kinesis_span_collector_memory_limit = "1536"
     kinesis_span_collector_jvm_memory_limit = "1024"
   }
 }
@@ -153,8 +175,10 @@ variable "ui" {
     saml_entry_point = ""
     saml_issuer = ""
     session_secret = ""
-    cpu_limit = "500m"
-    memory_limit = "1500"
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "1536"
+    memory_limit = "1536"
   }
 }
 
@@ -169,7 +193,9 @@ variable "metrictank" {
     external_kafka_broker_port = 1
     external_hostname = ""
     external_port = 1
-    cpu_limit = "500m"
-    memory_limit = "4000"
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "4096"
+    memory_limit = "4096"
   }
 }

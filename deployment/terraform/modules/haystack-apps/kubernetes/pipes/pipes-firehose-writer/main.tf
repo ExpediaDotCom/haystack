@@ -10,6 +10,7 @@ data "template_file" "deployment_yaml" {
   vars {
     app_name = "${local.app_name}"
     cpu_limit = "${var.cpu_limit}"
+    cpu_request = "${var.cpu_request}"
     env_vars= "${indent(9,"${var.env_vars}")}"
     firehose_initialretrysleep = "${var.firehose_initialretrysleep}"
     firehose_kafka_threadcount = "${var.firehose_kafka_threadcount}"
@@ -26,6 +27,7 @@ data "template_file" "deployment_yaml" {
     jvm_memory_limit = "${var.jvm_memory_limit}"
     kafka_hostname = "${var.kafka_hostname}"
     memory_limit = "${var.memory_limit}"
+    memory_limit = "${var.memory_request}"
     namespace = "${var.namespace}"
     node_selecter_label = "${var.node_selecter_label}"
     replicas = "${var.replicas}"
