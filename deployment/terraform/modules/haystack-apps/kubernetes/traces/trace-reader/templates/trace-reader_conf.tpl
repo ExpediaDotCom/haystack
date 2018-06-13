@@ -51,6 +51,8 @@ elasticsearch {
     name.prefix = "haystack-traces"
     type = "spans"
   }
+  
+  use.root.doc.starttime = true
 }
 
 trace {
