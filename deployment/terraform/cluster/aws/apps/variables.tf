@@ -57,7 +57,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true,
-    version = "77351a0028a2f644fedc7a7899e79a5b41d8273e"
+    version = "9854ff5cfc52c647311900c6fb443fe11fdbb61e"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "500m"
     span_timeseries_transformer_cpu_limit = "2000m"
@@ -169,7 +169,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "c7be950888aef83fa1709c40a62b9ce68066b85b"
+    version = "3aac25b74b14a7450da2bf6d75e086fe47ff3bda"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
