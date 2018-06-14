@@ -9,7 +9,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true
-    version = "36da9085c4a6a6458e5a4d28745c2faaf5cdcbbf"
+    version = "c420ee3d21c3645db445e33da5aa473f9a87d963"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "100m"
@@ -149,7 +149,7 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = false
-    version = "59a101cc9abba5a3f6f17305be4207ea350f3170"
+    version = "42ebbbc8ec6ba872879c0cda17e166f9f0da204a"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "100m"

@@ -34,7 +34,7 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = true
-    version = "59a101cc9abba5a3f6f17305be4207ea350f3170"
+    version = "42ebbbc8ec6ba872879c0cda17e166f9f0da204a"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "500m"

@@ -52,7 +52,7 @@ spec:
             - /app/isHealthy
           initialDelaySeconds: 30
           periodSeconds: 5
-          failureThreshold: 6
+          failureThreshold: 2
       nodeSelector:
         ${node_selecter_label}
       volumes:
