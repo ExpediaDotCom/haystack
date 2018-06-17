@@ -7,7 +7,7 @@
 ./build-image.sh
 ```
  
-You don't need to build AMI everytime you create haystack cluster. Once you have an AMI ready for a region, Terraform scripts will quary based on tag `type:haystack-cassandra-base` or `type:haystack-kafka-base`
+You don't need to build AMI everytime you create haystack cluster. Once you have an AMI ready for a region, Terraform scripts will query based on tag `type:haystack-cassandra-base` or `type:haystack-kafka-base`
 
 
 ## Cassandra
@@ -33,4 +33,4 @@ $ sudo service zookeeper status
     - `/tmp/zookeeper` : zookeeper data directory
 - Use `admin` as default ssh user name on the generated AMIs
 
-Please note that, these AMIs are not complete by themselves. There are some placeholders(eg. listen IPs, ZK IPs) that are being populated by Terrafor scripts. 
+Please note that, these AMIs are not complete by themselves. There are some placeholders(eg. listen IPs, ZK IPs) that are being populated by Terraform scripts. 
