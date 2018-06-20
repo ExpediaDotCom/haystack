@@ -205,3 +205,88 @@ variable "metrictank" {
     memory_limit = "250"
   }
 }
+
+# metric-router config
+variable "metric-router" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "latest" //TODO add version
+    metric_router_instances = 1
+    metric_router_cpu_request = "100m"
+    metric_router_cpu_limit = "1000m"
+    metric_router_memory_request = "250"
+    metric_router_memory_limit = "250"
+    metric_router_jvm_memory_limit = "200"
+    metric_router_environment_overrides = ""
+
+  }
+}
+
+# metric-router config
+variable "ewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "latest" //TODO add version
+    ewma_detector_instances = 1
+    ewma_detector_cpu_request = "100m"
+    ewma_detector_cpu_limit = "1000m"
+    ewma_detector_memory_request = "250"
+    ewma_detector_memory_limit = "250"
+    ewma_detector_jvm_memory_limit = "200"
+    ewma_detector_environment_overrides = ""
+
+  }
+}
+
+# constant-detector config
+variable "constant-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "latest" //TODO add version
+    constant_detector_instances = 1
+    constant_detector_cpu_request = "100m"
+    constant_detector_cpu_limit = "1000m"
+    constant_detector_memory_request = "250"
+    constant_detector_memory_limit = "250"
+    constant_detector_jvm_memory_limit = "200"
+    constant_detector_environment_overrides = ""
+
+  }
+}
+
+# pewma-detector config
+variable "pewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "latest" //TODO add version
+    pewma_detector_instances = 1
+    pewma_detector_cpu_request = "100m"
+    pewma_detector_cpu_limit = "1000m"
+    pewma_detector_memory_request = "250"
+    pewma_detector_memory_limit = "250"
+    pewma_detector_jvm_memory_limit = "200"
+    pewma_detector_environment_overrides = ""
+
+  }
+}
+
+# anomaly-validator config
+variable "anomaly-validator" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "latest" //TODO add version
+    anomaly_validator_instances = 1
+    anomaly_validator_cpu_request = "100m"
+    anomaly_validator_cpu_limit = "1000m"
+    anomaly_validator_memory_request = "250"
+    anomaly_validator_memory_limit = "250"
+    anomaly_validator_jvm_memory_limit = "200"
+    anomaly_validator_environment_overrides = ""
+
+  }
+}
