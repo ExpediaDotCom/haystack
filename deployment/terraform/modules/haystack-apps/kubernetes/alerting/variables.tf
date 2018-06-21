@@ -9,6 +9,10 @@ variable "app_namespace" {}
 variable "node_selector_label"{}
 
 
+# alerting config
+variable "alerting" {
+  type = "map"
+}
 # metric-router config
 variable "metric-router" {
   type = "map"

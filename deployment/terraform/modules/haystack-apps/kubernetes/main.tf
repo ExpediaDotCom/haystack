@@ -121,6 +121,7 @@ module "alerting" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
+  alerting = "${var.alerting}"
   metric-router = "${var.metric-router}"
   ewma-detector = "${var.ewma-detector}"
   constant-detector = "${var.constant-detector}"

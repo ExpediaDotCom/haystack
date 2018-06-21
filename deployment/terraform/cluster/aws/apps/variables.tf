@@ -202,18 +202,25 @@ variable "metrictank" {
   }
 }
 
+#alerting config
+variable "alerting" {
+  type = "map"
+  default = {
+    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+  }
+}
+
 # metric-router config
 variable "metric-router" {
   type = "map"
   default = {
-    enabled = true
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    enabled = false
     metric_router_instances = 1
     metric_router_cpu_request = "500m"
     metric_router_cpu_limit = "2000m"
-    metric_router_memory_request = "1536"
-    metric_router_memory_limit = "1536"
-    metric_router_jvm_memory_limit = "1024"
+    metric_router_memory_request = "250"
+    metric_router_memory_limit = "500"
+    metric_router_jvm_memory_limit = "512"
     metric_router_environment_overrides = ""
 
   }
@@ -223,14 +230,13 @@ variable "metric-router" {
 variable "ewma-detector" {
   type = "map"
   default = {
-    enabled = true
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    enabled = false
     ewma_detector_instances = 1
     ewma_detector_cpu_request = "500m"
     ewma_detector_cpu_limit = "2000m"
-    ewma_detector_memory_request = "1536"
-    ewma_detector_memory_limit = "1536"
-    ewma_detector_jvm_memory_limit = "1024"
+    ewma_detector_memory_request = "250"
+    ewma_detector_memory_limit = "500"
+    ewma_detector_jvm_memory_limit = "512"
     ewma_detector_environment_overrides = ""
 
   }
@@ -240,14 +246,13 @@ variable "ewma-detector" {
 variable "constant-detector" {
   type = "map"
   default = {
-    enabled = true
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    enabled = false
     constant_detector_instances = 1
     constant_detector_cpu_request = "500m"
     constant_detector_cpu_limit = "2000m"
-    constant_detector_memory_request = "1536"
-    constant_detector_memory_limit = "1536"
-    constant_detector_jvm_memory_limit = "1024"
+    constant_detector_memory_request = "250"
+    constant_detector_memory_limit = "500"
+    constant_detector_jvm_memory_limit = "512"
     constant_detector_environment_overrides = ""
 
   }
@@ -257,14 +262,13 @@ variable "constant-detector" {
 variable "pewma-detector" {
   type = "map"
   default = {
-    enabled = true
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    enabled = false
     pewma_detector_instances = 1
     pewma_detector_cpu_request = "500m"
     pewma_detector_cpu_limit = "2000m"
-    pewma_detector_memory_request = "1536"
-    pewma_detector_memory_limit = "1536"
-    pewma_detector_jvm_memory_limit = "1024"
+    pewma_detector_memory_request = "250"
+    pewma_detector_memory_limit = "500"
+    pewma_detector_jvm_memory_limit = "512"
     pewma_detector_environment_overrides = ""
 
   }
@@ -275,13 +279,12 @@ variable "anomaly-validator" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
     anomaly_validator_instances = 1
     anomaly_validator_cpu_request = "500m"
     anomaly_validator_cpu_limit = "2000m"
-    anomaly_validator_memory_request = "1536"
-    anomaly_validator_memory_limit = "1536"
-    anomaly_validator_jvm_memory_limit = "1024"
+    anomaly_validator_memory_request = "250"
+    anomaly_validator_memory_limit = "500"
+    anomaly_validator_jvm_memory_limit = "512"
     anomaly_validator_environment_overrides = ""
 
   }
