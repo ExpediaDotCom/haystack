@@ -8,6 +8,10 @@ variable "kubectl_executable_name" {}
 variable "app_namespace" {}
 variable "node_selector_label"{}
 
+#metrictank
+variable "metrictank" {
+  type = "map"
+}
 
 # alerting config
 variable "alerting" {
