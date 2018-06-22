@@ -1,6 +1,6 @@
 module "metric-router" {
   source = "metric-router"
-  image = "expediadotcom/haystack-adaptive-alerting-metric-router:${var.metric-router["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-metric-router:${var.alerting["version"]}"
   replicas = "${var.metric-router["metric_router_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
@@ -21,7 +21,7 @@ module "metric-router" {
 
 module "ewma-detector" {
   source = "ewma-detector"
-  image = "expediadotcom/haystack-adaptive-alerting-ewma-detector:${var.ewma-detector["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-ewma-detector:${var.alerting["version"]}"
   replicas = "${var.ewma-detector["ewma_detector_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
@@ -43,7 +43,7 @@ module "ewma-detector" {
 module "constant-detector" {
   source = "constant-detector"
 
-  image = "expediadotcom/haystack-adaptive-alerting-constant-detector:${var.constant-detector["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-constant-detector:${var.alerting["version"]}"
   replicas = "${var.constant-detector["constant_detector_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
@@ -65,7 +65,7 @@ module "constant-detector" {
 module "pewma-detector" {
   source = "pewma-detector"
 
-  image = "expediadotcom/haystack-adaptive-alerting-pewma-detector:${var.pewma-detector["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-pewma-detector:${var.alerting["version"]}"
   replicas = "${var.pewma-detector["pewma_detector_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
@@ -87,7 +87,7 @@ module "pewma-detector" {
 module "anomaly-validator" {
   source = "anomaly-validator"
 
-  image = "expediadotcom/haystack-adaptive-alerting-anomaly-validator:${var.anomaly-validator["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-anomaly-validator:${var.alerting["version"]}"
   replicas = "${var.anomaly-validator["anomaly_validator_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"

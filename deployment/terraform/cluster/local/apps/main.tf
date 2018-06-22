@@ -47,6 +47,9 @@ module "haystack-apps" {
   #metrictank configuration_overrides
   metrictank = "${var.metrictank}"
 
+  #alerting configuration_overrides
+  alerting = "${var.alerting}"
+
   #metric-router configuration_overrides
   metric-router = "${var.metric-router}"
 

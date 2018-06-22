@@ -206,12 +206,19 @@ variable "metrictank" {
   }
 }
 
+#alerting config
+variable "alerting" {
+  type = "map"
+  default = {
+    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+  }
+}
+
 # metric-router config
 variable "metric-router" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
     metric_router_instances = 1
     metric_router_cpu_request = "100m"
     metric_router_cpu_limit = "1000m"
@@ -228,7 +235,6 @@ variable "ewma-detector" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
     ewma_detector_instances = 1
     ewma_detector_cpu_request = "100m"
     ewma_detector_cpu_limit = "1000m"
@@ -245,7 +251,6 @@ variable "constant-detector" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
     constant_detector_instances = 1
     constant_detector_cpu_request = "100m"
     constant_detector_cpu_limit = "1000m"
@@ -262,7 +267,6 @@ variable "pewma-detector" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
     pewma_detector_instances = 1
     pewma_detector_cpu_request = "100m"
     pewma_detector_cpu_limit = "1000m"
@@ -279,7 +283,6 @@ variable "anomaly-validator" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
     anomaly_validator_instances = 1
     anomaly_validator_cpu_request = "100m"
     anomaly_validator_cpu_limit = "1000m"
