@@ -1,9 +1,15 @@
+locals {
+  external_metric_tank_enabled = "${var.metrictank["external_hostname"] != "" && var.metrictank["external_kafka_broker_hostname"] != ""? "true" : "false"}"
+  internal_kafka_endpoint =  "${var.kafka_hostname}:${var.kafka_port}"
+  external_kafka_endpoint = "${var.metrictank["external_kafka_broker_hostname"]}:${var.metrictank["external_kafka_broker_port"]}"
+}
+
 module "metric-router" {
   source = "metric-router"
   image = "expediadotcom/haystack-adaptive-alerting-metric-router:${var.alerting["version"]}"
   replicas = "${var.metric-router["metric_router_instances"]}"
   namespace = "${var.app_namespace}"
-  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  kafka_endpoint = "${local.external_metric_tank_enabled == "false" ? local.internal_kafka_endpoint  : local.external_kafka_endpoint}"
   graphite_hostname = "${var.graphite_hostname}"
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"
