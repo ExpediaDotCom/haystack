@@ -30,6 +30,7 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
     instance_type = "${var.worker_instance_type}"
     instance_count = "${var.worker_instance_count}"
     dedicated_master_enabled = "true"
+    dedicated_master_enabled = "${var.dedicated_master_enabled}"
     dedicated_master_type = "${var.master_instance_type}"
     dedicated_master_count = "${var.master_instance_count}"
   }
