@@ -206,6 +206,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
+    enabled = false
     version = "cfe6489dfe712530273c78ad84704b27321cd29e"
   }
 }
