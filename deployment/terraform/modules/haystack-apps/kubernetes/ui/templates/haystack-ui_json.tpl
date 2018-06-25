@@ -21,7 +21,7 @@
     },
     "trends": {
       "connectorName": "haystack",
-      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}"
+      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}",
       "encoder": "${metricpoint_encoder_type}"
 
     },
