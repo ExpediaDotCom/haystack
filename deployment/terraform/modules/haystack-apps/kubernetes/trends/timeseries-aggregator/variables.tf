@@ -9,6 +9,7 @@ variable "graphite_enabled" {}
 variable "enabled" {}
 variable "enable_external_kafka_producer" {}
 variable "external_kafka_producer_endpoint" {}
+variable "metricpoint_encoder_type" {}
 variable "env_vars" {}
 
 variable "kubectl_executable_name" {}

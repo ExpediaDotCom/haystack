@@ -23,6 +23,7 @@ data "template_file" "config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    metricpoint_encoder_type = "${var.metricpoint_encoder_type}"
   }
 }
 

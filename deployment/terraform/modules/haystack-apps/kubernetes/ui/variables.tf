@@ -14,6 +14,7 @@ variable "cpu_request"{}
 variable "cpu_limit"{}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
+variable "metricpoint_encoder_type" {}
 
 variable "termination_grace_period" {
   default = 30

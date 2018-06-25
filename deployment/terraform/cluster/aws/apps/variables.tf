@@ -8,7 +8,7 @@ variable "kubectl_executable_name" {}
 variable "traces" {
   type = "map"
   default = {
-    enabled = true,
+    enabled = true
     version = "c420ee3d21c3645db445e33da5aa473f9a87d963"
     indexer_instances = 1
     indexer_environment_overrides = ""
@@ -35,6 +35,7 @@ variable "service-graph" {
   default = {
     enabled = true
     version = "b28a61495e55679cefb762576dd54038cff9e67b"
+    metricpoint_encoder_type = "base64"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "500m"
@@ -57,8 +58,9 @@ variable "service-graph" {
 variable "trends" {
   type = "map"
   default = {
-    enabled = true,
-    version = "77351a0028a2f644fedc7a7899e79a5b41d8273e"
+    enabled = true
+    version = "9854ff5cfc52c647311900c6fb443fe11fdbb61e"
+    metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "500m"
     span_timeseries_transformer_cpu_limit = "2000m"
@@ -84,11 +86,11 @@ variable "pipes" {
   default = {
     version = "a20a8087f5ddc3fbf1a1c72dcff840608accadbf"
 
-    firehose_kafka_threadcount = 1,
+    firehose_kafka_threadcount = 1
     firehose_writer_enabled = false
-    firehose_writer_environment_overrides = "",
-    firehose_writer_firehose_initialretrysleep = 10,
-    firehose_writer_firehose_maxretrysleep = 3000,
+    firehose_writer_environment_overrides = ""
+    firehose_writer_firehose_initialretrysleep = 10
+    firehose_writer_firehose_maxretrysleep = 3000
     firehose_writer_firehose_signingregion = ""
     firehose_writer_firehose_streamname = ""
     firehose_writer_firehose_url = ""
@@ -170,7 +172,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "c7be950888aef83fa1709c40a62b9ce68066b85b"
+    version = "3aac25b74b14a7450da2bf6d75e086fe47ff3bda"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
@@ -182,6 +184,7 @@ variable "ui" {
     cpu_limit = "2000m"
     memory_request = "1536"
     memory_limit = "1536"
+    metricpoint_encoder_type = "base64"
   }
 }
 
@@ -220,8 +223,8 @@ variable "metric-router" {
     metric_router_instances = 1
     metric_router_cpu_request = "500m"
     metric_router_cpu_limit = "2000m"
-    metric_router_memory_request = "250"
-    metric_router_memory_limit = "500"
+    metric_router_memory_request = "1024"
+    metric_router_memory_limit = "1024"
     metric_router_jvm_memory_limit = "512"
     metric_router_environment_overrides = ""
 
@@ -236,8 +239,8 @@ variable "ewma-detector" {
     ewma_detector_instances = 1
     ewma_detector_cpu_request = "500m"
     ewma_detector_cpu_limit = "2000m"
-    ewma_detector_memory_request = "250"
-    ewma_detector_memory_limit = "500"
+    ewma_detector_memory_request = "1024"
+    ewma_detector_memory_limit = "1024"
     ewma_detector_jvm_memory_limit = "512"
     ewma_detector_environment_overrides = ""
 
@@ -252,8 +255,8 @@ variable "constant-detector" {
     constant_detector_instances = 1
     constant_detector_cpu_request = "500m"
     constant_detector_cpu_limit = "2000m"
-    constant_detector_memory_request = "250"
-    constant_detector_memory_limit = "500"
+    constant_detector_memory_request = "1024"
+    constant_detector_memory_limit = "1024"
     constant_detector_jvm_memory_limit = "512"
     constant_detector_environment_overrides = ""
 
@@ -268,8 +271,8 @@ variable "pewma-detector" {
     pewma_detector_instances = 1
     pewma_detector_cpu_request = "500m"
     pewma_detector_cpu_limit = "2000m"
-    pewma_detector_memory_request = "250"
-    pewma_detector_memory_limit = "500"
+    pewma_detector_memory_request = "1024"
+    pewma_detector_memory_limit = "1024"
     pewma_detector_jvm_memory_limit = "512"
     pewma_detector_environment_overrides = ""
 
@@ -284,8 +287,8 @@ variable "anomaly-validator" {
     anomaly_validator_instances = 1
     anomaly_validator_cpu_request = "500m"
     anomaly_validator_cpu_limit = "2000m"
-    anomaly_validator_memory_request = "250"
-    anomaly_validator_memory_limit = "500"
+    anomaly_validator_memory_request = "1024"
+    anomaly_validator_memory_limit = "1024"
     anomaly_validator_jvm_memory_limit = "512"
     anomaly_validator_environment_overrides = ""
 

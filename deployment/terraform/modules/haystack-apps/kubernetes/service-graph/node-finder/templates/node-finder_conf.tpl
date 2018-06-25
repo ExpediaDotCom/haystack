@@ -19,7 +19,7 @@ kafka {
       // 1) periodreplacement: replaces all periods with 3 underscores
       // 2) base64: base64 encodes the full name with a padding of _
       // 3) noop: does not perform any encoding
-      key.encoder = "periodreplacement"
+      key.encoder = "${metricpoint_encoder_type}"
 
     }
     service.call {
@@ -36,12 +36,6 @@ kafka {
   }
   collectorTags = "[${collect_tags}]"
 }
-
-// there are three types of encoders that are used on service and operation names:
-// 1) periodreplacement: replaces all periods with 3 underscores
-// 2) base64: base64 encodes the full name with a padding of _
-// 3) noop: does not perform any encoding
-metricpoint.encoder.type = "periodreplacement"
 
 
 haystack.graphite.host = "monitoring-influxdb-graphite.kube-system.svc"

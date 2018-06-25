@@ -36,6 +36,7 @@ data "template_file" "config_data" {
     ui_saml_entry_point = "${var.ui_saml_entry_point}"
     ui_saml_issuer = "${var.ui_saml_issuer}"
     ui_session_secret = "${var.ui_session_secret}"
+    metricpoint_encoder_type = "${var.metricpoint_encoder_type}"
   }
 }
 
