@@ -16,6 +16,7 @@ module "node-finder" {
   memory_request = "${var.service-graph["node_finder_memory_request"]}"
   jvm_memory_limit = "${var.service-graph["node_finder_jvm_memory_limit"]}"
   env_vars = "${var.service-graph["node_finder_environment_overrides"]}"
+  collect_tags = "${var.collect_tags}"
 }
 
 module "graph-builder" {

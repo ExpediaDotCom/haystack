@@ -34,6 +34,7 @@ kafka {
   aggregator {
     interval = 60000
   }
+  collectorTags = "[${collect_tags}]"
 }
 
 // there are three types of encoders that are used on service and operation names:
