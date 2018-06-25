@@ -47,4 +47,21 @@ module "haystack-apps" {
   #metrictank configuration_overrides
   metrictank = "${var.metrictank}"
 
+  #alerting configuration_overrides
+  alerting = "${var.alerting}"
+
+  #metric-router configuration_overrides
+  metric-router = "${var.metric-router}"
+
+  #ewma-detector configuration
+  ewma-detector = "${var.ewma-detector}"
+
+  #constant-detector configuration
+  constant-detector = "${var.constant-detector}"
+
+  #pewma-detector configuration
+  pewma-detector = "${var.pewma-detector}"
+
+  #anomaly-validator configuration
+  anomaly-validator = "${var.anomaly-validator}"
 }

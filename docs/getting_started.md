@@ -97,17 +97,19 @@ Alternatively, you can use the fakespans-runner script to download and run fakes
 
 
 ## Building fakespans
-Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fake_spans`.
+Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fakespans`.
 
  ```shell
-export $GOPATH=location where you want your go binaries (should end in /bin)
-export $GOBIN=$GOPATH
+export GOPATH= $(go env GOPATH)
+export GOBIN=  your GOPATH + `/bin` (location where you want your go binaries)
+
+cd fakespans
 go get github.com/Shopify/sarama
 go get github.com/codeskyblue/go-uuid
 go get github.com/golang/protobuf/proto
-cd fakespans
 go install
-$GOPATH/fakespans
+cd $GOBIN
+./fakespans
 ```
 #### fakespans command line options
 ```

@@ -50,3 +50,31 @@ variable "ui" {
 variable "metrictank" {
   type = "map"
 }
+
+#alerting
+variable "alerting" {
+  type = "map"
+}
+#metric-router
+variable "metric-router" {
+  type = "map"
+}
+
+#ewma-detector
+variable "ewma-detector" {
+  type = "map"
+}
+
+#constant-detector
+variable "constant-detector" {
+  type = "map"
+}
+#pewma-detector
+variable "pewma-detector" {
+  type = "map"
+}
+
+#anomaly-validator
+variable "anomaly-validator" {
+  type = "map"
+}

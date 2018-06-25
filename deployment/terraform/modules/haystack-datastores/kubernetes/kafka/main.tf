@@ -3,7 +3,7 @@ locals {
   service_port = 9092
   container_port = 9092
   image = "wurstmeister/kafka:0.11.0.1"
-  topics = "proto-spans:1:1,metricpoints:1:1,mdm:1:1,span-buffer:1:1,graph-nodes:1:1"
+  topics = "proto-spans:1:1,metricpoints:1:1,mdm:1:1,span-buffer:1:1,graph-nodes:1:1,ewma-metrics:1:1,constant-metrics:1:1,pewma-metrics:1:1,anomalies:1:1"
   deployment_yaml_file_path = "${path.module}/templates/deployment-yaml.tpl"
 }
 

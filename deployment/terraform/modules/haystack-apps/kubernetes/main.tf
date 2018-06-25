@@ -108,3 +108,24 @@ module "ui" {
   ui_session_secret = "${var.ui["session_secret"]}"
   ui_saml_entry_point = "${var.ui["saml_entry_point"]}"
 }
+
+module "alerting" {
+  source = "alerting"
+
+  app_namespace = "${var.k8s_app_namespace}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kafka_port = "${var.kafka_port}"
+  kafka_hostname = "${var.kafka_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  metrictank = "${var.metrictank}"
+  alerting = "${var.alerting}"
+  metric-router = "${var.metric-router}"
+  ewma-detector = "${var.ewma-detector}"
+  constant-detector = "${var.constant-detector}"
+  pewma-detector = "${var.pewma-detector}"
+  anomaly-validator = "${var.anomaly-validator}"
+}

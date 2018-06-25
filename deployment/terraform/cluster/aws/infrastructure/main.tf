@@ -88,6 +88,7 @@ module "haystack-datastores" {
   cassandra_node_image = "${var.cassandra_node_image}"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
   es_master_instance_count = "${var.es_master_instance_count}"
+  es_dedicated_master_enabled = "${var.es_dedicated_master_enabled}"
   es_worker_instance_count = "${var.es_worker_instance_count}"
   es_worker_instance_type = "${var.es_worker_instance_type}"
   es_master_instance_type = "${var.es_master_instance_type}"

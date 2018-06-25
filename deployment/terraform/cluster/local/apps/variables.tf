@@ -149,7 +149,7 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = false
-    version = "42ebbbc8ec6ba872879c0cda17e166f9f0da204a"
+    version = "b28a61495e55679cefb762576dd54038cff9e67b"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "100m"
@@ -203,5 +203,93 @@ variable "metrictank" {
     cpu_limit = "1000m"
     memory_request = "250"
     memory_limit = "250"
+  }
+}
+
+#alerting config
+variable "alerting" {
+  type = "map"
+  default = {
+    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+  }
+}
+
+# metric-router config
+variable "metric-router" {
+  type = "map"
+  default = {
+    enabled = false
+    metric_router_instances = 1
+    metric_router_cpu_request = "100m"
+    metric_router_cpu_limit = "1000m"
+    metric_router_memory_request = "250"
+    metric_router_memory_limit = "250"
+    metric_router_jvm_memory_limit = "200"
+    metric_router_environment_overrides = ""
+
+  }
+}
+
+# metric-router config
+variable "ewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    ewma_detector_instances = 1
+    ewma_detector_cpu_request = "100m"
+    ewma_detector_cpu_limit = "1000m"
+    ewma_detector_memory_request = "250"
+    ewma_detector_memory_limit = "250"
+    ewma_detector_jvm_memory_limit = "200"
+    ewma_detector_environment_overrides = ""
+
+  }
+}
+
+# constant-detector config
+variable "constant-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    constant_detector_instances = 1
+    constant_detector_cpu_request = "100m"
+    constant_detector_cpu_limit = "1000m"
+    constant_detector_memory_request = "250"
+    constant_detector_memory_limit = "250"
+    constant_detector_jvm_memory_limit = "200"
+    constant_detector_environment_overrides = ""
+
+  }
+}
+
+# pewma-detector config
+variable "pewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    pewma_detector_instances = 1
+    pewma_detector_cpu_request = "100m"
+    pewma_detector_cpu_limit = "1000m"
+    pewma_detector_memory_request = "250"
+    pewma_detector_memory_limit = "250"
+    pewma_detector_jvm_memory_limit = "200"
+    pewma_detector_environment_overrides = ""
+
+  }
+}
+
+# anomaly-validator config
+variable "anomaly-validator" {
+  type = "map"
+  default = {
+    enabled = false
+    anomaly_validator_instances = 1
+    anomaly_validator_cpu_request = "100m"
+    anomaly_validator_cpu_limit = "1000m"
+    anomaly_validator_memory_request = "250"
+    anomaly_validator_memory_limit = "250"
+    anomaly_validator_jvm_memory_limit = "200"
+    anomaly_validator_environment_overrides = ""
+
   }
 }
