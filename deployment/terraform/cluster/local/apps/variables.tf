@@ -186,6 +186,7 @@ variable "ui" {
     cpu_limit = "1000m"
     memory_request = "250"
     memory_limit = "250"
+    metricpoint_encoder_type = "base64"
   }
 }
 
