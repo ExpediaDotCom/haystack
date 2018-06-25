@@ -34,7 +34,8 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "77351a0028a2f644fedc7a7899e79a5b41d8273e"
+    version = "9854ff5cfc52c647311900c6fb443fe11fdbb61e"
+    metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
     span_timeseries_transformer_cpu_limit = "1000m"
@@ -60,11 +61,11 @@ variable "pipes" {
   default = {
     version = "a20a8087f5ddc3fbf1a1c72dcff840608accadbf"
 
-    firehose_kafka_threadcount = 1,
+    firehose_kafka_threadcount = 1
     firehose_writer_enabled = false
-    firehose_writer_environment_overrides = "",
-    firehose_writer_firehose_initialretrysleep = 1,
-    firehose_writer_firehose_maxretrysleep = "",
+    firehose_writer_environment_overrides = ""
+    firehose_writer_firehose_initialretrysleep = 1
+    firehose_writer_firehose_maxretrysleep = ""
     firehose_writer_firehose_signingregion = ""
     firehose_writer_firehose_streamname = ""
     firehose_writer_firehose_totopic = ""
@@ -173,7 +174,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "8266f60ee9f8177b5b1304388e6cb19af5e15e2f"
+    version = "3aac25b74b14a7450da2bf6d75e086fe47ff3bda"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
@@ -185,6 +186,7 @@ variable "ui" {
     cpu_limit = "1000m"
     memory_request = "250"
     memory_limit = "250"
+    metricpoint_encoder_type = "base64"
   }
 }
 
