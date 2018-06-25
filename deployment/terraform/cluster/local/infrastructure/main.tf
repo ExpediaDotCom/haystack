@@ -11,6 +11,7 @@ locals {
   memory_limit_in_mb = "768"
   jvm_memory_limit = "512"
   k8s_datastores_heap_memory_in_mb = "1024"
+  k8s_datastores_memory_limit_in_mb = "1224"
 }
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
@@ -46,7 +47,7 @@ module "haystack-infrastructure" {
   node_selecter_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   cpu_limit = "${local.default_cpu_limit}"
-  memory_limit = "${local.memory_limit_in_mb}"
+  memory_limit = "${local.k8s_datastores_memory_limit_in_mb}"
   jvm_memory_limit = "${local.jvm_memory_limit}"
   docker_host_ip = "${var.docker_host_ip}"
 }
