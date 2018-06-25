@@ -93,7 +93,7 @@ You can find the source for `fakespans` [in the haystack-idl repository](https:/
 
 ## Using the prebuilt binaries
 Choose the binary corresponding to Operating System and architecture from [here](https://github.com/ExpediaDotCom/haystack-idl/releases).
-Alternatively, you can use the fakespans-runner script to download and run fakespans , if your operating system is either Mac or Linux.
+Alternatively, you can use the fakespans-downloader script to download fakespans binary, if your operating system is either Mac or Linux.
 
 
 ## Building fakespans
