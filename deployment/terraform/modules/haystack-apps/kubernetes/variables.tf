@@ -51,6 +51,10 @@ variable "metrictank" {
   type = "map"
 }
 
+#alerting
+variable "alerting" {
+  type = "map"
+}
 #metric-router
 variable "metric-router" {
   type = "map"

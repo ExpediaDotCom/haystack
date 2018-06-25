@@ -2,6 +2,7 @@ variable "worker_instance_type" {}
 variable "master_instance_type" {}
 variable "worker_instance_count" {}
 variable "master_instance_count" {}
+variable "dedicated_master_enabled" {}
 variable "k8s_nodes_iam-role_arn" {}
 variable "haystack_cluster_name" {}
 variable "aws_vpc_id" {}
