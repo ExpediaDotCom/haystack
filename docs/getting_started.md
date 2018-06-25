@@ -91,6 +91,12 @@ You can find the source for `fakespans` [in the haystack-idl repository](https:/
 
 #### Using fakespans
 
+## Using the prebuilt binaries
+Choose the binary corresponding to Operating System and architecture from [here](https://github.com/ExpediaDotCom/haystack-idl/releases).
+Alternatively, you can use the fakespans-downloader script to download fakespans binary, if your operating system is either Mac or Linux.
+
+
+## Building fakespans
 Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fakespans`.
 
  ```shell
