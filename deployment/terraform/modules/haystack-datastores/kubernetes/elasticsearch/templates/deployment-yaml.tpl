@@ -27,8 +27,6 @@ spec:
         env:
         - name: "ES_JAVA_OPTS"
           value: "-Xms${jvm_memory_limit}m -Xmx${jvm_memory_limit}m"
-        - name: "bootstrap.memory_lock"
-          value: "true"
       nodeSelector:
         ${node_selecter_label}
 
