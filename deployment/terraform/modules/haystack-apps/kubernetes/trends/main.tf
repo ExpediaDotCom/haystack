@@ -40,6 +40,7 @@ module "span-timeseries-transformer" {
   memory_request = "${var.trends["span_timeseries_transformer_memory_request"]}"
   jvm_memory_limit = "${var.trends["span_timeseries_transformer_jvm_memory_limit"]}"
   env_vars = "${var.trends["span_timeseries_transformer_environment_overrides"]}"
+  metricpoint_encoder_type = "${var.trends["metricpoint_encoder_type"]}"
 }
 module "timeseries-aggregator" {
   source = "timeseries-aggregator"
@@ -62,4 +63,5 @@ module "timeseries-aggregator" {
   memory_request = "${var.trends["timeseries_aggregator_memory_request"]}"
   jvm_memory_limit = "${var.trends["timeseries_aggregator_jvm_memory_limit"]}"
   env_vars = "${var.trends["timeseries_aggregator_environment_overrides"]}"
+  metricpoint_encoder_type = "${var.trends["metricpoint_encoder_type"]}"
 }
