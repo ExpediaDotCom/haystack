@@ -19,5 +19,5 @@ variable "termination_grace_period" {
   default = 30
 }
 variable "collect_tags" {
-  default = ""
+  default = "[]"
 }

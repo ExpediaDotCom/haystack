@@ -34,7 +34,9 @@ kafka {
   aggregator {
     interval = 60000
   }
-  collectorTags = "[${collect_tags}]"
+  // collector tags allow service graph to collect tags from spans and have them available when querying service
+  // graph. Example: you can collect the tags service tier and infraprovider tags using value "tier,infraprovider"
+  collectorTags = "${collect_tags}"
 }
 
 
