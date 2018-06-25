@@ -35,6 +35,7 @@ variable "service-graph" {
   default = {
     enabled = true
     version = "b28a61495e55679cefb762576dd54038cff9e67b"
+    metricpoint_encoder_type = "base64"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "500m"
