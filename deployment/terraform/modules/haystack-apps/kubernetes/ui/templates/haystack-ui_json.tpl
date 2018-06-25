@@ -26,6 +26,8 @@
     "alerts": {
       "connectorName": "haystack",
       "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}",
+      "alertFreqInSec": 300,
+      "alertMergeBufferTimeInSec": 60,
       "subscriptions": {
           "connectorName": "stub",
           "enabled": false
