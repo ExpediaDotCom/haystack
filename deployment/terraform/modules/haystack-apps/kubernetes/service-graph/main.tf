@@ -18,6 +18,7 @@ module "node-finder" {
   jvm_memory_limit = "${var.service-graph["node_finder_jvm_memory_limit"]}"
   env_vars = "${var.service-graph["node_finder_environment_overrides"]}"
   metricpoint_encoder_type = "${var.service-graph["metricpoint_encoder_type"]}"
+  collect_tags = "${var.service-graph["collect_tags"]}"
 }
 
 module "graph-builder" {

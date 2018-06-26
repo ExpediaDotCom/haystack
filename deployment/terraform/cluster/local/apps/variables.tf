@@ -159,6 +159,7 @@ variable "service-graph" {
     node_finder_memory_request = "250"
     node_finder_memory_limit = "250"
     node_finder_jvm_memory_limit = "200"
+    collect_tags = "[]"
 
     graph_builder_instances = 1
     graph_builder_environment_overrides = ""
