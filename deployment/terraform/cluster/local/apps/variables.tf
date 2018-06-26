@@ -149,7 +149,7 @@ variable "collector" {
 variable "service-graph" {
   type = "map"
   default = {
-    enabled = true
+    enabled = false
     version = "b28a61495e55679cefb762576dd54038cff9e67b"
     metricpoint_encoder_type = "base64"
     node_finder_instances = 1
