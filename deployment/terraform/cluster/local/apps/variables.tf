@@ -149,7 +149,7 @@ variable "collector" {
 variable "service-graph" {
   type = "map"
   default = {
-    enabled = false
+    enabled = true
     version = "b28a61495e55679cefb762576dd54038cff9e67b"
     metricpoint_encoder_type = "base64"
     node_finder_instances = 1
@@ -159,6 +159,7 @@ variable "service-graph" {
     node_finder_memory_request = "250"
     node_finder_memory_limit = "250"
     node_finder_jvm_memory_limit = "200"
+    collect_tags = "[]"
 
     graph_builder_instances = 1
     graph_builder_environment_overrides = ""
