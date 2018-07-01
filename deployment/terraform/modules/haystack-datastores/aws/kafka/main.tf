@@ -85,7 +85,8 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   count = "${var.zookeeper_count}"
   ami = "${local.kafka_broker_ami}"
   instance_type = "${var.broker_instance_type}"
-  subnet_id = "${var.aws_subnet}"
+  #subnet_id = "${var.aws_subnet}"
+  subnet_id = "${element(var.aws_subnets, count.index)}"
   vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   associate_public_ip_address = false
   key_name = "${var.aws_ssh_key_pair_name}"
