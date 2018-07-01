@@ -9,6 +9,7 @@ variable "broker_image" {
 }
 variable "aws_vpc_id" {}
 variable "aws_subnet" {}
+variable "aws_subnets" {}
 variable "aws_hosted_zone_id" {}
 variable "aws_ssh_key_pair_name" {}
 variable "aws_graphite_host" {}

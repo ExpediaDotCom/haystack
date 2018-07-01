@@ -1,6 +1,7 @@
 variable "s3_bucket_name" {}
 variable "aws_vpc_id" {}
 variable "aws_nodes_subnet" {}
+variable "aws_nodes_subnets" {}
 variable "aws_utilities_subnet" {}
 variable "aws_domain_name" {}
 variable "kubectl_executable_name" {}

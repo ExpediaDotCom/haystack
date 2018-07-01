@@ -126,7 +126,8 @@ resource "aws_instance" "haystack-kafka-broker" {
   count = "${var.broker_count}"
   ami = "${local.kafka_broker_ami}"
   instance_type = "${var.broker_instance_type}"
-  subnet_id = "${var.aws_subnet}"
+  #subnet_id = "${var.aws_subnet}"
+  subnet_id = "${element(var.subnet_ids, count.index)}"
   vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   key_name = "${var.aws_ssh_key_pair_name}"
   associate_public_ip_address = false
