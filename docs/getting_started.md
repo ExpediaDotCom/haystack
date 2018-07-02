@@ -132,4 +132,4 @@ For details, see [ExpediaDotCom/haystack-idl](https://github.com/ExpediaDotCom/h
 ### How to view span data
 
 You can see span data in the Haystack UI at `https://haystack.local:32300`.
-See the [UI](https://expediadotcom.github.io/haystack/ui/ui.html) page for more information about how the data is presented and what you can do with the UI.
+See the [UI](https://expediadotcom.github.io/haystack/docs/ui.html) page for more information about how the data is presented and what you can do with the UI.
