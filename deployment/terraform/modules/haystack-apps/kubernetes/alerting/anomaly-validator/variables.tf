@@ -20,3 +20,6 @@ variable "env_vars" {}
 variable "termination_grace_period" {
   default = 30
 }
+variable "investigation_endpoint" {
+  default = ""
+}
