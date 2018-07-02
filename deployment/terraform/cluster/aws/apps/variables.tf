@@ -291,6 +291,6 @@ variable "anomaly-validator" {
     anomaly_validator_memory_limit = "1024"
     anomaly_validator_jvm_memory_limit = "512"
     anomaly_validator_environment_overrides = ""
-
+    anomaly_validator_investigation_endpoint = ""
   }
 }

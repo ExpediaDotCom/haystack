@@ -110,4 +110,5 @@ module "anomaly-validator" {
   memory_request = "${var.anomaly-validator["anomaly_validator_memory_request"]}"
   jvm_memory_limit = "${var.anomaly-validator["anomaly_validator_jvm_memory_limit"]}"
   env_vars = "${var.anomaly-validator["anomaly_validator_environment_overrides"]}"
+  investigation_endpoint = "${var.anomaly-validator["anomaly_validator_investigation_endpoint"]}"
 }

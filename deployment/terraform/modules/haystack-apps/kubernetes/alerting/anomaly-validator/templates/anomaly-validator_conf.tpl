@@ -7,6 +7,8 @@ anomaly-validator {
       JsonPojoClass = "com.expedia.adaptivealerting.core.anomaly.AnomalyResult"
     }
     topic = "anomalies"
-
+    investigation {
+      endpoint = "${investigation_endpoint}"
+    }
 }
 
