@@ -9,7 +9,7 @@ module "metric-router" {
   image = "expediadotcom/haystack-adaptive-alerting-metric-router:${var.alerting["version"]}"
   replicas = "${var.metric-router["metric_router_instances"]}"
   namespace = "${var.app_namespace}"
-  kafka_endpoint = "${local.external_metric_tank_enabled == "false" ? local.internal_kafka_endpoint  : local.external_kafka_endpoint}"
+  kafka_endpoint = "${local.internal_kafka_endpoint}"
   graphite_hostname = "${var.graphite_hostname}"
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"
