@@ -2,6 +2,7 @@
 .idea/
 .DS_Store
 .node_modules
+haystack.iml
 target/
 deployment/k8s/third_party_softwares/
 deployment/terraform/cluster/local/apps/overrides.json
@@ -21,5 +22,3 @@ docsite/translated_docs
 docsite/build/
 docsite/yarn.lock
 fakespans
-
-
