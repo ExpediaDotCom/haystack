@@ -5,6 +5,8 @@ ewma-detector {
     application.id = "ewma-detector"
     bootstrap.servers = "${kafka_endpoint}"
   }
-  topic = "ewma-metrics"
 
+  # TODO Renaming "topic" to "inbound-topic". Remove topic once transition is complete. [WLW]
+  topic = "ewma-metrics"
+  inbound-topic = "ewma-metrics"
 }
