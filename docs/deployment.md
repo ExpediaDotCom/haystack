@@ -7,7 +7,7 @@ Haystack uses [Terraform](https://www.terraform.io/intro/) to automate deploymen
 
 Deployment tools and scripts can be found in the `ExpediaDotCom/haystack` repository on GitHub.
 
-##Versioning
+## Versioning
 Haystack follows Semantic Versioning (MAJOR.MINOR.PATCH). All the modules are compatible with each other as long as the MAJOR version is same.
 
 ## Local Cluster
