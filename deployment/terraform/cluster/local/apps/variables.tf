@@ -9,7 +9,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true
-    version = "c420ee3d21c3645db445e33da5aa473f9a87d963"
+    version = "1.0"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "100m"
@@ -34,7 +34,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "9854ff5cfc52c647311900c6fb443fe11fdbb61e"
+    version = "1.0"
     metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
@@ -150,7 +150,7 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = false
-    version = "b28a61495e55679cefb762576dd54038cff9e67b"
+    version = "1.0"
     metricpoint_encoder_type = "base64"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
@@ -176,7 +176,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "3aac25b74b14a7450da2bf6d75e086fe47ff3bda"
+    version = "1.0"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
