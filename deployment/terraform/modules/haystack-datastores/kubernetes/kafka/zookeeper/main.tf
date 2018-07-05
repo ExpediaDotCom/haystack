@@ -3,7 +3,7 @@ locals {
   service_port = 2181
   container_port = 2181
   deployment_yaml_file_path = "${path.module}/templates/deployment-yaml.tpl"
-  image = "wurstmeister/zookeeper:3.4.6"
+  image = "zookeeper:3.4.12"
 }
 
 data "template_file" "deployment_yaml" {
