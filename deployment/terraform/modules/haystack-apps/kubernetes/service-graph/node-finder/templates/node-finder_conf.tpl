@@ -39,5 +39,3 @@ kafka {
   collectorTags = ${collect_tags}
 }
 
-
-haystack.graphite.host = "monitoring-influxdb-graphite.kube-system.svc"

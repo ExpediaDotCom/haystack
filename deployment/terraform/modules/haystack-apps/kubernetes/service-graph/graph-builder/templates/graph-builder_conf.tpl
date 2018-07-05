@@ -21,8 +21,9 @@ kafka {
     topic = "service-graph"
   }
 
-  accumulator {
-    interval = 60000
+  aggregate {
+    window.sec = 300
+    retention.days = 7
   }
 }
 
@@ -43,5 +44,3 @@ service {
         socket.timeout = 1000
     }
 }
-
-haystack.graphite.host = "monitoring-influxdb-graphite.kube-system.svc"
