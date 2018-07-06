@@ -40,7 +40,7 @@ service {
     }
 
     client {
-        connection.timeout = 1000
-        socket.timeout = 1000
+        connection.timeout = 10000
+        socket.timeout = 10000
     }
 }
