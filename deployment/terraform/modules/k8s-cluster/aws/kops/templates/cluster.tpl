@@ -123,7 +123,7 @@ metadata:
   name: master-${aws_zone}-3
 spec:
   associatePublicIp: false
-  image: k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-03-11
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
@@ -146,7 +146,7 @@ metadata:
   name: app-nodes
 spec:
   associatePublicIp: false
-  image: k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-03-11
   machineType: ${app-node_instance_type}
   maxSize: ${app-node_instance_count}
   minSize: ${app-node_instance_count}
@@ -169,7 +169,7 @@ metadata:
   name: monitoring-nodes
 spec:
   associatePublicIp: false
-  image: k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-03-11
   machineType: ${monitoring-node_instance_type}
   maxSize: ${monitoring-node_instance_count}
   minSize: ${monitoring-node_instance_count}
