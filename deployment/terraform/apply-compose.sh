@@ -105,9 +105,6 @@ function downloadThirdPartySoftwares() {
 
     if [ ! -f $TERRAFORM ] || [ ! -f $KUBECTL ] || [ ! -f $KOPS ]; then
         $DIR/install-third-party-softwares.sh
-        mv $THIRD_PARTY_SOFTWARE_PATH/kubectl $THIRD_PARTY_SOFTWARE_PATH/kubectl_org
-        echo  'while (( "$#" )); do args="$args "$1; shift; done; '$THIRD_PARTY_SOFTWARE_PATH'/kubectl_org  $args --insecure-skip-tls-verify=true' > $THIRD_PARTY_SOFTWARE_PATH/kubectl
-        chmod +x $THIRD_PARTY_SOFTWARE_PATH/kubectl
     fi
 }
 
