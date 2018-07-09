@@ -24,7 +24,7 @@ kafka {
 
   aggregate {
     window.sec = 300
-    retention.days = 7
+    retention.days = 2
   }
 }
 
