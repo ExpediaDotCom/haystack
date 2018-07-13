@@ -28,9 +28,4 @@ kafka {
 metricpoint.encoder.type = "${metricpoint_encoder_type}"
 enable.metricpoint.service.level.generation = false
 
-blacklist.services = [
-  "cs-deposits-distribution",
-  "lty-awards-service",
-  "cs-tcs-gateway",
-  "ews-booking-service"
-]
+blacklist.services = []
