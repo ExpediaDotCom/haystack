@@ -25,5 +25,5 @@ kafka {
 // 1) periodreplacement: replaces all periods with 3 underscores
 // 2) base64: base64 encodes the full name with a padding of _
 // 3) noop: does not perform any encoding
-metricpoint.encoder.type = "periodreplacement"
+metricpoint.encoder.type = "${metricpoint_encoder_type}"
 enable.metricpoint.service.level.generation = false

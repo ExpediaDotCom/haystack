@@ -5,6 +5,8 @@ constant-detector {
     application.id = "constant-detector"
     bootstrap.servers = "${kafka_endpoint}"
   }
-  topic = "constant-metrics"
 
+  # TODO Renaming "topic" to "inbound-topic". Remove topic once transition is complete. [WLW]
+  topic = "constant-metrics"
+  inbound-topic = "constant-metrics"
 }

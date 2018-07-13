@@ -9,7 +9,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true
-    version = "c420ee3d21c3645db445e33da5aa473f9a87d963"
+    version = "1.0"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "100m"
@@ -17,7 +17,7 @@ variable "traces" {
     indexer_memory_request = "250"
     indexer_memory_limit = "250"
     indexer_jvm_memory_limit = "200"
-    indexer_elasticsearch_template = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":16,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"starttime\":{\"type\":\"long\",\"doc_values\": true},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"type\":\"long\",\"doc_values\":true}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
+    indexer_elasticsearch_template = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":16,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"starttime\":{\"type\":\"long\",\"doc_values\": true},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"enabled\":false}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
 
     reader_instances = 1
     reader_environment_overrides = ""
@@ -34,7 +34,8 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "77351a0028a2f644fedc7a7899e79a5b41d8273e"
+    version = "1.0"
+    metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
     span_timeseries_transformer_cpu_limit = "1000m"
@@ -60,11 +61,11 @@ variable "pipes" {
   default = {
     version = "a20a8087f5ddc3fbf1a1c72dcff840608accadbf"
 
-    firehose_kafka_threadcount = 1,
+    firehose_kafka_threadcount = 1
     firehose_writer_enabled = false
-    firehose_writer_environment_overrides = "",
-    firehose_writer_firehose_initialretrysleep = 1,
-    firehose_writer_firehose_maxretrysleep = "",
+    firehose_writer_environment_overrides = ""
+    firehose_writer_firehose_initialretrysleep = 1
+    firehose_writer_firehose_maxretrysleep = ""
     firehose_writer_firehose_signingregion = ""
     firehose_writer_firehose_streamname = ""
     firehose_writer_firehose_totopic = ""
@@ -149,7 +150,8 @@ variable "service-graph" {
   type = "map"
   default = {
     enabled = false
-    version = "b28a61495e55679cefb762576dd54038cff9e67b"
+    version = "1.0"
+    metricpoint_encoder_type = "base64"
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "100m"
@@ -157,6 +159,7 @@ variable "service-graph" {
     node_finder_memory_request = "250"
     node_finder_memory_limit = "250"
     node_finder_jvm_memory_limit = "200"
+    collect_tags = "[]"
 
     graph_builder_instances = 1
     graph_builder_environment_overrides = ""
@@ -173,7 +176,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "8266f60ee9f8177b5b1304388e6cb19af5e15e2f"
+    version = "1.0"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
@@ -185,6 +188,7 @@ variable "ui" {
     cpu_limit = "1000m"
     memory_request = "250"
     memory_limit = "250"
+    metricpoint_encoder_type = "base64"
   }
 }
 
@@ -290,6 +294,6 @@ variable "anomaly-validator" {
     anomaly_validator_memory_limit = "250"
     anomaly_validator_jvm_memory_limit = "200"
     anomaly_validator_environment_overrides = ""
-
+    anomaly_validator_investigation_endpoint = ""
   }
 }

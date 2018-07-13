@@ -3,7 +3,7 @@
   "cluster": true,
   "upstreamTimeout": 30000,
   "enableServicePerformance": false,
-  "enableServiceLevelTrends": true,
+  "enableServiceLevelTrends": false,
   "enableLatencyCostViewer": true,
   "graphite": {
     "host": "${graphite_hostname}",
@@ -21,11 +21,15 @@
     },
     "trends": {
       "connectorName": "haystack",
-      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}"
+      "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}",
+      "encoder": "${metricpoint_encoder_type}"
+
     },
     "alerts": {
       "connectorName": "haystack",
       "metricTankUrl": "http://${metrictank_hostname}:${metrictank_port}",
+      "alertFreqInSec": 300,
+      "alertMergeBufferTimeInSec": 60,
       "subscriptions": {
           "connectorName": "stub",
           "enabled": false

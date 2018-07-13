@@ -13,6 +13,7 @@ variable "kubectl_context_name" {}
 variable "node_selecter_label"{}
 variable "memory_limit"{}
 variable "memory_request"{}
+variable "metricpoint_encoder_type" {}
 variable "jvm_memory_limit"{}
 variable "cpu_limit"{}
 variable "cpu_request"{}

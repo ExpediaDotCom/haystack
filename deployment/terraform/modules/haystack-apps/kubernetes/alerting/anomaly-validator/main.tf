@@ -25,6 +25,7 @@ data "template_file" "config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    investigation_endpoint = "${var.investigation_endpoint}"
   }
 }
 

@@ -18,12 +18,12 @@ resource "kubernetes_config_map" "haystack-config" {
   count = "${local.count}"
 
 }
-
 data "template_file" "config_data" {
   template = "${file("${local.config_file_path}")}"
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    metricpoint_encoder_type = "${var.metricpoint_encoder_type}"
   }
 }
 

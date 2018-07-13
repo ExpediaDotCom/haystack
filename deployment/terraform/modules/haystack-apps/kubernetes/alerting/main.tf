@@ -9,7 +9,7 @@ module "metric-router" {
   image = "expediadotcom/haystack-adaptive-alerting-metric-router:${var.alerting["version"]}"
   replicas = "${var.metric-router["metric_router_instances"]}"
   namespace = "${var.app_namespace}"
-  kafka_endpoint = "${local.external_metric_tank_enabled == "false" ? local.internal_kafka_endpoint  : local.external_kafka_endpoint}"
+  kafka_endpoint = "${local.internal_kafka_endpoint}"
   graphite_hostname = "${var.graphite_hostname}"
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"
@@ -110,4 +110,5 @@ module "anomaly-validator" {
   memory_request = "${var.anomaly-validator["anomaly_validator_memory_request"]}"
   jvm_memory_limit = "${var.anomaly-validator["anomaly_validator_jvm_memory_limit"]}"
   env_vars = "${var.anomaly-validator["anomaly_validator_environment_overrides"]}"
+  investigation_endpoint = "${var.anomaly-validator["anomaly_validator_investigation_endpoint"]}"
 }

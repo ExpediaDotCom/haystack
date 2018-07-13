@@ -11,6 +11,7 @@ kafka {
     commit.interval.ms = 3000
     auto.offset.reset = latest
     timestamp.extractor = "org.apache.kafka.streams.processor.WallclockTimestampExtractor"
+    replication.factor = 1
   }
 
   consumer {
@@ -21,8 +22,9 @@ kafka {
     topic = "service-graph"
   }
 
-  accumulator {
-    interval = 60000
+  aggregate {
+    window.sec = 1800
+    retention.days = 1
   }
 }
 
@@ -39,9 +41,7 @@ service {
     }
 
     client {
-        connection.timeout = 1000
-        socket.timeout = 1000
+        connection.timeout = 10000
+        socket.timeout = 10000
     }
 }
-
-haystack.graphite.host = "monitoring-influxdb-graphite.kube-system.svc"

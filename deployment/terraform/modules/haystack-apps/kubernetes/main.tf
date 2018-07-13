@@ -107,6 +107,7 @@ module "ui" {
   ui_saml_callback_url = "${var.ui["saml_callback_url"]}"
   ui_session_secret = "${var.ui["session_secret"]}"
   ui_saml_entry_point = "${var.ui["saml_entry_point"]}"
+  metricpoint_encoder_type = "${var.ui["metricpoint_encoder_type"]}"
 }
 
 module "alerting" {
