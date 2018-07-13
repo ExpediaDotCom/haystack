@@ -27,3 +27,5 @@ kafka {
 // 3) noop: does not perform any encoding
 metricpoint.encoder.type = "${metricpoint_encoder_type}"
 enable.metricpoint.service.level.generation = false
+
+blacklist.services = []
