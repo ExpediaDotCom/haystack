@@ -27,10 +27,3 @@ kafka {
 // 3) noop: does not perform any encoding
 metricpoint.encoder.type = "periodreplacement"
 enable.metricpoint.service.level.generation = false
-
-blacklist.services = [
-  "cs-deposits-distribution",
-  "lty-awards-service",
-  "cs-tcs-gateway",
-  "ews-booking-service"
-]
