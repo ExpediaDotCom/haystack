@@ -12,7 +12,7 @@ Haystack follows Semantic Versioning (MAJOR.MINOR.PATCH). All the modules are co
 
 ## Local Cluster
 
-To get a feel for Haystack you can run it locally inside minikube. Please refer to the [Getting Started guide](https://expediadotcom.github.io/haystack/src/getting_started.html) for installation instructions.
+To get a feel for Haystack you can run it locally inside minikube. Please refer to the [Getting Started guide](https://expediadotcom.github.io/haystack/docs/getting_started.html) for installation instructions.
 
 ## AWS Cluster
 
