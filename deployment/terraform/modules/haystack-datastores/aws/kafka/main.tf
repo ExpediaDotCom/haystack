@@ -106,6 +106,10 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
     delete_on_termination = false
   }
 
+  lifecycle {
+    ignore_changes = ["ami"]
+  }
+
   user_data = "${data.template_file.zookeeper_user_data.rendered}"
 }
 
@@ -143,6 +147,10 @@ resource "aws_instance" "haystack-kafka-broker" {
     volume_type = "gp2"
     volume_size = "${var.broker_volume_size}"
     delete_on_termination = false
+  }
+
+  lifecycle {
+    ignore_changes = ["ami"]
   }
 
   user_data = "${data.template_file.kafka_broker_user_data.rendered}"
