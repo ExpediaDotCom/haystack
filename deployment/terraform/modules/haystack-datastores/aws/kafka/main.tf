@@ -71,11 +71,6 @@ resource "aws_iam_instance_profile" "haystack-zookeeper-profile" {
   role = "${aws_iam_role.haystack-zookeeper-role.name}"
 }
 
-resource "aws_iam_role_policy_attachment" "zookeeper-policy-attach" {
-  role       = "${aws_iam_role.haystack-zookeeper-role.name}"
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMFullAccess"
-}
-
 data "template_file" "zookeeper_user_data" {
   template = "${file("${path.module}/data/zookeeper_user_data_sh.tpl")}"
 
