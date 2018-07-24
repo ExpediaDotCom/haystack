@@ -155,7 +155,7 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    ignore_changes = ["ami"]
   }
 
   user_data = "${data.template_file.zookeeper_user_data.rendered}"
@@ -202,7 +202,7 @@ resource "aws_instance" "haystack-kafka-broker" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    ignore_changes = ["ami"]
   }
 
   user_data = "${data.template_file.kafka_broker_user_data.rendered}"
