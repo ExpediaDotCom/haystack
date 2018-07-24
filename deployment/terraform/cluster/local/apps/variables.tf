@@ -297,3 +297,33 @@ variable "anomaly-validator" {
     anomaly_validator_investigation_endpoint = ""
   }
 }
+
+# anomaly-detector-mapper config
+variable "anomaly-detector-mapper" {
+  type = "map"
+  default = {
+    enabled = false
+    anomaly_detector_mapper_instances = 1
+    anomaly_detector_mapper_cpu_request = "100m"
+    anomaly_detector_mapper_cpu_limit = "1000m"
+    anomaly_detector_mapper_memory_request = "250"
+    anomaly_detector_mapper_memory_limit = "250"
+    anomaly_detector_mapper_jvm_memory_limit = "200"
+    anomaly_detector_mapper_environment_overrides = ""
+  }
+}
+
+# anomaly-validator config
+variable "anomaly-detector-manager" {
+  type = "map"
+  default = {
+    enabled = false
+    anomaly_detector_manager_instances = 1
+    anomaly_detector_manager_cpu_request = "100m"
+    anomaly_detector_manager_cpu_limit = "1000m"
+    anomaly_detector_manager_memory_request = "250"
+    anomaly_detector_manager_memory_limit = "250"
+    anomaly_detector_manager_jvm_memory_limit = "200"
+    anomaly_detector_manager_environment_overrides = ""
+  }
+}

@@ -64,4 +64,10 @@ module "haystack-apps" {
 
   #anomaly-validator configuration
   anomaly-validator = "${var.anomaly-validator}"
+
+  #anomaly-detector-mapper configuration
+  anomaly-detector-mapper = "${var.anomaly-detector-mapper}"
+
+  #anomaly-detector-manager configuration
+  anomaly-detector-manager = "${var.anomaly-detector-manager}"
 }

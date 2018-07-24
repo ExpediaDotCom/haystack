@@ -129,4 +129,6 @@ module "alerting" {
   constant-detector = "${var.constant-detector}"
   pewma-detector = "${var.pewma-detector}"
   anomaly-validator = "${var.anomaly-validator}"
+  anomaly-detector-mapper = "${var.anomaly-detector-mapper}"
+  anomaly-detector-manager = "${var.anomaly-detector-manager}"
 }
