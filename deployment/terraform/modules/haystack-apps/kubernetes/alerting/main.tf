@@ -112,3 +112,47 @@ module "anomaly-validator" {
   env_vars = "${var.anomaly-validator["anomaly_validator_environment_overrides"]}"
   investigation_endpoint = "${var.anomaly-validator["anomaly_validator_investigation_endpoint"]}"
 }
+
+module "anomaly-detector-mapper" {
+  source = "anomaly-detector-mapper"
+
+  image = "expediadotcom/haystack-adaptive-alerting-anomaly-detector-mapper:${var.alerting["version"]}"
+  replicas = "${var.anomaly-detector-mapper["anomaly_detector_mapper_instances"]}"
+  namespace = "${var.app_namespace}"
+  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_hostname = "${var.graphite_hostname}"
+  node_selecter_label = "${var.node_selector_label}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  enabled = "${var.anomaly-detector-mapper["enabled"]}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.anomaly-detector-mapper["anomaly_detector_mapper_cpu_limit"]}"
+  cpu_request = "${var.anomaly-detector-mapper["anomaly_detector_mapper_cpu_request"]}"
+  memory_limit = "${var.anomaly-detector-mapper["anomaly_detector_mapper_memory_limit"]}"
+  memory_request = "${var.anomaly-detector-mapper["anomaly_detector_mapper_memory_request"]}"
+  jvm_memory_limit = "${var.anomaly-detector-mapper["anomaly_detector_mapper_jvm_memory_limit"]}"
+  env_vars = "${var.anomaly-detector-mapper["anomaly_detector_mapper_environment_overrides"]}"
+}
+
+module "anomaly-detector-manager" {
+  source = "anomaly-detector-manager"
+
+  image = "expediadotcom/haystack-adaptive-alerting-anomaly-detector-manager:${var.alerting["version"]}"
+  replicas = "${var.anomaly-detector-manager["anomaly_detector_manager_instances"]}"
+  namespace = "${var.app_namespace}"
+  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_hostname = "${var.graphite_hostname}"
+  node_selecter_label = "${var.node_selector_label}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  enabled = "${var.anomaly-detector-manager["enabled"]}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.anomaly-detector-manager["anomaly_detector_manager_cpu_limit"]}"
+  cpu_request = "${var.anomaly-detector-manager["anomaly_detector_manager_cpu_request"]}"
+  memory_limit = "${var.anomaly-detector-manager["anomaly_detector_manager_memory_limit"]}"
+  memory_request = "${var.anomaly-detector-manager["anomaly_detector_manager_memory_request"]}"
+  jvm_memory_limit = "${var.anomaly-detector-manager["anomaly_detector_manager_jvm_memory_limit"]}"
+  env_vars = "${var.anomaly-detector-manager["anomaly_detector_manager_environment_overrides"]}"
+}

@@ -41,3 +41,12 @@ variable "anomaly-validator" {
   type = "map"
 }
 
+#anomaly-detector-mapper
+variable "anomaly-detector-mapper" {
+  type = "map"
+}
+
+#anomaly-detector-manager
+variable "anomaly-detector-manager" {
+  type = "map"
+}
