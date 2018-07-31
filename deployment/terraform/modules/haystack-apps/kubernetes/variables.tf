@@ -79,12 +79,12 @@ variable "anomaly-validator" {
   type = "map"
 }
 
-#anomaly-detector-mapper
-variable "anomaly-detector-mapper" {
+#ad-mapper
+variable "ad-mapper" {
   type = "map"
 }
 
-#anomaly-detector-manager
-variable "anomaly-detector-manager" {
+#ad-manager
+variable "ad-manager" {
   type = "map"
 }

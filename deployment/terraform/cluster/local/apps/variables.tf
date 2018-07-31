@@ -298,8 +298,8 @@ variable "anomaly-validator" {
   }
 }
 
-# anomaly-detector-mapper config
-variable "anomaly-detector-mapper" {
+# ad-mapper config
+variable "ad-mapper" {
   type = "map"
   default = {
     enabled = false
@@ -314,7 +314,7 @@ variable "anomaly-detector-mapper" {
 }
 
 # anomaly-validator config
-variable "anomaly-detector-manager" {
+variable "ad-manager" {
   type = "map"
   default = {
     enabled = false

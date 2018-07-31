@@ -1,6 +1,6 @@
-anomaly-detector-mapper {
+ad-mapper {
   streams {
-    application.id = "anomaly-detector-mapper"
+    application.id = "ad-mapper"
     bootstrap.servers = "${kafka_endpoint}"
     default.value.serde = "com.expedia.adaptivealerting.kafka.serde.JsonPojoSerde"
     JsonPojoClass = "com.expedia.adaptivealerting.core.data.Mpoint"
