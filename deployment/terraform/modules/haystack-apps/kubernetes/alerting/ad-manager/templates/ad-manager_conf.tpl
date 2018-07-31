@@ -1,6 +1,6 @@
-anomaly-detector-manager {
+ad-manager {
   streams {
-    application.id = "anomaly-detector-manager"
+    application.id = "ad-manager"
     bootstrap.servers = "${kafka_endpoint}"
     default.value.serde = "com.expedia.adaptivealerting.kafka.serde.JsonPojoSerde"
     JsonPojoClass = "com.expedia.adaptivealerting.core.data.MappedMpoint"

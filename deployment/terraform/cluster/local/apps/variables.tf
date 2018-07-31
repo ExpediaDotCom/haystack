@@ -298,32 +298,32 @@ variable "anomaly-validator" {
   }
 }
 
-# anomaly-detector-mapper config
-variable "anomaly-detector-mapper" {
+# ad-mapper config
+variable "ad-mapper" {
   type = "map"
   default = {
     enabled = false
-    anomaly_detector_mapper_instances = 1
-    anomaly_detector_mapper_cpu_request = "100m"
-    anomaly_detector_mapper_cpu_limit = "1000m"
-    anomaly_detector_mapper_memory_request = "250"
-    anomaly_detector_mapper_memory_limit = "250"
-    anomaly_detector_mapper_jvm_memory_limit = "200"
-    anomaly_detector_mapper_environment_overrides = ""
+    ad_mapper_instances = 1
+    ad_mapper_cpu_request = "100m"
+    ad_mapper_cpu_limit = "1000m"
+    ad_mapper_memory_request = "250"
+    ad_mapper_memory_limit = "250"
+    ad_mapper_jvm_memory_limit = "200"
+    ad_mapper_environment_overrides = ""
   }
 }
 
 # anomaly-validator config
-variable "anomaly-detector-manager" {
+variable "ad-manager" {
   type = "map"
   default = {
     enabled = false
-    anomaly_detector_manager_instances = 1
-    anomaly_detector_manager_cpu_request = "100m"
-    anomaly_detector_manager_cpu_limit = "1000m"
-    anomaly_detector_manager_memory_request = "250"
-    anomaly_detector_manager_memory_limit = "250"
-    anomaly_detector_manager_jvm_memory_limit = "200"
-    anomaly_detector_manager_environment_overrides = ""
+    ad_manager_instances = 1
+    ad_manager_cpu_request = "100m"
+    ad_manager_cpu_limit = "1000m"
+    ad_manager_memory_request = "250"
+    ad_manager_memory_limit = "250"
+    ad_manager_jvm_memory_limit = "200"
+    ad_manager_environment_overrides = ""
   }
 }
