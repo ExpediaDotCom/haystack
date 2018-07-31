@@ -116,7 +116,7 @@ module "anomaly-validator" {
 module "ad-mapper" {
   source = "ad-mapper"
 
-  image = "expediadotcom/haystack-adaptive-alerting-anomaly-detector-mapper:${var.alerting["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-ad-mapper:${var.alerting["version"]}"
   replicas = "${var.ad-mapper["ad_mapper_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
@@ -138,7 +138,7 @@ module "ad-mapper" {
 module "ad-manager" {
   source = "ad-manager"
 
-  image = "expediadotcom/haystack-adaptive-alerting-anomaly-detector-manager:${var.alerting["version"]}"
+  image = "expediadotcom/haystack-adaptive-alerting-ad-manager:${var.alerting["version"]}"
   replicas = "${var.ad-manager["ad_manager_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
