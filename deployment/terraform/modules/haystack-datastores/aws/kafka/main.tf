@@ -167,7 +167,8 @@ data "template_file" "kafka_broker_user_data" {
   vars {
     haystack_graphite_host = "${var.aws_graphite_host}"
     haystack_graphite_port = "${var.aws_graphite_port}"
-    zookeeper_hosts        = "${join(",", formatlist("%s:2181", aws_instance.haystack-zookeeper-nodes.*.private_ip))}"
+    #zookeeper_hosts        = "${join(",", formatlist("%s:2181", aws_instance.haystack-zookeeper-nodes.*.private_ip))}"
+    zookeeper_hosts        = "${join(",", formatlist("%s:2181", aws_route53_record.haystack-zookeeper-a-records.*.name))}"
     num_partitions         = "${var.default_partition_count}"
     retention_hours        = "24"
     retention_bytes        = "1073741824"
@@ -202,7 +203,7 @@ resource "aws_instance" "haystack-kafka-broker" {
   }
 
   lifecycle {
-    ignore_changes = ["ami"]
+    ignore_changes = ["ami", "user_data"]
   }
 
   user_data = "${data.template_file.kafka_broker_user_data.rendered}"
@@ -224,4 +225,13 @@ resource "aws_route53_record" "haystack-kafka-cname" {
   type    = "A"
   ttl     = "300"
   records = ["${aws_instance.haystack-kafka-broker.*.private_ip}"]
+}
+
+resource "aws_route53_record" "haystack-zookeeper-a-records" {
+  count   = "${var.zookeeper_count}"
+  zone_id = "${var.aws_hosted_zone_id}"
+  name    = "${var.haystack_cluster_name}-zookeeper-${count.index}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${element(aws_instance.haystack-zookeeper-nodes.*.private_ip, count.index)}"]
 }
