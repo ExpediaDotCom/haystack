@@ -8,8 +8,15 @@ data "terraform_remote_state" "haystack_inrastructure" {
     path = "../state/terraform-infra.tfstate"
   }
 }
+
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
+
+  # FIXME I am getting errors during apply-compose.sh -r uninstall-all:
+#  * module.haystack-apps.var.elasticsearch_port: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'elasticsearch_port' for variable 'data.terraform_remote_state.haystack_inrastructure.elasticsearch_port'
+#  * module.haystack-apps.var.kafka_hostname: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'kafka_hostname' for variable 'data.terraform_remote_state.haystack_inrastructure.kafka_hostname'
+#  * module.haystack-apps.var.elasticsearch_hostname: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'elasticsearch_hostname' for variable 'data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname'
+#  * module.haystack-apps.var.kafka_port: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'kafka_port' for variable 'data.terraform_remote_state.haystack_inrastructure.kafka_port'
 
   elasticsearch_hostname = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_port}"
@@ -47,27 +54,20 @@ module "haystack-apps" {
   #metrictank configuration_overrides
   metrictank = "${var.metrictank}"
 
-  #alerting configuration_overrides
+
+  # ========================================
+  # Adaptive Alerting overrides
+  # ========================================
+
   alerting = "${var.alerting}"
-
-  #metric-router configuration_overrides
-  metric-router = "${var.metric-router}"
-
-  #ewma-detector configuration
-  ewma-detector = "${var.ewma-detector}"
-
-  #constant-detector configuration
-  constant-detector = "${var.constant-detector}"
-
-  #pewma-detector configuration
-  pewma-detector = "${var.pewma-detector}"
-
-  #anomaly-validator configuration
-  anomaly-validator = "${var.anomaly-validator}"
-
-  #ad-mapper configuration
   ad-mapper = "${var.ad-mapper}"
-
-  #ad-manager configuration
   ad-manager = "${var.ad-manager}"
+  anomaly-validator = "${var.anomaly-validator}"
+  aquila-trainer = "${var.aquila-trainer}"
+
+  # Deprecated
+  metric-router = "${var.metric-router}"
+  constant-detector = "${var.constant-detector}"
+  ewma-detector = "${var.ewma-detector}"
+  pewma-detector = "${var.pewma-detector}"
 }

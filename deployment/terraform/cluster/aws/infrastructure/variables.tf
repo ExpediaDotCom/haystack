@@ -23,8 +23,6 @@ variable "graphite_node_port" {
   default = "32301"
 }
 
-
-
 variable "aws_region" {
   default = "us-west-2"
 }

@@ -123,12 +123,16 @@ module "alerting" {
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
   metrictank = "${var.metrictank}"
+
   alerting = "${var.alerting}"
+  ad-mapper = "${var.ad-mapper}"
+  ad-manager = "${var.ad-manager}"
+  anomaly-validator = "${var.anomaly-validator}"
+  aquila-trainer = "${var.aquila-trainer}"
+
+  # Deprecated
   metric-router = "${var.metric-router}"
   ewma-detector = "${var.ewma-detector}"
   constant-detector = "${var.constant-detector}"
   pewma-detector = "${var.pewma-detector}"
-  anomaly-validator = "${var.anomaly-validator}"
-  ad-mapper = "${var.ad-mapper}"
-  ad-manager = "${var.ad-manager}"
 }

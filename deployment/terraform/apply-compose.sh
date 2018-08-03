@@ -112,9 +112,9 @@ function deleteState() {
 
     case "$CLUSTER_TYPE" in
         local)
-	    echo "deleting .terraform folders..."
-	    find $DIR -iname ".terraform" -exec rm {} \;
-	    echo "deleting state folder..."
+            echo "deleting .terraform folders..."
+            find $DIR -iname ".terraform" -exec rm -rf {} \;
+            echo "deleting state folder..."
             rm -rf $DIR/cluster/$CLUSTER_TYPE/state
         ;;
 

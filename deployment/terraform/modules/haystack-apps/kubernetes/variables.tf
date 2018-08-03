@@ -13,7 +13,6 @@ variable "kubectl_executable_name" {}
 variable "k8s_app_namespace" {}
 variable "app-node_selector_label"{}
 
-
 # traces config
 variable "traces" {
   type = "map"
@@ -24,12 +23,10 @@ variable "trends" {
   type = "map"
 }
 
-
 # pipes config
 variable "pipes" {
   type = "map"
 }
-
 
 # collectors config
 variable "collector" {
@@ -46,45 +43,51 @@ variable "ui" {
   type = "map"
 }
 
-#metrictank
+# metrictank
 variable "metrictank" {
   type = "map"
 }
 
-#alerting
+# ========================================
+# Adaptive Alerting
+# ========================================
+
 variable "alerting" {
   type = "map"
 }
-#metric-router
-variable "metric-router" {
-  type = "map"
-}
 
-#ewma-detector
-variable "ewma-detector" {
-  type = "map"
-}
-
-#constant-detector
-variable "constant-detector" {
-  type = "map"
-}
-#pewma-detector
-variable "pewma-detector" {
-  type = "map"
-}
-
-#anomaly-validator
-variable "anomaly-validator" {
-  type = "map"
-}
-
-#ad-mapper
 variable "ad-mapper" {
   type = "map"
 }
 
-#ad-manager
 variable "ad-manager" {
+  type = "map"
+}
+
+variable "anomaly-validator" {
+  type = "map"
+}
+
+variable "aquila-trainer" {
+  type = "map"
+}
+
+# Deprecated - to be replaced by ad-mapper above
+variable "metric-router" {
+  type = "map"
+}
+
+# Deprecated - to be replaced by ad-manager above
+variable "ewma-detector" {
+  type = "map"
+}
+
+# Deprecated - to be replaced by ad-manager above
+variable "constant-detector" {
+  type = "map"
+}
+
+# Deprecated - to be replaced by ad-manager above
+variable "pewma-detector" {
   type = "map"
 }

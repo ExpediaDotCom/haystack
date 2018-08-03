@@ -1,9 +1,8 @@
-
-
 variable "kubectl_executable_name" {}
 variable "haystack_cluster_name" {
   default = "haystack"
 }
+
 # traces config
 variable "traces" {
   type = "map"
@@ -28,7 +27,6 @@ variable "traces" {
     reader_jvm_memory_limit = "200"
   }
 }
-
 
 variable "trends" {
   type = "map"
@@ -55,7 +53,6 @@ variable "trends" {
 }
 
 # pipes config
-
 variable "pipes" {
   type = "map"
   default = {
@@ -144,7 +141,6 @@ variable "collector" {
 
 }
 
-
 # service-graph config
 variable "service-graph" {
   type = "map"
@@ -193,7 +189,6 @@ variable "ui" {
 }
 
 #metrictank
-
 variable "metrictank" {
   type = "map"
   default = {
@@ -210,7 +205,11 @@ variable "metrictank" {
   }
 }
 
-#alerting config
+
+# ========================================
+# Adaptive Alerting
+# ========================================
+
 variable "alerting" {
   type = "map"
   default = {
@@ -218,71 +217,34 @@ variable "alerting" {
   }
 }
 
-# metric-router config
-variable "metric-router" {
+variable "ad-mapper" {
   type = "map"
   default = {
     enabled = false
-    metric_router_instances = 1
-    metric_router_cpu_request = "100m"
-    metric_router_cpu_limit = "1000m"
-    metric_router_memory_request = "250"
-    metric_router_memory_limit = "250"
-    metric_router_jvm_memory_limit = "200"
-    metric_router_environment_overrides = ""
-
+    ad_mapper_instances = 1
+    ad_mapper_cpu_request = "100m"
+    ad_mapper_cpu_limit = "1000m"
+    ad_mapper_memory_request = "250"
+    ad_mapper_memory_limit = "250"
+    ad_mapper_jvm_memory_limit = "200"
+    ad_mapper_environment_overrides = ""
   }
 }
 
-# metric-router config
-variable "ewma-detector" {
+variable "ad-manager" {
   type = "map"
   default = {
     enabled = false
-    ewma_detector_instances = 1
-    ewma_detector_cpu_request = "100m"
-    ewma_detector_cpu_limit = "1000m"
-    ewma_detector_memory_request = "250"
-    ewma_detector_memory_limit = "250"
-    ewma_detector_jvm_memory_limit = "200"
-    ewma_detector_environment_overrides = ""
-
+    ad_manager_instances = 1
+    ad_manager_cpu_request = "100m"
+    ad_manager_cpu_limit = "1000m"
+    ad_manager_memory_request = "250"
+    ad_manager_memory_limit = "250"
+    ad_manager_jvm_memory_limit = "200"
+    ad_manager_environment_overrides = ""
   }
 }
 
-# constant-detector config
-variable "constant-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    constant_detector_instances = 1
-    constant_detector_cpu_request = "100m"
-    constant_detector_cpu_limit = "1000m"
-    constant_detector_memory_request = "250"
-    constant_detector_memory_limit = "250"
-    constant_detector_jvm_memory_limit = "200"
-    constant_detector_environment_overrides = ""
-
-  }
-}
-
-# pewma-detector config
-variable "pewma-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    pewma_detector_instances = 1
-    pewma_detector_cpu_request = "100m"
-    pewma_detector_cpu_limit = "1000m"
-    pewma_detector_memory_request = "250"
-    pewma_detector_memory_limit = "250"
-    pewma_detector_jvm_memory_limit = "200"
-    pewma_detector_environment_overrides = ""
-
-  }
-}
-
-# anomaly-validator config
 variable "anomaly-validator" {
   type = "map"
   default = {
@@ -298,32 +260,80 @@ variable "anomaly-validator" {
   }
 }
 
-# ad-mapper config
-variable "ad-mapper" {
+variable "aquila-trainer" {
   type = "map"
   default = {
     enabled = false
-    ad_mapper_instances = 1
-    ad_mapper_cpu_request = "100m"
-    ad_mapper_cpu_limit = "1000m"
-    ad_mapper_memory_request = "250"
-    ad_mapper_memory_limit = "250"
-    ad_mapper_jvm_memory_limit = "200"
-    ad_mapper_environment_overrides = ""
+    aquila_trainer_instances = 1
+    aquila_trainer_cpu_request = "100m"
+    aquila_trainer_cpu_limit = "1000m"
+    aquila_trainer_memory_request = "250"
+    aquila_trainer_memory_limit = "250"
+    aquila_trainer_jvm_memory_limit = "200"
+    aquila_trainer_environment_overrides = ""
   }
 }
 
-# anomaly-validator config
-variable "ad-manager" {
+# Deprecated
+variable "metric-router" {
   type = "map"
   default = {
     enabled = false
-    ad_manager_instances = 1
-    ad_manager_cpu_request = "100m"
-    ad_manager_cpu_limit = "1000m"
-    ad_manager_memory_request = "250"
-    ad_manager_memory_limit = "250"
-    ad_manager_jvm_memory_limit = "200"
-    ad_manager_environment_overrides = ""
+    metric_router_instances = 1
+    metric_router_cpu_request = "100m"
+    metric_router_cpu_limit = "1000m"
+    metric_router_memory_request = "250"
+    metric_router_memory_limit = "250"
+    metric_router_jvm_memory_limit = "200"
+    metric_router_environment_overrides = ""
+
+  }
+}
+
+# Deprecated
+variable "constant-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    constant_detector_instances = 1
+    constant_detector_cpu_request = "100m"
+    constant_detector_cpu_limit = "1000m"
+    constant_detector_memory_request = "250"
+    constant_detector_memory_limit = "250"
+    constant_detector_jvm_memory_limit = "200"
+    constant_detector_environment_overrides = ""
+
+  }
+}
+
+# Deprecated
+variable "ewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    ewma_detector_instances = 1
+    ewma_detector_cpu_request = "100m"
+    ewma_detector_cpu_limit = "1000m"
+    ewma_detector_memory_request = "250"
+    ewma_detector_memory_limit = "250"
+    ewma_detector_jvm_memory_limit = "200"
+    ewma_detector_environment_overrides = ""
+
+  }
+}
+
+# Deprecated
+variable "pewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    pewma_detector_instances = 1
+    pewma_detector_cpu_request = "100m"
+    pewma_detector_cpu_limit = "1000m"
+    pewma_detector_memory_request = "250"
+    pewma_detector_memory_limit = "250"
+    pewma_detector_jvm_memory_limit = "200"
+    pewma_detector_environment_overrides = ""
+
   }
 }
