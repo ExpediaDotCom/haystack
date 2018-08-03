@@ -12,12 +12,6 @@ data "terraform_remote_state" "haystack_inrastructure" {
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
 
-  # FIXME I am getting errors during apply-compose.sh -r uninstall-all:
-#  * module.haystack-apps.var.elasticsearch_port: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'elasticsearch_port' for variable 'data.terraform_remote_state.haystack_inrastructure.elasticsearch_port'
-#  * module.haystack-apps.var.kafka_hostname: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'kafka_hostname' for variable 'data.terraform_remote_state.haystack_inrastructure.kafka_hostname'
-#  * module.haystack-apps.var.elasticsearch_hostname: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'elasticsearch_hostname' for variable 'data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname'
-#  * module.haystack-apps.var.kafka_port: Resource 'data.terraform_remote_state.haystack_inrastructure' does not have attribute 'kafka_port' for variable 'data.terraform_remote_state.haystack_inrastructure.kafka_port'
-
   elasticsearch_hostname = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_port}"
   kubectl_context_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"
