@@ -72,6 +72,11 @@ variable "aquila-trainer" {
   type = "map"
 }
 
+# Deprecated - to be replaced by ad-manager above
+variable "constant-detector" {
+  type = "map"
+}
+
 # Deprecated - to be replaced by ad-mapper above
 variable "metric-router" {
   type = "map"
@@ -79,11 +84,6 @@ variable "metric-router" {
 
 # Deprecated - to be replaced by ad-manager above
 variable "ewma-detector" {
-  type = "map"
-}
-
-# Deprecated - to be replaced by ad-manager above
-variable "constant-detector" {
   type = "map"
 }
 

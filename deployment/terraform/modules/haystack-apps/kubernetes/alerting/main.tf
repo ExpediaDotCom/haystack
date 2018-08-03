@@ -72,7 +72,7 @@ module "anomaly-validator" {
 }
 
 module "aquila-trainer" {
-  source = "anomaly-validator"
+  source = "aquila-trainer"
 
   image = "expediadotcom/aquila-trainer:${var.alerting["version"]}"
   replicas = "${var.aquila-trainer["aquila_trainer_instances"]}"
@@ -85,7 +85,7 @@ module "aquila-trainer" {
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
-  enabled = "${var.anomaly-validator["enabled"]}"
+  enabled = "${var.aquila-trainer["enabled"]}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   cpu_limit = "${var.aquila-trainer["aquila_trainer_cpu_limit"]}"
@@ -94,9 +94,6 @@ module "aquila-trainer" {
   memory_request = "${var.aquila-trainer["aquila_trainer_memory_request"]}"
   jvm_memory_limit = "${var.aquila-trainer["aquila_trainer_jvm_memory_limit"]}"
   env_vars = "${var.aquila-trainer["aquila_trainer_environment_overrides"]}"
-
-  # TODO Replace with aquila-trainer equivalents. [WLW]
-#  investigation_endpoint = "${var.anomaly-validator["anomaly_validator_investigation_endpoint"]}"
 }
 
 

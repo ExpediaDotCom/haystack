@@ -132,7 +132,7 @@ module "alerting" {
 
   # Deprecated
   metric-router = "${var.metric-router}"
-  ewma-detector = "${var.ewma-detector}"
   constant-detector = "${var.constant-detector}"
+  ewma-detector = "${var.ewma-detector}"
   pewma-detector = "${var.pewma-detector}"
 }
