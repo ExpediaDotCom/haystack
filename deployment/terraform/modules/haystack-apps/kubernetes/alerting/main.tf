@@ -1,12 +1,11 @@
 locals {
   external_metric_tank_enabled = "${var.metrictank["external_hostname"] != "" && var.metrictank["external_kafka_broker_hostname"] != ""? "true" : "false"}"
-  internal_kafka_endpoint =  "${var.kafka_hostname}:${var.kafka_port}"
+  internal_kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
   external_kafka_endpoint = "${var.metrictank["external_kafka_broker_hostname"]}:${var.metrictank["external_kafka_broker_port"]}"
 }
 
 module "ad-mapper" {
   source = "ad-mapper"
-
   image = "expediadotcom/haystack-adaptive-alerting-ad-mapper:${var.alerting["version"]}"
   replicas = "${var.ad-mapper["ad_mapper_instances"]}"
   namespace = "${var.app_namespace}"
@@ -28,7 +27,6 @@ module "ad-mapper" {
 
 module "ad-manager" {
   source = "ad-manager"
-
   image = "expediadotcom/haystack-adaptive-alerting-ad-manager:${var.alerting["version"]}"
   replicas = "${var.ad-manager["ad_manager_instances"]}"
   namespace = "${var.app_namespace}"
@@ -50,7 +48,6 @@ module "ad-manager" {
 
 module "anomaly-validator" {
   source = "anomaly-validator"
-
   image = "expediadotcom/haystack-adaptive-alerting-anomaly-validator:${var.alerting["version"]}"
   replicas = "${var.anomaly-validator["anomaly_validator_instances"]}"
   namespace = "${var.app_namespace}"
@@ -73,7 +70,6 @@ module "anomaly-validator" {
 
 module "aquila-trainer" {
   source = "aquila-trainer"
-
   image = "expediadotcom/aquila-trainer:${var.alerting["version"]}"
   replicas = "${var.aquila-trainer["aquila_trainer_instances"]}"
   namespace = "${var.app_namespace}"
@@ -145,7 +141,6 @@ module "ewma-detector" {
 
 module "constant-detector" {
   source = "constant-detector"
-
   image = "expediadotcom/haystack-adaptive-alerting-constant-detector:${var.alerting["version"]}"
   replicas = "${var.constant-detector["constant_detector_instances"]}"
   namespace = "${var.app_namespace}"
@@ -167,7 +162,6 @@ module "constant-detector" {
 
 module "pewma-detector" {
   source = "pewma-detector"
-
   image = "expediadotcom/haystack-adaptive-alerting-pewma-detector:${var.alerting["version"]}"
   replicas = "${var.pewma-detector["pewma_detector_instances"]}"
   namespace = "${var.app_namespace}"
@@ -186,4 +180,3 @@ module "pewma-detector" {
   jvm_memory_limit = "${var.pewma-detector["pewma_detector_jvm_memory_limit"]}"
   env_vars = "${var.pewma-detector["pewma_detector_environment_overrides"]}"
 }
-

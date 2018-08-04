@@ -12,7 +12,6 @@ variable "kubectl_executable_name" {}
 variable "namespace" {}
 variable "node_selector_label"{}
 
-
 # traces config
 variable "traces" {
   type = "map"

@@ -1,9 +1,10 @@
-variable "kubectl_executable_name" {}
+variable "kubectl_executable_name" {
+}
+
 variable "haystack_cluster_name" {
   default = "haystack"
 }
 
-# traces config
 variable "traces" {
   type = "map"
   default = {
@@ -52,7 +53,6 @@ variable "trends" {
   }
 }
 
-# pipes config
 variable "pipes" {
   type = "map"
   default = {
@@ -120,7 +120,6 @@ variable "pipes" {
     secret_detector_jvm_memory_limit = "200"
   }
 }
-# collectors config
 
 variable "collector" {
   type = "map"
@@ -138,10 +137,8 @@ variable "collector" {
     kinesis_span_collector_memory_limit = "250"
     kinesis_span_collector_jvm_memory_limit = "200"
   }
-
 }
 
-# service-graph config
 variable "service-graph" {
   type = "map"
   default = {
@@ -167,7 +164,6 @@ variable "service-graph" {
   }
 }
 
-# ui config
 variable "ui" {
   type = "map"
   default = {
@@ -188,14 +184,13 @@ variable "ui" {
   }
 }
 
-#metrictank
 variable "metrictank" {
   type = "map"
   default = {
-    instances = 1,
+    instances = 1
     environment_overrides = ""
     external_kafka_broker_hostname = ""
-    external_kafka_broker_port = 9092,
+    external_kafka_broker_port = 9092
     external_hostname = ""
     external_port = 6060
     cpu_request = "100m"
@@ -213,7 +208,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    version = "a7693e706b1444b9e6410d23adbc3fbdfd8659a4"
   }
 }
 
@@ -286,7 +281,6 @@ variable "metric-router" {
     metric_router_memory_limit = "250"
     metric_router_jvm_memory_limit = "200"
     metric_router_environment_overrides = ""
-
   }
 }
 
@@ -302,7 +296,6 @@ variable "constant-detector" {
     constant_detector_memory_limit = "250"
     constant_detector_jvm_memory_limit = "200"
     constant_detector_environment_overrides = ""
-
   }
 }
 
@@ -318,7 +311,6 @@ variable "ewma-detector" {
     ewma_detector_memory_limit = "250"
     ewma_detector_jvm_memory_limit = "200"
     ewma_detector_environment_overrides = ""
-
   }
 }
 
@@ -334,6 +326,5 @@ variable "pewma-detector" {
     pewma_detector_memory_limit = "250"
     pewma_detector_jvm_memory_limit = "200"
     pewma_detector_environment_overrides = ""
-
   }
 }

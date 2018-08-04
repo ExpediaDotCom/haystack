@@ -13,40 +13,34 @@ variable "kubectl_executable_name" {}
 variable "k8s_app_namespace" {}
 variable "app-node_selector_label"{}
 
-# traces config
 variable "traces" {
   type = "map"
 }
 
-# trends config
 variable "trends" {
   type = "map"
 }
 
-# pipes config
 variable "pipes" {
   type = "map"
 }
 
-# collectors config
 variable "collector" {
   type = "map"
 }
 
-# service-graph config
 variable "service-graph" {
   type = "map"
 }
 
-# ui config
 variable "ui" {
   type = "map"
 }
 
-# metrictank
 variable "metrictank" {
   type = "map"
 }
+
 
 # ========================================
 # Adaptive Alerting

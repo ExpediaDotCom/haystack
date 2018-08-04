@@ -2,6 +2,7 @@ locals {
   app-node_selecter_label = "kubernetes.io/hostname: minikube"
 }
 
+# FIXME "infrastructure" misspelled below
 data "terraform_remote_state" "haystack_inrastructure" {
   backend = "local"
   config {
@@ -12,6 +13,7 @@ data "terraform_remote_state" "haystack_inrastructure" {
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
 
+  # FIXME "infrastructure" misspelled below
   elasticsearch_hostname = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_hostname}"
   elasticsearch_port = "${data.terraform_remote_state.haystack_inrastructure.elasticsearch_port}"
   kubectl_context_name = "${data.terraform_remote_state.haystack_inrastructure.k8s_cluster_name}"
@@ -27,25 +29,17 @@ module "haystack-apps" {
   app-node_selector_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
 
-  #pipes configuration_overrides
+
+  # ========================================
+  # Haystack overrides
+  # ========================================
+
   pipes = "${var.pipes}"
-
-  #trace configuration
   traces = "${var.traces}"
-
-  #trends configuration
   trends = "${var.trends}"
-
-  #collector configuration_overrides
   collector = "${var.collector}"
-
-  #service-graph configuration_overrides
   service-graph = "${var.service-graph}"
-
-  #ui configuration_overrides
   ui = "${var.ui}"
-
-  #metrictank configuration_overrides
   metrictank = "${var.metrictank}"
 
 

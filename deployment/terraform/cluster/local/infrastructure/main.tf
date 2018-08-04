@@ -13,6 +13,7 @@ locals {
   k8s_datastores_heap_memory_in_mb = "1024"
   k8s_datastores_memory_limit_in_mb = "1224"
 }
+
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
   kubectl_context_name = "${var.kubectl_context_name}"
@@ -39,6 +40,7 @@ module "k8s-addons" {
   "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
   "datastores_heap_memory_in_mb" = "${local.k8s_datastores_heap_memory_in_mb}"
 }
+
 module "haystack-infrastructure" {
   source = "../../../modules/haystack-datastores/kubernetes"
   k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"

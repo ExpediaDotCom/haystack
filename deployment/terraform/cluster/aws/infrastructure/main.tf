@@ -7,7 +7,6 @@ locals {
   monitoring-node_selecter_label = "kops.k8s.io/instancegroup: monitoring-nodes"
   app-node_selecter_label  = "kops.k8s.io/instancegroup: app-nodes"
   k8s_datastores_heap_memory_in_mb = "2048"
-
 }
 
 module "haystack-k8s" {

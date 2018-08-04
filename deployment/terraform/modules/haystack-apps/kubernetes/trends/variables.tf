@@ -1,4 +1,3 @@
-
 variable "kafka_hostname" {}
 variable "kafka_port" {}
 variable "cassandra_hostname" {}
@@ -15,7 +14,6 @@ variable "node_selector_label"{}
 variable "trends" {
   type = "map"
 }
-
 
 #metrictank
 variable "metrictank" {

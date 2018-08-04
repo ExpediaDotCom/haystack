@@ -215,7 +215,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    version = "a7693e706b1444b9e6410d23adbc3fbdfd8659a4"
   }
 }
 
@@ -269,9 +269,9 @@ variable "aquila-trainer" {
     aquila_trainer_instances = 1
     aquila_trainer_cpu_request = "500m"
     aquila_trainer_cpu_limit = "2000m"
-    aquila_trainer_memory_request = "4096"
-    aquila_trainer_memory_limit = "4096"
-    aquila_trainer_jvm_memory_limit = "2048"
+    aquila_trainer_memory_request = "1024"
+    aquila_trainer_memory_limit = "2048"
+    aquila_trainer_jvm_memory_limit = "1024"
     aquila_trainer_environment_overrides = ""
   }
 }

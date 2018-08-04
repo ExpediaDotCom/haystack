@@ -22,7 +22,6 @@ module "trends" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   node_selector_label = "${var.app-node_selector_label}"
-
   kafka_port = "${var.kafka_port}"
   kafka_hostname = "${var.kafka_hostname}"
   cassandra_hostname = "${var.cassandra_hostname}"
@@ -41,29 +40,24 @@ module "pipes" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   node_selector_label = "${var.app-node_selector_label}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-
   kafka_port = "${var.kafka_port}"
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-
   pipes = "${var.pipes}"
 }
 
 module "collectors" {
   source = "collectors"
-
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   node_selector_label = "${var.app-node_selector_label}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
-
   kafka_port = "${var.kafka_port}"
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-
   collector = "${var.collector}"
 }
 
@@ -90,7 +84,6 @@ module "ui" {
   node_selecter_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-
   trace_reader_hostname = "${module.traces.reader_hostname}"
   trace_reader_service_port = "${module.traces.reader_port}"
   metrictank_hostname = "${module.trends.metrictank_hostname}"
@@ -112,7 +105,6 @@ module "ui" {
 
 module "alerting" {
   source = "alerting"
-
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"

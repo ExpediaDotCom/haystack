@@ -1,4 +1,3 @@
-
 variable "kafka_hostname" {}
 variable "kafka_port" {}
 variable "graphite_hostname" {}
