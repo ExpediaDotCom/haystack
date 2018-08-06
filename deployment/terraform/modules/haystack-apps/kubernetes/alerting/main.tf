@@ -156,3 +156,25 @@ module "ad-manager" {
   jvm_memory_limit = "${var.ad-manager["ad_manager_jvm_memory_limit"]}"
   env_vars = "${var.ad-manager["ad_manager_environment_overrides"]}"
 }
+
+module "modelservice" {
+  source = "modelservice"
+
+  image = "expediadotcom/haystack-adaptive-alerting-modelservice:${var.alerting["version"]}"
+  replicas = "${var.modelservice["modelservice_instances"]}"
+  namespace = "${var.app_namespace}"
+  db_endpoint = "jdbc:mysql://127.0.0.1:3306/model_service?autoReconnect=true"
+  graphite_hostname = "${var.graphite_hostname}"
+  node_selecter_label = "${var.node_selector_label}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  enabled = "${var.modelservice["enabled"]}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.modelservice["modelservice_cpu_limit"]}"
+  cpu_request = "${var.modelservice["modelservice_cpu_request"]}"
+  memory_limit = "${var.modelservice["modelservice_memory_limit"]}"
+  memory_request = "${var.modelservice["modelservice_memory_request"]}"
+  jvm_memory_limit = "${var.modelservice["modelservice_jvm_memory_limit"]}"
+  env_vars = "${var.modelservice["modelservice_environment_overrides"]}"
+}

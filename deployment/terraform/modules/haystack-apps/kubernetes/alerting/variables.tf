@@ -50,3 +50,8 @@ variable "ad-mapper" {
 variable "ad-manager" {
   type = "map"
 }
+
+#ad-manager
+variable "modelservice" {
+  type = "map"
+}
