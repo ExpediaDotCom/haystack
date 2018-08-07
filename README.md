@@ -8,7 +8,7 @@
 Topmost level repository for public open source Haystack
 
 ## Overview
-[Haystack](https://github.com/ExpediaDotCom/haystack) is an Expedia-backed open source project to facilitate detection 
+[Haystack](https://expediadotcom.github.io/haystack/) is an Expedia-backed open source project to facilitate detection 
 and remediation of problems with enterprise-level web services and websites.
 
 ### The Problem
