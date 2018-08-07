@@ -75,6 +75,7 @@ module "haystack-apps" {
   #ad-manager configuration
   ad-manager = "${var.ad-manager}"
 
-  #modelservice configuration
   modelservice = "${var.modelservice}"
+
+  aquila-trainer = "${var.aquila-trainer}"
 }

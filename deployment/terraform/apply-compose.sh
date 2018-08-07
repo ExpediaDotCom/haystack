@@ -114,9 +114,10 @@ function deleteState() {
         local)
             echo "deleting state folder..."
             rm -rf $DIR/cluster/$CLUSTER_TYPE/state
-            
+
+            # https://unix.stackexchange.com/questions/115863/delete-files-and-directories-by-their-names-no-such-file-or-directory
             echo "deleting .terraform folders..."
-            find $DIR -name ".terraform" -exec rm -r "{}" \;
+            find $DIR -name ".terraform" -prune -exec rm -r {} \;
         ;;
 
         ?)
@@ -125,7 +126,6 @@ function deleteState() {
             exit 1
         ;;
     esac
-
 }
 
 function command_exists() {

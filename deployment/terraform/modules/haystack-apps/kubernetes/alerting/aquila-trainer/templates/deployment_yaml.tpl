@@ -21,8 +21,8 @@ spec:
       containers:
       - name: ${app_name}
         image: ${image}
+        imagePullPolicy: ${image_pull_policy}
         volumeMounts:
-          # Create on-disk volume to store exec logs
         - mountPath: /config
           name: config-volume
         resources:
@@ -33,6 +33,8 @@ spec:
             cpu: ${cpu_request}
             memory: ${memory_request}Mi
         env:
+        - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
+          value: "/config/${app_name}.conf"
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
@@ -44,17 +46,10 @@ spec:
         - name: "JAVA_XMX"
           value: "${jvm_memory_limit}m"
         ${env_vars}
-        livenessProbe:
-          exec:
-            command:
-            - grep
-            - "true"
-            - /app/isHealthy
-          initialDelaySeconds: 30
-          periodSeconds: 5
-          failureThreshold: 6
+      # TODO HTTP GET readiness probe
+      # TODO HTTP GET liveness probe
       nodeSelector:
-        ${node_selecter_label}
+        ${node_selector_label}
       volumes:
       - name: config-volume
         configMap:

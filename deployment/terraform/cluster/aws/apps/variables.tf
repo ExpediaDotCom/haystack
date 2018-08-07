@@ -310,7 +310,7 @@ variable "ad-mapper" {
   }
 }
 
-# anomaly-validator config
+# anomaly-manager config
 variable "ad-manager" {
   type = "map"
   default = {
@@ -325,7 +325,6 @@ variable "ad-manager" {
   }
 }
 
-# modelservice config
 variable "modelservice" {
   type = "map"
   default = {
@@ -341,3 +340,24 @@ variable "modelservice" {
   }
 }
 
+variable "aquila-trainer" {
+  type = "map"
+
+  # I removed the app name from the keys here, as the keys are already app-scoped.
+  # It's easier to use this as a template for future apps. Please consider adopting
+  # this approach for the other apps. [WLW]
+  default = {
+    enabled = false
+    instances = 1
+
+    image = "expediadotcom/aquila-trainer:f72f754b8e20a96491ac3652877cd38b69b8c798"
+    image_pull_policy = "IfNotPresent"
+
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "1024"
+    memory_limit = "1024"
+    jvm_memory_limit = "512"
+    environment_overrides = ""
+  }
+}
