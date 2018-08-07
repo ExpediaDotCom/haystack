@@ -8,7 +8,7 @@ variable "haystack_cluster_name" {
 variable "traces" {
   type = "map"
   default = {
-    enabled = true
+    enabled = false
     version = "1.0"
     indexer_instances = 1
     indexer_environment_overrides = ""
@@ -32,7 +32,7 @@ variable "traces" {
 variable "trends" {
   type = "map"
   default = {
-    enabled = true
+    enabled = false
     version = "1.0"
     metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
@@ -210,7 +210,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    version = "latest"
   }
 }
 
@@ -325,7 +325,7 @@ variable "ad-manager" {
 variable "modelservice" {
   type = "map"
   default = {
-    enabled = false
+    enabled = true
     modelservice_instances = 1
     modelservice_cpu_request = "100m"
     modelservice_cpu_limit = "1000m"
