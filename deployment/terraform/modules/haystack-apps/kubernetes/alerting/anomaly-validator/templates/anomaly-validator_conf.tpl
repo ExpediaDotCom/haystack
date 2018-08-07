@@ -5,12 +5,15 @@ anomaly-validator {
       application.id = "anomaly-validator"
       bootstrap.servers = "${kafka_endpoint}"
       default.value.serde = "com.expedia.adaptivealerting.kafka.serde.JsonPojoSerde"
-      JsonPojoClass = "com.expedia.adaptivealerting.core.anomaly.AnomalyResult"
+      JsonPojoClass = "com.expedia.adaptivealerting.core.data.MappedMpoint"
+      default.timestamp.extractor = "com.expedia.adaptivealerting.kafka.serde.MappedMpointTimestampExtractor"
+      default.deserialization.exception.handler = "org.apache.kafka.streams.errors.LogAndContinueExceptionHandler"
     }
 
     # TODO Renaming "topic" to "inbound-topic". Remove topic once transition is complete. [WLW]
     topic = "anomalies"
     inbound-topic = "anomalies"
+    outbound-topic = "alerts"
 
     investigation {
       endpoint = "${investigation_endpoint}"
