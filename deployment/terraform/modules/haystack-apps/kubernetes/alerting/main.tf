@@ -163,7 +163,7 @@ module "modelservice" {
   image = "expediadotcom/haystack-adaptive-alerting-modelservice:${var.alerting["version"]}"
   replicas = "${var.modelservice["modelservice_instances"]}"
   namespace = "${var.app_namespace}"
-  db_endpoint = "jdbc:mysql://127.0.0.1:3306/model_service?autoReconnect=true"
+  db_endpoint =  "${var.modelservice["modelservice_db_endpoint"]}"
   graphite_hostname = "${var.graphite_hostname}"
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"

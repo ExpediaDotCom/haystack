@@ -33,8 +33,6 @@ spec:
             cpu: ${cpu_request}
             memory: ${memory_request}Mi
         env:
-        - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
-          value: "/config/ewma-detector.conf"
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"

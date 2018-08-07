@@ -340,5 +340,6 @@ variable "modelservice" {
     modelservice_memory_limit = "250"
     modelservice_jvm_memory_limit = "200"
     modelservice_environment_overrides = ""
+    modelservice_db_endpoint= ""
   }
 }
