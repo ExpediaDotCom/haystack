@@ -16,22 +16,6 @@ variable "alerting" {
   type = "map"
 }
 
-variable "metric-router" {
-  type = "map"
-}
-
-variable "ewma-detector" {
-  type = "map"
-}
-
-variable "constant-detector" {
-  type = "map"
-}
-
-variable "pewma-detector" {
-  type = "map"
-}
-
 variable "anomaly-validator" {
   type = "map"
 }

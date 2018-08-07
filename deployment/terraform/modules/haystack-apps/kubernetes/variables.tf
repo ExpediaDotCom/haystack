@@ -55,26 +55,6 @@ variable "alerting" {
   type = "map"
 }
 
-# Deprecated
-variable "metric-router" {
-  type = "map"
-}
-
-# Deprecated
-variable "ewma-detector" {
-  type = "map"
-}
-
-# Deprecated
-variable "constant-detector" {
-  type = "map"
-}
-
-# Deprecated
-variable "pewma-detector" {
-  type = "map"
-}
-
 variable "anomaly-validator" {
   type = "map"
 }
