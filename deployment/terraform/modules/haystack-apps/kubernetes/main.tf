@@ -132,4 +132,5 @@ module "alerting" {
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
   modelservice = "${var.modelservice}"
+  aquila-trainer = "${var.aquila-trainer}"
 }

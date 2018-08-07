@@ -1,9 +1,9 @@
-
-
 variable "kubectl_executable_name" {}
+
 variable "haystack_cluster_name" {
   default = "haystack"
 }
+
 # traces config
 variable "traces" {
   type = "map"
@@ -28,7 +28,6 @@ variable "traces" {
     reader_jvm_memory_limit = "200"
   }
 }
-
 
 variable "trends" {
   type = "map"
@@ -55,7 +54,6 @@ variable "trends" {
 }
 
 # pipes config
-
 variable "pipes" {
   type = "map"
   default = {
@@ -123,8 +121,8 @@ variable "pipes" {
     secret_detector_jvm_memory_limit = "200"
   }
 }
-# collectors config
 
+# collectors config
 variable "collector" {
   type = "map"
   default = {
@@ -143,7 +141,6 @@ variable "collector" {
   }
 
 }
-
 
 # service-graph config
 variable "service-graph" {
@@ -193,7 +190,6 @@ variable "ui" {
 }
 
 #metrictank
-
 variable "metrictank" {
   type = "map"
   default = {
@@ -230,7 +226,6 @@ variable "metric-router" {
     metric_router_memory_limit = "250"
     metric_router_jvm_memory_limit = "200"
     metric_router_environment_overrides = ""
-
   }
 }
 
@@ -313,7 +308,6 @@ variable "ad-mapper" {
   }
 }
 
-# ad-manager config
 variable "ad-manager" {
   type = "map"
   default = {
@@ -328,7 +322,6 @@ variable "ad-manager" {
   }
 }
 
-# modelservice config
 variable "modelservice" {
   type = "map"
   default = {
@@ -340,6 +333,30 @@ variable "modelservice" {
     modelservice_memory_limit = "250"
     modelservice_jvm_memory_limit = "200"
     modelservice_environment_overrides = ""
-    modelservice_db_endpoint= ""
+    modelservice_db_endpoint = ""
+  }
+}
+
+variable "aquila-trainer" {
+  type = "map"
+
+  # I removed the app name from the keys here, as the keys are already app-scoped.
+  # It's easier to use this as a template for future apps. Please consider adopting
+  # this approach for the other apps. [WLW]
+  default = {
+    enabled = false
+    instances = 1
+
+    # This allows us to use Minikube-local images.
+    # https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
+    image = "aquila-trainer:latest"
+    image_pull_policy = "Never"
+
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "250"
+    memory_limit = "250"
+    jvm_memory_limit = "200"
+    environment_overrides = ""
   }
 }

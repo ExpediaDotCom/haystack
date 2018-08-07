@@ -14,82 +14,83 @@ variable "k8s_app_namespace" {}
 variable "app-node_selector_label"{}
 
 
-# traces config
+# ========================================
+# Haystack
+# ========================================
+
 variable "traces" {
   type = "map"
 }
 
-# trends config
 variable "trends" {
   type = "map"
 }
 
-
-# pipes config
 variable "pipes" {
   type = "map"
 }
 
-
-# collectors config
 variable "collector" {
   type = "map"
 }
 
-# service-graph config
 variable "service-graph" {
   type = "map"
 }
 
-# ui config
 variable "ui" {
   type = "map"
 }
 
-#metrictank
 variable "metrictank" {
   type = "map"
 }
 
-#alerting
+
+# ========================================
+# Adaptive Alerting
+# ========================================
+
 variable "alerting" {
   type = "map"
 }
-#metric-router
+
+# Deprecated
 variable "metric-router" {
   type = "map"
 }
 
-#ewma-detector
+# Deprecated
 variable "ewma-detector" {
   type = "map"
 }
 
-#constant-detector
+# Deprecated
 variable "constant-detector" {
   type = "map"
 }
-#pewma-detector
+
+# Deprecated
 variable "pewma-detector" {
   type = "map"
 }
 
-#anomaly-validator
 variable "anomaly-validator" {
   type = "map"
 }
 
-#ad-mapper
 variable "ad-mapper" {
   type = "map"
 }
 
-#ad-manager
 variable "ad-manager" {
   type = "map"
 }
 
-#ad-manager
 variable "modelservice" {
+  type = "map"
+}
+
+variable "aquila-trainer" {
   type = "map"
 }
