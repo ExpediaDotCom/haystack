@@ -74,3 +74,7 @@ variable "modelservice" {
 variable "aquila-trainer" {
   type = "map"
 }
+
+variable "aquila-detector" {
+  type = "map"
+}
