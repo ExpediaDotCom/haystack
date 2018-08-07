@@ -74,4 +74,7 @@ module "haystack-apps" {
 
   #ad-manager configuration
   ad-manager = "${var.ad-manager}"
+
+  #modelservice configuration
+  modelservice = "${var.modelservice}"
 }

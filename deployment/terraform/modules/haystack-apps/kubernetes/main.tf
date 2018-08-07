@@ -131,4 +131,5 @@ module "alerting" {
   anomaly-validator = "${var.anomaly-validator}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
+  modelservice = "${var.modelservice}"
 }

@@ -324,3 +324,20 @@ variable "ad-manager" {
     ad_manager_environment_overrides = ""
   }
 }
+
+# modelservice config
+variable "modelservice" {
+  type = "map"
+  default = {
+    enabled = false
+    modelservice_instances = 1
+    modelservice_cpu_request = "100m"
+    modelservice_cpu_limit = "1000m"
+    modelservice_memory_request = "250"
+    modelservice_memory_limit = "250"
+    modelservice_jvm_memory_limit = "200"
+    modelservice_environment_overrides = ""
+    modelservice_db_endpoint= ""
+  }
+}
+
