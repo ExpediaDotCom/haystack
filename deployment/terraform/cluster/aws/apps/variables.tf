@@ -189,7 +189,6 @@ variable "ui" {
 }
 
 #metrictank
-
 variable "metrictank" {
   type = "map"
   default = {
@@ -206,80 +205,14 @@ variable "metrictank" {
   }
 }
 
-#alerting config
 variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "cfe6489dfe712530273c78ad84704b27321cd29e"
+    version = "02da63dfd5a559c9048b6e83d205d49da3af25f2"
   }
 }
 
-# metric-router config
-variable "metric-router" {
-  type = "map"
-  default = {
-    enabled = false
-    metric_router_instances = 1
-    metric_router_cpu_request = "500m"
-    metric_router_cpu_limit = "2000m"
-    metric_router_memory_request = "1024"
-    metric_router_memory_limit = "1024"
-    metric_router_jvm_memory_limit = "512"
-    metric_router_environment_overrides = ""
-
-  }
-}
-
-# metric-router config
-variable "ewma-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    ewma_detector_instances = 1
-    ewma_detector_cpu_request = "500m"
-    ewma_detector_cpu_limit = "2000m"
-    ewma_detector_memory_request = "1024"
-    ewma_detector_memory_limit = "1024"
-    ewma_detector_jvm_memory_limit = "512"
-    ewma_detector_environment_overrides = ""
-
-  }
-}
-
-# constant-detector config
-variable "constant-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    constant_detector_instances = 1
-    constant_detector_cpu_request = "500m"
-    constant_detector_cpu_limit = "2000m"
-    constant_detector_memory_request = "1024"
-    constant_detector_memory_limit = "1024"
-    constant_detector_jvm_memory_limit = "512"
-    constant_detector_environment_overrides = ""
-
-  }
-}
-
-# pewma-detector config
-variable "pewma-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    pewma_detector_instances = 1
-    pewma_detector_cpu_request = "500m"
-    pewma_detector_cpu_limit = "2000m"
-    pewma_detector_memory_request = "1024"
-    pewma_detector_memory_limit = "1024"
-    pewma_detector_jvm_memory_limit = "512"
-    pewma_detector_environment_overrides = ""
-
-  }
-}
-
-# anomaly-validator config
 variable "anomaly-validator" {
   type = "map"
   default = {
@@ -295,7 +228,6 @@ variable "anomaly-validator" {
   }
 }
 
-# ad-mapper config
 variable "ad-mapper" {
   type = "map"
   default = {
@@ -310,7 +242,6 @@ variable "ad-mapper" {
   }
 }
 
-# anomaly-manager config
 variable "ad-manager" {
   type = "map"
   default = {
