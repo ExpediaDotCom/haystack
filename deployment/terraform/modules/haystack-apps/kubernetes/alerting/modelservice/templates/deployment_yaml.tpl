@@ -45,12 +45,10 @@ spec:
           value: "${jvm_memory_limit}m"
         ${env_vars}
         livenessProbe:
-          exec:
-            command:
-            - grep
-            - "true"
-            - /app/isHealthy
-          initialDelaySeconds: 30
+          httpGet:
+              path: /isActive
+              port: 8080
+          initialDelaySeconds: 60
           periodSeconds: 5
           failureThreshold: 6
       nodeSelector:
@@ -59,3 +57,19 @@ spec:
       - name: config-volume
         configMap:
           name: ${configmap_name}
+---
+# ------------------- Service ------------------- #
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  ports:
+  - port: ${service_port}
+    targetPort: ${container_port}
+  selector:
+    k8s-app: ${app_name}
+
