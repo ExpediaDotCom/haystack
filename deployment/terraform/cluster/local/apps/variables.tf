@@ -8,7 +8,7 @@ variable "haystack_cluster_name" {
 variable "traces" {
   type = "map"
   default = {
-    enabled = true
+    enabled = false
     version = "1.0"
     indexer_instances = 1
     indexer_environment_overrides = ""
@@ -32,7 +32,7 @@ variable "traces" {
 variable "trends" {
   type = "map"
   default = {
-    enabled = true
+    enabled = false
     version = "1.0"
     metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
@@ -206,18 +206,78 @@ variable "metrictank" {
   }
 }
 
-
-# ========================================
-# Adaptive Alerting
-# ========================================
-
+#alerting config
 variable "alerting" {
   type = "map"
   default = {
-    version = "02da63dfd5a559c9048b6e83d205d49da3af25f2"
+    version = "latest"
   }
 }
 
+# metric-router config
+variable "metric-router" {
+  type = "map"
+  default = {
+    enabled = false
+    metric_router_instances = 1
+    metric_router_cpu_request = "100m"
+    metric_router_cpu_limit = "1000m"
+    metric_router_memory_request = "250"
+    metric_router_memory_limit = "250"
+    metric_router_jvm_memory_limit = "200"
+    metric_router_environment_overrides = ""
+  }
+}
+
+# metric-router config
+variable "ewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    ewma_detector_instances = 1
+    ewma_detector_cpu_request = "100m"
+    ewma_detector_cpu_limit = "1000m"
+    ewma_detector_memory_request = "250"
+    ewma_detector_memory_limit = "250"
+    ewma_detector_jvm_memory_limit = "200"
+    ewma_detector_environment_overrides = ""
+
+  }
+}
+
+# constant-detector config
+variable "constant-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    constant_detector_instances = 1
+    constant_detector_cpu_request = "100m"
+    constant_detector_cpu_limit = "1000m"
+    constant_detector_memory_request = "250"
+    constant_detector_memory_limit = "250"
+    constant_detector_jvm_memory_limit = "200"
+    constant_detector_environment_overrides = ""
+
+  }
+}
+
+# pewma-detector config
+variable "pewma-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    pewma_detector_instances = 1
+    pewma_detector_cpu_request = "100m"
+    pewma_detector_cpu_limit = "1000m"
+    pewma_detector_memory_request = "250"
+    pewma_detector_memory_limit = "250"
+    pewma_detector_jvm_memory_limit = "200"
+    pewma_detector_environment_overrides = ""
+
+  }
+}
+
+# anomaly-validator config
 variable "anomaly-validator" {
   type = "map"
   default = {
@@ -233,6 +293,7 @@ variable "anomaly-validator" {
   }
 }
 
+# ad-mapper config
 variable "ad-mapper" {
   type = "map"
   default = {
@@ -264,7 +325,7 @@ variable "ad-manager" {
 variable "modelservice" {
   type = "map"
   default = {
-    enabled = false
+    enabled = true
     modelservice_instances = 1
     modelservice_cpu_request = "100m"
     modelservice_cpu_limit = "1000m"
