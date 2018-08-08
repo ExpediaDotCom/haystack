@@ -244,7 +244,7 @@ function installComponents() {
 
     cd $DIR/cluster/$CLUSTER_TYPE/apps
     if [ "$SKIP_APPROVAL" = "true" ]; then
-        AUTO_APPROVE="-auto-approve"
+        AUTO_APPROVE="-input=false -auto-approve"
     else
         echo "$SKIP_APPROVAL"
     fi
