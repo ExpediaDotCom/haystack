@@ -163,5 +163,23 @@ spec:
          backend:
            serviceName: haystack-ui
            servicePort: 80
-
+---
+# ------------------- adaptive-alerting-modelservice ------------------- #
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-modelservice
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${haystack_ui_cname}
+     http:
+        paths:
+         - path: /modelservice
+           backend:
+             serviceName: modelservice
+             servicePort: 80
 
