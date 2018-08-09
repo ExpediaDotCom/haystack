@@ -123,10 +123,13 @@ module "alerting" {
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
   metrictank = "${var.metrictank}"
+
+  # AA apps
   alerting = "${var.alerting}"
-  anomaly-validator = "${var.anomaly-validator}"
+  modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  modelservice = "${var.modelservice}"
+  anomaly-validator = "${var.anomaly-validator}"
+  aquila-detector = "${var.aquila-detector}"
   aquila-trainer = "${var.aquila-trainer}"
 }
