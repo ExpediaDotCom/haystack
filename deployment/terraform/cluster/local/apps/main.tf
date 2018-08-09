@@ -8,6 +8,7 @@ data "terraform_remote_state" "haystack_inrastructure" {
     path = "../state/terraform-infra.tfstate"
   }
 }
+
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
 
@@ -26,40 +27,21 @@ module "haystack-apps" {
   app-node_selector_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
 
-  #pipes configuration_overrides
+  # Haystack configuration overrides
   pipes = "${var.pipes}"
-
-  #trace configuration
   traces = "${var.traces}"
-
-  #trends configuration
   trends = "${var.trends}"
-
-  #collector configuration_overrides
   collector = "${var.collector}"
-
-  #service-graph configuration_overrides
   service-graph = "${var.service-graph}"
-
-  #ui configuration_overrides
   ui = "${var.ui}"
-
-  #metrictank configuration_overrides
   metrictank = "${var.metrictank}"
 
-  #alerting configuration_overrides
+  # AA configuration overrides
   alerting = "${var.alerting}"
-
-  #anomaly-validator configuration
-  anomaly-validator = "${var.anomaly-validator}"
-
-  #ad-mapper configuration
-  ad-mapper = "${var.ad-mapper}"
-
-  #ad-manager configuration
-  ad-manager = "${var.ad-manager}"
-
   modelservice = "${var.modelservice}"
-
+  ad-mapper = "${var.ad-mapper}"
+  ad-manager = "${var.ad-manager}"
+  anomaly-validator = "${var.anomaly-validator}"
   aquila-trainer = "${var.aquila-trainer}"
+  aquila-detector = "${var.aquila-detector}"
 }

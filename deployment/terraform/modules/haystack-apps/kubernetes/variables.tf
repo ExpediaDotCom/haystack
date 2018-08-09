@@ -55,7 +55,7 @@ variable "alerting" {
   type = "map"
 }
 
-variable "anomaly-validator" {
+variable "modelservice" {
   type = "map"
 }
 
@@ -67,10 +67,14 @@ variable "ad-manager" {
   type = "map"
 }
 
-variable "modelservice" {
+variable "anomaly-validator" {
   type = "map"
 }
 
 variable "aquila-trainer" {
+  type = "map"
+}
+
+variable "aquila-detector" {
   type = "map"
 }

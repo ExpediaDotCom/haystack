@@ -8,6 +8,7 @@ variable "kubectl_executable_name" {}
 variable "app_namespace" {}
 variable "node_selector_label"{}
 
+# TODO Why is this part of Adaptive Alerting?
 variable "metrictank" {
   type = "map"
 }
@@ -33,5 +34,9 @@ variable "modelservice" {
 }
 
 variable "aquila-trainer" {
+  type = "map"
+}
+
+variable "aquila-detector" {
   type = "map"
 }
