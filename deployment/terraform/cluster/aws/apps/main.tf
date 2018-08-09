@@ -66,4 +66,8 @@ module "haystack-apps" {
   modelservice = "${var.modelservice}"
 
   aquila-trainer = "${var.aquila-trainer}"
+
+  aquila-detector = "${var.aquila-detector}"
+
+
 }
