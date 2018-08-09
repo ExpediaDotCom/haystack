@@ -37,6 +37,10 @@ data "template_file" "deployment_yaml" {
     graphite_host       = "${var.graphite_hostname}"
     graphite_enabled    = "${var.graphite_enabled}"
     env_vars            = "${indent(9, "${var.env_vars}")}"
+
+    # Service
+    service_port = "${var.service_port}"
+    container_port = "${var.container_port}"
   }
 }
 

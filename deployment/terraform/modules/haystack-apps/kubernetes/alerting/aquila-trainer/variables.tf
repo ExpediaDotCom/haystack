@@ -20,3 +20,11 @@ variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "graphite_enabled" {}
 variable "env_vars" {}
+
+# Service
+variable "service_port" {
+  default = 80
+}
+variable "container_port" {
+  default = 8080
+}

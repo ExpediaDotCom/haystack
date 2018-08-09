@@ -46,11 +46,31 @@ spec:
         - name: "JAVA_XMX"
           value: "${jvm_memory_limit}m"
         ${env_vars}
-      # TODO HTTP GET readiness probe
-      # TODO HTTP GET liveness probe
+        livenessProbe:
+          httpGet:
+              path: /alive
+              port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          failureThreshold: 6
       nodeSelector:
         ${node_selector_label}
       volumes:
       - name: config-volume
         configMap:
           name: ${configmap_name}
+---
+# ------------------- Service ------------------- #
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  ports:
+  - port: ${service_port}
+    targetPort: ${container_port}
+  selector:
+    k8s-app: ${app_name}
