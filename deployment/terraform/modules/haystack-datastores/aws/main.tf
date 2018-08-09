@@ -22,6 +22,7 @@ module "es" {
   master_instance_type = "${var.es_master_instance_type}"
   worker_instance_count = "${var.es_worker_instance_count}"
   worker_instance_type = "${var.es_worker_instance_type}"
+  dedicated_master_enabled = "${var.es_dedicated_master_enabled}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_subnet = "${var.aws_nodes_subnet}"

@@ -53,6 +53,10 @@ variable "es_master_instance_count" {
   default = 3
 }
 
+variable "es_dedicated_master_enabled" {
+  default = true
+}
+
 variable "zookeeper_count" {
   default = 3
 }

@@ -11,6 +11,7 @@ variable "es_master_instance_type" {}
 variable "es_worker_instance_type" {}
 variable "es_worker_instance_count" {}
 variable "es_master_instance_count" {}
+variable "es_dedicated_master_enabled" {}
 variable "zookeeper_count" {}
 variable "zookeeper_volume_size" {}
 variable "kafka_broker_count" {}
