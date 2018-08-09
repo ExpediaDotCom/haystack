@@ -3,10 +3,9 @@ spring:
     web-environment: true
     show-banner: true
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    drivername: com.mysql.jdbc.Driver
     url: "${db_endpoint}"
-    username: root
-    password:
+    username: "aa_user"
     maximum-pool-size: 8
     minimum-idle: 0
     # TODO Add other data source settings here
