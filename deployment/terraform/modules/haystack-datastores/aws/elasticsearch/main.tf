@@ -29,7 +29,6 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
   cluster_config {
     instance_type = "${var.worker_instance_type}"
     instance_count = "${var.worker_instance_count}"
-    dedicated_master_enabled = False
     dedicated_master_type = "${var.master_instance_type}"
     dedicated_master_count = "${var.master_instance_count}"
   }
