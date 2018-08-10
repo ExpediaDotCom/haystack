@@ -292,3 +292,22 @@ variable "aquila-trainer" {
     environment_overrides = ""
   }
 }
+
+variable "aquila-detector" {
+  type = "map"
+
+  default = {
+    enabled = false
+    instances = 1
+
+    image = "expediadotcom/aquila-detector:f72f754b8e20a96491ac3652877cd38b69b8c798"
+    image_pull_policy = "IfNotPresent"
+
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "1024"
+    memory_limit = "1024"
+    jvm_memory_limit = "512"
+    environment_overrides = ""
+  }
+}
