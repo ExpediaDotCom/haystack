@@ -196,11 +196,11 @@ spec:
   rules:
    - host: ${haystack_ui_cname}
      http:
-        paths:
-         - path: /aquila-detector
-           backend:
-             serviceName: aquila-detector
-             servicePort: 80
+       paths:
+       - path: /aquila-detector
+         backend:
+           serviceName: aquila-detector
+           servicePort: 80
 ---
 # --------------------------- aquila-trainer --------------------------- #
 apiVersion: extensions/v1beta1

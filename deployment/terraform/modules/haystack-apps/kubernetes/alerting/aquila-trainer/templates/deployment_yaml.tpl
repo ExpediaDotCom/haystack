@@ -48,11 +48,11 @@ spec:
         ${env_vars}
         livenessProbe:
           httpGet:
-              path: /alive
-              port: 8080
-          initialDelaySeconds: 60
+            path: /alive
+            port: 8080
+          initialDelaySeconds: 30
           periodSeconds: 5
-          failureThreshold: 6
+          failureThreshold: 1
       nodeSelector:
         ${node_selector_label}
       volumes:

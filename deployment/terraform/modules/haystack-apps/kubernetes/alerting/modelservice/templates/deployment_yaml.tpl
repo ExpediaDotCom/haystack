@@ -46,8 +46,8 @@ spec:
         ${env_vars}
         livenessProbe:
           httpGet:
-              path: /isActive
-              port: 8080
+            path: /isActive
+            port: 8080
           initialDelaySeconds: 60
           periodSeconds: 5
           failureThreshold: 6
