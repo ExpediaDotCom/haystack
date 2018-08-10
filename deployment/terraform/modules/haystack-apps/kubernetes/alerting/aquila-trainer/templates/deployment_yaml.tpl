@@ -46,6 +46,13 @@ spec:
         - name: "JAVA_XMX"
           value: "${jvm_memory_limit}m"
         ${env_vars}
+        livenessProbe:
+          httpGet:
+            path: /alive
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          failureThreshold: 6
       nodeSelector:
         ${node_selector_label}
       volumes:

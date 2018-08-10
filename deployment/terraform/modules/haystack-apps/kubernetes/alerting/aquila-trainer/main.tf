@@ -2,7 +2,7 @@ locals {
   app_name                  = "aquila-trainer"
   configmap_name            = "${local.app_name}-${local.checksum}"
   checksum                  = "${sha1("${data.template_file.config_data.rendered}")}"
-  config_file_path          = "${path.module}/templates/${local.app_name}_conf.tpl"
+  config_file_path          = "${path.module}/templates/application_conf.tpl"
   deployment_yaml_file_path = "${path.module}/templates/deployment_yaml.tpl"
   count                     = "${var.enabled ? 1 : 0}"
 }
