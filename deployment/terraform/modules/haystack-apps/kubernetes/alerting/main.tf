@@ -92,7 +92,7 @@ module "modelservice" {
 }
 
 module "aquila-trainer" {
-  source = "aquila-trainer"
+  source = "github.com/ExpediaDotCom/haystack-aquila//train/terraform/module?ref=v0.1.0"
 
   # Kubernetes
   namespace = "${var.app_namespace}"
@@ -119,7 +119,7 @@ module "aquila-trainer" {
 }
 
 module "aquila-detector" {
-  source = "aquila-detector"
+  source = "github.com/ExpediaDotCom/haystack-aquila//detect/terraform/module?ref=v0.1.0"
 
   # Kubernetes
   namespace = "${var.app_namespace}"

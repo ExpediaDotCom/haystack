@@ -225,9 +225,9 @@ variable "modelservice" {
     modelservice_instances = 1
     modelservice_cpu_request = "100m"
     modelservice_cpu_limit = "1000m"
-    modelservice_memory_request = "250"
-    modelservice_memory_limit = "250"
-    modelservice_jvm_memory_limit = "200"
+    modelservice_memory_request = "500"
+    modelservice_memory_limit = "500"
+    modelservice_jvm_memory_limit = "300"
     modelservice_environment_overrides = ""
     modelservice_db_endpoint = ""
   }
@@ -293,9 +293,9 @@ variable "aquila-trainer" {
 
     cpu_request = "100m"
     cpu_limit = "1000m"
-    memory_request = "250"
-    memory_limit = "250"
-    jvm_memory_limit = "200"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
     environment_overrides = ""
   }
 }
@@ -309,9 +309,9 @@ variable "aquila-detector" {
     image_pull_policy = "Never"
     cpu_request = "100m"
     cpu_limit = "1000m"
-    memory_request = "250"
-    memory_limit = "250"
-    jvm_memory_limit = "200"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
     environment_overrides = ""
   }
 }

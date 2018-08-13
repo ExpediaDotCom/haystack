@@ -182,4 +182,41 @@ spec:
            backend:
              serviceName: modelservice
              servicePort: 80
-
+---
+# -------------------------- aquila-detector --------------------------- #
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-aquila-detector
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${haystack_ui_cname}
+     http:
+       paths:
+       - path: /aquila-detector
+         backend:
+           serviceName: aquila-detector
+           servicePort: 80
+---
+# --------------------------- aquila-trainer --------------------------- #
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-aquila-trainer
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${haystack_ui_cname}
+     http:
+        paths:
+         - path: /aquila-trainer
+           backend:
+             serviceName: aquila-trainer
+             servicePort: 80

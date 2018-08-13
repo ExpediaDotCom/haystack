@@ -213,18 +213,18 @@ variable "alerting" {
   }
 }
 
-variable "anomaly-validator" {
+variable "modelservice" {
   type = "map"
   default = {
     enabled = false
-    anomaly_validator_instances = 1
-    anomaly_validator_cpu_request = "500m"
-    anomaly_validator_cpu_limit = "2000m"
-    anomaly_validator_memory_request = "1024"
-    anomaly_validator_memory_limit = "1024"
-    anomaly_validator_jvm_memory_limit = "512"
-    anomaly_validator_environment_overrides = ""
-    anomaly_validator_investigation_endpoint = ""
+    modelservice_instances = 1
+    modelservice_cpu_request = "100m"
+    modelservice_cpu_limit = "1000m"
+    modelservice_memory_request = "250"
+    modelservice_memory_limit = "250"
+    modelservice_jvm_memory_limit = "200"
+    modelservice_environment_overrides = ""
+    modelservice_db_endpoint= ""
   }
 }
 
@@ -256,18 +256,18 @@ variable "ad-manager" {
   }
 }
 
-variable "modelservice" {
+variable "anomaly-validator" {
   type = "map"
   default = {
     enabled = false
-    modelservice_instances = 1
-    modelservice_cpu_request = "100m"
-    modelservice_cpu_limit = "1000m"
-    modelservice_memory_request = "250"
-    modelservice_memory_limit = "250"
-    modelservice_jvm_memory_limit = "200"
-    modelservice_environment_overrides = ""
-    modelservice_db_endpoint= ""
+    anomaly_validator_instances = 1
+    anomaly_validator_cpu_request = "500m"
+    anomaly_validator_cpu_limit = "2000m"
+    anomaly_validator_memory_request = "1024"
+    anomaly_validator_memory_limit = "1024"
+    anomaly_validator_jvm_memory_limit = "512"
+    anomaly_validator_environment_overrides = ""
+    anomaly_validator_investigation_endpoint = ""
   }
 }
 
