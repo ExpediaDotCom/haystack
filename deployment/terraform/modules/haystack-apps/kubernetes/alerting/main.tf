@@ -92,7 +92,11 @@ module "modelservice" {
 }
 
 module "aquila-trainer" {
-  source = "github.com/ExpediaDotCom/haystack-aquila//train/terraform/module?ref=v0.1.0"
+  # TODO Find out why Trinity doesn't have git available on the path
+  # https://trinity.tools.expedia.com/job/monitoring-test_haystack-deployment/1252/console
+  # Error downloading modules: Error loading modules: error downloading 'https://github.com/ExpediaDotCom/haystack-aquila.git?ref=v0.1.0': git must be available and on the PATH
+#  source = "github.com/ExpediaDotCom/haystack-aquila//train/terraform/module?ref=v0.1.0"
+  source = "aquila-train"
 
   # Kubernetes
   namespace = "${var.app_namespace}"
@@ -119,7 +123,11 @@ module "aquila-trainer" {
 }
 
 module "aquila-detector" {
-  source = "github.com/ExpediaDotCom/haystack-aquila//detect/terraform/module?ref=v0.1.0"
+  # TODO Find out why Trinity doesn't have git available on the path
+  # https://trinity.tools.expedia.com/job/monitoring-test_haystack-deployment/1252/console
+  # Error downloading modules: Error loading modules: error downloading 'https://github.com/ExpediaDotCom/haystack-aquila.git?ref=v0.1.0': git must be available and on the PATH
+#  source = "github.com/ExpediaDotCom/haystack-aquila//detect/terraform/module?ref=v0.1.0"
+  source = "aquila-detect"
 
   # Kubernetes
   namespace = "${var.app_namespace}"
