@@ -33,6 +33,11 @@ spec:
             cpu: ${cpu_request}
             memory: ${memory_request}Mi
         env:
+        - name: "DB_PASSWORD"
+          valueFrom:
+            secretKeyRef:
+              name: modelservice-secret
+              key: password
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"
