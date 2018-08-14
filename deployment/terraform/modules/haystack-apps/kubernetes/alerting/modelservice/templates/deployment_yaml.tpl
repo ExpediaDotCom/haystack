@@ -38,6 +38,11 @@ spec:
             secretKeyRef:
               name: modelservice-secret
               key: password
+        - name: "DB_USERNAME"
+          valueFrom:
+            secretKeyRef:
+              name: modelservice-secret
+              key: username
         - name: "HAYSTACK_GRAPHITE_HOST"
           value: "${graphite_host}"
         - name: "HAYSTACK_GRAPHITE_PORT"

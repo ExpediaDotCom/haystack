@@ -5,8 +5,8 @@ spring:
   datasource:
     drivername: com.mysql.jdbc.Driver
     url: "${db_endpoint}"
-    username: "aa_user"
-    password : $${DB_PASSWORD}
+    username: $${DB_USERNAME}
+    password: $${DB_PASSWORD}
     maximum-pool-size: 8
     minimum-idle: 0
     # TODO Add other data source settings here
