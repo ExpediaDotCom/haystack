@@ -39,6 +39,7 @@ module "kafka" {
   broker_instance_type = "${var.kafka_broker_instance_type}"
   broker_volume_size = "${var.kafka_broker_volume_size}"
   aws_subnet = "${var.aws_nodes_subnet}"
+  aws_subnets = "${var.aws_nodes_subnets}"
   aws_hosted_zone_id = "${var.aws_hosted_zone_id}"
   aws_ssh_key_pair_name = "${var.aws_ssh_key}"
   aws_graphite_host = "${var.graphite_hostname}"

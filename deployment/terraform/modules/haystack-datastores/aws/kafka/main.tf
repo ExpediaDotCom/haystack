@@ -85,7 +85,7 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   count = "${var.zookeeper_count}"
   ami = "${local.kafka_broker_ami}"
   instance_type = "${var.broker_instance_type}"
-  subnet_id = "${var.aws_subnet}"
+  subnet_id = "${element(var.aws_subnets, count.index)}"
   vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   associate_public_ip_address = false
   key_name = "${var.aws_ssh_key_pair_name}"
@@ -104,8 +104,54 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
     volume_size = "${var.zookeeper_volume_size}"
     delete_on_termination = false
   }
+  lifecycle {
+    ignore_changes = ["ami", "user_data","subnet_id"]
+  }
 
   user_data = "${data.template_file.zookeeper_user_data.rendered}"
+}
+
+resource "aws_iam_role" "haystack-kafka-role" {
+  name = "${var.haystack_cluster_name}-kafka-role"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": { "Service": "ec2.amazonaws.com"},
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+  EOF
+}
+
+resource "aws_iam_role_policy" "kafka-policy" {
+  name = "kafka-policy"
+  role = "${aws_iam_role.haystack-kafka-role.name}"
+  policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "kafkaRoute53ListZones",
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
+  EOF
+}
+
+resource "aws_iam_instance_profile" "haystack-kafka-profile" {
+  name = "${var.haystack_cluster_name}-kafka"
+  role = "${aws_iam_role.haystack-kafka-role.name}"
 }
 
 data "template_file" "kafka_broker_user_data" {
@@ -114,7 +160,7 @@ data "template_file" "kafka_broker_user_data" {
   vars {
     haystack_graphite_host = "${var.aws_graphite_host}"
     haystack_graphite_port = "${var.aws_graphite_port}"
-    zookeeper_hosts = "${join(",", formatlist("%s:2181", aws_instance.haystack-zookeeper-nodes.*.private_ip))}"
+    zookeeper_hosts = "${join(",", formatlist("%s:2181", aws_route53_record.haystack-zookeeper-a-records.*.name))}"
     num_partitions = "${var.default_partition_count}"
     retention_hours = "24"
     retention_bytes = "1073741824"
@@ -126,10 +172,11 @@ resource "aws_instance" "haystack-kafka-broker" {
   count = "${var.broker_count}"
   ami = "${local.kafka_broker_ami}"
   instance_type = "${var.broker_instance_type}"
-  subnet_id = "${var.aws_subnet}"
+  subnet_id = "${element(var.aws_subnets, count.index)}"
   vpc_security_group_ids = [ "${module.kafka-security-groups.kafka_broker_security_group_ids}"]
   key_name = "${var.aws_ssh_key_pair_name}"
   associate_public_ip_address = false
+  iam_instance_profile = "${aws_iam_instance_profile.haystack-kafka-profile.name}"
   tags = {
     Product = "Haystack"
     Component = "Kafka"
@@ -141,6 +188,9 @@ resource "aws_instance" "haystack-kafka-broker" {
     volume_type = "gp2"
     volume_size = "${var.broker_volume_size}"
     delete_on_termination = false
+  }
+  lifecycle {
+    ignore_changes = ["ami", "user_data","subnet_id"]
   }
 
   user_data = "${data.template_file.kafka_broker_user_data.rendered}"
@@ -162,4 +212,14 @@ resource "aws_route53_record" "haystack-kafka-cname" {
   type    = "A"
   ttl     = "300"
   records = ["${aws_instance.haystack-kafka-broker.*.private_ip}"]
+}
+
+// create A records for zookeeper hosts
+resource "aws_route53_record" "haystack-zookeeper-a-records" {
+  count   = "${var.zookeeper_count}"
+  zone_id = "${var.aws_hosted_zone_id}"
+  name    = "${var.haystack_cluster_name}-zookeeper-${count.index}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${element(aws_instance.haystack-zookeeper-nodes.*.private_ip, count.index)}"]
 }
