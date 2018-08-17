@@ -72,6 +72,7 @@ trace {
     post {
       sequence = [
         "com.expedia.www.haystack.trace.reader.readers.transformers.PartialSpanTransformer"
+        "com.expedia.www.haystack.trace.reader.readers.transformers.ServerClientSpanMergeTransformer"
         "com.expedia.www.haystack.trace.reader.readers.transformers.InvalidRootTransformer"
         "com.expedia.www.haystack.trace.reader.readers.transformers.InvalidParentTransformer"
         "com.expedia.www.haystack.trace.reader.readers.transformers.ClockSkewTransformer"
