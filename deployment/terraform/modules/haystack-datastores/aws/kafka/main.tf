@@ -135,14 +135,36 @@ resource "aws_iam_role_policy" "kafka-policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "kafkaRoute53ListZones",
+      "Sid": "kafkaProvidesAccessToSSM",
       "Effect": "Allow",
       "Action": [
-        "ec2:DescribeInstances"
+        "cloudwatch:PutMetricData",
+        "ds:CreateComputer",
+        "ds:DescribeDirectories",
+        "ec2:DescribeInstanceStatus",
+        "logs:*",
+        "ssm:*",
+        "ec2messages:*"
       ],
-      "Resource": [
-        "*"
-      ]
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "ssm.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:DeleteServiceLinkedRole",
+        "iam:GetServiceLinkedRoleDeletionStatus"
+      ],
+      "Resource": "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*"
     }
   ]
 }
