@@ -71,6 +71,7 @@ module "haystack-datastores" {
   aws_utilities_subnet = "${var.aws_utilities_subnet}"
   aws_vpc_id = "${var.aws_vpc_id}"
   aws_nodes_subnet = "${var.aws_nodes_subnet}"
+  aws_nodes_subnets = "${var.aws_nodes_subnets}"
   s3_bucket_name = "${var.s3_bucket_name}"
   aws_ssh_key = "${var.aws_ssh_key}"
   zookeeper_count = "${var.zookeeper_count}"
