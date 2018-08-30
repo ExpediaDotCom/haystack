@@ -19,7 +19,7 @@ resource "null_resource" "elasticsearch_addons" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${data.template_file.curator_cron_job.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    command = "echo '${data.template_file.curator_cron_job.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name} || true"
     when = "destroy"
   }
   count = "${local.count}"

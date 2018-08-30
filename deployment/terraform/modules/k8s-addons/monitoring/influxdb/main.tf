@@ -39,7 +39,7 @@ resource "null_resource" "k8s_influxdb_retention" {
     command = "echo '${file("${path.module}/manifests/influx_db_retention.yaml")}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
   provisioner "local-exec" {
-    command = "echo '${file("${path.module}/manifests/influx_db_retention.yaml")}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    command = "echo '${file("${path.module}/manifests/influx_db_retention.yaml")}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name} || true"
     when = "destroy"
   }
 
