@@ -21,7 +21,7 @@ resource "null_resource" "kibana_addons" {
     command = "echo '${data.template_file.kibana_addon_config.rendered}' | ${var.kubectl_executable_name} create -f - --context ${var.kubectl_context_name}"
   }
   provisioner "local-exec" {
-    command = "echo '${data.template_file.kibana_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    command = "echo '${data.template_file.kibana_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name} || true"
     when = "destroy"
   }
   count = "${local.count}"

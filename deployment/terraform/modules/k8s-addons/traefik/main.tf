@@ -34,7 +34,7 @@ resource "null_resource" "traefik_cluster_addon" {
   }
 
   provisioner "local-exec" {
-    command = "echo '${data.template_file.traefik_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
+    command = "echo '${data.template_file.traefik_cluster_addon_config.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name} || true"
     when = "destroy"
   }
   depends_on = [
