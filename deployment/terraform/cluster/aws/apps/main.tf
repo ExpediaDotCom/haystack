@@ -15,6 +15,7 @@ data "terraform_remote_state" "haystack_inrastructure" {
 module "haystack-apps" {
   source = "../../../modules/haystack-apps/kubernetes"
   k8s_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.k8s_app_namespace}"
+  aa_app_namespace = "${data.terraform_remote_state.haystack_inrastructure.aa_app_namespace}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   app-node_selector_label = "${local.app-node_selecter_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
