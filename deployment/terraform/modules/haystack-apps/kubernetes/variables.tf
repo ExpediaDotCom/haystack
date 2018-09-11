@@ -11,6 +11,7 @@ variable "haystack_cluster_name" {}
 variable "kubectl_context_name" {}
 variable "kubectl_executable_name" {}
 variable "k8s_app_namespace" {}
+variable "aa_app_namespace" {}
 variable "app-node_selector_label"{}
 
 

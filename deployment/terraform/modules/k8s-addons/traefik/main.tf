@@ -1,5 +1,6 @@
 locals {
   "k8s_app_namespace" = "haystack-apps"
+  "aa_app_namespace" = "aa-apps"
 }
 data "template_file" "traefik_cluster_addon_config" {
   template = "${file("${path.module}/templates/traefik-yaml.tpl")}"
@@ -25,6 +26,19 @@ resource "null_resource" "haystack_app_namespace" {
   }
 }
 
+
+resource "null_resource" "aa_app_namespace" {
+  provisioner "local-exec" {
+    command = "${var.kubectl_executable_name} create namespace ${local.aa_app_namespace} --context ${var.kubectl_context_name}"
+  }
+
+  provisioner "local-exec" {
+    command = "${var.kubectl_executable_name} delete namespace ${local.aa_app_namespace} --context ${var.kubectl_context_name}"
+    when = "destroy"
+  }
+}
+
+
 resource "null_resource" "traefik_cluster_addon" {
   triggers {
     template = "${data.template_file.traefik_cluster_addon_config.rendered}"
@@ -38,5 +52,5 @@ resource "null_resource" "traefik_cluster_addon" {
     when = "destroy"
   }
   depends_on = [
-    "null_resource.haystack_app_namespace"]
+    "null_resource.haystack_app_namespace", "null_resource.aa_app_namespace" ]
 }
