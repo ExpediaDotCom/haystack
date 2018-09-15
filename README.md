@@ -65,9 +65,9 @@ minimize AWS costs. Kinesis Firehose can be configured to deliver the data to
     * [Amazon Redshift](https://aws.amazon.com/redshift/)
     * [Amazon Elasticsearch Service](https://aws.amazon.com/elasticsearch-service/)
 
-#### Stitcher
-The Stitcher module collects related Span objects into
-[StitchedSpan](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/stitchedSpan.proto) protobuf objects 
+#### Buffer
+The Buffer module collects Span objects sharing a trace ID into
+[SpanBuffer](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/spanBuffer.proto) protobuf objects 
 which are written to the Kafka message bus. The Span objects are identified as related by the parent span IDs; the Span
 with a null parent Span ID is the root Span, child Spans have a parent Span ID of the root Span, grandchild Spans have a
 parent span ID of the appropriate child Span, etc.
