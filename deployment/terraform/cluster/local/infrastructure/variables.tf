@@ -25,3 +25,12 @@ variable "monitoring_addons_enabled" {
 variable "logging_addons_enabled" {
   default = "false"
 }
+
+variable "aa_apps_resource_limits" {
+  type = "map"
+  default = {
+    enabled = false
+    cpu_limit = "1"
+    memory_limit =  "1Gi"
+  }
+}
