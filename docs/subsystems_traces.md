@@ -42,4 +42,4 @@ The Reader runs as a GRPC server and serves Haystack UI to fetch traces directly
      
 The [Trace View](./ui_traces.html) in the user interface reads the stitched view of all the span and sub-span data for a given TraceID, and renders it:
 
-<img src="/haystack/img/trace_details.png" style="width: 800px;"/>
+<img src="/haystack/img/trace_timeline.png" style="width: 800px;"/>
