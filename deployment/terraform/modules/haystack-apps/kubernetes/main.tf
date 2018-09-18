@@ -113,7 +113,7 @@ module "ui" {
 module "alerting" {
   source = "alerting"
 
-  app_namespace = "${var.k8s_app_namespace}"
+  app_namespace = "${var.aa_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   node_selector_label = "${var.app-node_selector_label}"
