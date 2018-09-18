@@ -114,3 +114,12 @@ variable "cassandra_seed_node_instance_type" {
 variable "cassandra_non_seed_node_instance_type" {
   default = "c4.xlarge"
 }
+
+variable "aa_apps_resource_limits" {
+  type = "map"
+  default = {
+    enabled = true
+    cpu_limit = "2"
+    memory_limit =  "4Gi"
+  }
+}

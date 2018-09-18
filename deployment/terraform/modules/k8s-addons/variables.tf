@@ -37,3 +37,7 @@ variable "influxdb_storage_volume" {
 variable "es_storage_volume" {
   default = "100Mi"
 }
+
+variable "aa_apps_resource_limits" {
+  type = "map"
+}

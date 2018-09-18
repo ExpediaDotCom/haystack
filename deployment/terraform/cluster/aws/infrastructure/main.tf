@@ -64,6 +64,7 @@ module "k8s-addons" {
   "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
   "app-node_selecter_label" = "${local.app-node_selecter_label}"
   datastores_heap_memory_in_mb = "${local.k8s_datastores_heap_memory_in_mb}"
+  aa_apps_resource_limits = "${var.aa_apps_resource_limits}"
 }
 
 module "haystack-datastores" {

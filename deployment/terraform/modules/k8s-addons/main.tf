@@ -57,3 +57,13 @@ module "dashboard-addon" {
   k8s_dashboard_cname = "${var.k8s_dashboard_cname}"
   monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
 }
+
+module "aa_apps_resource_limits" {
+  source = "aa_apps_resource_limits"
+  enabled = "${var.aa_apps_resource_limits["enabled"]}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  cpu_limit = "${var.aa_apps_resource_limits["cpu_limit"]}"
+  memory_limit = "${var.aa_apps_resource_limits["memory_limit"]}"
+  aa_app_namespace = "${module.traefik-addon.aa_app_namespace}"
+}
