@@ -6,7 +6,7 @@ sidebar_label: Trends
 The Trends view in the UI provides visualization for vital service health trends. Haystack trends 3 metrics for each operation of all services - count, duration(tp95, tp99, median) and success %.
 
 ## Main view
-When you open the Trends page in the UI, the Trends view shows summary stats for count, duration and success % for all operations.
+When you select the trends tab for a provided `serviceName` query in the searchbar, the Trends view shows summary stats for count, duration and success % for all operations.
 
 ![Trends page](/haystack/img/trends.png)
 

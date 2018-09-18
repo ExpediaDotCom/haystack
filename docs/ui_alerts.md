@@ -6,8 +6,8 @@ sidebar_label: Alerts
 Visualization for current status of vital service health trends. Haystack provides anomaly detection on 3 metrices for each operation of all services - count, duration TP99 and failure count.
 
 ## Alerts Summary
-You would get summary stats for count, duration TP99 and failure count alerts for all operation of the service on landing on Alerts page.
-At the top, Current health of Service is displayed by total number of unhealthy alerts out of total available alerts.
+Upon selecting the alerts tab, you are provided summary stats for count, duration TP99 and failure count alerts for all operation of the queried service.
+The alerts view is split into three tabs for the three types of alerts: failure count, duration TP99, and AA (adaptive alerting) duration. 
 
 ![Alerts Page](/haystack/img/alerts.png)
 

@@ -6,13 +6,7 @@ sidebar_label: Traces
 Visualization for tracing sub-system of Haystack.
 
 ## Traces Search  
-User can search for Traces going through a service. Operation can be 'all' or any specific operation from the given service. Any fields you want to filter on can be specified `key=value` format. Time Picker allows selecting presets and any time range you want. 
-Here are the available search options -
-- **Service**: Service through which trace must go through
-- **Operation**: Operation of the given service through which trace must go through
-- **Tags**: User can specify white space separated list of tags in `key=value` format(eg. `success=false`), it will fetch Traces who have all the specified tags for provided service and operation combination. Please note that *only the tags whitelisted in haystack tracing subsystem will be eligible for search*, others will be ignored. Some special case for Tags search -
-    - In case of `traceId` tag search, haystack will search for the given id across all services and ignore the provided service 
-- **Time Range Picker**: User can select any presets or specify a custom time window.
+Any query done in the search bar will display the traces tab. Using the search bar, fields you want to filter on can be specified `key=value` format. Time Picker allows selecting presets and any time range you want. For more information on universal search bar querying, visit the [Universal Search documentation](https://expediadotcom.github.io/haystack/docs/ui_universal_search.html).
 
 ![Traces](/haystack/img/traces.png)
 
@@ -29,7 +23,7 @@ Search results are presented in tabluar format for easy visualization of the dat
 
   
 ### Trace Details
-Along with Timeline representation of a trace, haystack comes with 2 more sub-views for providing different prospectives on a trace.
+Along with Timeline representation of a trace, haystack comes with 4 more sub-views for providing different prospectives on a trace.
 
 ### Timeline
 Waterfall for the trace, it shows span timelines using horizontal bars and parent child relationship between them using dotted lines.
@@ -46,5 +40,11 @@ Latency cost view is a handy tool to analyze how much time a trace is consuming 
 ### Trends
 Trace-Trends view is simply list of all operations involved in a single trace along with their current count, duration & success trends. One quickly compare involved trends and spot if any of these trends have changed recently causing issue with the trace.
 
-![Trace Trends](/haystack/img/trends.png)
+![Trace Trends](/haystack/img/trace_trends.png)
+
+### Related Traces
+
+The related traces view allows users to specify properties for traces to match to easily view other traces that match the properties. These options are set in [base.js](https://github.com/ExpediaDotCom/haystack-ui/blob/master/server/config/base.js#L134).
+
+![Related Traces](/haystack/img/trace_related.png)
 

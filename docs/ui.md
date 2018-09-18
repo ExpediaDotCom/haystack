@@ -11,9 +11,9 @@ Visualization tools in haystack-ui include -
 * [Traces](https://expediadotcom.github.io/haystack/docs/ui_traces.html) - Distributed tracing visualization for easy root cause analysis 
 * [Trends](https://expediadotcom.github.io/haystack/docs/ui_trends.html) - Visualization for vital service trends 
 * [Alerts and Anomaly Detection](https://expediadotcom.github.io/haystack/docs/ui_alerts.html) - UI for configuring and subscribing alerts 
-* **Service Dependency** [coming soon] - Real time dependency graph with health and connectivity indicators 
+* [Service Graph](https://expediadotcom.github.io/haystack/docs/ui_service_graph.html) - Real time dependency graph with health and connectivity indicators 
 
-Navigation in `haystack-ui` is pivoted around services. On selecting a service, you will get various visualizations tools each corresponding to a haystack sub-system. 
+Navigation in `haystack-ui` is pivoted around the universal search bar. For information regarding workflow and querying capabilities, please review the [universal search bar documentation](https://expediadotcom.github.io/haystack/docs/ui_universal_search.html).
 
 
 ## Code, Deployment and Configuration
