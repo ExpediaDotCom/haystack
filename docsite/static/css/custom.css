@@ -1,5 +1,9 @@
 /* your custom css */
 
+body {
+    background-color: white !important;
+}
+
 .fixedHeaderContainer {
     min-height: 55px;
 }
@@ -12,7 +16,19 @@ footer .footer__logo {
 }
 
 footer.nav-footer {
-    background: #333333;
+    background: $secondaryColor;
+}
+
+a.navItemActive {
+    color: #e23474 !important;
+}
+
+.mainContainer {
+    background-color: white !important;
+}
+
+.navGroupActive {
+    background-color: #F2F4FB !important;
 }
 
 .darkBackground {
