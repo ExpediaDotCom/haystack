@@ -17,6 +17,9 @@ spring:
     generate-ddl: false
     hibernate:
       naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  data:
+    rest:
+      base-path: /api     
 
 endpoints:
   health:
