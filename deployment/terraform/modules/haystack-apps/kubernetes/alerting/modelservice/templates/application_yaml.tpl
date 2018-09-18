@@ -3,7 +3,7 @@ spring:
     web-environment: true
     show-banner: true
   datasource:
-    drivername: com.mysql.jdbc.Driver
+    driver-class-name: "com.mysql.jdbc.Driver"
     url: "${db_endpoint}"
     username: $${DB_USERNAME}
     password: $${DB_PASSWORD}
