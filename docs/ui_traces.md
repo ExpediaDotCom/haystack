@@ -38,13 +38,33 @@ Latency cost view is a handy tool to analyze how much time a trace is consuming 
 ![Trace Latency](/haystack/img/trace_latency.png)
 
 ### Trends
-Trace-Trends view is simply list of all operations involved in a single trace along with their current count, duration & success trends. One quickly compare involved trends and spot if any of these trends have changed recently causing issue with the trace.
+Trace-Trends view is simply a list of all operations involved in a single trace along with their current count, duration & success trends. One quickly compare involved trends and spot if any of these trends have changed recently causing issue with the trace.
 
 ![Trace Trends](/haystack/img/trace_trends.png)
 
-### Related Traces
+### RelatedTraces
+Related Traces view aggregate traces across services that are correlated to the current trace by tag value. It provides an intuitive and quick way to find traces that are similar to the current trace.
 
-The related traces view allows users to specify properties for traces to match to easily view other traces that match the properties. These options are set in [base.js](https://github.com/ExpediaDotCom/haystack-ui/blob/master/server/config/base.js#L134).
+![Trace Trends](/haystack/img/trace_related.png)
 
-![Related Traces](/haystack/img/trace_related.png)
+To see this view, you must configure it through the `relatedTracesOptions` property of your `base.js` configuraton file. Here's a full sample configuration, with all possible (and required) fields in each option/object of the array:
+
+```javascript
+relatedTracesOptions: [
+    {
+        fieldTag: 'url2',
+        propertyToMatch: 'url',
+        fieldDescription: 'test trait 1'
+    },
+    {
+        fieldTag: 'url2',
+        propertyToMatch: 'url2',
+        fieldDescription: 'test trait 2'
+    }
+]
+```
+
+The Related Traces view finds related traces by extracting the value of the `propertyToMatch` of the current trace and then querying traces with a key value pair where the key is the `fieldTag` and the value is the former value. The `fieldDescription` is the description of this relation that will appear in the "Find Related Traces by" dropdown in the related traces view. Note: the `fieldTag` must be indexed to elasticSearch, i.e. included in the `whitelist.json` file in the haystack-indexer. This configuration makes mixing and matching properties more easy and flexible.
+
+In the example configuration above, when the first option is chosen in the dropdown, the view will extract the value of `url` of the current trace and then search for traces where `url2` equals that value.
 
