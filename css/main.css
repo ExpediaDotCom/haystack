@@ -1890,6 +1890,10 @@ footer .copyright {
 
 /* your custom css */
 
+body {
+    background-color: white !important;
+}
+
 .fixedHeaderContainer {
     min-height: 55px;
 }
@@ -1902,7 +1906,19 @@ footer .footer__logo {
 }
 
 footer.nav-footer {
-    background: #333333;
+    background: #3f4d71;
+}
+
+a.navItemActive {
+    color: #e23474 !important;
+}
+
+.mainContainer {
+    background-color: white !important;
+}
+
+.navGroupActive {
+    background-color: #F2F4FB !important;
 }
 
 .darkBackground {
@@ -1951,30 +1967,30 @@ footer.nav-footer {
 }
 
 .mainContainer .wrapper .post .postHeader h1 {
-    color: #3f4d71;
+    color: #2d3750;
 }
 .mainContainer .wrapper .post .postHeader h1 a {
-    color: #3f4d71;
+    color: #2d3750;
 }
 
 .mainContainer .wrapper .post h1 {
-    color: #3f4d71;
+    color: #2d3750;
     font-weight: bold;
 }
 .mainContainer .wrapper .post h2 {
-    color: #3f4d71;
+    color: #2d3750;
     font-weight: bold;
 }
 .mainContainer .wrapper .post h3 {
-    color: #3f4d71;
+    color: #2d3750;
     font-weight: bold;
 }
 .mainContainer .wrapper .post h5 {
-    color: #3f4d71;
+    color: #2d3750;
     font-weight: bold;
 }
 .mainContainer .wrapper .post h5 strong {
-    color: #3f4d71;
+    color: #2d3750;
     font-weight: bolder;
 }
 
