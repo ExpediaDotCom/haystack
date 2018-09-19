@@ -6,8 +6,8 @@ metadata:
   namespace: kube-system
 data:
   retention_queries.txt: |-
-   ALTER RETENTION POLICY "default" ON "k8s" DURATION 7d REPLICATION 1 DEFAULT;
-   CREATE RETENTION POLICY "7_days" ON "graphite" DURATION 7d REPLICATION 1 DEFAULT;
+   ALTER RETENTION POLICY "default" ON "k8s" DURATION 5d SHARD DURATION 1d REPLICATION 1 DEFAULT;
+   CREATE RETENTION POLICY "graphite_retention" ON "graphite" DURATION 5d SHARD DURATION 1d REPLICATION 1 DEFAULT;
 ---
 apiVersion: batch/v1
 kind: Job
