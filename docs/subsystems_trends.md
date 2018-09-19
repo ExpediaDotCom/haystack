@@ -6,7 +6,7 @@ sidebar_label: Trends
 The Trends subsystem is responsible for reading spans and generating vital service health trends.
 
 Haystack collects trace data from services, creates a distributed call graph from that data, and depicts the time taken by calls across various services.
-By identifying the trends of change in the call pattern or the time taken to complete calls, Haystack makes it easier to identify which part of a complex system is responsible for a change in the system's responsiveness. The Trends system maintains trend information and provides it for subsequent display to users in the [Trends UI](./ui_trends.html) and analysis by automation like the [Anomaly Detection](./subsystems_anomaly_detection.html) subsystem. 
+By identifying the trends of change in the call pattern or the time taken to complete calls, Haystack makes it easier to identify which part of a complex system is responsible for a change in the system's responsiveness.
 
 
 ## What we Trend
