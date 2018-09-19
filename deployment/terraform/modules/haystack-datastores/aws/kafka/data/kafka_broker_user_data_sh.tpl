@@ -20,6 +20,7 @@ sudo sed -i -e "s/_LOCAL_IP/$local_ip/g" $KAFKA_SERVER_PROPERTIES_FILE
 sudo sed -i -e "s/_NUM_PARTITIONS/${num_partitions}/g" $KAFKA_SERVER_PROPERTIES_FILE
 sudo sed -i -e "s/_RETENTION_HOURS/${retention_hours}/g" $KAFKA_SERVER_PROPERTIES_FILE
 sudo sed -i -e "s/_RETENTION_BYTES/${retention_bytes}/g" $KAFKA_SERVER_PROPERTIES_FILE
+sudo sed -i -e "/broker.id/ a \broker.rack=${broker_rack}" $KAFKA_SERVER_PROPERTIES_FILE
 
 # start service
 sudo chmod a+w /var/log

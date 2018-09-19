@@ -177,6 +177,7 @@ resource "aws_iam_instance_profile" "haystack-kafka-profile" {
 }
 
 data "template_file" "kafka_broker_user_data" {
+  count = "${var.broker_count}"
   template = "${file("${path.module}/data/kafka_broker_user_data_sh.tpl")}"
 
   vars {
@@ -186,6 +187,7 @@ data "template_file" "kafka_broker_user_data" {
     num_partitions = "${var.default_partition_count}"
     retention_hours = "24"
     retention_bytes = "1073741824"
+    broker_rack = "${index(var.aws_subnets, "${element(var.aws_subnets, count.index)}")}"
   }
 }
 
@@ -215,7 +217,7 @@ resource "aws_instance" "haystack-kafka-broker" {
     ignore_changes = ["ami", "user_data","subnet_id"]
   }
 
-  user_data = "${data.template_file.kafka_broker_user_data.rendered}"
+  user_data = "${data.template_file.kafka_broker_user_data.*.rendered[count.index]}"
 }
 
 // create cname for newly created zookeeper cluster
