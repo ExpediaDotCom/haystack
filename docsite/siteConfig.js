@@ -15,7 +15,7 @@ const siteConfig = {
     colors: {
         primaryColor: '#2d3750',
         secondaryColor: '#3f4d71',
-        postHeaderColor: '#3f4d71',
+        postHeaderColor: '#2d3750',
     },
     fonts: {
         myFont: [
