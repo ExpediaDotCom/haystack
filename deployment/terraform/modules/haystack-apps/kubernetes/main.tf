@@ -1,3 +1,7 @@
+locals {
+  cross_namespace_kafka_hostname = "${var.kafka_hostname}.${var.k8s_app_namespace}.svc.cluster.local"
+}
+
 module "traces" {
   source = "traces"
   namespace = "${var.k8s_app_namespace}"
@@ -118,7 +122,7 @@ module "alerting" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   node_selector_label = "${var.app-node_selector_label}"
   kafka_port = "${var.kafka_port}"
-  kafka_hostname = "${var.kafka_hostname}"
+  kafka_hostname = "${local.cross_namespace_kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
