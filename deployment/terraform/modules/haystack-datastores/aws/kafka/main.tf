@@ -187,7 +187,7 @@ data "template_file" "kafka_broker_user_data" {
     num_partitions = "${var.default_partition_count}"
     retention_hours = "24"
     retention_bytes = "1073741824"
-    broker_rack = "${index(var.aws_subnets, "${element(var.aws_subnets, count.index)}")}"
+    broker_rack = "${element(var.aws_subnets, count.index)}"
   }
 }
 
