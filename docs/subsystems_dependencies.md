@@ -3,9 +3,6 @@ title: Service Graph
 sidebar_label: Service Graph
 ---
 
-[![Build Status](https://travis-ci.org/ExpediaDotCom/haystack-service-graph.svg?branch=master)](https://travis-ci.org/ExpediaDotCom/haystack-service-graph)
-[![License](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://github.com/ExpediaDotCom/haystack/blob/master/LICENSE)
-
 # Haystack-service-graph
 
 The service graph or the dependencies subsystem is designed for visualizing service graphs and how requests are flowing between them. It will combine data from the Alerts and Trending subsystems into a dependency graph to show the current state of the system at a glance. You will be able to drill down into the graph to get details and fine-grain data.
