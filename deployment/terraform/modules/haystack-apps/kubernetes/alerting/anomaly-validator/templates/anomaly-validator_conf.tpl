@@ -5,8 +5,8 @@ anomaly-validator {
       application.id = "anomaly-validator"
       bootstrap.servers = "${kafka_endpoint}"
       default.value.serde = "com.expedia.adaptivealerting.kafka.serde.JsonPojoSerde"
-      JsonPojoClass = "com.expedia.adaptivealerting.core.data.MappedMpoint"
-      default.timestamp.extractor = "com.expedia.adaptivealerting.kafka.serde.MappedMpointTimestampExtractor"
+      JsonPojoClass = "com.expedia.adaptivealerting.core.data.MappedMetricData"
+      default.timestamp.extractor = "com.expedia.adaptivealerting.kafka.serde.MappedMetricDataTimestampExtractor"
       default.deserialization.exception.handler = "org.apache.kafka.streams.errors.LogAndContinueExceptionHandler"
     }
 
