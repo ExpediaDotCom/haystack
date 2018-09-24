@@ -24,7 +24,7 @@ output "graphite_enabled" {
 
 
 output "kafka_hostname" {
-  value = "${module.haystack-infrastructure.kafka_hostname}"
+  value = "${module.haystack-infrastructure.kafka_hostname}.${module.k8s-addons.k8s_app_namespace}.svc.cluster.local"
 }
 
 output "kafka_port" {
