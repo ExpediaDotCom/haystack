@@ -36,6 +36,7 @@ module "ad-mapper" {
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
+  modelservice_uri_template = "${var.ad-mapper["ad_mapper_modelservice_uri_template"]}"
   enabled = "${var.ad-mapper["enabled"]}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"

@@ -244,6 +244,7 @@ variable "ad-mapper" {
     ad_mapper_memory_limit = "250"
     ad_mapper_jvm_memory_limit = "200"
     ad_mapper_environment_overrides = ""
+    ad_mapper_modelservice_uri_template = "http://modelservice.aa-apps/modelservice/api/models/search/findByMetricHash?hash=%s"
   }
 }
 
