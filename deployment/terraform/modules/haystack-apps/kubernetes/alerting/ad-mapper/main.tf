@@ -25,6 +25,7 @@ data "template_file" "config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    modelservice_uri_template = "${var.modelservice_uri_template}"
   }
 }
 
