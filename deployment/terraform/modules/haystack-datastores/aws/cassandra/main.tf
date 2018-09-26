@@ -105,7 +105,10 @@ resource "aws_instance" "haystack-cassandra-seed-nodes" {
     volume_size = "${var.seed_node_volume_size}"
     delete_on_termination = false
   }
-
+  lifecycle {
+    ignore_changes = ["ami", "user_data","subnet_id"]
+  }
+  
   user_data = "${data.template_file.cassandra_user_data.rendered}"
 }
 
