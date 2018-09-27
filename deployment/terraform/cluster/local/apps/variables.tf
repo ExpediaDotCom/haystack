@@ -214,7 +214,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "edd21d068c41f8638b354ad3423d2523f8f41166"
+    version = "42ab27434b491b910f38b66f5d83c6fb4458682d"
   }
 }
 
@@ -291,8 +291,9 @@ variable "aquila-trainer" {
 
     # This allows us to use Minikube-local images.
     # https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
-    image = "aquila-trainer:latest"
-    image_pull_policy = "Never"
+#    image = "aquila-trainer:latest"
+#    image_pull_policy = "Never"
+    image_pull_policy = "IfNotPresent"
 
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -308,8 +309,11 @@ variable "aquila-detector" {
   default = {
     enabled = false
     instances = 1
-    image = "aquila-detector:latest"
-    image_pull_policy = "Never"
+
+#    image = "aquila-detector:latest"
+#    image_pull_policy = "Never"
+    image_pull_policy = "IfNotPresent"
+
     cpu_request = "100m"
     cpu_limit = "1000m"
     memory_request = "500"

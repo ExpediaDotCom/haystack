@@ -12,7 +12,9 @@ variable "kubectl_context_name" {}
 
 # Docker
 variable "image" {}
-variable "image_pull_policy" {}
+variable "image_pull_policy" {
+  default = "IfNotPresent"
+}
 
 # Environment
 variable "jvm_memory_limit" {}
