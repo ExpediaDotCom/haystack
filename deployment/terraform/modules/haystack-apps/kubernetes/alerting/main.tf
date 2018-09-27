@@ -55,6 +55,8 @@ module "ad-manager" {
   replicas = "${var.ad-manager["ad_manager_instances"]}"
   namespace = "${var.app_namespace}"
   kafka_endpoint = "${local.kafka_endpoint}"
+  models_region = "${var.ad-manager["ad_manager_models_region"]}"
+  models_bucket = "${var.ad-manager["ad_manager_models_bucket"]}"
   graphite_hostname = "${var.graphite_hostname}"
   node_selecter_label = "${var.node_selector_label}"
   graphite_port = "${var.graphite_port}"
