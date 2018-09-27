@@ -247,6 +247,8 @@ variable "ad-manager" {
   type = "map"
   default = {
     enabled = false
+    ad_manager_models_region = "us-west-2"
+    ad_manager_models_bucket = "aa-models"
     ad_manager_instances = 1
     ad_manager_cpu_request = "500m"
     ad_manager_cpu_limit = "2000m"
