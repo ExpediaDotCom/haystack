@@ -61,4 +61,3 @@ spec:
       - name: config-volume
         configMap:
           name: ${configmap_name}
-

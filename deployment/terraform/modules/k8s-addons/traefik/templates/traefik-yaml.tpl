@@ -169,7 +169,9 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: traefik-modelservice
-  namespace: ${k8s_app_namespace}
+  # TODO Remove hardcode [WLW]
+#  namespace: ${k8s_app_namespace}
+  namespace: aa-apps
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
@@ -188,7 +190,9 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: traefik-aquila-detector
-  namespace: ${k8s_app_namespace}
+  # TODO Remove hardcode [WLW]
+#  namespace: ${k8s_app_namespace}
+  namespace: aa-apps
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip
@@ -207,7 +211,9 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: traefik-aquila-trainer
-  namespace: ${k8s_app_namespace}
+  # TODO Remove hardcode [WLW]
+#  namespace: ${k8s_app_namespace}
+  namespace: aa-apps
   annotations:
     kubernetes.io/ingress.class: traefik
     traefik.frontend.rule.type: PathPrefixStrip

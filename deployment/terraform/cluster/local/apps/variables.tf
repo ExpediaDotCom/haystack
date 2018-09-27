@@ -214,7 +214,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "02da63dfd5a559c9048b6e83d205d49da3af25f2"
+    version = "35e210dd8a01d64d9a17f99006c185765b80aa70"
   }
 }
 
