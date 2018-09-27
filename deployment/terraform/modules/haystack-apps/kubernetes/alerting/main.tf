@@ -114,7 +114,8 @@ module "aquila-trainer" {
   kubectl_context_name = "${var.kubectl_context_name}"
 
   # Docker
-  image = "${var.aquila-trainer["image"]}"
+  image = "expediadotcom/aquila-trainer:${var.alerting["version"]}"
+#  image = "${var.aquila-trainer["image"]}"
   image_pull_policy = "${var.aquila-trainer["image_pull_policy"]}"
 
   # Environment
@@ -145,7 +146,8 @@ module "aquila-detector" {
   kubectl_context_name = "${var.kubectl_context_name}"
 
   # Docker
-  image = "${var.aquila-detector["image"]}"
+  image = "expediadotcom/aquila-detector:${var.alerting["version"]}"
+#  image = "${var.aquila-detector["image"]}"
   image_pull_policy = "${var.aquila-detector["image_pull_policy"]}"
 
   # Environment

@@ -209,7 +209,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "edd21d068c41f8638b354ad3423d2523f8f41166"
+    version = "3d1b63cc5c612c6520cfab3fee8ff8933b474837"
   }
 }
 
@@ -283,10 +283,7 @@ variable "aquila-trainer" {
   default = {
     enabled = false
     instances = 1
-
-    image = "expediadotcom/aquila-trainer:f72f754b8e20a96491ac3652877cd38b69b8c798"
     image_pull_policy = "IfNotPresent"
-
     cpu_request = "500m"
     cpu_limit = "2000m"
     memory_request = "1024"
@@ -302,10 +299,7 @@ variable "aquila-detector" {
   default = {
     enabled = false
     instances = 1
-
-    image = "expediadotcom/aquila-detector:f72f754b8e20a96491ac3652877cd38b69b8c798"
     image_pull_policy = "IfNotPresent"
-
     cpu_request = "500m"
     cpu_limit = "2000m"
     memory_request = "1024"
