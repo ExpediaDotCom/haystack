@@ -209,7 +209,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "02da63dfd5a559c9048b6e83d205d49da3af25f2"
+    version = "edd21d068c41f8638b354ad3423d2523f8f41166"
   }
 }
 
