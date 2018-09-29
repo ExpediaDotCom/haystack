@@ -33,10 +33,10 @@ variable "modelservice" {
   type = "map"
 }
 
-variable "aquila-trainer" {
+variable "aquila-detector" {
   type = "map"
 }
 
-variable "aquila-detector" {
+variable "aquila-trainer" {
   type = "map"
 }
