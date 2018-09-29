@@ -4,6 +4,10 @@ variable "haystack_cluster_name" {
   default = "haystack"
 }
 
+# ========================================
+# Haystack
+# ========================================
+
 # traces config
 variable "traces" {
   type = "map"
@@ -53,7 +57,6 @@ variable "trends" {
   }
 }
 
-# pipes config
 variable "pipes" {
   type = "map"
   default = {
@@ -122,7 +125,6 @@ variable "pipes" {
   }
 }
 
-# collectors config
 variable "collector" {
   type = "map"
   default = {
@@ -139,10 +141,8 @@ variable "collector" {
     kinesis_span_collector_memory_limit = "250"
     kinesis_span_collector_jvm_memory_limit = "200"
   }
-
 }
 
-# service-graph config
 variable "service-graph" {
   type = "map"
   default = {
@@ -168,7 +168,6 @@ variable "service-graph" {
   }
 }
 
-# ui config
 variable "ui" {
   type = "map"
   default = {
@@ -189,7 +188,6 @@ variable "ui" {
   }
 }
 
-#metrictank
 variable "metrictank" {
   type = "map"
   default = {
@@ -206,7 +204,6 @@ variable "metrictank" {
   }
 }
 
-
 # ========================================
 # Adaptive Alerting
 # ========================================
@@ -222,14 +219,14 @@ variable "modelservice" {
   type = "map"
   default = {
     enabled = false
-    modelservice_instances = 1
-    modelservice_cpu_request = "100m"
-    modelservice_cpu_limit = "1000m"
-    modelservice_memory_request = "500"
-    modelservice_memory_limit = "500"
-    modelservice_jvm_memory_limit = "300"
-    modelservice_environment_overrides = ""
-    modelservice_db_endpoint = ""
+    instances = 1
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    db_endpoint = ""
   }
 }
 
@@ -237,14 +234,14 @@ variable "ad-mapper" {
   type = "map"
   default = {
     enabled = false
-    ad_mapper_instances = 1
-    ad_mapper_cpu_request = "100m"
-    ad_mapper_cpu_limit = "1000m"
-    ad_mapper_memory_request = "250"
-    ad_mapper_memory_limit = "250"
-    ad_mapper_jvm_memory_limit = "200"
-    ad_mapper_environment_overrides = ""
-    ad_mapper_modelservice_uri_template = "http://modelservice/api/models/search/findByMetricHash?hash=%s"
+    instances = 1
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "250"
+    memory_limit = "250"
+    jvm_memory_limit = "200"
+    environment_overrides = ""
+    modelservice_uri_template = "http://modelservice/api/models/search/findByMetricHash?hash=%s"
   }
 }
 
@@ -252,15 +249,15 @@ variable "ad-manager" {
   type = "map"
   default = {
     enabled = false
-    ad_manager_models_region = "us-west-2"
-    ad_manager_models_bucket = "aa-models"
-    ad_manager_instances = 1
-    ad_manager_cpu_request = "100m"
-    ad_manager_cpu_limit = "1000m"
-    ad_manager_memory_request = "250"
-    ad_manager_memory_limit = "250"
-    ad_manager_jvm_memory_limit = "200"
-    ad_manager_environment_overrides = ""
+    models_region = "us-west-2"
+    models_bucket = "aa-models"
+    instances = 1
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "250"
+    memory_limit = "250"
+    jvm_memory_limit = "200"
+    environment_overrides = ""
   }
 }
 
@@ -268,14 +265,40 @@ variable "anomaly-validator" {
   type = "map"
   default = {
     enabled = false
-    anomaly_validator_instances = 1
-    anomaly_validator_cpu_request = "100m"
-    anomaly_validator_cpu_limit = "1000m"
-    anomaly_validator_memory_request = "250"
-    anomaly_validator_memory_limit = "250"
-    anomaly_validator_jvm_memory_limit = "200"
-    anomaly_validator_environment_overrides = ""
-    anomaly_validator_investigation_endpoint = ""
+    instances = 1
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "250"
+    memory_limit = "250"
+    jvm_memory_limit = "200"
+    environment_overrides = ""
+    investigation_endpoint = ""
+  }
+}
+
+# ========================================
+# Aquila
+# ========================================
+
+# TODO Figure out how to isolate and DRY the Aquila version in the config below. [WLW]
+# https://github.com/hashicorp/terraform/issues/4084
+
+# Override image and image_pull_policy to use Minikube-local images. See
+# https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
+
+variable "aquila-detector" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/aquila-detector:3d1b63cc5c612c6520cfab3fee8ff8933b474837"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
   }
 }
 
@@ -288,32 +311,8 @@ variable "aquila-trainer" {
   default = {
     enabled = false
     instances = 1
-
-    # This allows us to use Minikube-local images.
-    # https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
-#    image = "aquila-trainer:latest"
-#    image_pull_policy = "Never"
+    image = "expediadotcom/aquila-trainer:3d1b63cc5c612c6520cfab3fee8ff8933b474837"
     image_pull_policy = "IfNotPresent"
-
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-  }
-}
-
-variable "aquila-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-
-#    image = "aquila-detector:latest"
-#    image_pull_policy = "Never"
-    image_pull_policy = "IfNotPresent"
-
     cpu_request = "100m"
     cpu_limit = "1000m"
     memory_request = "500"
