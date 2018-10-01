@@ -2,7 +2,7 @@ anomaly-validator {
   health.status.path = "/app/isHealthy"
 
   streams {
-      application.id = "anomaly-validator"
+      application.id = "anomaly-validator2"
       bootstrap.servers = "${kafka_endpoint}"
       default.value.serde = "com.expedia.adaptivealerting.kafka.serde.JsonPojoSerde"
       JsonPojoClass = "com.expedia.adaptivealerting.core.data.MappedMetricData"
