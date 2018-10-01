@@ -35,17 +35,21 @@ done
 
 getservers
 
+# build zookeeper configuration
+sed -i -e "s/dataDir.*/dataDir=\/var\/zookeeper/g" /opt/kafka/config/zookeeper.properties
 echo "tickTime=4000" >> /opt/kafka/config/zookeeper.properties
 echo "initLimit=30" >> /opt/kafka/config/zookeeper.properties
 echo "syncLimit=15" >> /opt/kafka/config/zookeeper.properties
-mkdir /tmp/zookeeper
+mkdir /var/zookeeper
+COUNT=0
 
 for ID in $SERVERS
 do
+  ZKNAME=${zk_a_name}$COUNT
   COUNT=$[$COUNT +1]
-  echo "server.$COUNT=$ID:2888:3888" >> /opt/kafka/config/zookeeper.properties
+  echo "server.$COUNT=$ZKNAME:2888:3888" >> /opt/kafka/config/zookeeper.properties
   if [ "$local_ip" == "$ID" ]; then
-    echo "$COUNT" > /tmp/zookeeper/myid
+    echo "$COUNT" > /var/zookeeper/myid
   fi
 done
 

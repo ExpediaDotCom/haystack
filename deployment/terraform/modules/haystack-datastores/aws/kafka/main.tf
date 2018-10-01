@@ -74,6 +74,7 @@ data "template_file" "zookeeper_user_data" {
 
   vars {
     role = "${var.haystack_cluster_name}-kafka-zookeeper"
+    zk_a_name = "${var.haystack_cluster_name}-zookeeper-"
     zk_node_count = "${var.zookeeper_count}"
     haystack_graphite_host = "${var.aws_graphite_host}"
     haystack_graphite_port = "${var.aws_graphite_port}"
