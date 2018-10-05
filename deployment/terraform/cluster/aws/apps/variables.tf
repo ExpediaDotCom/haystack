@@ -248,6 +248,7 @@ variable "ad-manager" {
   type = "map"
   default = {
     enabled = false
+    aquila_uri = "http://aquila-detector/detect"
     models_region = "us-west-2"
     models_bucket = "aa-models"
     instances = 1

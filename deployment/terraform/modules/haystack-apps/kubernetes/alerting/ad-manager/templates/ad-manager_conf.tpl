@@ -6,16 +6,54 @@ ad-manager {
     JsonPojoClass = "com.expedia.adaptivealerting.core.data.MappedMetricData"
     default.timestamp.extractor = "com.expedia.adaptivealerting.kafka.serde.MappedMetricDataTimestampExtractor"
   }
-  factories {
-    region = "${models_region}"
-    bucket = "${models_bucket}"
-    by-type {
-      aquila-detector = "com.expedia.adaptivealerting.anomdetect.aquila.AquilaFactory"
-      constant-detector = "com.expedia.adaptivealerting.anomdetect.constant.ConstantThresholdFactory"
-      cusum-detector = "com.expedia.adaptivealerting.anomdetect.cusum.CusumFactory"
-      ewma-detector = "com.expedia.adaptivealerting.anomdetect.ewma.EwmaFactory"
-      pewma-detector = "com.expedia.adaptivealerting.anomdetect.pewma.PewmaFactory"
-      rcf-detector = "com.expedia.adaptivealerting.anomdetect.rcf.RandomCutForestFactory"
+
+  detectors {
+    aquila {
+      factory = "com.expedia.adaptivealerting.anomdetect.aquila.AquilaFactory"
+      config {
+        uri = "${aquila_uri}"
+      }
+    }
+    constant {
+      factory = "com.expedia.adaptivealerting.anomdetect.BasicAnomalyDetectorFactory"
+      config {
+        detectorClass = "com.expedia.adaptivealerting.anomdetect.ConstantThresholdAnomalyDetector"
+        region = "${models_region}"
+        bucket = "${models_bucket}"
+        folder = "constant-detector"
+      }
+    }
+    cusum {
+      factory = "com.expedia.adaptivealerting.anomdetect.BasicAnomalyDetectorFactory"
+      config {
+        detectorClass = "com.expedia.adaptivealerting.anomdetect.CusumAnomalyDetector"
+        region = "${models_region}"
+        bucket = "${models_bucket}"
+        folder = "cusum-detector"
+      }
+    }
+    ewma {
+      factory = "com.expedia.adaptivealerting.anomdetect.BasicAnomalyDetectorFactory"
+      config {
+        detectorClass = "com.expedia.adaptivealerting.anomdetect.EwmaAnomalyDetector"
+        region = "${models_region}"
+        bucket = "${models_bucket}"
+        folder = "ewma-detector"
+      }
+    }
+    pewma {
+      factory = "com.expedia.adaptivealerting.anomdetect.BasicAnomalyDetectorFactory"
+      config {
+        detectorClass = "com.expedia.adaptivealerting.anomdetect.PewmaAnomalyDetector"
+        region = "${models_region}"
+        bucket = "${models_bucket}"
+        folder = "pewma-detector"
+      }
+    }
+    rcf {
+      factory = "com.expedia.adaptivealerting.anomdetect.rcf.RandomCutForestFactory"
+      config {
+      }
     }
   }
 

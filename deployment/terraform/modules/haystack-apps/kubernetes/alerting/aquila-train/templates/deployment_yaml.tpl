@@ -23,8 +23,8 @@ spec:
         image: ${image}
         imagePullPolicy: ${image_pull_policy}
         volumeMounts:
-        - mountPath: /config
-          name: config-volume
+        - name: config-volume
+          mountPath: /config
         resources:
           limits:
             cpu: ${cpu_limit}
