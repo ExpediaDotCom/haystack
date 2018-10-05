@@ -1,4 +1,8 @@
 {
+  "description": "Static site generator for http://expediadotcom.github.io/haystack",
+  "repository": "https://github.com/ExpediaDotCom/haystack",
+  "homepage": "http://expediadotcom.github.io/haystack",
+  "license": "Apache-2.0",
   "scripts": {
     "examples": "docusaurus-examples",
     "start": "docusaurus-start",
@@ -9,6 +13,6 @@
     "rename-version": "docusaurus-rename-version"
   },
   "devDependencies": {
-    "docusaurus": "^1.0.9"
+    "docusaurus": "^1.4.0"
   }
 }
