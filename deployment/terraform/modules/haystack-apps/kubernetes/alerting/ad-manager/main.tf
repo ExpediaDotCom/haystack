@@ -25,6 +25,7 @@ data "template_file" "config_data" {
 
   vars {
     kafka_endpoint = "${var.kafka_endpoint}"
+    aquila_uri = "${var.aquila_uri}"
     models_region = "${var.models_region}"
     models_bucket = "${var.models_bucket}"
   }

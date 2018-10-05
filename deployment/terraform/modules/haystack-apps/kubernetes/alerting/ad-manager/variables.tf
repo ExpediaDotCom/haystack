@@ -2,8 +2,11 @@ variable "image" {}
 variable "replicas" {}
 variable "namespace" {}
 variable "kafka_endpoint" {}
+
+variable "aquila_uri" {}
 variable "models_region" {}
 variable "models_bucket" {}
+
 variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "graphite_enabled" {}
