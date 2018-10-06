@@ -23,8 +23,8 @@ spec:
         image: ${image}
         volumeMounts:
           # Create on-disk volume to store exec logs
-        - mountPath: /config
-          name: config-volume
+        - name: config-volume
+          mountPath: /config
         resources:
           limits:
             cpu: ${cpu_limit}
@@ -56,7 +56,7 @@ spec:
           periodSeconds: 5
           failureThreshold: 6
       nodeSelector:
-        ${node_selecter_label}
+        ${node_selector_label}
       volumes:
       - name: config-volume
         configMap:
