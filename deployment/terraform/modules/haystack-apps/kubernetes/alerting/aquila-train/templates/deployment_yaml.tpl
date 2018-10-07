@@ -25,6 +25,8 @@ spec:
         volumeMounts:
         - name: config-volume
           mountPath: /config
+        - name: aws
+          mountPath: /root/.aws
         resources:
           limits:
             cpu: ${cpu_limit}
@@ -59,6 +61,9 @@ spec:
       - name: config-volume
         configMap:
           name: ${configmap_name}
+      - name: aws
+        hostPath:
+          path: /root/.aws
 ---
 # ------------------- Service ------------------- #
 apiVersion: v1

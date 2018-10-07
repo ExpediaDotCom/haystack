@@ -17,6 +17,10 @@ data "template_file" "deployment_yaml" {
   vars {
     app_name            = "${local.app_name}"
 
+    # Docker
+    image               = "${var.image}"
+    image_pull_policy   = "${var.image_pull_policy}"
+
     # Kubernetes
     namespace           = "${var.namespace}"
     replicas            = "${var.replicas}"
@@ -26,10 +30,8 @@ data "template_file" "deployment_yaml" {
     memory_request      = "${var.memory_request}"
     node_selector_label = "${var.node_selector_label}"
     configmap_name      = "${local.configmap_name}"
-
-    # Docker
-    image               = "${var.image}"
-    image_pull_policy   = "${var.image_pull_policy}"
+    service_port        = "${var.service_port}"
+    container_port      = "${var.container_port}"
 
     # Environment
     jvm_memory_limit    = "${var.jvm_memory_limit}"
@@ -37,10 +39,6 @@ data "template_file" "deployment_yaml" {
     graphite_host       = "${var.graphite_hostname}"
     graphite_enabled    = "${var.graphite_enabled}"
     env_vars            = "${indent(9, "${var.env_vars}")}"
-
-    # Service
-    service_port = "${var.service_port}"
-    container_port = "${var.container_port}"
   }
 }
 

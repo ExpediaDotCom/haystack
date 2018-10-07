@@ -54,25 +54,34 @@ module "ad-mapper" {
 module "ad-manager" {
   source = "ad-manager"
 
-  image = "expediadotcom/haystack-adaptive-alerting-ad-manager:${var.alerting["version"]}"
-  replicas = "${var.ad-manager["instances"]}"
+  # Docker
+  image = "${var.ad-manager["image"]}"
+  image_pull_policy = "${var.ad-manager["image_pull_policy"]}"
+
+  # Kubernetes
   namespace = "${var.app_namespace}"
-  kafka_endpoint = "${local.kafka_endpoint}"
-  models_region = "${var.ad-manager["models_region"]}"
-  models_bucket = "${var.ad-manager["models_bucket"]}"
-  graphite_hostname = "${var.graphite_hostname}"
-  node_selecter_label = "${var.node_selector_label}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
   enabled = "${var.ad-manager["enabled"]}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
+  replicas = "${var.ad-manager["instances"]}"
   cpu_limit = "${var.ad-manager["cpu_limit"]}"
   cpu_request = "${var.ad-manager["cpu_request"]}"
   memory_limit = "${var.ad-manager["memory_limit"]}"
   memory_request = "${var.ad-manager["memory_request"]}"
+  node_selector_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+
+  # Environment
   jvm_memory_limit = "${var.ad-manager["jvm_memory_limit"]}"
+  graphite_enabled = "${var.graphite_enabled}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
   env_vars = "${var.ad-manager["environment_overrides"]}"
+
+  # App
+  kafka_endpoint = "${local.kafka_endpoint}"
+  aquila_uri = "${var.ad-manager["aquila_uri"]}"
+  models_region = "${var.ad-manager["models_region"]}"
+  models_bucket = "${var.ad-manager["models_bucket"]}"
 }
 
 module "anomaly-validator" {
@@ -111,6 +120,10 @@ module "aquila-detector" {
 #  source = "github.com/ExpediaDotCom/haystack-aquila//detect/terraform/module?ref=v0.1.0"
   source = "aquila-detect"
 
+  # Docker
+  image = "${var.aquila-detector["image"]}"
+  image_pull_policy = "${var.aquila-detector["image_pull_policy"]}"
+
   # Kubernetes
   namespace = "${var.app_namespace}"
   enabled = "${var.aquila-detector["enabled"]}"
@@ -123,10 +136,6 @@ module "aquila-detector" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
 
-  # Docker
-  image = "${var.aquila-detector["image"]}"
-  image_pull_policy = "${var.aquila-detector["image_pull_policy"]}"
-
   # Environment
   jvm_memory_limit = "${var.aquila-detector["jvm_memory_limit"]}"
   graphite_hostname = "${var.graphite_hostname}"
@@ -137,6 +146,10 @@ module "aquila-detector" {
 
 module "aquila-trainer" {
   source = "aquila-train"
+
+  # Docker
+  image = "${var.aquila-trainer["image"]}"
+  image_pull_policy = "${var.aquila-trainer["image_pull_policy"]}"
 
   # Kubernetes
   namespace = "${var.app_namespace}"
@@ -149,10 +162,6 @@ module "aquila-trainer" {
   node_selector_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-
-  # Docker
-  image = "${var.aquila-trainer["image"]}"
-  image_pull_policy = "${var.aquila-trainer["image_pull_policy"]}"
 
   # Environment
   jvm_memory_limit = "${var.aquila-trainer["jvm_memory_limit"]}"
