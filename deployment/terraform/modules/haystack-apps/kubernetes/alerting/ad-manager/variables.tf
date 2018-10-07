@@ -23,7 +23,7 @@ variable "graphite_port" {}
 variable "graphite_enabled" {}
 variable "env_vars" {}
 
-# Service
+# App
 variable "kafka_endpoint" {}
 variable "models_region" {}
 variable "models_bucket" {}

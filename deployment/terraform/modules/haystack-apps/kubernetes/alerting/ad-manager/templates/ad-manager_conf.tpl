@@ -10,7 +10,7 @@ ad-manager {
     aquila-detector {
       factory = "com.expedia.adaptivealerting.anomdetect.aquila.AquilaAnomalyDetectorFactory"
       config {
-        uri = "http://haystack.local:32300/aquila-detector/detect"
+        uri = "${aquila_uri}"
       }
     }
     constant-detector {

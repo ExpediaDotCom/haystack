@@ -9,46 +9,61 @@ locals {
 module "modelservice" {
   source = "modelservice"
 
+  # Docker
   image = "expediadotcom/haystack-adaptive-alerting-modelservice:${var.alerting["version"]}"
-  replicas = "${var.modelservice["instances"]}"
+
+  # Kubernetes
   namespace = "${var.app_namespace}"
-  db_endpoint = "${var.modelservice["db_endpoint"]}"
-  graphite_hostname = "${var.graphite_hostname}"
-  node_selecter_label = "${var.node_selector_label}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
   enabled = "${var.modelservice["enabled"]}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
+  replicas = "${var.modelservice["instances"]}"
   cpu_limit = "${var.modelservice["cpu_limit"]}"
   cpu_request = "${var.modelservice["cpu_request"]}"
   memory_limit = "${var.modelservice["memory_limit"]}"
   memory_request = "${var.modelservice["memory_request"]}"
+  node_selecter_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+
+  # Environment
   jvm_memory_limit = "${var.modelservice["jvm_memory_limit"]}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
   env_vars = "${var.modelservice["environment_overrides"]}"
+
+  # App
+  db_endpoint = "${var.modelservice["db_endpoint"]}"
 }
 
 module "ad-mapper" {
   source = "ad-mapper"
 
-  image = "expediadotcom/haystack-adaptive-alerting-ad-mapper:${var.alerting["version"]}"
-  replicas = "${var.ad-mapper["instances"]}"
+  # Docker
+  image = "${var.ad-mapper["image"]}"
+  image_pull_policy = "${var.ad-mapper["image_pull_policy"]}"
+
+  # Kubernetes
   namespace = "${var.app_namespace}"
-  kafka_endpoint = "${local.kafka_endpoint}"
-  graphite_hostname = "${var.graphite_hostname}"
-  node_selecter_label = "${var.node_selector_label}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
-  modelservice_uri_template = "${var.ad-mapper["modelservice_uri_template"]}"
   enabled = "${var.ad-mapper["enabled"]}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
+  replicas = "${var.ad-mapper["instances"]}"
   cpu_limit = "${var.ad-mapper["cpu_limit"]}"
   cpu_request = "${var.ad-mapper["cpu_request"]}"
   memory_limit = "${var.ad-mapper["memory_limit"]}"
   memory_request = "${var.ad-mapper["memory_request"]}"
+  node_selector_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+
+  # Environment
   jvm_memory_limit = "${var.ad-mapper["jvm_memory_limit"]}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
   env_vars = "${var.ad-mapper["environment_overrides"]}"
+
+  # App
+  kafka_endpoint = "${local.kafka_endpoint}"
+  modelservice_uri_template = "${var.ad-mapper["modelservice_uri_template"]}"
 }
 
 module "ad-manager" {
@@ -87,23 +102,30 @@ module "ad-manager" {
 module "anomaly-validator" {
   source = "anomaly-validator"
 
+  # Docker
   image = "expediadotcom/haystack-adaptive-alerting-anomaly-validator:${var.alerting["version"]}"
-  replicas = "${var.anomaly-validator["instances"]}"
+
+  # Kubernetes
   namespace = "${var.app_namespace}"
-  kafka_endpoint = "${local.kafka_endpoint}"
-  graphite_hostname = "${var.graphite_hostname}"
-  node_selecter_label = "${var.node_selector_label}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
   enabled = "${var.anomaly-validator["enabled"]}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
+  replicas = "${var.anomaly-validator["instances"]}"
   cpu_limit = "${var.anomaly-validator["cpu_limit"]}"
   cpu_request = "${var.anomaly-validator["cpu_request"]}"
   memory_limit = "${var.anomaly-validator["memory_limit"]}"
   memory_request = "${var.anomaly-validator["memory_request"]}"
+  node_selecter_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+
+  # Environment
   jvm_memory_limit = "${var.anomaly-validator["jvm_memory_limit"]}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
   env_vars = "${var.anomaly-validator["environment_overrides"]}"
+
+  # App
+  kafka_endpoint = "${local.kafka_endpoint}"
   investigation_endpoint = "${var.anomaly-validator["investigation_endpoint"]}"
 }
 

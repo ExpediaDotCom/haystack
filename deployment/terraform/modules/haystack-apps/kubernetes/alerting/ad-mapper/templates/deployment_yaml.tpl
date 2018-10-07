@@ -21,6 +21,7 @@ spec:
       containers:
       - name: ${app_name}
         image: ${image}
+        imagePullPolicy: ${image_pull_policy}
         volumeMounts:
           # Create on-disk volume to store exec logs
         - mountPath: /config
@@ -56,9 +57,8 @@ spec:
           periodSeconds: 5
           failureThreshold: 6
       nodeSelector:
-        ${node_selecter_label}
+        ${node_selector_label}
       volumes:
       - name: config-volume
         configMap:
           name: ${configmap_name}
-
