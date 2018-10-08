@@ -62,7 +62,7 @@ spec:
           periodSeconds: 5
           failureThreshold: 6
       nodeSelector:
-        ${node_selecter_label}
+        ${node_selector_label}
       volumes:
       - name: config-volume
         configMap:
