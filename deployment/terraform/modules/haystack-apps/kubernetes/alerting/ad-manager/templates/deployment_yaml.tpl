@@ -21,6 +21,7 @@ spec:
       containers:
       - name: ${app_name}
         image: ${image}
+        imagePullPolicy: ${image_pull_policy}
         volumeMounts:
           # Create on-disk volume to store exec logs
         - name: config-volume

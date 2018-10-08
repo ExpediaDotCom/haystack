@@ -35,9 +35,9 @@ data "template_file" "deployment_yaml" {
 
     # Environment
     jvm_memory_limit    = "${var.jvm_memory_limit}"
-    graphite_port       = "${var.graphite_port}"
-    graphite_host       = "${var.graphite_hostname}"
     graphite_enabled    = "${var.graphite_enabled}"
+    graphite_host       = "${var.graphite_hostname}"
+    graphite_port       = "${var.graphite_port}"
     env_vars            = "${indent(9, "${var.env_vars}")}"
   }
 }
