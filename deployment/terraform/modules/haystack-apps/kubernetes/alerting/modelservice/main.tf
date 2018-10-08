@@ -18,7 +18,7 @@ data "template_file" "deployment_yaml" {
     graphite_port = "${var.graphite_port}"
     graphite_host = "${var.graphite_hostname}"
     graphite_enabled = "${var.graphite_enabled}"
-    node_selecter_label = "${var.node_selecter_label}"
+    node_selector_label = "${var.node_selector_label}"
     image = "${var.image}"
     replicas = "${var.replicas}"
     memory_limit = "${var.memory_limit}"

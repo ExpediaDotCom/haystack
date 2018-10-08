@@ -10,7 +10,7 @@ module "modelservice" {
   source = "modelservice"
 
   # Docker
-  image = "expediadotcom/haystack-adaptive-alerting-modelservice:${var.alerting["version"]}"
+  image = "expediadotcom/adaptive-alerting-modelservice:${var.alerting["version"]}"
 
   # Kubernetes
   namespace = "${var.app_namespace}"
@@ -20,7 +20,7 @@ module "modelservice" {
   cpu_request = "${var.modelservice["cpu_request"]}"
   memory_limit = "${var.modelservice["memory_limit"]}"
   memory_request = "${var.modelservice["memory_request"]}"
-  node_selecter_label = "${var.node_selector_label}"
+  node_selector_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
 
@@ -103,7 +103,7 @@ module "anomaly-validator" {
   source = "anomaly-validator"
 
   # Docker
-  image = "expediadotcom/haystack-adaptive-alerting-anomaly-validator:${var.alerting["version"]}"
+  image = "expediadotcom/adaptive-alerting-anomaly-validator:${var.alerting["version"]}"
 
   # Kubernetes
   namespace = "${var.app_namespace}"
@@ -113,7 +113,7 @@ module "anomaly-validator" {
   cpu_request = "${var.anomaly-validator["cpu_request"]}"
   memory_limit = "${var.anomaly-validator["memory_limit"]}"
   memory_request = "${var.anomaly-validator["memory_request"]}"
-  node_selecter_label = "${var.node_selector_label}"
+  node_selector_label = "${var.node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
 
@@ -133,13 +133,7 @@ module "anomaly-validator" {
 # Aquila
 # ========================================
 
-# TODO Below we want to source external Aquila modules, but we can't because Trinity
-# doesn't have git available on the path. Need to look into this. [WLW]
-# https://trinity.tools.expedia.com/job/monitoring-test_haystack-deployment/1252/console
-# Error downloading modules: Error loading modules: error downloading 'https://github.com/ExpediaDotCom/haystack-aquila.git?ref=v0.1.0': git must be available and on the PATH
-
 module "aquila-detector" {
-#  source = "github.com/ExpediaDotCom/haystack-aquila//detect/terraform/module?ref=v0.1.0"
   source = "aquila-detect"
 
   # Docker
