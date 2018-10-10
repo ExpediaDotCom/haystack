@@ -79,3 +79,11 @@ variable "aquila-trainer" {
 variable "aquila-detector" {
   type = "map"
 }
+
+# ========================================
+# Alert Manager
+# ========================================
+
+variable "alert-manager" {
+  type = "map"
+}

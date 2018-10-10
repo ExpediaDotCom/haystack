@@ -47,4 +47,7 @@ module "haystack-apps" {
   # Aquila configuration overrides
   aquila-detector = "${var.aquila-detector}"
   aquila-trainer = "${var.aquila-trainer}"
+
+  # Alert Manager
+  alert-manager = "${var.alert-manager}"
 }
