@@ -43,6 +43,7 @@ module "haystack-apps" {
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
   anomaly-validator = "${var.anomaly-validator}"
+  notifier = "${var.notifier}"
 
   # Aquila configuration overrides
   aquila-detector = "${var.aquila-detector}"

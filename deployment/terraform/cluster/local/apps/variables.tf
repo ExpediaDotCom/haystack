@@ -211,7 +211,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "66a7d28cc90ad1c3f54db078e849c962e4771289"
+    version = "3fc6132075449a7a054f6db71e248abc9cbd0305"
   }
 }
 
@@ -278,6 +278,22 @@ variable "anomaly-validator" {
     jvm_memory_limit = "200"
     environment_overrides = ""
     investigation_endpoint = ""
+  }
+}
+
+variable "notifier" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    webhook_url = ""
   }
 }
 

@@ -48,6 +48,7 @@ module "haystack-apps" {
   anomaly-validator = "${var.anomaly-validator}"
   aquila-trainer = "${var.aquila-trainer}"
   aquila-detector = "${var.aquila-detector}"
+  notifier = "${var.notifier}"
 
   # Alert Manager
   alert-manager = "${var.alert-manager}"
