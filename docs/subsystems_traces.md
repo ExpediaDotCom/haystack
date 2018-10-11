@@ -7,15 +7,7 @@ Traces is a subsystem included in Haystack that provides a distributed tracing s
 
 In a modern microservice architecture, requests often span multiple services. Each service handles a request by performing one or more operations, such as invoking downstream services over HTTP or GRPC, querying databases, or publishing to an event bus. To understand behavior and troubleshoot problems in a system that deploys tens or hundreds of microservices is a complex task. Application-level monitoring and log entries scattered across multiple servers may not be useful enough to detect a problem, let alone help pinpoint the specific server or service that's the point of failure. 
 
-Haystack addresses this problem in the Traces subsystem, by reading the trace [spans](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/span.proto) emitted by microservices and stitching them together based on data that identifies spans and their parent-child relationships. The Traces subsystem also provides a search capability on the metadata attached with every span and presents a view showing all the services and their operations as a time vector. This helps a developer or system administrator to understand the flow of calls and diagnose latencies across a set of services.  
-
-## Example 
-
-The following diagram shows a typical flow of trace data from a single request that starts from the browser or a mobile app. It shows how a request typically flows across multiple services, and at each point of communication, a span is generated. In this diagram, T1 is used as TraceID that is generated once at the very start for every single incoming request. Message IDs like M1 and M2 are SpanIds that are generated for every single interaction between two services. When one service calls another, the caller's MessageID become the ParentMessageId for spans from the callee service. 
-
-For example, in the diagram, Service B calls Service C with Message ID M3. When Service C records trace data for its call to an external service, its MessageID is M4 because this is a new sub-span, and the ParentMessage ID is set to M3 to indicate that M4 happened while servicing the M3 request.
-
-![Sample Trace Data](/haystack/img/Haystack-Spans.png)
+Haystack addresses this problem in the Traces subsystem, by reading the trace [spans](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/span.proto) emitted by microservices and stitching them together based on data that identifies spans and their parent-child relationships. The Traces subsystem also provides a search capability on the metadata attached with every span and presents a view showing all the services and their operations as a time vector. This helps a developer or system administrator to understand the flow of calls and diagnose latencies across a set of services. 
 
 ### Architecture
 The traces subsystem is composed of the following components:
