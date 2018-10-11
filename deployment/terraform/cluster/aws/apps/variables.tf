@@ -323,3 +323,25 @@ variable "aquila-trainer" {
     environment_overrides = ""
   }
 }
+
+# ========================================
+# Alert Manager
+# ========================================
+
+variable "alert-manager" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager:b11f26572abc1a3dfd49400cdd178fc46bfacdcf"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    db_endpoint = ""
+    smtp_host = ""
+  }
+}
