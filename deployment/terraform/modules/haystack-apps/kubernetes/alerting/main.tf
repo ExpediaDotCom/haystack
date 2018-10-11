@@ -129,6 +129,37 @@ module "anomaly-validator" {
   investigation_endpoint = "${var.anomaly-validator["investigation_endpoint"]}"
 }
 
+module "notifier" {
+  source = "notifier"
+
+  # Docker
+  image = "expediadotcom/adaptive-alerting-notifier:${var.alerting["version"]}"
+  image_pull_policy = "${var.notifier["image_pull_policy"]}"
+
+  # Kubernetes
+  namespace = "${var.app_namespace}"
+  enabled = "${var.notifier["enabled"]}"
+  replicas = "${var.notifier["instances"]}"
+  cpu_limit = "${var.notifier["cpu_limit"]}"
+  cpu_request = "${var.notifier["cpu_request"]}"
+  memory_limit = "${var.notifier["memory_limit"]}"
+  memory_request = "${var.notifier["memory_request"]}"
+  node_selector_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+
+  # Environment
+  jvm_memory_limit = "${var.notifier["jvm_memory_limit"]}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  env_vars = "${var.notifier["environment_overrides"]}"
+
+  # App
+  kafka_endpoint = "${local.kafka_endpoint}"
+  webhook_url = "${var.notifier["webhook_url"]}"
+}
+
 # ========================================
 # Aquila
 # ========================================

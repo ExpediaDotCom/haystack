@@ -80,6 +80,10 @@ variable "aquila-detector" {
   type = "map"
 }
 
+variable "notifier" {
+  type = "map"
+}
+
 # ========================================
 # Alert Manager
 # ========================================

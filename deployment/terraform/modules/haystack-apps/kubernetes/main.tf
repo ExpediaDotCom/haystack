@@ -132,6 +132,7 @@ module "alerting" {
   anomaly-validator = "${var.anomaly-validator}"
   aquila-detector = "${var.aquila-detector}"
   aquila-trainer = "${var.aquila-trainer}"
+  notifier = "${var.notifier}"
 
   ## Alert manager
   alert-manager = "${var.alert-manager}"

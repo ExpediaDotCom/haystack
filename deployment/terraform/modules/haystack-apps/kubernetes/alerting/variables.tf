@@ -33,6 +33,10 @@ variable "modelservice" {
   type = "map"
 }
 
+variable "notifier" {
+  type = "map"
+}
+
 variable "aquila-detector" {
   type = "map"
 }
