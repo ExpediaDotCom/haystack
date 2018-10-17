@@ -242,7 +242,7 @@ variable "ad-mapper" {
     memory_limit = "1024"
     jvm_memory_limit = "512"
     environment_overrides = ""
-    modelservice_uri_template = "http://modelservice/api/models/search/findByMetricHash?hash=%s"
+    modelservice_uri_template = "http://modelservice/api/detectors/search/findByMetricHash?hash=%s"
   }
 }
 
