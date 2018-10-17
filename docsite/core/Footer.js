@@ -73,8 +73,6 @@ class Footer extends React.Component {
                     <img
                         src={this.props.config.baseUrl + 'img/logo/expedia_logo_inverted.png'}
                         alt="Expedia"
-                        width="170"
-                        height="45"
                     />
                 </a>
                 <section className="copyright">
