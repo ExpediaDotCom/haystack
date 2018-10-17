@@ -61,7 +61,7 @@ class HomeSplash extends React.Component {
         return (
             <SplashContainer>
                 <div className="inner">
-                    <img width="632" height="373" src={imgUrl('/logo/logo_with_title_white.png')} />
+                    <img width="600" height="200" src={imgUrl('/logo/logo_with_title_white.png')} />
                     <h2 className="projectTitle">
                         <small>
                             A resilient, scalable tracing and analysis system
