@@ -4,6 +4,7 @@ variable "replicas" {}
 variable "namespace" {}
 variable "db_endpoint" {}
 variable "smtp_host" {}
+variable "mail_from" {}
 variable "graphite_hostname" {}
 variable "graphite_port" {}
 variable "graphite_enabled" {}

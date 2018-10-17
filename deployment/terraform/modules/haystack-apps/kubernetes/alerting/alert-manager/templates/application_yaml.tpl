@@ -2,6 +2,7 @@ spring:
   mail:
     host: "${smtp_host}"
     port: 25
+    fromAddress: "${mail_from}"
   datasource:
     driver-class-name: "com.mysql.jdbc.Driver"
     url: "${db_endpoint}"

@@ -41,6 +41,7 @@ data "template_file" "config_data" {
   vars {
     db_endpoint = "${var.db_endpoint}"
     smtp_host = "${var.smtp_host}"
+    mail_from = "${var.mail_from}"
   }
 }
 
