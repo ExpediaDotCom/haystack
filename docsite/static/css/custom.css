@@ -34,6 +34,10 @@ a.navItemActive {
     background-color: white !important;
 }
 
+.indexContainer {
+    padding: 0;
+}
+
 .navGroupActive {
     background-color: #F2F4FB !important;
 }
