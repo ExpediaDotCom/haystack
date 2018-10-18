@@ -262,6 +262,7 @@ variable "ad-manager" {
     aquila_uri = "http://aquila-detector/detect"
     models_region = "us-west-2"
     models_bucket = "aa-models"
+    modelservice_uri_template = "http://modelservice/api/detectors/search/findTopByDetectorUuidOrderByBuildTimestampDesc?uuid=%s"
   }
 }
 
