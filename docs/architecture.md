@@ -20,12 +20,12 @@ We provide client components for the client applications or microservices that s
 
 We provide the following six subsystems within the server:
 
-* [Traces](./subsystems_traces.html)
-* [Trends](./subsystems_trends.html)
-* [Collectors](./subsystems_collectors.html)
-* [Pipes](./subsystems_pipes.html)
-* [Dependencies](./subsystems_dependencies.html)
-* [Anomaly Detection](./subsystems_anomaly_detection.html)
+* [Traces](./subsystems_traces.md)
+* [Trends](./subsystems_trends.md)
+* [Collectors](./subsystems_collectors.md)
+* [Pipes](./subsystems_pipes.md)
+* [Dependencies](./subsystems_dependencies.md)
+* [Anomaly Detection](./subsystems_anomaly_detection.md)
 
 Trace data is stored using different services, including:
 
