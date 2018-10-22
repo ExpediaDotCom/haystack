@@ -5,7 +5,7 @@ const siteConfig = {
     baseUrl: '/haystack/',
     projectName: 'haystack',
     headerLinks: [
-        {doc: 'introduction', label: 'Docs'},
+        {doc: 'about/introduction', label: 'Docs'},
         {page: 'help', label: 'Help'},
     ],
     headerIcon: 'img/logo/logo.png',

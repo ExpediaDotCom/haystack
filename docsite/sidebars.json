@@ -1,9 +1,9 @@
 {
   "docs": {
-    "About": ["introduction","getting_started", "architecture", "clients"],
-    "Subsystems": ["subsystems", "subsystems_traces", "subsystems_trends", "subsystems_collectors", "subsystems_dependencies","subsystems_pipes", "subsystems_anomaly_detection"],
-    "UI": ["ui", "ui_traces", "ui_trends", "ui_alerts", "ui_service_graph", "ui_universal_search"],
-    "Deployment": ["deployment", "deployment_sub_systems", "deployment_clients"],
+    "About": ["about/introduction","about/getting_started", "about/architecture", "about/clients"],
+    "Subsystems": ["subsystems/subsystems", "subsystems/subsystems_traces", "subsystems/subsystems_trends", "subsystems/subsystems_collectors", "subsystems/subsystems_dependencies","subsystems/subsystems_pipes", "subsystems/subsystems_anomaly_detection"],
+    "UI": ["ui/ui", "ui/ui_traces", "ui/ui_trends", "ui/ui_alerts", "ui/ui_service_graph", "ui/ui_universal_search"],
+    "Deployment": ["deployment/deployment", "deployment/deployment_sub_systems", "deployment/deployment_clients"],
     "": ["contributing"]
 
   }

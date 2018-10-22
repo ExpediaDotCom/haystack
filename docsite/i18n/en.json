@@ -5,87 +5,87 @@
     "previous": "Previous",
     "tagline": "A resilient, scalable tracing and analysis system",
     "docs": {
-      "architecture": {
+      "about/architecture": {
         "title": "Architecture",
         "sidebar_label": "Architecture"
       },
-      "clients": {
+      "about/clients": {
         "title": "Haystack Client",
         "sidebar_label": "Clients"
+      },
+      "about/getting_started": {
+        "title": "Getting Started",
+        "sidebar_label": "Getting Started"
+      },
+      "about/introduction": {
+        "title": "Introduction",
+        "sidebar_label": "Introduction"
       },
       "contributing": {
         "title": "Contributing to Haystack",
         "sidebar_label": "Contributing"
       },
-      "deployment_clients": {
+      "deployment/deployment_clients": {
         "title": "Clients Deployment",
         "sidebar_label": "Clients"
       },
-      "deployment_sub_systems": {
+      "deployment/deployment_sub_systems": {
         "title": "Subsystems Deployment",
         "sidebar_label": "Subsystems"
       },
-      "deployment": {
+      "deployment/deployment": {
         "title": "Deployment",
         "sidebar_label": "Deployment"
       },
-      "getting_started": {
-        "title": "Getting Started",
-        "sidebar_label": "Getting Started"
-      },
-      "introduction": {
-        "title": "Introduction",
-        "sidebar_label": "Introduction"
-      },
-      "subsystems_anomaly_detection": {
+      "subsystems/subsystems_anomaly_detection": {
         "title": "Anomaly Detection",
         "sidebar_label": "Anomaly Detection"
       },
-      "subsystems_collectors": {
+      "subsystems/subsystems_collectors": {
         "title": "Collector",
         "sidebar_label": "Collector"
       },
-      "subsystems_dependencies": {
+      "subsystems/subsystems_dependencies": {
         "title": "Service Graph",
         "sidebar_label": "Service Graph"
       },
-      "subsystems_pipes": {
+      "subsystems/subsystems_pipes": {
         "title": "Pipes",
         "sidebar_label": "Pipes"
       },
-      "subsystems_traces": {
+      "subsystems/subsystems_traces": {
         "title": "Traces",
         "sidebar_label": "Traces"
       },
-      "subsystems_trends": {
+      "subsystems/subsystems_trends": {
         "title": "Trends",
         "sidebar_label": "Trends"
       },
-      "subsystems": {
+      "subsystems/subsystems": {
         "title": "Subsystems",
         "sidebar_label": "Subsystems"
       },
-      "ui_alerts": {
+      "ui/ui_alerts": {
         "title": "Alerts",
         "sidebar_label": "Alerts"
       },
-      "ui_service_graph": {
+      "ui/ui_service_graph": {
         "title": "Service Graph UI",
         "sidebar_label": "Service Graph"
       },
-      "ui_traces": {
+      "ui/ui_traces": {
         "title": "Traces",
         "sidebar_label": "Traces"
       },
-      "ui_trends": {
+      "ui/ui_trends": {
         "title": "Trends",
         "sidebar_label": "Trends"
       },
-      "ui_universal_search": {
+      "ui/ui_universal_search": {
         "title": "Haystack Universal Search",
         "sidebar_label": "Universal Search"
       },
-      "ui": {
+      "ui/ui": {
         "title": "UI",
         "sidebar_label": "UI"
       }
