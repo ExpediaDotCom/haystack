@@ -4,48 +4,103 @@
     "next": "Next",
     "previous": "Previous",
     "tagline": "A resilient, scalable tracing and analysis system",
-    "architecture": "Architecture",
-    "Architecture": "Architecture",
-    "clients": "Haystack Client",
-    "Clients": "Clients",
-    "contributing": "Contributing to Haystack",
-    "Contributing": "Contributing",
-    "deployment_clients": "Clients Deployment",
-    "deployment_sub_systems": "Subsystems Deployment",
-    "Subsystems": "Subsystems",
-    "deployment": "Deployment",
-    "Deployment": "Deployment",
-    "getting_started": "Getting Started",
-    "Getting Started": "Getting Started",
-    "introduction": "Introduction",
-    "Introduction": "Introduction",
-    "subsystems_anomaly_detection": "Anomaly Detection",
-    "Anomaly Detection": "Anomaly Detection",
-    "subsystems_collectors": "Collector",
-    "Collector": "Collector",
-    "subsystems_dependencies": "Dependencies",
-    "Dependencies": "Dependencies",
-    "subsystems_pipes": "Pipes",
-    "Pipes": "Pipes",
-    "subsystems_traces": "Traces",
-    "Traces": "Traces",
-    "subsystems_trends": "Trends",
-    "Trends": "Trends",
-    "subsystems": "Subsystems",
-    "ui_alerts": "Alerts",
-    "Alerts": "Alerts",
-    "ui_service_graph": "Service Graph UI",
-    "Service Graph": "Service Graph",
-    "ui_traces": "Traces",
-    "ui_trends": "Trends",
-    "ui_universal_search": "Haystack Universal Search",
-    "Universal Search": "Universal Search",
-    "ui": "UI",
-    "UI": "UI",
-    "Docs": "Docs",
-    "Help": "Help",
-    "About": "About",
-    "": ""
+    "docs": {
+      "architecture": {
+        "title": "Architecture",
+        "sidebar_label": "Architecture"
+      },
+      "clients": {
+        "title": "Haystack Client",
+        "sidebar_label": "Clients"
+      },
+      "contributing": {
+        "title": "Contributing to Haystack",
+        "sidebar_label": "Contributing"
+      },
+      "deployment_clients": {
+        "title": "Clients Deployment",
+        "sidebar_label": "Clients"
+      },
+      "deployment_sub_systems": {
+        "title": "Subsystems Deployment",
+        "sidebar_label": "Subsystems"
+      },
+      "deployment": {
+        "title": "Deployment",
+        "sidebar_label": "Deployment"
+      },
+      "getting_started": {
+        "title": "Getting Started",
+        "sidebar_label": "Getting Started"
+      },
+      "introduction": {
+        "title": "Introduction",
+        "sidebar_label": "Introduction"
+      },
+      "subsystems_anomaly_detection": {
+        "title": "Anomaly Detection",
+        "sidebar_label": "Anomaly Detection"
+      },
+      "subsystems_collectors": {
+        "title": "Collector",
+        "sidebar_label": "Collector"
+      },
+      "subsystems_dependencies": {
+        "title": "Service Graph",
+        "sidebar_label": "Service Graph"
+      },
+      "subsystems_pipes": {
+        "title": "Pipes",
+        "sidebar_label": "Pipes"
+      },
+      "subsystems_traces": {
+        "title": "Traces",
+        "sidebar_label": "Traces"
+      },
+      "subsystems_trends": {
+        "title": "Trends",
+        "sidebar_label": "Trends"
+      },
+      "subsystems": {
+        "title": "Subsystems",
+        "sidebar_label": "Subsystems"
+      },
+      "ui_alerts": {
+        "title": "Alerts",
+        "sidebar_label": "Alerts"
+      },
+      "ui_service_graph": {
+        "title": "Service Graph UI",
+        "sidebar_label": "Service Graph"
+      },
+      "ui_traces": {
+        "title": "Traces",
+        "sidebar_label": "Traces"
+      },
+      "ui_trends": {
+        "title": "Trends",
+        "sidebar_label": "Trends"
+      },
+      "ui_universal_search": {
+        "title": "Haystack Universal Search",
+        "sidebar_label": "Universal Search"
+      },
+      "ui": {
+        "title": "UI",
+        "sidebar_label": "UI"
+      }
+    },
+    "links": {
+      "Docs": "Docs",
+      "Help": "Help"
+    },
+    "categories": {
+      "About": "About",
+      "Subsystems": "Subsystems",
+      "UI": "UI",
+      "Deployment": "Deployment",
+      "": ""
+    }
   },
   "pages-strings": {
     "Help Translate|recruit community translators for your project": "Help Translate",

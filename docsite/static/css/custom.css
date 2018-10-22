@@ -1,14 +1,19 @@
-/* your custom css */
 
-@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700');
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'),
+    url('../fonts/TitilliumWeb-Regular.ttf') format('truetype')
+}
 
 body {
     background-color: white !important;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: "Titillium Web", sans-serif;
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Titillium Web', sans-serif !important;
+    font-family: "Titillium Web", sans-serif !important;
 }
 
 .fixedHeaderContainer {
