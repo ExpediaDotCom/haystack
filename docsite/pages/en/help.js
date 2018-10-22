@@ -18,7 +18,7 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content:
-          'Learn more using the [documentation on this site.](/haystack/docs/introduction.html)',
+          'Learn more using the [documentation on this site.](/haystack/docs/about/introduction.html)',
         title: 'Browse Docs',
       },
       {

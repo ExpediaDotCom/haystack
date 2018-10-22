@@ -68,7 +68,7 @@ class HomeSplash extends React.Component {
                         </small>
                     </h2>
                     <PromoSection>
-                        <Button href={docUrl('introduction.html', language)}>
+                        <Button href={docUrl('about/introduction.html', language)}>
                             Get Started
                         </Button>
                         <Button target="_blank" href="https://github.com/ExpediaDotCom/haystack">

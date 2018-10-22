@@ -5,7 +5,7 @@ const siteConfig = {
     baseUrl: '/haystack/',
     projectName: 'haystack',
     headerLinks: [
-        {doc: 'introduction', label: 'Docs'},
+        {doc: 'about/introduction', label: 'Docs'},
         {page: 'help', label: 'Help'},
     ],
     headerIcon: 'img/logo/logo.png',
@@ -19,6 +19,7 @@ const siteConfig = {
     },
     fonts: {
         myFont: [
+            "Titillium Web",
             "sansserif"
         ],
         myOtherFont: [
@@ -37,7 +38,11 @@ const siteConfig = {
     scripts: ['https://buttons.github.io/buttons.js'],
     repoUrl: 'https://github.com/ExpediaDotCom/haystack',
     onPageNav: 'separate',
-    gaTrackingId: 'UA-109460835-4'
+    gaTrackingId: 'UA-109460835-4',
+    scrollToTop: true,
+    scrollToTopOptions: {
+        zIndex: 100,
+    }
 };
 
 module.exports = siteConfig;
