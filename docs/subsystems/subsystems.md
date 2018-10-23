@@ -5,11 +5,11 @@ sidebar_label: Subsystems
 
 All our subsystems are included and ready to use. 
 The system is designed in such a way that subsystems are replaceable as well, if you have requirements that the current components don't meet. 
-The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/deployment.md) based on
+The Haystack system includes an easy-to-use ["one click" deployment mechanism](../deployment/deployment.html) based on
 [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes), that deploys a working development environment with working
 implementations of all of the services in the block diagram above. This same mechanism, with different configurations,
 deploys to test and production environments as well. See the collection of scripts, CloudFormation templates, and YAML
-files in the [haystack-deployment](https://github.com/ExpediaDotCom/haystack-deployment) repository for details.
+files in the [haystack](https://github.com/ExpediaDotCom/haystack) repository for details.
 
 ## Kafka
 [Kafka](https://en.wikipedia.org/wiki/Apache_Kafka) is the Haystack message bus. The messages that enter the

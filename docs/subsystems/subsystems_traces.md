@@ -32,6 +32,6 @@ The Reader runs as a GRPC server and serves Haystack UI to fetch traces directly
     
 * **ClockSkew**: This fixes the clock skew between parent and child span. If any child span reports a startTime earlier then the parent span's startTime, then the corresponding delta gets added in the subtree with the child span as root. We are evaluating better strategies to fix the clock skew problem in a distributed system.
      
-The [Trace View](./ui_traces.html) in the user interface reads the stitched view of all the span and sub-span data for a given TraceID, and renders it:
+The [Trace View](../ui/ui_traces.html) in the user interface reads the stitched view of all the span and sub-span data for a given TraceID, and renders it:
 
 <img src="/haystack/img/trace_timeline.png" style="width: 800px;"/>

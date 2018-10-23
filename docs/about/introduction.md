@@ -5,7 +5,7 @@ sidebar_label: Introduction
 
 ## A resilient, scalable tracing and analysis system 
 
-[Haystack](https://github.com/ExpediaDotCom/haystack) is an Expedia-backed open source distributed tracing project to facilitate detection and remediation of problems in micro services and websites. It combines an [OpenTracing](http://opentracing.io/documentation/)-compliant trace engine with
+[Haystack](https://github.com/ExpediaDotCom/haystack) is an Expedia-backed open source distributed tracing project to facilitate detection and remediation of problems in micro services and websites. It combines an [OpenTracing](http://opentracing.io/docs/)-compliant trace engine with
 a componentized back-end architecture designed for high resiliency and high scalability. Haystack also includes analysis tools for visualizing trace data, tracking trends in trace data, and setting alarms when trace data trends exceed limits you set.
 
 With Haystack's alarms, you can automatically detect when your web service or website isn't performing properly. With Haystack's trace visualization tools, you can quickly determine the part of your system that is slowing or failing transactions, reducing the time it takes to get from knowing there's a problem to remedying the problem.

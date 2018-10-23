@@ -21,7 +21,7 @@ AAll the Haystack components are released as Docker images on the Docker Hub:-
  
  ## Installation
  
- Clone the [ExpediaDotCom/haystack](https://github.com/ExpediaInc/haystack) repository and run the `apply-compose.sh` script, as documented in the next section.
+ Clone the [ExpediaDotCom/haystack](https://github.com/ExpediaDotCom/haystack) repository and run the `apply-compose.sh` script, as documented in the next section.
  
  ### Usage
  From the root of the location to which haystack has been cloned:

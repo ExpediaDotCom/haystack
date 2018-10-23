@@ -3,7 +3,7 @@ title: Getting Started
 sidebar_label: Getting Started
 ---
 
-All of Haystack's backend components are released as [Docker images](./deployment/sub_systems.html) on the ExpediaDotCom Docker Hub.
+All of Haystack's backend components are released as [Docker images](../subsystems/subsystems.html) on the ExpediaDotCom Docker Hub.
 If you need to package the components yourself, fat jars are available from the Maven Central Repository.
 Haystack is designed so that all of its components can be deployed selectively. 
 
