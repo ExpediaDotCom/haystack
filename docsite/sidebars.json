@@ -4,7 +4,7 @@
     "Subsystems": ["subsystems/subsystems", "subsystems/subsystems_traces", "subsystems/subsystems_trends", "subsystems/subsystems_collectors", "subsystems/subsystems_dependencies","subsystems/subsystems_pipes", "subsystems/subsystems_anomaly_detection"],
     "UI": ["ui/ui", "ui/ui_traces", "ui/ui_trends", "ui/ui_alerts", "ui/ui_service_graph", "ui/ui_universal_search"],
     "Deployment": ["deployment/deployment", "deployment/deployment_sub_systems", "deployment/deployment_clients"],
-    "": ["contributing"]
+    " ": ["contributing"]
 
   }
 }

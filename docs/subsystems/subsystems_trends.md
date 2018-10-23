@@ -41,6 +41,6 @@ The time series metric points are [MetricTank](https://github.com/grafana/metric
  2. TimeSeries Database - Haystack supports MetricTank as its time series store by default. If you use another time series database, you can write another [adapter](https://github.com/ExpediaDotCom/haystack-commons/blob/master/src/main/scala/com/expedia/www/haystack/commons/kstreams/serde/metricpoint/MetricTankSerde.scala) for that database, and configure Trends to use it.
 
 
-The Trends system maintains trend information and provides it for subsequent display to users in the [Trends UI](./ui_trends.html) and analysis by automation like the [Anomaly Detection](./subsystems_anomaly_detection.html) subsystem.
+The Trends system maintains trend information and provides it for subsequent display to users in the [Trends UI](../ui/ui_trends.html) and analysis by automation like the [Anomaly Detection](./subsystems_anomaly_detection.html) subsystem.
 
 ![Trends UI](/haystack/img/trends.png)
