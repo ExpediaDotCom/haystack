@@ -362,5 +362,6 @@ variable "alert-manager" {
     environment_overrides = ""
     db_endpoint = ""
     smtp_host = ""
+    mail_from = ""
   }
 }

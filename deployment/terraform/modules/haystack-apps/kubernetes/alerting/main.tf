@@ -251,4 +251,5 @@ module "alert-manager" {
   # App
   db_endpoint = "${var.alert-manager["db_endpoint"]}"
   smtp_host = "${var.alert-manager["smtp_host"]}"
+  mail_from = "${var.alert-manager["mail_from"]}"
 }
