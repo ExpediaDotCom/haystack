@@ -6,7 +6,7 @@ sidebar_label: Universal Search
 Haystack's Universal Searchbar (USB) is a powerful way to drill deep into available data and show only the information that you want to see. 
 
 ## Simple Workflow
-Tabs for the different UI subsystems are displayed based on what query is submitted. Provided all UI subsystems are enabled in [base.js](https://github.com/ExpediaDotCom/haystack-ui/blob/master/server/config/base.js), the default view will show the [Service Graph](https://expediadotcom.github.io/haystack/docs/ui_service_graph.html) and service performance tabs. 
+Tabs for the different UI subsystems are displayed based on what query is submitted. Provided all UI subsystems are enabled in [base.js](https://github.com/ExpediaDotCom/haystack-ui/blob/master/server/config/base.js), the default view will show the [Service Graph](https://expediadotcom.github.io/haystack/docs/ui/ui_service_graph.html) and service performance tabs. 
 
 ![Default View](/haystack/img/universal_search_default.png)
 
