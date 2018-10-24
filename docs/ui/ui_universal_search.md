@@ -10,7 +10,7 @@ Tabs for the different UI subsystems are displayed based on what query is submit
 
 ![Default View](/haystack/img/universal_search_default.png)
 
-To view information about a specific service, submit the query **`serviceName=example-service`**. This will render the [traces](https://expediadotcom.github.io/haystack/docs/ui_traces.html), [trends](https://expediadotcom.github.io/haystack/docs/ui_trends.html), [alerts](https://expediadotcom.github.io/haystack/docs/ui_alerts.html), and service graph (detail view) tabs for the supplied service **`example-service`**. 
+To view information about a specific service, submit the query **`serviceName=example-service`**. This will render the [traces](https://expediadotcom.github.io/haystack/docs/ui/ui_traces.html), [trends](https://expediadotcom.github.io/haystack/docs/ui/ui_trends.html), [alerts](https://expediadotcom.github.io/haystack/docs/ui/ui_alerts.html), and service graph (detail view) tabs for the supplied service **`example-service`**. 
 
 Supplying an **`operationName=example-operation`** query will display only traces, trends, and alerts that include that operation name.
 
