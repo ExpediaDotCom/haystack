@@ -42,8 +42,8 @@ kafka {
     topic {
       autocreate = true
       name = "haystack-node-finder-metadata"
-      partition.count = 4
-      replication.factor = 1
+      partition.count = 6
+      replication.factor = 2
     }
   }
 }
