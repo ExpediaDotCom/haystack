@@ -129,11 +129,10 @@ module "alerting" {
   modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  anomaly-validator = "${var.anomaly-validator}"
   aquila-detector = "${var.aquila-detector}"
   aquila-trainer = "${var.aquila-trainer}"
   notifier = "${var.notifier}"
 
-  ## Alert manager
+  # Alert manager
   alert-manager = "${var.alert-manager}"
 }
