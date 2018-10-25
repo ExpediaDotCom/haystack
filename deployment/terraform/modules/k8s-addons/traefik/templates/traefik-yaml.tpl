@@ -164,6 +164,24 @@ spec:
            serviceName: haystack-ui
            servicePort: 80
 ---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-http-span-collector
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefix
+spec:
+  rules:
+  - host: ${haystack_ui_cname}
+    http:
+      paths:
+       - path: /span
+         backend:
+           serviceName: http-span-collector
+           servicePort: 80
+---
 # ------------------- adaptive-alerting-modelservice ------------------- #
 apiVersion: extensions/v1beta1
 kind: Ingress

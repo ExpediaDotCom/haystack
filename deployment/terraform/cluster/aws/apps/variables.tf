@@ -151,7 +151,7 @@ variable "pipes" {
 variable "collector" {
   type = "map"
   default = {
-    version = "08534fa97ffb723ef6f138bddecd9dfbce0b9dd2"
+    version = "1.1"
     kinesis_span_collector_instances = 1
     kinesis_span_collector_enabled = true
     kinesis_stream_region = ""
@@ -163,6 +163,15 @@ variable "collector" {
     kinesis_span_collector_memory_request = "1536"
     kinesis_span_collector_memory_limit = "1536"
     kinesis_span_collector_jvm_memory_limit = "1024"
+
+    http_span_collector_instances = 1
+    http_span_collector_enabled = false
+    http_span_collector_environment_overrides = ""
+    http_span_collector_cpu_request = "500m"
+    http_span_collector_cpu_limit = "2000m"
+    http_span_collector_memory_request = "1536"
+    http_span_collector_memory_limit = "1536"
+    http_span_collector_jvm_memory_limit = "1024"
   }
 }
 
