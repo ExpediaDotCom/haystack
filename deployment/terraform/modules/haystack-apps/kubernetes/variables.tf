@@ -68,10 +68,6 @@ variable "ad-manager" {
   type = "map"
 }
 
-variable "anomaly-validator" {
-  type = "map"
-}
-
 variable "aquila-trainer" {
   type = "map"
 }

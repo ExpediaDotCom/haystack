@@ -17,10 +17,6 @@ variable "alerting" {
   type = "map"
 }
 
-variable "anomaly-validator" {
-  type = "map"
-}
-
 variable "ad-mapper" {
   type = "map"
 }
