@@ -45,7 +45,6 @@ module "haystack-apps" {
   modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  anomaly-validator = "${var.anomaly-validator}"
   aquila-trainer = "${var.aquila-trainer}"
   aquila-detector = "${var.aquila-detector}"
   notifier = "${var.notifier}"

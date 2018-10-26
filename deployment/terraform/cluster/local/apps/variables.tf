@@ -267,21 +267,6 @@ variable "ad-manager" {
   }
 }
 
-variable "anomaly-validator" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "250"
-    memory_limit = "250"
-    jvm_memory_limit = "200"
-    environment_overrides = ""
-    investigation_endpoint = ""
-  }
-}
-
 variable "notifier" {
   type = "map"
   default = {
