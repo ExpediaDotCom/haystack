@@ -37,5 +37,14 @@ kafka {
   // collector tags allow service graph to collect tags from spans and have them available when querying service
   // graph. Example: you can collect the tags service tier and infraprovider tags using value "[tier,infraprovider]"
   collectorTags = ${collect_tags}
+
+  node.metadata {
+    topic {
+      autocreate = true
+      name = "haystack-node-finder-metadata"
+      partition.count = 6
+      replication.factor = 2
+    }
+  }
 }
 

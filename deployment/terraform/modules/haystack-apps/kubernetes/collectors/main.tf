@@ -22,3 +22,25 @@ module "kinesis-span-collector" {
   memory_limit = "${var.collector["kinesis_span_collector_memory_limit"]}"
   jvm_memory_limit = "${var.collector["kinesis_span_collector_jvm_memory_limit"]}"
 }
+
+module "http-span-collector" {
+  source = "http-span-collector"
+  image = "expediadotcom/haystack-http-span-collector:${var.collector["version"]}"
+  replicas = "${var.collector["http_span_collector_instances"]}"
+  enabled = "${var.collector["http_span_collector_enabled"]}"
+  env_vars = "${var.collector["http_span_collector_environment_overrides"]}"
+
+  namespace = "${var.app_namespace}"
+  kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
+  node_selecter_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.collector["http_span_collector_cpu_limit"]}"
+  cpu_request = "${var.collector["http_span_collector_cpu_request"]}"
+  memory_request = "${var.collector["http_span_collector_memory_request"]}"
+  memory_limit = "${var.collector["http_span_collector_memory_limit"]}"
+  jvm_memory_limit = "${var.collector["http_span_collector_jvm_memory_limit"]}"
+}
