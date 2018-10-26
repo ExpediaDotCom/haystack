@@ -36,7 +36,9 @@ kafka {
 state.store {
   enable.logging = true
   logging.delay.seconds = 60
-  cache.size = 32767
+
+  // It is capacity for the trends to be kept in memory before flushing it to state store
+  cache.size = 3000
   changelog.topic {
     cleanup.policy = "compact,delete"
     retention.ms = 14400000 // 4Hrs
