@@ -12,7 +12,7 @@ Haystack addresses this problem in the Traces subsystem, by reading the trace [s
 ### Architecture
 The traces subsystem is composed of the following components:
 
-![Trace subsystem architecture diagram](/haystack/img/traces-architecture.svg)
+![Trace subsystem architecture diagram](/haystack/img/traces-architecture.png)
 
 #### Indexer
 The role of the Indexer is to read spans from Kafka and group them together based on their unique traceId. It writes the resulting [grouped data structure](https://github.com/ExpediaDotCom/haystack-idl/blob/master/proto/spanBuffer.proto) to [Cassandra](http://cassandra.apache.org/) and [ElasticSearch](https://aws.amazon.com/elasticsearch-service/). Cassandra is used as a raw data store where all the spans are inserted with TraceId as a primary key. ElasticSearch is used to build an index on the metadata, serviceName and operationName associated with every span. This helps the Reader service to query ElasticSearch for contextual searches such as "fetch all TraceId(requests) that have any span with serviceName=xyz and a metadata tag success=false". 

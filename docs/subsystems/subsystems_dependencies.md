@@ -29,7 +29,7 @@ Discovered "span pairs" are then used to produce two different outputs
 Like many other components of Haystack, this component is also a `Kafka streams`. Picture below shows the topology / architecture of this component
 
 
-![High Level Block Diagram](/haystack/img/service-graph-architecture.svg)
+![High Level Block Diagram](/haystack/img/service-graph-architecture.png)
 
 
 
