@@ -56,7 +56,7 @@
 <li>A <code>MetricPoint</code> object with <code>latency</code> between the service pair discovered</li>
 </ul>
 <p>Like many other components of Haystack, this component is also a <code>Kafka streams</code>. Picture below shows the topology / architecture of this component</p>
-<p><img src="/haystack/img/dependency_graph.png" alt="High Level Block Diagram"></p>
+<p><img src="/haystack/img/service-graph-architecture.svg" alt="High Level Block Diagram"></p>
 <p>Starting point for the application is the <a href="node-finder/src/main/scala/com/expedia/www/haystack/service/graph/node/finder/app/Streams.scala">Streams</a> class. This class builds the topology shown in the picture above.</p>
 <p><code>node-finder</code> topology consists of one source, three processors and two sinks.</p>
 <ul>
