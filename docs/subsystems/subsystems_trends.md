@@ -22,7 +22,7 @@ Each trend is computed for 4 intervals `[1min, 5min, 15min, 1hour]`.
 
 ## Architecture
 
-![Trends Architecture](/haystack/img/haystack_trends.png)
+![Trends Architecture](/haystack/img/trends-architecture.svg)
 
 The Trends service is a loosely coupled system that uses Kafka as its backbone. It is a collection of modules which reads spans and pushes aggregated metric points to Kafka. Each module runs as an individual app, and the apps talk to each other via Kafka.
     
