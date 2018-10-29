@@ -12,7 +12,7 @@ To enable that, we have used [Apache Kafka](http://kafka.apache.org/) as the ner
 * Haystack is **Highly Resilient**: There is no single point of failure. 
 * Haystack is **Highly Scalable**: We have completely decentralized our system which helps us to scale every component individually. 
 
-![Haystack architecture diagram](/haystack/img/Haystack_Components.png)
+![Haystack architecture diagram](/haystack/img/haystack-architecture.svg)
 
 We provide client components for the client applications or microservices that send trace data to be recorded by the `haystack-agent` subsystem:
 
