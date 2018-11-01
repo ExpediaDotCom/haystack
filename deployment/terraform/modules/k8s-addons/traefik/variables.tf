@@ -4,7 +4,7 @@ variable "traefik_node_port" {}
 variable "kubectl_context_name" {}
 
 variable "k8s_traefik_image" {
-  default = "traefik:v1.3.7"
+  default = "traefik:v1.7.3"
 }
 variable "traefik_replicas" {
   default = "1"
