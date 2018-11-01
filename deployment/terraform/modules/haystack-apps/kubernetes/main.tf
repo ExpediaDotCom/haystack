@@ -17,7 +17,7 @@ module "traces" {
 }
 
 module "trends" {
-  source = "trends"
+  source = "github.com/ExpediaDotCom/haystack-trends/deployment/terraform"
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
