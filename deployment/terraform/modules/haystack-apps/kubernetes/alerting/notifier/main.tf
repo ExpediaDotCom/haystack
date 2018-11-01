@@ -8,7 +8,7 @@ locals {
 
 }
 
-//using kubectl to craete deployment construct since its not natively support by the kubernetes provider
+// using kubectl to create deployment construct since its not natively support by the kubernetes provider
 data "template_file" "deployment_yaml" {
   template = "${file("${local.deployment_yaml_file_path}")}"
 
