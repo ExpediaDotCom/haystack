@@ -32,15 +32,6 @@ spec:
           requests:
             cpu: ${cpu_request}
             memory: ${memory_request}Mi
-        livenessProbe:
-          exec:
-            command:
-            - grep
-            - "true"
-            - /app/isHealthy
-          initialDelaySeconds: 30
-          periodSeconds: 5
-          failureThreshold: 1
         env:
         - name: "HAYSTACK_OVERRIDES_CONFIG_PATH"
           value: "/config/trace-reader.conf"
@@ -58,12 +49,11 @@ spec:
         livenessProbe:
           exec:
             command:
-            - grep
-            - "true"
-            - /app/isHealthy
+            - /bin/grpc_health_probe
+            - "-addr=:${container_port}"
           initialDelaySeconds: 30
-          periodSeconds: 5
-          failureThreshold: 6
+          periodSeconds: 15
+          failureThreshold: 3
       nodeSelector:
         ${node_selecter_label}
       volumes:
