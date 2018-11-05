@@ -51,7 +51,7 @@ module "pipes" {
 }
 
 module "collectors" {
-  source = "github.com/ExpediaDotCom/haystack-collectors/deployment/terraform"
+  source = "github.com/ExpediaDotCom/haystack-collector/deployment/terraform"
 
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
