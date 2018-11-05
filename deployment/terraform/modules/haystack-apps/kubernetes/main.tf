@@ -1,5 +1,5 @@
 module "traces" {
-  source = "traces"
+  source = "github.com/ExpediaDotCom/haystack-traces/deployment/terraform"
   namespace = "${var.k8s_app_namespace}"
   kafka_hostname = "${var.kafka_hostname}"
   kafka_port = "${var.kafka_port}"
@@ -35,7 +35,7 @@ module "trends" {
 }
 
 module "pipes" {
-  source = "pipes"
+  source = "github.com/ExpediaDotCom/haystack-pipes/deployment/terraform"
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
@@ -51,7 +51,7 @@ module "pipes" {
 }
 
 module "collectors" {
-  source = "collectors"
+  source = "github.com/ExpediaDotCom/haystack-collectors/deployment/terraform"
 
   app_namespace = "${var.k8s_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
@@ -68,7 +68,7 @@ module "collectors" {
 }
 
 module "service-graph" {
-  source = "service-graph"
+  source = "github.com/ExpediaDotCom/haystack-service-graph/deployment/terraform"
   namespace = "${var.k8s_app_namespace}"
   kafka_hostname = "${var.kafka_hostname}"
   kafka_port = "${var.kafka_port}"
@@ -81,7 +81,7 @@ module "service-graph" {
 }
 
 module "ui" {
-  source = "ui"
+  source = "github.com/ExpediaDotCom/haystack-ui/deployment/terraform"
   enabled = "${var.ui["enabled"]}"
   image = "expediadotcom/haystack-ui:${var.ui["version"]}"
   replicas = "${var.ui["instances"]}"
