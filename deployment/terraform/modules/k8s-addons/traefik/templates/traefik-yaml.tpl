@@ -249,6 +249,27 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: traefik-alert-manager-deprecated
+  # TODO Remove hardcode
+#  namespace: ${k8s_app_namespace}
+  namespace: aa-apps
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${haystack_ui_cname}
+     http:
+        paths:
+         - path: /alert-manager-deprecated
+           backend:
+             serviceName: alert-manager
+             servicePort: 80
+---
+# --------------------------- alert-manager --------------------------- #
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: traefik-alert-manager
   # TODO Remove hardcode
 #  namespace: ${k8s_app_namespace}
@@ -263,5 +284,5 @@ spec:
         paths:
          - path: /alert-manager
            backend:
-             serviceName: alert-manager
+             serviceName: alert-manager-api
              servicePort: 80
