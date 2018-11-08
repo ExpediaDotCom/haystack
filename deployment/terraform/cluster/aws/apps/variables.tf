@@ -219,7 +219,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "daeb5ef8891c492756d42732066813280fcd732f"
+    version = "644f39ebb559a2360fa5fced46d1caa596a14979"
   }
 }
 
@@ -243,7 +243,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:daeb5ef8891c492756d42732066813280fcd732f"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:644f39ebb559a2360fa5fced46d1caa596a14979"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -260,7 +260,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:daeb5ef8891c492756d42732066813280fcd732f"
+    image = "expediadotcom/adaptive-alerting-ad-manager:644f39ebb559a2360fa5fced46d1caa596a14979"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -304,7 +304,7 @@ variable "aquila-detector" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-detector:daeb5ef8891c492756d42732066813280fcd732f"
+    image = "expediadotcom/aquila-detector:644f39ebb559a2360fa5fced46d1caa596a14979"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -324,7 +324,7 @@ variable "aquila-trainer" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-trainer:daeb5ef8891c492756d42732066813280fcd732f"
+    image = "expediadotcom/aquila-trainer:644f39ebb559a2360fa5fced46d1caa596a14979"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
