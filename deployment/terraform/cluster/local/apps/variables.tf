@@ -363,3 +363,19 @@ variable "alert-manager" {
     mail_from = ""
   }
 }
+
+variable "alert-manager-api" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-api:1c4be13085f0978e7578f0da2afdad4f261819de"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+  }
+}
