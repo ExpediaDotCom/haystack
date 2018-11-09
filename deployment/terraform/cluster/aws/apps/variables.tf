@@ -191,6 +191,7 @@ variable "metrictank" {
   default = {
     instances = 1
     environment_overrides = ""
+    tag_support = "true"
     external_kafka_broker_hostname = ""
     external_kafka_broker_port = 1
     external_hostname = ""
