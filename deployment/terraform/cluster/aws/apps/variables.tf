@@ -371,5 +371,6 @@ variable "alert-manager-api" {
     memory_limit = "500"
     jvm_memory_limit = "300"
     environment_overrides = ""
+    es_urls = ""
   }
 }
