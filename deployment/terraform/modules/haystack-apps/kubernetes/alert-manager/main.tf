@@ -63,4 +63,7 @@ module "alert-manager-api" {
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
   env_vars = "${var.alert-manager-api["environment_overrides"]}"
+
+  # App
+  es_urls = "${var.alert-manager-api["es_urls"]}"
 }
