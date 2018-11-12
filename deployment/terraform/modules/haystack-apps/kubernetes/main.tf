@@ -111,7 +111,7 @@ module "ui" {
 }
 
 module "alerting" {
-  source = "alerting"
+  source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
 
   app_namespace = "${var.aa_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
@@ -135,7 +135,7 @@ module "alerting" {
 }
 
 module "alert-manager" {
-  source = "alert-manager"
+  source = "github.com/ExpediaDotCom/alert-manager/deployment/terraform"
 
   app_namespace = "${var.aa_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
