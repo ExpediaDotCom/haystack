@@ -43,11 +43,11 @@ spec:
             secretKeyRef:
               name: modelservice-secret
               key: username
-        - name: "HAYSTACK_GRAPHITE_HOST"
+        - name: "AA_GRAPHITE_HOST"
           value: "${graphite_host}"
-        - name: "HAYSTACK_GRAPHITE_PORT"
+        - name: "AA_GRAPHITE_PORT"
           value: "${graphite_port}"
-        - name: "HAYSTACK_GRAPHITE_ENABLED"
+        - name: "AA_GRAPHITE_ENABLED"
           value: "${graphite_enabled}"
         - name: "JAVA_XMS"
           value: "${jvm_memory_limit}m"

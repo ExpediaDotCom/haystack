@@ -219,7 +219,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    version = "77eab4a5755f666bc9b460c652ba148c785249ee"
   }
 }
 
@@ -243,7 +243,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -260,7 +260,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/adaptive-alerting-ad-manager:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -304,7 +304,7 @@ variable "aquila-detector" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-detector:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/aquila-detector:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -324,7 +324,7 @@ variable "aquila-trainer" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-trainer:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/aquila-trainer:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -355,5 +355,22 @@ variable "alert-manager" {
     db_endpoint = ""
     smtp_host = ""
     mail_from = ""
+  }
+}
+
+variable "alert-manager-api" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-api:1c4be13085f0978e7578f0da2afdad4f261819de"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    es_urls = ""
   }
 }

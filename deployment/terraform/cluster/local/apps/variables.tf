@@ -221,7 +221,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    version = "77eab4a5755f666bc9b460c652ba148c785249ee"
   }
 }
 
@@ -245,7 +245,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -254,6 +254,7 @@ variable "ad-mapper" {
     jvm_memory_limit = "200"
     environment_overrides = ""
     modelservice_uri_template = "http://modelservice/api/detectors/search/findByMetricHash?hash=%s"
+    kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
   }
 }
 
@@ -262,7 +263,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/adaptive-alerting-ad-manager:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -274,6 +275,7 @@ variable "ad-manager" {
     models_region = "us-west-2"
     models_bucket = "aa-models"
     modelservice_uri_template = "http://modelservice/api/models/search/findLatestByDetectorUuid?uuid=%s"
+    kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
   }
 }
 
@@ -308,7 +310,7 @@ variable "aquila-detector" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-detector:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/aquila-detector:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -328,7 +330,7 @@ variable "aquila-trainer" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-trainer:0cd65d0d7e761914bb6f7ff525f3825c1b456434"
+    image = "expediadotcom/aquila-trainer:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -359,5 +361,22 @@ variable "alert-manager" {
     db_endpoint = ""
     smtp_host = ""
     mail_from = ""
+  }
+}
+
+variable "alert-manager-api" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-api:3453f1cfecce2e2707e28c13302e046a63b51c2c"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    es_urls = ""
   }
 }
