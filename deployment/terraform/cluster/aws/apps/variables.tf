@@ -363,7 +363,7 @@ variable "alert-manager-api" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-api:1c4be13085f0978e7578f0da2afdad4f261819de"
+    image = "expediadotcom/alert-manager-api:4e437f472384a65f1f9d9828f5fa70a35c036065"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -372,5 +372,23 @@ variable "alert-manager-api" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     es_urls = ""
+  }
+}
+
+variable "alert-manager-notifier" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-notifier:4e437f472384a65f1f9d9828f5fa70a35c036065"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    subscription_search_url = ""
+    mail_from = ""
   }
 }

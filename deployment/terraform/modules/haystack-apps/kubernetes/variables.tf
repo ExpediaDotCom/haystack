@@ -91,3 +91,7 @@ variable "alert-manager" {
 variable "alert-manager-api" {
   type = "map"
 }
+
+variable "alert-manager-notifier" {
+  type = "map"
+}
