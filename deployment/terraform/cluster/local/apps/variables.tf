@@ -38,7 +38,7 @@ variable "trends" {
   default = {
     enabled = true
     version = "1.0"
-    metricpoint_encoder_type = "base64"
+    metricpoint_encoder_type = "periodreplacement"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
     span_timeseries_transformer_cpu_limit = "1000m"
@@ -203,8 +203,9 @@ variable "metrictank" {
   default = {
     instances = 1,
     environment_overrides = ""
+    tag_support = "true"
     external_kafka_broker_hostname = ""
-    external_kafka_broker_port = 9092,
+    external_kafka_broker_port = 9092
     external_hostname = ""
     external_port = 6060
     cpu_request = "100m"
