@@ -160,7 +160,7 @@ spec:
         - mountPath: /data
           name: influxdb-persistent-storage
         - name: config-volume
-          mountPath: "/etc"
+          mountPath: "/etc/influxdb"
       nodeSelector:
         ${node_selecter_label}
       volumes:
