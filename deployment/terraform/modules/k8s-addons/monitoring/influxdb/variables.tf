@@ -8,6 +8,6 @@ variable "storage_class" {}
 variable "heap_memory_in_mb" {}
 
 variable "k8s_influxdb_image" {
-  default = "gcr.io/google_containers/heapster-influxdb-amd64:v1.3.3"
+  default = "influxdb:1.6"
 }
 
