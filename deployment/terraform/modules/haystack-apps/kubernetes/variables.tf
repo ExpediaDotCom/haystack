@@ -88,7 +88,7 @@ variable "alert-manager" {
   type = "map"
 }
 
-variable "alert-manager-api" {
+variable "alert-manager-service" {
   type = "map"
 }
 
