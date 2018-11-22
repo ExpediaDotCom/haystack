@@ -376,6 +376,23 @@ variable "alert-manager-service" {
   }
 }
 
+variable "alert-manager-store" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-store:d01a72e8f940f4b0c2fd6f3fbb042c7d333386dc"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    es_urls = ""
+  }
+}
+
 variable "alert-manager-notifier" {
   type = "map"
   default = {
