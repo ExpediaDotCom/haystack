@@ -149,6 +149,6 @@ module "alert-manager" {
 
   # AM apps
   alert-manager = "${var.alert-manager}"
-  alert-manager-api = "${var.alert-manager-api}"
+  alert-manager-service = "${var.alert-manager-service}"
   alert-manager-notifier = "${var.alert-manager-notifier}"
 }
