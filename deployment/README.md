@@ -6,7 +6,7 @@ setup Haystack cluster on your local (Mac/Linux) machine, or on AWS.
 ## Local Cluster
 To get a feel for Haystack you can run Haystack locally inside 
 [Minikube](https://kubernetes.io/docs/setup/minikube/). For details on local deployment refer to the 
-[getting started guide](https://expediadotcom.github.io/haystack/docs/getting_started.html).
+[getting started guide](https://expediadotcom.github.io/haystack/docs/about/getting_started.html).
 
 ## AWS Cluster
 We support out of the box deployment in AWS for Haystack. For the details on deploying Haystack on AWS, refer to the 
