@@ -284,5 +284,5 @@ spec:
         paths:
          - path: /alert-manager
            backend:
-             serviceName: alert-manager-api
+             serviceName: alert-manager-service
              servicePort: 80
