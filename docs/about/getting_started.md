@@ -25,6 +25,30 @@ To do so, clone the `ExpediaDotCom/haystack` repository and run the installer sc
 minikube start --memory 8192 --cpus 4
 ```
 
+NOTE: if minikube has been previously started without these resource parameters, you may need to convince it to forget it's previous settings. 
+You can use one of the following 2 methods:
+
+* Method 1 : 
+    1. Stop minikube
+        ```shell
+        minikube stop
+        ``` 
+    2. Manually change the memory and cpu settings in your Virtual Machine software,
+    3. Restart minikube
+        ```shell
+        minikube start
+        ```
+* Method 2 :
+    1. Delete minikube
+        ```shell 
+        minikube stop 
+        minikube delete 
+        ``` 
+    2. Run the command to start minikube with desired configuration :
+        ```shell
+        minikube start --memory 8192 --cpus 4
+        ```
+
 ### Install the software
 
 From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
