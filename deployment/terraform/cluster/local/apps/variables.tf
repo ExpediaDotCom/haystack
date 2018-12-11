@@ -351,7 +351,7 @@ variable "alert-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager:f6470536884dbb846dfb79fd627f52c4cf4ed8e1"
+    image = "expediadotcom/alert-manager-deprecated:f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
