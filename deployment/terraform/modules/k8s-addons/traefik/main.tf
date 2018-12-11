@@ -7,6 +7,7 @@ data "template_file" "traefik_cluster_addon_config" {
   vars {
     traefik_image = "${var.k8s_traefik_image}"
     haystack_ui_cname = "${var.haystack_ui_cname}"
+    haystack_traefik_ingress_host = "${var.haystack_traefik_ingress_host}"
     traefik_name = "${var.traefik_name}",
     node_port = "${var.traefik_node_port}",
     k8s_app_namespace = "${local.k8s_app_namespace}"

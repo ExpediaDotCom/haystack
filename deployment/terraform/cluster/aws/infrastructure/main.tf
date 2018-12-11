@@ -1,6 +1,7 @@
 locals {
   container_log_path = "/var/lib/docker/containers"
   haystack_ui_cname = "${var.haystack_cluster_name}.${var.aws_domain_name}"
+  haystack_traefik_ingress_host = "${var.haystack_traefik_ingress_host}"
   metrics_cname = "${var.haystack_cluster_name}-metrics.${var.aws_domain_name}"
   logs_cname = "${var.haystack_cluster_name}-logs.${var.aws_domain_name}"
   k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.aws_domain_name}"
@@ -35,6 +36,7 @@ module "haystack-k8s" {
   k8s_dashboard_cname_enabled = true
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   haystack_ui_cname = "${local.haystack_ui_cname}"
+  haystack_traefik_ingress_host = "${local.haystack_traefik_ingress_host}"
   graphite_node_port = "${var.graphite_node_port}"
 }
 
@@ -60,6 +62,7 @@ module "k8s-addons" {
   logs_cname = "${local.logs_cname}"
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   haystack_ui_cname = "${local.haystack_ui_cname}"
+  haystack_traefik_ingress_host = "${local.haystack_traefik_ingress_host}"
   metrics_cname = "${local.metrics_cname}"
   "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
   "app-node_selecter_label" = "${local.app-node_selecter_label}"

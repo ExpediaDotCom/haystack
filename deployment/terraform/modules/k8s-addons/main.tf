@@ -45,6 +45,7 @@ module "traefik-addon" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   haystack_ui_cname = "${var.haystack_ui_cname}"
+  haystack_traefik_ingress_host = "${var.haystack_traefik_ingress_host}"
   traefik_node_port = "${var.traefik_node_port}"
   app-node_selecter_label = "${var.app-node_selecter_label}"
 }

@@ -167,6 +167,23 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
+  name: traefik-haystack-expnet-ui
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: ${haystack_traefik_ingress_host}
+    http:
+      paths:
+       - path: /
+         backend:
+           serviceName: haystack-ui
+           servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
   name: traefik-http-span-collector
   namespace: ${k8s_app_namespace}
   annotations:
