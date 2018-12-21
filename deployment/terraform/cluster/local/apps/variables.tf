@@ -17,18 +17,18 @@ variable "traces" {
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "100m"
-    indexer_cpu_limit = "1000m"
+    indexer_cpu_limit = "4000m"
     indexer_memory_request = "250"
-    indexer_memory_limit = "250"
+    indexer_memory_limit = "1000"
     indexer_jvm_memory_limit = "200"
     indexer_elasticsearch_template = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":16,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"starttime\":{\"type\":\"long\",\"doc_values\": true},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"enabled\":false}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
 
     reader_instances = 1
     reader_environment_overrides = ""
     reader_cpu_request = "100m"
-    reader_cpu_limit = "1000m"
+    reader_cpu_limit = "4000m"
     reader_memory_request = "250"
-    reader_memory_limit = "250"
+    reader_memory_limit = "1000"
     reader_jvm_memory_limit = "200"
   }
 }
@@ -41,18 +41,18 @@ variable "trends" {
     metricpoint_encoder_type = "periodreplacement"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
-    span_timeseries_transformer_cpu_limit = "1000m"
+    span_timeseries_transformer_cpu_limit = "4000m"
     span_timeseries_transformer_memory_request = "250"
-    span_timeseries_transformer_memory_limit = "250"
+    span_timeseries_transformer_memory_limit = "1000"
     span_timeseries_transformer_jvm_memory_limit = "200"
     span_timeseries_transformer_environment_overrides = ""
 
     timeseries_aggregator_instances = 1
     timeseries_aggregator_environment_overrides = ""
     timeseries_aggregator_cpu_request = "100m"
-    timeseries_aggregator_cpu_limit = "1000m"
+    timeseries_aggregator_cpu_limit = "4000m"
     timeseries_aggregator_memory_request = "250"
-    timeseries_aggregator_memory_limit = "250"
+    timeseries_aggregator_memory_limit = "1000"
     timeseries_aggregator_jvm_memory_limit = "200"
   }
 }
@@ -76,7 +76,7 @@ variable "pipes" {
     firehose_writer_cpu_request = "100m"
     firehose_writer_cpu_limit = "500m"
     firehose_writer_memory_request = "250"
-    firehose_writer_memory_limit = "250"
+    firehose_writer_memory_limit = "1000"
     firehose_writer_jvm_memory_limit = "200"
 
     http_poster_enabled = false
@@ -87,7 +87,7 @@ variable "pipes" {
     http_poster_cpu_request = "100m"
     http_poster_cpu_limit = "500m"
     http_poster_memory_request = "250"
-    http_poster_memory_limit = "250"
+    http_poster_memory_limit = "1000"
     http_poster_jvm_memory_limit = "200"
 
     json_transformer_enabled = false
@@ -96,7 +96,7 @@ variable "pipes" {
     json_transformer_cpu_request = "100m"
     json_transformer_cpu_limit = "500m"
     json_transformer_memory_request = "250"
-    json_transformer_memory_limit = "250"
+    json_transformer_memory_limit = "1000"
     json_transformer_jvm_memory_limit = "200"
 
     kafka_producer_enabled = false
@@ -105,7 +105,7 @@ variable "pipes" {
     kafka_producer_cpu_request = "100m"
     kafka_producer_cpu_limit = "500m"
     kafka_producer_memory_request = "250"
-    kafka_producer_memory_limit = "250"
+    kafka_producer_memory_limit = "1000"
     kafka_producer_jvm_memory_limit = "200"
 
     secret_detector_enabled = false
@@ -120,7 +120,7 @@ variable "pipes" {
     secret_detector_cpu_request = "100m"
     secret_detector_cpu_limit = "500m"
     secret_detector_memory_request = "250"
-    secret_detector_memory_limit = "250"
+    secret_detector_memory_limit = "1000"
     secret_detector_jvm_memory_limit = "200"
   }
 }
@@ -136,9 +136,9 @@ variable "collector" {
     kinesis_span_collector_sts_role_arn = ""
     kinesis_span_collector_environment_overrides = ""
     kinesis_span_collector_cpu_request = "100m"
-    kinesis_span_collector_cpu_limit = "1000m"
+    kinesis_span_collector_cpu_limit = "4000m"
     kinesis_span_collector_memory_request = "250"
-    kinesis_span_collector_memory_limit = "250"
+    kinesis_span_collector_memory_limit = "1000"
     kinesis_span_collector_jvm_memory_limit = "200"
 
 
@@ -146,9 +146,9 @@ variable "collector" {
     http_span_collector_enabled = false
     http_span_collector_environment_overrides = ""
     http_span_collector_cpu_request = "100m"
-    http_span_collector_cpu_limit = "1000m"
+    http_span_collector_cpu_limit = "4000m"
     http_span_collector_memory_request = "250"
-    http_span_collector_memory_limit = "250"
+    http_span_collector_memory_limit = "1000"
     http_span_collector_jvm_memory_limit = "200"
   }
 }
@@ -162,18 +162,18 @@ variable "service-graph" {
     node_finder_instances = 1
     node_finder_environment_overrides = ""
     node_finder_cpu_request = "100m"
-    node_finder_cpu_limit = "1000m"
+    node_finder_cpu_limit = "4000m"
     node_finder_memory_request = "250"
-    node_finder_memory_limit = "250"
+    node_finder_memory_limit = "1000"
     node_finder_jvm_memory_limit = "200"
     collect_tags = "[]"
 
     graph_builder_instances = 1
     graph_builder_environment_overrides = ""
     graph_builder_cpu_request = "100m"
-    graph_builder_cpu_limit = "1000m"
+    graph_builder_cpu_limit = "4000m"
     graph_builder_memory_request = "250"
-    graph_builder_memory_limit = "250"
+    graph_builder_memory_limit = "1000"
     graph_builder_jvm_memory_limit = "200"
   }
 }
@@ -191,9 +191,9 @@ variable "ui" {
     saml_issuer = ""
     session_secret = ""
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "250"
-    memory_limit = "250"
+    memory_limit = "1000"
     metricpoint_encoder_type = "base64"
   }
 }
@@ -209,9 +209,9 @@ variable "metrictank" {
     external_hostname = ""
     external_port = 6060
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "250"
-    memory_limit = "250"
+    memory_limit = "1000"
   }
 }
 
@@ -232,7 +232,7 @@ variable "modelservice" {
     enabled = false
     instances = 1
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -249,9 +249,9 @@ variable "ad-mapper" {
     image = "expediadotcom/adaptive-alerting-ad-mapper:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "250"
-    memory_limit = "250"
+    memory_limit = "1000"
     jvm_memory_limit = "200"
     environment_overrides = ""
     modelservice_uri_template = "http://modelservice/api/detectors/search/findByMetricHash?hash=%s"
@@ -267,9 +267,9 @@ variable "ad-manager" {
     image = "expediadotcom/adaptive-alerting-ad-manager:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "250"
-    memory_limit = "250"
+    memory_limit = "1000"
     jvm_memory_limit = "200"
     environment_overrides = ""
     aquila_uri = "http://aquila-detector/detect"
@@ -287,7 +287,7 @@ variable "notifier" {
     instances = 1
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -314,7 +314,7 @@ variable "aquila-detector" {
     image = "expediadotcom/aquila-detector:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -334,7 +334,7 @@ variable "aquila-trainer" {
     image = "expediadotcom/aquila-trainer:77eab4a5755f666bc9b460c652ba148c785249ee"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -354,7 +354,7 @@ variable "alert-manager" {
     image = "expediadotcom/alert-manager-deprecated:f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -373,7 +373,7 @@ variable "alert-manager-service" {
     image = "expediadotcom/alert-manager-service:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -390,7 +390,7 @@ variable "alert-manager-store" {
     image = "expediadotcom/alert-manager-store:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
@@ -407,7 +407,7 @@ variable "alert-manager-notifier" {
     image = "expediadotcom/alert-manager-notifier:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
-    cpu_limit = "1000m"
+    cpu_limit = "4000m"
     memory_request = "500"
     memory_limit = "500"
     jvm_memory_limit = "300"
