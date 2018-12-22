@@ -13,7 +13,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "100m"
