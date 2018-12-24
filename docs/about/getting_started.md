@@ -72,6 +72,36 @@ You can access the Kubernetes console at `http://haystack.local:30000`.
 The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
 To open the Minikube dashboard type `minikube dashboard`.
 
+### Custom Installations
+By default deployment scripts are configured to deploy only the traces and trends components. However we can pass an overrides config file to the deployment script to specify the exact subsystems and their configurations you want to deploy
+```shell
+cd deployment/terraform
+./apply-compose.sh -r install-all -o <path of your overrides file>
+```
+
+Here's a sample overrides file : 
+
+```json
+{
+  "trends": {
+    "enabled": false
+  },
+  "traces": {
+    "enabled": true,
+    "indexer_memory_request": "1024",
+    "indexer_memory_limit" : "1024"
+
+  },
+  "service_graph": {
+    "enabled": false
+  }
+} 
+```
+
+You can choose to override any of the values mentioned in the folowing [file](https://github.com/ExpediaDotCom/haystack/blob/master/deployment/terraform/cluster/local/apps/variables.tf) 
+
+
+
 ### Uninstall the software
 From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
 ```shell
