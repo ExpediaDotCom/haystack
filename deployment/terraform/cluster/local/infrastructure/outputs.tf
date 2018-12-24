@@ -19,7 +19,7 @@ output "graphite_port" {
 }
 
 output "graphite_enabled" {
-  value = "${var.monitoring_addons_enabled ? "true" : "false"}"
+  value = "${var.monitoring_addons["enabled"]? "true" : "false"}"
 }
 
 

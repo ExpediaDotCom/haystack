@@ -3,27 +3,48 @@ variable "kubectl_executable_name" {}
 variable "kubectl_context_name" {
   default = "minikube"
 }
-variable "haystack_cluster_name" {
-  default = "haystack"
-}
-variable "haystack_domain_name" {
-  default = "local"
-}
-variable "reverse_proxy_port" {
-  default = "32300"
-}
 variable "docker_host_ip" {}
 
-variable "graphite_node_port" {
-  default = "32301"
+variable "monitoring_addons" {
+  type = "map"
+  default = {
+    enabled = "false"
+    graphite_node_port = "32301"
+    grafana_storage_volume = "100Mi"
+    influxdb_storage_volume = "100Mi"
+  }
 }
 
-variable "monitoring_addons_enabled" {
-  default = "false"
+variable "alerting_addons" {
+  type = "map"
+  default = {
+    enabled = "false"
+    kubewatch_config_yaml_base64 = ""
+  }
 }
 
-variable "logging_addons_enabled" {
-  default = "false"
+
+variable "logging_addons" {
+  type = "map"
+  default = {
+    enabled = "false"
+    container_log_path = "/mnt/sda1/var/lib/docker/containers"
+    es_nodes = "1"
+    es_storage_volume = "100Mi"
+  }
+}
+
+
+variable "cluster" {
+  type = "map"
+  default = {
+    name = "haystack"
+    domain_name = "local"
+    storage_class = "default"
+    reverse_proxy_port = "32300"
+    monitoring-node_selecter_label = "kubernetes.io/hostname: minikube"
+    app-node_selecter_label = "kubernetes.io/hostname: minikube"
+  }
 }
 
 variable "aa_apps_resource_limits" {
@@ -31,6 +52,6 @@ variable "aa_apps_resource_limits" {
   default = {
     enabled = false
     cpu_limit = "1"
-    memory_limit =  "1Gi"
+    memory_limit = "1Gi"
   }
 }
