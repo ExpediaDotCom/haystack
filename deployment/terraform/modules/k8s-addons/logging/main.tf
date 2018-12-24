@@ -7,7 +7,7 @@ module "elasticsearch-addon" {
   storage_volume = "${var.es_storage_volume}"
   storage_class = "${var.k8s_storage_class}"
   heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
-  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  monitoring-node_selecter_label = "${var.node_selecter_label}"
 }
 
 module "curator-addon" {
@@ -15,7 +15,7 @@ module "curator-addon" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   enabled = "${var.enabled}"
-  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  monitoring-node_selecter_label = "${var.node_selecter_label}"
   elasticsearch_host = "${module.elasticsearch-addon.host}"
 }
 
@@ -34,6 +34,6 @@ module "kibana-addon" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   enabled = "${var.enabled}"
   elasticsearch_http_endpoint = "${module.elasticsearch-addon.http_endpoint}"
-  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  monitoring-node_selecter_label = "${var.node_selecter_label}"
   logs_cname = "${var.logs_cname}"
 }

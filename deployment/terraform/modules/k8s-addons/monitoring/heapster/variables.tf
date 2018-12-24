@@ -1,7 +1,7 @@
 variable "kubectl_executable_name" {}
 variable "enabled" {}
 variable "kubectl_context_name" {}
-variable "monitoring-node_selecter_label" {}
+variable "node_selecter_label" {}
 
 variable "k8s_heapster_image" {
   default = "gcr.io/google_containers/heapster-amd64:v1.5.0"
