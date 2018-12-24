@@ -54,6 +54,7 @@ module "haystack-apps" {
 
   # Alert Manager
   alert-manager = "${var.alert-manager}"
-  alert-manager-api = "${var.alert-manager-api}"
+  alert-manager-service = "${var.alert-manager-service}"
+  alert-manager-store = "${var.alert-manager-store}"
   alert-manager-notifier = "${var.alert-manager-notifier}"
 }

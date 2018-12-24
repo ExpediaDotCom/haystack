@@ -345,7 +345,7 @@ variable "alert-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager:f6470536884dbb846dfb79fd627f52c4cf4ed8e1"
+    image = "expediadotcom/alert-manager-deprecated:f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -359,12 +359,29 @@ variable "alert-manager" {
   }
 }
 
-variable "alert-manager-api" {
+variable "alert-manager-service" {
   type = "map"
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-api:8e29ae2d3723b8d37d4386b5cdd3260481e4d5cc"
+    image = "expediadotcom/alert-manager-service:2d8db274ee9ef437f77e34ccf8f85aaeea89985a"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    es_urls = ""
+  }
+}
+
+variable "alert-manager-store" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-store:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -381,7 +398,7 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-notifier:8e29ae2d3723b8d37d4386b5cdd3260481e4d5cc"
+    image = "expediadotcom/alert-manager-notifier:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"

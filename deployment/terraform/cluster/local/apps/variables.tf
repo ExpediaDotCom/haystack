@@ -13,7 +13,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "316f53fb22b01984099db5c2b99049b703483082"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "100m"
@@ -21,7 +21,7 @@ variable "traces" {
     indexer_memory_request = "250"
     indexer_memory_limit = "250"
     indexer_jvm_memory_limit = "200"
-    indexer_elasticsearch_template = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":16,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"starttime\":{\"type\":\"long\",\"doc_values\": true},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"enabled\":false}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
+    indexer_elasticsearch_template = "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":4,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"starttime\":{\"type\":\"long\",\"doc_values\": true},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"enabled\":false}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}"
 
     reader_instances = 1
     reader_environment_overrides = ""
@@ -37,7 +37,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     metricpoint_encoder_type = "periodreplacement"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
@@ -182,7 +182,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
@@ -351,7 +351,7 @@ variable "alert-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager:f6470536884dbb846dfb79fd627f52c4cf4ed8e1"
+    image = "expediadotcom/alert-manager-deprecated:f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -365,12 +365,29 @@ variable "alert-manager" {
   }
 }
 
-variable "alert-manager-api" {
+variable "alert-manager-service" {
   type = "map"
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-api:8e29ae2d3723b8d37d4386b5cdd3260481e4d5cc"
+    image = "expediadotcom/alert-manager-service:3e60c8fd215aea39123439b30759b6de11850f09"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    es_urls = ""
+  }
+}
+
+variable "alert-manager-store" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/alert-manager-store:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -387,7 +404,7 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-notifier:8e29ae2d3723b8d37d4386b5cdd3260481e4d5cc"
+    image = "expediadotcom/alert-manager-notifier:3e60c8fd215aea39123439b30759b6de11850f09"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"

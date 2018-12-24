@@ -14,8 +14,8 @@ function display_help() {
     echo "   -c     choose the cluster-type settings for cluster. possible values: aws | local, default: local"
     echo "   -n     name of the cluster. must be unique for every cluster created in aws,default: haystack"
     echo "   -b     name of the s3 bucket where the deployment state would be stored, its mandatory when the cluster type is aws"
-    echo "   -o     app configuration values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : trends_version, traces_version, default:cluster/aws|local/variables.json "
-    echo "   -i     infrastructure configuration which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/variables.json "
+    echo "   -o     app configuration values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : trends_version, traces_version, default:cluster/aws|local/overrides.json "
+    echo "   -i     infrastructure configuration which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/overrides.json "
     echo "   -s     flag to skip interactive approval of deployment plan before applying"
     echo "   -h     usage. Prints this message"
     echo

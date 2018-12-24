@@ -1,61 +1,48 @@
 locals {
   graphite_hostname = "monitoring-influxdb-graphite.kube-system.svc"
   graphite_port = 2003
+  haystack_ui_cname = "${var.cluster["name"]}.${var.cluster["domain_name"]}"
+  logs_cname = "logs.${var.cluster["name"]}.${var.cluster["domain_name"]}"
 }
 
-module "kubewatch-addon" {
-   source = "kubewatch"
-   kubectl_executable_name = "${var.kubectl_executable_name}"
-   enabled = "${var.add_kubewatch_addon}"
-   kubectl_context_name = "${var.kubectl_context_name}"
-   node_selecter_label = "${var.monitoring-node_selecter_label}"
-   kubewatch_config_yaml_base64 = "${var.kubewatch_config_yaml_base64}"
+module "alerting-addon" {
+  source = "alerting"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  cluster = "${var.cluster}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  alerting_addons = "${var.alerting_addons}"
 }
 
 module "monitoring-addons" {
   source = "monitoring"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  enabled = "${var.add_monitoring_addons}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  grafana_storage_volume = "${var.grafana_storage_volume}"
-  k8s_storage_class = "${var.k8s_storage_class}"
-  influxdb_storage_volume = "${var.influxdb_storage_volume}"
   datastores_heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
-  metrics_cname = "${var.metrics_cname}"
-  graphite_node_port = "${var.graphite_node_port}"
-  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  cluster = "${var.cluster}"
+  monitoring_addons = "${var.monitoring_addons}"
 }
 
 module "logging-addons" {
   source = "logging"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
-  enabled = "${var.add_logging_addons}"
-  container_log_path = "${var.container_log_path}"
-  es_nodes = "${var.logging_es_nodes}"
-  k8s_storage_class = "${var.k8s_storage_class}"
+  enabled = "${var.logging_addons["enabled"]}"
+  container_log_path = "${var.logging_addons["container_log_path"]}"
+  es_nodes = "${var.logging_addons["es_nodes"]}"
+  k8s_storage_class = "${var.cluster["storage_class"]}"
+  es_storage_volume = "${var.logging_addons["es_storage_volume"]}"
   datastores_heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
-  es_storage_volume = "${var.es_storage_volume}"
-  logs_cname = "${var.logs_cname}"
-  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  logs_cname = "${local.logs_cname}"
+  node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
 }
 
 module "traefik-addon" {
   source = "traefik"
   kubectl_context_name = "${var.kubectl_context_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  haystack_ui_cname = "${var.haystack_ui_cname}"
-  traefik_node_port = "${var.traefik_node_port}"
-  app-node_selecter_label = "${var.app-node_selecter_label}"
-}
-
-module "dashboard-addon" {
-  source = "dashboard"
-  enabled = "${var.add_k8s_dashboard_addons}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  k8s_dashboard_cname = "${var.k8s_dashboard_cname}"
-  monitoring-node_selecter_label = "${var.monitoring-node_selecter_label}"
+  haystack_ui_cname = "${local.haystack_ui_cname}"
+  traefik_node_port = "${var.cluster["reverse_proxy_port"]}"
+  app-node_selecter_label = "${var.cluster["app-node_selecter_label"]}"
 }
 
 module "aa_apps_resource_limits" {

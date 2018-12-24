@@ -7,7 +7,7 @@ variable "datastores_heap_memory_in_mb" {}
 
 variable "es_storage_volume" {}
 variable "logs_cname" {}
-variable "monitoring-node_selecter_label" {}
+variable "node_selecter_label" {}
 
 variable "enabled" {
   default = false

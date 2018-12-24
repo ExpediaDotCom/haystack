@@ -25,6 +25,30 @@ To do so, clone the `ExpediaDotCom/haystack` repository and run the installer sc
 minikube start --memory 8192 --cpus 4
 ```
 
+NOTE: if minikube has been previously started without these resource parameters, you may need to convince it to forget it's previous settings. 
+You can use one of the following 2 methods:
+
+* Method 1 : 
+    1. Stop minikube
+        ```shell
+        minikube stop
+        ``` 
+    2. Manually change the memory and cpu settings in your Virtual Machine software,
+    3. Restart minikube
+        ```shell
+        minikube start
+        ```
+* Method 2 :
+    1. Delete minikube
+        ```shell 
+        minikube stop 
+        minikube delete 
+        ``` 
+    2. Run the command to start minikube with desired configuration :
+        ```shell
+        minikube start --memory 8192 --cpus 4
+        ```
+
 ### Install the software
 
 From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
@@ -47,6 +71,36 @@ You can access the Kubernetes console at `http://haystack.local:30000`.
 
 The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
 To open the Minikube dashboard type `minikube dashboard`.
+
+### Custom Installations
+By default deployment scripts are configured to deploy only the traces and trends components. However we can pass an overrides config file to the deployment script to specify the exact subsystems and their configurations you want to deploy
+```shell
+cd deployment/terraform
+./apply-compose.sh -r install-all -o <path of your overrides file>
+```
+
+Here's a sample overrides file : 
+
+```json
+{
+  "trends": {
+    "enabled": false
+  },
+  "traces": {
+    "enabled": true,
+    "indexer_memory_request": "1024",
+    "indexer_memory_limit" : "1024"
+
+  },
+  "service_graph": {
+    "enabled": false
+  }
+} 
+```
+
+You can choose to override any of the values mentioned in the folowing [file](https://github.com/ExpediaDotCom/haystack/blob/master/deployment/terraform/cluster/local/apps/variables.tf) 
+
+
 
 ### Uninstall the software
 From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
@@ -133,3 +187,27 @@ For details, see [ExpediaDotCom/haystack-idl](https://github.com/ExpediaDotCom/h
 
 You can see span data in the Haystack UI at `https://haystack.local:32300`.
 See the [UI](https://expediadotcom.github.io/haystack/docs/ui/ui.html) page for more information about how the data is presented and what you can do with the UI.
+
+## Searchable Keys
+
+### Why do you need this?
+By default, haystack allows you to search for traces with a traceId, serviceName and operationName. To make search more convenient, haystack  auto suggests the observed values only for serviceName and all its operationNames. Since UI web app cache this data (5 minutes TTL) to reduce the load on backend systems, hence you may see a delay in the auto suggestion for a new serviceName. 
+
+These default search keys are good for basic usecase, but definitely you may want to search or filter traces(or spans) with custom keys that are part of a span tag. Here are few example scenarios:
+
+```
+a) Filter all the error spans from a booking service 'B' in last 1 hour
+b) Look for all failed transactions for a given userId in last 24 hours
+c) Search for spans with 4xx http response from Content serving app 'C' in last 15 min  
+```
+
+Haystack does not index every span tag key primarily to avoid producers(here micro services) from flooding indexing subsystem accidentally. The producers can still send any key-value pair as a tag that is visibile in the span data but it is not searchable. The team that manages haystack infrastructure can add or remove the searchable keys depending upon their business usecases.
+
+### How to whitelist a key for search?
+
+Haystack uses ElasticSearch(ES) for twin purpose. It stores the whitelisted keys that needs to be indexed(searched) and then index the stream of spans for those searchable keys in ElasticSearch.
+
+Regarding the whitelist field configuration, haystack-indexer reloads it every few min and you can control the refresh frequency [here](https://github.com/ExpediaDotCom/haystack-traces/blob/master/deployment/terraform/trace-indexer/templates/trace-indexer.conf#L136). The haystack-reader provides the list of searchable keys through a grpc endpoint(`getFieldNames`) that is consumed by UI application. Please note that search keys are normalized to lowercase at the time of indexing and searching from ElasticSearch.  
+
+In order to whitelist a tag key, you require to update a single document(docId 1) in the ElasticSearch `index/type` called `reload-configs/indexing-fields`. We provide a sample kubernetes job spec [here](https://github.com/ExpediaDotCom/haystack-traces/blob/master/deployment/terraform/es-indices/whitelisted-fields/templates/whitelisted-fields-pod-yaml.tpl) that you can run as a cron or on-demand whenever a new key needs to be whitelisted or blacklisted(if enabled before). If you are not using kubernetes, you can still refer the job that shows how the whitelisted keys are structured as a json in ElasticSearch. Please note that `searchContext` attribute in the field [here](https://github.com/ExpediaDotCom/haystack-traces/blob/master/deployment/terraform/es-indices/whitelisted-fields/templates/whitelisted-fields-pod-yaml.tpl#L13) has been deprecated and ignored to prefer the [nested search](https://expediadotcom.github.io/haystack/docs/ui/ui_universal_search.html#complex-workflow) functionality on universal search bar.
+

@@ -33,7 +33,7 @@ The Haystack system includes an easy-to-use "one click" deployment mechanism, ba
 [Kubernetes](https://en.wikipedia.org/wiki/Kubernetes), that deploys a working development environment with working
 implementations of all of the services in the block diagram above. This same mechanism, with different configurations, 
 deploys to test and production environments as well. See the collection of scripts, CloudFormation templates, and YAML 
-files in the [haystack-deployment](deployment/terraform) repository for details.
+files in the [deployment](deployment) module for details.
 
 #### Kafka
 Internal [Kafka](https://en.wikipedia.org/wiki/Apache_Kafka) is the Haystack message bus. The messages that enter the
