@@ -110,46 +110,46 @@ module "ui" {
   metricpoint_encoder_type = "${var.ui["metricpoint_encoder_type"]}"
 }
 
-module "alerting" {
-  source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
-
-  app_namespace = "${var.aa_app_namespace}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  node_selector_label = "${var.app-node_selector_label}"
-  kafka_port = "${var.kafka_port}"
-  kafka_hostname = "${var.kafka_hostname}"
-  graphite_hostname = "${var.graphite_hostname}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
-  metrictank = "${var.metrictank}"
-
-  # AA apps
-  alerting = "${var.alerting}"
-  modelservice = "${var.modelservice}"
-  ad-mapper = "${var.ad-mapper}"
-  ad-manager = "${var.ad-manager}"
-  aquila-detector = "${var.aquila-detector}"
-  aquila-trainer = "${var.aquila-trainer}"
-  notifier = "${var.notifier}"
-}
-
-module "alert-manager" {
-  source = "github.com/ExpediaDotCom/alert-manager/deployment/terraform"
-
-  app_namespace = "${var.aa_app_namespace}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  node_selector_label = "${var.app-node_selector_label}"
-  kafka_port = "${var.kafka_port}"
-  kafka_hostname = "${var.kafka_hostname}"
-  graphite_hostname = "${var.graphite_hostname}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
-
-  # AM apps
-  alert-manager = "${var.alert-manager}"
-  alert-manager-service = "${var.alert-manager-service}"
-  alert-manager-store = "${var.alert-manager-store}"
-  alert-manager-notifier = "${var.alert-manager-notifier}"
-}
+//module "alerting" {
+//  source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
+//
+//  app_namespace = "${var.aa_app_namespace}"
+//  kubectl_context_name = "${var.kubectl_context_name}"
+//  kubectl_executable_name = "${var.kubectl_executable_name}"
+//  node_selector_label = "${var.app-node_selector_label}"
+//  kafka_port = "${var.kafka_port}"
+//  kafka_hostname = "${var.kafka_hostname}"
+//  graphite_hostname = "${var.graphite_hostname}"
+//  graphite_port = "${var.graphite_port}"
+//  graphite_enabled = "${var.graphite_enabled}"
+//  metrictank = "${var.metrictank}"
+//
+//  # AA apps
+//  alerting = "${var.alerting}"
+//  modelservice = "${var.modelservice}"
+//  ad-mapper = "${var.ad-mapper}"
+//  ad-manager = "${var.ad-manager}"
+//  aquila-detector = "${var.aquila-detector}"
+//  aquila-trainer = "${var.aquila-trainer}"
+//  notifier = "${var.notifier}"
+//}
+//
+//module "alert-manager" {
+//  source = "github.com/ExpediaDotCom/alert-manager/deployment/terraform"
+//
+//  app_namespace = "${var.aa_app_namespace}"
+//  kubectl_context_name = "${var.kubectl_context_name}"
+//  kubectl_executable_name = "${var.kubectl_executable_name}"
+//  node_selector_label = "${var.app-node_selector_label}"
+//  kafka_port = "${var.kafka_port}"
+//  kafka_hostname = "${var.kafka_hostname}"
+//  graphite_hostname = "${var.graphite_hostname}"
+//  graphite_port = "${var.graphite_port}"
+//  graphite_enabled = "${var.graphite_enabled}"
+//
+//  # AM apps
+//  alert-manager = "${var.alert-manager}"
+//  alert-manager-service = "${var.alert-manager-service}"
+//  alert-manager-store = "${var.alert-manager-store}"
+//  alert-manager-notifier = "${var.alert-manager-notifier}"
+//}
