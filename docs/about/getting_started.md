@@ -158,7 +158,7 @@ For details, see [ExpediaDotCom/haystack-idl](https://github.com/ExpediaDotCom/h
 You can see span data in the Haystack UI at `https://haystack.local:32300`.
 See the [UI](https://expediadotcom.github.io/haystack/docs/ui/ui.html) page for more information about how the data is presented and what you can do with the UI.
 
-#### Searchable Keys
+## Searchable Keys
 
 ### Why do you need this?
 By default, haystack allows you to search for traces with a traceId, serviceName and operationName. To make search more convenient, haystack  auto suggests the observed values only for serviceName and all its operationNames. Since UI web app cache this data (5 minutes TTL) to reduce the load on backend systems, hence you may see a delay in the auto suggestion for a new serviceName. 

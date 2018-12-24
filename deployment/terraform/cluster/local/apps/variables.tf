@@ -37,7 +37,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     metricpoint_encoder_type = "periodreplacement"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "100m"
@@ -182,7 +182,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
