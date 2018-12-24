@@ -29,6 +29,12 @@ variable "traces" {
     reader_memory_request = "1536"
     reader_memory_limit = "1536"
     reader_jvm_memory_limit = "1024"
+
+    backend_cpu_request = "500m"
+    backend_cpu_limit = "1000m"
+    backend_memory_request = "500"
+    backend_memory_limit = "500"
+    backend_jvm_memory_limit = "256"
   }
 }
 
@@ -235,7 +241,7 @@ variable "modelservice" {
     memory_limit = "250"
     jvm_memory_limit = "200"
     environment_overrides = ""
-    db_endpoint= ""
+    db_endpoint = ""
   }
 }
 

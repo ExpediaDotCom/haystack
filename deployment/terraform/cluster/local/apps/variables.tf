@@ -30,6 +30,12 @@ variable "traces" {
     reader_memory_request = "250"
     reader_memory_limit = "250"
     reader_jvm_memory_limit = "200"
+
+    backend_cpu_request = "100m"
+    backend_cpu_limit = "500m"
+    backend_memory_request = "250"
+    backend_memory_limit = "250"
+    backend_jvm_memory_limit = "200"
   }
 }
 
