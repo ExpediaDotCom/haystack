@@ -47,6 +47,10 @@ variable "metrictank" {
   type = "map"
 }
 
+variable "haystack-alerts" {
+  type = "map"
+}
+
 
 # ========================================
 # Adaptive Alerting
