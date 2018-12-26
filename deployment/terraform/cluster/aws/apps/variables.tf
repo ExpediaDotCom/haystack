@@ -218,6 +218,34 @@ variable "metrictank" {
   }
 }
 
+variable "haystack-alerts" {
+  type = "map"
+  default = {
+    enabled = false
+    es_curator_enabled = false
+    alert-api_version = "f885465bdb3f38952963c344ba1b1d57e132fd51"
+    alert-api_instances = 1
+    alert-api_environment_overrides = ""
+    alert-api_cpu_request = "500m"
+    alert-api_cpu_limit = "2000m"
+    alert-api_memory_request = "1536"
+    alert-api_memory_limit = "1536"
+    alert-api_jvm_memory_limit = "1024"
+    subscription_service_hostname = "http://alert-manager-service"
+    subscription_service_port = 8080
+
+    anomaly-store_version = "f885465bdb3f38952963c344ba1b1d57e132fd51"
+    anomaly-store_instances = 1
+    anomaly-store_environment_overrides = ""
+    anomaly-store_cpu_request = "500m"
+    anomaly-store_cpu_limit = "2000m"
+    anomaly-store_memory_request = "1536"
+    anomaly-store_memory_limit = "1536"
+    anomaly-store_jvm_memory_limit = "1024"
+  }
+}
+
+
 # ========================================
 # Adaptive Alerting
 # ========================================
