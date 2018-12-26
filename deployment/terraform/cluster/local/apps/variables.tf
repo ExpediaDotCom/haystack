@@ -226,7 +226,7 @@ variable "haystack-alerts" {
   default = {
     enabled = false
     es_curator_enabled = false
-    alert-api_version = "94763a4f406a161de6fc51e51259d1daf366b77e"
+    version = "f46d57afa6d1ab40fdeb026fc759dbbaf61e6633"
     alert-api_instances = 1
     alert-api_environment_overrides = ""
     alert-api_cpu_request = "100m"
@@ -237,7 +237,6 @@ variable "haystack-alerts" {
     subscription_service_hostname = "http://alert-manager-service.aa-apps.svc.cluster.local"
     subscription_service_port = 8080
 
-    anomaly-store_version = "94763a4f406a161de6fc51e51259d1daf366b77e"
     anomaly-store_instances = 1
     anomaly-store_environment_overrides = ""
     anomaly-store_cpu_request = "100m"
