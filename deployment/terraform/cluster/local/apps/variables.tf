@@ -234,7 +234,7 @@ variable "haystack-alerts" {
     alert-api_memory_request = "250"
     alert-api_memory_limit = "250"
     alert-api_jvm_memory_limit = "200"
-    subscription_service_hostname = "http://alert-manager-service"
+    subscription_service_hostname = "http://alert-manager-service.aa-apps.svc.cluster.local"
     subscription_service_port = 8080
 
     anomaly-store_version = "94763a4f406a161de6fc51e51259d1daf366b77e"
