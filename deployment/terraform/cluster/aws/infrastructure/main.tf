@@ -4,8 +4,6 @@ locals {
   metrics_cname = "${var.haystack_cluster_name}-metrics.${var.aws_domain_name}"
   logs_cname = "${var.haystack_cluster_name}-logs.${var.aws_domain_name}"
   k8s_dashboard_cname = "${var.haystack_cluster_name}-k8s.${var.aws_domain_name}"
-  monitoring-node_selecter_label = "kops.k8s.io/instancegroup: monitoring-nodes"
-  app-node_selecter_label  = "kops.k8s.io/instancegroup: app-nodes"
   k8s_datastores_heap_memory_in_mb = "2048"
 
 }
@@ -24,7 +22,7 @@ module "haystack-k8s" {
   app-node_instance_type = "${var.k8s_app-nodes_instance_type}"
   monitoring-nodes_instance_count = "${var.k8s_monitoring-nodes_instance_count}"
   monitoring-nodes_instance_type = "${var.k8s_monitoring-nodes_instance_type}"
-  reverse_proxy_port = "${var.traefik_node_port}"
+  reverse_proxy_port = "${var.cluster["reverse_proxy_port"]}"
   kops_executable_name = "${var.kops_executable_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
@@ -35,36 +33,19 @@ module "haystack-k8s" {
   k8s_dashboard_cname_enabled = true
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   haystack_ui_cname = "${local.haystack_ui_cname}"
-  graphite_node_port = "${var.graphite_node_port}"
+  graphite_node_port = "${var.monitoring_addons["graphite_node_port"]}"
 }
 
 module "k8s-addons" {
   source = "../../../modules/k8s-addons"
   kubectl_context_name = "${module.haystack-k8s.cluster_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  traefik_node_port = "${var.traefik_node_port}"
-  graphite_node_port = "${var.graphite_node_port}"
-  base_domain_name = "${var.aws_domain_name}"
-  haystack_cluster_name = "${var.haystack_cluster_name}"
-  add_monitoring_addons = true
-  add_kubewatch_addon = "${var.kubewatch_enabled}" 
-  kubewatch_config_yaml_base64 = "${var.kubewatch_config_yaml_base64}"
-  add_logging_addons = true
-  add_k8s_dashboard_addons = true
-  container_log_path = "${local.container_log_path}"
-  logging_es_nodes = "1"
-  k8s_storage_class = "default"
-  grafana_storage_volume = "2Gi"
-  influxdb_storage_volume = "50Gi"
-  es_storage_volume = "100Gi"
-  logs_cname = "${local.logs_cname}"
-  k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
-  haystack_ui_cname = "${local.haystack_ui_cname}"
-  metrics_cname = "${local.metrics_cname}"
-  "monitoring-node_selecter_label" = "${local.monitoring-node_selecter_label}"
-  "app-node_selecter_label" = "${local.app-node_selecter_label}"
   datastores_heap_memory_in_mb = "${local.k8s_datastores_heap_memory_in_mb}"
   aa_apps_resource_limits = "${var.aa_apps_resource_limits}"
+  monitoring_addons = "${var.monitoring_addons}"
+  alerting_addons = "${var.alerting_addons}"
+  logging_addons = "${var.logging_addons}"
+  cluster = "${var.cluster}"
 }
 
 module "haystack-datastores" {

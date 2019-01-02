@@ -29,6 +29,12 @@ variable "traces" {
     reader_memory_request = "1536"
     reader_memory_limit = "1536"
     reader_jvm_memory_limit = "1024"
+
+    backend_cpu_request = "500m"
+    backend_cpu_limit = "1000m"
+    backend_memory_request = "500"
+    backend_memory_limit = "500"
+    backend_jvm_memory_limit = "256"
   }
 }
 
@@ -61,7 +67,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "500m"
@@ -179,7 +185,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.1"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
@@ -212,6 +218,34 @@ variable "metrictank" {
   }
 }
 
+variable "haystack-alerts" {
+  type = "map"
+  default = {
+    enabled = false
+    es_curator_enabled = false
+    version = "4c0bb47b0cd04ab9234befcdef3ad5710ea183f3"
+    elasticsearch_template = "{\"template\": \"haystack-anomalies*\",\"settings\": {\"number_of_shards\": 1,\"index.mapping.ignore_malformed\": true,\"analysis\": {\"normalizer\": {\"lowercase_normalizer\": {\"type\": \"custom\",\"filter\": [\"lowercase\"]}}}},\"mappings\": {\"anomaly\": {\"_source\": {\"enabled\": true},\"_field_names\": {\"enabled\": false},\"_all\": {\"enabled\": false},\"properties\": {\"startTime\": {\"type\": \"long\",\"doc_values\": true}},\"dynamic_templates\": [{\"strings_as_keywords_1\": {\"match_mapping_type\": \"string\",\"mapping\": {\"type\": \"keyword\",\"normalizer\": \"lowercase_normalizer\",\"doc_values\": false,\"norms\": false}}}, {\"longs_disable_doc_norms\": {\"match_mapping_type\": \"long\",\"mapping\": {\"type\": \"long\",\"doc_values\": false,\"norms\": false}}}]}}}"
+    alert-api_instances = 1
+    alert-api_environment_overrides = ""
+    alert-api_cpu_request = "500m"
+    alert-api_cpu_limit = "2000m"
+    alert-api_memory_request = "1536"
+    alert-api_memory_limit = "1536"
+    alert-api_jvm_memory_limit = "1024"
+    subscription_service_hostname = "http://alert-manager-service.aa-apps.svc.cluster.local"
+    subscription_service_port = 8080
+
+    anomaly-store_instances = 1
+    anomaly-store_environment_overrides = ""
+    anomaly-store_cpu_request = "500m"
+    anomaly-store_cpu_limit = "2000m"
+    anomaly-store_memory_request = "1536"
+    anomaly-store_memory_limit = "1536"
+    anomaly-store_jvm_memory_limit = "1024"
+  }
+}
+
+
 # ========================================
 # Adaptive Alerting
 # ========================================
@@ -220,7 +254,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "77eab4a5755f666bc9b460c652ba148c785249ee"
+    version = "ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
   }
 }
 
@@ -235,7 +269,7 @@ variable "modelservice" {
     memory_limit = "250"
     jvm_memory_limit = "200"
     environment_overrides = ""
-    db_endpoint= ""
+    db_endpoint = ""
   }
 }
 
@@ -244,7 +278,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:77eab4a5755f666bc9b460c652ba148c785249ee"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -261,7 +295,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:77eab4a5755f666bc9b460c652ba148c785249ee"
+    image = "expediadotcom/adaptive-alerting-ad-manager:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -305,7 +339,7 @@ variable "aquila-detector" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-detector:77eab4a5755f666bc9b460c652ba148c785249ee"
+    image = "expediadotcom/aquila-detector:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -325,7 +359,7 @@ variable "aquila-trainer" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/aquila-trainer:77eab4a5755f666bc9b460c652ba148c785249ee"
+    image = "expediadotcom/aquila-trainer:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"

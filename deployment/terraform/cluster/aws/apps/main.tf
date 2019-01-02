@@ -40,6 +40,7 @@ module "haystack-apps" {
   service-graph = "${var.service-graph}"
   ui = "${var.ui}"
   metrictank = "${var.metrictank}"
+  haystack-alerts = "${var.haystack-alerts}"
 
   # Adaptive Alerting configuration overrides
   alerting = "${var.alerting}"

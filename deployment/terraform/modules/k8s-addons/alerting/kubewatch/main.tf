@@ -10,7 +10,6 @@ data "template_file" "kubewatch_addon_config" {
     node_selecter_label = "${var.node_selecter_label}"
     kubewatch_config_yaml_base64 = "${var.kubewatch_config_yaml_base64}"
   }
-  count = "${local.count}"
 }
 
 resource "null_resource" "k8s_kubewatch_addons" {

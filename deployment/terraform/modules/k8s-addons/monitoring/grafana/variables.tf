@@ -3,7 +3,7 @@ variable "enabled" {}
 variable "kubectl_context_name" {}
 variable "metrics_cname" {}
 variable "storage_volume" {}
-variable "monitoring-node_selecter_label" {}
+variable "node_selecter_label" {}
 
 variable "storage_class" {}
 
