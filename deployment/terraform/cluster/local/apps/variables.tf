@@ -403,7 +403,7 @@ variable "alert-manager-service" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-service:3e60c8fd215aea39123439b30759b6de11850f09"
+    image = "expediadotcom/alert-manager-service:a66980da8d644fd08d2c86699c474437fc16ceff"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -420,7 +420,7 @@ variable "alert-manager-store" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-store:3e60c8fd215aea39123439b30759b6de11850f09"
+    image = "expediadotcom/alert-manager-store:a66980da8d644fd08d2c86699c474437fc16ceff"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -437,7 +437,7 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-notifier:3e60c8fd215aea39123439b30759b6de11850f09"
+    image = "expediadotcom/alert-manager-notifier:a66980da8d644fd08d2c86699c474437fc16ceff"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
