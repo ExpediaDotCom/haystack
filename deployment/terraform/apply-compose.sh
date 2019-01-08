@@ -258,7 +258,7 @@ function installComponents() {
             DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
             echo "setting kubectl context : $CLUSTER_NAME-k8s.$DOMAIN_NAME"
             $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$DOMAIN_NAME --state s3://$S3_BUCKET
-            $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var cluster="{name = $CLUSTER_NAME s3_bucket_name = $S3_BUCKET}" -var kubectl_executable_name=$KUBECTL
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET -var kubectl_executable_name=$KUBECTL
         ;;
 
         local)
