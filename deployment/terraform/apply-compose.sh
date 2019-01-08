@@ -178,9 +178,9 @@ function uninstallComponents() {
         aws)
             $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-apps"
             #setting the correct kubectl config for terraform
-            AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
-            echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
-            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME --state s3://$S3_BUCKET
+            DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
+            echo "setting kubectl context : $CLUSTER_NAME-k8s.$DOMAIN_NAME"
+            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$DOMAIN_NAME --state s3://$S3_BUCKET
             $TERRAFORM destroy $FORCE_FLAG -var-file=$APP_VARS_FILE -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET -var kubectl_executable_name=$KUBECTL
         ;;
 
@@ -204,7 +204,7 @@ function uninstallInfrastructure() {
             $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-infrastructure"
             #not explicitly deleting the k8s addons module since we're anyways destroying the k8s cluster
             $TERRAFORM state rm module.k8s-addons
-            $TERRAFORM destroy $FORCE_FLAG -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET
+            $TERRAFORM destroy $FORCE_FLAG -var-file=$INFRA_VARS_FILE -var "cluster={ name = \"$CLUSTER_NAME\", s3_bucket_name = \"$S3_BUCKET\" }"  -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
         ;;
 
         local)
@@ -227,10 +227,10 @@ function installInfrastructure() {
         aws)
             $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-infrastructure"
             #setting the correct kubectl config for terraform
-            AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE)
-            echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
-            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME --state s3://$S3_BUCKET || true
-            $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET
+            DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE)
+            echo "setting kubectl context : $CLUSTER_NAME-k8s.$DOMAIN_NAME"
+            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$DOMAIN_NAME --state s3://$S3_BUCKET || true
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$INFRA_VARS_FILE -var "cluster={ name = \"$CLUSTER_NAME\", s3_bucket_name = \"$S3_BUCKET\" }" -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
         ;;
 
         local)
@@ -255,9 +255,9 @@ function installComponents() {
         aws)
             $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-apps"
             #setting the correct kubectl config for terraform
-            AWS_DOMAIN_NAME=$(echo "var.aws_domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
-            echo "setting kubectl context : $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME"
-            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$AWS_DOMAIN_NAME --state s3://$S3_BUCKET
+            DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
+            echo "setting kubectl context : $CLUSTER_NAME-k8s.$DOMAIN_NAME"
+            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$DOMAIN_NAME --state s3://$S3_BUCKET
             $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET -var kubectl_executable_name=$KUBECTL
         ;;
 

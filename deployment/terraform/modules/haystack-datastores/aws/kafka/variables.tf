@@ -8,7 +8,6 @@ variable "broker_image" {
   default = ""
 }
 variable "aws_vpc_id" {}
-variable "aws_subnet" {}
 variable "aws_subnets" {
   type = "list"
 }

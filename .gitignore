@@ -24,3 +24,4 @@ docsite/translated_docs
 docsite/build/
 docsite/yarn.lock
 fakespans
+**/.terraform/**

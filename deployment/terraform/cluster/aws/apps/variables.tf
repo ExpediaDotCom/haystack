@@ -1,7 +1,7 @@
 # configs to setup kubectl context in case just apps is deployed in another host
 variable "haystack_cluster_name" {}
 variable "s3_bucket_name" {}
-variable "aws_domain_name" {}
+variable "domain_name" {}
 variable "kubectl_executable_name" {}
 
 # ========================================
