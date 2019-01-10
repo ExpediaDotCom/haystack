@@ -11,6 +11,7 @@ env:
 
 # generate doc pages and move generated resources to out folder
 script:
+  - ./deployment/terraform/apply-compose.sh -r plan
   - git config --global user.email "absrivastava@users.noreply.github.com"
   - git config --global user.name "absrivastava"
   - echo "machine github.com login absrivastava password $GITHUB_TOKEN" > ~/.netrc
