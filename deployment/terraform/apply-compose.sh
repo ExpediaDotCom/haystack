@@ -279,7 +279,7 @@ function installComponents() {
 }
 
 function planComponents() {
-
+    TF_LOG=TRACE
     cd $DIR/cluster/$CLUSTER_TYPE/apps
     if [ "$SKIP_APPROVAL" = "true" ]; then
         AUTO_APPROVE="-input=false -auto-approve"
