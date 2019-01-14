@@ -313,18 +313,20 @@ function planComponents() {
 
 function verifyK8sCluster() {
     if [[ $CLUSTER_TYPE == 'local' ]]; then
-        if command_exists minikube; then
-            `minikube status > /tmp/minikube_status`
-            if grep -q -i 'Running' /tmp/minikube_status; then
-                echo "Congratulations! Minikube is found in running state!"
+        if [[$ACTION != 'plan']]; then
+            if command_exists minikube; then
+                `minikube status > /tmp/minikube_status`
+                if grep -q -i 'Running' /tmp/minikube_status; then
+                    echo "Congratulations! Minikube is found in running state!"
+                else
+                    echo 'Minikube is not running, starting now...'
+                    minikube start
+                fi
+                rm -rf /tmp/minikube_status
             else
-                echo 'Minikube is not running, starting now...'
-                minikube start
+                echo "Minikube is not installed on local box, please setup minikube by following the instructions at https://kubernetes.io/docs/getting-started-guides/minikube"
+                exit 1
             fi
-            rm -rf /tmp/minikube_status
-        else
-            echo "Minikube is not installed on local box, please setup minikube by following the instructions at https://kubernetes.io/docs/getting-started-guides/minikube"
-            exit 1
         fi
     fi
 }
