@@ -6,8 +6,8 @@ node_js:
   - '8'
 
 env:
-  - CHANGE_MINIKUBE_NONE_USER=true
   global:
+    - CHANGE_MINIKUBE_NONE_USER=true
     - BRANCH=${TRAVIS_BRANCH}
     - TAG=${TRAVIS_TAG}
     - SHA=${TRAVIS_COMMIT}
