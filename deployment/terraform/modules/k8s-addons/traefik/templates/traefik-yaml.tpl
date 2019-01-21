@@ -102,9 +102,9 @@ spec:
            name: config
         resources:
           limits:
-            memory: 100Mi
+            memory: 512Mi
           requests:
-            memory: 50Mi
+            memory: 128Mi
         ports:
         - containerPort: 80
         - containerPort: 8080
