@@ -226,7 +226,7 @@ variable "haystack-alerts" {
   default = {
     enabled = false
     es_curator_enabled = false
-    version = "4c0bb47b0cd04ab9234befcdef3ad5710ea183f3"
+    version = "f7f7e516ac0459fb4e4cf3df977a3255a729bed8"
     elasticsearch_template = "{\"template\": \"haystack-anomalies*\",\"settings\": {\"number_of_shards\": 1,\"index.mapping.ignore_malformed\": true,\"analysis\": {\"normalizer\": {\"lowercase_normalizer\": {\"type\": \"custom\",\"filter\": [\"lowercase\"]}}}},\"mappings\": {\"anomaly\": {\"_source\": {\"enabled\": true},\"_field_names\": {\"enabled\": false},\"_all\": {\"enabled\": false},\"properties\": {\"startTime\": {\"type\": \"long\",\"doc_values\": true}},\"dynamic_templates\": [{\"strings_as_keywords_1\": {\"match_mapping_type\": \"string\",\"mapping\": {\"type\": \"keyword\",\"normalizer\": \"lowercase_normalizer\",\"doc_values\": false,\"norms\": false}}}, {\"longs_disable_doc_norms\": {\"match_mapping_type\": \"long\",\"mapping\": {\"type\": \"long\",\"doc_values\": false,\"norms\": false}}}]}}}"
     alert-api_instances = 1
     alert-api_environment_overrides = ""
@@ -236,7 +236,7 @@ variable "haystack-alerts" {
     alert-api_memory_limit = "250"
     alert-api_jvm_memory_limit = "200"
     subscription_service_hostname = "http://alert-manager-service.aa-apps.svc.cluster.local"
-    subscription_service_port = 8080
+    subscription_service_port = 80
 
     anomaly-store_instances = 1
     anomaly-store_environment_overrides = ""
