@@ -313,6 +313,31 @@ variable "ad-manager" {
   }
 }
 
+variable "mc-a2m-mapper" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "250"
+    memory_limit = "250"
+    jvm_memory_limit = "200"
+    environment_overrides = ""
+    kafka_input_endpoint = "kafka-service.haystack-apps.svc.cluster.local:9092"
+    kafka_input_topic = "anomalies"
+    kafka_input_serde_key = "org.apache.kafka.common.serialization.Serdes$String"
+    kafka_input_serde_value = "org.apache.kafka.common.serialization.Serdes$String"
+    kafka_input_extractor_timestamp = "org.apache.kafka.streams.processor.ConsumerRecordTimestampExtractor"
+    kafka_output_endpoint = "kafka-service.haystack-apps.svc.cluster.local:9092"
+    kafka_output_topic = "mdm"
+    kafka_output_serde_key = "org.apache.kafka.common.serialization.Serdes$String"
+    kafka_output_serde_value = "org.apache.kafka.common.serialization.Serdes$String"
+  }
+}
+
 variable "notifier" {
   type = "map"
   default = {
