@@ -313,7 +313,7 @@ function planComponents() {
 
 function verifyK8sCluster() {
     if [[ $CLUSTER_TYPE == 'local' ]]; then
-        if [[$ACTION != 'plan']]; then
+        if [[ $ACTION != 'plan' ]]; then
             if command_exists minikube; then
                 `minikube status > /tmp/minikube_status`
                 if grep -q -i 'Running' /tmp/minikube_status; then
