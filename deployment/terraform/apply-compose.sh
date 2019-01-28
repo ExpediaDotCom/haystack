@@ -141,6 +141,7 @@ function applyActionOnComponents() {
             echo "Congratulations! you've successfully created haystack infrastructure and deployed haystack apps"
         ;;
         plan)
+            echo "Starting plan"
             installInfrastructure
             planComponents
             echo "Congratulations! you've successfully created haystack infrastructure and planned haystack apps"
