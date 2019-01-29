@@ -323,7 +323,6 @@ variable "mc-a2m-mapper" {
     memory_limit = "1024"
     jvm_memory_limit = "512"
     environment_overrides = ""
-    # Kafka config goes in env-specific overrides.
   }
 }
 
