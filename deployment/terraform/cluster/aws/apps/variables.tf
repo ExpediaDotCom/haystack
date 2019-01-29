@@ -310,6 +310,23 @@ variable "ad-manager" {
   }
 }
 
+variable "mc-a2m-mapper" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "1024"
+    memory_limit = "1024"
+    jvm_memory_limit = "512"
+    environment_overrides = ""
+    # Kafka config goes in env-specific overrides.
+  }
+}
+
 variable "notifier" {
   type = "map"
   default = {
