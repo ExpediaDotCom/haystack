@@ -60,10 +60,6 @@ variable "alerting" {
   type = "map"
 }
 
-variable "modelservice" {
-  type = "map"
-}
-
 variable "ad-mapper" {
   type = "map"
 }
@@ -72,15 +68,11 @@ variable "ad-manager" {
   type = "map"
 }
 
+variable "modelservice" {
+  type = "map"
+}
+
 variable "mc-a2m-mapper" {
-  type = "map"
-}
-
-variable "aquila-trainer" {
-  type = "map"
-}
-
-variable "aquila-detector" {
   type = "map"
 }
 
