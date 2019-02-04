@@ -10,7 +10,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 function display_help() {
     echo "Usage: $0 [option...] " >&2
     echo
-    echo "   -r     choose the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps | delete-state | plan. Default: install-all"
+    echo "   -r     choose the action for deploying haystack components. possible values: install-all | install-apps | uninstall-all | uninstall-apps | delete-state. Default: install-all"
     echo "   -c     choose the cluster-type settings for cluster. possible values: aws | local, default: local"
     echo "   -n     name of the cluster. must be unique for every cluster created in aws,default: haystack"
     echo "   -b     name of the s3 bucket where the deployment state would be stored, its mandatory when the cluster type is aws"
@@ -140,11 +140,6 @@ function applyActionOnComponents() {
             installComponents
             echo "Congratulations! you've successfully created haystack infrastructure and deployed haystack apps"
         ;;
-        plan)
-            installInfrastructure
-            planComponents
-            echo "Congratulations! you've successfully created haystack infrastructure and planned haystack apps"
-        ;;
         install-apps)
             installComponents
             echo "Congratulations! you've successfully redeployed haystack apps"
@@ -269,39 +264,6 @@ function installComponents() {
         local)
             $TERRAFORM init
             $TERRAFORM apply $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL
-        ;;
-
-        ?)
-            display_help
-            exit 1
-        ;;
-    esac
-}
-
-function planComponents() {
-
-    cd $DIR/cluster/$CLUSTER_TYPE/apps
-    if [ "$SKIP_APPROVAL" = "true" ]; then
-        AUTO_APPROVE="-input=false -auto-approve"
-    else
-        echo "$SKIP_APPROVAL"
-    fi
-
-    echo "deploying haystack-apps using terraform"
-
-    case "$CLUSTER_TYPE" in
-        aws)
-            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-apps"
-            #setting the correct kubectl config for terraform
-            DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$APP_VARS_FILE)
-            echo "setting kubectl context : $CLUSTER_NAME-k8s.$DOMAIN_NAME"
-            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$DOMAIN_NAME --state s3://$S3_BUCKET
-            $TERRAFORM plan $AUTO_APPROVE -var-file=$APP_VARS_FILE -var haystack_cluster_name=$CLUSTER_NAME -var s3_bucket_name=$S3_BUCKET -var kubectl_executable_name=$KUBECTL
-        ;;
-
-        local)
-            $TERRAFORM init
-            $TERRAFORM plan $AUTO_APPROVE -var-file=$APP_VARS_FILE -var kubectl_executable_name=$KUBECTL
         ;;
 
         ?)
