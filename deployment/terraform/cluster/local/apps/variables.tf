@@ -259,6 +259,23 @@ variable "alerting" {
   }
 }
 
+variable "modelservice" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "500"
+    memory_limit = "500"
+    jvm_memory_limit = "300"
+    environment_overrides = ""
+    db_endpoint = ""
+  }
+}
+
 variable "ad-mapper" {
   type = "map"
   default = {
@@ -292,23 +309,6 @@ variable "ad-manager" {
     environment_overrides = ""
     modelservice_uri_template = "http://modelservice/api/models/search/findLatestByDetectorUuid?uuid=%s"
     kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
-  }
-}
-
-variable "modelservice" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-    db_endpoint = ""
   }
 }
 
