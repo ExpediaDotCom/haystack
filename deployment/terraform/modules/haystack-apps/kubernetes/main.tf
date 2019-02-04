@@ -112,8 +112,8 @@ module "ui" {
 
 # Adaptive Alerting
 module "alerting" {
-#  source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
-  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
+  source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
+#  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
 
   app_namespace = "${var.aa_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"

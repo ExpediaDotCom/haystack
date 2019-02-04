@@ -334,7 +334,10 @@ variable "mc-a2m-mapper" {
     metric_producer_client_id = "mc-a2m-mapper"
     metric_producer_topic = "metrics"
     metric_producer_key_serializer = "org.apache.kafka.common.serialization.StringSerializer"
-    metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataMessagePackSerializer"
+
+    # TODO Rename the serializer after we merge Haystack integration into AA. [WLW]
+#    metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataMessagePackSerializer"
+    metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataSerializer"
   }
 }
 
