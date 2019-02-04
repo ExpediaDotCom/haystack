@@ -19,6 +19,46 @@ To do so, clone the `ExpediaDotCom/haystack` repository and run the installer sc
 
 ### Install pre-requisites
 
+1. Allocate memory to docker
+
+To run all of haystack and its components, it is suggested to change the default in docker settings from 2GiB to 4GiB. Please check this Stackoverflow answer.
+
+
+2. To start Haystack's traces, trends and service graph
+```shell
+docker-compose -f docker-compose.yml \
+               -f traces/docker-compose.yml \
+               -f trends/docker-compose.yml \
+               -f service-graph/docker-compose \
+               -f agent/docker-compose.yml up
+```
+The command above starts haystack-agent as well. Give a minute or two for the containers to come up and connect with each other. Haystack's UI will be available at http://localhost:8080
+
+Finally, one can find a sample spring boot application @ https://github.com/mchandramouli/haystack-springbootsample to send data to Haystack via haystack-agent listening in port 34000.
+
+3. To start Zipkin (tracing) with Haystack's trends and service graph
+```shell
+docker-compose -f docker-compose.yml \
+               -f zipkin/docker-compose.yml \
+               -f trends/docker-compose.yml \
+               -f service-graph/docker-compose.yml up
+```
+The command above starts Pitchfork to proxy data to Zipkin and Haystack.
+
+Give a minute or two for the containers to come up and connect with each other. Once the stack is up, one can use the sample application @ https://github.com/openzipkin/brave-webmvc-example and send some sample data to see traces (from Zipkin), trends and service-graph in haystack-ui @ http://localhost:8080
+
+4. Note on composing components
+
+Note the two commands above add a series of docker-compose.yml files.
+
+Haystack needs at least one trace provider ( traces/docker-compose.yml or zipkin/docker-compose.yml ) and one trends provider ( trends/docker-compose.yml ). One can remove service-graph/docker-compose.yml if service graph is not required. Staring the stack just with with base docker-compose.yml, will start core services like kafka, cassandra and elastic-search along with haystack-ui with mock backend
+
+```shell
+docker-compose -f docker-compose.yml up
+```
+
+#### An alternate approach using terraform that consumers can use for large cluster deployments:
+
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
 2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
 ```shell
