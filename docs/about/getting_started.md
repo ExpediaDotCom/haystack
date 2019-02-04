@@ -1,4 +1,4 @@
----
+--
 title: Getting Started
 sidebar_label: Getting Started
 ---
@@ -7,27 +7,25 @@ All of Haystack's backend components are released as [Docker images](../subsyste
 If you need to package the components yourself, fat jars are available from the Maven Central Repository.
 Haystack is designed so that all of its components can be deployed selectively. 
 
-We have automated deployment of Haystack components using [Kubernetes](https://github.com/jaegertracing/jaeger-kubernetes).
+We have automated deployment of Haystack components using [Kubernetes](https://github.com/kubernetes/kubernetes)
 The entire Haystack server runs locally on Minikube (k8s), and with a 1 click deployment on other environments.
 The deployment scripts are not tied up with Minikube for local development.
 You can use the same script to deploy in production (and that is how we deploy at Expedia.)
 
-## To install the local server
+Also, Minikube is not the only option to run Haystack server component locally. One can use docker-compose as well. 
 
-To get a feel of Haystack you can run Haystack locally inside Minikube.
-To do so, clone the `ExpediaDotCom/haystack` repository and run the installer script, as described below.
-#### There are two possible approaches to getting Haystack running locally: Using docker-compose or using Minikube with Terraform
+## Starting Haystack components 
 
-### Install pre-requisites
+### Using docker-compose
 
-##### docker-compose Approach 
+Clone [ExpediaDotCom/haystack-docker](https://github.com/ExpediaDotCom/haystack-docker) repository and run docker-compose as described below
 
 1. Allocate memory to docker
 
-To run all of haystack and its components, it is suggested to change the default in docker settings from 2GiB to 4GiB. Please check this [Stackoverflow answer](https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container).
-
+To run all of haystack and its components, it is suggested to change the default in docker settings from `2GiB` to `4GiB`. Please check this [Stackoverflow](https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container) post on changing docker memory allocation.
 
 2. To start Haystack's traces, trends and service graph
+
 ```shell
 docker-compose -f docker-compose.yml \
                -f traces/docker-compose.yml \
@@ -37,21 +35,17 @@ docker-compose -f docker-compose.yml \
 ```
 The command above starts haystack-agent as well. Give a minute or two for the containers to come up and connect with each other. Haystack's UI will be available at http://localhost:8080
 
-Finally, one can find a sample spring boot application @ https://github.com/mchandramouli/haystack-springbootsample to send data to Haystack via haystack-agent listening in port 34000.
-
+Finally, one can find a sample spring boot application @ https://github.com/ExpediaDotCom/opentracing-spring-haystack-example to send data to Haystack via haystack-agent listening in port 34000.
 
 3. To compose components
 
 Haystack needs at least trace provider ( traces/docker-compose.yml ) and trends provider ( trends/docker-compose.yml ) to get a functional stack running. One can start without trends provider, but the system will use a mock trends provider. One can remove service-graph/docker-compose.yml if service dependency graph is not required. Starting the stack with just base docker-compose.yml will start core services like kafka, cassandra and elastic-search along with haystack-ui with mock backend
 
-```shell
-docker-compose -f docker-compose.yml up
-```
+### MiniKube (Kubernetes) with Terraform Approach 
 
-##### MiniKube with Terraform Approach 
+To get a feel of Haystack running in Kubernetes, one can run Haystack locally inside Minikube. To do so, clone the [ExpediaDotCom/haystack](https://github.com/ExpediaDotCom/haystack/) repository and run the installer script, as described below.
 
 Note: Terraform to deploy Haystack into minikube described below can be used for deploying Haystack into large kubernetes clusters as well.
-
 
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
 2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
@@ -83,7 +77,7 @@ You can use one of the following 2 methods:
         minikube start --memory 8192 --cpus 4
         ```
 
-### Install the software
+#### Install the software
 
 From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
 ```shell
@@ -101,12 +95,12 @@ Once the record for the Minikube appears in `/etc/hosts`, you can access the Hay
 
 You can access the Kubernetes console at `http://haystack.local:30000`.
 
-### Installed components list
+#### Installed components list
 
 The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
 To open the Minikube dashboard type `minikube dashboard`.
 
-### Custom Installations
+#### Custom Installations
 By default deployment scripts are configured to deploy only the traces and trends components. However we can pass an overrides config file to the deployment script to specify the exact subsystems and their configurations you want to deploy
 ```shell
 cd deployment/terraform
@@ -134,9 +128,7 @@ Here's a sample overrides file :
 
 You can choose to override any of the values mentioned in the folowing [file](https://github.com/ExpediaDotCom/haystack/blob/master/deployment/terraform/cluster/local/apps/variables.tf) 
 
-
-
-### Uninstall the software
+#### Uninstall the software
 From the root of the location to which `ExpediatDotCom/haystack` has been cloned:
 ```shell
 cd deployment/terraform
@@ -148,8 +140,7 @@ this will uninstall all Haystack components, but will leave Minikube running. To
 minikube stop
 ``` 
 
-
-### Troubleshooting deployment errors
+#### Troubleshooting deployment errors
 
 If Minikube is returning errors during the install process it could be due to inconsistent terraform state. To fix this issue run the following commands in order of sequence.
 
@@ -167,24 +158,24 @@ If Minikube is returning errors during the install process it could be due to in
     ./apply-compose.sh -r install-all
     ```
 
-## How to send spans
+### How to send spans
 
 A *span* is one unit of telemetry data. A span typically represents a service call or a block of code.
 A span for a service call starts from the time a client sends a request, ends at the time that the client receives a response, and includes metadata associated with the service call.
 
-### Creating test data in kafka with fakespans
+#### Creating test data in kafka with fakespans
 
 `fakespans` is a simple app written in the Go language, which can generate random spans and push them to the the Haystack messge bus, Kafka.
 You can find the source for `fakespans` [in the haystack-idl repository](https://github.com/ExpediaDotCom/haystack-idl/tree/master/fakespans).
 
-#### Using fakespans
+##### Using fakespans
 
 ## Using the prebuilt binaries
 Choose the binary corresponding to Operating System and architecture from [here](https://github.com/ExpediaDotCom/haystack-idl/releases).
 Alternatively, you can use the fakespans-downloader script to download fakespans binary, if your operating system is either Mac or Linux.
 
 
-## Building fakespans
+### Building fakespans
 Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fakespans`.
 
  ```shell
@@ -217,7 +208,7 @@ Usage of fakespans:
 
 For details, see [ExpediaDotCom/haystack-idl](https://github.com/ExpediaDotCom/haystack-idl).
 
-### How to view span data
+#### How to view span data
 
 You can see span data in the Haystack UI at `https://haystack.local:32300`.
 See the [UI](https://expediadotcom.github.io/haystack/docs/ui/ui.html) page for more information about how the data is presented and what you can do with the UI.
