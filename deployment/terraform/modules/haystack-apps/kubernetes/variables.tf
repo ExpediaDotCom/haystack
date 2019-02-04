@@ -60,15 +60,15 @@ variable "alerting" {
   type = "map"
 }
 
+variable "modelservice" {
+  type = "map"
+}
+
 variable "ad-mapper" {
   type = "map"
 }
 
 variable "ad-manager" {
-  type = "map"
-}
-
-variable "modelservice" {
   type = "map"
 }
 

@@ -44,9 +44,9 @@ module "haystack-apps" {
 
   # Adaptive Alerting configuration overrides
   alerting = "${var.alerting}"
+  modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  modelservice = "${var.modelservice}"
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
 
