@@ -158,7 +158,7 @@ If Minikube is returning errors during the install process it could be due to in
     ./apply-compose.sh -r install-all
     ```
 
-### How to send spans
+#### How to send spans
 
 A *span* is one unit of telemetry data. A span typically represents a service call or a block of code.
 A span for a service call starts from the time a client sends a request, ends at the time that the client receives a response, and includes metadata associated with the service call.
@@ -168,14 +168,14 @@ A span for a service call starts from the time a client sends a request, ends at
 `fakespans` is a simple app written in the Go language, which can generate random spans and push them to the the Haystack messge bus, Kafka.
 You can find the source for `fakespans` [in the haystack-idl repository](https://github.com/ExpediaDotCom/haystack-idl/tree/master/fakespans).
 
-##### Using fakespans
+#### Using fakespans
 
-## Using the prebuilt binaries
+##### Using the prebuilt binaries
 Choose the binary corresponding to Operating System and architecture from [here](https://github.com/ExpediaDotCom/haystack-idl/releases).
 Alternatively, you can use the fakespans-downloader script to download fakespans binary, if your operating system is either Mac or Linux.
 
 
-### Building fakespans
+##### Building fakespans
 Run the following commands on your terminal to start using fake spans. You will need to have the Go language installed in order to run `fakespans`.
 
  ```shell
@@ -190,7 +190,7 @@ go install
 cd $GOBIN
 ./fakespans
 ```
-#### fakespans command line options
+##### fakespans command line options
 ```
 ./fakespans -h
 Usage of fakespans:
