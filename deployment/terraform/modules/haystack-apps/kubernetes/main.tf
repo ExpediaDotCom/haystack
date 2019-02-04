@@ -110,8 +110,10 @@ module "ui" {
   metricpoint_encoder_type = "${var.ui["metricpoint_encoder_type"]}"
 }
 
+# Adaptive Alerting
 module "alerting" {
   source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
+#  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
 
   app_namespace = "${var.aa_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
@@ -122,15 +124,13 @@ module "alerting" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
-  metrictank = "${var.metrictank}"
 
   # AA apps
   alerting = "${var.alerting}"
   modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  aquila-detector = "${var.aquila-detector}"
-  aquila-trainer = "${var.aquila-trainer}"
+  mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
 }
 

@@ -72,17 +72,14 @@ variable "ad-manager" {
   type = "map"
 }
 
-variable "aquila-trainer" {
-  type = "map"
-}
-
-variable "aquila-detector" {
+variable "mc-a2m-mapper" {
   type = "map"
 }
 
 variable "notifier" {
   type = "map"
 }
+
 
 # ========================================
 # Alert Manager
