@@ -84,6 +84,7 @@ variable "trends" {
     timeseries_aggregator_memory_request = "1536"
     timeseries_aggregator_memory_limit = "1536"
     timeseries_aggregator_jvm_memory_limit = "1024"
+    timeseries_aggregator_enable_metrics_sink = true
   }
 }
 
