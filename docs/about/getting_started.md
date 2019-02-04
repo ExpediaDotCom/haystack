@@ -16,12 +16,15 @@ You can use the same script to deploy in production (and that is how we deploy a
 
 To get a feel of Haystack you can run Haystack locally inside Minikube.
 To do so, clone the `ExpediaDotCom/haystack` repository and run the installer script, as described below.
+#### There are two possible approaches to getting Haystack running locally: Using docker-compose or using Minikube with Terraform
 
 ### Install pre-requisites
 
+##### docker-compose Approach 
+
 1. Allocate memory to docker
 
-To run all of haystack and its components, it is suggested to change the default in docker settings from 2GiB to 4GiB. Please check this Stackoverflow answer.
+To run all of haystack and its components, it is suggested to change the default in docker settings from 2GiB to 4GiB. Please check this [Stackoverflow answer](https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container).
 
 
 2. To start Haystack's traces, trends and service graph
@@ -36,28 +39,19 @@ The command above starts haystack-agent as well. Give a minute or two for the co
 
 Finally, one can find a sample spring boot application @ https://github.com/mchandramouli/haystack-springbootsample to send data to Haystack via haystack-agent listening in port 34000.
 
-3. To start Zipkin (tracing) with Haystack's trends and service graph
-```shell
-docker-compose -f docker-compose.yml \
-               -f zipkin/docker-compose.yml \
-               -f trends/docker-compose.yml \
-               -f service-graph/docker-compose.yml up
-```
-The command above starts Pitchfork to proxy data to Zipkin and Haystack.
 
-Give a minute or two for the containers to come up and connect with each other. Once the stack is up, one can use the sample application @ https://github.com/openzipkin/brave-webmvc-example and send some sample data to see traces (from Zipkin), trends and service-graph in haystack-ui @ http://localhost:8080
+3. To compose components
 
-4. Note on composing components
-
-Note the two commands above add a series of docker-compose.yml files.
-
-Haystack needs at least one trace provider ( traces/docker-compose.yml or zipkin/docker-compose.yml ) and one trends provider ( trends/docker-compose.yml ). One can remove service-graph/docker-compose.yml if service graph is not required. Staring the stack just with with base docker-compose.yml, will start core services like kafka, cassandra and elastic-search along with haystack-ui with mock backend
+Haystack needs at least trace provider ( traces/docker-compose.yml ) and trends provider ( trends/docker-compose.yml ) to get a functional stack running. One can start without trends provider, but the system will use a mock trends provider. One can remove service-graph/docker-compose.yml if service dependency graph is not required. Starting the stack with just base docker-compose.yml will start core services like kafka, cassandra and elastic-search along with haystack-ui with mock backend
 
 ```shell
 docker-compose -f docker-compose.yml up
 ```
 
-#### An alternate approach using terraform that consumers can use for large cluster deployments:
+##### MiniKube with Terraform Approach 
+
+Note: Terraform to deploy Haystack into minikube described below can be used for deploying Haystack into large kubernetes clusters as well.
+
 
 1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
 2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
