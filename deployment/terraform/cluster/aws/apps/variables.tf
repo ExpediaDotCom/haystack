@@ -60,6 +60,8 @@ variable "service-graph" {
     graph_builder_memory_request = "1536"
     graph_builder_memory_limit = "1536"
     graph_builder_jvm_memory_limit = "1024"
+    kafka_replication_factor = "1"
+    metadata_topic_partition_count = "1"
   }
 }
 

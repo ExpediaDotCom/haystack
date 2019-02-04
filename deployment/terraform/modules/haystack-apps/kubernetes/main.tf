@@ -78,6 +78,7 @@ module "service-graph" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   service-graph = "${var.service-graph}"
+  graphite_enabled = "${var.graphite_enabled}"
 }
 
 module "ui" {
