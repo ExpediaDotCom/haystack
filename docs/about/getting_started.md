@@ -39,10 +39,6 @@ The command above starts haystack-agent as well. Give a minute or two for the co
 
 Finally, one can find a sample spring boot application @ https://github.com/ExpediaDotCom/opentracing-spring-haystack-example to send data to Haystack via haystack-agent listening in port 34000.
 
-3. To compose components
-
-Haystack needs at least trace provider ( traces/docker-compose.yml ) and trends provider ( trends/docker-compose.yml ) to get a functional stack running. One can start without trends provider, but the system will use a mock trends provider. One can remove service-graph/docker-compose.yml if service dependency graph is not required. Starting the stack with just base docker-compose.yml will start core services like kafka, cassandra and elastic-search along with haystack-ui with mock backend
-
 ### MiniKube (Kubernetes) with Terraform Approach 
 
 To get a feel of Haystack running in Kubernetes, one can run Haystack locally inside Minikube. To do so, clone the [ExpediaDotCom/haystack](https://github.com/ExpediaDotCom/haystack/) repository and run the installer script, as described below.
