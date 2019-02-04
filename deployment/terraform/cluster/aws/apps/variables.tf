@@ -299,11 +299,11 @@ variable "modelservice" {
     instances = 1
     image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "250"
-    memory_limit = "250"
-    jvm_memory_limit = "200"
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "1024"
+    memory_limit = "1024"
+    jvm_memory_limit = "512"
     environment_overrides = ""
     db_endpoint = ""
   }
