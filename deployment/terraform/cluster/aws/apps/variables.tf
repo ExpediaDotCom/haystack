@@ -254,7 +254,7 @@ variable "alerting" {
   type = "map"
   default = {
     enabled = false
-    version = "ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    version = "baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
   }
 }
 
@@ -263,11 +263,13 @@ variable "modelservice" {
   default = {
     enabled = false
     instances = 1
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "250"
-    memory_limit = "250"
-    jvm_memory_limit = "200"
+    image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "500m"
+    cpu_limit = "2000m"
+    memory_request = "1024"
+    memory_limit = "1024"
+    jvm_memory_limit = "512"
     environment_overrides = ""
     db_endpoint = ""
   }
@@ -278,7 +280,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -295,7 +297,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image = "expediadotcom/adaptive-alerting-ad-manager:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -303,9 +305,6 @@ variable "ad-manager" {
     memory_limit = "1024"
     jvm_memory_limit = "512"
     environment_overrides = ""
-    aquila_uri = "http://aquila-detector/detect"
-    models_region = "us-west-2"
-    models_bucket = "aa-models"
     modelservice_uri_template = "http://modelservice/api/models/search/findLatestByDetectorUuid?uuid=%s"
   }
 }
@@ -315,7 +314,7 @@ variable "mc-a2m-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "500m"
     cpu_limit = "2000m"
@@ -339,50 +338,6 @@ variable "notifier" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     webhook_url = ""
-  }
-}
-
-# ========================================
-# Aquila
-# ========================================
-
-# TODO Figure out how to isolate and DRY the Aquila version in the config below. [WLW]
-# https://github.com/hashicorp/terraform/issues/4084
-
-variable "aquila-detector" {
-  type = "map"
-
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/aquila-detector:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "500m"
-    cpu_limit = "2000m"
-    memory_request = "1024"
-    memory_limit = "1024"
-    jvm_memory_limit = "512"
-    environment_overrides = ""
-  }
-}
-
-variable "aquila-trainer" {
-  type = "map"
-
-  # I removed the app name from the keys here, as the keys are already app-scoped.
-  # It's easier to use this as a template for future apps. Please consider adopting
-  # this approach for the other apps. [WLW]
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/aquila-trainer:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "500m"
-    cpu_limit = "2000m"
-    memory_request = "1024"
-    memory_limit = "1024"
-    jvm_memory_limit = "512"
-    environment_overrides = ""
   }
 }
 

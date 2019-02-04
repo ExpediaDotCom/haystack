@@ -50,10 +50,6 @@ module "haystack-apps" {
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
 
-  # Aquila configuration overrides
-  aquila-trainer = "${var.aquila-trainer}"
-  aquila-detector = "${var.aquila-detector}"
-
   # Alert Manager
   alert-manager = "${var.alert-manager}"
   alert-manager-service = "${var.alert-manager-service}"
