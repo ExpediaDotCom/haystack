@@ -361,31 +361,12 @@ variable "notifier" {
 # Alert Manager
 # ========================================
 
-variable "alert-manager" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    version = "f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-    db_endpoint = ""
-    smtp_host = ""
-    mail_from = ""
-  }
-}
-
 variable "alert-manager-service" {
   type = "map"
   default = {
     enabled = false
     instances = 1
-    version = "d6001287d8841bcb80a56a705fb8454093ab7371"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -394,6 +375,7 @@ variable "alert-manager-service" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     es_urls = ""
+    additional_email_validator_expression = ""
   }
 }
 
@@ -402,7 +384,7 @@ variable "alert-manager-store" {
   default = {
     enabled = false
     instances = 1
-    version = "d6001287d8841bcb80a56a705fb8454093ab7371"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -419,16 +401,18 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    version = "d6001287d8841bcb80a56a705fb8454093ab7371"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
+    memory_request = "700"
+    memory_limit = "700"
     jvm_memory_limit = "300"
     environment_overrides = ""
     subscription_search_url = ""
     mail_from = ""
+    rate_limit_enabled = false
+    es_urls = ""
   }
 }
 
