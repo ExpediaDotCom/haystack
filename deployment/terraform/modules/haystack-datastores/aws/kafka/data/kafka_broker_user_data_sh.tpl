@@ -1,5 +1,13 @@
 #!/bin/bash
 
+#format and mount ephemeral disk if the instance type from i3 family
+if [[ `curl -s http://169.254.169.254/latest/meta-data/instance-type ` =~ ^(i3.*)$ ]]
+then
+    echo 'sudo mkfs.ext4 -E nodiscard /dev/nvme0n1' | sudo tee -a /etc/rc.local
+    echo 'sudo mount -o discard /dev/nvme0n1 /var/kafka' | sudo tee -a /etc/rc.local
+    echo 'sudo service kafka restart' | sudo tee -a /etc/rc.local
+fi
+
 # get ip from metadata service
 local_ip=`curl -s http://169.254.169.254/latest/meta-data/local-ipv4`
 
