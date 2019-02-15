@@ -31,6 +31,7 @@ module "haystack-apps" {
   graphite_hostname = "${data.terraform_remote_state.haystack_infrastructure.graphite_hostname}"
   graphite_port = "${data.terraform_remote_state.haystack_infrastructure.graphite_port}"
   graphite_enabled = "${local.graphite_enabled}"
+  domain_name = "${var.domain_name}"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"
