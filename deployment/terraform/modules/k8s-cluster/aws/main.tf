@@ -2,6 +2,9 @@ locals {
   k8s_cluster_name = "${var.cluster["name"]}-k8s.${var.cluster["domain_name"]}"
   haystack_ui_cname = "${var.cluster["name"]}.${var.cluster["domain_name"]}"
   aws_nodes_subnet = "${element(split(",", var.cluster["aws_nodes_subnet"]),0)}"
+  haystack_cluster_role = "${var.cluster["name"]}"
+  haystack_cluster_env = "${var.cluster["env"]}"
+  haystack_cluster_name = "${var.cluster["env"] == "" ? var.cluster["name"] : "${var.cluster["name"]}-${var.cluster["env"]}"}"
 }
 
 
@@ -39,7 +42,7 @@ module "security_groups" {
   aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
   reverse_proxy_port = "${var.cluster["reverse_proxy_port"]}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
-  haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_name = "${local.haystack_cluster_name}"
   graphite_node_port = "${var.graphite_node_port}"
 }
 
@@ -48,7 +51,7 @@ module "iam_roles" {
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
   s3_bucket_name = "${var.cluster["s3_bucket_name"]}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
-  haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_name = "${local.haystack_cluster_name}"
 }
 module "asg" {
   source = "asg"
@@ -66,7 +69,9 @@ module "asg" {
   aws_nodes_subnet = "${local.aws_nodes_subnet}"
   masters_security_groups = "${module.security_groups.master_security_group_ids}"
   masters_iam-instance-profile_arn = "${module.iam_roles.masters_iam-instance-profile_arn}"
-  haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_name = "${local.haystack_cluster_name}"
+  haystack_cluster_role = "${local.haystack_cluster_role}"
+  haystack_cluster_env = "${local.haystack_cluster_env}"
   master_instance_volume = "${var.kops_kubernetes["master_instance_volume"]}"
   app-nodes_instance_volume = "${var.kops_kubernetes["app-nodes_instance_volume"]}"
   monitoring-nodes_instance_volume = "${var.kops_kubernetes["monitoring-nodes_instance_volume"]}"
@@ -86,7 +91,9 @@ module "elbs" {
   master-3_asg_id = "${module.asg.master-3_asg_id}"
   app-nodes_asg_id = "${module.asg.app-nodes_asg_id}"
   "monitoring-nodes_asg_id" = "${module.asg.monitoring-nodes_asg_id}"
-  haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_name = "${local.haystack_cluster_name}"
+  haystack_cluster_role = "${local.haystack_cluster_role}"
+  haystack_cluster_env = "${local.haystack_cluster_env}"
   monitoring_security_groups = "${module.security_groups.monitoring-elb-security_group_ids}"
   graphite_node_port = "${var.graphite_node_port}"
   aws_nodes_subnet = "${local.aws_nodes_subnet}"

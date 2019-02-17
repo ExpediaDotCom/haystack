@@ -44,6 +44,7 @@ variable "cluster" {
     aws_vpc_id = ""
     aws_utilities_subnet = ""
     aws_s3_bucket_name = ""
+    env = ""
   }
 }
 

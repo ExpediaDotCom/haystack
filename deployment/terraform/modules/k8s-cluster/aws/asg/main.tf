@@ -35,8 +35,13 @@ resource "aws_autoscaling_group" "master-1" {
     },
     {
       key = "Role"
-      value = "${var.haystack_cluster_name}-k8s-masters"
+      value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
+    },
+    {
+      key = "Environment"
+      value = "${var.haystack_cluster_env}"
+      ropagate_at_launch = true
     },
     {
       key = "Name"
@@ -93,8 +98,13 @@ resource "aws_autoscaling_group" "master-2" {
     },
     {
       key = "Role"
-      value = "${var.haystack_cluster_name}-k8s-masters"
+      value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
+    },
+    {
+      key = "Environment"
+      value = "${var.haystack_cluster_env}"
+      ropagate_at_launch = true
     },
     {
       key = "Name"
@@ -152,8 +162,13 @@ resource "aws_autoscaling_group" "master-3" {
     },
     {
       key = "Role"
-      value = "${var.haystack_cluster_name}-k8s-masters"
+      value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
+    },
+    {
+      key = "Environment"
+      value = "${var.haystack_cluster_env}"
+      ropagate_at_launch = true
     },
     {
       key = "Name"
@@ -209,8 +224,13 @@ resource "aws_autoscaling_group" "app-nodes" {
     },
     {
       key = "Role"
-      value = "${var.haystack_cluster_name}-k8s-app-nodes"
+      value = "${var.haystack_cluster_role}-k8s-app-nodes"
       propagate_at_launch = true
+    },
+    {
+      key = "Environment"
+      value = "${var.haystack_cluster_env}"
+      ropagate_at_launch = true
     },
     {
       key = "Name"
@@ -258,8 +278,13 @@ resource "aws_autoscaling_group" "monitoring-nodes" {
     },
     {
       key = "Role"
-      value = "${var.haystack_cluster_name}-k8s-monitoring-nodes"
+      value = "${var.haystack_cluster_role}-k8s-monitoring-nodes"
       propagate_at_launch = true
+    },
+   {
+      key = "Environment"
+      value = "${var.haystack_cluster_env}"
+      ropagate_at_launch = true
     },
     {
       key = "Name"
@@ -450,11 +475,12 @@ resource "aws_ebs_volume" "1-etcd-events" {
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
     Name = "${var.haystack_cluster_name}-k8s-events-1"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Role = "${var.haystack_cluster_role}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
     //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
     KubernetesCluster = "${var.k8s_cluster_name}"
     "k8s.io/etcd/events" = "1/1,2,3"
-    "k8s.io/role/master" = "1"
+    "k8s.io/`e/master" = "1"
   }
 }
 
@@ -471,6 +497,7 @@ resource "aws_ebs_volume" "1-etcd-main" {
     ClusterName = "${var.haystack_cluster_name}"
     Name = "${var.haystack_cluster_name}-k8s-main-1"
     Role = "${var.haystack_cluster_name}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
     //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
     KubernetesCluster = "${var.k8s_cluster_name}"
     "k8s.io/etcd/main" = "1/1,2,3"
@@ -490,7 +517,8 @@ resource "aws_ebs_volume" "2-etcd-events" {
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
     Name = "${var.haystack_cluster_name}-k8s-events-2"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Role = "${var.haystack_cluster_role}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
     //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
     KubernetesCluster = "${var.k8s_cluster_name}"
     "k8s.io/etcd/events" = "2/1,2,3"
@@ -510,7 +538,8 @@ resource "aws_ebs_volume" "2-etcd-main" {
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
     Name = "${var.haystack_cluster_name}-k8s-main-2"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Role = "${var.haystack_cluster_role}-k8s-masters"
+
     //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
     KubernetesCluster = "${var.k8s_cluster_name}"
     "k8s.io/etcd/main" = "2/1,2,3"
@@ -531,6 +560,7 @@ resource "aws_ebs_volume" "3-etcd-events" {
     ClusterName = "${var.haystack_cluster_name}"
     Name = "${var.haystack_cluster_name}-k8s-events-3"
     Role = "${var.haystack_cluster_name}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
     //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
     KubernetesCluster = "${var.k8s_cluster_name}"
     "k8s.io/etcd/events" = "3/1,2,3"
@@ -550,7 +580,8 @@ resource "aws_ebs_volume" "3-etcd-main" {
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
     Name = "${var.haystack_cluster_name}-k8s-main-3"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Role = "${var.haystack_cluster_role}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
     //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
     KubernetesCluster = "${var.k8s_cluster_name}"
     "k8s.io/etcd/main" = "3/1,2,3"
