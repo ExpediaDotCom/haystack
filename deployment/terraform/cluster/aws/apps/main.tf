@@ -31,6 +31,7 @@ module "haystack-apps" {
   graphite_hostname = "${data.terraform_remote_state.haystack_infrastructure.graphite_hostname}"
   graphite_port = "${data.terraform_remote_state.haystack_infrastructure.graphite_port}"
   graphite_enabled = "${local.graphite_enabled}"
+  domain_name = "${var.domain_name}"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"
@@ -50,12 +51,7 @@ module "haystack-apps" {
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
 
-  # Aquila configuration overrides
-  aquila-trainer = "${var.aquila-trainer}"
-  aquila-detector = "${var.aquila-detector}"
-
   # Alert Manager
-  alert-manager = "${var.alert-manager}"
   alert-manager-service = "${var.alert-manager-service}"
   alert-manager-store = "${var.alert-manager-store}"
   alert-manager-notifier = "${var.alert-manager-notifier}"

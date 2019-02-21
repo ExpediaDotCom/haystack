@@ -256,7 +256,7 @@ variable "haystack-alerts" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    version = "baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
   }
 }
 
@@ -265,6 +265,8 @@ variable "modelservice" {
   default = {
     enabled = false
     instances = 1
+    image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
     memory_request = "500"
@@ -280,7 +282,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -298,7 +300,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image = "expediadotcom/adaptive-alerting-ad-manager:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -306,9 +308,6 @@ variable "ad-manager" {
     memory_limit = "250"
     jvm_memory_limit = "200"
     environment_overrides = ""
-    aquila_uri = "http://aquila-detector/detect"
-    models_region = "us-west-2"
-    models_bucket = "aa-models"
     modelservice_uri_template = "http://modelservice/api/models/search/findLatestByDetectorUuid?uuid=%s"
     kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
   }
@@ -319,7 +318,7 @@ variable "mc-a2m-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
+    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -336,6 +335,9 @@ variable "mc-a2m-mapper" {
     metric_producer_client_id = "mc-a2m-mapper"
     metric_producer_topic = "metrics"
     metric_producer_key_serializer = "org.apache.kafka.common.serialization.StringSerializer"
+
+    # TODO Rename the serializer after we merge Haystack integration into AA. [WLW]
+#    metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataMessagePackSerializer"
     metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataSerializer"
   }
 }
@@ -357,80 +359,15 @@ variable "notifier" {
 }
 
 # ========================================
-# Aquila
-# ========================================
-
-# TODO Figure out how to isolate and DRY the Aquila version in the config below. [WLW]
-# https://github.com/hashicorp/terraform/issues/4084
-
-# Override image and image_pull_policy to use Minikube-local images. See
-# https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
-
-variable "aquila-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/aquila-detector:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-  }
-}
-
-variable "aquila-trainer" {
-  type = "map"
-
-  # I removed the app name from the keys here, as the keys are already app-scoped.
-  # It's easier to use this as a template for future apps. Please consider adopting
-  # this approach for the other apps. [WLW]
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/aquila-trainer:ecca91efc7b51d45c21aaaf04a72f45bd83f99eb"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-  }
-}
-
-# ========================================
 # Alert Manager
 # ========================================
-
-variable "alert-manager" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    version = "f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-    db_endpoint = ""
-    smtp_host = ""
-    mail_from = ""
-  }
-}
 
 variable "alert-manager-service" {
   type = "map"
   default = {
     enabled = false
     instances = 1
-    version = "d6001287d8841bcb80a56a705fb8454093ab7371"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -439,6 +376,7 @@ variable "alert-manager-service" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     es_urls = ""
+    additional_email_validator_expression = ""
   }
 }
 
@@ -447,7 +385,7 @@ variable "alert-manager-store" {
   default = {
     enabled = false
     instances = 1
-    version = "d6001287d8841bcb80a56a705fb8454093ab7371"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -464,16 +402,18 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    version = "d6001287d8841bcb80a56a705fb8454093ab7371"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
+    memory_request = "700"
+    memory_limit = "700"
     jvm_memory_limit = "300"
     environment_overrides = ""
     subscription_search_url = ""
     mail_from = ""
+    rate_limit_enabled = false
+    es_urls = ""
   }
 }
 

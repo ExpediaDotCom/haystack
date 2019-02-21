@@ -124,7 +124,6 @@ module "alerting" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
-  metrictank = "${var.metrictank}"
 
   # AA apps
   alerting = "${var.alerting}"
@@ -132,8 +131,6 @@ module "alerting" {
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
-  aquila-detector = "${var.aquila-detector}"
-  aquila-trainer = "${var.aquila-trainer}"
   notifier = "${var.notifier}"
 }
 
@@ -151,7 +148,6 @@ module "alert-manager" {
   graphite_enabled = "${var.graphite_enabled}"
 
   # AM apps
-  alert-manager = "${var.alert-manager}"
   alert-manager-service = "${var.alert-manager-service}"
   alert-manager-store = "${var.alert-manager-store}"
   alert-manager-notifier = "${var.alert-manager-notifier}"

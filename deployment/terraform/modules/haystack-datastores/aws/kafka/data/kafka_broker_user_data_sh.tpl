@@ -1,5 +1,14 @@
 #!/bin/bash
 
+#format and mount ephemeral
+if [ lsblk /dev/nvme0n1 ]; then
+      echo 'if [ "$(file -b -s /dev/nvme0n1)" == "data" ]; then' | sudo tee -a /etc/rc.local
+      echo ' sudo mkfs.ext4 -E nodiscard /dev/nvme0n1' | sudo tee -a /etc/rc.local
+      echo 'fi' |  sudo tee -a /etc/rc.local
+      echo 'sudo mount -o discard /dev/nvme0n1 /var/kafka' | sudo tee -a /etc/rc.local
+      echo 'sudo service kafka restart' | sudo tee -a /etc/rc.local
+fi
+
 # get ip from metadata service
 local_ip=`curl -s http://169.254.169.254/latest/meta-data/local-ipv4`
 
