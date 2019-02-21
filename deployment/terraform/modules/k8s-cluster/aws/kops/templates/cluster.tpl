@@ -147,9 +147,9 @@ metadata:
 spec:
   associatePublicIp: false
   image: k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
-  machineType: ${app-node_instance_type}
-  maxSize: ${app-node_instance_count}
-  minSize: ${app-node_instance_count}
+  machineType: ${app-nodes_instance_type}
+  maxSize: ${app-nodes_instance_count}
+  minSize: ${app-nodes_instance_count}
   rootVolumeSize: ${app-node_instance_volume}
   rootVolumeType: gp2
   nodeLabels:

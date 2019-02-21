@@ -30,6 +30,12 @@ variable "traces" {
     reader_memory_request = "250"
     reader_memory_limit = "250"
     reader_jvm_memory_limit = "200"
+
+    backend_cpu_request = "100m"
+    backend_cpu_limit = "500m"
+    backend_memory_request = "250"
+    backend_memory_limit = "250"
+    backend_jvm_memory_limit = "200"
   }
 }
 
@@ -215,6 +221,33 @@ variable "metrictank" {
   }
 }
 
+variable "haystack-alerts" {
+  type = "map"
+  default = {
+    enabled = false
+    es_curator_enabled = false
+    version = "f7f7e516ac0459fb4e4cf3df977a3255a729bed8"
+    elasticsearch_template = "{\"template\": \"haystack-anomalies*\",\"settings\": {\"number_of_shards\": 1,\"index.mapping.ignore_malformed\": true,\"analysis\": {\"normalizer\": {\"lowercase_normalizer\": {\"type\": \"custom\",\"filter\": [\"lowercase\"]}}}},\"mappings\": {\"anomaly\": {\"_source\": {\"enabled\": true},\"_field_names\": {\"enabled\": false},\"_all\": {\"enabled\": false},\"properties\": {\"startTime\": {\"type\": \"long\",\"doc_values\": true}},\"dynamic_templates\": [{\"strings_as_keywords_1\": {\"match_mapping_type\": \"string\",\"mapping\": {\"type\": \"keyword\",\"normalizer\": \"lowercase_normalizer\",\"doc_values\": false,\"norms\": false}}}, {\"longs_disable_doc_norms\": {\"match_mapping_type\": \"long\",\"mapping\": {\"type\": \"long\",\"doc_values\": false,\"norms\": false}}}]}}}"
+    alert-api_instances = 1
+    alert-api_environment_overrides = ""
+    alert-api_cpu_request = "100m"
+    alert-api_cpu_limit = "1000m"
+    alert-api_memory_request = "250"
+    alert-api_memory_limit = "250"
+    alert-api_jvm_memory_limit = "200"
+    subscription_service_hostname = "http://alert-manager-service.aa-apps.svc.cluster.local"
+    subscription_service_port = 80
+
+    anomaly-store_instances = 1
+    anomaly-store_environment_overrides = ""
+    anomaly-store_cpu_request = "100m"
+    anomaly-store_cpu_limit = "1000m"
+    anomaly-store_memory_request = "250"
+    anomaly-store_memory_limit = "250"
+    anomaly-store_jvm_memory_limit = "200"
+  }
+}
+
 # ========================================
 # Adaptive Alerting
 # ========================================
@@ -222,7 +255,7 @@ variable "metrictank" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "77eab4a5755f666bc9b460c652ba148c785249ee"
+    version = "baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
   }
 }
 
@@ -231,6 +264,8 @@ variable "modelservice" {
   default = {
     enabled = false
     instances = 1
+    image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
     memory_request = "500"
@@ -246,7 +281,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:77eab4a5755f666bc9b460c652ba148c785249ee"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -264,7 +299,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:77eab4a5755f666bc9b460c652ba148c785249ee"
+    image = "expediadotcom/adaptive-alerting-ad-manager:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -272,11 +307,37 @@ variable "ad-manager" {
     memory_limit = "250"
     jvm_memory_limit = "200"
     environment_overrides = ""
-    aquila_uri = "http://aquila-detector/detect"
-    models_region = "us-west-2"
-    models_bucket = "aa-models"
     modelservice_uri_template = "http://modelservice/api/models/search/findLatestByDetectorUuid?uuid=%s"
     kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
+  }
+}
+
+variable "mc-a2m-mapper" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image_pull_policy = "IfNotPresent"
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    memory_request = "250"
+    memory_limit = "250"
+    jvm_memory_limit = "200"
+    environment_overrides = ""
+    anomaly_consumer_bootstrap_servers = "kafka-service.haystack-apps.svc.cluster.local:9092"
+    anomaly_consumer_group_id = "mc-a2m-mapper"
+    anomaly_consumer_topic = "anomalies"
+    anomaly_consumer_key_deserializer = "org.apache.kafka.common.serialization.StringDeserializer"
+    anomaly_consumer_value_deserializer = "com.expedia.adaptivealerting.kafka.serde.AnomalyResultJsonDeserializer"
+    metric_producer_bootstrap_servers = "kafka-service.haystack-apps.svc.cluster.local:9092"
+    metric_producer_client_id = "mc-a2m-mapper"
+    metric_producer_topic = "metrics"
+    metric_producer_key_serializer = "org.apache.kafka.common.serialization.StringSerializer"
+
+    # TODO Rename the serializer after we merge Haystack integration into AA. [WLW]
+#    metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataMessagePackSerializer"
+    metric_producer_value_serializer = "com.expedia.adaptivealerting.kafka.serde.MetricDataSerializer"
   }
 }
 
@@ -297,88 +358,24 @@ variable "notifier" {
 }
 
 # ========================================
-# Aquila
-# ========================================
-
-# TODO Figure out how to isolate and DRY the Aquila version in the config below. [WLW]
-# https://github.com/hashicorp/terraform/issues/4084
-
-# Override image and image_pull_policy to use Minikube-local images. See
-# https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
-
-variable "aquila-detector" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/aquila-detector:77eab4a5755f666bc9b460c652ba148c785249ee"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-  }
-}
-
-variable "aquila-trainer" {
-  type = "map"
-
-  # I removed the app name from the keys here, as the keys are already app-scoped.
-  # It's easier to use this as a template for future apps. Please consider adopting
-  # this approach for the other apps. [WLW]
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/aquila-trainer:77eab4a5755f666bc9b460c652ba148c785249ee"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-  }
-}
-
-# ========================================
 # Alert Manager
 # ========================================
-
-variable "alert-manager" {
-  type = "map"
-  default = {
-    enabled = false
-    instances = 1
-    image = "expediadotcom/alert-manager-deprecated:f5bd3989f0c06b250a7bdaa29c27b858daf7231f"
-    image_pull_policy = "IfNotPresent"
-    cpu_request = "100m"
-    cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
-    jvm_memory_limit = "300"
-    environment_overrides = ""
-    db_endpoint = ""
-    smtp_host = ""
-    mail_from = ""
-  }
-}
 
 variable "alert-manager-service" {
   type = "map"
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-service:3e60c8fd215aea39123439b30759b6de11850f09"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
+    memory_request = "700"
+    memory_limit = "700"
     jvm_memory_limit = "300"
     environment_overrides = ""
     es_urls = ""
+    additional_email_validator_expression = ""
   }
 }
 
@@ -387,7 +384,7 @@ variable "alert-manager-store" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-store:3e60c8fd215aea39123439b30759b6de11850f09"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -404,16 +401,18 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/alert-manager-notifier:3e60c8fd215aea39123439b30759b6de11850f09"
+    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
-    memory_request = "500"
-    memory_limit = "500"
+    memory_request = "700"
+    memory_limit = "700"
     jvm_memory_limit = "300"
     environment_overrides = ""
     subscription_search_url = ""
     mail_from = ""
+    rate_limit_enabled = false
+    es_urls = ""
   }
 }
 

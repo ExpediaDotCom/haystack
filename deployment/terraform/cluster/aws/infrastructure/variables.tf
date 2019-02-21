@@ -1,15 +1,6 @@
-variable "s3_bucket_name" {}
-variable "aws_vpc_id" {}
-variable "aws_nodes_subnet" {}
-variable "aws_nodes_subnets" {
-  type = "list"
-}
-variable "aws_utilities_subnet" {}
-variable "aws_domain_name" {}
 variable "kubectl_executable_name" {}
 variable "kops_executable_name" {}
-variable "haystack_cluster_name" {}
-
+variable "domain_name" {}
 
 variable "monitoring_addons" {
   type = "map"
@@ -29,7 +20,6 @@ variable "alerting_addons" {
   }
 }
 
-
 variable "logging_addons" {
   type = "map"
   default = {
@@ -40,104 +30,76 @@ variable "logging_addons" {
   }
 }
 
-
 variable "cluster" {
   type = "map"
   default = {
-    name = "haystack"
     base_domain_name = "local"
     storage_class = "default"
     reverse_proxy_port = "32300"
     monitoring-node_selecter_label = "kops.k8s.io/instancegroup: monitoring-nodes"
     app-node_selecter_label = "kops.k8s.io/instancegroup: app-nodes"
+    aws_region = "us-west-2"
+    aws_ssh_key = "haystack"
+    aws_nodes_subnets = ""
+    aws_vpc_id = ""
+    aws_utilities_subnet = ""
+    aws_s3_bucket_name = ""
   }
 }
 
-variable "aws_region" {
-  default = "us-west-2"
+variable "kafka" {
+  type = "map"
+  default = {
+    zookeeper_count = 3
+    zookeeper_volume_size = 512
+    broker_count = 3
+    broker_volume_size = 512
+    broker_instance_type = "m4.xlarge"
+    default_partition_count = 96
+  }
+}
+//Kubernetes cluster created using KOPS
+variable "kops_kubernetes" {
+  type = "map"
+  default = {
+    master_instance_type = "c4.large"
+    master_instance_volume = 128
+    app-nodes_instance_type = "c5.large"
+    app-nodes_instance_count = 4
+    app-nodes_instance_volume = 256
+    monitoring-nodes_instance_type = "m4.xlarge"
+    monitoring-nodes_instance_count = 2
+    monitoring-nodes_instance_volume = 128
+    k8s_version = "1.8.6"
+    node_ami = "ami-7ee37206"
+    master_ami = "ami-7ee37206"
+  }
 }
 
-variable "aws_ssh_key" {
-  default = "haystack"
+variable "es_spans_index" {
+  type = "map"
+  default = {
+    dedicated_master_enabled = true
+    master_instance_type = "m4.large.elasticsearch"
+    master_instance_count = 3
+    worker_instance_type = "i3.2xlarge.elasticsearch"
+    worker_instance_type = "i3.2xlarge.elasticsearch"
+    worker_instnce_count = 3
+  }
 }
 
-variable "es_master_instance_type" {
-  default = "m4.large.elasticsearch"
-}
-
-
-variable "es_worker_instance_type" {
-  default = "i3.2xlarge.elasticsearch"
-}
-
-variable "es_worker_instance_count" {
-  default = 3
-}
-
-variable "es_master_instance_count" {
-  default = 3
-}
-
-variable "es_dedicated_master_enabled" {
-  default = true
-}
-
-variable "zookeeper_count" {
-  default = 3
-}
-variable "zookeeper_volume_size" {
-  default = 512
-}
-variable "kafka_broker_count" {
-  default = 1
-}
-variable "kafka_broker_volume_size" {
-  default = 512
-}
-variable "kafka_broker_instance_type" {
-  default = "m4.xlarge"
-}
-
-variable "k8s_master_instance_type" {
-  default = "c4.large"
-}
-variable "kafka_default_partition_count" {
-  default = 96
-}
-
-
-variable "k8s_app-nodes_instance_type" {
-  default = "c5.large"
-}
-variable "k8s_app-nodes_instance_count" {
-  default = 4
-}
-variable "k8s_monitoring-nodes_instance_type" {
-  default = "m4.xlarge"
-}
-variable "k8s_monitoring-nodes_instance_count" {
-  default = 2
-}
-variable "cassandra_node_image" {
-  default = ""
-}
-variable "cassandra_seed_node_volume_size" {
-  default = 512
-}
-variable "cassandra_non_seed_node_volume_size" {
-  default = 512
-}
-variable "cassandra_seed_node_instance_count" {
-  default = 2
-}
-variable "cassandra_non_seed_node_instance_count" {
-  default = 1
-}
-variable "cassandra_seed_node_instance_type" {
-  default = "c4.xlarge"
-}
-variable "cassandra_non_seed_node_instance_type" {
-  default = "c4.xlarge"
+variable "cassandra_spans_backend" {
+  type = "map"
+  default = {
+    node_image = ""
+    seed_node_volume_size = 512
+    non_seed_node_volume_size = 512
+    seed_node_instance_count = 2
+    seed_node_instance_count = 2
+    non_seed_node_instance_count = 1
+    seed_node_instance_type = "c5.xlarge"
+    non_seed_node_instance_type = "c5.xlarge"
+  }
 }
 
 variable "aa_apps_resource_limits" {
@@ -145,6 +107,6 @@ variable "aa_apps_resource_limits" {
   default = {
     enabled = true
     cpu_limit = "2"
-    memory_limit =  "4Gi"
+    memory_limit = "4Gi"
   }
 }

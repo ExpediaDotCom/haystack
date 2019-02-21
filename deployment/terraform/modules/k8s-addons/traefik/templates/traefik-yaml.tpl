@@ -102,9 +102,9 @@ spec:
            name: config
         resources:
           limits:
-            memory: 100Mi
+            memory: 512Mi
           requests:
-            memory: 50Mi
+            memory: 128Mi
         ports:
         - containerPort: 80
         - containerPort: 8080
@@ -128,24 +128,6 @@ spec:
     nodePort: ${node_port}
   selector:
     k8s-app: ${traefik_name}
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-haystack-metrictank
-  namespace: ${k8s_app_namespace}
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-  - host: ${haystack_ui_cname}
-    http:
-      paths:
-       - path: /metrictank
-         backend:
-           serviceName: metrictank
-           servicePort: 6060
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -182,107 +164,4 @@ spec:
            serviceName: http-span-collector
            servicePort: 80
 ---
-# ------------------- adaptive-alerting-modelservice ------------------- #
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-modelservice
-  # TODO Remove hardcode [WLW]
-#  namespace: ${k8s_app_namespace}
-  namespace: aa-apps
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haystack_ui_cname}
-     http:
-        paths:
-         - path: /modelservice
-           backend:
-             serviceName: modelservice
-             servicePort: 80
----
-# -------------------------- aquila-detector --------------------------- #
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-aquila-detector
-  # TODO Remove hardcode [WLW]
-#  namespace: ${k8s_app_namespace}
-  namespace: aa-apps
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haystack_ui_cname}
-     http:
-       paths:
-       - path: /aquila-detector
-         backend:
-           serviceName: aquila-detector
-           servicePort: 80
----
-# --------------------------- aquila-trainer --------------------------- #
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-aquila-trainer
-  # TODO Remove hardcode [WLW]
-#  namespace: ${k8s_app_namespace}
-  namespace: aa-apps
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haystack_ui_cname}
-     http:
-        paths:
-         - path: /aquila-trainer
-           backend:
-             serviceName: aquila-trainer
-             servicePort: 80
----
-# --------------------------- alert-manager --------------------------- #
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-alert-manager-deprecated
-  # TODO Remove hardcode
-#  namespace: ${k8s_app_namespace}
-  namespace: aa-apps
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haystack_ui_cname}
-     http:
-        paths:
-         - path: /alert-manager-deprecated
-           backend:
-             serviceName: alert-manager
-             servicePort: 80
----
-# --------------------------- alert-manager --------------------------- #
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: traefik-alert-manager
-  # TODO Remove hardcode
-#  namespace: ${k8s_app_namespace}
-  namespace: aa-apps
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    traefik.frontend.rule.type: PathPrefixStrip
-spec:
-  rules:
-   - host: ${haystack_ui_cname}
-     http:
-        paths:
-         - path: /alert-manager
-           backend:
-             serviceName: alert-manager-service
-             servicePort: 80
+

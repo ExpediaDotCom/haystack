@@ -36,20 +36,17 @@ module "haystack-apps" {
   service-graph = "${var.service-graph}"
   ui = "${var.ui}"
   metrictank = "${var.metrictank}"
+  haystack-alerts = "${var.haystack-alerts}"
 
   # AA configuration overrides
   alerting = "${var.alerting}"
   modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
+  mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
 
-  # Aquila configuration overrides
-  aquila-detector = "${var.aquila-detector}"
-  aquila-trainer = "${var.aquila-trainer}"
-
   # Alert Manager
-  alert-manager = "${var.alert-manager}"
   alert-manager-service = "${var.alert-manager-service}"
   alert-manager-store = "${var.alert-manager-store}"
   alert-manager-notifier = "${var.alert-manager-notifier}"

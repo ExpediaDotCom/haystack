@@ -110,8 +110,10 @@ module "ui" {
   metricpoint_encoder_type = "${var.ui["metricpoint_encoder_type"]}"
 }
 
+# Adaptive Alerting
 module "alerting" {
   source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
+#  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
 
   app_namespace = "${var.aa_app_namespace}"
   kubectl_context_name = "${var.kubectl_context_name}"
@@ -122,15 +124,13 @@ module "alerting" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
-  metrictank = "${var.metrictank}"
 
   # AA apps
   alerting = "${var.alerting}"
   modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  aquila-detector = "${var.aquila-detector}"
-  aquila-trainer = "${var.aquila-trainer}"
+  mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
 }
 
@@ -148,8 +148,23 @@ module "alert-manager" {
   graphite_enabled = "${var.graphite_enabled}"
 
   # AM apps
-  alert-manager = "${var.alert-manager}"
   alert-manager-service = "${var.alert-manager-service}"
   alert-manager-store = "${var.alert-manager-store}"
   alert-manager-notifier = "${var.alert-manager-notifier}"
+}
+
+module "haystack-alerting" {
+  source = "github.com/ExpediaDotCom/haystack-alerting/deployment/terraform"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  kafka_port = "${var.kafka_port}"
+  elasticsearch_port = "${var.elasticsearch_port}"
+  elasticsearch_hostname = "${var.elasticsearch_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  haystack-alerts = "${var.haystack-alerts}"
 }

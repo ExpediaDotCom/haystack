@@ -12,8 +12,8 @@ variable "kubectl_context_name" {}
 variable "kubectl_executable_name" {}
 variable "k8s_app_namespace" {}
 variable "aa_app_namespace" {}
-variable "app-node_selector_label"{}
-
+variable "app-node_selector_label" {}
+variable "domain_name" {}
 
 # ========================================
 # Haystack
@@ -47,6 +47,10 @@ variable "metrictank" {
   type = "map"
 }
 
+variable "haystack-alerts" {
+  type = "map"
+}
+
 
 # ========================================
 # Adaptive Alerting
@@ -68,11 +72,7 @@ variable "ad-manager" {
   type = "map"
 }
 
-variable "aquila-trainer" {
-  type = "map"
-}
-
-variable "aquila-detector" {
+variable "mc-a2m-mapper" {
   type = "map"
 }
 
@@ -80,13 +80,10 @@ variable "notifier" {
   type = "map"
 }
 
+
 # ========================================
 # Alert Manager
 # ========================================
-
-variable "alert-manager" {
-  type = "map"
-}
 
 variable "alert-manager-service" {
   type = "map"
