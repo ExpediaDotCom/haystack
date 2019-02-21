@@ -24,6 +24,7 @@ module "cassandra" {
   graphite_host = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_role = "${var.cluster["role_prefix"]}"
 }
 
 module "es" {
@@ -34,6 +35,7 @@ module "es" {
   worker_instance_type = "${var.es_spans_index["worker_instance_type"]}"
   dedicated_master_enabled = "${var.es_spans_index["dedicated_master_enabled"]}"
   haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_role = "${var.cluster["role_prefix"]}"
   aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
   aws_subnet = "${local.aws_nodes_subnet}"
   aws_region = "${var.cluster["aws_region"]}"
@@ -54,5 +56,6 @@ module "kafka" {
   aws_graphite_host = "${var.graphite_hostname}"
   aws_graphite_port = "${var.graphite_port}"
   haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_role = "${var.cluster["role_prefix"]}"
   default_partition_count = "${var.kafka["default_partition_count"]}"
 }

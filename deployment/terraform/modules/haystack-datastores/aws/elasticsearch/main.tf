@@ -55,7 +55,7 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
     Product = "Haystack"
     Component = "ES"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${local.haystack_index_store_domain_name}"
+    Role = "${var.haystack_cluster_role}-index-store"
     Name = "${local.haystack_index_store_domain_name}"
   }
 }
