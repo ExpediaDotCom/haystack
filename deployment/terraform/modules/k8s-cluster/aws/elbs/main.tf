@@ -28,8 +28,9 @@ resource "aws_elb" "api-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Role = "${var.haystack_cluster_role}-k8s-masters"
     Name = "${var.haystack_cluster_name}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 
@@ -63,8 +64,9 @@ resource "aws_elb" "monitoring-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-monitoring-nodes"
+    Role = "${var.haystack_cluster_role}-k8s-monitoring-nodes"
     Name = "${var.haystack_cluster_name}-k8s-monitoring-nodes"
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 
@@ -98,8 +100,9 @@ resource "aws_elb" "nodes-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-app-nodes"
+    Role = "${var.haystack_cluster_role}-k8s-app-nodes"
     Name = "${var.haystack_cluster_name}-k8s-app-nodes"
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 

@@ -23,8 +23,9 @@ resource "aws_security_group" "api-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters-elb"
+    Role = "${var.haystack_cluster_role}-k8s-masters-elb"
     Name = "${var.haystack_cluster_name}-k8s-masters-elb"
+    Environment = "${var.haystack_cluster_env}"
   }
 
 }
@@ -54,9 +55,9 @@ resource "aws_security_group" "nodes-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-nodes-elb"
+    Role = "${var.haystack_cluster_role}-k8s-nodes-elb"
     Name = "${var.haystack_cluster_name}-k8s-nodes-elb"
-
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 
@@ -85,9 +86,9 @@ resource "aws_security_group" "monitoring-elb" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-monitoring-elb"
+    Role = "${var.haystack_cluster_role}-k8s-monitoring-elb"
     Name = "${var.haystack_cluster_name}-k8s-monitoring-elb"
-
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 
@@ -102,8 +103,9 @@ resource "aws_security_group" "nodes" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-nodes"
+    Role = "${var.haystack_cluster_role}-k8s-nodes"
     Name = "${var.haystack_cluster_name}-k8s-nodes"
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 
@@ -177,8 +179,9 @@ resource "aws_security_group" "masters" {
     Product = "Haystack"
     Component = "K8s"
     ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
+    Role = "${var.haystack_cluster_role}-k8s-masters"
     Name = "${var.haystack_cluster_name}-k8s-masters"
+    Environment = "${var.haystack_cluster_env}"
   }
 }
 

@@ -4,7 +4,7 @@ locals {
   aws_nodes_subnet = "${element(split(",", var.cluster["aws_nodes_subnet"]),0)}"
   haystack_cluster_role = "${var.cluster["name"]}"
   haystack_cluster_env = "${var.cluster["env"]}"
-  haystack_cluster_name = "${var.cluster["env"] == "" ? var.cluster["name"] : "${var.cluster["name"]}-${var.cluster["env"]}"}"
+  haystack_cluster_name = "${var.cluster["name"]}-${var.cluster["env"]}"
 }
 
 
