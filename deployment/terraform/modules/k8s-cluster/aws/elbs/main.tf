@@ -80,6 +80,7 @@ resource "aws_elb" "nodes-elb" {
     instance_protocol = "HTTP"
     lb_port = "${local.nodes_elb_port}"
     lb_protocol = "${local.nodes_elb_protocol}"
+    ssl_certificate_id   = "${var.cluster["node_elb_sslcert_arn"]}"
   }
 
   security_groups = [
