@@ -88,6 +88,7 @@ module "elbs" {
   monitoring_security_groups = "${module.security_groups.monitoring-elb-security_group_ids}"
   graphite_node_port = "${var.graphite_node_port}"
   aws_nodes_subnet = "${local.aws_nodes_subnet}"
+  cluster = "${var.cluster}"
 }
 
 module "route53" {
