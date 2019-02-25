@@ -45,6 +45,7 @@ variable "cluster" {
     aws_utilities_subnet = ""
     aws_s3_bucket_name = ""
     role_prefix = "haystack"
+    node_elb_sslcert_arn = ""
   }
 }
 
