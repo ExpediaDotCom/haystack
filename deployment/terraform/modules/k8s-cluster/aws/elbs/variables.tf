@@ -19,3 +19,6 @@ variable "graphite_node_port" {}
 variable "monitoring_security_groups" {
   type = "list"
 }
+variable "cluster" {
+  type = "map"
+}
