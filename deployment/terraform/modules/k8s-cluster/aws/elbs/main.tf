@@ -1,5 +1,9 @@
+locals {
+  nodes_elb_port = "${var.cluster["node_elb_sslcert_arn"] == "" ? 80 : 443 }"
+  nodes_elb_protocol = "${var.cluster["node_elb_sslcert_arn"] == "" ? "HTTP" : "HTTPS" }"
+}
 resource "aws_elb" "api-elb" {
-  name = "${var.haystack_cluster_name}-api-elb"
+  name = "${var.cluster["name"]}-api-elb"
 
   listener = {
     instance_port = 443
@@ -11,7 +15,7 @@ resource "aws_elb" "api-elb" {
   security_groups = [
     "${var.elb_api_security_groups}"]
   subnets = [
-    "${var.aws_elb_subnet}"]
+    "${var.cluster["aws_utilities_subnet"]}"]
   internal = false
 
   health_check = {
@@ -27,14 +31,14 @@ resource "aws_elb" "api-elb" {
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_role}-k8s-masters"
-    Name = "${var.haystack_cluster_name}-k8s-masters"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-masters"
+    Name = "${var.cluster["name"]}-k8s-masters"
   }
 }
 
 resource "aws_elb" "monitoring-elb" {
-  name = "${var.haystack_cluster_name}-monitoring-elb"
+  name = "${var.cluster["name"]}-monitoring-elb"
 
   listener = {
     instance_port = "${var.graphite_node_port}"
@@ -62,30 +66,31 @@ resource "aws_elb" "monitoring-elb" {
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_role}-k8s-monitoring-nodes"
-    Name = "${var.haystack_cluster_name}-k8s-monitoring-nodes"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-monitoring-nodes"
+    Name = "${var.cluster["name"]}-k8s-monitoring-nodes"
   }
 }
 
 resource "aws_elb" "nodes-elb" {
-  name = "${var.haystack_cluster_name}-nodes-elb"
+  name = "${var.cluster["name"]}-nodes-elb"
 
   listener = {
-    instance_port = "${var.reverse_proxy_port}"
+    instance_port = "${var.cluster["reverse_proxy_port"]}"
     instance_protocol = "HTTP"
-    lb_port = 80
-    lb_protocol = "HTTP"
+    lb_port = "${local.nodes_elb_port}"
+    lb_protocol = "${local.nodes_elb_protocol}"
+    ssl_certificate_id   = "${var.cluster["node_elb_sslcert_arn"]}"
   }
 
   security_groups = [
     "${var.nodes_api_security_groups}"]
   subnets = [
-    "${var.aws_elb_subnet}"]
+    "${var.cluster["aws_utilities_subnet"]}"]
   internal = false
 
   health_check = {
-    target = "TCP:${var.reverse_proxy_port}"
+    target = "TCP:${var.cluster["reverse_proxy_port"]}"
     healthy_threshold = 2
     unhealthy_threshold = 2
     interval = 10
@@ -97,9 +102,9 @@ resource "aws_elb" "nodes-elb" {
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_role}-k8s-app-nodes"
-    Name = "${var.haystack_cluster_name}-k8s-app-nodes"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-app-nodes"
+    Name = "${var.cluster["name"]}-k8s-app-nodes"
   }
 }
 
