@@ -23,7 +23,7 @@ do
   if [ $SERVERCOUNT -lt ${zk_node_count} ]
   then
    echo "found $SERVERCOUNT ... retrying"
-   SERVERS=$(aws ec2 describe-instances --output text  --filters "Name=tag:Role,Values=${role}" "Name=instance-state-name,Values=running" --query 'Reservations[*].Instances[*].[PrivateIpAddress,Tags[?Key==`Type`].Value[]]' --region us-west-2)
+   SERVERS=$(aws ec2 describe-instances --output text  --filters "Name=tag:Role,Values=${role}" "Name=tag:ClusterName,Values=${cluster_name}" "Name=instance-state-name,Values=running" --query 'Reservations[*].Instances[*].[PrivateIpAddress,Tags[?Key==`Type`].Value[]]' --region us-west-2)
    SERVERCOUNT=`echo $SERVERS |wc -w`
   else
    echo "found servers: $SERVERS"

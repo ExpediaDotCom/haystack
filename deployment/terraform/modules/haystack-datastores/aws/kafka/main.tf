@@ -73,7 +73,8 @@ data "template_file" "zookeeper_user_data" {
   template = "${file("${path.module}/data/zookeeper_user_data_sh.tpl")}"
 
   vars {
-    role = "${var.haystack_cluster_name}-kafka-zookeeper"
+    role = "${var.haystack_cluster_role}-kafka-zookeeper"
+    cluster_name = "${var.haystack_cluster_name}"
     zk_a_name = "${var.haystack_cluster_name}-zookeeper-"
     zk_node_count = "${var.zookeeper_count}"
     haystack_graphite_host = "${var.aws_graphite_host}"

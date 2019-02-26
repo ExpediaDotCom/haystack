@@ -44,6 +44,7 @@ variable "cluster" {
     reverse_proxy_port = "32300"
     monitoring-node_selecter_label = "kubernetes.io/hostname: minikube"
     app-node_selecter_label = "kubernetes.io/hostname: minikube"
+    role_prefix = "haystack"
   }
 }
 

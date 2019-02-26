@@ -14,3 +14,4 @@ variable "aws_ssh_key_pair_name" {}
 variable "graphite_host" {}
 variable "graphite_port" {}
 variable "haystack_cluster_name" {}
+variable "haystack_cluster_role" {}
