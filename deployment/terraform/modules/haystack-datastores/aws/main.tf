@@ -29,16 +29,9 @@ module "cassandra" {
 
 module "es" {
   source = "elasticsearch"
-  master_instance_count = "${var.es_spans_index["master_instance_count"]}"
-  master_instance_type = "${var.es_spans_index["master_instance_type"]}"
-  worker_instance_count = "${var.es_spans_index["worker_instance_count"]}"
-  worker_instance_type = "${var.es_spans_index["worker_instance_type"]}"
-  dedicated_master_enabled = "${var.es_spans_index["dedicated_master_enabled"]}"
-  haystack_cluster_name = "${var.cluster["name"]}"
-  haystack_cluster_role = "${var.cluster["role_prefix"]}"
-  aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
+  es_spans_index = "${var.es_spans_index}"
+  cluster = "${var.cluster}"
   aws_subnet = "${local.aws_nodes_subnet}"
-  aws_region = "${var.cluster["aws_region"]}"
   k8s_nodes_iam-role_arn = "${var.k8s_nodes_iam-role_arn}"
 }
 
