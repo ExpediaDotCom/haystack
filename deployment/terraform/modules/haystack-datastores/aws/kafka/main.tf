@@ -14,7 +14,7 @@ data "aws_ami" "haystack-kafka-base-ami" {
 }
 
 locals {
-  kafka_broker_ami = "${var.broker_image == "" ? data.aws_ami.haystack-kafka-base-ami.image_id : var.broker_image }"
+  kafka_broker_ami = "${var.kafka["broker_image"] == "" ? data.aws_ami.haystack-kafka-base-ami.image_id : var.kafka["broker_image"] }"
   zookeeper_cname = "${var.cluster["name"]}-zookeeper"
   kafka_cname = "${var.cluster["name"]}-kafka"
   kafka_port = "9092"

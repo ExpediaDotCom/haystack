@@ -1,6 +1,3 @@
-variable "broker_image" {
-  default = ""
-}
 variable "aws_subnets" {
   type = "list"
 }
