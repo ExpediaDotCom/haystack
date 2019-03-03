@@ -10,21 +10,12 @@ data "aws_route53_zone" "haystack_dns_zone" {
 
 module "cassandra" {
   source = "cassandra"
-  aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
+  cluster = "${var.cluster}"
+  cassandra_spans_backend = "${var.cassandra_spans_backend}"
   aws_subnet = "${local.aws_nodes_subnet}"
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
-  node_image = "${var.cassandra_spans_backend["node_image"]}"
-  seed_node_count = "${var.cassandra_spans_backend["seed_node_instance_count"]}"
-  non_seed_node_count = "${var.cassandra_spans_backend["non_seed_node_instance_count"]}"
-  seed_node_volume_size = "${var.cassandra_spans_backend["seed_node_volume_size"]}"
-  non_seed_node_volume_size = "${var.cassandra_spans_backend["non_seed_node_volume_size"]}"
-  seed_node_instance_type = "${var.cassandra_spans_backend["seed_node_instance_type"]}"
-  non_seed_node_instance_type = "${var.cassandra_spans_backend["non_seed_node_instance_type"]}"
-  aws_ssh_key_pair_name = "${var.cluster["aws_ssh_key"]}"
   graphite_host = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
-  haystack_cluster_name = "${var.cluster["name"]}"
-  haystack_cluster_role = "${var.cluster["role_prefix"]}"
 }
 
 module "es" {
