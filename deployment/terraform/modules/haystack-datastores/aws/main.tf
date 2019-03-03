@@ -44,18 +44,10 @@ module "es" {
 
 module "kafka" {
   source = "kafka"
-  aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
-  zookeeper_count = "${var.kafka["zookeeper_count"]}"
-  zookeeper_volume_size = "${var.kafka["zookeeper_volume_size"]}"
-  broker_count = "${var.kafka["broker_count"]}"
-  broker_instance_type = "${var.kafka["broker_instance_type"]}"
-  broker_volume_size = "${var.kafka["broker_volume_size"]}"
+  cluster = "${var.cluster}"
+  kafka= "${var.kafka}"
   aws_subnets = "${local.aws_nodes_subnets}"
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
-  aws_ssh_key_pair_name = "${var.cluster["aws_ssh_key"]}"
   aws_graphite_host = "${var.graphite_hostname}"
   aws_graphite_port = "${var.graphite_port}"
-  haystack_cluster_name = "${var.cluster["name"]}"
-  haystack_cluster_role = "${var.cluster["role_prefix"]}"
-  default_partition_count = "${var.kafka["default_partition_count"]}"
 }

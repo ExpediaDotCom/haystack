@@ -6,6 +6,9 @@ variable "dedicated_master_enabled" {}
 variable "k8s_nodes_iam-role_arn" {}
 variable "haystack_cluster_name" {}
 variable "haystack_cluster_role" {}
+variable "cluster" {
+  type = "map"
+}
 variable "aws_vpc_id" {}
 variable "aws_subnet" {}
 variable "aws_region" {}
