@@ -1,14 +1,14 @@
 resource "aws_security_group" "haystack-cassandra-nodes" {
-  name = "${var.haystack_cluster_name}-cassandra-node-sg"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "${var.cluster["name"]}-cassandra-node-sg"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack cassandra nodes"
 
   tags = {
     Product = "Haystack"
     Component = "Cassandra"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-cassandra"
-    Name = "${var.haystack_cluster_name}-cassandra"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-cassandra"
+    Name = "${var.cluster["name"]}-cassandra"
     NodeType = "seed"
   }
 }
