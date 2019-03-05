@@ -5,7 +5,7 @@
 
 # haystack
 
-Topmost level repository for public open source Haystack
+This is an uber repository for all Haystack components. Visit our documentation site @ https://expediadotcom.github.io/haystack/
 
 ## Overview
 [Haystack](https://expediadotcom.github.io/haystack/) is an Expedia-backed open source project to facilitate detection 
