@@ -1,5 +1,6 @@
 // using data-source to find latest cassandra image
 data "aws_ami" "haystack-cassandra-base-ami" {
+  owners           = ["self"]
   filter {
     name   = "state"
     values = ["available"]

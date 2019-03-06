@@ -1,5 +1,6 @@
 // using data-source to find latest kafka image
 data "aws_ami" "haystack-kafka-base-ami" {
+  owners           = ["self"]
   filter {
     name   = "state"
     values = ["available"]
