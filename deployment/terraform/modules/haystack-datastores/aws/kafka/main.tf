@@ -9,7 +9,7 @@ data "aws_ami" "haystack-kafka-base-ami" {
     name   = "tag:type"
     values = ["haystack-kafka-base"]
   }
-
+  owners = ["self"]
   most_recent = true
 }
 
