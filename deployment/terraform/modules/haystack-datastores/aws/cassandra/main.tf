@@ -11,6 +11,7 @@ data "aws_ami" "haystack-cassandra-base-ami" {
   }
 
   most_recent = true
+  owners = ["self"]
 }
 
 locals {
