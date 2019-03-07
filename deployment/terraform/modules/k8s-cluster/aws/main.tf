@@ -34,12 +34,10 @@ module "kops" {
   monitoring-nodes_instance_volume = "${var.kops_kubernetes["monitoring-nodes_instance_volume"]}"
 }
 
-module "security_groups" {
+module "security_groups" { 
   source = "security-groups"
-  aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
-  reverse_proxy_port = "${var.cluster["reverse_proxy_port"]}"
+  cluster = "${var.cluster}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
-  haystack_cluster_name = "${var.cluster["name"]}"
   graphite_node_port = "${var.graphite_node_port}"
 }
 

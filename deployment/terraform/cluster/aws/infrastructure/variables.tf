@@ -58,6 +58,7 @@ variable "kafka" {
     broker_volume_size = 512
     broker_instance_type = "m4.xlarge"
     default_partition_count = 96
+    broker_image = ""
   }
 }
 //Kubernetes cluster created using KOPS
