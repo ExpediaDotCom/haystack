@@ -1,14 +1,14 @@
 resource "aws_security_group" "haystack-es" {
-  name = "${var.haystack_cluster_name}-es"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "${var.cluster["name"]}-es"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack ES"
 
   tags = {
     Product = "Haystack"
     Component = "ES"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-es"
-    Name = "${var.haystack_cluster_name}-es"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-es"
+    Name = "${var.cluster["name"]}-es"
   }
   ingress {
     from_port = 80

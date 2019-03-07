@@ -34,12 +34,10 @@ module "kops" {
   monitoring-nodes_instance_volume = "${var.kops_kubernetes["monitoring-nodes_instance_volume"]}"
 }
 
-module "security_groups" {
+module "security_groups" { 
   source = "security-groups"
-  aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
-  reverse_proxy_port = "${var.cluster["reverse_proxy_port"]}"
+  cluster = "${var.cluster}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
-  haystack_cluster_name = "${var.cluster["name"]}"
   graphite_node_port = "${var.graphite_node_port}"
 }
 
@@ -67,6 +65,7 @@ module "asg" {
   masters_security_groups = "${module.security_groups.master_security_group_ids}"
   masters_iam-instance-profile_arn = "${module.iam_roles.masters_iam-instance-profile_arn}"
   haystack_cluster_name = "${var.cluster["name"]}"
+  haystack_cluster_role = "${var.cluster["role_prefix"]}"
   master_instance_volume = "${var.kops_kubernetes["master_instance_volume"]}"
   app-nodes_instance_volume = "${var.kops_kubernetes["app-nodes_instance_volume"]}"
   monitoring-nodes_instance_volume = "${var.kops_kubernetes["monitoring-nodes_instance_volume"]}"
@@ -77,19 +76,17 @@ module "asg" {
 module "elbs" {
   source = "elbs"
   elb_api_security_groups = "${module.security_groups.api-elb-security_group_ids}"
-  aws_elb_subnet = "${var.cluster["aws_utilities_subnet"]}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   nodes_api_security_groups = "${module.security_groups.nodes-api-elb-security_group_ids}"
-  reverse_proxy_port = "${var.cluster["reverse_proxy_port"]}"
   master-1_asg_id = "${module.asg.master-1_asg_id}"
   master-2_asg_id = "${module.asg.master-2_asg_id}"
   master-3_asg_id = "${module.asg.master-3_asg_id}"
   app-nodes_asg_id = "${module.asg.app-nodes_asg_id}"
   "monitoring-nodes_asg_id" = "${module.asg.monitoring-nodes_asg_id}"
-  haystack_cluster_name = "${var.cluster["name"]}"
   monitoring_security_groups = "${module.security_groups.monitoring-elb-security_group_ids}"
   graphite_node_port = "${var.graphite_node_port}"
   aws_nodes_subnet = "${local.aws_nodes_subnet}"
+  cluster = "${var.cluster}"
 }
 
 module "route53" {

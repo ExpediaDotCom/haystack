@@ -44,6 +44,8 @@ variable "cluster" {
     aws_vpc_id = ""
     aws_utilities_subnet = ""
     aws_s3_bucket_name = ""
+    role_prefix = "haystack"
+    node_elb_sslcert_arn = ""
   }
 }
 
@@ -56,6 +58,7 @@ variable "kafka" {
     broker_volume_size = 512
     broker_instance_type = "m4.xlarge"
     default_partition_count = 96
+    broker_image = ""
   }
 }
 //Kubernetes cluster created using KOPS
