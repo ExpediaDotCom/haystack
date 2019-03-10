@@ -3,3 +3,4 @@ variable "graphite_node_port" {}
 variable "cluster" {
   type = "map"
 }
+variable "nodes_elb_port" {}
