@@ -136,6 +136,7 @@ variable "collector" {
   type = "map"
   default = {
     version = "1.1"
+    kinesis_span_collector_app_name = "kinesis-span-collector"
     kinesis_span_collector_instances = 1
     kinesis_span_collector_enabled = false
     kinesis_stream_region = ""
@@ -149,6 +150,7 @@ variable "collector" {
     kinesis_span_collector_jvm_memory_limit = "200"
 
 
+    http_span_collector_app_name = "http-span-collector"
     http_span_collector_instances = 1
     http_span_collector_enabled = false
     http_span_collector_environment_overrides = ""
@@ -375,7 +377,9 @@ variable "alert-manager-service" {
     memory_limit = "700"
     jvm_memory_limit = "300"
     environment_overrides = ""
+    es_aws_region = ""
     es_urls = ""
+    es_aws_iam_auth_required = false
     additional_email_validator_expression = ""
   }
 }
@@ -394,6 +398,8 @@ variable "alert-manager-store" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     es_urls = ""
+    es_aws_iam_auth_required = false
+    es_aws_region = ""
   }
 }
 
@@ -412,8 +418,12 @@ variable "alert-manager-notifier" {
     environment_overrides = ""
     subscription_search_url = ""
     mail_from = ""
-    rate_limit_enabled = false
     es_urls = ""
+    es_aws_iam_auth_required = false
+    es_aws_region = ""
+    alert_rate_limit_enabled = false
+    alert_rate_limit_value = ""
+    alert_expiry_time_in_sec = 36000
   }
 }
 
