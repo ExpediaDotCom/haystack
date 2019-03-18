@@ -18,3 +18,5 @@ variable "monitoring_security_groups" {
 variable "cluster" {
   type = "map"
 }
+variable "nodes_elb_protocol" {}
+variable "nodes_elb_port" {}

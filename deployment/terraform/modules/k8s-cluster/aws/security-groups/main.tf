@@ -1,3 +1,6 @@
+locals {
+  node-elb_ingress = "${split(",", var.cluster["node-elb_ingress"])}"
+}
 //api elb security group
 resource "aws_security_group" "api-elb" {
   name = "api-elb.${var.cluster["name"]}"
@@ -36,11 +39,10 @@ resource "aws_security_group" "nodes-elb" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for nodes ELB"
   ingress {
-    from_port = 80
-    to_port = 80
+    from_port = "${var.nodes_elb_port}"
+    to_port = "${var.nodes_elb_port}"
     protocol = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = [ "${local.node-elb_ingress}" ]
   }
 
   egress {

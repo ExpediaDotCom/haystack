@@ -1,6 +1,5 @@
-locals {
-  nodes_elb_port = "${var.cluster["node_elb_sslcert_arn"] == "" ? 80 : 443 }"
-  nodes_elb_protocol = "${var.cluster["node_elb_sslcert_arn"] == "" ? "HTTP" : "HTTPS" }"
+locals { 
+  node-elb-sgs = "${compact(concat(var.nodes_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
 }
 resource "aws_elb" "api-elb" {
   name = "${var.cluster["name"]}-api-elb"
@@ -78,13 +77,13 @@ resource "aws_elb" "nodes-elb" {
   listener = {
     instance_port = "${var.cluster["reverse_proxy_port"]}"
     instance_protocol = "HTTP"
-    lb_port = "${local.nodes_elb_port}"
-    lb_protocol = "${local.nodes_elb_protocol}"
+    lb_port = "${var.nodes_elb_port}"
+    lb_protocol = "${var.nodes_elb_protocol}"
     ssl_certificate_id   = "${var.cluster["node_elb_sslcert_arn"]}"
   }
 
   security_groups = [
-    "${var.nodes_api_security_groups}"]
+    "${local.node-elb-sgs}"]
   subnets = [
     "${var.cluster["aws_utilities_subnet"]}"]
   internal = false
