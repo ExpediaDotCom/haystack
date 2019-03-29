@@ -27,7 +27,7 @@ module "haystack-apps" {
   haystack_cluster_name = "${var.haystack_cluster_name}"
   app-node_selector_label = "${local.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
-  domain_name = "local"
+  domain_name = "${var.domain_name}"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"

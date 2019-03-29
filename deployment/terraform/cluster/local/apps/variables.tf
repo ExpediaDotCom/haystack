@@ -4,6 +4,10 @@ variable "haystack_cluster_name" {
   default = "haystack"
 }
 
+variable "domain_name" {
+  default = "local"
+}
+
 # ========================================
 # Haystack
 # ========================================
