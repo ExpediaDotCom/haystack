@@ -35,9 +35,7 @@ variable "traces" {
     backend_memory_request = "500"
     backend_memory_limit = "500"
     backend_jvm_memory_limit = "256"
-    backend_cassandra_retries_max = 864000
-    backend_cassandra_backoff_initial_ms = 100
-    backend_cassandra_backoff_factor = 1
+    backend_environment_overrides = ""
   }
 }
 
