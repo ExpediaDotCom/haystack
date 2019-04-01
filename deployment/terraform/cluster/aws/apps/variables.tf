@@ -85,6 +85,9 @@ variable "trends" {
     timeseries_aggregator_memory_limit = "1536"
     timeseries_aggregator_jvm_memory_limit = "1024"
     timeseries_aggregator_enable_metrics_sink = true
+    timeseries_aggregator_histogram_max_value = 1800000
+    timeseries_aggregator_histogram_precision = 2
+    timeseries_aggregator_histogram_value_unit = "millis"
   }
 }
 
