@@ -35,6 +35,9 @@ variable "traces" {
     backend_memory_request = "500"
     backend_memory_limit = "500"
     backend_jvm_memory_limit = "256"
+    backend_cassandra_retries_max = 864000
+    backend_cassandra_backoff_initial_ms = 100
+    backend_cassandra_backoff_factor = 1
   }
 }
 
@@ -85,6 +88,9 @@ variable "trends" {
     timeseries_aggregator_memory_limit = "1536"
     timeseries_aggregator_jvm_memory_limit = "1024"
     timeseries_aggregator_enable_metrics_sink = true
+    timeseries_aggregator_histogram_max_value = 1800000
+    timeseries_aggregator_histogram_precision = 2
+    timeseries_aggregator_histogram_value_unit = "millis"
   }
 }
 
