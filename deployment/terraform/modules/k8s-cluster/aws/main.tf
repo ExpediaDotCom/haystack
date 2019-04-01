@@ -2,6 +2,8 @@ locals {
   k8s_cluster_name = "${var.cluster["name"]}-k8s.${var.cluster["domain_name"]}"
   haystack_ui_cname = "${var.cluster["name"]}.${var.cluster["domain_name"]}"
   aws_nodes_subnet = "${element(split(",", var.cluster["aws_nodes_subnet"]),0)}"
+  nodes_elb_port = "${var.cluster["node_elb_sslcert_arn"] == "" ? 80 : 443 }"
+  nodes_elb_protocol = "${var.cluster["node_elb_sslcert_arn"] == "" ? "HTTP" : "HTTPS" }"
 }
 
 
@@ -34,12 +36,11 @@ module "kops" {
   monitoring-nodes_instance_volume = "${var.kops_kubernetes["monitoring-nodes_instance_volume"]}"
 }
 
-module "security_groups" {
+module "security_groups" { 
   source = "security-groups"
-  aws_vpc_id = "${var.cluster["aws_vpc_id"]}"
-  reverse_proxy_port = "${var.cluster["reverse_proxy_port"]}"
+  cluster = "${var.cluster}"
+  nodes_elb_port ="${local.nodes_elb_port}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
-  haystack_cluster_name = "${var.cluster["name"]}"
   graphite_node_port = "${var.graphite_node_port}"
 }
 
@@ -77,6 +78,8 @@ module "asg" {
 
 module "elbs" {
   source = "elbs"
+  nodes_elb_port = "${local.nodes_elb_port}"
+  nodes_elb_protocol = "${local.nodes_elb_protocol}"
   elb_api_security_groups = "${module.security_groups.api-elb-security_group_ids}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   nodes_api_security_groups = "${module.security_groups.nodes-api-elb-security_group_ids}"

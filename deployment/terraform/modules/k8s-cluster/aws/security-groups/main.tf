@@ -1,7 +1,10 @@
+locals {
+  node-elb_ingress = "${split(",", var.cluster["node-elb_ingress"])}"
+}
 //api elb security group
 resource "aws_security_group" "api-elb" {
-  name = "api-elb.${var.haystack_cluster_name}"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "api-elb.${var.cluster["name"]}"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for api ELB"
 
   ingress {
@@ -22,9 +25,9 @@ resource "aws_security_group" "api-elb" {
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters-elb"
-    Name = "${var.haystack_cluster_name}-k8s-masters-elb"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-masters-elb"
+    Name = "${var.cluster["name"]}-k8s-masters-elb"
   }
 
 }
@@ -32,15 +35,14 @@ resource "aws_security_group" "api-elb" {
 
 //node elb security group
 resource "aws_security_group" "nodes-elb" {
-  name = "nodes-elb.${var.haystack_cluster_name}"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "nodes-elb.${var.cluster["name"]}"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for nodes ELB"
   ingress {
-    from_port = 80
-    to_port = 80
+    from_port = "${var.nodes_elb_port}"
+    to_port = "${var.nodes_elb_port}"
     protocol = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = [ "${local.node-elb_ingress}" ]
   }
 
   egress {
@@ -53,9 +55,9 @@ resource "aws_security_group" "nodes-elb" {
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-nodes-elb"
-    Name = "${var.haystack_cluster_name}-k8s-nodes-elb"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-nodes-elb"
+    Name = "${var.cluster["name"]}-k8s-nodes-elb"
 
   }
 }
@@ -63,8 +65,8 @@ resource "aws_security_group" "nodes-elb" {
 
 //node elb security group
 resource "aws_security_group" "monitoring-elb" {
-  name = "monitoring-elb.${var.haystack_cluster_name}"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "monitoring-elb.${var.cluster["name"]}"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for nodes ELB"
   ingress {
     from_port = 2003
@@ -84,9 +86,9 @@ resource "aws_security_group" "monitoring-elb" {
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-monitoring-elb"
-    Name = "${var.haystack_cluster_name}-k8s-monitoring-elb"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-monitoring-elb"
+    Name = "${var.cluster["name"]}-k8s-monitoring-elb"
 
   }
 }
@@ -94,16 +96,16 @@ resource "aws_security_group" "monitoring-elb" {
 //node instance security group
 
 resource "aws_security_group" "nodes" {
-  name = "nodes.${var.haystack_cluster_name}"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "nodes.${var.cluster["name"]}"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for nodes"
 
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-nodes"
-    Name = "${var.haystack_cluster_name}-k8s-nodes"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-nodes"
+    Name = "${var.cluster["name"]}-k8s-nodes"
   }
 }
 
@@ -140,8 +142,8 @@ resource "aws_security_group_rule" "reverse_proxy-to-node" {
   type = "ingress"
   security_group_id = "${aws_security_group.nodes.id}"
   source_security_group_id = "${aws_security_group.nodes-elb.id}"
-  from_port = "${var.reverse_proxy_port}"
-  to_port = "${var.reverse_proxy_port}"
+  from_port = "${var.cluster["reverse_proxy_port"]}"
+  to_port = "${var.cluster["reverse_proxy_port"]}"
   protocol = "tcp"
 }
 
@@ -169,16 +171,16 @@ resource "aws_security_group_rule" "node-egress" {
 //master instance security group
 
 resource "aws_security_group" "masters" {
-  name = "masters.${var.haystack_cluster_name}"
-  vpc_id = "${var.aws_vpc_id}"
+  name = "masters.${var.cluster["name"]}"
+  vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for masters"
 
   tags = {
     Product = "Haystack"
     Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
-    Name = "${var.haystack_cluster_name}-k8s-masters"
+    ClusterName = "${var.cluster["name"]}"
+    Role = "${var.cluster["role_prefix"]}-k8s-masters"
+    Name = "${var.cluster["name"]}-k8s-masters"
   }
 }
 

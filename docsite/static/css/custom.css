@@ -51,9 +51,11 @@ a.navItemActive {
     background: #F2F4FB;
     color: $primaryColor;
 }
+
 .darkBackground a {
     color: $primaryColor;
 }
+
 .darkBackground code {
     color: $primaryColor;
 }
@@ -183,6 +185,11 @@ li.navListItem.navListItemActive {
 li.navListItem a:hover {
     color: #e23474 !important;
 }
+
+input#search_input_react {
+    line-height: 30px;
+}
+
 
 .homeContainer {
     background-image: url("../img/network_graph.png");

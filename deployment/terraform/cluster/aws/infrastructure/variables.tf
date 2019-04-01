@@ -46,6 +46,8 @@ variable "cluster" {
     aws_s3_bucket_name = ""
     role_prefix = "haystack"
     node_elb_sslcert_arn = ""
+    node-elb_ingress = "0.0.0.0/0"
+    additional-security_groups = ""
   }
 }
 
@@ -58,6 +60,7 @@ variable "kafka" {
     broker_volume_size = 512
     broker_instance_type = "m4.xlarge"
     default_partition_count = 96
+    broker_image = ""
   }
 }
 //Kubernetes cluster created using KOPS

@@ -42,7 +42,11 @@ const siteConfig = {
     scrollToTop: true,
     scrollToTopOptions: {
         zIndex: 100,
-    }
+    },
+    algolia: {
+        apiKey: 'd35e5b975bb77d817c19162f8d0e9ec6',
+        indexName: 'haystack'
+    },
 };
 
 module.exports = siteConfig;

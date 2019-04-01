@@ -32,7 +32,7 @@ To run all of haystack and its components, it is suggested to change the default
 docker-compose -f docker-compose.yml \
                -f traces/docker-compose.yml \
                -f trends/docker-compose.yml \
-               -f service-graph/docker-compose \
+               -f service-graph/docker-compose.yml \
                -f agent/docker-compose.yml up
 ```
 The command above starts haystack-agent as well. Give a minute or two for the containers to come up and connect with each other. Haystack's UI will be available at http://localhost:8080
