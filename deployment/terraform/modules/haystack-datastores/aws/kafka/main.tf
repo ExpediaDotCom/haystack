@@ -49,14 +49,37 @@ resource "aws_iam_role_policy" "zookeeper-policy" {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "zookeeperRoute53ListZones",
+      "Sid": "zkProvidesAccessToSSM",
       "Effect": "Allow",
       "Action": [
-        "ec2:DescribeInstances"
+        "cloudwatch:PutMetricData",
+        "ds:CreateComputer",
+        "ds:DescribeDirectories",
+        "ec2:DescribeInstanceStatus",
+        "ec2:DescribeInstances",
+        "logs:*",
+        "ssm:*",
+        "ec2messages:*"
       ],
-      "Resource": [
-        "*"
-      ]
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:CreateServiceLinkedRole",
+      "Resource": "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*",
+      "Condition": {
+        "StringLike": {
+          "iam:AWSServiceName": "ssm.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:DeleteServiceLinkedRole",
+        "iam:GetServiceLinkedRoleDeletionStatus"
+      ],
+      "Resource": "arn:aws:iam::*:role/aws-service-role/ssm.amazonaws.com/AWSServiceRoleForAmazonSSM*"
     }
   ]
 }
@@ -69,6 +92,7 @@ resource "aws_iam_instance_profile" "haystack-zookeeper-profile" {
 }
 
 data "template_file" "zookeeper_user_data" {
+  count = "${var.kafka["zookeeper_count"]}"
   template = "${file("${path.module}/data/zookeeper_user_data_sh.tpl")}"
 
   vars {
@@ -76,6 +100,7 @@ data "template_file" "zookeeper_user_data" {
     cluster_name = "${var.cluster["name"]}"
     zk_a_name = "${var.cluster["name"]}-zookeeper-"
     zk_node_count = "${var.kafka["zookeeper_count"]}"
+    index = "${count.index}"
     haystack_graphite_host = "${var.aws_graphite_host}"
     haystack_graphite_port = "${var.aws_graphite_port}"
   }
@@ -109,7 +134,7 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
     ignore_changes = ["ami", "user_data","subnet_id"]
   }
 
-  user_data = "${data.template_file.zookeeper_user_data.rendered}"
+  user_data = "${data.template_file.zookeeper_user_data.*.rendered[count.index]}"
 }
 
 resource "aws_iam_role" "haystack-kafka-role" {
