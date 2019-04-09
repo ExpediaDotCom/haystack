@@ -125,7 +125,6 @@ function getHaystackState() {
 
             echo "Haystack State"
             HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
-            echo $HAYSTACK_STATE
         ;;
 
         local)
@@ -141,7 +140,7 @@ function getHaystackState() {
 
             echo "Haystack State"
             HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
-            echo $HAYSTACK_STATE
+
         ;;
     esac
 }
