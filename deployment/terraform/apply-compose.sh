@@ -108,6 +108,43 @@ function downloadThirdPartySoftwares() {
     fi
 }
 
+function getHaystackState() {
+
+    echo "Fetching Haystack State"
+    case "$CLUSTER_TYPE" in
+        aws)
+            cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
+            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-infrastructure"
+            echo "Fetching Haystack Infrastructure State"
+            INFRASTRUCTURE_STATE=`$TERRAFORM state pull`
+
+            cd $DIR/cluster/$CLUSTER_TYPE/apps
+            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-apps"
+            echo "Fetching Haystack Apps State"
+            APPS_STATE=`$TERRAFORM state pull`
+
+            echo "Haystack State"
+            HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
+        ;;
+
+        local)
+            cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
+            $TERRAFORM init
+            echo "Fetching Haystack Infrastructure State"
+            INFRASTRUCTURE_STATE=`$TERRAFORM state pull`
+
+            cd $DIR/cluster/$CLUSTER_TYPE/apps
+            $TERRAFORM init
+            echo "Fetching Haystack Apps State"
+            APPS_STATE=`$TERRAFORM state pull`
+
+            echo "Haystack State"
+            HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
+
+        ;;
+    esac
+}
+
 function deleteState() {
 
     case "$CLUSTER_TYPE" in
@@ -138,10 +175,12 @@ function applyActionOnComponents() {
         install-all)
             installInfrastructure
             installComponents
+            getHaystackState
             echo "Congratulations! you've successfully created haystack infrastructure and deployed haystack apps"
         ;;
         install-apps)
             installComponents
+            getHaystackState
             echo "Congratulations! you've successfully redeployed haystack apps"
         ;;
         uninstall-apps)
