@@ -109,7 +109,7 @@ function downloadThirdPartySoftwares() {
 }
 
 function getHaystackState() {
-    cd $DIR/cluster/$CLUSTER_TYPE/apps
+
     echo "Fetching Haystack State"
     case "$CLUSTER_TYPE" in
         aws)
@@ -124,7 +124,7 @@ function getHaystackState() {
             APPS_STATE=`$TERRAFORM state pull`
 
             echo "Haystack State"
-            HAYSTACK_STATE='{"infrastructureState":"'"$INFRASTRUCTURE_STATE"'","appsState":"'"$APPS_STATE"'"}'
+            HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
             echo $HAYSTACK_STATE
         ;;
 
@@ -140,7 +140,7 @@ function getHaystackState() {
             APPS_STATE=`$TERRAFORM state pull`
 
             echo "Haystack State"
-            HAYSTACK_STATE='{"infrastructureState":"'"$INFRASTRUCTURE_STATE"'","appsState":"'"$APPS_STATE"'"}'
+            HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
             echo $HAYSTACK_STATE
         ;;
     esac
