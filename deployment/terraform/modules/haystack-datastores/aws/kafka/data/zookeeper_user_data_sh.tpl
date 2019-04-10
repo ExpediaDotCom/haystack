@@ -45,7 +45,7 @@ myid=$[${index} +1]
 echo $myid > /var/zookeeper/myid
 
 COUNT=0
-for ID in $SERVERS
+while [ $COUNT -lt $SERVERCOUNT ]
 do
   ZKNAME=${zk_a_name}$COUNT
   COUNT=$[$COUNT +1]
