@@ -16,6 +16,7 @@
 
         <!-- KAFKA -->
         <query objectName="kafka.server:type=*,name=*" resultAlias="server.%type%.%name%.#attribute#"/>
+        <query objectName="kafka.server:type=BrokerTopicMetrics,name=*,topic=*" resultAlias="server.%type%.%name%.%topic%.#attribute#"/>
         <query objectName="kafka.controller:type=*,name=*" resultAlias="controller.%type%.%name%.#attribute#"/>
         <query objectName="kafka.network:type=*,name=*" resultAlias="network.%type%.%name%.#attribute#"/>
         <query objectName="kafka.network:type=*,name=*,request=*" resultAlias="network.%type%.%name%-%request%.#attribute#"/>
