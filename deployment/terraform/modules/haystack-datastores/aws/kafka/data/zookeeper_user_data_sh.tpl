@@ -41,16 +41,15 @@ echo "tickTime=4000" >> /opt/kafka/config/zookeeper.properties
 echo "initLimit=30" >> /opt/kafka/config/zookeeper.properties
 echo "syncLimit=15" >> /opt/kafka/config/zookeeper.properties
 mkdir /var/zookeeper
-COUNT=0
+myid=$[${index} +1]
+echo $myid > /var/zookeeper/myid
 
-for ID in $SERVERS
+COUNT=0
+while [ $COUNT -lt $SERVERCOUNT ]
 do
   ZKNAME=${zk_a_name}$COUNT
   COUNT=$[$COUNT +1]
   echo "server.$COUNT=$ZKNAME:2888:3888" >> /opt/kafka/config/zookeeper.properties
-  if [ "$local_ip" == "$ID" ]; then
-    echo "$COUNT" > /var/zookeeper/myid
-  fi
 done
 
 # start service
