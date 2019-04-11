@@ -35,3 +35,12 @@ module "kafka" {
   aws_graphite_host = "${var.graphite_hostname}"
   aws_graphite_port = "${var.graphite_port}"
 }
+
+module "kinesis-stream" {
+  source = "kinesis-stream"
+  cluster = "${var.cluster}"
+  kinesis-stream = "${var.kinesis-stream}"
+  providers = {
+    aws = "aws.${var.kinesis-stream["aws_region"]}"
+  }
+}

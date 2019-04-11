@@ -27,6 +27,7 @@ module "haystack-datastores" {
   source = "../../../modules/haystack-datastores/aws"
   cluster = "${var.cluster}"
   kafka = "${var.kafka}"
+  kinesis-stream = "${var.kinesis-stream}"
   cassandra_spans_backend = "${var.cassandra_spans_backend}"
   es_spans_index = "${var.es_spans_index}"
   graphite_hostname = "${module.haystack-k8s.external_graphite_hostname}"
