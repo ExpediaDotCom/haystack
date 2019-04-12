@@ -40,7 +40,4 @@ module "kinesis-stream" {
   source = "kinesis-stream"
   cluster = "${var.cluster}"
   kinesis-stream = "${var.kinesis-stream}"
-  providers = {
-    aws = "aws.${var.kinesis-stream["aws_region"]}"
-  }
 }
