@@ -23,6 +23,7 @@ locals {
 module "kafka-security-groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
 }
 
 resource "aws_iam_role" "haystack-zookeeper-role" {
@@ -117,13 +118,11 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   key_name = "${var.cluster["aws_ssh_key"]}"
   iam_instance_profile = "${aws_iam_instance_profile.haystack-zookeeper-profile.name}"
 
-  tags = {
-    Product = "Haystack"
-    Component = "Kafka"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-kafka-zookeeper"
-    Name = "${var.cluster["name"]}-kafka-zookeeper-${count.index}"
-  }
+  tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-kafka-zookeeper",
+    "Name", "${var.cluster["name"]}-kafka-zookeeper-${count.index}",
+    "Component", "Kafka"
+  ))}"
 
   root_block_device = {
     volume_type = "gp2"
@@ -227,13 +226,11 @@ resource "aws_instance" "haystack-kafka-broker" {
   key_name = "${var.cluster["aws_ssh_key"]}"
   associate_public_ip_address = false
   iam_instance_profile = "${aws_iam_instance_profile.haystack-kafka-profile.name}"
-  tags = {
-    Product = "Haystack"
-    Component = "Kafka"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-kafka-brokers"
-    Name = "${var.cluster["name"]}-kafka-brokers-${count.index}"
-  }
+  tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
+    "Name", "${var.cluster["name"]}-kafka-brokers-${count.index}",
+    "Component", "Kafka"
+  ))}"
   root_block_device = {
     volume_type = "gp2"
     volume_size = "${var.kafka["broker_volume_size"]}"

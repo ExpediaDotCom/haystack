@@ -9,3 +9,7 @@ variable "kops_kubernetes" {
 variable "cluster" {
   type = "map"
 }
+
+variable "common_tags" {
+  type = "map"
+}

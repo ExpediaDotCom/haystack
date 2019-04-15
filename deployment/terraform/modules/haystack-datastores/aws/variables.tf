@@ -14,7 +14,9 @@ variable "es_spans_index" {
 variable "cassandra_spans_backend" {
   type = "map"
 }
-
+variable "common_tags" {
+  type = "map"
+}
 
 variable "graphite_hostname" {}
 variable "graphite_port" {}

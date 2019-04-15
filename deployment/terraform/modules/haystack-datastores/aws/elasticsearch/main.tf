@@ -50,11 +50,9 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
   snapshot_options {
     automated_snapshot_start_hour = 23
   }
-  tags = {
-    Product = "Haystack"
-    Component = "ES"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-index-store"
-    Name = "${local.haystack_index_store_domain_name}"
-  }
+ tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-index-store",
+    "Name", "${local.haystack_index_store_domain_name}",
+    "Component", "ES"
+  ))}"
 }
