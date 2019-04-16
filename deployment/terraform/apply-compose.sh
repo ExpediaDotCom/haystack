@@ -17,6 +17,7 @@ function display_help() {
     echo "   -o     app configuration values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : trends_version, traces_version, default:cluster/aws|local/overrides.json "
     echo "   -i     infrastructure configuration which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/overrides.json "
     echo "   -s     flag to skip interactive approval of deployment plan before applying"
+    echo "   -t     flag to fetch Haystack Terraform State"
     echo "   -h     usage. Prints this message"
     echo
 }
@@ -66,6 +67,10 @@ function verifyArgs() {
         SKIP_APPROVAL="false"
     fi
 
+    if [[ -z ${GET_HAYSTACK_STATE} ]]; then
+        GET_HAYSTACK_STATE="false"
+    fi
+
     if [ ! -f ${APP_VARS_FILE} -o ! -f ${INFRA_VARS_FILE} ]; then
         echo "Error: Overrides file provided is not a file or not readable"
         display_help
@@ -81,6 +86,7 @@ function verifyArgs() {
     echo "appvars-file-path = ${APP_VARS_FILE}"
     echo "infravars-file-path = ${INFRA_VARS_FILE}"
     echo "skip-approval = ${SKIP_APPROVAL}"
+    echo "get-haystack-state = ${GET_HAYSTACK_STATE}"
     echo
 }
 
@@ -109,40 +115,48 @@ function downloadThirdPartySoftwares() {
 }
 
 function getHaystackState() {
+    if [[ "$GET_HAYSTACK_STATE" = "true" ]]; then
+        echo "Fetching Haystack State"
+        case "$CLUSTER_TYPE" in
+            aws)
+                cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
+                $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-infrastructure"
+                echo "Fetching Haystack Infrastructure State"
+                INFRASTRUCTURE_STATE=`$TERRAFORM state pull`
 
-    echo "Fetching Haystack State"
-    case "$CLUSTER_TYPE" in
-        aws)
-            cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
-            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-infrastructure"
-            echo "Fetching Haystack Infrastructure State"
-            INFRASTRUCTURE_STATE=`$TERRAFORM state pull`
+                cd $DIR/cluster/$CLUSTER_TYPE/apps
+                $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-apps"
+                echo "Fetching Haystack Apps State"
+                APPS_STATE=`$TERRAFORM state pull`
 
-            cd $DIR/cluster/$CLUSTER_TYPE/apps
-            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-apps"
-            echo "Fetching Haystack Apps State"
-            APPS_STATE=`$TERRAFORM state pull`
+                echo "Haystack State"
+                HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
+                echo "HAYSTACK_STATE_START"
+                echo $HAYSTACK_STATE
+                echo "HAYSTACK_STATE_END"
+            ;;
 
-            echo "Haystack State"
-            HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
-        ;;
+            local)
+                cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
+                $TERRAFORM init
+                echo "Fetching Haystack Infrastructure State"
+                INFRASTRUCTURE_STATE=`$TERRAFORM state pull`
 
-        local)
-            cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
-            $TERRAFORM init
-            echo "Fetching Haystack Infrastructure State"
-            INFRASTRUCTURE_STATE=`$TERRAFORM state pull`
+                cd $DIR/cluster/$CLUSTER_TYPE/apps
+                $TERRAFORM init
+                echo "Fetching Haystack Apps State"
+                APPS_STATE=`$TERRAFORM state pull`
 
-            cd $DIR/cluster/$CLUSTER_TYPE/apps
-            $TERRAFORM init
-            echo "Fetching Haystack Apps State"
-            APPS_STATE=`$TERRAFORM state pull`
-
-            echo "Haystack State"
-            HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
-
-        ;;
-    esac
+                echo "Haystack State"
+                HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
+                echo "HAYSTACK_STATE_START"
+                echo $HAYSTACK_STATE
+                echo "HAYSTACK_STATE_END"
+            ;;
+        esac
+    else
+        echo "$GET_HAYSTACK_STATE"
+    fi
 }
 
 function deleteState() {
@@ -333,7 +347,7 @@ function verifyK8sCluster() {
 ########
 # main
 ########
-while getopts "hsc:r:n:b:i:o:" OPTION
+while getopts "hsc:r:n:b:i:o:t" OPTION
 do
     case $OPTION in
         h)
@@ -360,6 +374,9 @@ do
         ;;
         s)
             SKIP_APPROVAL="true"
+        ;;
+        t)
+            GET_HAYSTACK_STATE="true"
         ;;
         ?)
             display_help
