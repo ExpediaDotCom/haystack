@@ -9,6 +9,7 @@ data "aws_caller_identity" "current" {
 module "security_groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
 }
 
 data "template_file" "es_access_policy" {

@@ -55,9 +55,6 @@ variable "common_tags" {
   type = "map"
   default = {
    Product = "Haystack"
-   FeatureSet = ""
-   Environment = ""
-   ClusterName = ""
   }
 }
 variable "kafka" {
