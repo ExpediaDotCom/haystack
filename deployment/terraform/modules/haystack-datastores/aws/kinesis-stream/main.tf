@@ -1,5 +1,5 @@
 locals {
-  stream_name = "${var.cluster["name"]}-spans"
+  stream_name = "${var.cluster-name}-spans"
 }
 
 resource "aws_kinesis_stream" "kinesis-spans-stream" {
