@@ -35,3 +35,9 @@ module "kafka" {
   aws_graphite_host = "${var.graphite_hostname}"
   aws_graphite_port = "${var.graphite_port}"
 }
+
+module "kinesis-stream" {
+  source = "kinesis-stream"
+  cluster-name = "${var.cluster["name"]}"
+  kinesis-stream = "${var.kinesis-stream}"
+}
