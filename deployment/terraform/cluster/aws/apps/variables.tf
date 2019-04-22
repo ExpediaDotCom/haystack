@@ -174,6 +174,8 @@ variable "collector" {
     kinesis_span_collector_memory_request = "1536"
     kinesis_span_collector_memory_limit = "1536"
     kinesis_span_collector_jvm_memory_limit = "1024"
+    kinesis_span_collector_dynamodb_write_thoroughput = 10
+    kinesis_span_collector_dynamodb_read_thoroughput = 10
 
     http_span_collector_instances = 1
     http_span_collector_enabled = false

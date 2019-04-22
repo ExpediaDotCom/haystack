@@ -156,6 +156,8 @@ variable "collector" {
     kinesis_span_collector_memory_request = "250"
     kinesis_span_collector_memory_limit = "250"
     kinesis_span_collector_jvm_memory_limit = "200"
+    kinesis_span_collector_dynamodb_write_thoroughput = 10
+    kinesis_span_collector_dynamodb_read_thoroughput = 10
 
 
     http_span_collector_app_name = "http-span-collector"
