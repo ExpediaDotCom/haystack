@@ -1,5 +1,5 @@
 locals {
-  haystack_index_store_domain_name = "${substr("${var.cluster["name"]}-index-store",0,28)}"
+  haystack_index_store_domain_name = "${format("%.28s", "${var.cluster["name"]}-index-store")}"
   haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
 }
 
