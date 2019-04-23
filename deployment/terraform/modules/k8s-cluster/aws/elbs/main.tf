@@ -37,7 +37,7 @@ resource "aws_elb" "api-elb" {
 }
 
 resource "aws_elb" "monitoring-elb" {
-  name = "${format("%.32s", "${var.cluster["name"]}-monitoring-elb")}"
+  name = "${format("%.17s", "${var.cluster["name"]}")}-monitoring-elb"
 
   listener = {
     instance_port = "${var.graphite_node_port}"
