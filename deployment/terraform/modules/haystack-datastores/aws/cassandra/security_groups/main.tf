@@ -28,7 +28,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-ingress" {
   from_port = 9042
   to_port = 9042
   protocol = "tcp"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ingress" {
@@ -37,7 +37,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ingress" {
   from_port = 7000
   to_port = 7000
   protocol = "tcp"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ssl-ingress" {
@@ -46,7 +46,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ssl-ingress" {
   from_port = 7001
   to_port = 7001
   protocol = "tcp"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-egress" {
