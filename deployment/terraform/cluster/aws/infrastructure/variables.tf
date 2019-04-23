@@ -48,6 +48,7 @@ variable "cluster" {
     node_elb_sslcert_arn = ""
     node-elb_ingress = "0.0.0.0/0"
     additional-security_groups = ""
+    cidr_blocks = "0.0.0.0/0"
   }
 }
 

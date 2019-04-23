@@ -11,16 +11,14 @@ resource "aws_security_group" "api-elb" {
     from_port = 443
     to_port = 443
     protocol = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = "${var.cluster["cidr_blocks"]}"
   }
 
   egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = "${var.cluster["cidr_blocks"]}"
   }
   tags = {
     Product = "Haystack"
@@ -49,8 +47,7 @@ resource "aws_security_group" "nodes-elb" {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = "${var.cluster["cidr_blocks"]}"
   }
   tags = {
     Product = "Haystack"
@@ -72,16 +69,14 @@ resource "aws_security_group" "monitoring-elb" {
     from_port = 2003
     to_port = 2003
     protocol = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = "${var.cluster["cidr_blocks"]}"
   }
 
   egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"]
+    cidr_blocks = "${var.cluster["cidr_blocks"]}"
   }
   tags = {
     Product = "Haystack"
@@ -133,8 +128,7 @@ resource "aws_security_group_rule" "ssh-external-to-node-0-0-0-0--0" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = [
-    "0.0.0.0/0"]
+  cidr_blocks = "${var.cluster["cidr_blocks"]}"
 }
 
 
@@ -162,8 +156,7 @@ resource "aws_security_group_rule" "node-egress" {
   from_port = 0
   to_port = 0
   protocol = "-1"
-  cidr_blocks = [
-    "0.0.0.0/0"]
+  cidr_blocks = "${var.cluster["cidr_blocks"]}"
 }
 
 
@@ -207,8 +200,7 @@ resource "aws_security_group_rule" "ssh-external-to-master-0-0-0-0--0" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = [
-    "0.0.0.0/0"]
+  cidr_blocks = "${var.cluster["cidr_blocks"]}"
 }
 
 resource "aws_security_group_rule" "https-elb-to-master" {
@@ -226,8 +218,7 @@ resource "aws_security_group_rule" "master-egress" {
   from_port = 0
   to_port = 0
   protocol = "-1"
-  cidr_blocks = [
-    "0.0.0.0/0"]
+  cidr_blocks = "${var.cluster["cidr_blocks"]}"
 }
 
 
