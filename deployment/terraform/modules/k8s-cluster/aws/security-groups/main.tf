@@ -11,7 +11,7 @@ resource "aws_security_group" "api-elb" {
     from_port = 443
     to_port = 443
     protocol = "tcp"
-    cidr_blocks = "${var.cluster["cidr_blocks"]}"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
@@ -128,7 +128,7 @@ resource "aws_security_group_rule" "ssh-external-to-node-0-0-0-0--0" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 
@@ -200,7 +200,7 @@ resource "aws_security_group_rule" "ssh-external-to-master-0-0-0-0--0" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 resource "aws_security_group_rule" "https-elb-to-master" {
