@@ -18,7 +18,7 @@ resource "aws_security_group" "api-elb" {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_blocks = "${var.cluster["cidr_blocks"]}"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Product = "Haystack"
@@ -47,7 +47,7 @@ resource "aws_security_group" "nodes-elb" {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_blocks = "${var.cluster["cidr_blocks"]}"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Product = "Haystack"
@@ -69,14 +69,14 @@ resource "aws_security_group" "monitoring-elb" {
     from_port = 2003
     to_port = 2003
     protocol = "tcp"
-    cidr_blocks = "${var.cluster["cidr_blocks"]}"
+    cidr_blocks = ["0.0.0.0"]
   }
 
   egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_blocks = "${var.cluster["cidr_blocks"]}"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Product = "Haystack"
@@ -156,7 +156,7 @@ resource "aws_security_group_rule" "node-egress" {
   from_port = 0
   to_port = 0
   protocol = "-1"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 
@@ -218,7 +218,7 @@ resource "aws_security_group_rule" "master-egress" {
   from_port = 0
   to_port = 0
   protocol = "-1"
-  cidr_blocks = "${var.cluster["cidr_blocks"]}"
+  cidr_blocks = ["0.0.0.0/0"]
 }
 
 
