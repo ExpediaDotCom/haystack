@@ -51,6 +51,12 @@ variable "cluster" {
   }
 }
 
+variable "common_tags" {
+  type = "map"
+  default = {
+   Product = "Haystack"
+  }
+}
 variable "kafka" {
   type = "map"
   default = {
