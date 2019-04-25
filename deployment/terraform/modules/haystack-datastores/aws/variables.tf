@@ -11,10 +11,13 @@ variable "es_spans_index" {
   type = "map"
 }
 
-variable "cassandra_spans_backend" {
+variable "kinesis-stream" {
   type = "map"
 }
 variable "common_tags" {
+  type = "map"
+} 
+variable "cassandra_spans_backend" {
   type = "map"
 }
 

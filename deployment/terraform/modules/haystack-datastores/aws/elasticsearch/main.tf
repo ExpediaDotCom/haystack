@@ -1,7 +1,6 @@
 locals {
-  haystack_index_store_domain_name = "${var.cluster["name"]}-index-store"
+  haystack_index_store_domain_name = "${format("%.16s", "${var.cluster["name"]}")}-index-store"
   haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
-
 }
 
 data "aws_caller_identity" "current" {

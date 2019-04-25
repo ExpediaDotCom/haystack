@@ -38,3 +38,9 @@ module "kafka" {
   aws_graphite_port = "${var.graphite_port}"
   common_tags = "${var.common_tags}"
 }
+
+module "kinesis-stream" {
+  source = "kinesis-stream"
+  cluster-name = "${var.cluster["name"]}"
+  kinesis-stream = "${var.kinesis-stream}"
+}
