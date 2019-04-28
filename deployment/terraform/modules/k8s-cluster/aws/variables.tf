@@ -12,6 +12,3 @@ variable "cluster" {
 variable "common_tags" {
   type = "map"
 }
-variable "nodes-nlb-arn" {
-  default=""
-}
