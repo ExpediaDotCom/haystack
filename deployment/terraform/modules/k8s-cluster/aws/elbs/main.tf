@@ -1,5 +1,6 @@
 locals { 
   node-elb-sgs = "${compact(concat(var.nodes_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
+  TLS_enabled = "${var.cluster["node_elb_sslcert_arn"] == "" ? 0 : 1}"
 }
 resource "aws_elb" "api-elb" {
   name = "${var.cluster["name"]}-api-elb"
@@ -107,7 +108,65 @@ resource "aws_elb" "nodes-elb" {
   }
 }
 
+resource "aws_lb" "nodes-nlb-endpoint-service" {
+  count = "${var.cluster["vpce-svc_enabled"]}"
 
+  name               = "${var.cluster["name"]}-esvc"
+  internal           = true
+  load_balancer_type = "network"
+  subnets = [
+    "${var.cluster["aws_utilities_subnet"]}" ]
+
+  enable_deletion_protection = false
+
+  tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-k8s-app-nodes",
+    "Name", "${var.cluster["name"]}-nodes-nlb-endpoint-service",
+    "Component", "K8s"
+  ))}"
+}
+
+resource "aws_lb_target_group" "nodes-nlb-target-group" {
+  count = "${var.cluster["vpce-svc_enabled"]}"
+
+  name     = "${var.cluster["name"]}-nlb-tg"
+  port     = "${var.cluster["vpce-proxy_port"]}"
+  protocol = "TCP"
+  stickiness { 
+    type = "lb_cookie"
+    enabled = false 
+    }
+  vpc_id   = "${var.cluster["aws_vpc_id"]}"
+}
+
+resource "aws_lb_listener" "http-nlb-listener" {
+  count = "${ var.cluster["vpce-svc_enabled"] ? var.cluster["vpce-svc_enabled"] - local.TLS_enabled : 0 }"
+
+  load_balancer_arn = "${aws_lb.nodes-nlb-endpoint-service.arn}"
+  port              = "80"
+  protocol          = "TCP"
+  default_action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.nodes-nlb-target-group.arn}"
+  }
+}
+resource "aws_lb_listener" "https-nlb-listener" {
+  count = "${ var.cluster["vpce-svc_enabled"] ? local.TLS_enabled : 0}"
+
+  load_balancer_arn = "${aws_lb.nodes-nlb-endpoint-service.arn}"
+  port              = "443"
+  protocol          = "TLS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "${var.cluster["node_elb_sslcert_arn"]}"
+  default_action {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.nodes-nlb-target-group.arn}"
+  }
+}
+resource "aws_autoscaling_attachment" "nodes-nlb-autoscale" {
+  alb_target_group_arn   = "${aws_lb_target_group.nodes-nlb-target-group.arn}"
+  autoscaling_group_name = "${var.app-nodes_asg_id}"
+}
 resource "aws_autoscaling_attachment" "master-1" {
   elb = "${aws_elb.api-elb.id}"
   autoscaling_group_name = "${var.master-1_asg_id}"

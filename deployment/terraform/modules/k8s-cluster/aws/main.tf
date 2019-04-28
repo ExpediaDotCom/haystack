@@ -105,6 +105,11 @@ module "route53" {
 
 }
 
+module "vpce" {
+  source = "vpce"
+  cluster = "${var.cluster}"
+  nodes-nlb-arn = "${module.elbs.app-nodes-nlb-arn}"
+}
 resource "aws_eip" "eip" {
   vpc = true
 }
