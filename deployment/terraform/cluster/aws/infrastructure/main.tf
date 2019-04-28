@@ -5,6 +5,7 @@ locals {
 module "haystack-k8s" {
   source = "../../../modules/k8s-cluster/aws"
   cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
   kops_kubernetes = "${var.kops_kubernetes}"
   kops_executable_name = "${var.kops_executable_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
@@ -26,6 +27,7 @@ module "k8s-addons" {
 module "haystack-datastores" {
   source = "../../../modules/haystack-datastores/aws"
   cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
   kafka = "${var.kafka}"
   kinesis-stream = "${var.kinesis-stream}"
   cassandra_spans_backend = "${var.cassandra_spans_backend}"

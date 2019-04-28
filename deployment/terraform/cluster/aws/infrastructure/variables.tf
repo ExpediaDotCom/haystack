@@ -48,9 +48,19 @@ variable "cluster" {
     node_elb_sslcert_arn = ""
     node-elb_ingress = "0.0.0.0/0"
     additional-security_groups = ""
+    vpce-svc_enabled = false
+    vpce-acceptance_required = false
+    vpce-proxy_port = "32300"
+    vpce-allowed_principals = ""
   }
 }
 
+variable "common_tags" {
+  type = "map"
+  default = {
+   Product = "Haystack"
+  }
+}
 variable "kafka" {
   type = "map"
   default = {

@@ -28,13 +28,11 @@ resource "aws_elb" "api-elb" {
 
   idle_timeout = 300
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-masters"
-    Name = "${var.cluster["name"]}-k8s-masters"
-  }
+  tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-k8s-masters",
+    "Name", "${var.cluster["name"]}-k8s-masters",
+    "Component", "K8s"
+  ))}"
 }
 
 resource "aws_elb" "monitoring-elb" {
@@ -63,13 +61,11 @@ resource "aws_elb" "monitoring-elb" {
 
   idle_timeout = 300
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-monitoring-nodes"
-    Name = "${var.cluster["name"]}-k8s-monitoring-nodes"
-  }
+ tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-k8s-monitoring-nodes",
+    "Name", "${var.cluster["name"]}-k8s-monitoring-nodes",
+    "Component", "K8s"
+  ))}"
 }
 
 resource "aws_elb" "nodes-elb" {
@@ -99,13 +95,11 @@ resource "aws_elb" "nodes-elb" {
 
   idle_timeout = 300
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-app-nodes"
-    Name = "${var.cluster["name"]}-k8s-app-nodes"
-  }
+tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-k8s-app-nodes",
+    "Name", "${var.cluster["name"]}-k8s-app-nodes",
+    "Component", "K8s"
+  ))}"
 }
 
 resource "aws_lb" "nodes-nlb-endpoint-service" {
@@ -164,9 +158,11 @@ resource "aws_lb_listener" "https-nlb-listener" {
   }
 }
 resource "aws_autoscaling_attachment" "nodes-nlb-autoscale" {
-  alb_target_group_arn   = "${aws_lb_target_group.nodes-nlb-target-group.arn}"
+  count = "${ var.cluster["vpce-svc_enabled"]}"
+  alb_target_group_arn   = "${aws_lb_target_group.nodes-nlb-target-group.*.arn[0]}"
   autoscaling_group_name = "${var.app-nodes_asg_id}"
 }
+
 resource "aws_autoscaling_attachment" "master-1" {
   elb = "${aws_elb.api-elb.id}"
   autoscaling_group_name = "${var.master-1_asg_id}"

@@ -9,4 +9,9 @@ variable "kops_kubernetes" {
 variable "cluster" {
   type = "map"
 }
-variable "nodes-nlb-arn" {}
+variable "common_tags" {
+  type = "map"
+}
+variable "nodes-nlb-arn" {
+  default=""
+}

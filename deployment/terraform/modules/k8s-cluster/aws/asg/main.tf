@@ -6,6 +6,14 @@ locals {
   k8s_app-nodes_instance_group_name = "app-nodes"
   k8s_monitoring-nodes_instance_group_name = "monitoring-nodes"
 }
+data "null_data_source" "tags" {
+  count = "${length(keys(var.common_tags))}"
+  inputs = {
+    key                 = "${element(keys(var.common_tags), count.index)}"
+    value               = "${element(values(var.common_tags), count.index)}"
+    propagate_at_launch = true
+  }
+}
 
 
 resource "aws_autoscaling_group" "master-1" {
@@ -17,46 +25,35 @@ resource "aws_autoscaling_group" "master-1" {
     "${var.aws_nodes_subnet}"]
 
 
-  tags = [
-    {
-      key = "Product"
-      value = "Haystack"
-      propagate_at_launch = true
-    },
-    {
+  tags = ["${data.null_data_source.tags.*.outputs}"]
+    tags = [
+      {
       key = "Component"
       value = "K8s"
       propagate_at_launch = true
-    },
-    {
-      key = "ClusterName"
-      value = "${var.haystack_cluster_name}"
-      propagate_at_launch = true
-    },
-    {
+       },
+      {
       key = "Role"
       value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
-    },
-    {
+      },
+      {
       key = "Name"
       value = "${var.haystack_cluster_name}-k8s-masters-1"
       propagate_at_launch = true
-    },
-    //these tags are required by protokube(kops) to set up kubecfg on that host, change with caution
-    {
-      key = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
-      value = "${local.k8s_master_1_instance_group_name}"
-      propagate_at_launch = true
-    },
-    {
+      },
+      //these tags are required by protokube(kops) to set up kubecfg on that host, change with caution
+      {
       key = "KubernetesCluster"
       value = "${var.k8s_cluster_name}"
-      propagate_at_launch = true
-    }
-  ]
-
-
+      propagate_at_launch = true  
+      },
+      {
+      key = "k8s.io/cluster-autoscaler/node-template/label/kops.k8s.io/instancegroup"
+      value = "${local.k8s_master_1_instance_group_name}"
+      propagate_at_launch = true 
+      }
+    ]
 
 
   depends_on = [
@@ -75,20 +72,11 @@ resource "aws_autoscaling_group" "master-2" {
   min_size = 1
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet}"]
+  tags = ["${data.null_data_source.tags.*.outputs}"]
   tags = [
-    {
-      key = "Product"
-      value = "Haystack"
-      propagate_at_launch = true
-    },
     {
       key = "Component"
       value = "K8s"
-      propagate_at_launch = true
-    },
-    {
-      key = "ClusterName"
-      value = "${var.haystack_cluster_name}"
       propagate_at_launch = true
     },
     {
@@ -133,21 +121,11 @@ resource "aws_autoscaling_group" "master-3" {
   min_size = 1
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet}"]
-
+  tags = ["${data.null_data_source.tags.*.outputs}"]
   tags = [
-    {
-      key = "Product"
-      value = "Haystack"
-      propagate_at_launch = true
-    },
     {
       key = "Component"
       value = "K8s"
-      propagate_at_launch = true
-    },
-    {
-      key = "ClusterName"
-      value = "${var.haystack_cluster_name}"
       propagate_at_launch = true
     },
     {
@@ -190,21 +168,11 @@ resource "aws_autoscaling_group" "app-nodes" {
   min_size = "${var.app-nodes_instance_count}"
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet}"]
-
+  tags = ["${data.null_data_source.tags.*.outputs}"]
   tags = [
-    {
-      key = "Product"
-      value = "Haystack"
-      propagate_at_launch = true
-    },
     {
       key = "Component"
       value = "K8s"
-      propagate_at_launch = true
-    },
-    {
-      key = "ClusterName"
-      value = "${var.haystack_cluster_name}"
       propagate_at_launch = true
     },
     {
@@ -239,21 +207,11 @@ resource "aws_autoscaling_group" "monitoring-nodes" {
   min_size = "${var.monitoring-nodes_instance_count}"
   vpc_zone_identifier = [
     "${var.aws_nodes_subnet}"]
-
+  tags = ["${data.null_data_source.tags.*.outputs}"]
   tags = [
-    {
-      key = "Product"
-      value = "Haystack"
-      propagate_at_launch = true
-    },
     {
       key = "Component"
       value = "K8s"
-      propagate_at_launch = true
-    },
-    {
-      key = "ClusterName"
-      value = "${var.haystack_cluster_name}"
       propagate_at_launch = true
     },
     {
@@ -445,19 +403,15 @@ resource "aws_ebs_volume" "1-etcd-events" {
   encrypted = false
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-events-1"
-    Role = "${var.haystack_cluster_role}-k8s-masters"
-    //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    "k8s.io/etcd/events" = "1/1,2,3"
-    "k8s.io/role/master" = "1"
-  }
+ tags = "${merge(var.common_tags, map(
+    "Role", "${var.haystack_cluster_role}-k8s-masters",
+    "Name", "${var.haystack_cluster_name}-k8s-events-1",
+    "Component", "${var.haystack_cluster_name}",
+    "KubernetesCluster", "${var.k8s_cluster_name}",
+    "k8s.io/etcd/events", "1/1,2,3",
+    "k8s.io/role/master", "1"
+  ))}"
 }
-
 resource "aws_ebs_volume" "1-etcd-main" {
   availability_zone = "${var.aws_zone}"
   size = 20
@@ -465,19 +419,15 @@ resource "aws_ebs_volume" "1-etcd-main" {
   encrypted = false
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-main-1"
-    Role = "${var.haystack_cluster_role}-k8s-masters"
-    //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    "k8s.io/etcd/main" = "1/1,2,3"
-    "k8s.io/role/master" = "1"
-  }
+ tags = "${merge(var.common_tags, map(
+    "Role", "${var.haystack_cluster_role}-k8s-masters",
+    "Name", "${var.haystack_cluster_name}-k8s-main-1",
+    "Component", "K8s",
+    "KubernetesCluster", "${var.k8s_cluster_name}",
+    "k8s.io/etcd/main", "1/1,2,3",
+    "k8s.io/role/master", "1"
+  ))}"
 }
-
 resource "aws_ebs_volume" "2-etcd-events" {
   availability_zone = "${var.aws_zone}"
   size = 20
@@ -485,17 +435,14 @@ resource "aws_ebs_volume" "2-etcd-events" {
   encrypted = false
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-events-2"
-    Role = "${var.haystack_cluster_role}-k8s-masters"
-    //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    "k8s.io/etcd/events" = "2/1,2,3"
-    "k8s.io/role/master" = "1"
-  }
+ tags = "${merge(var.common_tags, map(
+    "Role", "${var.haystack_cluster_role}-k8s-masters",
+    "Name", "${var.haystack_cluster_name}-k8s-events-2",
+    "Component", "K8s",
+    "KubernetesCluster", "${var.k8s_cluster_name}",
+    "k8s.io/etcd/events", "2/1,2,3",
+    "k8s.io/role/master", "1"
+  ))}"
 }
 
 resource "aws_ebs_volume" "2-etcd-main" {
@@ -505,17 +452,14 @@ resource "aws_ebs_volume" "2-etcd-main" {
   encrypted = false
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-main-2"
-    Role = "${var.haystack_cluster_name}-k8s-masters"
-    //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    "k8s.io/etcd/main" = "2/1,2,3"
-    "k8s.io/role/master" = "1"
-  }
+tags = "${merge(var.common_tags, map(
+    "Role", "${var.haystack_cluster_name}-k8s-masters",
+    "Name", "${var.haystack_cluster_name}-k8s-main-2",
+    "Component", "K8s",
+    "KubernetesCluster", "${var.k8s_cluster_name}",
+    "k8s.io/etcd/main", "2/1,2,3",
+    "k8s.io/role/master", "1"
+  ))}"
 }
 
 resource "aws_ebs_volume" "3-etcd-events" {
@@ -525,19 +469,15 @@ resource "aws_ebs_volume" "3-etcd-events" {
   encrypted = false
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-events-3"
-    Role = "${var.haystack_cluster_role}-k8s-masters"
-    //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    "k8s.io/etcd/events" = "3/1,2,3"
-    "k8s.io/role/master" = "1"
-  }
+tags = "${merge(var.common_tags, map(
+    "Role", "${var.haystack_cluster_role}-k8s-masters",
+    "Name", "${var.haystack_cluster_name}-k8s-events-3",
+    "Component", "K8s",
+    "KubernetesCluster", "${var.k8s_cluster_name}",
+    "k8s.io/etcd/events", "3/1,2,3",
+    "k8s.io/role/master", "1"
+  ))}"
 }
-
 resource "aws_ebs_volume" "3-etcd-main" {
   availability_zone = "${var.aws_zone}"
   size = 20
@@ -545,15 +485,12 @@ resource "aws_ebs_volume" "3-etcd-main" {
   encrypted = false
 
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.haystack_cluster_name}"
-    Name = "${var.haystack_cluster_name}-k8s-main-3"
-    Role = "${var.haystack_cluster_role}-k8s-masters"
-    //The below tags are used by protokube(kops) to mount the ebs volume, change with caution
-    KubernetesCluster = "${var.k8s_cluster_name}"
-    "k8s.io/etcd/main" = "3/1,2,3"
-    "k8s.io/role/master" = "1"
-  }
+tags = "${merge(var.common_tags, map(
+    "Role", "${var.haystack_cluster_role}-k8s-masters",
+    "Name", "${var.haystack_cluster_name}-k8s-main-3",
+    "Component", "K8s",
+    "KubernetesCluster", "${var.k8s_cluster_name}",
+    "k8s.io/etcd/main", "3/1,2,3",
+    "k8s.io/role/master", "1"
+  ))}"
 }

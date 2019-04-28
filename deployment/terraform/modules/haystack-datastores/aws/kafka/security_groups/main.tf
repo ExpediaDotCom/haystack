@@ -3,13 +3,11 @@ resource "aws_security_group" "haystack-kafka" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack kafka brokers"
 
-  tags = {
-    Product = "Haystack"
-    Component = "Kafka"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-kafka-brokers"
-    Name = "${var.cluster["name"]}-kafka-brokers"
-  }
+   tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
+    "Name", "${var.cluster["name"]}-kafka-brokers",
+    "Component", "Kafka"
+  ))}"
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-ssh-ingress" {

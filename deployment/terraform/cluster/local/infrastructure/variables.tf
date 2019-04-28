@@ -45,10 +45,6 @@ variable "cluster" {
     monitoring-node_selecter_label = "kubernetes.io/hostname: minikube"
     app-node_selecter_label = "kubernetes.io/hostname: minikube"
     role_prefix = "haystack"
-    vpce-svc_enabled = false
-    vpce-acceptance_required = false
-    vpce-proxy_port = "32300"
-    vpce-allowed_principals = ""
   }
 }
 

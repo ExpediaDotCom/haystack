@@ -3,16 +3,13 @@ resource "aws_security_group" "haystack-cassandra-nodes" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack cassandra nodes"
 
-  tags = {
-    Product = "Haystack"
-    Component = "Cassandra"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-cassandra"
-    Name = "${var.cluster["name"]}-cassandra"
-    NodeType = "seed"
-  }
+tags = "${merge(var.common_tags, map(
+    "Role", "${var.cluster["role_prefix"]}-cassandra",
+    "Name", "${var.cluster["name"]}-cassandra",
+    "Component", "Cassandra",
+    "NodeType", "seed"
+  ))}"
 }
-
 resource "aws_security_group_rule" "haytack-cassandra-node-ssh-ingress" {
   type = "ingress"
   security_group_id = "${aws_security_group.haystack-cassandra-nodes.id}"
