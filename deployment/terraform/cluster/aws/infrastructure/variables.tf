@@ -12,24 +12,6 @@ variable "monitoring_addons" {
   }
 }
 
-variable "alerting_addons" {
-  type = "map"
-  default = {
-    enabled = "false"
-    kubewatch_config_yaml_base64 = ""
-  }
-}
-
-variable "logging_addons" {
-  type = "map"
-  default = {
-    enabled = "true"
-    container_log_path = "/var/lib/docker/containers"
-    es_nodes = "1"
-    es_storage_volume = "100Gi"
-  }
-}
-
 variable "cluster" {
   type = "map"
   default = {
@@ -119,14 +101,5 @@ variable "cassandra_spans_backend" {
     non_seed_node_instance_count = 1
     seed_node_instance_type = "c5.xlarge"
     non_seed_node_instance_type = "c5.xlarge"
-  }
-}
-
-variable "aa_apps_resource_limits" {
-  type = "map"
-  default = {
-    enabled = true
-    cpu_limit = "2"
-    memory_limit = "4Gi"
   }
 }

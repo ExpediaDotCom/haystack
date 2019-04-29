@@ -8,7 +8,6 @@ variable "monitoring_addons" {
   type = "map"
 }
 
-
 variable "alerting_addons" {
   type = "map"
 }

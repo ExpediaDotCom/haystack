@@ -16,6 +16,7 @@ function display_help() {
     echo "   -b     name of the s3 bucket where the deployment state would be stored, its mandatory when the cluster type is aws"
     echo "   -o     app configuration values which need to be passed to terraform in a tfvars file(required for aws deployment) eg : trends_version, traces_version, default:cluster/aws|local/overrides.json "
     echo "   -i     infrastructure configuration which need to be passed to terraform in a tfvars file(required for aws deployment) eg : s3_bucket_name, aws_vpc_id, default:cluster/aws|local/overrides.json "
+    echo "   -a     k8s addons configuration which need to be passed to terraform in a tfvars file(required for aws deployment) default:cluster/aws|local/overrides.json "
     echo "   -s     flag to skip interactive approval of deployment plan before applying"
     echo "   -t     flag to fetch Haystack Terraform State"
     echo "   -h     usage. Prints this message"
@@ -58,6 +59,13 @@ function verifyArgs() {
         fi
     fi
 
+    if [[ -z $K8S_ADDONS_VARS_FILE ]]; then
+        K8S_ADDONS_VARS_FILE=$DIR/cluster/$CLUSTER_TYPE/k8s-addons/overrides.json
+        if [ ! -f ${K8S_ADDONS_VARS_FILE} ]; then
+            echo "{}" >> ${K8S_ADDONS_VARS_FILE}
+        fi
+    fi
+
     if [[ ( -z $S3_BUCKET ) && "$CLUSTER_TYPE" = "aws" ]]; then
         echo "flag --s3-bucket|-sb needs to be passed when cluster_type is aws"
         exit 1
@@ -85,6 +93,7 @@ function verifyArgs() {
     echo "cluster-name = ${CLUSTER_NAME}"
     echo "appvars-file-path = ${APP_VARS_FILE}"
     echo "infravars-file-path = ${INFRA_VARS_FILE}"
+    echo "k8saddonsvars-file-path = ${K8S_ADDONS_VARS_FILE}"
     echo "skip-approval = ${SKIP_APPROVAL}"
     echo "get-haystack-state = ${GET_HAYSTACK_STATE}"
     echo
@@ -129,8 +138,13 @@ function getHaystackState() {
                 echo "Fetching Haystack Apps State"
                 APPS_STATE=`$TERRAFORM state pull`
 
+                cd $DIR/cluster/$CLUSTER_TYPE/k8s-addons
+                $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-k8s-addons"
+                echo "Fetching Haystack k8s-addons State"
+                K8S_ADDONS_STATE=`$TERRAFORM state pull`
+
                 echo "Haystack State"
-                HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
+                HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"', "k8sAddonsState":'"$K8S_ADDONS_STATE"'}'
                 echo "HAYSTACK_STATE_START"
                 echo $HAYSTACK_STATE
                 echo "HAYSTACK_STATE_END"
@@ -147,8 +161,13 @@ function getHaystackState() {
                 echo "Fetching Haystack Apps State"
                 APPS_STATE=`$TERRAFORM state pull`
 
+                 cd $DIR/cluster/$CLUSTER_TYPE/k8s-addons
+                $TERRAFORM init
+                echo "Fetching Haystack k8s-addons State"
+                K8S_ADDONS_STATE=`$TERRAFORM state pull`
+
                 echo "Haystack State"
-                HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"'}'
+                HAYSTACK_STATE='{"infrastructureState":'"$INFRASTRUCTURE_STATE"',"appsState":'"$APPS_STATE"', "k8sAddonsState":'"$K8S_ADDONS_STATE"'}'
                 echo "HAYSTACK_STATE_START"
                 echo $HAYSTACK_STATE
                 echo "HAYSTACK_STATE_END"
@@ -188,6 +207,7 @@ function applyActionOnComponents() {
     case "$ACTION" in
         install-all)
             installInfrastructure
+            installK8sAddons
             installComponents
             getHaystackState
             echo "Congratulations! you've successfully created haystack infrastructure and deployed haystack apps"
@@ -203,6 +223,7 @@ function applyActionOnComponents() {
         ;;
         uninstall-all)
             uninstallComponents
+            installK8sAddons
             uninstallInfrastructure
             echo "Congratulations! you've successfully and deleted haystack apps and destroyed haystack infrastructure"
         ;;
@@ -267,6 +288,29 @@ function uninstallInfrastructure() {
     esac
 }
 
+function uninstallK8sAddons() {
+    cd $DIR/cluster/$CLUSTER_TYPE/k8s-addons
+    if [ "$SKIP_APPROVAL" = "true" ]; then
+        FORCE_FLAG="-force"
+    else
+        echo "$SKIP_APPROVAL"
+    fi
+    echo "Deleting haystack k8s-addons using terraform"
+    case "$CLUSTER_TYPE" in
+        aws)
+            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-k8s-addons"
+            #not explicitly deleting the k8s addons module since we're anyways destroying the k8s cluster
+            $TERRAFORM state rm module.k8s-addons
+            $TERRAFORM destroy $FORCE_FLAG -var-file=$K8S_ADDONS_VARS_FILE -var "cluster={ name = \"$CLUSTER_NAME\", s3_bucket_name = \"$S3_BUCKET\" }"  -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
+        ;;
+
+        local)
+            $TERRAFORM init
+            $TERRAFORM destroy $FORCE_FLAG -var-file=$K8S_ADDONS_VARS_FILE -var kubectl_executable_name=$KUBECTL -var docker_host_ip=$(minikube ip)
+        ;;
+    esac
+}
+
 function installInfrastructure() {
 
     cd $DIR/cluster/$CLUSTER_TYPE/infrastructure
@@ -292,6 +336,33 @@ function installInfrastructure() {
         ;;
     esac
 }
+
+function installK8sAddons() {
+
+    cd $DIR/cluster/$CLUSTER_TYPE/k8s-addons
+    if [ "$SKIP_APPROVAL" = "true" ]; then
+        AUTO_APPROVE="-auto-approve"
+    else
+        echo "$SKIP_APPROVAL"
+    fi
+    echo "Creating haystack k8s-addons using terraform "
+    case "$CLUSTER_TYPE" in
+        aws)
+            $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-k8s-addons"
+            #setting the correct kubectl config for terraform
+            DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE)
+            echo "setting kubectl context : $CLUSTER_NAME-k8s.$DOMAIN_NAME"
+            $KOPS export kubecfg --name $CLUSTER_NAME-k8s.$DOMAIN_NAME --state s3://$S3_BUCKET || true
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$K8S_ADDONS_VARS_FILE -var "cluster={ name = \"$CLUSTER_NAME\", s3_bucket_name = \"$S3_BUCKET\" }" -var kubectl_executable_name=$KUBECTL -var kops_executable_name=$KOPS
+        ;;
+
+        local)
+            $TERRAFORM init
+            $TERRAFORM apply $AUTO_APPROVE -var-file=$K8S_ADDONS_VARS_FILE -var kubectl_executable_name=$KUBECTL -var docker_host_ip=$(minikube ip)
+        ;;
+    esac
+}
+
 
 function installComponents() {
 
@@ -371,6 +442,9 @@ do
         ;;
         o)
             APP_VARS_FILE=$OPTARG
+        ;;
+        a)
+            K8S_ADDONS_VARS_FILE=$OPTARG
         ;;
         s)
             SKIP_APPROVAL="true"

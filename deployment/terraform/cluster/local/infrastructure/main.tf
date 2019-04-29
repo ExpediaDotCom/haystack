@@ -6,22 +6,12 @@ locals {
   jvm_memory_limit = "512"
   k8s_datastores_heap_memory_in_mb = "1024"
   k8s_datastores_memory_limit_in_mb = "1224"
+  k8s_app_namespace = "haystack-apps"
 }
-module "k8s-addons" {
-  source = "../../../modules/k8s-addons"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  datastores_heap_memory_in_mb = "${local.k8s_datastores_heap_memory_in_mb}"
-  aa_apps_resource_limits = "${var.aa_apps_resource_limits}"
-  monitoring_addons = "${var.monitoring_addons}"
-  alerting_addons = "${var.alerting_addons}"
-  logging_addons = "${var.logging_addons}"
-  cluster = "${var.cluster}"
 
-}
 module "haystack-infrastructure" {
   source = "../../../modules/haystack-datastores/kubernetes"
-  k8s_app_name_space = "${module.k8s-addons.k8s_app_namespace}"
+  k8s_app_name_space = "${local.k8s_app_namespace}"
   k8s_cluster_name = "${var.kubectl_context_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   node_selecter_label = "${local.app-node_selecter_label}"
