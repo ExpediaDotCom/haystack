@@ -38,6 +38,8 @@ resource "aws_route53_record" "subdomain-route53" {
     "aws_route53_record.api-elb-route53"]
 }
 
+# This is needed to pause k8s-addons module in infrastructure while k8s cluster is getting creating
+# Can be removed when terraform start providing direct module dependency
 data "null_data_source" "dependency" {
   inputs = {
     cluster_name = "${var.k8s_cluster_name}"
