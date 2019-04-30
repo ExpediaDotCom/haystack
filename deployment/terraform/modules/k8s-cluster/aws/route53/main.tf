@@ -15,6 +15,14 @@ resource "aws_route53_record" "api-elb-route53" {
   }
 }
 
+resource "null_resource" "clusterValidator" {
+  provisioner "local-exec" {
+    command = "bash ${path.module}/scripts/clusterValidator.sh ${var.kubectl_executable_name}"
+  }
+  depends_on = [
+    "aws_route53_record.api-elb-route53"]
+}
+
 resource "aws_route53_record" "root-route53" {
   name = "${var.haystack_ui_cname}"
   type = "CNAME"
@@ -36,4 +44,13 @@ resource "aws_route53_record" "subdomain-route53" {
   zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   depends_on = [
     "aws_route53_record.api-elb-route53"]
+}
+
+data "null_data_source" "dependency" {
+  inputs = {
+    cluster_name = "${var.k8s_cluster_name}"
+  }
+  depends_on = [
+    "aws_route53_record.api-elb-route53"
+  ]
 }
