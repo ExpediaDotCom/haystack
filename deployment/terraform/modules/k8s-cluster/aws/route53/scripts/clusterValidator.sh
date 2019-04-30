@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 kubectl="$1"
+context="$2"
+
 shouldExit="false"
 while [[ "$shouldExit" == "false" ]]
    do
-    nodes=$(${kubectl} get nodes -l kubernetes.io/role=master -o json  | jq -r .items)
+    nodes=$(${kubectl} get nodes --context ${context} -l kubernetes.io/role=master -o json  | jq -r .items)
     shouldExit="true"
 
     for row in $(echo "${nodes}" | jq -r '.[] | @base64'); do
