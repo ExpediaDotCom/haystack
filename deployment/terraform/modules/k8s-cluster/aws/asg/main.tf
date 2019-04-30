@@ -81,7 +81,7 @@ resource "aws_autoscaling_group" "master-2" {
     },
     {
       key = "Role"
-      value = "${var.haystack_cluster_name}-k8s-masters"
+      value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
     },
     {
