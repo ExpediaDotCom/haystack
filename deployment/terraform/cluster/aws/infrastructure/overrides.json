@@ -1,0 +1,43 @@
+{
+  "domain_name": "test.monitoring.expedia.com",
+  "cluster": {
+    "region": "us-west-2",
+    "aws_vpc_id": "vpc-de7925b9",
+    "aws_nodes_subnet": "subnet-33f0ea6b,subnet-34a0cb53",
+    "aws_utilities_subnet": "subnet-68f2e830",
+    "domain_name": "test.monitoring.expedia.com",
+    "node_elb_sslcert_arn" : "arn:aws:acm:us-west-2:810409578363:certificate/c9af2076-7ed6-46ad-befa-2c81c6866297",
+    "additional-security_groups" : "sg-5ae95321,sg-eaea5091,sg-ebea5090,sg-07740a91f31bf2c57",
+    "node-elb_ingress" : "52.42.63.248/29,34.218.216.136/30"
+  },
+  "alerting_addons": {
+    "enabled": "true",
+    "kubewatch_config_yaml_base64": "aGFuZGxlcjoNCiAgc2xhY2s6DQogICAgdG9rZW46ICd4b3hwLTk0NDkyNTExNTktMjA4NzkzODY1NTEtMjg5OTE5NzE0NTE2LTJlMzkxMTkwZmFkMTAwOTFkZDA5ODVhZjAyYmZkY2M5JyAgICANCiAgICBjaGFubmVsOiAnI2hheXN0YWNrLWFsZXJ0cy10ZXN0Jw0KcmVzb3VyY2U6DQogIGRlcGxveW1lbnQ6IHRydWUNCiAgcmVwbGljYXRpb25jb250cm9sbGVyOiBmYWxzZQ0KICByZXBsaWNhc2V0OiB0cnVlDQogIGRhZW1vbnNldDogdHJ1ZQ0KICBzZXJ2aWNlczogZmFsc2UNCiAgcG9kOiB0cnVlDQogIGpvYjogdHJ1ZQ0KICBwZXJzaXN0ZW50dm9sdW1lOiB0cnVlDQo="
+  },
+  "kafka": {
+    "broker_volume_size": 1024,
+    "default_partition_count": 16,
+    "broker_count": 6,
+    "broker_instance_type": "c5.xlarge"
+  },
+  "cassandra_spans_backend": {
+    "node_image" : "ami-08c24c70",
+    "seed_node_instance_count": 1,
+    "non_seed_node_instance_count": 2,
+    "non_seed_node_volume_size": 250,
+    "seed_node_volume_size": 1024
+  },
+  "es_spans_index": {
+    "dedicated_master_enabled": false,
+    "worker_instance_count": 3,
+    "worker_instance_type": "i3.large.elasticsearch"
+  },
+  "kops_kubernetes": {
+    "app-nodes_instance_count": 10,
+    "app-nodes_instance_type": "c5.xlarge"
+  },
+  "aa_apps_resource_limits": {
+    "cpu_limit": "20",
+    "memory_limit": "40Gi"
+  }
+}

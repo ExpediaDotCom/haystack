@@ -1,0 +1,138 @@
+{
+  "control-plane": {
+    "attribution_s3_spans_bucket": "haystack-attribution-data",
+    "attribution_s3_metadata_blobs_account": "408096535527",
+    "attribution_s3_metadata_blobs_region": "us-west-2",
+    "influxdb_endpoint_host": "monitoring-influxdb.kube-system.svc",
+    "influxdb_endpoint_port": "8086",
+    "attributor_tags": "{\"items\":[{\"attributeName\":\"blobsCount\",\"spanTagKeys\":[\"Blob-RESPONSE\",\"Blob-REQUEST\",\"request\",\"response\"],\"operatorType\":\"count\"},{\"attributeName\":\"blobSizeInBytes\",\"spanTagKeys\":[\"Blob-REQUEST-sz\",\"Blob-RESPONSE-sz\"],\"operatorType\":\"sum\"}]}",
+    "environment_name": "Test",
+    "attribution_to_email_ids": "haystack@expedia.com",
+    "attribution_s3_spans_folder_path": "cpa/spans/test",
+    "attribution_s3_blobs_bucket": "haystack-attribution-data",
+    "attribution_s3_blobs_folder_path": "cpa/blobs/test",
+    "attribution_s3_use_sts_role": true,
+    "attribution_s3_sts_role_arn": "arn:aws:iam::408096535527:role/haystack-attribution-data-s3-role",
+    "docker_registry": "kumorelease-docker-virtual.artylab.expedia.biz",
+    "console_version": "42b2fdf4a5c098dabb064ae5f9ae6d9915c1993c",
+    "version": "9f080074459a0888d1db01bebbea6a86a6519639",
+    "attribution_from_email_id": "haystack@expedia.com",
+    "attribution_s3_metadata_spans_region": "us-west-2",
+    "attribution_s3_metadata_spans_account": "810409578363",
+    "tenant-manager_instances": 1,
+    "tenant-manager_use_sts_role": false,
+    "tenant-manager_sts_role_arn": "",
+    "tenant-manager_s3_bucket": "haystack-tenant-manager-test",
+    "tenant-manager_s3_file_path": "test",
+    "tenant-manager_s3_file_name": "haystack_tenant_data.json",
+    "deployment-topology-recommender_instances": 1,
+    "tenant-manager_forwarder_host": "deployment-topology-recommender",
+    "tenant-manager_forwarder_path": "topology",
+    "tenant-manager_forwarder_port": "8080",
+    "deployment-topology-recommender_jenkins_job_url" : "https://jenkins-nimbus-primer-master.test.nimbus.expedia.com/job/deploy_haystack_tenant/",
+    "deployment-topology-recommender_environment" : "test",
+    "deployment-topology-recommender_planner_installer_image" : "kumorelease-docker-virtual.artylab.expedia.biz/library/haystack-tenant-installer:250680c05317aa647e3ac2eecfd0cc833e8954eb",
+    "deployment-topology-recommender_planner_interpolater_image" : "lachlanevenson/k8s-kubectl",
+    "deployment-topology-recommender_config_service_endpoint" : "https://haystack-config.test.nimbus.expedia.com/"
+  },
+  "pipes": {
+    "firehose_initialretrysleep": 1,
+    "firehose_kafka_threadcount": 4,
+    "firehose_writer_enabled": true,
+    "firehose_writer_firehose_signingregion": "us-west-2",
+    "firehose_writer_firehose_streamname": "haystack-pipes-spans-json-test",
+    "firehose_writer_firehose_url": "https://firehose.us-west-2.amazonaws.com",
+    "firehose_writer_haystack_kafka_fromtopic": "proto-spans-scrubbed",
+    "firehose_writer_instances": 1,
+    "firehose_writer_jvm_memory_limit": 512,
+    "firehose_writer_memory_limit": 1024,
+    "firehose_writer_memory_request": 1024,
+    "http_poster_enabled": true,
+    "http_poster_httppost_pollpercent": "100",
+    "http_poster_httppost_url": "https://collector.test.expedia.com/haystack-spans.json?stream=true&persist=false&multilines=true",
+    "http_poster_instances": 1,
+    "http_poster_jvm_memory_limit": 512,
+    "http_poster_memory_limit": 1024,
+    "http_poster_memory_request": 1024,
+    "secret_detector_cpu_limit": "1000m",
+    "secret_detector_enabled": true,
+    "secret_detector_instances": 2,
+    "secret_detector_kafka_threadcount": 4,
+    "secret_detector_secretsnotifications_whitelist_bucket": "haystack-config-test",
+    "version": "e0a9fa76565f2e45943cb612f7129e0ce808040c"
+  },
+  "traefik_replicas": 2,
+  "base_docker_registry": "kumorelease-docker-virtual.artylab.expedia.biz",
+  "domain_name": "test.monitoring.expedia.com",
+  "ui": {
+    "enabled": false,
+    "version": "45a5ace819cf713f6202187218ef7a8a82326736"
+  },
+  "collector": {
+    "version": "456a8e3897da27e019896b1d627652e784e2146b",
+    "kinesis_span_collector_app_name": "kinesis-span-collector",
+    "kinesis_stream_region": "us-west-2",
+    "kinesis_stream_name": "haystack-spans-test",
+    "kinesis_span_collector_jvm_memory_limit": 512,
+    "kinesis_span_collector_memory_request": 1024,
+    "kinesis_span_collector_memory_limit": 1024
+  },
+  "collector_ha": {
+    "version": "456a8e3897da27e019896b1d627652e784e2146b",
+    "kinesis_span_collector_instances": 1,
+    "kinesis_span_collector_app_name": "kinesis-ha-span-collector",
+    "kinesis_stream_region": "us-west-2",
+    "kinesis_stream_name": "haystack-ha-spans-test"
+  },
+  "http_collector": {
+    "version": "fa7f04c4ff3569affaf9789257220fa5f62d87a3"
+  },
+  "haystack-alerts": {
+    "enabled": true,
+    "es_curator_enabled": true,
+    "version": "9f4260b2c65dfceb8d3bde92f4ffad9376f10060",
+    "elasticsearch_template": "{\"template\": \"haystack-anomalies*\",\"settings\": {\"number_of_shards\": 1,\"index.mapping.ignore_malformed\": true,\"analysis\": {\"normalizer\": {\"lowercase_normalizer\": {\"type\": \"custom\",\"filter\": [\"lowercase\"]}}}},\"mappings\": {\"anomaly\": {\"_source\": {\"enabled\": true},\"_field_names\": {\"enabled\": false},\"_all\": {\"enabled\": false},\"properties\": {\"startTime\": {\"type\": \"long\",\"doc_values\": true}},\"dynamic_templates\": [{\"strings_as_keywords_1\": {\"match_mapping_type\": \"string\",\"mapping\": {\"type\": \"keyword\",\"normalizer\": \"lowercase_normalizer\",\"doc_values\": false,\"norms\": false}}}, {\"longs_disable_doc_norms\": {\"match_mapping_type\": \"long\",\"mapping\": {\"type\": \"long\",\"doc_values\": false,\"norms\": false}}}]}}}"
+  },
+  "service-graph": {
+    "version": "4f07c9fd44910aa82ce0d2fcfe0fa96fb046501d",
+    "node_finder_instances": 2,
+    "collect_tags": "[\"X-HAYSTACK-INFRASTRUCTURE-PROVIDER\", \"tier\"]"
+  },
+  "metrictank": {
+    "memory_request": "4096",
+    "memory_limit": "4096"
+  },
+  "trends": {
+    "version": "3ec63990ece3ebc742baf6a9b32089094315fa4d",
+    "span_timeseries_transformer_instances": 1,
+    "timeseries_aggregator_instances": 2,
+    "span_timeseries_transformer_jvm_memory_limit": 512,
+    "span_timeseries_transformer_memory_request": 1024,
+    "span_timeseries_transformer_memory_limit": 1024,
+    "metricpoint_encoder_type": "base64"
+  },
+  "traces": {
+    "version": "abc8ad4159c2bca241a3dcee5e5e7579f522b5ce",
+    "indexer_instances": 2,
+    "indexer_elasticsearch_template": "{\"template\":\"haystack-traces*\",\"settings\":{\"number_of_shards\":3,\"index.mapping.ignore_malformed\":true,\"analysis\":{\"normalizer\":{\"lowercase_normalizer\":{\"type\":\"custom\",\"filter\":[\"lowercase\"]}}}},\"aliases\":{\"haystack-traces\":{}},\"mappings\":{\"spans\":{\"_field_names\":{\"enabled\":false},\"_all\":{\"enabled\":false},\"_source\":{\"includes\":[\"traceid\"]},\"properties\":{\"traceid\":{\"enabled\":false},\"starttime\":{\"type\":\"long\",\"doc_values\": true},\"spans\":{\"type\":\"nested\",\"properties\":{\"servicename\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"operationname\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false},\"starttime\":{\"enabled\":false},\"duration\":{\"type\":\"long\",\"doc_values\":true}}}},\"dynamic_templates\":[{\"strings_as_keywords_1\":{\"match_mapping_type\":\"string\",\"mapping\":{\"type\":\"keyword\",\"normalizer\":\"lowercase_normalizer\",\"doc_values\":false,\"norms\":false}}},{\"longs_disable_doc_norms\":{\"match_mapping_type\":\"long\",\"mapping\":{\"type\":\"long\",\"doc_values\":false,\"norms\":false}}}]}}}",
+    "backend_retries_max": 864000,
+    "backend_backoff_initial_ms": 100,
+    "backend_backoff_factor": 1,
+    "backend_auto_discovery_enabled": true,
+    "backend_auto_discovery_aws_region": "us-west-2",
+    "backend_auto_discovery_aws_tags_clustername": "test-cassandra-haystack",
+    "backend_auto_discovery_aws_tags_env": "test",
+    "backend_credentials_username": "haystack_appuser",
+    "backend_credentials_password": "d5271a48-5231-11e9-8647-d663bd873d93"
+  },
+  "haystack_blobs_web_service": {
+    "version": "7274a41e285dd731b52a81678bf889ddd700da77"
+  },
+  "tincl": {
+    "version": "d5e7876ec519a821874e23284f943ff9825c14f8",
+    "docker_registry": "kumorelease-docker-virtual.artylab.expedia.biz"
+  },
+  "internal_ui": {
+    "version": "4d8a0a9ae05ad04df5296c7915240a99298b262b"
+  }
+}
