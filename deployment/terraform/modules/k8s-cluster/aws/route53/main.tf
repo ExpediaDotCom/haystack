@@ -11,7 +11,7 @@ resource "aws_route53_record" "api-elb-route53" {
   zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   //this would ensure that the cluster is up and configured correctly
   provisioner "local-exec" {
-    command = "for i in {1..50}; do ${var.kubectl_executable_name} get nodes --context ${var.k8s_cluster_name} -- && break || sleep 15; done"
+    command = "bash ${path.module}/scripts/clusterValidator.sh ${var.kubectl_executable_name} ${var.k8s_cluster_name}"
   }
 }
 
@@ -36,4 +36,15 @@ resource "aws_route53_record" "subdomain-route53" {
   zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   depends_on = [
     "aws_route53_record.api-elb-route53"]
+}
+
+# This is needed to pause k8s-addons module in infrastructure while k8s cluster is getting creating
+# Can be removed when terraform start providing direct module dependency
+data "null_data_source" "dependency" {
+  inputs = {
+    cluster_name = "${var.k8s_cluster_name}"
+  }
+  depends_on = [
+    "aws_route53_record.api-elb-route53"
+  ]
 }
