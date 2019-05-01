@@ -2,7 +2,7 @@ locals {
   node-elb-sgs = "${compact(concat(var.nodes_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
 }
 resource "aws_elb" "api-elb" {
-  name = "${var.cluster["name"]}-api-elb"
+  name = "${format("%.24s", "${var.cluster["name"]}")}-api-elb"
 
   listener = {
     instance_port = 443
@@ -68,7 +68,7 @@ resource "aws_elb" "monitoring-elb" {
 }
 
 resource "aws_elb" "nodes-elb" {
-  name = "${var.cluster["name"]}-nodes-elb"
+  name = "${format("%.22s", "${var.cluster["name"]}")}-nodes-elb"
 
   listener = {
     instance_port = "${var.cluster["reverse_proxy_port"]}"
