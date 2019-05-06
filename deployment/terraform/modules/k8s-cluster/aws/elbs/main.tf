@@ -1,5 +1,6 @@
 locals { 
   node-elb-sgs = "${compact(concat(var.nodes_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
+  api-elb-sgs = "${compact(concat(var.elb_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
 }
 resource "aws_elb" "api-elb" {
   name = "${format("%.24s", "${var.cluster["name"]}")}-api-elb"
@@ -12,7 +13,7 @@ resource "aws_elb" "api-elb" {
   }
 
   security_groups = [
-    "${var.elb_api_security_groups}"]
+    "${local.api-elb-sgs}"]
   subnets = [
     "${var.cluster["aws_utilities_subnet"]}"]
   internal = false
