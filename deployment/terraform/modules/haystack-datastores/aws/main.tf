@@ -41,7 +41,7 @@ module "kafka" {
 
 module "kinesis-stream" {
   source = "kinesis-stream"
-  cluster-name = "${var.cluster["name"]}"
+  cluster = "${var.cluster}"
   kinesis-stream = "${var.kinesis-stream}"
   common_tags = "${var.common_tags}"
 }

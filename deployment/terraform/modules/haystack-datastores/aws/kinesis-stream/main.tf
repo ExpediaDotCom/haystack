@@ -1,5 +1,5 @@
 locals {
-  defaultStreamName  = "${var.cluster-name}-spans"
+  defaultStreamName  = "${var.cluster["name"]}-spans"
   stream_name = "${var.kinesis-stream["name"] == "" ? local.defaultStreamName : var.kinesis-stream["name"]}"
 }
 
