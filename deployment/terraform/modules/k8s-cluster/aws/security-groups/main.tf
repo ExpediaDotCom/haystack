@@ -23,6 +23,7 @@ resource "aws_security_group" "api-elb" {
       "0.0.0.0/0"]
   }
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-masters-elb",
     "Name", "${var.cluster["name"]}-k8s-masters-elb",
     "Component", "K8s"
@@ -50,6 +51,7 @@ resource "aws_security_group" "nodes-elb" {
       "0.0.0.0/0"]
   }
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-nodes-elb",
     "Name", "${var.cluster["name"]}-k8s-nodes-elb",
     "Component", "K8s"
@@ -78,6 +80,7 @@ resource "aws_security_group" "monitoring-elb" {
       "0.0.0.0/0"]
   }
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-monitoring-elb",
     "Name", "${var.cluster["name"]}-k8s-monitoring-elb",
     "Component", "K8s"
@@ -92,6 +95,7 @@ resource "aws_security_group" "nodes" {
   description = "Security group for nodes"
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-nodes",
     "Name", "${var.cluster["name"]}-k8s-nodes",
     "Component", "K8s"
@@ -164,6 +168,7 @@ resource "aws_security_group" "masters" {
   description = "Security group for masters"
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-masters",
     "Name", "${var.cluster["name"]}-k8s-masters",
     "Component", "K8s"

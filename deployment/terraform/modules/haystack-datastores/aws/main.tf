@@ -43,4 +43,5 @@ module "kinesis-stream" {
   source = "kinesis-stream"
   cluster-name = "${var.cluster["name"]}"
   kinesis-stream = "${var.kinesis-stream}"
+  common_tags = "${var.common_tags}"
 }

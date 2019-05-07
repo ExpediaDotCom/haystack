@@ -4,6 +4,7 @@ resource "aws_security_group" "haystack-kafka" {
   description = "Security group for haystack kafka brokers"
 
    tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
     "Name", "${var.cluster["name"]}-kafka-brokers",
     "Component", "Kafka"

@@ -4,6 +4,7 @@ resource "aws_security_group" "haystack-es" {
   description = "Security group for haystack ES"
 
   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-es",
     "Name", "${var.cluster["name"]}-es",
     "Component", "ES"
