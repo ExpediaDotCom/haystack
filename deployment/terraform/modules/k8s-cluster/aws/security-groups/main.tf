@@ -12,7 +12,7 @@ resource "aws_security_group" "api-elb" {
     to_port = 443
     protocol = "tcp"
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "${local.node-elb_ingress}"]
   }
 
   egress {
