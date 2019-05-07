@@ -1,5 +1,5 @@
 locals {
-  stream_name = "${var.kinesis-stream["name"] == "" ? ${var.cluster-name}-spans : var.kinesis-stream["name"]}"
+  stream_name = "${var.kinesis-stream["name"] == "" ? "${var.cluster-name}-spans" : var.kinesis-stream["name"]}"
 }
 
 resource "aws_kinesis_stream" "kinesis-spans-stream" {
