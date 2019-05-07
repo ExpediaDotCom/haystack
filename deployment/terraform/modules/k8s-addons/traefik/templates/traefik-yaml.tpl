@@ -164,4 +164,20 @@ spec:
            serviceName: http-span-collector
            servicePort: 80
 ---
-
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-pitchfork
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: ${haystack_ui_cname}
+    http:
+      paths:
+       - path: /pitchfork
+         backend:
+           serviceName: pitchfork
+           servicePort: 80
+---

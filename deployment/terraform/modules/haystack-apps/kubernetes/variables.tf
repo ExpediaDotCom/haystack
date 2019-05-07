@@ -96,3 +96,10 @@ variable "alert-manager-notifier" {
 variable "alert-manager-store" {
   type = "map"
 }
+
+# ========================================
+# Pitchfork
+# ========================================
+variable "pitchfork" {
+  type = "map"
+}

@@ -51,4 +51,7 @@ module "haystack-apps" {
   alert-manager-service = "${var.alert-manager-service}"
   alert-manager-store = "${var.alert-manager-store}"
   alert-manager-notifier = "${var.alert-manager-notifier}"
+
+  # Pitchfork
+  pitchfork = "${var.pitchfork}"
 }

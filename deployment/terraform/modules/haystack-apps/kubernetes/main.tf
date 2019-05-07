@@ -168,3 +168,14 @@ module "haystack-alerting" {
   kubectl_context_name = "${var.kubectl_context_name}"
   haystack-alerts = "${var.haystack-alerts}"
 }
+
+# Pitchfork
+module "pitchfork" {
+  source = "pitchfork"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  kafka_port = "${var.kafka_port}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  pitchfork = "${var.pitchfork}"
+}
