@@ -1,5 +1,5 @@
-variable "cluster-name" {
-  type = "string"
+variable "cluster" {
+  type = "map"
 }
 
 variable "kinesis-stream" {
