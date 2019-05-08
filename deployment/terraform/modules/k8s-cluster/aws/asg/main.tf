@@ -33,6 +33,11 @@ resource "aws_autoscaling_group" "master-1" {
       propagate_at_launch = true
        },
       {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+      },
+      {
       key = "Role"
       value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
@@ -77,6 +82,11 @@ resource "aws_autoscaling_group" "master-2" {
     {
       key = "Component"
       value = "K8s"
+      propagate_at_launch = true
+    },
+    {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
       propagate_at_launch = true
     },
     {
@@ -129,6 +139,11 @@ resource "aws_autoscaling_group" "master-3" {
       propagate_at_launch = true
     },
     {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+    },
+    {
       key = "Role"
       value = "${var.haystack_cluster_role}-k8s-masters"
       propagate_at_launch = true
@@ -176,6 +191,11 @@ resource "aws_autoscaling_group" "app-nodes" {
       propagate_at_launch = true
     },
     {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
+      propagate_at_launch = true
+    },
+    {
       key = "Role"
       value = "${var.haystack_cluster_role}-k8s-app-nodes"
       propagate_at_launch = true
@@ -212,6 +232,11 @@ resource "aws_autoscaling_group" "monitoring-nodes" {
     {
       key = "Component"
       value = "K8s"
+      propagate_at_launch = true
+    },
+    {
+      key = "ClusterName"
+      value = "${var.haystack_cluster_name}"
       propagate_at_launch = true
     },
     {
@@ -404,6 +429,7 @@ resource "aws_ebs_volume" "1-etcd-events" {
 
 
  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.haystack_cluster_name}",
     "Role", "${var.haystack_cluster_role}-k8s-masters",
     "Name", "${var.haystack_cluster_name}-k8s-events-1",
     "Component", "${var.haystack_cluster_name}",
@@ -420,6 +446,7 @@ resource "aws_ebs_volume" "1-etcd-main" {
 
 
  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.haystack_cluster_name}",
     "Role", "${var.haystack_cluster_role}-k8s-masters",
     "Name", "${var.haystack_cluster_name}-k8s-main-1",
     "Component", "K8s",
@@ -436,6 +463,7 @@ resource "aws_ebs_volume" "2-etcd-events" {
 
 
  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.haystack_cluster_name}",
     "Role", "${var.haystack_cluster_role}-k8s-masters",
     "Name", "${var.haystack_cluster_name}-k8s-events-2",
     "Component", "K8s",
@@ -453,6 +481,7 @@ resource "aws_ebs_volume" "2-etcd-main" {
 
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.haystack_cluster_name}",
     "Role", "${var.haystack_cluster_name}-k8s-masters",
     "Name", "${var.haystack_cluster_name}-k8s-main-2",
     "Component", "K8s",
@@ -470,6 +499,7 @@ resource "aws_ebs_volume" "3-etcd-events" {
 
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.haystack_cluster_name}",
     "Role", "${var.haystack_cluster_role}-k8s-masters",
     "Name", "${var.haystack_cluster_name}-k8s-events-3",
     "Component", "K8s",
@@ -486,6 +516,7 @@ resource "aws_ebs_volume" "3-etcd-main" {
 
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.haystack_cluster_name}",
     "Role", "${var.haystack_cluster_role}-k8s-masters",
     "Name", "${var.haystack_cluster_name}-k8s-main-3",
     "Component", "K8s",

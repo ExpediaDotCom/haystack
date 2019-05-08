@@ -4,6 +4,7 @@ resource "aws_security_group" "haystack-cassandra-nodes" {
   description = "Security group for haystack cassandra nodes"
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-cassandra",
     "Name", "${var.cluster["name"]}-cassandra",
     "Component", "Cassandra",

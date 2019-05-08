@@ -29,6 +29,7 @@ resource "aws_elb" "api-elb" {
   idle_timeout = 300
 
   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-masters",
     "Name", "${var.cluster["name"]}-k8s-masters",
     "Component", "K8s"
@@ -62,6 +63,7 @@ resource "aws_elb" "monitoring-elb" {
   idle_timeout = 300
 
  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-monitoring-nodes",
     "Name", "${var.cluster["name"]}-k8s-monitoring-nodes",
     "Component", "K8s"
@@ -96,6 +98,7 @@ resource "aws_elb" "nodes-elb" {
   idle_timeout = 300
 
 tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-k8s-app-nodes",
     "Name", "${var.cluster["name"]}-k8s-app-nodes",
     "Component", "K8s"

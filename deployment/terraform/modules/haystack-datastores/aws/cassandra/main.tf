@@ -92,6 +92,7 @@ resource "aws_instance" "haystack-cassandra-seed-nodes" {
   key_name = "${var.cluster["aws_ssh_key"]}"
 
   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-cassandra",
     "Name", "${var.cluster["name"]}-cassandra-${count.index}",
     "ClusterRole", "${var.cluster["name"]}-cassandra-seed",
@@ -123,6 +124,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
 
 
   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-cassandra",
     "Name", "${var.cluster["name"]}-cassandra-${var.cassandra_spans_backend["seed_node_instance_count"] + count.index}",
     "ClusterRole", "${var.cluster["name"]}-cassandra-non-seed",

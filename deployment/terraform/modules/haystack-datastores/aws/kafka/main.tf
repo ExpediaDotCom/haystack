@@ -119,6 +119,7 @@ resource "aws_instance" "haystack-zookeeper-nodes" {
   iam_instance_profile = "${aws_iam_instance_profile.haystack-zookeeper-profile.name}"
 
   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-zookeeper",
     "Name", "${var.cluster["name"]}-kafka-zookeeper-${count.index}",
     "Component", "Kafka"
@@ -227,6 +228,7 @@ resource "aws_instance" "haystack-kafka-broker" {
   associate_public_ip_address = false
   iam_instance_profile = "${aws_iam_instance_profile.haystack-kafka-profile.name}"
   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
     "Name", "${var.cluster["name"]}-kafka-brokers-${count.index}",
     "Component", "Kafka"
