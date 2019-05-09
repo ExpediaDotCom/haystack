@@ -69,7 +69,7 @@ resource "aws_security_group" "monitoring-elb" {
     to_port = 2003
     protocol = "tcp"
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "${var.cluster["node_ingress"]}"]
   }
 
   egress {
@@ -126,7 +126,7 @@ resource "aws_security_group_rule" "ssh-external-to-node-0-0-0-0--0" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 
@@ -199,7 +199,7 @@ resource "aws_security_group_rule" "ssh-external-to-master-0-0-0-0--0" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "https-elb-to-master" {

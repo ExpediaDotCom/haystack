@@ -47,6 +47,7 @@ variable "cluster" {
     role_prefix = "haystack"
     node_elb_sslcert_arn = ""
     node-elb_ingress = "0.0.0.0/0"
+    node-ingress = "0.0.0.0/0"
     additional-security_groups = ""
   }
 }

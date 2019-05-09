@@ -17,7 +17,7 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ssh-ingress" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
@@ -26,7 +26,7 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
   from_port = 9092
   to_port = 9092
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-egress" {
@@ -63,5 +63,5 @@ resource "aws_security_group_rule" "haytack-kafka-broker-zookeeper-ingress" {
   to_port = 2181
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
