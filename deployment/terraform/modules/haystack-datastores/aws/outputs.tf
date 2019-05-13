@@ -25,6 +25,10 @@ output "kinesis-stream_shardcount" {
   value = "${module.kinesis-stream.kinesis-stream_shardcount}"
 }
 
+output "kinesis-stream_region" {
+  value = "${module.kinesis-stream.kinesis-stream_region}"
+}
+
 output "cassandra_hostname" {
   value = "${module.cassandra.cassandra_hostname}"
 }

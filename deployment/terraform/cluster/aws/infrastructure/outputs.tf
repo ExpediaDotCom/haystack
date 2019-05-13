@@ -30,6 +30,10 @@ output "kinesis-stream_shardcount" {
   value = "${module.haystack-datastores.kinesis-stream_shardcount}"
 }
 
+output "kinesis-stream_region" {
+  value = "${module.haystack-datastores.kinesis-stream_region}"
+}
+
 output "elasticsearch_hostname" {
   value = "${module.haystack-datastores.elasticsearch_hostname}"
 }
