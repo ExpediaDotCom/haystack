@@ -75,6 +75,7 @@ variable "kinesis-stream" {
   type = "map"
   default = {
     name = ""
+    enabled = false,
     shard_count = 10
     retention_period = 24
     aws_region = "us-west-2"
