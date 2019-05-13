@@ -32,6 +32,8 @@ module "haystack-apps" {
   graphite_port = "${data.terraform_remote_state.haystack_infrastructure.graphite_port}"
   graphite_enabled = "${local.graphite_enabled}"
   domain_name = "${var.domain_name}"
+  kinesis-stream_name = "${data.terraform_remote_state.haystack_infrastructure.kinesis-stream_name}"
+  kinesis-stream_region = "${data.terraform_remote_state.haystack_infrastructure.kinesis-stream_region}"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"

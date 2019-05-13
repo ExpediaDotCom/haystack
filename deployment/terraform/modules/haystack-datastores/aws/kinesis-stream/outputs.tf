@@ -10,3 +10,6 @@ output "kinesis-stream_shardcount" {
   value = "${aws_kinesis_stream.kinesis-spans-stream.shard_count}"
 }
 
+output "kinesis-stream_region" {
+  value = "${var.kinesis-stream["aws_region"]}"
+}

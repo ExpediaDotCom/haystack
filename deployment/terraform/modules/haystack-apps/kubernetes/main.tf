@@ -63,6 +63,8 @@ module "collectors" {
   kafka_hostname = "${var.kafka_hostname}"
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  kinesis-stream_name = "${var.kinesis-stream_name}"
+  kinesis-stream_region = "${var.kinesis-stream_region}"
 
   collector = "${var.collector}"
 }
