@@ -1,7 +1,7 @@
 locals {
   defaultStreamName  = "${var.cluster["name"]}-spans"
   stream_name = "${var.kinesis-stream["name"] == "" ? local.defaultStreamName : var.kinesis-stream["name"]}"
-  count = "${var.kinesis-stream["enabled"]?1:0}"
+
 }
 
 resource "aws_kinesis_stream" "kinesis-spans-stream" {
@@ -9,7 +9,7 @@ resource "aws_kinesis_stream" "kinesis-spans-stream" {
   shard_count      = "${var.kinesis-stream["shard_count"]}"
   retention_period = "${var.kinesis-stream["retention_period"]}"
   provider = "aws.aws_kinesis"
-  count = "${local.count}"
+  count = "${var.kinesis-stream["enabled"]}"
   tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kinesis",
