@@ -169,7 +169,7 @@ spec:
              name: "influxdb-configmap"
              items:
                - key: "influxdb.toml"
-                 path: "config.toml"
+                 path: "influxdb.conf"
   volumeClaimTemplates:
     - metadata:
         name: influxdb-persistent-storage
