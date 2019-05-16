@@ -47,6 +47,43 @@
       "Resource": [
         "*"
       ]
+    },
+    {
+      "Sid": "kinesis-stream",
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:GetShardIterator",
+        "kinesis:GetRecords",
+        "kinesis:DescribeStream",
+        "kinesis:PutRecord",
+        "kinesis:PutRecords",
+        "kinesis:DescribeStream"
+      ],
+      "Resource": [
+        "arn:aws:dynamodb:${kinesis-stream-region}:${account_id}:table/haystack-*"
+      ]
+    },
+    {
+      "Sid": "dynamoDb",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:CreateTable",
+        "dynamodb:BatchGetItem",
+        "sts:AssumeRole",
+        "dynamodb:BatchWriteItem",
+        "cloudwatch:PutMetricData",
+        "dynamodb:PutItem",
+        "dynamodb:ListTables",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem",
+        "dynamodb:GetRecords",
+        "dynamodb:DeleteItem"
+      ],
+      "Resource": [
+        "arn:aws:kinesis:${kinesis-stream-region}:${account_id}:stream/haystack-*"
+      ]
     }
   ]
 }

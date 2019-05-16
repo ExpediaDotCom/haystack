@@ -10,6 +10,7 @@ module "haystack-k8s" {
   kops_executable_name = "${var.kops_executable_name}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   graphite_node_port = "${var.monitoring_addons["graphite_node_port"]}"
+  kinesis-stream-region= "${var.kinesis-stream["aws_region"]}"
 }
 
 module "k8s-addons" {

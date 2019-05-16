@@ -165,8 +165,8 @@ variable "collector" {
     version = "1.1"
     kinesis_span_collector_instances = 1
     kinesis_span_collector_enabled = true
-    kinesis_stream_region = ""
-    kinesis_stream_name = ""
+    kinesis-stream_region = ""
+    kinesis-stream_name = ""
     kinesis_span_collector_sts_role_arn = ""
     kinesis_span_collector_environment_overrides = ""
     kinesis_span_collector_cpu_request = "500m"

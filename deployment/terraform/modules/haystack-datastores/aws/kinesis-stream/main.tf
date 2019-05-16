@@ -35,5 +35,5 @@ resource "aws_dynamodb_table" "kinesis-consumer-table" {
     "Component", "dynamodb-consumer-table"
   ))}"
   count = "${var.kinesis-stream["enabled"]}"
-  depends_on = ["kinesis-spans-stream"]
+  depends_on = ["aws_kinesis_stream.kinesis-spans-stream"]
 }

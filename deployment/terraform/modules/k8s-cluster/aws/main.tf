@@ -51,6 +51,7 @@ module "iam_roles" {
   s3_bucket_name = "${var.cluster["s3_bucket_name"]}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   haystack_cluster_name = "${var.cluster["name"]}"
+  kinesis-stream-region = "${var.kinesis-stream-region}"
 }
 module "asg" {
   source = "asg"
