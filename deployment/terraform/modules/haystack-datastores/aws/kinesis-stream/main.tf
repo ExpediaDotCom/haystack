@@ -28,6 +28,7 @@ resource "aws_dynamodb_table" "kinesis-consumer-table" {
   name = "${local.app_group_name}"
   read_capacity = "${var.dynamodb["read_limit"]}"
   write_capacity = "${var.dynamodb["write_limit"]}"
+  provider = "aws.aws_kinesis"
   tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Name", "${local.app_group_name}",
