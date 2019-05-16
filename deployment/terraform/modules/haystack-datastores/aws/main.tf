@@ -43,5 +43,6 @@ module "kinesis-stream" {
   source = "kinesis-stream"
   cluster = "${var.cluster}"
   kinesis-stream = "${var.kinesis-stream}"
+  dynamodb = "${var.dynamodb}"
   common_tags = "${var.common_tags}"
 }

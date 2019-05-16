@@ -133,3 +133,11 @@ variable "aa_apps_resource_limits" {
     memory_limit = "4Gi"
   }
 }
+
+variable "dynamodb" {
+  type = "map"
+  default = {
+    read_limit=10
+    write_limit=10
+  }
+}

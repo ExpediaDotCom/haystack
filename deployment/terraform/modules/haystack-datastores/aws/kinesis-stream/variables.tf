@@ -8,4 +8,8 @@ variable "kinesis-stream" {
 
 variable "common_tags" {
   type = "map"
-} 
+}
+
+variable "dynamodb" {
+  type = "map"
+}

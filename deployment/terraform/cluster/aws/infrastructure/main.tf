@@ -35,4 +35,5 @@ module "haystack-datastores" {
   graphite_hostname = "${module.haystack-k8s.external_graphite_hostname}"
   graphite_port = "${module.k8s-addons.graphite_port}"
   k8s_nodes_iam-role_arn = "${module.haystack-k8s.nodes_iam-role_arn}"
+  dynamodb = "${var.dynamodb}"
 }

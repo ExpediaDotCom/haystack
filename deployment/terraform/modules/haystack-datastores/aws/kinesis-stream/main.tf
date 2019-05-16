@@ -1,7 +1,7 @@
 locals {
   defaultStreamName  = "${var.cluster["name"]}-spans"
   stream_name = "${var.kinesis-stream["name"] == "" ? local.defaultStreamName : var.kinesis-stream["name"]}"
-
+  app_group_name = "${var.cluster["name"]}-kinesis-span-collector"
 }
 
 resource "aws_kinesis_stream" "kinesis-spans-stream" {
@@ -16,4 +16,23 @@ resource "aws_kinesis_stream" "kinesis-spans-stream" {
     "Name", "${local.stream_name}",
     "Component", "kinesis-stream"
   ))}"
+}
+
+
+resource "aws_dynamodb_table" "kinesis-consumer-table" {
+  "attribute" {
+    name = "leaseKey"
+    type = "S"
+  }
+  hash_key = "leaseKey"
+  name = "${local.app_group_name}"
+  read_capacity = "${var.dynamodb["read_limit"]}"
+  write_capacity = "${var.dynamodb["write_limit"]}"
+  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Name", "${local.app_group_name}",
+    "Component", "dynamodb-consumer-table"
+  ))}"
+  count = "${var.kinesis-stream["enabled"]}"
+  depends_on = ["kinesis-spans-stream"]
 }

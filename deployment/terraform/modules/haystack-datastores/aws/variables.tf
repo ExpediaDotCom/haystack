@@ -14,6 +14,11 @@ variable "es_spans_index" {
 variable "kinesis-stream" {
   type = "map"
 }
+
+variable "dynamodb" {
+  type = "map"
+}
+
 variable "common_tags" {
   type = "map"
 } 
