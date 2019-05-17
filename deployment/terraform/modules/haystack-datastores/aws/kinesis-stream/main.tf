@@ -31,6 +31,7 @@ resource "aws_dynamodb_table" "kinesis-consumer-table" {
   provider = "aws.aws_kinesis"
   tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-dynamodb",
     "Name", "${local.app_group_name}",
     "Component", "dynamodb-consumer-table"
   ))}"
