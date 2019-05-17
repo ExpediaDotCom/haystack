@@ -25,3 +25,6 @@ variable "masters_security_groups" {
 variable "nodes_security_groups" {
   type = "list"
 }
+variable "common_tags" {
+  type = "map"
+}

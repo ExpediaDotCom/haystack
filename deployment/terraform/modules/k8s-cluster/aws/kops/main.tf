@@ -48,6 +48,10 @@ resource "null_resource" "create_cluster_configuration" {
     command = "${var.kops_executable_name} update cluster ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name} --target terraform"
   }
 
+  provisioner "local-exec" {
+    command = "${var.kops_executable_name} export kubecfg --name ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name}"
+  }
+
   //The --unregister flag just deletes the kops configurations stored in s3
   provisioner "local-exec" {
     command = "${var.kops_executable_name} delete cluster ${var.k8s_cluster_name} --state s3://${var.s3_bucket_name} --unregister --yes"

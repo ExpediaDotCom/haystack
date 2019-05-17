@@ -24,6 +24,7 @@ locals {
 module "cassandra-security-groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
+  common_tags="${var.common_tags}"
 }
 
 data "template_file" "cassandra_user_data" {
@@ -90,16 +91,14 @@ resource "aws_instance" "haystack-cassandra-seed-nodes" {
   associate_public_ip_address = false
   key_name = "${var.cluster["aws_ssh_key"]}"
 
-  tags {
-    Product = "Haystack"
-    Component = "Cassandra"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-cassandra"
-    Name = "${var.cluster["name"]}-cassandra-${count.index}"
-    ClusterRole = "${var.cluster["name"]}-cassandra-seed"
-    isSeed = "true"
-  }
-
+  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-cassandra",
+    "Name", "${var.cluster["name"]}-cassandra-${count.index}",
+    "ClusterRole", "${var.cluster["name"]}-cassandra-seed",
+    "Component", "Cassandra",
+    "isSeed", "true"
+  ))}"
   root_block_device = {
     volume_type = "gp2"
     volume_size = "${var.cassandra_spans_backend["seed_node_volume_size"]}"
@@ -124,16 +123,14 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
 
 
 
-  tags {
-    Product = "Haystack"
-    Component = "Cassandra"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-cassandra"
-    Name = "${var.cluster["name"]}-cassandra-${var.cassandra_spans_backend["seed_node_instance_count"] + count.index}"
-    ClusterRole = "${var.cluster["name"]}-cassandra-non-seed"
-    isSeed = "false"
-  }
-
+  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-cassandra",
+    "Name", "${var.cluster["name"]}-cassandra-${var.cassandra_spans_backend["seed_node_instance_count"] + count.index}",
+    "ClusterRole", "${var.cluster["name"]}-cassandra-non-seed",
+    "Component", "Cassandra",
+    "isSeed", "false"
+  ))}"
   root_block_device = {
     volume_type = "gp2"
     volume_size = "${var.cassandra_spans_backend["non_seed_node_volume_size"]}"

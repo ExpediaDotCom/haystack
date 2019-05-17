@@ -22,8 +22,6 @@ module "es" {
   jvm_memory_limit = "${var.jvm_memory_limit}"
 }
 
-
-
 module "kafka" {
   source = "kafka"
   replicas = "1"

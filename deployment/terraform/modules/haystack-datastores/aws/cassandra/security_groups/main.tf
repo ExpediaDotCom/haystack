@@ -3,16 +3,14 @@ resource "aws_security_group" "haystack-cassandra-nodes" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack cassandra nodes"
 
-  tags = {
-    Product = "Haystack"
-    Component = "Cassandra"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-cassandra"
-    Name = "${var.cluster["name"]}-cassandra"
-    NodeType = "seed"
-  }
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-cassandra",
+    "Name", "${var.cluster["name"]}-cassandra",
+    "Component", "Cassandra",
+    "NodeType", "seed"
+  ))}"
 }
-
 resource "aws_security_group_rule" "haytack-cassandra-node-ssh-ingress" {
   type = "ingress"
   security_group_id = "${aws_security_group.haystack-cassandra-nodes.id}"
@@ -20,7 +18,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-ssh-ingress" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-ingress" {
@@ -30,7 +28,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-ingress" {
   to_port = 9042
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ingress" {
@@ -40,7 +38,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ingress" {
   to_port = 7000
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ssl-ingress" {
@@ -50,7 +48,7 @@ resource "aws_security_group_rule" "haytack-cassandra-node-gossip-ssl-ingress" {
   to_port = 7001
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-cassandra-node-egress" {

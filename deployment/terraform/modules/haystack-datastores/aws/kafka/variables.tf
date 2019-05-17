@@ -10,3 +10,6 @@ variable "cluster" {
 variable "kafka" {
   type = "map"
 }
+variable "common_tags" {
+  type = "map"
+}

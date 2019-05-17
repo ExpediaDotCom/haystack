@@ -42,6 +42,7 @@ module "security_groups" {
   nodes_elb_port ="${local.nodes_elb_port}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   graphite_node_port = "${var.graphite_node_port}"
+  common_tags = "${var.common_tags}"
 }
 
 module "iam_roles" {
@@ -50,6 +51,7 @@ module "iam_roles" {
   s3_bucket_name = "${var.cluster["s3_bucket_name"]}"
   k8s_cluster_name = "${local.k8s_cluster_name}"
   haystack_cluster_name = "${var.cluster["name"]}"
+  kinesis-stream-region = "${var.kinesis-stream-region}"
 }
 module "asg" {
   source = "asg"
@@ -74,6 +76,7 @@ module "asg" {
   monitoring-nodes_instance_volume = "${var.kops_kubernetes["monitoring-nodes_instance_volume"]}"
   nodes_ami = "${var.kops_kubernetes["node_ami"]}"
   masters_ami = "${var.kops_kubernetes["master_ami"]}"
+  common_tags = "${var.common_tags}"
 }
 
 module "elbs" {
@@ -92,6 +95,7 @@ module "elbs" {
   graphite_node_port = "${var.graphite_node_port}"
   aws_nodes_subnet = "${local.aws_nodes_subnet}"
   cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
 }
 
 module "route53" {

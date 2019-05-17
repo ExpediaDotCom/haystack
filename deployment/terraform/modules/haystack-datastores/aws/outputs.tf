@@ -13,6 +13,22 @@ output "kafka_port" {
   value = "${module.kafka.kafka_port}"
 }
 
+output "kinesis-stream_arn" {
+  value = "${module.kinesis-stream.kinesis-stream_arn}"
+}
+
+output "kinesis-stream_name" {
+  value = "${module.kinesis-stream.kinesis-stream_name}"
+}
+
+output "kinesis-stream_shardcount" {
+  value = "${module.kinesis-stream.kinesis-stream_shardcount}"
+}
+
+output "kinesis-stream_region" {
+  value = "${module.kinesis-stream.kinesis-stream_region}"
+}
+
 output "cassandra_hostname" {
   value = "${module.cassandra.cassandra_hostname}"
 }

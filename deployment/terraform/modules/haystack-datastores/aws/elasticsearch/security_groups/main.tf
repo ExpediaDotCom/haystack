@@ -3,18 +3,17 @@ resource "aws_security_group" "haystack-es" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack ES"
 
-  tags = {
-    Product = "Haystack"
-    Component = "ES"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-es"
-    Name = "${var.cluster["name"]}-es"
-  }
+  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-es",
+    "Name", "${var.cluster["name"]}-es",
+    "Component", "ES"
+  ))}"
   ingress {
     from_port = 80
     protocol = "tcp"
     to_port = 80
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${var.cluster["node_ingress"]}"]
   }
 
   egress {

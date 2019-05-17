@@ -4,3 +4,7 @@ variable "cluster" {
   type = "map"
 }
 variable "nodes_elb_port" {}
+variable "common_tags" {
+  type = "map"
+  
+}

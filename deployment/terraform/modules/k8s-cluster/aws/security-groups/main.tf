@@ -12,7 +12,7 @@ resource "aws_security_group" "api-elb" {
     to_port = 443
     protocol = "tcp"
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "${local.node-elb_ingress}"]
   }
 
   egress {
@@ -22,14 +22,12 @@ resource "aws_security_group" "api-elb" {
     cidr_blocks = [
       "0.0.0.0/0"]
   }
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-masters-elb"
-    Name = "${var.cluster["name"]}-k8s-masters-elb"
-  }
-
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-masters-elb",
+    "Name", "${var.cluster["name"]}-k8s-masters-elb",
+    "Component", "K8s"
+  ))}"
 }
 
 
@@ -52,14 +50,12 @@ resource "aws_security_group" "nodes-elb" {
     cidr_blocks = [
       "0.0.0.0/0"]
   }
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-nodes-elb"
-    Name = "${var.cluster["name"]}-k8s-nodes-elb"
-
-  }
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-nodes-elb",
+    "Name", "${var.cluster["name"]}-k8s-nodes-elb",
+    "Component", "K8s"
+  ))}"
 }
 
 
@@ -73,7 +69,7 @@ resource "aws_security_group" "monitoring-elb" {
     to_port = 2003
     protocol = "tcp"
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "${var.cluster["node_ingress"]}"]
   }
 
   egress {
@@ -83,14 +79,12 @@ resource "aws_security_group" "monitoring-elb" {
     cidr_blocks = [
       "0.0.0.0/0"]
   }
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-monitoring-elb"
-    Name = "${var.cluster["name"]}-k8s-monitoring-elb"
-
-  }
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-monitoring-elb",
+    "Name", "${var.cluster["name"]}-k8s-monitoring-elb",
+    "Component", "K8s"
+  ))}"
 }
 
 //node instance security group
@@ -100,15 +94,13 @@ resource "aws_security_group" "nodes" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for nodes"
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-nodes"
-    Name = "${var.cluster["name"]}-k8s-nodes"
-  }
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-nodes",
+    "Name", "${var.cluster["name"]}-k8s-nodes",
+    "Component", "K8s"
+  ))}"
 }
-
 
 resource "aws_security_group_rule" "all-master-to-node" {
   type = "ingress"
@@ -134,7 +126,7 @@ resource "aws_security_group_rule" "ssh-external-to-node-0-0-0-0--0" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 
@@ -175,13 +167,12 @@ resource "aws_security_group" "masters" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for masters"
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-masters"
-    Name = "${var.cluster["name"]}-k8s-masters"
-  }
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-masters",
+    "Name", "${var.cluster["name"]}-k8s-masters",
+    "Component", "K8s"
+  ))}"
 }
 
 resource "aws_security_group_rule" "all-master-to-master" {
@@ -208,7 +199,7 @@ resource "aws_security_group_rule" "ssh-external-to-master-0-0-0-0--0" {
   to_port = 22
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "https-elb-to-master" {

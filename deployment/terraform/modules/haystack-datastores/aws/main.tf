@@ -16,6 +16,7 @@ module "cassandra" {
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
   graphite_host = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
+  common_tags = "${var.common_tags}"
 }
 
 module "es" {
@@ -24,6 +25,7 @@ module "es" {
   cluster = "${var.cluster}"
   aws_subnet = "${local.aws_nodes_subnet}"
   k8s_nodes_iam-role_arn = "${var.k8s_nodes_iam-role_arn}"
+  common_tags = "${var.common_tags}"
 }
 
 module "kafka" {
@@ -34,4 +36,13 @@ module "kafka" {
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
   aws_graphite_host = "${var.graphite_hostname}"
   aws_graphite_port = "${var.graphite_port}"
+  common_tags = "${var.common_tags}"
+}
+
+module "kinesis-stream" {
+  source = "kinesis-stream"
+  cluster = "${var.cluster}"
+  kinesis-stream = "${var.kinesis-stream}"
+  dynamodb = "${var.dynamodb}"
+  common_tags = "${var.common_tags}"
 }

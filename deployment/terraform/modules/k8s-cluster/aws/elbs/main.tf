@@ -1,8 +1,9 @@
 locals { 
   node-elb-sgs = "${compact(concat(var.nodes_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
+  api-elb-sgs = "${compact(concat(var.elb_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
 }
 resource "aws_elb" "api-elb" {
-  name = "${var.cluster["name"]}-api-elb"
+  name = "${format("%.24s", "${var.cluster["name"]}")}-api-elb"
 
   listener = {
     instance_port = 443
@@ -12,7 +13,7 @@ resource "aws_elb" "api-elb" {
   }
 
   security_groups = [
-    "${var.elb_api_security_groups}"]
+    "${local.api-elb-sgs}"]
   subnets = [
     "${var.cluster["aws_utilities_subnet"]}"]
   internal = false
@@ -27,17 +28,16 @@ resource "aws_elb" "api-elb" {
 
   idle_timeout = 300
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-masters"
-    Name = "${var.cluster["name"]}-k8s-masters"
-  }
+  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-masters",
+    "Name", "${var.cluster["name"]}-k8s-masters",
+    "Component", "K8s"
+  ))}"
 }
 
 resource "aws_elb" "monitoring-elb" {
-  name = "${var.cluster["name"]}-monitoring-elb"
+  name = "${format("%.17s", "${var.cluster["name"]}")}-monitoring-elb"
 
   listener = {
     instance_port = "${var.graphite_node_port}"
@@ -62,17 +62,16 @@ resource "aws_elb" "monitoring-elb" {
 
   idle_timeout = 300
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-monitoring-nodes"
-    Name = "${var.cluster["name"]}-k8s-monitoring-nodes"
-  }
+ tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-monitoring-nodes",
+    "Name", "${var.cluster["name"]}-k8s-monitoring-nodes",
+    "Component", "K8s"
+  ))}"
 }
 
 resource "aws_elb" "nodes-elb" {
-  name = "${var.cluster["name"]}-nodes-elb"
+  name = "${format("%.22s", "${var.cluster["name"]}")}-nodes-elb"
 
   listener = {
     instance_port = "${var.cluster["reverse_proxy_port"]}"
@@ -98,15 +97,13 @@ resource "aws_elb" "nodes-elb" {
 
   idle_timeout = 300
 
-  tags = {
-    Product = "Haystack"
-    Component = "K8s"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-k8s-app-nodes"
-    Name = "${var.cluster["name"]}-k8s-app-nodes"
-  }
+tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-k8s-app-nodes",
+    "Name", "${var.cluster["name"]}-k8s-app-nodes",
+    "Component", "K8s"
+  ))}"
 }
-
 
 resource "aws_autoscaling_attachment" "master-1" {
   elb = "${aws_elb.api-elb.id}"

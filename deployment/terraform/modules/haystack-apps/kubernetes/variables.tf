@@ -14,6 +14,8 @@ variable "k8s_app_namespace" {}
 variable "aa_app_namespace" {}
 variable "app-node_selector_label" {}
 variable "domain_name" {}
+variable "kinesis-stream_name" {}
+variable "kinesis-stream_region" {}
 
 # ========================================
 # Haystack

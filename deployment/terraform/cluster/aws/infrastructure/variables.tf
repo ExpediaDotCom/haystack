@@ -47,10 +47,17 @@ variable "cluster" {
     role_prefix = "haystack"
     node_elb_sslcert_arn = ""
     node-elb_ingress = "0.0.0.0/0"
+    node_ingress = "0.0.0.0/0"
     additional-security_groups = ""
   }
 }
 
+variable "common_tags" {
+  type = "map"
+  default = {
+   Product = "Haystack"
+  }
+}
 variable "kafka" {
   type = "map"
   default = {
@@ -61,6 +68,17 @@ variable "kafka" {
     broker_instance_type = "m4.xlarge"
     default_partition_count = 96
     broker_image = ""
+  }
+}
+
+variable "kinesis-stream" {
+  type = "map"
+  default = {
+    name = ""
+    enabled = false,
+    shard_count = 10
+    retention_period = 24
+    aws_region = "us-west-2"
   }
 }
 //Kubernetes cluster created using KOPS
@@ -113,5 +131,13 @@ variable "aa_apps_resource_limits" {
     enabled = true
     cpu_limit = "2"
     memory_limit = "4Gi"
+  }
+}
+
+variable "dynamodb" {
+  type = "map"
+  default = {
+    read_limit=10
+    write_limit=10
   }
 }

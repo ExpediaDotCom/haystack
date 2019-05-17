@@ -3,13 +3,12 @@ resource "aws_security_group" "haystack-kafka" {
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   description = "Security group for haystack kafka brokers"
 
-  tags = {
-    Product = "Haystack"
-    Component = "Kafka"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-kafka-brokers"
-    Name = "${var.cluster["name"]}-kafka-brokers"
-  }
+   tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
+    "Name", "${var.cluster["name"]}-kafka-brokers",
+    "Component", "Kafka"
+  ))}"
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-ssh-ingress" {
@@ -18,7 +17,7 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ssh-ingress" {
   from_port = 22
   to_port = 22
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
@@ -27,7 +26,7 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
   from_port = 9092
   to_port = 9092
   protocol = "tcp"
-  cidr_blocks = ["0.0.0.0/0"]
+  cidr_blocks = ["${var.cluster["node_ingress"]}"]
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-egress" {
@@ -64,5 +63,5 @@ resource "aws_security_group_rule" "haytack-kafka-broker-zookeeper-ingress" {
   to_port = 2181
   protocol = "tcp"
   cidr_blocks = [
-    "0.0.0.0/0"]
+    "${var.cluster["node_ingress"]}"]
 }

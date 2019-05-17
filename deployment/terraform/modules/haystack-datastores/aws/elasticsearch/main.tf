@@ -1,7 +1,6 @@
 locals {
-  haystack_index_store_domain_name = "${var.cluster["name"]}-index-store"
+  haystack_index_store_domain_name = "${format("%.16s", "${var.cluster["name"]}")}-index-store"
   haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
-
 }
 
 data "aws_caller_identity" "current" {
@@ -9,6 +8,7 @@ data "aws_caller_identity" "current" {
 module "security_groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
 }
 
 data "template_file" "es_access_policy" {
@@ -50,11 +50,10 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
   snapshot_options {
     automated_snapshot_start_hour = 23
   }
-  tags = {
-    Product = "Haystack"
-    Component = "ES"
-    ClusterName = "${var.cluster["name"]}"
-    Role = "${var.cluster["role_prefix"]}-index-store"
-    Name = "${local.haystack_index_store_domain_name}"
-  }
+ tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-index-store",
+    "Name", "${local.haystack_index_store_domain_name}",
+    "Component", "ES"
+  ))}"
 }
