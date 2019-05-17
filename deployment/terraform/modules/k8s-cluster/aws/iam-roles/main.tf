@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 resource "aws_iam_instance_profile" "masters-profile" {
   name = "${var.haystack_cluster_name}-k8s-masters"
   role = "${aws_iam_role.masters-role.name}"
@@ -37,6 +39,8 @@ data "template_file" "nodes-iam-role-policy-template" {
   template = "${file("${path.module}/templates/nodes_iam-role-policy.tpl")}"
   vars {
     s3_bucket_name = "${var.s3_bucket_name}"
+    account_id = "${data.aws_caller_identity.current.account_id}"
+    kinesis-stream-region = "${var.kinesis-stream-region}"
   }
 }
 resource "aws_iam_role_policy" "nodes-policy" {
