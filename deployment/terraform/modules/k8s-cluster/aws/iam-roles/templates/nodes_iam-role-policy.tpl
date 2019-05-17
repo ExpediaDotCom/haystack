@@ -49,7 +49,7 @@
       ]
     },
     {
-      "Sid": "kinesis-stream",
+      "Sid": "kinesisStream",
       "Effect": "Allow",
       "Action": [
         "kinesis:GetShardIterator",
