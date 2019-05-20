@@ -434,5 +434,23 @@ variable "alert-manager-notifier" {
     alert_expiry_time_in_sec = 36000
   }
 }
+variable "pitchfork" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "hotelsdotcom/pitchfork:1.6"
+    cpu_request = "1"
+    cpu_limit = "1"
+    memory_request = "1536"
+    memory_limit = "2000"
+    jvm_memory_limit = "1024"
+    pitchfork_port = 9411
+    kafka_enabled = "true"
+    logging_enabled = "true"
+    logging_span_enabled = "false"
+    kafka_topic = "proto-spans"
+  }
+}
 
 

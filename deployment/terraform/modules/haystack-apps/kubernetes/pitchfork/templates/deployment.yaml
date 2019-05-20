@@ -1,0 +1,70 @@
+# ------------------- Deployment ------------------- #
+kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  replicas: ${replicas}
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: ${app_name}
+  template:
+    metadata:
+      labels:
+        k8s-app: ${app_name}
+    spec:
+      containers:
+      - name: pitchfork
+        image: ${pitchfork_image}
+        resources:
+          limits:
+            cpu: ${cpu_limit}
+            memory: ${memory_limit}Mi
+          requests:
+            cpu: ${cpu_request}
+            memory: ${memory_request}Mi
+        env:
+        - name: "JAVA_JVM_ARGS"
+          value: "-Xms${jvm_memory_limit}m -Xmx${jvm_memory_limit}m"
+        - name: "SERVER_PORT"
+          value: "${pitchfork_port}"
+        - name: "PITCHFORK_FORWARDERS_HAYSTACK_KAFKA_ENABLED"
+          value: "${kafka_enabled}"
+        - name: "PITCHFORK_FORWARDERS_HAYSTACK_KAFKA_BOOTSTRAP_SERVERS"
+          value: "${kafka_endpoint}"
+        - name: "PITCHFORK_FORWARDERS_LOGGING_ENABLED"
+          value: "${logging_enabled}"
+        - name: "PITCHFORK_FORWARDERS_LOGGING_LOG_FULL_SPAN"
+          value: "${logging_span_enabled}"
+        - name: "PITCHFORK_FORWARDERS_HAYSTACK_KAFKA_TOPIC"
+          value: "${kafka_topic}" 
+        ${env_vars}  
+        livenessProbe:
+          httpGet:
+              path: "/health"
+              port: ${pitchfork_port}
+          initialDelaySeconds: 30
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+# ------------------- Service ------------------- #
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  ports: 
+  - port: 80
+    targetPort: ${pitchfork_port}
+    protocol: "TCP"
+  selector:
+    k8s-app: ${app_name}
