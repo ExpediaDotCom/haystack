@@ -49,7 +49,7 @@
       ]
     },
     {
-      "Sid": "kinesis-stream",
+      "Sid": "kinesisStream",
       "Effect": "Allow",
       "Action": [
         "kinesis:GetShardIterator",
@@ -60,7 +60,7 @@
         "kinesis:DescribeStream"
       ],
       "Resource": [
-        "arn:aws:dynamodb:${kinesis-stream-region}:${account_id}:table/haystack-*"
+        "arn:aws:kinesis:${kinesis-stream-region}:${account_id}:stream/haystack-*"
       ]
     },
     {
@@ -82,7 +82,7 @@
         "dynamodb:DeleteItem"
       ],
       "Resource": [
-        "arn:aws:kinesis:${kinesis-stream-region}:${account_id}:stream/haystack-*"
+        "arn:aws:dynamodb:${kinesis-stream-region}:${account_id}:table/haystack-*"
       ]
     }
   ]
