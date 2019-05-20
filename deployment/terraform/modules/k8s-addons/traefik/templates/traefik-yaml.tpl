@@ -176,7 +176,7 @@ spec:
   - host: ${haystack_ui_cname}
     http:
       paths:
-       - path: /pitchfork
+       - path: /zipkin
          backend:
            serviceName: pitchfork
            servicePort: 80
