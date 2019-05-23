@@ -11,5 +11,4 @@ variable "termination_grace_period" {
 }
 variable "namespace" {}
 variable "kafka_hostname" {} 
-variable "kafka_port" {} 
-variable "env_vars" {}
+variable "kafka_port" {}
