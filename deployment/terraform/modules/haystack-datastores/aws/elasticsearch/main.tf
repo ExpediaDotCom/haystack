@@ -1,5 +1,6 @@
 locals {
-  haystack_index_store_domain_name = "${format("%.16s", "${var.cluster["name"]}")}-index-store"
+  // size limit for es name is 28
+  haystack_index_store_domain_name = "${length("${var.cluster["name"]}") > 16 ? format("%s-%s", substr("${var.cluster["name"]}", 0, 11), random_string.random_name_string.result) : "${var.cluster["name"]}"}-index-store"
   haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
 }
 
@@ -20,6 +21,10 @@ data "template_file" "es_access_policy" {
     aws_account_id = "${data.aws_caller_identity.current.account_id}"
     es_domain_name = "${local.haystack_index_store_domain_name}"
   }
+}
+resource "random_string" "random_name_string" {
+  length = 4
+  special = false
 }
 resource "aws_elasticsearch_domain" "haystack_index_store" {
   domain_name = "${local.haystack_index_store_domain_name}"
