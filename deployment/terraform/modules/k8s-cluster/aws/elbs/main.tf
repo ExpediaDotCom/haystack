@@ -6,6 +6,9 @@ locals {
 resource "random_string" "random_name_string" {
   length = 4
   special = false
+  upper = false
+  lower = true
+  number = false
 }
 
 resource "aws_elb" "api-elb" {

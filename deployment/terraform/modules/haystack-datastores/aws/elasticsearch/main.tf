@@ -25,6 +25,9 @@ data "template_file" "es_access_policy" {
 resource "random_string" "random_name_string" {
   length = 4
   special = false
+  upper = false
+  lower = true
+  number = false
 }
 resource "aws_elasticsearch_domain" "haystack_index_store" {
   domain_name = "${local.haystack_index_store_domain_name}"
