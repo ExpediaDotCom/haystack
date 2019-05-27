@@ -68,3 +68,22 @@ spec:
     protocol: "TCP"
   selector:
     k8s-app: ${app_name}
+# ------------------- Ingress ------------------- #
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-pitchfork
+  namespace: ${k8s_app_namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: ${haystack_pitchfork}
+    http:
+      paths:
+       - path: /zipkin
+         backend:
+           serviceName: pitchfork
+           servicePort: 80
+---

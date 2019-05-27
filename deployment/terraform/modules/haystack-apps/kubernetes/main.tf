@@ -1,3 +1,6 @@
+local {
+haystack_pitchfork = "${var.cluster["name"]}.${var.cluster["domain_name"]}"
+}
 module "traces" {
   source = "github.com/ExpediaDotCom/haystack-traces/deployment/terraform"
   namespace = "${var.k8s_app_namespace}"
@@ -180,4 +183,6 @@ module "pitchfork" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   pitchfork = "${var.pitchfork}"
+  haystack_pitchfork = "${local.haystack_pitchfork}"
+  cluster = "${var.cluster}"
 }

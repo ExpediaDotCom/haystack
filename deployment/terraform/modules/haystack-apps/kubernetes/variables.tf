@@ -105,3 +105,6 @@ variable "alert-manager-store" {
 variable "pitchfork" {
   type = "map"
 }
+variable "cluster" {
+  type = "map"
+}

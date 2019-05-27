@@ -24,6 +24,7 @@ data "template_file" "deployment_yaml" {
     kafka_topic = "${var.pitchfork["kafka_topic"]}"
     kafka_endpoint = "${var.kafka_hostname}:${var.kafka_port}"
     env_vars= "${indent(9,"${var.env_vars}")}"
+    haystack_pitchfork = "${var.haystack_pitchfork}"
   }
 }
 
