@@ -2,18 +2,11 @@ locals {
   node-elb-sgs = "${compact(concat(var.nodes_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
   api-elb-sgs = "${compact(concat(var.elb_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
 }
-
-resource "random_string" "random_name_string" {
-  length = 4
-  special = false
-  upper = false
-  lower = true
-  number = false
-}
-
 resource "aws_elb" "api-elb" {
-  // size limit for elb name is 28
-  name = "${length("${var.cluster["name"]}") > 24 ? format("%s-%s", substr("${var.cluster["name"]}", 0, 19), random_string.random_name_string.result) : "${var.cluster["name"]}"}-api-elb"
+  /* appending char `b` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for elb name is 32 chars.
+  */
+  name = "${format("%.31s", "${var.cluster["name"]}-api-el")}b"
 
   listener = {
     instance_port = 443
@@ -47,8 +40,10 @@ resource "aws_elb" "api-elb" {
 }
 
 resource "aws_elb" "monitoring-elb" {
-  // size limit for elb name is 28
-  name = "${length("${var.cluster["name"]}") > 17 ? format("%s-%s", substr("${var.cluster["name"]}", 0, 12), random_string.random_name_string.result) : "${var.cluster["name"]}"}-monitoring-elb"
+  /* appending char `b` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for elb name is 32 chars.
+  */
+  name = "${format("%.31s", "${var.cluster["name"]}-monitoring-el")}b"
 
   listener = {
     instance_port = "${var.graphite_node_port}"
@@ -82,8 +77,10 @@ resource "aws_elb" "monitoring-elb" {
 }
 
 resource "aws_elb" "nodes-elb" {
-  // size limit for elb name is 28
-  name = "${length("${var.cluster["name"]}") > 22 ? format("%s-%s", substr("${var.cluster["name"]}", 0, 17), random_string.random_name_string.result) : "${var.cluster["name"]}"}-nodes-elb"
+  /* appending char `b` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for elb name is 32 chars.
+  */
+  name = "${format("%.31s", "${var.cluster["name"]}-nodes-el")}b"
 
   listener = {
     instance_port = "${var.cluster["reverse_proxy_port"]}"
