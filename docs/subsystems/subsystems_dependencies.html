@@ -49,7 +49,7 @@
 <li>Computing the network latency between the services that allows <a href="https://github.com/ExpediaDotCom/haystack-traces">haystack-trends</a> to produce latency trends between services</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="component-node-finder"></a><a href="#component-node-finder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Component: node-finder</h2>
-<p>This component discovers the relationship between services. Services are the nodes in graph with operations being the edges. Since individual span's (client or server spans) do not carry the name of the services being called or calling them, this component accumulates the incoming spans and uses <code>span-id</code> to discover the dependent services and the operations between them.</p>
+<p>This component discovers the relationship between services. Services are the nodes in the graph with operations being the edges. Since individual spans (client or server spans) do not carry the name of the services being called or calling them, this component accumulates the incoming spans and uses <code>span-id</code> to discover the dependent services and the operations between them.</p>
 <p>Discovered &quot;span pairs&quot; are then used to produce two different outputs</p>
 <ul>
 <li>A simple object that has calling service name, called service name and the operation name and</li>
@@ -72,8 +72,8 @@
   <span class="hljs-attr">"value"</span>: <span class="hljs-number">40.0</span>,
   <span class="hljs-attr">"epochTimeInSeconds"</span>: <span class="hljs-number">1523637898</span>,
   <span class="hljs-attr">"tags"</span> : {
-    <span class="hljs-attr">"serviceName"</span>: <span class="hljs-string">"foo-service"</span>
-    <span class="hljs-string">"operationName"</span>:  <span class="hljs-string">"bar"</span>
+    <span class="hljs-attr">"serviceName"</span>: <span class="hljs-string">"foo-service"</span>,
+    <span class="hljs-attr">"operationName"</span>: <span class="hljs-string">"bar"</span>
   }
 }  
 </code></pre>
@@ -102,13 +102,13 @@
 <p>Interactive query to a single stream nodes return only the graph-edges sharded to that node, hence it is a partial view of the world. The servlet take care of fetching partial graphs from all nodes having the ktable to form full service-graphs.</p>
 <h6><a class="anchor" aria-hidden="true" id="endpoints"></a><a href="#endpoints" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Endpoints</h6>
 <ol>
-<li><code>/servicegraph</code> : returns full service graph, includes edges from all know services. Edges include operations also.</li>
+<li><code>/servicegraph</code> : returns full service graph, includes edges from all known services. Edges include operations also.</li>
 </ol>
 <h2><a class="anchor" aria-hidden="true" id="building"></a><a href="#building" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Building</h2>
 <p>To build the components in this repository at once, one can run</p>
 <pre><code class="hljs"><span class="hljs-keyword">make</span> <span class="hljs-keyword">all</span>
 </code></pre>
-<p>To build the components separately, once can check the README in the individual component folders</p>
+<p>To build the components separately, one can check the README in the individual component folders.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/haystack/docs/subsystems/subsystems_collectors.html"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/haystack/docs/subsystems/subsystems_pipes.html"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#building-the-service-graph">Building the service graph</a></li><li><a href="#component-node-finder">Component: node-finder</a></li><li><a href="#component-graph-builder">Component: graph-builder</a></li><li><a href="#building">Building</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/haystack/" class="nav-home"><img src="/haystack/img/logo/logo.png" alt="Haystack" width="66" height="58"/></a><div><h5>Docs</h5><a href="/haystack/docs/about/introduction.html">Introduction</a><a href="/haystack/docs/about/getting_started.html">Getting Started</a><a href="/haystack/docs/about/architecture.html">Architecture</a></div><div><h5>Related</h5><a href="https://gitter.im/expedia-haystack/Lobby">Chat on Gitter</a><a href="/haystack/docs/contributing.html">Contributing to Haystack</a></div><div><h5>More</h5><a href="https://github.com/ExpediaDotCom/haystack">GitHub</a><a class="github-button" href="https://github.com/ExpediaDotCom/haystack" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://www.expedia.com" target="_blank" class="footer__logo"><img src="/haystack/img/logo/expedia_logo_inverted.png" alt="Expedia"/></a><section class="copyright">Copyright © 2019 Expedia</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
