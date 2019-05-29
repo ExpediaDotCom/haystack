@@ -69,6 +69,7 @@ variable "trends" {
     timeseries_aggregator_histogram_max_value = 1800000
     timeseries_aggregator_histogram_precision = 2
     timeseries_aggregator_histogram_value_unit = "millis"
+    timeseries_aggregator_additional_tags = ""
   }
 }
 
