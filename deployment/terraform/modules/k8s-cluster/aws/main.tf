@@ -2,8 +2,8 @@ locals {
   k8s_cluster_name = "${var.cluster["name"]}-k8s.${var.cluster["domain_name"]}"
   haystack_ui_cname = "${var.cluster["name"]}.${var.cluster["domain_name"]}"
   aws_nodes_subnet = "${element(split(",", var.cluster["aws_nodes_subnet"]),0)}"
-  nodes_elb_port = "${var.cluster["node_elb_sslcert_arn"] == "" ? 80 : 443 }"
-  nodes_elb_protocol = "${var.cluster["node_elb_sslcert_arn"] == "" ? "HTTP" : "HTTPS" }"
+  nodes_elb_port = "${var.cluster["node_elb_enable_ssl"] == "true" ? 443 : 80 }"
+  nodes_elb_protocol = "${var.cluster["node_elb_enable_ssl"] == "true" ? "HTTPS" : "HTTP" }"
 }
 
 
