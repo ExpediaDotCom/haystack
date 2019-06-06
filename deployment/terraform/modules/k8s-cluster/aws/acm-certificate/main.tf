@@ -5,8 +5,8 @@ resource "aws_acm_certificate" "cert" {
 
   tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
-    "Role", "${var.cluster["role_prefix"]}-k8s-app-nodes",
-    "Name", "${var.cluster["name"]}-k8s-app-nodes",
+    "Role", "${var.cluster["role_prefix"]}-acm-certificate",
+    "Name", "${var.cluster["name"]}-acm-certificate",
     "Component", "K8s"
   ))}"
 }
