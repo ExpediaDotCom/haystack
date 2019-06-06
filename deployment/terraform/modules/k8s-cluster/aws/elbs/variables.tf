@@ -23,3 +23,5 @@ variable "common_tags" {
 }
 variable "nodes_elb_protocol" {}
 variable "nodes_elb_port" {}
+
+variable "aws_acm_certificate_arn" {}
