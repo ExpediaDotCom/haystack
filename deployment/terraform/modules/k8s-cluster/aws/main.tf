@@ -96,6 +96,14 @@ module "elbs" {
   aws_nodes_subnet = "${local.aws_nodes_subnet}"
   cluster = "${var.cluster}"
   common_tags = "${var.common_tags}"
+  aws_acm_certificate_arn = "${module.acm-certificate.aws-acm-certificate-arn}"
+}
+
+module "acm-certificate" {
+  source = "acm-certificate"
+  cluster = "${var.cluster}"
+  common_tags = "${var.common_tags}"
+  aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
 }
 
 module "route53" {
