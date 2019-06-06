@@ -48,6 +48,7 @@ variable "cluster" {
     node-elb_ingress = "0.0.0.0/0"
     node_ingress = "0.0.0.0/0"
     additional-security_groups = ""
+    node_elb_enable_ssl = "true"
   }
 }
 
