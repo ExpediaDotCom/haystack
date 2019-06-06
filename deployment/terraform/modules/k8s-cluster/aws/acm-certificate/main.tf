@@ -1,6 +1,6 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name               = "*.${var.cluster["domain"]}"
-  subject_alternative_names = [ "*.${var.cluster["name"]}.${var.cluster["domain"]}" ]
+  domain_name               = "*.${var.cluster["domain_name"]}"
+  subject_alternative_names = [ "*.${var.cluster["name"]}.${var.cluster["domain_name"]}" ]
   validation_method         = "DNS"
 
   tags = "${merge(var.common_tags, map(
