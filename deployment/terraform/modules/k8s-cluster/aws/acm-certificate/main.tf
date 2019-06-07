@@ -17,6 +17,7 @@ resource "aws_route53_record" "cert_validation" {
   zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   records = ["${aws_acm_certificate.cert.domain_validation_options.0.resource_record_value}"]
   ttl     = 60
+  allow_overwrite = true
 }
 
 resource "aws_route53_record" "cert_validation_alt1" {
@@ -25,6 +26,7 @@ resource "aws_route53_record" "cert_validation_alt1" {
   zone_id = "/hostedzone/${var.aws_hosted_zone_id}"
   records = ["${aws_acm_certificate.cert.domain_validation_options.1.resource_record_value}"]
   ttl     = 60
+  allow_overwrite = true
 }
 
 resource "aws_acm_certificate_validation" "cert" {
