@@ -89,7 +89,7 @@ variable "trends" {
     timeseries_aggregator_histogram_max_value = 1800000
     timeseries_aggregator_histogram_precision = 2
     timeseries_aggregator_histogram_value_unit = "millis"
-    timeseries_aggregator_additional_tags =""
+    timeseries_aggregator_additional_tags = ""
   }
 }
 
@@ -175,6 +175,7 @@ variable "collector" {
     kinesis_span_collector_memory_request = "1536"
     kinesis_span_collector_memory_limit = "1536"
     kinesis_span_collector_jvm_memory_limit = "1024"
+    kinesis_span_collector_app_name = "kinesis-span-collector"
 
     http_span_collector_instances = 1
     http_span_collector_enabled = false
@@ -184,6 +185,7 @@ variable "collector" {
     http_span_collector_memory_request = "1536"
     http_span_collector_memory_limit = "1536"
     http_span_collector_jvm_memory_limit = "1024"
+    http_span_collector_app_name = "http-span-collector"
   }
 }
 
@@ -248,6 +250,26 @@ variable "haystack-alerts" {
     anomaly-store_memory_request = "1536"
     anomaly-store_memory_limit = "1536"
     anomaly-store_jvm_memory_limit = "1024"
+  }
+}
+
+variable "pitchfork" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 1
+    image = "hotelsdotcom/pitchfork:1.6"
+    cpu_request = "1"
+    cpu_limit = "1"
+    memory_request = "1536"
+    memory_limit = "2000"
+    jvm_memory_limit = "1024"
+    pitchfork_port = 9411
+    kafka_enabled = "true"
+    logging_enabled = "true"
+    logging_span_enabled = "false"
+    kafka_topic = "proto-spans"
+    env_vars = ""
   }
 }
 
@@ -405,6 +427,7 @@ variable "alert-manager-notifier" {
     es_urls = ""
   }
 }
+
 variable "pitchfork" {
   type = "map"
   default = {

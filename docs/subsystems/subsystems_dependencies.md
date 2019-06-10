@@ -19,7 +19,7 @@ This repository has two components that focus on:
 
 ## Component: node-finder
 
-This component discovers the relationship between services. Services are the nodes in graph with operations being the edges. Since individual span's (client or server spans) do not carry the name of the services being called or calling them, this component accumulates the incoming spans and uses `span-id` to discover the dependent services and the operations between them. 
+This component discovers the relationship between services. Services are the nodes in the graph with operations being the edges. Since individual spans (client or server spans) do not carry the name of the services being called or calling them, this component accumulates the incoming spans and uses `span-id` to discover the dependent services and the operations between them. 
 
 Discovered "span pairs" are then used to produce two different outputs
 
@@ -51,8 +51,8 @@ Starting point for the application is the [Streams](node-finder/src/main/scala/c
     "value": 40.0,
     "epochTimeInSeconds": 1523637898,
     "tags" : {
-      "serviceName": "foo-service"
-      "operationName":  "bar"
+      "serviceName": "foo-service",
+      "operationName": "bar"
     }
   }  
   ```
@@ -87,7 +87,7 @@ Kafka does take care of persisting and replicating the graph ktable across broke
 Interactive query to a single stream nodes return only the graph-edges sharded to that node, hence it is a partial view of the world. The servlet take care of fetching partial graphs from all nodes having the ktable to form full service-graphs.
   
 ###### Endpoints 
-1. `/servicegraph` : returns full service graph, includes edges from all know services. Edges include operations also.  
+1. `/servicegraph` : returns full service graph, includes edges from all known services. Edges include operations also.  
 
 ## Building
 
@@ -97,4 +97,4 @@ To build the components in this repository at once, one can run
 make all
 ```
 
-To build the components separately, once can check the README in the individual component folders
+To build the components separately, one can check the README in the individual component folders.

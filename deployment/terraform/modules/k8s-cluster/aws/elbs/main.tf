@@ -3,7 +3,10 @@ locals {
   api-elb-sgs = "${compact(concat(var.elb_api_security_groups , split(",", var.cluster["additional-security_groups"])))}"
 }
 resource "aws_elb" "api-elb" {
-  name = "${format("%.24s", "${var.cluster["name"]}")}-api-elb"
+  /* appending char `b` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for elb name is 32 chars.
+  */
+  name = "${format("%.31s", "${var.cluster["name"]}-api-el")}b"
 
   listener = {
     instance_port = 443
@@ -37,7 +40,10 @@ resource "aws_elb" "api-elb" {
 }
 
 resource "aws_elb" "monitoring-elb" {
-  name = "${format("%.17s", "${var.cluster["name"]}")}-monitoring-elb"
+  /* appending char `b` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for elb name is 32 chars.
+  */
+  name = "${format("%.31s", "${var.cluster["name"]}-monitoring-el")}b"
 
   listener = {
     instance_port = "${var.graphite_node_port}"
@@ -71,14 +77,17 @@ resource "aws_elb" "monitoring-elb" {
 }
 
 resource "aws_elb" "nodes-elb" {
-  name = "${format("%.22s", "${var.cluster["name"]}")}-nodes-elb"
+  /* appending char `b` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for elb name is 32 chars.
+  */
+  name = "${format("%.31s", "${var.cluster["name"]}-nodes-el")}b"
 
   listener = {
     instance_port = "${var.cluster["reverse_proxy_port"]}"
     instance_protocol = "HTTP"
     lb_port = "${var.nodes_elb_port}"
     lb_protocol = "${var.nodes_elb_protocol}"
-    ssl_certificate_id   = "${var.cluster["node_elb_sslcert_arn"]}"
+    ssl_certificate_id   = "${var.aws_acm_certificate_arn}"
   }
 
   security_groups = [

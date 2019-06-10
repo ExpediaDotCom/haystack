@@ -1,5 +1,9 @@
 locals {
-  haystack_index_store_domain_name = "${format("%.16s", "${var.cluster["name"]}")}-index-store"
+  /* appending char `e` explicitly at the end to avoid the issue due to name ending
+    with a special charater `-`. Limit on length for ES name is 28 chars.
+  */
+  haystack_index_store_domain_name = "${format("%.27s", "${var.cluster["name"]}-index-stor")}e"
+
   haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
 }
 
@@ -50,7 +54,7 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
   snapshot_options {
     automated_snapshot_start_hour = 23
   }
- tags = "${merge(var.common_tags, map(
+  tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-index-store",
     "Name", "${local.haystack_index_store_domain_name}",

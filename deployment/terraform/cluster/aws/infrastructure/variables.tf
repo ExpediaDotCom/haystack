@@ -45,10 +45,10 @@ variable "cluster" {
     aws_utilities_subnet = ""
     aws_s3_bucket_name = ""
     role_prefix = "haystack"
-    node_elb_sslcert_arn = ""
     node-elb_ingress = "0.0.0.0/0"
     node_ingress = "0.0.0.0/0"
     additional-security_groups = ""
+    node_elb_enable_ssl = "true"
   }
 }
 
