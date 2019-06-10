@@ -42,5 +42,5 @@ resource "null_resource" "kubectl_destroy" {
     command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name}"
     when = "destroy"
   }
-  count = "${local.count}"
+  count = "${var.pitchfork["enabled"]}"
 }

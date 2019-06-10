@@ -89,6 +89,7 @@ variable "trends" {
     timeseries_aggregator_histogram_max_value = 1800000
     timeseries_aggregator_histogram_precision = 2
     timeseries_aggregator_histogram_value_unit = "millis"
+    timeseries_aggregator_additional_tags =""
   }
 }
 
@@ -420,5 +421,6 @@ variable "pitchfork" {
     logging_enabled = "true"
     logging_span_enabled = "false"
     kafka_topic = "proto-spans"
+    env_vars = ""
   }
 }
