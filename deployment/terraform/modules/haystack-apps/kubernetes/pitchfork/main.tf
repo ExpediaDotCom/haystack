@@ -1,13 +1,12 @@
 locals {
   app_name = "pitchfork"
   deployment_yaml_file_path = "${path.module}/templates/deployment.yaml"
-  count = "${var.pitchfork["enabled"]?1:0}"
-  
 }
 
 data "template_file" "deployment_yaml" {
   template = "${file("${local.deployment_yaml_file_path}")}"
   vars {
+    cname = "haystack-${local.app_name}.${var.domain_name}"
     pitchfork_image = "${var.pitchfork["image"]}"
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
@@ -34,7 +33,7 @@ resource "null_resource" "kubectl_apply" {
   provisioner "local-exec" {
    command = "echo '${data.template_file.deployment_yaml.rendered}' | ${var.kubectl_executable_name} apply -f - --context ${var.kubectl_context_name}"
   }
-  count = "${local.count}"
+  count = "${var.pitchfork["enabled"]}"
 }
 
 resource "null_resource" "kubectl_destroy" {

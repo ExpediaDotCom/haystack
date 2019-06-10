@@ -68,3 +68,22 @@ spec:
     protocol: "TCP"
   selector:
     k8s-app: ${app_name}
+
+# ------------------ Ingress ---------------------- #
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-${app_name}
+  namespace: ${namespace}
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  - host: ${cname}
+    http:
+      paths:
+       - path: /zipkin
+         backend:
+           serviceName: ${app_name}
+           servicePort: 80
