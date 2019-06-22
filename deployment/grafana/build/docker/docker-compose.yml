@@ -1,0 +1,6 @@
+version: "3"
+services:
+  haystack-grafana:
+    image: haystack-grafana:1
+    environment:
+      GF_SERVER_HOSTNAME: "localhost"

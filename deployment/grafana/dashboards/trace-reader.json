@@ -1,0 +1,2505 @@
+{
+  "dashboard": {
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "v4.4.3"
+      },
+      {
+        "type": "panel",
+        "id": "graph",
+        "name": "Graph",
+        "version": ""
+      },
+      {
+        "type": "datasource",
+        "id": "influxdb",
+        "name": "InfluxDB",
+        "version": "1.0.0"
+      }
+    ],
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "hideControls": false,
+    "id": null,
+    "links": [],
+    "refresh": "1m",
+    "rows": [
+      {
+        "collapse": false,
+        "height": 279,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "decimals": null,
+            "fill": 1,
+            "id": 2,
+            "legend": {
+              "alignAsTable": false,
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.traces.reader",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "read.time.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "backend"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Cassandra Read - 1min Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.traces.reader",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "read.time.99thPercentile"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "backend"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 200
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Cassandra Read Time(ms) - 99th Percentile",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 1,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.traces.reader",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "read.failures.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "cassandra"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.2
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Cassandra Read Failure Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Cassandra",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 284,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 4,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.traces.reader",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "read.time.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "elasticsearch"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "ElasticSearch Read - 1min Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 7,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.traces.reader",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "read.time.99thPercentile"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "elasticsearch"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 4000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "ElasticSearch Read Time(ms) - 99th Percentile",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 3,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.traces.reader",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "read.failures.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "elasticsearch"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 2
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "ElasticSearch Read Failure Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "ElasticSearch",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 337,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Endpoint GetFieldNames",
+            "fill": 1,
+            "id": 5,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "getFieldNames-Rate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "reader.getFieldNames.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldNames.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ]
+              },
+              {
+                "alias": "getFieldNames-50th($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "reader.getFieldNames.50thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldNames.50thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ]
+              },
+              {
+                "alias": "getFieldNames-99th($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "reader.getFieldNames.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldNames.99thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ]
+              },
+              {
+                "alias": "getFieldNames-Failures($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "reader.getFieldNames.failures.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldNames.failures.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "GetFieldNames",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Reader's getFieldValues endpoint",
+            "fill": 1,
+            "id": 8,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "SuccessRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getFieldValues.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldValues.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "50thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getFieldValues.50thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldValues.50thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "99thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getFieldValues.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldValues.99thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "FailureRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getFieldValues.failures.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getFieldValues.failures.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "GetFieldValues",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Reader's getRawTrace endpoint",
+            "fill": 1,
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "SuccessRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawTrace.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawTrace.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "50thPercentile ($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawTrace.50thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawTrace.50thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "99thPercentile ($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawTrace.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawTrace.99thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "FailureRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawTrace.failures.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawTrace.failures.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "GetRawTrace",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Reader's getRawSpan endpoint",
+            "fill": 1,
+            "id": 9,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "SuccessRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawSpan.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawSpan.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "50thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawSpan.50thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawSpan.50thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "99thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawSpan.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawSpan.99thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "FailureRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getRawSpan.failures.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getRawSpan.failures.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "GetRawSpan",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Reader's getTrace endpoint",
+            "fill": 1,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "SuccessRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getTrace.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getTrace.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "50thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getTrace.50thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getTrace.50thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "99thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getTrace.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getTrace.99thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "FailureRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.getTrace.failures.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.getTrace.failures.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 10000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "GetTrace",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Reader's searchTraces endpoint",
+            "fill": 1,
+            "id": 12,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "SuccessRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.searchTraces.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.searchTraces.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "50thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.searchTraces.50thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.searchTraces.50thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "99thPercentile($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.searchTraces.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.searchTraces.99thPercentile\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              },
+              {
+                "alias": "FailureRate($tag_host)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "reader.searchTraces.failures.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"reader.searchTraces.failures.OneMinuteRate\" FROM \"haystack.traces.reader\" WHERE \"class\" = 'trace' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "traces"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "reader"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trace"
+                  }
+                ],
+                "target": ""
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 30000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "SearchTraces",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Reader Endpoints",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "Trace Reader"
+  }
+}
