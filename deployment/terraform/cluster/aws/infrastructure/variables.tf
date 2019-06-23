@@ -102,6 +102,7 @@ variable "kops_kubernetes" {
 variable "es_spans_index" {
   type = "map"
   default = {
+    enabled = false
     dedicated_master_enabled = true
     master_instance_type = "m4.large.elasticsearch"
     master_instance_count = 3
