@@ -6,7 +6,7 @@ locals {
 data "template_file" "deployment_yaml" {
   template = "${file("${local.deployment_yaml_file_path}")}"
   vars {
-    cname = "haystack-${local.app_name}.${var.domain_name}"
+    cname = "${var.haystack_cluster_name}.${var.domain_name}"
     pitchfork_image = "${var.pitchfork["image"]}"
     app_name = "${local.app_name}"
     namespace = "${var.namespace}"
