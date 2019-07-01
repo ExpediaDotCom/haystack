@@ -1,6 +1,0 @@
-version: "3"
-services:
-  haystack-grafana:
-    image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.3
-    ports:
-      - 3000:3000
