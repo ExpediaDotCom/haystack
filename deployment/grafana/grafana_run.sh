@@ -12,7 +12,7 @@ if [ -z ${grafana_passwd} ]; then
 fi
 
 if [ -z ${gf_server_protocol} ]; then
-    gf_server_protocol="admin"
+    gf_server_protocol="http"
 fi
 
 if [ -z ${gf_server_hostname} ]; then
@@ -23,9 +23,11 @@ if [ -z ${httpPort} ]; then
     httpPort="2003"
 fi
 
+echo "gf_server_protocol=${gf_server_protocol}"
 echo "gf_server_hostname=${gf_server_hostname}"
+echo "httpPort=${httpPort}"
 
-echo "Going to create haystack datasources"
+echo "Creating haystack datasources"
 DATASOURCE_GRAFANA_URL="${gf_server_protocol}://${grafana_user}:${grafana_passwd}@${gf_server_hostname}:${httpPort}/api/datasources"
 for FILENAME in ${datasource_location}/*.json; do
     echo "Creating datasource ${FILENAME}"
@@ -33,7 +35,7 @@ for FILENAME in ${datasource_location}/*.json; do
     echo ""
 done
 
-echo "Going to create haystack dashboards"
+echo "Creating haystack dashboards"
 DASHBOARD_GRAFANA_URL="${gf_server_protocol}://${grafana_user}:${grafana_passwd}@${gf_server_hostname}:${httpPort}/api/dashboards/db"
 for FILENAME in ${dashboard_location}/*.json; do
     echo "Creating dashboard ${FILENAME}"
