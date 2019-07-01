@@ -3,6 +3,7 @@ locals {
     with a special charater `-`. Limit on length for ES name is 28 chars.
   */
   haystack_index_store_domain_name = "${format("%.27s", "${var.cluster["name"]}-index-stor")}e"
+  count = "${var.es_spans_index["enabled"]?1:0}"
 
   haystack_index_store_access_policy_file_path = "${path.module}/templates/haystack-index-store-es-policy"
 }
@@ -60,4 +61,5 @@ resource "aws_elasticsearch_domain" "haystack_index_store" {
     "Name", "${local.haystack_index_store_domain_name}",
     "Component", "ES"
   ))}"
+  count = "${local.count}"
 }

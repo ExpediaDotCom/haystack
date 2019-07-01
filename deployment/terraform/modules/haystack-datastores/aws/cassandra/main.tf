@@ -19,6 +19,7 @@ locals {
   cassandra_config_yaml_path = "/etc/cassandra/default.conf/cassandra.yaml"
   cassandra_cname = "${var.cluster["name"]}-cassandra"
   cassandra_ssh_user = "ec2-user"
+  count = "${var.cassandra_spans_backend["seed_node_instance_count"] > 0 ? 1 : 0}"
 }
 
 module "cassandra-security-groups" {
@@ -39,6 +40,7 @@ data "template_file" "cassandra_user_data" {
 }
 
 resource "aws_iam_role" "haystack-cassandra-role" {
+  count = "${local.count}"
   name = "${var.cluster["name"]}-cassandra-nodes-role"
   assume_role_policy = <<EOF
 {
@@ -55,6 +57,7 @@ resource "aws_iam_role" "haystack-cassandra-role" {
 }
 
 resource "aws_iam_role_policy" "cassandra-policy" {
+  count = "${local.count}"
   name = "cassandra-policy"
   role = "${aws_iam_role.haystack-cassandra-role.name}"
   policy = <<EOF
@@ -77,6 +80,7 @@ resource "aws_iam_role_policy" "cassandra-policy" {
 }
 
 resource "aws_iam_instance_profile" "haystack-cassandra-nodes-profile" {
+  count = "${local.count}"
   name = "${var.cluster["name"]}-cassandra-nodes"
   role = "${aws_iam_role.haystack-cassandra-role.name}"
 }
@@ -145,6 +149,7 @@ resource "aws_instance" "haystack-cassandra-non-seed-nodes" {
 
 // create cname for newly created cassandra cluster
 resource "aws_route53_record" "haystack-cassandra-cname" {
+  count = "${local.count}"
   zone_id = "${var.aws_hosted_zone_id}"
   name    = "${local.cassandra_cname}"
   type    = "A"

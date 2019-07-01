@@ -180,4 +180,6 @@ module "pitchfork" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
   pitchfork = "${var.pitchfork}"
+  domain_name = "${var.domain_name}"
+  haystack_cluster_name = "${var.haystack_cluster_name}"
 }
