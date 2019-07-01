@@ -19,16 +19,16 @@ if [ -z ${gf_server_hostname} ]; then
     gf_server_hostname="monitoring-grafana"
 fi
 
-if [ -z ${httpPort} ]; then
-    httpPort="2003"
+if [ -z ${gf_server_http_port} ]; then
+    gf_server_http_port="2003"
 fi
 
 echo "gf_server_protocol=${gf_server_protocol}"
 echo "gf_server_hostname=${gf_server_hostname}"
-echo "httpPort=${httpPort}"
+echo "gf_server_http_port=${gf_server_http_port}"
 
 echo "Creating haystack datasources"
-DATASOURCE_GRAFANA_URL="${gf_server_protocol}://${grafana_user}:${grafana_passwd}@${gf_server_hostname}:${httpPort}/api/datasources"
+DATASOURCE_GRAFANA_URL="${gf_server_protocol}://${grafana_user}:${grafana_passwd}@${gf_server_hostname}:${gf_server_http_port}/api/datasources"
 for FILENAME in ${datasource_location}/*.json; do
     echo "Creating datasource ${FILENAME}"
     curl -X POST -H "Content-Type:application/json" "${DATASOURCE_GRAFANA_URL}" -d @${FILENAME}
@@ -36,7 +36,7 @@ for FILENAME in ${datasource_location}/*.json; do
 done
 
 echo "Creating haystack dashboards"
-DASHBOARD_GRAFANA_URL="${gf_server_protocol}://${grafana_user}:${grafana_passwd}@${gf_server_hostname}:${httpPort}/api/dashboards/db"
+DASHBOARD_GRAFANA_URL="${gf_server_protocol}://${grafana_user}:${grafana_passwd}@${gf_server_hostname}:${gf_server_http_port}/api/dashboards/db"
 for FILENAME in ${dashboard_location}/*.json; do
     echo "Creating dashboard ${FILENAME}"
     curl -X POST -H "Content-Type:application/json" "${DASHBOARD_GRAFANA_URL}" -d @${FILENAME}
