@@ -10,3 +10,4 @@ spec:
       containers:
       - name: influxdb-retention
         image: expediadotcom/haystack-grafana-dashboards
+      restartPolicy: Never

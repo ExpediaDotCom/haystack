@@ -20,7 +20,7 @@ if [ -z ${gf_server_hostname} ]; then
 fi
 
 if [ -z ${gf_server_http_port} ]; then
-    gf_server_http_port="3000"
+    gf_server_http_port="80"
 fi
 
 echo "gf_server_protocol=${gf_server_protocol}"
