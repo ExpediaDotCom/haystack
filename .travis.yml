@@ -14,8 +14,8 @@ script:
   - git config --global user.email "absrivastava@users.noreply.github.com"
   - git config --global user.name "absrivastava"
   - echo "machine github.com login absrivastava password $GITHUB_TOKEN" > ~/.netrc
-  - if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]) || [ -n "$TRAVIS_TAG" ]; then cd ./docsite && GIT_USER=$GITHUB_USER ./generate_docsite.sh; fi
-  - if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]) || [ -n "$TRAVIS_TAG" ]; then cd ./deployment/grafana ./build/docker/publish-to-docker-hub.sh; fi
+  - if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]) || [ -n "$TRAVIS_TAG" ]; then GIT_USER=$GITHUB_USER ./docsite/generate_docsite.sh; fi
+  - if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]) || [ -n "$TRAVIS_TAG" ]; then ./deployment/grafana/build/docker/publish-to-docker-hub.sh; fi
 
 notifications:
   email:
