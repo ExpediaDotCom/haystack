@@ -1,0 +1,19 @@
+{
+  "id": 3,
+  "orgId": 1,
+  "name": "internal",
+  "type": "influxdb",
+  "typeLogoUrl": "",
+  "access": "proxy",
+  "url": "http://monitoring-influxdb:8086",
+  "password": "root",
+  "user": "root",
+  "database": "_internal",
+  "basicAuth": false,
+  "basicAuthUser": "",
+  "basicAuthPassword": "",
+  "withCredentials": false,
+  "isDefault": false,
+  "jsonData": {},
+  "secureJsonFields": {}
+}

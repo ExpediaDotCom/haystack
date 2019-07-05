@@ -1,0 +1,4859 @@
+{
+  "dashboard": {
+    "__requires": [
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "v4.4.3"
+      },
+      {
+        "type": "panel",
+        "id": "graph",
+        "name": "Graph",
+        "version": ""
+      },
+      {
+        "type": "datasource",
+        "id": "influxdb",
+        "name": "InfluxDB",
+        "version": "1.0.0"
+      }
+    ],
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "hideControls": false,
+    "id": null,
+    "links": [],
+    "refresh": false,
+    "rows": [
+      {
+        "collapse": true,
+        "height": 330,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 17,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage (milli cores)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 18,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 19,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 20,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/usage",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory usage",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 21,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 22,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "k8s",
+            "fill": 1,
+            "id": 23,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/working_set",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory working set",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Pod",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 27,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "heapMemoryUsage.used",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "heapMemoryUsage.used"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM heap memory used",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 28,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "heapMemoryUsage.committed",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "heapMemoryUsage.committed"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM heap memory committed",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 29,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "nonHeapMemoryUsage.used",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "nonHeapMemoryUsage.used"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM non heap memory used",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 30,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "nonHeapMemoryUsage.committed",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "nonHeapMemoryUsage.committed"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM non heap memory committed",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 31,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "used.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "g1OldGen.used",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "max.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "g1OldGen.max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "used.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "g1OldGen.used"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "max.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"g1OldGen.max\" WHERE \"application\" = 'timeseries-aggregator' AND \"subsystem\" = 'trends' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": false,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "g1OldGen.max"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM GC Old Generation",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 32,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "max.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "g1SurvivorSpace.max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "used.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "g1SurvivorSpace.used",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "max.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "g1SurvivorSpace.max"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "used.$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"g1SurvivorSpace.used\" WHERE \"application\" = 'timeseries-aggregator' AND \"subsystem\" = 'trends' AND $timeFilter GROUP BY \"host\"",
+                "rawQuery": false,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "g1SurvivorSpace.used"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM GC Survivor Space",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 33,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "loadedClasses",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "loadedClasses"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM loaded classes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 34,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "thread",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "thread"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "jvm"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM thread count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "JVM",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 2,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "records-consumed.rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-consumed.rate"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka Read Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 1,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "record-send.rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "record-send.rate"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "lt",
+                "value": 1
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka Records Send Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 7,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "records-lag.max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-lag.max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 10000000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka Consumer Lag Max : Topic : metricpoints",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 3,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "record-error.rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "record-error.rate"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.05
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Records Send Error Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 24,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "record-error.rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "record-error.rate"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka Record Send Error Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Kafka",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "",
+            "fill": 1,
+            "id": 25,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "kafka-external.failure.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "kafka-external.failure.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 2000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "External Kafka Records Produce- Failure rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "",
+            "fill": 1,
+            "id": 26,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "kafka-external.success.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "kafka-external.success.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 2000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "External Kafka Records Produce- Success rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "External Kafka",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": 225,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Would happen incase the metricpoint has an invalid value i.e negative. \nIts most likely a client integration issue",
+            "fill": 1,
+            "id": 13,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "invalid.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  }
+                ]
+              },
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "invalid.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 2000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Invalid MetricPoints OneMinuteRate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "",
+            "fill": 1,
+            "id": 14,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "compute.time.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "compute.time.99thPercentile"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Trend Metric Compute Time in Ns (*_99)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ns",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "This would happen if the metric points are not sorted by timestamp, can be expected during kafka outage",
+            "fill": 1,
+            "id": 12,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "disordered.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "disordered.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 100000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Disordered Metric Points OneMinuteRate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "",
+            "fill": 1,
+            "id": 16,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "compute.time.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "count-metric"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "compute.time.99thPercentile"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "count-metric"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Count Metric Compute Time in Ns (*_99)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ns",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "",
+            "fill": 1,
+            "id": 15,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "compute.time.99thPercentile",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "histogram-metric"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "compute.time.99thPercentile"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "histogram-metric"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Histogram Metric Compute Time in Ns (*_99)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ns",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Number of trends computed for each kaka partition",
+            "fill": 1,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_class",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "class"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "Count",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "system",
+                    "operator": "=",
+                    "value": "haystack"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "!=",
+                    "value": "metricprocessor_invalid"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_class",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "class"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "Count"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "!=",
+                    "value": "metricprocessor_invalid"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 25000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Trends Count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Aggregator",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 209,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "height": "300px",
+            "id": 36,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "ser.success.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "ser.success.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.05
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Trend Metric Serialize Success OneMinuteRate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "height": "300px",
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "deser.success.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "deser.success.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Trend Metric Deserialise Success OneMinuteRate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "height": "300px",
+            "id": 9,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "deser.failure.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "deser.failure.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "trend-metric"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.05
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Trend Metric Deserialise Failure OneMinuteRate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "height": "300px",
+            "id": 8,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "deser.failure.OneMinuteRate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "timeseries-aggregator"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "trends"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.timeseries-aggregator",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "deser.failure.OneMinuteRate"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "metricpoint"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.05
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "MetricPoint Deserialise Failure OneMinuteRate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Serde",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "Timeseries Aggregator"
+  }
+}

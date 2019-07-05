@@ -1,0 +1,4139 @@
+{
+  "dashboard": {
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "hideControls": false,
+    "id": null,
+    "links": [],
+    "refresh": "5m",
+    "rows": [
+      {
+        "collapse": false,
+        "height": 253,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 2,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Count",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "REQUEST_COUNTER"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Incoming Span Count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 3,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Bytes",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "BYTES_IN_COUNTER"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "SpanJsonSerializer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Bytes In per 5 Minutes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Details of the AWS response to the \"put batch\" request.\nThere are usually 500 requests in a batch.\nEach request that succeeds will increment the \"Success\" counter.\nIf AWS throws an Exception in response to the batch, then all of the requests will be retried, and the \"Exception\" counter will be incremented by 1.\nThrottling is on a request basis, so every throttled request will increment the \"Throttled\" counter and will be retried until succeeding.\nAll other failures are also per request; they increment the \"Failures\" counter with each failed request and are retried until succeeding.",
+            "fill": 1,
+            "id": 4,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Success",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "SUCCESS_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"SUCCESS_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\" WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              },
+              {
+                "alias": "Failure",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "FAILURE_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"FAILURE_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\" WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              },
+              {
+                "alias": "Throttled",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "THROTTLED_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"THROTTLED_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\" WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_Batch' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_Batch"
+                  }
+                ]
+              },
+              {
+                "alias": "Exception",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "EXCEPTION_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"EXCEPTION_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\"  WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              },
+              {
+                "alias": "Socket Timeout",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "SOCKET_TIMEOUT_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"SOCKET_TIMEOUT_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\"  WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_S3Sender' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "E",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_S3Sender"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Success / Failure / Throttled / Exception Per 5 Minutes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 5,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "PUT_BATCH_REQUEST_GAUGE_max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "S3 Put Batch TP100",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 6,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Count",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "PUT_BATCH_REQUEST_NORMALIZED_count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "S3 Put Batch Count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 1,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "All",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"45.ERROR_COUNTER\") FROM \"haystack.errors.pipes-firehose-writer\" WHERE \"fqClass\" != 'com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "!=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor"
+                  }
+                ]
+              },
+              {
+                "alias": "SystemExitUncaughtExceptionHandler:55",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-commons-SystemExitUncaughtExceptionHandler' AND \"lineNumber\" = '54' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-commons-SystemExitUncaughtExceptionHandler"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "55"
+                  }
+                ]
+              },
+              {
+                "alias": "KafkaThread:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-kafka-common-utils-KafkaThread$1' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "E",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-kafka-common-utils-KafkaThread$1"
+                  }
+                ]
+              },
+              {
+                "alias": "DirectJDKLog:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-juli-logging-DirectJDKLog' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-juli-logging-DirectJDKLog"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "181"
+                  }
+                ]
+              },
+              {
+                "alias": "StreamThread:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-juli-logging-DirectJDKLog' AND \"lineNumber\" = '181' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "F",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-kafka-streams-processor-internals-StreamThread"
+                  }
+                ]
+              },
+              {
+                "alias": "Batch:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-juli-logging-DirectJDKLog' AND \"lineNumber\" = '181' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "H",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-Batch"
+                  }
+                ]
+              },
+              {
+                "alias": "FailedRecordExtractor:101 (AWS InternalFailure)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-firehoseWriter-FirehoseProcessor' AND \"lineNumber\" = '108' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "G",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "101"
+                  }
+                ]
+              },
+              {
+                "alias": "S3Sender:104",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor' AND \"lineNumber\" = '101' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "I",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-S3Sender"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "104"
+                  }
+                ]
+              },
+              {
+                "alias": "S3Sender:111",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor' AND \"lineNumber\" = '101' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "K",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-S3Sender"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "111"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.5
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Error Counter",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": false
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 7,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$interval"
+                    ],
+                    "type": "time"
+                  }
+                ],
+                "measurement": "haystack.pipes.firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-lag.max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 40000000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka - Lag",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 14,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "heapMemoryUsage.used"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Heap Memory Used",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 15,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage (millicores)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 22,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "SPAN_ARRIVAL_MS_GAUGE_max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Max Span Arrival Delay",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Firehose Writer",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 18,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host,$tag_class",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "class"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.pipes.firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-lag.max"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 100000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka - Lag",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 19,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.pipes.firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "heapMemoryUsage.used"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Heap Memory Used",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 20,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage (millicores)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 23,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "class"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "SPAN_ARRIVAL_MS_GAUGE_max"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 100000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Max Span Arrival Delay",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Firehose Writer (by host)",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 1,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-secret-detector",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "DETECTOR_SPAN_COUNTER"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Incoming Spans Per 1 Minute",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 2,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "BYTES_IN_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "SpanProtobufSerializer"
+                  }
+                ]
+              },
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-secret-detector",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "BYTES_IN_COUNTER"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "SpanProtobufSerializer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Bytes In per 5 Minutes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 3,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "All",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "EmailerDetectedAction:81",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-secret-detector' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-secretDetector-com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction' AND \"lineNumber\" = '105' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "81"
+                  }
+                ]
+              },
+              {
+                "alias": "EmailerDetectedAction:101",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-secret-detector' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-secretDetector-com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction' AND \"lineNumber\" = '105' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "101"
+                  }
+                ]
+              },
+              {
+                "alias": "S3ConfigFetcherBase:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-secret-detector' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-secretDetector-com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction' AND \"lineNumber\" = '105' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-commons-secretDetector-S3ConfigFetcherBase"
+                  }
+                ]
+              },
+              {
+                "alias": "RecordCollectorImpl:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-secret-detector' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-secretDetector-com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction' AND \"lineNumber\" = '105' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "F",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-kafka-streams-processor-internals-RecordCollectorImpl$1"
+                  }
+                ]
+              },
+              {
+                "alias": "SystemExitUncaughtExceptionHandler:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-secret-detector' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-secretDetector-com-expedia-www-haystack-pipes-secretDetector-actions-EmailerDetectedAction' AND \"lineNumber\" = '105' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "G",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-commons-SystemExitUncaughtExceptionHandler"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.5
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Error Counter",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": false
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 4,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  }
+                ],
+                "hide": false,
+                "measurement": "haystack.pipes.secret-detector",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"records-lag.max\" FROM \"haystack.pipes.secret-detector\" WHERE $timeFilter",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-lag.max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "kafka-consumer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 250000000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka - Lag",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 5,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  }
+                ],
+                "measurement": "heapMemoryUsage.used",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"heapMemoryUsage.used\") FROM \"haystack.pipes.secret-detector\" WHERE $timeFilter GROUP BY time($__interval)",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "secret-detector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Heap Memory Used",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "pipes-secret-detector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage (millicores)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 24,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "SPAN_ARRIVAL_MS_GAUGE_max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT max(\"SPAN_ARRIVAL_MS_GAUGE_max\") FROM \"haystack.pipes.haystack-pipes-secret-detector\" WHERE $timeFilter GROUP BY time(1m) fill(none)",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Max Span Arrival Delay",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 25,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "NON_LOCAL_IPV4_ADDRESS",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "NON_LOCAL_IPV4_ADDRESS_GAUGE_max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "EMAIL",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "EMAIL_GAUGE_max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "PHONE_NUMBER",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "PHONE_NUMBER_GAUGE_max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "CREDIT_CARD",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "CREDIT_CARD_GAUGE_max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "STREET_ADDRESS",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "STREET_ADDRESS_GAUGE_max",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "E",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Max Finder Time",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 26,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "NON_LOCAL_IPV4_ADDRESS",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "NON_LOCAL_IPV4_ADDRESS_NORMALIZED_count",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "EMAIL",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "EMAIL_NORMALIZED_count",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "PHONE_NUMBER",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "PHONE_NUMBER_NORMALIZED_count",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "CREDIT_CARD",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "CREDIT_CARD_NORMALIZED_count",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              },
+              {
+                "alias": "STREET_ADDRESS",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "STREET_ADDRESS_NORMALIZED_count",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "E",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-secret-detector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Finder Call Normalized Count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 21,
+            "interval": ">1m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": true,
+              "hideZero": true,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_fqClass,$tag_lineNumber",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "fqClass"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "lineNumber"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-secret-detector",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "DETECTOR_DETECT_NORMALIZED_count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Secrets Detected",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Secret Detector",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "Pipes"
+  }
+}

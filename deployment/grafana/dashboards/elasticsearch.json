@@ -1,0 +1,1842 @@
+{
+  "dashboard": {
+    "__requires": [
+      {
+        "type": "datasource",
+        "id": "cloudwatch",
+        "name": "AWS_CloudWatch",
+        "version": "1.0.0"
+      },
+      {
+        "type": "grafana",
+        "id": "grafana",
+        "name": "Grafana",
+        "version": "v4.4.3"
+      },
+      {
+        "type": "panel",
+        "id": "graph",
+        "name": "Graph",
+        "version": ""
+      }
+    ],
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "hideControls": false,
+    "id": null,
+    "links": [],
+    "refresh": "5s",
+    "rows": [
+      {
+        "collapse": false,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the ES cluster heath status",
+            "fill": 1,
+            "height": "300px",
+            "id": 5,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "ClusterStatus.red",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "ClusterStatus.yellow",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "ClusterStatus.green",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "C",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Cluster Health Status",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "percentunit",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the ES cpu utilization",
+            "fill": 1,
+            "height": "300px",
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "CPUUtilization",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "CPUUtilization",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Utilization",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "percent",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the free Storage space",
+            "fill": 1,
+            "height": "300px",
+            "id": 12,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "FreeStorageSpace",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Minimum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "FreeStorageSpace",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "FreeStorageSpace",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "C",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Free Storage Space",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "mbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows JVM memory pressure on ES cluster",
+            "fill": 1,
+            "height": "300px",
+            "id": 13,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "JVMMemoryPressure",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "JVMMemoryPressure",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "JVM Memory Pressure",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "percent",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the sum of all free Storage space",
+            "fill": 1,
+            "height": "300px",
+            "id": 14,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "FreeStorageSpace",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Free Storage Space - SUM",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "mbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the snapshot failures for ES",
+            "fill": 1,
+            "height": "300px",
+            "id": 15,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "AutomatedSnapshotFailure",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Maximum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              },
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "AutomatedSnapshotFailure",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Automated Snapshot Failure",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the ES cluster used space",
+            "fill": 1,
+            "height": "300px",
+            "id": 16,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "ClusterUsedSpace",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Cluster Used Space",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "mbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the number of nodes",
+            "fill": 1,
+            "height": "300px",
+            "id": 17,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "Nodes",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Minimum"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Number of Nodes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the CPU utilization of master nodes in ES cluster",
+            "fill": 1,
+            "height": "300px",
+            "id": 18,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "MasterCPUUtilization",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Master Nodes - CPU Utilization",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "percent",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "description": "This graph shows the JVM Memory Pressure of master nodes in ES cluster",
+            "fill": 1,
+            "height": "300px",
+            "id": 19,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "hideEmpty": false,
+              "hideZero": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 6,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dimensions": {
+                  "ClientId": "$aws_client_id",
+                  "DomainName": "$aws_es_domain_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "Load.Count",
+                "metricName": "MasterJVMMemoryPressure",
+                "namespace": "AWS/ES",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "B",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "datastore"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "application",
+                    "operator": "=",
+                    "value": "cassandra"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "Storage"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Master Nodes - JVM Memory Pressure",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "percent",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Metrics",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "tags": [],
+            "text": "<your_aws_acocunt_id>",
+            "value": "<your_aws_acocunt_id>"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "AWS Client ID",
+          "multi": false,
+          "name": "aws_client_id",
+          "options": [
+            {
+              "selected": true,
+              "text": "<your_aws_acocunt_id>",
+              "value": "<your_aws_acocunt_id>"
+            }
+          ],
+          "query": "<your_aws_acocunt_id>",
+          "type": "custom"
+        },
+        {
+          "allValue": null,
+          "current": {
+            "tags": [],
+            "text": "haystack-index-store",
+            "value": "haystack-index-store"
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "ES Domain Name",
+          "multi": false,
+          "name": "aws_es_domain_name",
+          "options": [
+            {
+              "selected": true,
+              "text": "haystack-index-store",
+              "value": "haystack-index-store"
+            },
+            {
+              "selected": false,
+              "text": "",
+              "value": ""
+            }
+          ],
+          "query": "haystack-index-store,",
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-15m",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "ElasticSearch",
+    "version": 12
+  }
+}

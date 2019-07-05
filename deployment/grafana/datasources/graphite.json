@@ -1,0 +1,19 @@
+{
+  "id": 2,
+  "orgId": 1,
+  "name": "graphite",
+  "type": "influxdb",
+  "typeLogoUrl": "",
+  "access": "proxy",
+  "url": "http://monitoring-influxdb:8086",
+  "password": "root",
+  "user": "root",
+  "database": "graphite",
+  "basicAuth": false,
+  "basicAuthUser": "",
+  "basicAuthPassword": "",
+  "withCredentials": false,
+  "isDefault": false,
+  "jsonData": {},
+  "secureJsonFields": {}
+}

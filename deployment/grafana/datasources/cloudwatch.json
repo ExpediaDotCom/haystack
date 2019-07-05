@@ -1,0 +1,14 @@
+{
+  "orgId": 1,
+  "name": "AWS_CloudWatch",
+  "type": "cloudwatch",
+  "access": "proxy",
+  "basicAuth": false,
+  "isDefault": false,
+  "jsonData": {
+    "assumeRoleArn": "",
+    "authType": "arn",
+    "defaultRegion": "us-west-2",
+    "timeField": "@timestamp"
+  }
+}

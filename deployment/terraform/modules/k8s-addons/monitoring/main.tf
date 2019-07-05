@@ -45,3 +45,10 @@ module "dashboard-addon" {
   k8s_dashboard_cname = "${local.k8s_dashboard_cname}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
 }
+
+module "grafana-dashboards-addon" {
+  source = "grafana_dashboards"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  enabled = "${var.monitoring_addons["enabled"]}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+}
