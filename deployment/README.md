@@ -9,5 +9,4 @@ To get a feel for Haystack you can run Haystack locally inside
 [getting started guide](https://expediadotcom.github.io/haystack/docs/about/getting_started.html).
 
 ## AWS Cluster
-We support out of the box deployment in AWS for Haystack. For the details on deploying Haystack on AWS, refer to the 
-following [wiki](https://expediadotcom.github.io/haystack/docs/deployment.html).
+We support out of the box deployment in AWS for Haystack. For the details on deploying Haystack on AWS, refer to the [deployment guide](https://expediadotcom.github.io/haystack/docs/deployment/deployment.html).
