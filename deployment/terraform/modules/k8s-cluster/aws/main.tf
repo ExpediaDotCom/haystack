@@ -114,7 +114,7 @@ module "route53" {
   haystack_ui_cname = "${local.haystack_ui_cname}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
-
+  monitoring_elb_dns_name = "${module.elbs.monitoring-nodes-elb-dns_name}"
 }
 
 resource "aws_eip" "eip" {
