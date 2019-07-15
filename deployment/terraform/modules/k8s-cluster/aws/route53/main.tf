@@ -39,7 +39,7 @@ resource "aws_route53_record" "subdomain-route53" {
 }
 
 resource "aws_route53_record" "monitoring-elb-route53" {
-  name = "monitoring.${var.k8s_cluster_name}"
+  name = "monitoring.${var.haystack_ui_cname}"
   type = "CNAME"
   records = [
     "${var.monitoring_elb_dns_name}"]
