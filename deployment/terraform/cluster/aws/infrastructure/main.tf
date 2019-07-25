@@ -31,6 +31,7 @@ module "haystack-datastores" {
   common_tags = "${var.common_tags}"
   kafka = "${var.kafka}"
   kinesis-stream = "${var.kinesis-stream}"
+  pipes_firehose_stream = "${var.pipes_firehose_stream}"
   cassandra_spans_backend = "${var.cassandra_spans_backend}"
   es_spans_index = "${var.es_spans_index}"
   graphite_hostname = "${module.haystack-k8s.external_graphite_hostname}"

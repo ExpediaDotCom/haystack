@@ -20,7 +20,6 @@ resource "aws_iam_role" "nodes-role" {
   assume_role_policy = "${file("${path.module}/manifests/nodes_iam-role.json")}"
 }
 
-
 data "template_file" "masters-iam-role-policy-template" {
   template = "${file("${path.module}/templates/masters_iam-role-policy.tpl")}"
   vars {
@@ -33,7 +32,6 @@ resource "aws_iam_role_policy" "masters-policy" {
   role = "${aws_iam_role.masters-role.name}"
   policy = "${data.template_file.masters-iam-role-policy-template.rendered}"
 }
-
 
 data "template_file" "nodes-iam-role-policy-template" {
   template = "${file("${path.module}/templates/nodes_iam-role-policy.tpl")}"

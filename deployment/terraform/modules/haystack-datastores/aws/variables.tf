@@ -14,6 +14,9 @@ variable "es_spans_index" {
 variable "kinesis-stream" {
   type = "map"
 }
+variable "pipes_firehose_stream" {
+  type = "map"
+}
 
 variable "dynamodb" {
   type = "map"
