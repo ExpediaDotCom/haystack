@@ -47,6 +47,8 @@ module "pipes" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
 
+  firehose_writer_firehose_streamname = "${var.firehose_writer_firehose_streamname}"
+
   pipes = "${var.pipes}"
 }
 

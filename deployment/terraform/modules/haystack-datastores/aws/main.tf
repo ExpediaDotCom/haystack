@@ -46,3 +46,10 @@ module "kinesis-stream" {
   dynamodb = "${var.dynamodb}"
   common_tags = "${var.common_tags}"
 }
+
+module "pipes_firehose_stream" {
+  source = "pipes_firehose_stream"
+  cluster = "${var.cluster}"
+  pipes_firehose_stream = "${var.pipes_firehose_stream}"
+  common_tags = "${var.common_tags}"
+}

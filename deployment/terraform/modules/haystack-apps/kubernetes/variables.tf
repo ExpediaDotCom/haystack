@@ -16,6 +16,7 @@ variable "app-node_selector_label" {}
 variable "domain_name" {}
 variable "kinesis-stream_name" {}
 variable "kinesis-stream_region" {}
+variable "firehose_writer_firehose_streamname" {}
 
 # ========================================
 # Haystack

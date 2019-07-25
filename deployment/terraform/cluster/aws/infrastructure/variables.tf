@@ -81,6 +81,22 @@ variable "kinesis-stream" {
     aws_region = "us-west-2"
   }
 }
+
+variable "pipes_firehose_stream" {
+  type = "map"
+  default = {
+    name = ""
+    enabled = false,
+    destination = "s3"
+    prefix = ""
+    compression_format = "GZIP"
+    buffer_size = 128
+    buffer_interval = 300
+    s3_configuration_bucket_name = ""
+  }
+}
+
+
 //Kubernetes cluster created using KOPS
 variable "kops_kubernetes" {
   type = "map"
