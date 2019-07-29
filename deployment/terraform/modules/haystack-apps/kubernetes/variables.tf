@@ -16,7 +16,7 @@ variable "app-node_selector_label" {}
 variable "domain_name" {}
 variable "kinesis-stream_name" {}
 variable "kinesis-stream_region" {}
-variable "firehose_writer_firehose_streamname" {}
+variable "pipes_firehose_writer_firehose_streamname" {}
 
 # ========================================
 # Haystack
@@ -84,21 +84,21 @@ variable "notifier" {
 }
 
 
-# ========================================
-# Alert Manager
-# ========================================
+# # ========================================
+# # Alert Manager
+# # ========================================
 
-variable "alert-manager-service" {
-  type = "map"
-}
+# variable "alert-manager-service" {
+#   type = "map"
+# }
 
-variable "alert-manager-notifier" {
-  type = "map"
-}
+# variable "alert-manager-notifier" {
+#   type = "map"
+# }
 
-variable "alert-manager-store" {
-  type = "map"
-}
+# variable "alert-manager-store" {
+#   type = "map"
+# }
 
 # ========================================
 # Pitchfork

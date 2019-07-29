@@ -47,7 +47,7 @@ module "pipes" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
 
-  firehose_writer_firehose_streamname = "${var.firehose_writer_firehose_streamname}"
+  firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
 
   pipes = "${var.pipes}"
 }
@@ -115,63 +115,63 @@ module "ui" {
 }
 
 # Adaptive Alerting
-module "alerting" {
-  source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
-#  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
+# module "alerting" {
+#   source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
+# #  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
 
-  app_namespace = "${var.aa_app_namespace}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  node_selector_label = "${var.app-node_selector_label}"
-  kafka_port = "${var.kafka_port}"
-  kafka_hostname = "${var.kafka_hostname}"
-  graphite_hostname = "${var.graphite_hostname}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
+#   app_namespace = "${var.aa_app_namespace}"
+#   kubectl_context_name = "${var.kubectl_context_name}"
+#   kubectl_executable_name = "${var.kubectl_executable_name}"
+#   node_selector_label = "${var.app-node_selector_label}"
+#   kafka_port = "${var.kafka_port}"
+#   kafka_hostname = "${var.kafka_hostname}"
+#   graphite_hostname = "${var.graphite_hostname}"
+#   graphite_port = "${var.graphite_port}"
+#   graphite_enabled = "${var.graphite_enabled}"
 
-  # AA apps
-  alerting = "${var.alerting}"
-  modelservice = "${var.modelservice}"
-  ad-mapper = "${var.ad-mapper}"
-  ad-manager = "${var.ad-manager}"
-  mc-a2m-mapper = "${var.mc-a2m-mapper}"
-  notifier = "${var.notifier}"
-}
+#   # AA apps
+#   alerting = "${var.alerting}"
+#   modelservice = "${var.modelservice}"
+#   ad-mapper = "${var.ad-mapper}"
+#   ad-manager = "${var.ad-manager}"
+#   mc-a2m-mapper = "${var.mc-a2m-mapper}"
+#   notifier = "${var.notifier}"
+# }
 
-module "alert-manager" {
-  source = "github.com/ExpediaDotCom/alert-manager/deployment/terraform"
+# module "alert-manager" {
+#   source = "github.com/ExpediaDotCom/alert-manager/deployment/terraform"
 
-  app_namespace = "${var.aa_app_namespace}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  node_selector_label = "${var.app-node_selector_label}"
-  kafka_port = "${var.kafka_port}"
-  kafka_hostname = "${var.kafka_hostname}"
-  graphite_hostname = "${var.graphite_hostname}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
+#   app_namespace = "${var.aa_app_namespace}"
+#   kubectl_context_name = "${var.kubectl_context_name}"
+#   kubectl_executable_name = "${var.kubectl_executable_name}"
+#   node_selector_label = "${var.app-node_selector_label}"
+#   kafka_port = "${var.kafka_port}"
+#   kafka_hostname = "${var.kafka_hostname}"
+#   graphite_hostname = "${var.graphite_hostname}"
+#   graphite_port = "${var.graphite_port}"
+#   graphite_enabled = "${var.graphite_enabled}"
 
-  # AM apps
-  alert-manager-service = "${var.alert-manager-service}"
-  alert-manager-store = "${var.alert-manager-store}"
-  alert-manager-notifier = "${var.alert-manager-notifier}"
-}
+#   # AM apps
+#   alert-manager-service = "${var.alert-manager-service}"
+#   alert-manager-store = "${var.alert-manager-store}"
+#   alert-manager-notifier = "${var.alert-manager-notifier}"
+# }
 
-module "haystack-alerting" {
-  source = "github.com/ExpediaDotCom/haystack-alerting/deployment/terraform"
-  namespace = "${var.k8s_app_namespace}"
-  kafka_hostname = "${var.kafka_hostname}"
-  kafka_port = "${var.kafka_port}"
-  elasticsearch_port = "${var.elasticsearch_port}"
-  elasticsearch_hostname = "${var.elasticsearch_hostname}"
-  graphite_hostname = "${var.graphite_hostname}"
-  graphite_port = "${var.graphite_port}"
-  graphite_enabled = "${var.graphite_enabled}"
-  node_selector_label = "${var.app-node_selector_label}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-  haystack-alerts = "${var.haystack-alerts}"
-}
+# module "haystack-alerting" {
+#   source = "github.com/ExpediaDotCom/haystack-alerting/deployment/terraform"
+#   namespace = "${var.k8s_app_namespace}"
+#   kafka_hostname = "${var.kafka_hostname}"
+#   kafka_port = "${var.kafka_port}"
+#   elasticsearch_port = "${var.elasticsearch_port}"
+#   elasticsearch_hostname = "${var.elasticsearch_hostname}"
+#   graphite_hostname = "${var.graphite_hostname}"
+#   graphite_port = "${var.graphite_port}"
+#   graphite_enabled = "${var.graphite_enabled}"
+#   node_selector_label = "${var.app-node_selector_label}"
+#   kubectl_executable_name = "${var.kubectl_executable_name}"
+#   kubectl_context_name = "${var.kubectl_context_name}"
+#   haystack-alerts = "${var.haystack-alerts}"
+# }
 
 # Pitchfork
 module "pitchfork" {
