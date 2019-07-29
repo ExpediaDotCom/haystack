@@ -114,7 +114,7 @@ module "ui" {
   metricpoint_encoder_type = "${var.ui["metricpoint_encoder_type"]}"
 }
 
-Adaptive Alerting
+#Adaptive Alerting
 module "alerting" {
   source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
 #  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
