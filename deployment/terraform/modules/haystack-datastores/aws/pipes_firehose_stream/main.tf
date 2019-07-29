@@ -45,5 +45,5 @@ resource "aws_kinesis_firehose_delivery_stream" "pipes_firehose_stream" {
     buffer_interval = "${var.pipes_firehose_stream["buffer_interval"]}"
   }
 
-  depends_on = ["${aws_iam_role.pipes_firehose_role.arn}"]
+  depends_on = ["${aws_iam_role.pipes_firehose_role}"]
 }

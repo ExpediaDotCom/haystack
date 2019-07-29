@@ -38,7 +38,7 @@ output "pipes_firehose_stream_name" {
 }
 
 output "pipes_firehose_s3_configuration_bucket_arn" {
-  value = "${module.pipes_firehose_stream.ipes_firehose_s3_configuration_bucket_arn}"
+  value = "${module.pipes_firehose_stream.pipes_firehose_s3_configuration_bucket_arn}"
 }
 
 output "cassandra_hostname" {
