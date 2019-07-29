@@ -84,21 +84,21 @@ variable "notifier" {
 }
 
 
-# # ========================================
-# # Alert Manager
-# # ========================================
+# ========================================
+# Alert Manager
+# ========================================
 
-# variable "alert-manager-service" {
-#   type = "map"
-# }
+variable "alert-manager-service" {
+  type = "map"
+}
 
-# variable "alert-manager-notifier" {
-#   type = "map"
-# }
+variable "alert-manager-notifier" {
+  type = "map"
+}
 
-# variable "alert-manager-store" {
-#   type = "map"
-# }
+variable "alert-manager-store" {
+  type = "map"
+}
 
 # ========================================
 # Pitchfork
