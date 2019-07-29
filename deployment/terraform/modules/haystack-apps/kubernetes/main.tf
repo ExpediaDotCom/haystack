@@ -47,7 +47,7 @@ module "pipes" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
 
-  firehose_writer_firehose_streamname = "${var.firehose_writer_firehose_streamname}"
+  firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
 
   pipes = "${var.pipes}"
 }
@@ -114,7 +114,7 @@ module "ui" {
   metricpoint_encoder_type = "${var.ui["metricpoint_encoder_type"]}"
 }
 
-# Adaptive Alerting
+#Adaptive Alerting
 module "alerting" {
   source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
 #  source = "../../../../../../../aa/adaptive-alerting/deployment/terraform"
