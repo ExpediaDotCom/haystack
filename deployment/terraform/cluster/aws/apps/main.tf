@@ -34,9 +34,9 @@ module "haystack-apps" {
   domain_name = "${var.domain_name}"
   kinesis-stream_name = "${data.terraform_remote_state.haystack_infrastructure.kinesis-stream_name}"
   kinesis-stream_region = "${data.terraform_remote_state.haystack_infrastructure.kinesis-stream_region}"
-  pipes_firehose_writer_firehose_streamname = "${data.terraform_remote_state.haystack_infrastructure.pipes_firehose_writer_firehose_streamname}"
-  pipes_firehose_writer_firehose_s3_destination_bucket_arn = "${data.terraform_remote_state.haystack_infrastructure.pipes_firehose_writer_firehose_s3_destination_bucket_arn}"
-  pipes_firehose_writer_firehose_role_arn = "${data.terraform_remote_state.haystack_infrastructure.pipes_firehose_writer_firehose_role_arn}"
+  pipes_firehose_writer_firehose_streamname = "${data.terraform_remote_state.haystack_infrastructure.pipes_firehose_stream_name}"
+  pipes_firehose_writer_firehose_s3_destination_bucket_arn = "${data.terraform_remote_state.haystack_infrastructure.pipes_firehose_s3_configuration_bucket_arn}"
+  pipes_firehose_writer_firehose_role_arn = "${data.terraform_remote_state.haystack_infrastructure.pipes_firehose_stream_role_arn}"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"
