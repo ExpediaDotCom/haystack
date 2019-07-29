@@ -9,6 +9,6 @@ output "pipes_firehose_stream_name" {
 }
 
 output "pipes_firehose_s3_configuration_bucket_arn" {
-  value = "${join("", aws_kinesis_firehose_delivery_stream.pipes_firehose_stream.s3_configuration.bucket_arn)}"
+  value = "${join("", aws_kinesis_firehose_delivery_stream.pipes_firehose_stream.*.s3_configuration.bucket_arn)}"
   depends_on = ["aws_kinesis_firehose_delivery_stream.pipes_firehose_stream"]
 }

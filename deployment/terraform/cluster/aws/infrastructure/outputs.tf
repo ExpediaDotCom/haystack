@@ -34,6 +34,19 @@ output "kinesis-stream_region" {
   value = "${module.haystack-datastores.kinesis-stream_region}"
 }
 
+output "pipes_firehose_stream_role_arn" {
+  value = "${module.haystack-datastores.pipes_firehose_stream_role_arn}"
+}
+
+output "pipes_firehose_stream_name" {
+  value = "${module.haystack-datastores.pipes_firehose_stream_name}"
+}
+
+output "pipes_firehose_s3_configuration_bucket_arn" {
+  value = "${module.haystack-datastores.pipes_firehose_s3_configuration_bucket_arn}"
+}
+
+
 output "elasticsearch_hostname" {
   value = "${module.haystack-datastores.elasticsearch_hostname}"
 }
