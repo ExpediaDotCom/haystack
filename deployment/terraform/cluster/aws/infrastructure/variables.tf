@@ -8,6 +8,7 @@ variable "monitoring_addons" {
     enabled = "true"
     graphite_node_port = "32301"
     grafana_storage_volume = "2Gi"
+    grafana_root_url = ""
     influxdb_storage_volume = "50Gi"
   }
 }
