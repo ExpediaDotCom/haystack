@@ -10,6 +10,7 @@ data "template_file" "grafana_cluster_addon_config" {
     grafana_storage_class = "${var.storage_class}"
     grafana_storage = "${var.storage_volume}"
     metrics_cname = "${var.metrics_cname}"
+    root_url = "${var.root_url}"
     node_selecter_label = "${var.node_selecter_label}"
 
   }

@@ -33,6 +33,7 @@ module "grafana-addon" {
   storage_class = "${var.cluster["storage_class"]}"
   storage_volume = "${var.monitoring_addons["grafana_storage_volume"]}"
   metrics_cname = "${local.metrics_cname}"
+  root_url = "${var.monitoring_addons["grafana_root_url"] == "" ? local.metrics_cname : var.monitoring_addons["grafana_root_url"]}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
 }
 
