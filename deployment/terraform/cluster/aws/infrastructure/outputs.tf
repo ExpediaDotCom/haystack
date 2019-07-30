@@ -42,14 +42,6 @@ output "elasticsearch_hostname" {
   value = "${module.haystack-datastores.elasticsearch_hostname}"
 }
 
-output "elasticsearch_a-hostname" {
-  value = "${module.haystack-datastores.elasticsearch_a-hostname}"
-}
-
-output "elasticsearch_hostnames" {
-  value = "${module.haystack-datastores.elasticsearch_hostnames}"
-}
-
 output "elasticsearch_port" {
   value = "${module.haystack-datastores.elasticsearch_port}"
 }

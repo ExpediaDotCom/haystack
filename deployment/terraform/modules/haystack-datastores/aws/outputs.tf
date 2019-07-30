@@ -2,14 +2,6 @@ output "elasticsearch_hostname" {
   value = "${module.es.elasticsearch_hostname}"
 }
 
-output "elasticsearch_a-hostname" {
-  value = "${module.es.elasticsearch_a-hostname}"
-}
-
-output "elasticsearch_hostnames" {
-  value = "${module.es.elasticsearch_hostnames}"
-}
-
 output "elasticsearch_port" {
   value = "${module.es.elasticsearch_service_port}"
 }
