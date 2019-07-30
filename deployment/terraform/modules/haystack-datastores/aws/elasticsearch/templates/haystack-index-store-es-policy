@@ -9,7 +9,10 @@
         ]
       },
       "Action": "es:*",
-      "Resource": "arn:aws:es:${aws_region}:${aws_account_id}:domain/${es_domain_name}/*"
+      "Resource": [
+        "arn:aws:es:${aws_region}:${aws_account_id}:domain/${es_domain_name}/*",
+        "arn:aws:es:${aws_region}:${aws_account_id}:domain/${a-es_domain_name}/*"
+        ]
     }
   ]
 }
