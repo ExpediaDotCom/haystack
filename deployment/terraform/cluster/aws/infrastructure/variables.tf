@@ -118,13 +118,27 @@ variable "kops_kubernetes" {
 variable "es_spans_index" {
   type = "map"
   default = {
-    enabled = false
+
+    # Common Variables for both ES
     dedicated_master_enabled = true
     master_instance_type = "m4.large.elasticsearch"
     master_instance_count = 3
+
+    # Configuration for Creating 2 ES, which will also help us in scaling ES.
+    # One of the ES can be used for creating new ES with Scaled values.
+    # NOTE: First identify which ES is getting used currently and then update accordingly.
+    
+    # Variables for First ES 
+    enabled = false
     worker_instance_type = "i3.2xlarge.elasticsearch"
-    worker_instance_type = "i3.2xlarge.elasticsearch"
-    worker_instnce_count = 3
+    worker_instance_count = 3
+    es_version = "6.0"
+
+    # Variables for Second ES 
+    a-enabled = false
+    a-worker_instance_type = "i3.2xlarge.elasticsearch"
+    a-worker_instance_count = 3
+    a-es_version = "6.0"
   }
 }
 
