@@ -8,6 +8,6 @@ spec:
   template:
     spec:
       containers:
-      - name: influxdb-retention
+      - name: grafana-dashboards
         image: expediadotcom/haystack-grafana-dashboards
       restartPolicy: Never

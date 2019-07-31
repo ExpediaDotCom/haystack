@@ -40,7 +40,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 1,
             "legend": {
@@ -150,7 +150,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 2,
             "legend": {
