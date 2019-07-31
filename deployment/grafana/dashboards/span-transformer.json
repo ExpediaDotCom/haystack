@@ -40,7 +40,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 8,
             "legend": {
@@ -148,7 +148,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 9,
             "legend": {
@@ -256,7 +256,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 10,
             "legend": {
@@ -364,7 +364,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 11,
             "legend": {
@@ -472,7 +472,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 12,
             "legend": {
@@ -580,7 +580,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 13,
             "legend": {
@@ -688,7 +688,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "k8s",
+            "datasource": "influxdb-datasource",
             "fill": 1,
             "id": 14,
             "legend": {
