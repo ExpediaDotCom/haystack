@@ -34,6 +34,9 @@ module "logging-addons" {
   datastores_heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
   logs_cname = "${local.logs_cname}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
+  splunk_deployment_server = "${var.cluster["splunk_deployment_server"]}"
+  logging_backend = "${var.cluster["logging_backend"]}"
+  cluster_name = "${var.cluster["name"]}"
 }
 
 module "traefik-addon" {

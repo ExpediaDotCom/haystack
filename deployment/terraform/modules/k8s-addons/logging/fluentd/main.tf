@@ -1,5 +1,5 @@
 locals {
-  count = "${var.enabled?1:0}"
+  count = "${var.enabled && (var.logging_backend == "" || var.logging_backend == "es") ? 1 : 0 }"
 }
 
 //creating the fluentd cluster addon for pushing k8s logs to elastic search
