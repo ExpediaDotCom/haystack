@@ -13,7 +13,6 @@ data "template_file" "elasticsearch_addon_config" {
     storage_volume = "${var.storage_volume}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
     heap_memory_in_mb = "${var.heap_memory_in_mb}"
-
   }
 }
 

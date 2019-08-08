@@ -35,7 +35,7 @@ module "logging-addons" {
   logs_cname = "${local.logs_cname}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
   splunk_deployment_server = "${var.cluster["splunk_deployment_server"]}"
-  logging_backend = "${var.cluster["logging_backend"]}"
+  logging_backend = "${var.logging_addons["logging_backend"]}"
   cluster_name = "${var.cluster["name"]}"
 }
 
