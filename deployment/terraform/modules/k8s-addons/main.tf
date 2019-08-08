@@ -34,7 +34,7 @@ module "logging-addons" {
   datastores_heap_memory_in_mb = "${var.datastores_heap_memory_in_mb}"
   logs_cname = "${local.logs_cname}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
-  splunk_deployment_server = "${var.cluster["splunk_deployment_server"]}"
+  splunk_deployment_server = "${var.logging_addons["splunk_deployment_server"]}"
   logging_backend = "${var.logging_addons["logging_backend"]}"
   cluster_name = "${var.cluster["name"]}"
 }
