@@ -1,0 +1,66 @@
+# ------------------- Deployment ------------------- #
+
+kind: Deployment
+apiVersion: apps/v1beta2
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  replicas: ${replicas}
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      k8s-app: ${app_name}
+  template:
+    metadata:
+      labels:
+        k8s-app: ${app_name}
+    spec:
+      containers:
+      - name: ${app_name}
+        image: ${image}
+        resources:
+          limits:
+            cpu: ${cpu_limit}
+            memory: ${memory_limit}Mi
+          requests:
+            cpu: ${cpu_request}
+            memory: ${memory_request}Mi
+        env:
+        - name: "JAVA_XMS"
+          value: "${jvm_memory_limit}m"
+        - name: "JAVA_XMX"
+          value: "${jvm_memory_limit}m"
+        - name: "grpc-server-endpoint"
+          value: ${grpc_server_endpoint}
+        - name: "http-port"
+          value: ":${service_port}"
+#        livenessProbe:
+#          exec:
+#            command:
+#            - /bin/grpc_health_probe
+#            - "-addr=:${container_port}"
+#          initialDelaySeconds: 30
+#          periodSeconds: 15
+#          timeoutSeconds: 5
+#          failureThreshold: 3
+      nodeSelector:
+        ${node_selecter_label}
+
+# ------------------- Service ------------------- #
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    k8s-app: ${app_name}
+  name: ${app_name}
+  namespace: ${namespace}
+spec:
+  ports:
+  - port: ${service_port}
+    targetPort: ${service_port}
+  selector:
+    k8s-app: ${app_name}

@@ -54,4 +54,10 @@ module "haystack-apps" {
 
   # Pitchfork
   pitchfork = "${var.pitchfork}"
+
+  # reverse-proxy
+  reverse-proxy = "${var.reverse-proxy}"
+
+  # haystack-agent
+  haystack-agent = "${var.haystack-agent}"
 }

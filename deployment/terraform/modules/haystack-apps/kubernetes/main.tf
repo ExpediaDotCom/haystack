@@ -185,3 +185,26 @@ module "pitchfork" {
   domain_name = "${var.domain_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
 }
+
+module "reverse-proxy" {
+  source = "reverse-proxy"
+  reverseProxy = "${var.reverse-proxy}"
+  namespace = "${var.aa_app_namespace}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+}
+
+module "haystack-agent" {
+  source = "haystack-agent"
+  haystackAgent = "${var.haystack-agent}"
+  namespace = "${var.k8s_app_namespace}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  kafka_port = "${var.kafka_port}"
+  kafka_hostname = "${var.kafka_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+}
