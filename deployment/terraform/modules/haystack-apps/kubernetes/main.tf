@@ -186,18 +186,9 @@ module "pitchfork" {
   haystack_cluster_name = "${var.haystack_cluster_name}"
 }
 
-module "reverse-proxy" {
-  source = "github.com/ExpediaDotCom/blobs/deployment/terraform"
-  reverseProxy = "${var.reverse-proxy}"
-  namespace = "${var.aa_app_namespace}"
-  node_selector_label = "${var.app-node_selector_label}"
-  kubectl_executable_name = "${var.kubectl_executable_name}"
-  kubectl_context_name = "${var.kubectl_context_name}"
-}
-
 module "haystack-agent" {
   source = "github.com/ExpediaDotCom/haystack-agent/deployment/terraform"
-  haystackAgent = "${var.haystack-agent}"
+  haystack-agent = "${var.haystack-agent}"
   namespace = "${var.k8s_app_namespace}"
   node_selector_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
@@ -207,4 +198,14 @@ module "haystack-agent" {
   graphite_hostname = "${var.graphite_hostname}"
   graphite_port = "${var.graphite_port}"
   graphite_enabled = "${var.graphite_enabled}"
+}
+
+module "reverse-proxy" {
+  source = "github.com/ExpediaDotCom/blobs/deployment/terraform"
+  reverse-proxy = "${var.reverse-proxy}"
+  namespace = "${var.aa_app_namespace}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  grpc_server_endpoint ="${module.haystack-agent.proxy_grpc_server_endpoint}"
 }
