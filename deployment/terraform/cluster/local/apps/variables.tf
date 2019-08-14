@@ -281,6 +281,36 @@ variable "pitchfork" {
   }
 }
 
+variable "reverse-proxy" {
+  type = "map"
+  default = {
+    enabled = false
+    proxy_instances = 0
+    version = "1.0"
+    proxy_jvm_memory_limit = "1024"
+    proxy_memory_request = "1536"
+    proxy_memory_limit = "1536"
+    proxy_cpu_request = "1"
+    proxy_cpu_limit = "1"
+  }
+}
+
+variable "haystack-agent" {
+  type = "map"
+  default = {
+    enabled = false
+    instances = 0
+    version = "0.1"
+    jvm_memory_limit = "1024"
+    memory_request = "1536"
+    memory_limit = "1536"
+    cpu_request = "1"
+    cpu_limit = "1"
+    blobs_aws_bucket_name = "haystack-blobs"
+    blobs_aws_region = "us-west-2"
+  }
+}
+
 # ========================================
 # Adaptive Alerting
 # ========================================

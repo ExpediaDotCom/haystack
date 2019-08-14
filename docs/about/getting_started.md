@@ -37,7 +37,7 @@ docker-compose -f docker-compose.yml \
 ```
 The command above starts haystack-agent as well. Give a minute or two for the containers to come up and connect with each other. Haystack's UI will be available at http://localhost:8080
 
-Finally, one can find a sample spring boot application @ https://github.com/ExpediaDotCom/opentracing-spring-haystack-example to send data to Haystack via haystack-agent listening in port 34000.
+Finally, one can find a sample spring boot application @ https://github.com/ExpediaDotCom/opentracing-spring-haystack-example to send data to Haystack via haystack-agent listening in port 35000.
 
 ### MiniKube (Kubernetes) with Terraform Approach 
 
