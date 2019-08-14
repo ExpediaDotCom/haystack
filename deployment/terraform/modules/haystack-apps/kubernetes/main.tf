@@ -187,7 +187,7 @@ module "pitchfork" {
 }
 
 module "reverse-proxy" {
-  source = "reverse-proxy"
+  source = "github.com/ExpediaDotCom/blobs/deployment/terraform"
   reverseProxy = "${var.reverse-proxy}"
   namespace = "${var.aa_app_namespace}"
   node_selector_label = "${var.app-node_selector_label}"
@@ -196,7 +196,7 @@ module "reverse-proxy" {
 }
 
 module "haystack-agent" {
-  source = "haystack-agent"
+  source = "github.com/ExpediaDotCom/haystack-agent/deployment/terraform"
   haystackAgent = "${var.haystack-agent}"
   namespace = "${var.k8s_app_namespace}"
   node_selector_label = "${var.app-node_selector_label}"

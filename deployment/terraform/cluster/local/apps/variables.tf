@@ -284,7 +284,7 @@ variable "pitchfork" {
 variable "reverse-proxy" {
   type = "map"
   default = {
-    enabled = false
+    enabled = true
     proxy_instances = 0
     version = "1.0"
     proxy_jvm_memory_limit = "1024"
@@ -299,7 +299,7 @@ variable "reverse-proxy" {
 variable "haystack-agent" {
   type = "map"
   default = {
-    enabled = false
+    enabled = true
     instances = 0
     version = "0.1"
     jvm_memory_limit = "1024"
