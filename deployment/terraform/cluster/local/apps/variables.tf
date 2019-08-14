@@ -292,7 +292,7 @@ variable "reverse-proxy" {
     proxy_memory_limit = "1536"
     proxy_cpu_request = "1"
     proxy_cpu_limit = "1"
-    grpc_server_endpoint = "haystack-agent:34001"
+    grpc_server_endpoint = "haystack-agent:35001"
   }
 }
 

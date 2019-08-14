@@ -25,13 +25,13 @@ The configuration file defines which dispatchers the agent will use, and contain
 
 ```java -jar target/haystack-agent.jar --config-provider myAgentConfigFile --file-path docker/dev-config.yaml```
 
-The following example configuration loads our span agent provider, which accepts spans over GRPC at the configured port. This agent listens for GRPC requests on port 34000. It publishes spans to both Kinesis and Kafka, using the settings specified in the appropriate sections of the config (details below).
+The following example configuration loads our span agent provider, which accepts spans over GRPC at the configured port. This agent listens for GRPC requests on port 35000. It publishes spans to both Kinesis and Kafka, using the settings specified in the appropriate sections of the config (details below).
 
 ```
 agents:
 - name: "spans"
   props:
-    port: 34000
+    port: 35000
   dispatchers:
     kinesis:
       Region: us-west-2
