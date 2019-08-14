@@ -203,7 +203,7 @@ module "haystack-agent" {
 module "reverse-proxy" {
   source = "github.com/ExpediaDotCom/blobs/deployment/terraform"
   reverse-proxy = "${var.reverse-proxy}"
-  namespace = "${var.aa_app_namespace}"
+  namespace = "${var.k8s_app_namespace}"
   node_selector_label = "${var.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   kubectl_context_name = "${var.kubectl_context_name}"
