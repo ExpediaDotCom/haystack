@@ -292,7 +292,7 @@ variable "haystack-agent" {
   default = {
     enabled = false
     enable_spans = false
-    enable_blobs = false
+    enable_ossblobs = false
     enable_pitchfork = false
     use_sts_arn = false
     sts_arn_role = ""
