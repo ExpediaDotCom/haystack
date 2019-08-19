@@ -305,7 +305,7 @@ variable "haystack-agent" {
     use_sts_arn = false
     sts_arn_role = ""
     instances = 0
-    version = "0.1.11"
+    version = "0.1.12"
     jvm_memory_limit = "1024"
     memory_request = "1536"
     memory_limit = "1536"
