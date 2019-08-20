@@ -106,3 +106,17 @@ variable "alert-manager-store" {
 variable "pitchfork" {
   type = "map"
 }
+
+# ========================================
+# Blobs HTTP Reverse Proxy
+# ========================================
+variable "reverse-proxy" {
+  type = "map"
+}
+
+# ========================================
+# Haystack Agent
+# ========================================
+variable "haystack-agent" {
+  type = "map"
+}
