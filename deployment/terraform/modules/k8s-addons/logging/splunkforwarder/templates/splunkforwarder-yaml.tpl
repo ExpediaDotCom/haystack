@@ -19,7 +19,7 @@ data:
     index = ${splunk_index}
     host = localhost
 ---
-apiVersion: v1
+apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
   name: splunk-forwarder
