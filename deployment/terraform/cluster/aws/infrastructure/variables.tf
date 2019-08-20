@@ -30,6 +30,7 @@ variable "logging_addons" {
     es_storage_volume = "100Gi"
     logging_backend = ""  // Backend options for logging: "es" / "splunk". If not specified, default is "es".
     splunk_deployment_server = ""
+    splunk_index = ""
   }
 }
 

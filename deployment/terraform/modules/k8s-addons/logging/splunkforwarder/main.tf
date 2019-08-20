@@ -8,6 +8,7 @@ data "template_file" "splunkforwarder_config" {
     node_selecter_label = "${var.monitoring-node_selecter_label}"
     splunk_deployment_server = "${var.splunk_deployment_server}"
     cluster_name = "${var.cluster_name}"
+    splunk_index = "${var.splunk_index}"
   }
 }
 

@@ -10,6 +10,7 @@ variable "node_selecter_label" {}
 variable "splunk_deployment_server" {}
 variable "logging_backend" {}
 variable "cluster_name" {}
+variable "splunk_index" {}
 
 variable "enabled" {
   default = false

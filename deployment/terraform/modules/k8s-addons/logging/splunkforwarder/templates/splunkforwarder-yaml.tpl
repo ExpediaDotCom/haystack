@@ -1,4 +1,25 @@
-apiVersion: extensions/v1beta1
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: splunk-forwarder-config
+  namespace: kube-system
+data:
+  cacert.pem: ...
+  client.pem: ...
+  limits.conf: ...
+  outputs.conf: ...
+  server.pem: ...
+  inputs.conf: |
+    # watch all files in <path>
+    [monitor:///var/log/containers/*.log]
+    # extract `host` from the first group in the filename
+    host_regex = /var/log/containers/(.*)_.*_.*\.log
+    # set source type to Kubernetes
+    sourcetype = ${cluster_name}
+    index = ${splunk_index}
+    host = localhost
+---
+apiVersion: v1
 kind: DaemonSet
 metadata:
   name: splunk-forwarder
@@ -8,7 +29,12 @@ spec:
     metadata:
       labels:
         name: splunk-forwarder
+        kubernetes.io/cluster-service: "true"
     spec:
+      selector:
+        matchLabels:
+          k8s-app: splunk-forwarder
+          kubernetes.io/cluster-service: "true"
       hostNetwork: true
       containers:
       - name: splunk-forwarder
@@ -20,8 +46,6 @@ spec:
           value: ${splunk_deployment_server}
         - name: SPLUNK_USER
           value: root
-        - name: SPLUNK_ADD_1
-          value: 'monitor /var/log/containers -sourcetype ${cluster_name}-apps -index app -host localhost'
         volumeMounts:
         - mountPath: /var/log
           name: varlog
@@ -29,8 +53,8 @@ spec:
         - mountPath: /var/lib/docker/containers
           name: varlibdockercontainers
           readOnly: true
-      nodeSelector:
-        ${node_selecter_label}
+        - mountPath: /opt/splunk/etc/apps/splunkclouduf/default
+          name: config-volume
       terminationGracePeriodSeconds: 30
       volumes:
       - hostPath:
@@ -39,3 +63,6 @@ spec:
       - hostPath:
           path: /var/lib/docker/containers
         name: varlibdockercontainers
+      - name: config-volume
+        configMap:
+          name: splunk-forwarder-config

@@ -51,4 +51,5 @@ module "splunkforwarder" {
   monitoring-node_selecter_label = "${var.node_selecter_label}"
   logging_backend = "${var.logging_backend}"
   cluster_name = "${var.cluster_name}"
+  splunk_index = "${var.splunk_index}"
 }

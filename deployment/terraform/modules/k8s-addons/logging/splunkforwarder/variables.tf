@@ -5,3 +5,4 @@ variable "splunk_deployment_server" {}
 variable "enabled" {}
 variable "logging_backend" {}
 variable "cluster_name" {}
+variable "splunk_index" {}
