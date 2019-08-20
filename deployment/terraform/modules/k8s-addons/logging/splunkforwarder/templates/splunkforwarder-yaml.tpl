@@ -22,19 +22,27 @@ data:
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
+  labels:
+    k8s-app: fluentd-logging
+    kubernetes.io/cluster-service: "true"
   name: splunk-forwarder
   namespace: kube-system
 spec:
+  selector:
+    matchLabels:
+      k8s-app: splunk-forwarder
+      kubernetes.io/cluster-service: "true"
   template:
     metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      creationTimestamp: null
       labels:
-        name: splunk-forwarder
+        k8s-app: splunk-forwarder
         kubernetes.io/cluster-service: "true"
+      name: splunk-forwarder
+      namespace: kube-system
     spec:
-      selector:
-        matchLabels:
-          k8s-app: splunk-forwarder
-          kubernetes.io/cluster-service: "true"
       hostNetwork: true
       containers:
       - name: splunk-forwarder
