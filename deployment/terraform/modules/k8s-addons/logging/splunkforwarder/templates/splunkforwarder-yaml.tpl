@@ -47,6 +47,13 @@ spec:
       containers:
       - name: splunk-forwarder
         image: splunk/universalforwarder:6.6.3
+        resources:
+          limits:
+            cpu: 100m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
         env:
         - name: SPLUNK_START_ARGS
           value: "--accept-license"
