@@ -37,7 +37,7 @@ module "logging-addons" {
   splunk_deployment_server = "${var.logging_addons["splunk_deployment_server"]}"
   logging_backend = "${var.logging_addons["logging_backend"]}"
   cluster_name = "${var.cluster["name"]}"
-  splunk_index = "${var.cluster["splunk_index"]}"
+  splunk_index = "${var.logging_addons["splunk_index"]}"
 }
 
 module "traefik-addon" {
