@@ -64,6 +64,19 @@
       ]
     },
     {
+      "Sid": "kinesisFirehoseDeliveryStream",
+      "Effect": "Allow",
+      "Action": [
+        "firehose:DeleteDeliveryStream",
+        "firehose:PutRecord",
+        "firehose:PutRecordBatch",
+        "firehose:UpdateDestination"
+      ],
+      "Resource": [
+        "arn:aws:firehose:${current_region}:${account_id}:deliverystream/haystack-*"
+      ]
+    },
+    {
       "Sid": "dynamoDb",
       "Effect": "Allow",
       "Action": [
