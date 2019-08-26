@@ -1,7 +1,6 @@
 locals {
-  count = "${var.enabled?1:0}"
+  count = "${var.enabled && (var.logging_backend == "" || var.logging_backend == "es") ? 1 : 0 }"
 }
-
 
 data "template_file" "curator_cron_job" {
   template = "${file("${path.module}/templates/curator-cron-job-yaml.tpl")}"
@@ -10,6 +9,7 @@ data "template_file" "curator_cron_job" {
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
 }
+
 resource "null_resource" "elasticsearch_addons" {
   triggers {
     template = "${data.template_file.curator_cron_job.rendered}"

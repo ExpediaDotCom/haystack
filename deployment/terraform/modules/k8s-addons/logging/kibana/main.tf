@@ -1,7 +1,6 @@
 locals {
   rendered_kibana_addon_path = "${path.module}/manifests/kibana-addon.yaml"
-  count = "${var.enabled?1:0}"
-
+  count = "${var.enabled && (var.logging_backend == "" || var.logging_backend == "es") ? 1 : 0 }"
 }
 
 
@@ -13,6 +12,7 @@ data "template_file" "kibana_addon_config" {
     node_selecter_label = "${var.monitoring-node_selecter_label}"
   }
 }
+
 resource "null_resource" "kibana_addons" {
   triggers {
     template = "${data.template_file.kibana_addon_config.rendered}"

@@ -1,9 +1,8 @@
 locals {
   elasticsearch-name = "elasticsearch-logging"
   elasticsearch-port = 9200
-  count = "${var.enabled?1:0}"
+  count = "${var.enabled && (var.logging_backend == "" || var.logging_backend == "es") ? 1 : 0 }"
 }
-
 
 data "template_file" "elasticsearch_addon_config" {
   template = "${file("${path.module}/templates/es-logging-yaml.tpl")}"
@@ -14,9 +13,9 @@ data "template_file" "elasticsearch_addon_config" {
     storage_volume = "${var.storage_volume}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
     heap_memory_in_mb = "${var.heap_memory_in_mb}"
-
   }
 }
+
 resource "null_resource" "elasticsearch_addons" {
   triggers {
     template = "${data.template_file.elasticsearch_addon_config.rendered}"

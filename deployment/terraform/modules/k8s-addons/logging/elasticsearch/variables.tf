@@ -6,7 +6,7 @@ variable "storage_class" {}
 variable "enabled" {}
 variable "monitoring-node_selecter_label" {}
 variable "heap_memory_in_mb" {}
-
+variable "logging_backend" {}
 
 variable "k8s_fluentd_image" {
   default = "cheungpat/fluentd-elasticsearch-aws:1.22"
