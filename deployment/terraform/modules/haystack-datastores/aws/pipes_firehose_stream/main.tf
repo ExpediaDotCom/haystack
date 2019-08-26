@@ -4,7 +4,8 @@ locals {
   s3_configuration_bucket_arn = "arn:aws:s3:::${var.pipes_firehose_stream["s3_configuration_bucket_name"]}"
 
 }
-resource "aws_iam_role" "pipes_firehose_role" {
+
+resource "aws_iam_role" "pipes-firehose-role" {
   name = "${local.pipes_firehose_stream_name}"
   count = "${var.pipes_firehose_stream["enabled"]}"
   assume_role_policy = <<EOF
@@ -24,7 +25,21 @@ resource "aws_iam_role" "pipes_firehose_role" {
 EOF
 }
 
-resource "aws_kinesis_firehose_delivery_stream" "pipes_firehose_stream" {
+resource "aws_iam_role_policy" "pipes-firehose-role-policy" {
+  name = "${local.pipes_firehose_stream_name}"
+  role = "${aws_iam_role.pipes-firehose-role.name}"
+  policy = "${data.template_file.pipes-firehose-role-policy-template.rendered}"
+  count = "${var.pipes_firehose_stream["enabled"]}"
+}
+
+data "template_file" "pipes-firehose-role-policy-template" {
+  template = "${file("${path.module}/templates/pipes-firehose-role-policy-policy.tpl")}"
+  vars {
+    s3_bucket_name = "${var.pipes_firehose_stream["s3_configuration_bucket_name"]}"
+  }
+}
+
+resource "aws_kinesis_firehose_delivery_stream" "pipes-firehose-stream" {
   name        = "${local.pipes_firehose_stream_name}"
   destination = "${var.pipes_firehose_stream["destination"]}"
   count = "${var.pipes_firehose_stream["enabled"]}"
@@ -37,7 +52,7 @@ resource "aws_kinesis_firehose_delivery_stream" "pipes_firehose_stream" {
   ))}"
 
   s3_configuration {
-    role_arn   = "${aws_iam_role.pipes_firehose_role.arn}"
+    role_arn   = "${aws_iam_role.pipes-firehose-role.arn}"
     bucket_arn = "${local.s3_configuration_bucket_arn}"
     prefix = "${var.cluster["name"]}/json/"
     compression_format = "${var.pipes_firehose_stream["compression_format"]}"
@@ -45,5 +60,5 @@ resource "aws_kinesis_firehose_delivery_stream" "pipes_firehose_stream" {
     buffer_interval = "${var.pipes_firehose_stream["buffer_interval"]}"
   }
 
-  depends_on = ["aws_iam_role.pipes_firehose_role"]
+  depends_on = ["aws_iam_role.pipes-firehose-role"]
 }
