@@ -5,9 +5,6 @@ locals {
 
 }
 
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}
-
 resource "aws_iam_role" "pipes-firehose-role" {
   name = "${local.pipes_firehose_stream_name}"
   count = "${var.pipes_firehose_stream["enabled"]}"
