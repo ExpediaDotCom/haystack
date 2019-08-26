@@ -33,7 +33,7 @@ resource "aws_iam_role_policy" "pipes-firehose-role-policy" {
 }
 
 data "template_file" "pipes-firehose-role-policy-template" {
-  template = "${file("${path.module}/templates/pipes-firehose-role-policy-policy.tpl")}"
+  template = "${file("${path.module}/templates/pipes-firehose-role-policy.tpl")}"
   vars {
     s3_bucket_name = "${var.pipes_firehose_stream["s3_configuration_bucket_name"]}"
   }
