@@ -54,7 +54,7 @@ resource "aws_kinesis_firehose_delivery_stream" "pipes-firehose-stream" {
   s3_configuration {
     role_arn   = "${aws_iam_role.pipes-firehose-role.arn}"
     bucket_arn = "${local.s3_configuration_bucket_arn}"
-    prefix = "${var.cluster["name"]}/json/"
+    prefix = "json/${var.cluster["name"]}/"
     compression_format = "${var.pipes_firehose_stream["compression_format"]}"
     buffer_size = "${var.pipes_firehose_stream["buffer_size"]}"
     buffer_interval = "${var.pipes_firehose_stream["buffer_interval"]}"
