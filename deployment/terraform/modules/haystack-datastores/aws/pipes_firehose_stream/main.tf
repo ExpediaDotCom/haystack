@@ -2,7 +2,7 @@ locals {
   default_pipes_firehose_stream_name  = "${var.cluster["name"]}-json-spans"
   pipes_firehose_stream_name = "${var.pipes_firehose_stream["name"] == "" ? local.default_pipes_firehose_stream_name : var.pipes_firehose_stream["name"]}"
   s3_configuration_bucket_arn = "arn:aws:s3:::${var.pipes_firehose_stream["s3_configuration_bucket_name"]}"
-
+  s3_configuration_bucket_prefix = "${var.pipes_firehose_stream["prefix"] == "" ? "json/${var.cluster["name"]}/" : var.pipes_firehose_stream["prefix"]}"
 }
 
 resource "aws_iam_role" "pipes-firehose-role" {
@@ -54,7 +54,7 @@ resource "aws_kinesis_firehose_delivery_stream" "pipes-firehose-stream" {
   s3_configuration {
     role_arn   = "${aws_iam_role.pipes-firehose-role.arn}"
     bucket_arn = "${local.s3_configuration_bucket_arn}"
-    prefix = "json/${var.cluster["name"]}/"
+    prefix = "${local.s3_configuration_bucket_prefix}"
     compression_format = "${var.pipes_firehose_stream["compression_format"]}"
     buffer_size = "${var.pipes_firehose_stream["buffer_size"]}"
     buffer_interval = "${var.pipes_firehose_stream["buffer_interval"]}"
