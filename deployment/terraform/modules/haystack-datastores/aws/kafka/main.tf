@@ -245,6 +245,18 @@ resource "aws_instance" "haystack-kafka-broker" {
   user_data = "${data.template_file.kafka_broker_user_data.*.rendered[count.index]}"
 }
 
+module "vpce" {
+    subnets = "${var.subnets}"
+    cluster = ""
+    kafka = "map("vpce_enabled", "true")
+    common_tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
+    "Name", "${var.cluster["name"]}-kafka-brokers-${count.index}",
+    "Component", "Kafka"))}
+    kafka_instance_ids = ""
+}
+
 // create cname for newly created zookeeper cluster
 resource "aws_route53_record" "haystack-zookeeper-cname" {
   zone_id = "${var.aws_hosted_zone_id}"
