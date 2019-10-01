@@ -48,7 +48,7 @@ data:
     [monitor]
       store-enabled = true
       store-database = "_internal"
-      store-interval = "10s"
+      store-interval = "60s"
 
     [subscriber]
       enabled = true
