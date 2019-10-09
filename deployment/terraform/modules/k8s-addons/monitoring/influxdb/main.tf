@@ -10,6 +10,7 @@ data "template_file" "influxdb_cluster_addon_config" {
     influxdb_storage_class = "${var.storage_class}"
     influxdb_storage = "${var.storage_volume}"
     influxdb_memory_limit = "${var.influxdb_memory_limit}"
+    influxdb_cpu_limit = "${var.influxdb_cpu_limit}"
     graphite_node_port = "${var.graphite_node_port}"
     node_selecter_label = "${var.node_selecter_label}"
   }

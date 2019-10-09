@@ -153,7 +153,8 @@ spec:
         resources:
           # keep request = limit to keep this container in guaranteed class
           limits:
-            memory: ${heap_memory_in_mb}Mi
+            memory: ${influxdb_memory_limit}
+            cpu: ${influxdb_cpu_limit}
         ports:
           - containerPort: 8083
         volumeMounts:

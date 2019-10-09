@@ -13,6 +13,7 @@ module "influxdb-addon" {
   graphite_node_port = "${var.monitoring_addons["graphite_node_port"]}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
   influxdb_memory_limit = "${var.monitoring_addons["influxdb_memory_limit"]}"
+  influxdb_cpu_limit = "${var.monitoring_addons["influxdb_cpu_limit"]}"
 }
 
 
