@@ -245,15 +245,23 @@ resource "aws_instance" "haystack-kafka-broker" {
   user_data = "${data.template_file.kafka_broker_user_data.*.rendered[count.index]}"
 }
 
-module "vpce" {
-    subnets = "${var.subnets}"
-    cluster = ""
-    kafka = "map("vpce_enabled", "true")
-    common_tags = "${merge(var.common_tags, map(
-    "ClusterName", "${var.cluster["name"]}",
-    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
-    "Name", "${var.cluster["name"]}-kafka-brokers-${count.index}",
-    "Component", "Kafka"))}
+module "kafka-vpce" {
+    source = "vpce"
+    subnets = "${var.aws_subnets}"
+    cluster = "${var.cluster}"
+    kafka = {
+      "vpce_enabled": "true"
+      "kafka_port": "${local.kafka_port}"
+    }
+    common_tags = "${merge(
+        var.common_tags,
+        map(
+            "ClusterName", "${var.cluster["name"]}",
+            "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
+            "Name", "${var.cluster["name"]}-kafka-brokers-${count.index}",
+            "Component", "Kafka"
+        )
+      )}"
     kafka_instance_ids = ""
 }
 
