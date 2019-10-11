@@ -15,10 +15,10 @@ variable "common_tags" {
 }
 
 variable "kafka_instance_ids" {
-    type = "list"
+  type = "list"
 }
 
 variable "whitelisted_accounts" {
-    type = "list"
-    default = []
+  type = "list"
+  default = []
 }
