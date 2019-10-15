@@ -4,7 +4,7 @@
       {
         "type": "datasource",
         "id": "cloudwatch",
-        "name": "CloudWatch",
+        "name": "AWS_CloudWatch",
         "version": "1.0.0"
       },
       {
@@ -40,7 +40,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the ES cluster heath status",
             "fill": 1,
             "height": "300px",
@@ -286,7 +286,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the ES cpu utilization",
             "fill": 1,
             "height": "300px",
@@ -474,7 +474,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the free Storage space",
             "fill": 1,
             "height": "300px",
@@ -720,7 +720,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows JVM memory pressure on ES cluster",
             "fill": 1,
             "height": "300px",
@@ -908,7 +908,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the sum of all free Storage space",
             "fill": 1,
             "height": "300px",
@@ -1038,7 +1038,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the snapshot failures for ES",
             "fill": 1,
             "height": "300px",
@@ -1226,7 +1226,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the ES cluster used space",
             "fill": 1,
             "height": "300px",
@@ -1356,7 +1356,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the number of nodes",
             "fill": 1,
             "height": "300px",
@@ -1486,7 +1486,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the CPU utilization of master nodes in ES cluster",
             "fill": 1,
             "height": "300px",
@@ -1616,7 +1616,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "description": "This graph shows the JVM Memory Pressure of master nodes in ES cluster",
             "fill": 1,
             "height": "300px",
@@ -1759,8 +1759,8 @@
           "allValue": null,
           "current": {
             "tags": [],
-            "text": "008242042658",
-            "value": "008242042658"
+            "text": "<your_aws_account_id>",
+            "value": "<your_aws_account_id>"
           },
           "hide": 0,
           "includeAll": false,
@@ -1770,18 +1770,18 @@
           "options": [
             {
               "selected": true,
-              "text": "008242042658",
-              "value": "008242042658"
+              "text": "<your_aws_account_id>",
+              "value": "<your_aws_account_id>"
             }
           ],
-          "query": "008242042658",
+          "query": "<your_aws_account_id>",
           "type": "custom"
         },
         {
           "allValue": null,
           "current": {
-            "text": "a-haystack-index-store",
-            "value": "a-haystack-index-store"
+            "text": "haystack-index-store",
+            "value": "haystack-index-store"
           },
           "hide": 0,
           "includeAll": false,

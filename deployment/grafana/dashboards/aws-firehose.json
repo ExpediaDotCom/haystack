@@ -4,7 +4,7 @@
       {
         "type": "datasource",
         "id": "cloudwatch",
-        "name": "CloudWatch",
+        "name": "AWS_CloudWatch",
         "version": "1.0.0"
       },
       {
@@ -41,7 +41,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 1,
             "legend": {
@@ -155,7 +155,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 2,
             "legend": {
@@ -269,7 +269,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 3,
             "legend": {
@@ -383,7 +383,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 6,
             "legend": {
@@ -497,7 +497,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 7,
             "legend": {
@@ -611,7 +611,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 5,
             "legend": {
@@ -725,7 +725,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "${DS_AWS_CLOUDWATCH}",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 4,
             "legend": {
