@@ -190,6 +190,302 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-span-collector"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-lpas-span-collector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-span-collector"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-lpas-span-collector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
             "id": 9,
             "legend": {
               "avg": false,
@@ -314,7 +610,303 @@
             },
             "yaxes": [
               {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
                 "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 12,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-span-collector"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/usage",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-lpas-span-collector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 13,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-span-collector"
+                  }
+                ]
+              },
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/usage",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "kinesis-lpas-span-collector"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -340,15 +932,99 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 287,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "alerting",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for drop in kinesis ingestion rate.",
+              "name": "Kinesis Span Collector- drop in kinesis ingestion rate",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "graphite",
             "fill": 1,
             "id": 3,
             "legend": {
@@ -454,11 +1130,95 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      120000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      120000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      120000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in kinesis lag (ms).\n\nTroubleshooting steps:\n1. check kafka health\n2. check kinesis traffic and read success\n3. check collector's cpu and memory\n4. try increasing cpu / memory and/or no. of pods",
+              "name": "Kinesis Span Collector- increase in kinesis lag",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "graphite",
             "fill": 1,
             "id": 4,
             "legend": {
@@ -564,11 +1324,49 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in kinesis checkpoint failure rate.",
+              "name": "Kinesis Span Collector- increase in kinesis checkpoint failure rate",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "graphite",
             "fill": 1,
             "id": 5,
             "legend": {
@@ -682,15 +1480,99 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 255,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "alerting",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for drop in kafka send rate.",
+              "name": "Kinesis Span Collector- drop in kafka send rate",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "graphite",
             "fill": 1,
             "id": 1,
             "legend": {
@@ -712,7 +1594,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 5,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -794,7 +1676,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "graphite",
             "fill": 1,
             "id": 6,
             "legend": {
@@ -892,11 +1774,95 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in kafka produce error rate.",
+              "name": "Kinesis Span Collector- increase in kafka produce error rate",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "graphite",
             "fill": 1,
             "id": 2,
             "legend": {
@@ -918,7 +1884,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -1045,7 +2011,7 @@
         "30d"
       ]
     },
-    "timezone": "browser",
+    "timezone": "",
     "title": "Kinesis Span Collector"
   }
 }

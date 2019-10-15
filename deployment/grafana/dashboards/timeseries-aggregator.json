@@ -845,6 +845,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "heapMemoryUsage.used",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -993,6 +994,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "heapMemoryUsage.committed",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1141,6 +1143,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "nonHeapMemoryUsage.used",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1289,6 +1292,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "nonHeapMemoryUsage.committed",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1437,6 +1441,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "g1OldGen.used",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1477,6 +1482,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "g1OldGen.max",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1655,6 +1661,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "g1SurvivorSpace.max",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1695,6 +1702,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "g1SurvivorSpace.used",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -1867,6 +1875,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "loadedClasses",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -2015,6 +2024,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "thread",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -2181,6 +2191,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "records-consumed.rate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -2290,6 +2301,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This alert indicates drop in kafka records send rate.",
+              "name": "Timeseries Aggregator- drop in kafka records send rate",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2298,6 +2393,7 @@
             "fill": 1,
             "id": 1,
             "legend": {
+              "alignAsTable": false,
               "avg": false,
               "current": false,
               "max": false,
@@ -2329,15 +2425,10 @@
                       "1m"
                     ],
                     "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
                   }
                 ],
-                "measurement": "record-send.rate",
+                "hide": true,
+                "measurement": "haystack.trends.timeseries-aggregator",
                 "orderByTime": "ASC",
                 "policy": "default",
                 "refId": "A",
@@ -2346,7 +2437,7 @@
                   [
                     {
                       "params": [
-                        "value"
+                        "record-send.rate"
                       ],
                       "type": "field"
                     },
@@ -2356,19 +2447,7 @@
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "application",
-                    "operator": "=",
-                    "value": "timeseries-aggregator"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "subsystem",
-                    "operator": "=",
-                    "value": "trends"
-                  }
-                ]
+                "tags": []
               },
               {
                 "alias": "$tag_host",
@@ -2454,6 +2533,86 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      60000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "30m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      60000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      60000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for excessive lag in reading records from Kafka's \"metricpoints\" topic.\nIf the alert is only red on a few pods, it can often be cleared by deleting the pod(s) in the Kubernetes dashboard.\nIf you delete more than one pod, do so slowly to give the system time to stabilize before deleting the next pod.\nKubernetes will then launch a new pod that usually will not show the same large lag.\nThis is due to the possibility of timeseries-aggregator running on the same k8s host as a \"greedy\" (CPU-wise) service like secret-detector.",
+              "name": "Timeseries Aggregator- increase in kafka iterator age",
+              "noDataState": "no_data",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2501,6 +2660,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "records-lag.max",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -2560,7 +2720,7 @@
                   [
                     {
                       "params": [
-                        "records-lag.max"
+                        "iterator.age.ms.99thPercentile"
                       ],
                       "type": "field"
                     },
@@ -2579,12 +2739,12 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 10000000
+                "value": 60000
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Kafka Consumer Lag Max : Topic : metricpoints",
+            "title": "Kafka Iterator Age",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -2600,7 +2760,7 @@
             },
             "yaxes": [
               {
-                "format": "short",
+                "format": "ms",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -2618,6 +2778,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert from Timeseries Aggregator for increase in kafka producer's record send error rate.",
+              "name": "Timeseries Aggregator- increase in records send error rate",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2664,6 +2908,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "record-error.rate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -2741,7 +2986,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.05
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -2827,6 +3072,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "record-error.rate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -2990,6 +3236,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "kafka-external.failure.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -3147,6 +3394,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "kafka-external.success.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -3268,6 +3516,90 @@
         "height": 225,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      5000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      5000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      5000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in rate of invalid metric points.",
+              "name": "Timeseries Aggregator- increase in invalid MetricPoints",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -3309,6 +3641,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "invalid.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -3366,7 +3699,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 2000
+                "value": 5000
               }
             ],
             "timeFrom": null,
@@ -3447,6 +3780,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "compute.time.99thPercentile",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -3548,6 +3882,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      100000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in disordered metric points.",
+              "name": "Timeseries Aggregator- increase in disordered MetricPoints",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -3590,6 +4008,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "disordered.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -3747,6 +4166,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "compute.time.99thPercentile",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -3896,6 +4316,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "compute.time.99thPercentile",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -4003,6 +4424,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      25000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      25000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      25000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in MetricPoint compute failure.",
+              "name": "Timeseries Aggregator- increase in unique trends count",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -4034,64 +4539,6 @@
             "stack": false,
             "steppedLine": false,
             "targets": [
-              {
-                "alias": "$tag_class",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "class"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "Count",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "application",
-                    "operator": "=",
-                    "value": "timeseries-aggregator"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "subsystem",
-                    "operator": "=",
-                    "value": "trends"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "system",
-                    "operator": "=",
-                    "value": "haystack"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "class",
-                    "operator": "!=",
-                    "value": "metricprocessor_invalid"
-                  }
-                ]
-              },
               {
                 "alias": "$tag_class",
                 "dsType": "influxdb",
@@ -4186,7 +4633,7 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 209,
         "panels": [
           {
@@ -4232,6 +4679,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "ser.success.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -4389,6 +4837,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "deser.success.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -4496,6 +4945,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This alert indicates the increase in windowed metric deserialisation error rate.",
+              "name": "Timeseries Aggregator- increase in windowed metric deserialise failure",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -4538,6 +5071,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "deser.failure.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -4614,7 +5148,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.05
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -4653,6 +5187,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.05
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.05
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.05
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "alerting",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This alert indicates increase in deserialisation error rate.",
+              "name": "Timeseries Aggregator- increase in MetricPoint deserialise failure rate",
+              "noDataState": "no_data",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -4695,6 +5313,7 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "deser.failure.OneMinuteRate",
                 "orderByTime": "ASC",
                 "policy": "default",

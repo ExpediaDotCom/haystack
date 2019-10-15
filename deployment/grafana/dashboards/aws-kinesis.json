@@ -2,6 +2,12 @@
   "dashboard": {
     "__requires": [
       {
+        "type": "datasource",
+        "id": "cloudwatch",
+        "name": "CloudWatch",
+        "version": "1.0.0"
+      },
+      {
         "type": "grafana",
         "id": "grafana",
         "name": "Grafana",
@@ -12,36 +18,30 @@
         "id": "graph",
         "name": "Graph",
         "version": ""
-      },
-      {
-        "type": "datasource",
-        "id": "influxdb",
-        "name": "InfluxDB",
-        "version": "1.0.0"
       }
     ],
     "annotations": {
       "list": []
     },
-    "description": "Dashboard for haystack-http-span-collector",
+    "description": "Dashboard for AWS ELB - haystack-nodes-elb",
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": false,
+    "refresh": "1m",
     "rows": [
       {
         "collapse": false,
-        "height": 406,
+        "height": "250px",
         "panels": [
           {
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "graphite",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 1,
             "legend": {
@@ -56,7 +56,7 @@
             "lines": true,
             "linewidth": 1,
             "links": [],
-            "nullPointMode": "null",
+            "nullPointMode": "connected",
             "percentage": false,
             "pointradius": 5,
             "points": false,
@@ -68,36 +68,56 @@
             "steppedLine": false,
             "targets": [
               {
+                "dimensions": {
+                  "LoadBalancerName": "haystack-nodes-elb"
+                },
                 "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "HTTPCode_Backend_2XX",
+                "namespace": "AWS/ELB",
                 "orderByTime": "ASC",
+                "period": "",
                 "policy": "default",
-                "refId": "A",
+                "refId": "B",
+                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "valid.span.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Valid Spans Rate",
+            "title": "ELB- 2XX",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -135,7 +155,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "graphite",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 2,
             "legend": {
@@ -162,36 +182,56 @@
             "steppedLine": false,
             "targets": [
               {
+                "dimensions": {
+                  "LoadBalancerName": "haystack-nodes-elb"
+                },
                 "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "HTTPCode_Backend_4XX",
+                "namespace": "AWS/ELB",
                 "orderByTime": "ASC",
+                "period": "",
                 "policy": "default",
                 "refId": "A",
+                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "apikey.validation.failure.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Api Key Validation Failure",
+            "title": "ELB- 4XX",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -229,7 +269,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "graphite",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 3,
             "legend": {
@@ -244,7 +284,7 @@
             "lines": true,
             "linewidth": 1,
             "links": [],
-            "nullPointMode": "null",
+            "nullPointMode": "connected",
             "percentage": false,
             "pointradius": 5,
             "points": false,
@@ -256,36 +296,56 @@
             "steppedLine": false,
             "targets": [
               {
+                "dimensions": {
+                  "LoadBalancerName": "haystack-nodes-elb"
+                },
                 "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "HTTPCode_Backend_5XX",
+                "namespace": "AWS/ELB",
                 "orderByTime": "ASC",
+                "period": "",
                 "policy": "default",
                 "refId": "A",
+                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "invalid.span.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Invalid Spans Rate",
+            "title": "ELB- 5XX",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -363,7 +423,6 @@
       ]
     },
     "timezone": "",
-    "title": "Http Collector",
-    "version": 10
+    "title": "AWS ELB"
   }
 }

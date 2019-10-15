@@ -23,18 +23,16 @@
     "annotations": {
       "list": []
     },
-    "description": "Dashboard for haystack-http-span-collector",
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": false,
     "rows": [
       {
         "collapse": false,
-        "height": 406,
+        "height": 283,
         "panels": [
           {
             "aliasColors": {},
@@ -70,7 +68,7 @@
               {
                 "dsType": "influxdb",
                 "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "measurement": "haystack.pitchfork.#hostname#",
                 "orderByTime": "ASC",
                 "policy": "default",
                 "refId": "A",
@@ -79,25 +77,111 @@
                   [
                     {
                       "params": [
-                        "valid.span.OneMinuteRate"
+                        "pitchfork.spans.protocol.http.transport.jsonv2.count"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "jsonv2"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.protocol.http.transport.jsonv1.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "jsonv1"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.protocol.http.transport.protobuf.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "protobuf"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.protocol.http.transport.thrift.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "thrift"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.invalid.invalid.true.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "invalid"
+                      ],
+                      "type": "alias"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Valid Spans Rate",
+            "title": "Spans Count",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -164,7 +248,7 @@
               {
                 "dsType": "influxdb",
                 "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "measurement": "haystack.pitchfork.#hostname#",
                 "orderByTime": "ASC",
                 "policy": "default",
                 "refId": "A",
@@ -173,25 +257,51 @@
                   [
                     {
                       "params": [
-                        "apikey.validation.failure.OneMinuteRate"
+                        "server.requests.exception.None.method.POST.outcome.SUCCESS.status.200.uri./api/v2/spans.count"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "success"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "server.requests.exception.IllegalArgumentException.method.POST.outcome.SERVER_ERROR.status.500.uri./api/v2/spans.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "fail"
+                      ],
+                      "type": "alias"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Api Key Validation Failure",
+            "title": "Request Success / Failure",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -231,7 +341,7 @@
             "dashes": false,
             "datasource": "graphite",
             "fill": 1,
-            "id": 3,
+            "id": 4,
             "legend": {
               "avg": false,
               "current": false,
@@ -257,35 +367,47 @@
             "targets": [
               {
                 "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
                 "orderByTime": "ASC",
                 "policy": "default",
+                "query": "SELECT \"events.level.error.m1_rate\" FROM \"haystack.pitchfork.#hostname#\" WHERE $timeFilter",
+                "rawQuery": true,
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "invalid.span.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Invalid Spans Rate",
+            "title": "Errors",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -323,7 +445,7 @@
         "repeatIteration": null,
         "repeatRowId": null,
         "showTitle": false,
-        "title": "Dashboard Row",
+        "title": "Pitchfork",
         "titleSize": "h6"
       }
     ],
@@ -363,7 +485,6 @@
       ]
     },
     "timezone": "",
-    "title": "Http Collector",
-    "version": 10
+    "title": "Pitchfork"
   }
 }
