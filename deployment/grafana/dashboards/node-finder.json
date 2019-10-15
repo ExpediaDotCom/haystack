@@ -32,7 +32,7 @@
     "refresh": "1m",
     "rows": [
       {
-        "collapse": false,
+        "collapse": true,
         "height": "250px",
         "panels": [
           {
@@ -62,7 +62,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 6,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -152,6 +152,226 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
+            "id": 8,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "node-finder"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 9,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "node-finder"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
             "id": 2,
             "legend": {
               "avg": false,
@@ -172,7 +392,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 6,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -252,20 +472,315 @@
                 "show": true
               }
             ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "node-finder"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "node-finder"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
         "repeat": null,
         "repeatIteration": null,
         "repeatRowId": null,
         "showTitle": true,
-        "title": "Node Finder Pods",
+        "title": "Pod",
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 250,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      6000000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      6000000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      6000000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Node Finder- increase in Max Kafka Lag",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -322,7 +837,7 @@
                   [
                     {
                       "params": [
-                        "records-lag.max"
+                        "iterator.age.ms.99thPercentile"
                       ],
                       "type": "field"
                     },
@@ -346,7 +861,7 @@
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Max Kafka Lag - topic: proto-spans",
+            "title": "Iterator Age- topic: proto-spans",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -362,7 +877,7 @@
             },
             "yaxes": [
               {
-                "format": "short",
+                "format": "ms",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -380,6 +895,85 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      100
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      100
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      100
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Node Finder- drop in Kafka Read Rate",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -494,6 +1088,85 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Node Finder- drop in Produce Rate",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -622,7 +1295,7 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 250,
         "panels": [
           {
@@ -855,7 +1528,7 @@
       "list": []
     },
     "time": {
-      "from": "now-1h",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -883,7 +1556,7 @@
         "30d"
       ]
     },
-    "timezone": "browser",
+    "timezone": "",
     "title": "Node Finder"
   }
 }
