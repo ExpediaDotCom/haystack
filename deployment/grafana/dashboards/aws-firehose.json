@@ -4,7 +4,7 @@
       {
         "type": "datasource",
         "id": "cloudwatch",
-        "name": "AWS_CloudWatch",
+        "name": "CloudWatch",
         "version": "1.0.0"
       },
       {
@@ -849,25 +849,21 @@
     "templating": {
       "list": [
         {
-          "allValue": null,
           "current": {
-            "text": "haystack-json-spans",
-            "value": "haystack-json-spans"
+            "value": "${VAR_AWS_FIREHOSE_NAME}",
+            "text": "${VAR_AWS_FIREHOSE_NAME}"
           },
           "hide": 0,
-          "includeAll": false,
           "label": "AWS Firehose",
-          "multi": false,
           "name": "aws_firehose_name",
           "options": [
             {
-              "selected": true,
-              "text": "haystack-json-spans",
-              "value": "haystack-json-spans"
+              "value": "${VAR_AWS_FIREHOSE_NAME}",
+              "text": "${VAR_AWS_FIREHOSE_NAME}"
             }
           ],
-          "query": "haystack-json-spans",
-          "type": "custom"
+          "query": "${VAR_AWS_FIREHOSE_NAME}",
+          "type": "constant"
         }
       ]
     },
