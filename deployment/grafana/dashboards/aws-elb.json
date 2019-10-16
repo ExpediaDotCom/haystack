@@ -4,7 +4,7 @@
       {
         "type": "datasource",
         "id": "cloudwatch",
-        "name": "CloudWatch",
+        "name": "AWS_CloudWatch",
         "version": "1.0.0"
       },
       {
