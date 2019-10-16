@@ -1756,52 +1756,38 @@
     "templating": {
       "list": [
         {
-          "allValue": null,
           "current": {
-            "tags": [],
-            "text": "<your_aws_account_id>",
-            "value": "<your_aws_account_id>"
+            "value": "${VAR_AWS_CLIENT_ID}",
+            "text": "${VAR_AWS_CLIENT_ID}"
           },
           "hide": 0,
-          "includeAll": false,
           "label": "AWS Client ID",
-          "multi": false,
           "name": "aws_client_id",
           "options": [
             {
-              "selected": true,
-              "text": "<your_aws_account_id>",
-              "value": "<your_aws_account_id>"
+              "value": "${VAR_AWS_CLIENT_ID}",
+              "text": "${VAR_AWS_CLIENT_ID}"
             }
           ],
-          "query": "<your_aws_account_id>",
-          "type": "custom"
+          "query": "${VAR_AWS_CLIENT_ID}",
+          "type": "constant"
         },
         {
-          "allValue": null,
           "current": {
-            "text": "haystack-index-store",
-            "value": "haystack-index-store"
+            "value": "${VAR_AWS_ES_DOMAIN_NAME}",
+            "text": "${VAR_AWS_ES_DOMAIN_NAME}"
           },
           "hide": 0,
-          "includeAll": false,
           "label": "ES Domain Name",
-          "multi": false,
           "name": "aws_es_domain_name",
           "options": [
             {
-              "selected": true,
-              "text": "haystack-index-store",
-              "value": "haystack-index-store"
-            },
-            {
-              "selected": false,
-              "text": "",
-              "value": ""
+              "value": "${VAR_AWS_ES_DOMAIN_NAME}",
+              "text": "${VAR_AWS_ES_DOMAIN_NAME}"
             }
           ],
-          "query": "haystack-index-store,",
-          "type": "custom"
+          "query": "${VAR_AWS_ES_DOMAIN_NAME}",
+          "type": "constant"
         }
       ]
     },
@@ -1835,6 +1821,6 @@
       ]
     },
     "timezone": "",
-    "title": "ElasticSearch"
+    "title": "AWS ElasticSearch"
   }
 }

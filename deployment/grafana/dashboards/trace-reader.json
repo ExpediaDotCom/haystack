@@ -145,7 +145,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      4000
+                      5000
                     ],
                     "type": "gt"
                   },
@@ -168,7 +168,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      4000
+                      5000
                     ],
                     "type": "gt"
                   },
@@ -191,7 +191,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      4000
+                      5000
                     ],
                     "type": "gt"
                   },
@@ -295,7 +295,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 4000
+                "value": 5000
               }
             ],
             "timeFrom": null,
@@ -647,7 +647,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      4000
+                      5000
                     ],
                     "type": "gt"
                   },
@@ -670,7 +670,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      4000
+                      5000
                     ],
                     "type": "gt"
                   },
@@ -693,7 +693,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      4000
+                      5000
                     ],
                     "type": "gt"
                   },
@@ -797,7 +797,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 4000
+                "value": 5000
               }
             ],
             "timeFrom": null,
