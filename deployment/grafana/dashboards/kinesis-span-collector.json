@@ -1008,12 +1008,12 @@
                   "type": "query"
                 }
               ],
-              "executionErrorState": "alerting",
+              "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for drop in kinesis ingestion rate.",
               "name": "Kinesis Span Collector- drop in kinesis ingestion rate",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -1556,12 +1556,12 @@
                   "type": "query"
                 }
               ],
-              "executionErrorState": "alerting",
+              "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for drop in kafka send rate.",
               "name": "Kinesis Span Collector- drop in kafka send rate",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1

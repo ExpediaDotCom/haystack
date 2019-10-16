@@ -2378,7 +2378,7 @@
               "handler": 1,
               "message": "This alert indicates drop in kafka records send rate.",
               "name": "Timeseries Aggregator- drop in kafka records send rate",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -2610,7 +2610,7 @@
               "handler": 1,
               "message": "This is an alert for excessive lag in reading records from Kafka's \"metricpoints\" topic.\nIf the alert is only red on a few pods, it can often be cleared by deleting the pod(s) in the Kubernetes dashboard.\nIf you delete more than one pod, do so slowly to give the system time to stabilize before deleting the next pod.\nKubernetes will then launch a new pod that usually will not show the same large lag.\nThis is due to the possibility of timeseries-aggregator running on the same k8s host as a \"greedy\" (CPU-wise) service like secret-detector.",
               "name": "Timeseries Aggregator- increase in kafka iterator age",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": []
             },
             "aliasColors": {},
@@ -2855,7 +2855,7 @@
               "handler": 1,
               "message": "This is an alert from Timeseries Aggregator for increase in kafka producer's record send error rate.",
               "name": "Timeseries Aggregator- increase in records send error rate",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -3593,7 +3593,7 @@
               "handler": 1,
               "message": "This is an alert for increase in rate of invalid metric points.",
               "name": "Timeseries Aggregator- increase in invalid MetricPoints",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -5022,7 +5022,7 @@
               "handler": 1,
               "message": "This alert indicates the increase in windowed metric deserialisation error rate.",
               "name": "Timeseries Aggregator- increase in windowed metric deserialise failure",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -5259,12 +5259,12 @@
                   "type": "query"
                 }
               ],
-              "executionErrorState": "alerting",
+              "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
               "message": "This alert indicates increase in deserialisation error rate.",
               "name": "Timeseries Aggregator- increase in MetricPoint deserialise failure rate",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
