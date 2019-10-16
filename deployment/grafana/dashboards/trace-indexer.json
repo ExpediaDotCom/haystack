@@ -561,7 +561,7 @@
               "handler": 1,
               "message": "Kafka reads have gone down the threshold limit, possible cases:\na) span-collector is not pushing the spans to kafka\nb) kafka may be down\nc) Check indexer",
               "name": "Trace Indexer- drop in Kafka spans reads",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -1505,7 +1505,7 @@
               "handler": 1,
               "message": "This is an alert for drop in ES write rate.",
               "name": "Trace Indexer- drop in ES write rate",
-              "noDataState": "no_data",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -2135,7 +2135,7 @@
                   "type": "query"
                 }
               ],
-              "executionErrorState": "alerting",
+              "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for drop in Cassandra write rate.",
