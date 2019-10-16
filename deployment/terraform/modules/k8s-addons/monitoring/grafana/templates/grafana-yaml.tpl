@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: gcr.io/google_containers/heapster-grafana-amd64:v4.4.3
+        image: ${grafana_image}
         resources:
           limits:
             cpu: 100m
@@ -36,21 +36,54 @@ spec:
         - name: GF_SERVER_HTTP_PORT
           value: "3000"
         - name: GF_SERVER_ROOT_URL
-          value: "https://hcom-k8s.haystack.exp-int.net"
+          value: "https://${root_url}"
       nodeSelector:
-        kops.k8s.io/instancegroup: "monitoring-nodes"
+        ${node_selecter_label}
       volumes:
       - name: etc-ssl-certs
         hostPath:
           path: /etc/ssl/certs
   volumeClaimTemplates:
-  - metadata:
-      name: grafana-persistent-storage
-      annotations:
-        volume.beta.kubernetes.io/storage-class: "default"
-    spec:
-      storageClassName: "default"
-      accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storage: "2Gi"
+   - metadata:
+       name: grafana-persistent-storage
+       annotations:
+         volume.beta.kubernetes.io/storage-class: "${grafana_storage_class}"
+     spec:
+       storageClassName: "${grafana_storage_class}"
+       accessModes: ["ReadWriteOnce"]
+       resources:
+         requests:
+           storage: "${grafana_storage}"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    kubernetes.io/cluster-service: "true"
+    kubernetes.io/name: monitoring-grafana
+  name: monitoring-grafana
+  namespace: kube-system
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    k8s-app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: traefik-haystack-grafana
+  namespace: kube-system
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+   - host: ${metrics_cname}
+     http:
+        paths:
+         - path: /
+           backend:
+             serviceName: monitoring-grafana
+             servicePort: 80
