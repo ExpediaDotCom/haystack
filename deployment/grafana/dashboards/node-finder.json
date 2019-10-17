@@ -900,7 +900,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      100
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -923,9 +923,9 @@
                 {
                   "evaluator": {
                     "params": [
-                      100
+                      0.1
                     ],
-                    "type": "gt"
+                    "type": "lt"
                   },
                   "operator": {
                     "type": "and"
@@ -946,9 +946,9 @@
                 {
                   "evaluator": {
                     "params": [
-                      100
+                      0.1
                     ],
-                    "type": "gt"
+                    "type": "lt"
                   },
                   "operator": {
                     "type": "and"
@@ -1049,7 +1049,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 100
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -1093,7 +1093,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      10
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -1116,7 +1116,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      10
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -1139,7 +1139,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      10
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -1248,7 +1248,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 10
+                "value": 0.1
               }
             ],
             "timeFrom": null,
