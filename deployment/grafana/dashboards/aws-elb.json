@@ -4,7 +4,7 @@
       {
         "type": "datasource",
         "id": "cloudwatch",
-        "name": "CloudWatch",
+        "name": "AWS_CloudWatch",
         "version": "1.0.0"
       },
       {
@@ -30,6 +30,7 @@
     "hideControls": false,
     "id": null,
     "links": [],
+    "refresh": "1m",
     "rows": [
       {
         "collapse": false,
@@ -68,7 +69,7 @@
             "targets": [
               {
                 "dimensions": {
-                  "LoadBalancerName": "haystack-nodes-elb"
+                  "LoadBalancerName": "$load_balancer"
                 },
                 "dsType": "influxdb",
                 "groupBy": [
@@ -182,7 +183,7 @@
             "targets": [
               {
                 "dimensions": {
-                  "LoadBalancerName": "haystack-nodes-elb"
+                  "LoadBalancerName": "$load_balancer"
                 },
                 "dsType": "influxdb",
                 "groupBy": [
@@ -296,7 +297,7 @@
             "targets": [
               {
                 "dimensions": {
-                  "LoadBalancerName": "haystack-nodes-elb"
+                  "LoadBalancerName": "$load_balancer"
                 },
                 "dsType": "influxdb",
                 "groupBy": [
@@ -390,10 +391,28 @@
     "style": "dark",
     "tags": [],
     "templating": {
-      "list": []
+      "list": [
+        {
+          "current": {
+            "value": "${VAR_LOAD_BALANCER}",
+            "text": "${VAR_LOAD_BALANCER}"
+          },
+          "hide": 0,
+          "label": "LoadBalancer",
+          "name": "load_balancer",
+          "options": [
+            {
+              "value": "${VAR_LOAD_BALANCER}",
+              "text": "${VAR_LOAD_BALANCER}"
+            }
+          ],
+          "query": "${VAR_LOAD_BALANCER}",
+          "type": "constant"
+        }
+      ]
     },
     "time": {
-      "from": "now-6h",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -421,7 +440,7 @@
         "30d"
       ]
     },
-    "timezone": "browser",
+    "timezone": "",
     "title": "AWS ELB"
   }
 }

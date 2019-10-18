@@ -2043,6 +2043,90 @@
         "height": 363,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for drop in kafka read rate.",
+              "name": "Span Transformer- drop in kafka read rate",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2213,6 +2297,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for drop in kafka send rate.",
+              "name": "Span Transfomer- drop in kafka records send rate",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2277,6 +2445,45 @@
                     "value": "kafka-producer"
                   }
                 ]
+              },
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  }
+                ],
+                "hide": true,
+                "measurement": "haystack.trends.span-transformer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "record-send.rate"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "kafka-producer"
+                  }
+                ]
               }
             ],
             "thresholds": [
@@ -2324,6 +2531,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      300000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      300000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      300000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This alert is for kafka consumer lag in records for topic proto-spans.\n\nProbable reasons:\n- incoming traffic might have increased. Resulting Span Transformer to be behind in reading\n- Span Transformer service is too slow in ingesting messaged from proto span kafka topic",
+              "name": "Span Transformer- increase in kafka consumer lag",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2381,13 +2672,13 @@
                   [
                     {
                       "params": [
-                        "records-lag.max"
+                        "iterator.age.ms.99thPercentile"
                       ],
                       "type": "field"
                     },
                     {
                       "params": [],
-                      "type": "max"
+                      "type": "mean"
                     }
                   ]
                 ],
@@ -2400,12 +2691,12 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 500000
+                "value": 300000
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Kafka Consumer Lag Max : Topic : proto-spans",
+            "title": "Kafka Consumer Lag Max (Topic : proto-spans)",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -2421,7 +2712,7 @@
             },
             "yaxes": [
               {
-                "format": "short",
+                "format": "ms",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -2439,6 +2730,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This alert indicates that Span Transformer is having trouble in writing to kafka.\n\nProbable reasons:\n- service is not able to write to kafka because of write's reaching threshold, kafka down or any other reason",
+              "name": "Span Transformer- increase in kafka records send error rate",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2511,7 +2886,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.05
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -3444,6 +3819,90 @@
         "height": 370,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in Span Transformer serialisation failures.",
+              "name": "Span Transformer- increase in span serde failure",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -3562,7 +4021,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.05
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -3754,6 +4213,90 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "This is an alert for increase in Span Transformer deserialisation failure.",
+              "name": "Span Transformer- increase in metricpoint deserialise failure",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -3872,7 +4415,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.05
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -3954,7 +4497,7 @@
         "30d"
       ]
     },
-    "timezone": "browser",
+    "timezone": "",
     "title": "Span Transformer"
   }
 }

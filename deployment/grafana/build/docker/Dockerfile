@@ -1,4 +1,4 @@
-FROM alpine:3.9.4
+FROM alpine:3.10.2
 
 MAINTAINER Haystack <haystack@expedia.com>
 

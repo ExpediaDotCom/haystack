@@ -29,7 +29,7 @@
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": "1m",
+    "refresh": "5m",
     "rows": [
       {
         "collapse": true,
@@ -62,7 +62,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -80,7 +80,7 @@
                 "measurement": "cpu/usage_rate",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
                 "rawQuery": false,
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -104,7 +104,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "trace-indexer"
+                    "value": "pipes-firehose-writer"
                   }
                 ]
               }
@@ -112,7 +112,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "CPU Usage(milli cores)",
+            "title": "CPU Usage (millicores)",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -152,7 +152,7 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
-            "id": 16,
+            "id": 28,
             "legend": {
               "avg": false,
               "current": false,
@@ -172,7 +172,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -187,9 +187,11 @@
                     "type": "tag"
                   }
                 ],
-                "measurement": "memory/usage",
+                "measurement": "cpu/limit",
                 "orderByTime": "ASC",
                 "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
@@ -212,7 +214,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "trace-indexer"
+                    "value": "pipes-firehose-writer"
                   }
                 ]
               }
@@ -220,7 +222,227 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Memory usage",
+            "title": "CPU Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 29,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 27,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/usage",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Usage",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -260,7 +482,7 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
-            "id": 24,
+            "id": 30,
             "legend": {
               "avg": false,
               "current": false,
@@ -280,7 +502,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -295,10 +517,10 @@
                     "type": "tag"
                   }
                 ],
-                "measurement": "cpu/usage_rate",
+                "measurement": "memory/limit",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
                 "rawQuery": false,
                 "refId": "A",
                 "resultFormat": "time_series",
@@ -322,7 +544,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "storage-backend-cassandra"
+                    "value": "pipes-firehose-writer"
                   }
                 ]
               }
@@ -330,7 +552,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "CPU Usage - StorageBackend(milli cores)",
+            "title": "Memory Limit",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -346,7 +568,7 @@
             },
             "yaxes": [
               {
-                "format": "short",
+                "format": "decbytes",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -370,7 +592,7 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
-            "id": 25,
+            "id": 31,
             "legend": {
               "avg": false,
               "current": false,
@@ -390,7 +612,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -405,9 +627,11 @@
                     "type": "tag"
                   }
                 ],
-                "measurement": "memory/usage",
+                "measurement": "memory/request",
                 "orderByTime": "ASC",
                 "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'pipes-firehose-writer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
@@ -430,7 +654,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "storage-backend-cassandra"
+                    "value": "pipes-firehose-writer"
                   }
                 ]
               }
@@ -438,7 +662,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Memory usage - StorageBackend",
+            "title": "Memory Request",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -481,93 +705,9 @@
       },
       {
         "collapse": true,
-        "height": 256,
+        "height": 253,
         "panels": [
           {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "Kafka reads have gone down the threshold limit, possible cases:\na) span-collector is not pushing the spans to kafka\nb) kafka may be down\nc) Check indexer",
-              "name": "Trace Indexer- drop in Kafka spans reads",
-              "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -575,6 +715,7 @@
             "datasource": "graphite",
             "fill": 1,
             "id": 2,
+            "interval": ">5m",
             "legend": {
               "avg": false,
               "current": false,
@@ -599,18 +740,23 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_host,$tag_class",
+                "alias": "Count",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
                     "params": [
-                      "1m"
+                      "$__interval"
                     ],
                     "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
                   }
                 ],
-                "hide": true,
-                "measurement": "haystack.traces.indexer",
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
                 "refId": "B",
@@ -619,65 +765,472 @@
                   [
                     {
                       "params": [
-                        "records-consumed.rate"
+                        "REQUEST_COUNTER"
                       ],
                       "type": "field"
                     },
                     {
                       "params": [],
-                      "type": "mean"
+                      "type": "sum"
                     }
                   ]
                 ],
-                "tags": []
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Incoming Span Count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
               },
               {
-                "alias": "$tag_host,$tag_class",
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 3,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Bytes",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
                     "params": [
-                      "host"
+                      "$__interval"
                     ],
-                    "type": "tag"
+                    "type": "time"
                   },
                   {
                     "params": [
-                      "class"
+                      "null"
                     ],
-                    "type": "tag"
+                    "type": "fill"
                   }
                 ],
-                "measurement": "haystack.traces.indexer",
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "BYTES_IN_COUNTER"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "class",
+                    "operator": "=",
+                    "value": "SpanJsonSerializer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Bytes In per 5 Minutes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "description": "Details of the AWS response to the \"put batch\" request.\nThere are usually 500 requests in a batch.\nEach request that succeeds will increment the \"Success\" counter.\nIf AWS throws an Exception in response to the batch, then all of the requests will be retried, and the \"Exception\" counter will be incremented by 1.\nThrottling is on a request basis, so every throttled request will increment the \"Throttled\" counter and will be retried until succeeding.\nAll other failures are also per request; they increment the \"Failures\" counter with each failed request and are retried until succeeding.",
+            "fill": 1,
+            "id": 4,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Success",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "SUCCESS_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"SUCCESS_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\" WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
                 "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "records-consumed.rate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],
-                "tags": []
-              }
-            ],
-            "thresholds": [
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              },
               {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "lt",
-                "value": 1
+                "alias": "Failure",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "FAILURE_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"FAILURE_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\" WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              },
+              {
+                "alias": "Throttled",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "THROTTLED_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"THROTTLED_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\" WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_Batch' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_Batch"
+                  }
+                ]
+              },
+              {
+                "alias": "Exception",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "EXCEPTION_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"EXCEPTION_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\"  WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_FirehoseProcessor"
+                  }
+                ]
+              },
+              {
+                "alias": "Socket Timeout",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "SOCKET_TIMEOUT_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"SOCKET_TIMEOUT_COUNTER\") FROM \"haystack.pipes.haystack-pipes-firehose-writer\"  WHERE \"class\" = 'com_expedia_www_haystack_pipes_firehoseWriter_S3Sender' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "E",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "application",
+                    "operator": "=",
+                    "value": "haystack-pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "class",
+                    "operator": "=",
+                    "value": "com_expedia_www_haystack_pipes_firehoseWriter_S3Sender"
+                  }
+                ]
               }
             ],
+            "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Kafka - Spans Read Rate",
+            "title": "Success / Failure / Throttled / Exception Per 5 Minutes",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -717,7 +1270,8 @@
             "dashes": false,
             "datasource": "graphite",
             "fill": 1,
-            "id": 12,
+            "id": 5,
+            "interval": ">5m",
             "legend": {
               "avg": false,
               "current": false,
@@ -742,26 +1296,374 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_host,$tag_class",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
                     "params": [
-                      "host"
+                      "$__interval"
                     ],
-                    "type": "tag"
+                    "type": "time"
                   },
                   {
                     "params": [
-                      "class"
+                      "null"
                     ],
-                    "type": "tag"
+                    "type": "fill"
                   }
                 ],
-                "measurement": "haystack.traces.indexer",
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT \"records-lag.max\" FROM \"haystack.traces.indexer\" WHERE $timeFilter GROUP BY \"host\", \"class\"",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "PUT_BATCH_REQUEST_GAUGE_max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "S3 Put Batch TP100",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 6,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "Count",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "PUT_BATCH_REQUEST_NORMALIZED_count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "S3 Put Batch Count",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.5
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "sum"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.5
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "sum"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.5
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "sum"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Firehose Writer- increase in error count",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 1,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "All",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"45.ERROR_COUNTER\") FROM \"haystack.errors.pipes-firehose-writer\" WHERE \"fqClass\" != 'com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "!=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor"
+                  }
+                ]
+              },
+              {
+                "alias": "SystemExitUncaughtExceptionHandler:55",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-commons-SystemExitUncaughtExceptionHandler' AND \"lineNumber\" = '54' AND $timeFilter GROUP BY time($__interval) fill(null)",
                 "rawQuery": false,
                 "refId": "B",
                 "resultFormat": "time_series",
@@ -769,849 +1671,421 @@
                   [
                     {
                       "params": [
-                        "records-lag.max"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Max Kafka Lag - topic: proto-spans",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      300000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      300000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      300000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "",
-              "name": "Trace Indexer- Kafka Iterator Age alert",
-              "noDataState": "keep_state",
-              "notifications": []
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 26,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host,$tag_class",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  },
-                  {
-                    "params": [
-                      "class"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "iterator.age.ms.99thPercentile"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "kafka"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 300000
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Kafka Iterator Age",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "ms",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          }
-        ],
-        "repeat": null,
-        "repeatIteration": null,
-        "repeatRowId": null,
-        "showTitle": true,
-        "title": "Kafka",
-        "titleSize": "h6"
-      },
-      {
-        "collapse": true,
-        "height": 314,
-        "panels": [
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 11,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "buffer-size.Max"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Spans Stitched per TraceID - Max",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "description": "If  eviction happens, \nit implies that stitch operation has not completed in memory. \nThis may happen either due to increase in traffic or we are not running enough containers to stitch the incoming spans.",
-            "fill": 1,
-            "id": 6,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 6,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "eviction.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "span-state-store"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "In-Memory Store Cache Eviction",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          }
-        ],
-        "repeat": null,
-        "repeatIteration": null,
-        "repeatRowId": null,
-        "showTitle": true,
-        "title": "Indexer",
-        "titleSize": "h6"
-      },
-      {
-        "collapse": true,
-        "height": "256",
-        "panels": [
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      2500
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      2500
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      2500
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "This is an alert for increase in ES write time.",
-              "name": "Trace Indexer- increase in ES write time",
-              "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 8,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "writer.time.99thPercentile"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "elasticsearch"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 2500
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "ElasticSearch Write Time - TP99",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "ms",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "This is an alert for drop in ES write rate.",
-              "name": "Trace Indexer- drop in ES write rate",
-              "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 13,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "writer.time.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
                     },
                     {
                       "params": [],
-                      "type": "mean"
+                      "type": "sum"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "class",
+                    "key": "subsystem",
                     "operator": "=",
-                    "value": "elasticsearch"
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-commons-SystemExitUncaughtExceptionHandler"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "55"
                   }
                 ]
               },
               {
-                "alias": "$tag_host",
+                "alias": "KafkaThread:*",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
                     "params": [
-                      "host"
+                      "$__interval"
                     ],
-                    "type": "tag"
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
                   }
                 ],
-                "measurement": "haystack.traces.indexer",
+                "measurement": "ERROR_COUNTER",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "refId": "A",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-kafka-common-utils-KafkaThread$1' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "E",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "writer.time.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],
                 "tags": [
                   {
-                    "key": "class",
+                    "key": "subsystem",
                     "operator": "=",
-                    "value": "elasticsearch"
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-kafka-common-utils-KafkaThread$1"
+                  }
+                ]
+              },
+              {
+                "alias": "DirectJDKLog:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-juli-logging-DirectJDKLog' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": true,
+                "refId": "D",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-juli-logging-DirectJDKLog"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "181"
+                  }
+                ]
+              },
+              {
+                "alias": "StreamThread:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-juli-logging-DirectJDKLog' AND \"lineNumber\" = '181' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "F",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "org-apache-kafka-streams-processor-internals-StreamThread"
+                  }
+                ]
+              },
+              {
+                "alias": "Batch:*",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'org-apache-juli-logging-DirectJDKLog' AND \"lineNumber\" = '181' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "H",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-Batch"
+                  }
+                ]
+              },
+              {
+                "alias": "FailedRecordExtractor:101 (AWS InternalFailure)",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-firehoseWriter-FirehoseProcessor' AND \"lineNumber\" = '108' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "G",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "101"
+                  }
+                ]
+              },
+              {
+                "alias": "S3Sender:104",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor' AND \"lineNumber\" = '101' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "I",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-S3Sender"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "104"
+                  }
+                ]
+              },
+              {
+                "alias": "S3Sender:111",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "ERROR_COUNTER",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT sum(\"value\") FROM \"ERROR_COUNTER\" WHERE \"subsystem\" = 'pipes-firehose-writer' AND \"fqClass\" = 'com-expedia-www-haystack-pipes-firehoseWriter-FailedRecordExtractor' AND \"lineNumber\" = '101' AND $timeFilter GROUP BY time($__interval) fill(null)",
+                "rawQuery": false,
+                "refId": "K",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "subsystem",
+                    "operator": "=",
+                    "value": "pipes-firehose-writer"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "fqClass",
+                    "operator": "=",
+                    "value": "com-expedia-www-haystack-pipes-firehoseWriter-S3Sender"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "lineNumber",
+                    "operator": "=",
+                    "value": "111"
                   }
                 ]
               }
@@ -1621,13 +2095,13 @@
                 "colorMode": "critical",
                 "fill": true,
                 "line": true,
-                "op": "lt",
-                "value": 1
+                "op": "gt",
+                "value": 0.5
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "ElasticSearch Write Rate",
+            "title": "Error Counter",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -1644,10 +2118,10 @@
             "yaxes": [
               {
                 "format": "short",
-                "label": null,
+                "label": "",
                 "logBase": 1,
                 "max": null,
-                "min": null,
+                "min": "0",
                 "show": true
               },
               {
@@ -1656,7 +2130,7 @@
                 "logBase": 1,
                 "max": null,
                 "min": null,
-                "show": true
+                "show": false
               }
             ]
           },
@@ -1666,7 +2140,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1
+                      40000000
                     ],
                     "type": "gt"
                   },
@@ -1689,7 +2163,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1
+                      40000000
                     ],
                     "type": "gt"
                   },
@@ -1712,7 +2186,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1
+                      40000000
                     ],
                     "type": "gt"
                   },
@@ -1734,10 +2208,10 @@
                 }
               ],
               "executionErrorState": "keep_state",
-              "frequency": "60s",
+              "frequency": "300s",
               "handler": 1,
-              "message": "This is an alert for increase in ES write failure rate.",
-              "name": "Trace Indexer- increase in ES write failure rate",
+              "message": "Kafka reads have gone below the threshold limit. Possible causes:\na) span-collector is not pushing the spans to Kafka.\nb) Kafka may be down.",
+              "name": "Firehose Writer- increase in Kafka lag",
               "noDataState": "keep_state",
               "notifications": [
                 {
@@ -1752,408 +2226,7 @@
             "datasource": "graphite",
             "fill": 1,
             "id": 7,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "connected",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "writer.failure.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "elasticsearch"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 1
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Elastic Search Write Failure Rate",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          }
-        ],
-        "repeat": null,
-        "repeatIteration": null,
-        "repeatRowId": null,
-        "showTitle": true,
-        "title": "ElasticSearch",
-        "titleSize": "h6"
-      },
-      {
-        "collapse": true,
-        "height": 275,
-        "panels": [
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      1000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "This is an alert for increase in Cassandra write time.",
-              "name": "Trace Indexer- increase in Cassandra  write time",
-              "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 5,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "write.time.99thPercentile"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "backend"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 1000
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Backend  Write Time - TP99",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "µs",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "This is an alert for drop in Cassandra write rate.",
-              "name": "Trace Indexer- drop in Cassandra write rate",
-              "noDataState": "alerting",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 4,
+            "interval": ">5m",
             "legend": {
               "avg": false,
               "current": false,
@@ -2183,13 +2256,12 @@
                 "groupBy": [
                   {
                     "params": [
-                      "1m"
+                      "$interval"
                     ],
                     "type": "time"
                   }
                 ],
-                "hide": true,
-                "measurement": "haystack.traces.indexer",
+                "measurement": "haystack.pipes.firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
                 "refId": "B",
@@ -2198,67 +2270,17 @@
                   [
                     {
                       "params": [
-                        "write.time.OneMinuteRate"
+                        "records-lag.max"
                       ],
                       "type": "field"
                     },
                     {
                       "params": [],
-                      "type": "mean"
+                      "type": "max"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "backend"
-                  }
-                ]
-              },
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "write.time.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "backend"
-                  }
-                ]
+                "tags": []
               }
             ],
             "thresholds": [
@@ -2266,13 +2288,13 @@
                 "colorMode": "critical",
                 "fill": true,
                 "line": true,
-                "op": "lt",
-                "value": 1
+                "op": "gt",
+                "value": 40000000
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Backend Write Rate",
+            "title": "Kafka - Lag (records)",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -2306,97 +2328,14 @@
             ]
           },
           {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      10
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      10
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      10
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "This is an alert for increase in Cassandra failure rate.",
-              "name": "Trace Indexer- increase in Cassandra write failure rate",
-              "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
             "datasource": "graphite",
             "fill": 1,
-            "id": 9,
+            "id": 14,
+            "interval": ">5m",
             "legend": {
               "avg": false,
               "current": false,
@@ -2421,17 +2360,22 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_host",
                 "dsType": "influxdb",
                 "groupBy": [
                   {
                     "params": [
-                      "host"
+                      "$__interval"
                     ],
-                    "type": "tag"
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
                   }
                 ],
-                "measurement": "haystack.traces.indexer",
+                "measurement": "haystack.pipes.firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
                 "refId": "B",
@@ -2440,33 +2384,23 @@
                   [
                     {
                       "params": [
-                        "write.failure.OneMinuteRate"
+                        "heapMemoryUsage.used"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "backend"
-                  }
-                ]
+                "tags": []
               }
             ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 10
-              }
-            ],
+            "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Backend Write Failure Rate",
+            "title": "Heap Memory Used",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -2482,131 +2416,7 @@
             },
             "yaxes": [
               {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          }
-        ],
-        "repeat": null,
-        "repeatIteration": null,
-        "repeatRowId": null,
-        "showTitle": true,
-        "title": "Storage Backend - Client",
-        "titleSize": "h6"
-      },
-      {
-        "collapse": true,
-        "height": 283,
-        "panels": [
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 21,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.backend-cassandra",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "writeSpans.99thPercentile"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "endpoint"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 1000
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Write Spans Endpoint Time TP99",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "µs",
+                "format": "decbytes",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -2631,6 +2441,236 @@
             "datasource": "graphite",
             "fill": 1,
             "id": 22,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "none"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "SPAN_ARRIVAL_MS_GAUGE_max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "max"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Max Span Arrival Delay",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "µs",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": "0",
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Firehose Writer",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 18,
+            "interval": ">5m",
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host,$tag_class",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "class"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.pipes.firehose-writer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-lag.max"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 100000
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka - Lag",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 19,
+            "interval": ">5m",
             "legend": {
               "avg": false,
               "current": false,
@@ -2660,49 +2700,43 @@
                 "groupBy": [
                   {
                     "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
                       "host"
                     ],
                     "type": "tag"
                   }
                 ],
-                "measurement": "haystack.traces.backend-cassandra",
+                "measurement": "haystack.pipes.firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
                 "refId": "B",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "writeSpans.OneMinuteRate"
+                        "heapMemoryUsage.used"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "endpoint"
-                  }
-                ]
+                "tags": []
               }
             ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 1000
-              }
-            ],
+            "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Write Spans Endpoint Rate",
+            "title": "Heap Memory Used",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -2718,7 +2752,7 @@
             },
             "yaxes": [
               {
-                "format": "short",
+                "format": "decbytes",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -2743,6 +2777,7 @@
             "datasource": "graphite",
             "fill": 1,
             "id": 23,
+            "interval": ">5m",
             "legend": {
               "avg": false,
               "current": false,
@@ -2775,144 +2810,30 @@
                       "host"
                     ],
                     "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.backend-cassandra",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "writeSpans.failures.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "endpoint"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 1000
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Write Spans Endpoint Failure Rate",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 18,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
+                  },
                   {
                     "params": [
-                      "host"
+                      "class"
                     ],
                     "type": "tag"
                   }
                 ],
-                "measurement": "haystack.traces.backend-cassandra",
+                "measurement": "haystack.pipes.haystack-pipes-firehose-writer",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
                 "refId": "B",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "requests.99thPercentile"
+                        "SPAN_ARRIVAL_MS_GAUGE_max"
                       ],
                       "type": "field"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "cassandra"
-                  }
-                ]
+                "tags": []
               }
             ],
             "thresholds": [
@@ -2921,12 +2842,12 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 1000
+                "value": 100000
               }
             ],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Cassandra Write Time - TP99",
+            "title": "Max Span Arrival Delay",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -2958,367 +2879,13 @@
                 "show": true
               }
             ]
-          },
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      1
-                    ],
-                    "type": "lt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "name": "Cassandra- drop in write rate",
-              "noDataState": "keep_state",
-              "notifications": []
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 19,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.traces.backend-cassandra",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "requests.rate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "cassandra"
-                  }
-                ]
-              },
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.backend-cassandra",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "requests.rate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "cassandra"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "lt",
-                "value": 1
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Cassandra Write Rate",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 20,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "haystack.traces.backend-cassandra",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "write.failure.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "cassandra"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 1000
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Cassandra Write Failure Rate",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
           }
         ],
         "repeat": null,
         "repeatIteration": null,
         "repeatRowId": null,
         "showTitle": true,
-        "title": "Storage Backend - Server",
+        "title": "Firehose Writer (by host)",
         "titleSize": "h6"
       }
     ],
@@ -3358,6 +2925,6 @@
       ]
     },
     "timezone": "",
-    "title": "Trace Indexer"
+    "title": "Firehose Writer"
   }
 }

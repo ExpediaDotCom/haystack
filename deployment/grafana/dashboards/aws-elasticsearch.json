@@ -32,7 +32,7 @@
     "refresh": "5s",
     "rows": [
       {
-        "collapse": false,
+        "collapse": true,
         "height": 250,
         "panels": [
           {
@@ -682,7 +682,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Free Storage Space",
+            "title": "Min Free Storage Space - Single Node",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -1756,58 +1756,43 @@
     "templating": {
       "list": [
         {
-          "allValue": null,
           "current": {
-            "tags": [],
-            "text": "<your_aws_acocunt_id>",
-            "value": "<your_aws_acocunt_id>"
+            "value": "${VAR_AWS_CLIENT_ID}",
+            "text": "${VAR_AWS_CLIENT_ID}"
           },
           "hide": 0,
-          "includeAll": false,
           "label": "AWS Client ID",
-          "multi": false,
           "name": "aws_client_id",
           "options": [
             {
-              "selected": true,
-              "text": "<your_aws_acocunt_id>",
-              "value": "<your_aws_acocunt_id>"
+              "value": "${VAR_AWS_CLIENT_ID}",
+              "text": "${VAR_AWS_CLIENT_ID}"
             }
           ],
-          "query": "<your_aws_acocunt_id>",
-          "type": "custom"
+          "query": "${VAR_AWS_CLIENT_ID}",
+          "type": "constant"
         },
         {
-          "allValue": null,
           "current": {
-            "tags": [],
-            "text": "haystack-index-store",
-            "value": "haystack-index-store"
+            "value": "${VAR_AWS_ES_DOMAIN_NAME}",
+            "text": "${VAR_AWS_ES_DOMAIN_NAME}"
           },
           "hide": 0,
-          "includeAll": false,
           "label": "ES Domain Name",
-          "multi": false,
           "name": "aws_es_domain_name",
           "options": [
             {
-              "selected": true,
-              "text": "haystack-index-store",
-              "value": "haystack-index-store"
-            },
-            {
-              "selected": false,
-              "text": "",
-              "value": ""
+              "value": "${VAR_AWS_ES_DOMAIN_NAME}",
+              "text": "${VAR_AWS_ES_DOMAIN_NAME}"
             }
           ],
-          "query": "haystack-index-store,",
-          "type": "custom"
+          "query": "${VAR_AWS_ES_DOMAIN_NAME}",
+          "type": "constant"
         }
       ]
     },
     "time": {
-      "from": "now-15m",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -1836,7 +1821,6 @@
       ]
     },
     "timezone": "",
-    "title": "ElasticSearch",
-    "version": 12
+    "title": "AWS ElasticSearch"
   }
 }
