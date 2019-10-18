@@ -31,6 +31,7 @@ sudo sed -i -e "s/_RETENTION_HOURS/${retention_hours}/g" $KAFKA_SERVER_PROPERTIE
 sudo sed -i -e "s/_RETENTION_BYTES/${retention_bytes}/g" $KAFKA_SERVER_PROPERTIES_FILE
 sudo sed -i -e "/broker.id/ a \broker.rack=${broker_rack}" $KAFKA_SERVER_PROPERTIES_FILE
 if [ ! -z ${advertised_listeners} ]; then
+      # Advertise both, the desired hostname and the local IP for completeness
       sed -i -e "/^#advertised.listeners=/c\advertised.listeners=PLAINTEXT:\/\/${advertised_listeners}:9092,PLAINTEXT:\/\/${local_ip}:9092" $KAFKA_SERVER_PROPERTIES_FILE
 fi
 

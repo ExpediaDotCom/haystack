@@ -214,7 +214,7 @@ data "template_file" "kafka_broker_user_data" {
     retention_hours = "24"
     retention_bytes = "1073741824"
     broker_rack = "${element(var.aws_subnets, count.index)}"
-    advertised_listeners = "${var.kafka["vpce_advertised_hostname"]}"
+    advertised_listeners = "${var.kafka["kafka_advertised_hostname"]}"
   }
 }
 
