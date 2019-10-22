@@ -214,8 +214,10 @@ data "template_file" "kafka_broker_user_data" {
     retention_hours = "24"
     retention_bytes = "1073741824"
     broker_rack = "${element(var.aws_subnets, count.index)}"
-    advertised_listeners = "${var.kafka["kafka_advertised_hostname"]}"
+    advertised_listeners = "${var.kafka["advertised_hostname"]}"
   }
+
+  depends_on = ["module.kafka-vpce"]
 }
 
 // create kafka brokers
@@ -250,10 +252,9 @@ module "kafka-vpce" {
   source = "vpce"
   subnets = "${var.aws_subnets}"
   cluster = "${var.cluster}"
-  kafka = {
-    "vpce_enabled": "true"
-    "kafka_port": "${local.kafka_port}"
-  }
+  kafka = "${merge(var.kafka, map(
+    "kafka_port", "${local.kafka_port}"
+  ))}"
   common_tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
