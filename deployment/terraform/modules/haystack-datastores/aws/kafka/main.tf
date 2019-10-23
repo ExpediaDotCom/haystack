@@ -252,9 +252,8 @@ module "kafka-vpce" {
   source = "vpce"
   subnets = "${var.aws_subnets}"
   cluster = "${var.cluster}"
-  kafka = "${merge(var.kafka, map(
-    "kafka_port", "${local.kafka_port}"
-  ))}"
+  kafka = "${var.kafka}"
+  kafka_port = "${local.kafka_port}"
   common_tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-brokers",

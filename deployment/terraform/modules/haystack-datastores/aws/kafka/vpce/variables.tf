@@ -10,6 +10,8 @@ variable "kafka" {
   type = "map"
 }
 
+variable "kafka_port" {}
+
 variable "common_tags" {
   type = "map"
 }
