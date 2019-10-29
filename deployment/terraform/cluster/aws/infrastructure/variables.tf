@@ -76,7 +76,13 @@ variable "kafka" {
     broker_image = ""
     vpce_enabled = "false"
     advertised_hostname = ""
+    whitelisted_accounts = []
   }
+}
+
+variable "whitelisted_accounts" {
+  type = "list"
+  default = []
 }
 
 variable "kinesis-stream" {

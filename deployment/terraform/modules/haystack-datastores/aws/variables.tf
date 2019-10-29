@@ -7,6 +7,11 @@ variable "kafka" {
   type = "map"
 }
 
+variable "whitelisted_accounts" {
+  type = "list"
+  default = []
+}
+
 variable "es_spans_index" {
   type = "map"
 }
@@ -24,7 +29,7 @@ variable "dynamodb" {
 
 variable "common_tags" {
   type = "map"
-} 
+}
 variable "cassandra_spans_backend" {
   type = "map"
 }
