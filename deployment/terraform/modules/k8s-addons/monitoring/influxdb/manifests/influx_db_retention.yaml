@@ -32,7 +32,7 @@ spec:
           name: data
       initContainers:
       - name: init-mydb
-        image: busybox
+        image: "busybox:1.28.0"
         command: ["sh", "-c", "until nslookup monitoring-influxdb-graphite.kube-system; do echo waiting for monitoring-influxdb-graphite.kube-system; sleep 2; done;"]
       restartPolicy: OnFailure
       volumes:
