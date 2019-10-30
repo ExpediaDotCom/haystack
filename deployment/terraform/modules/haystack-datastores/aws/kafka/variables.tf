@@ -13,7 +13,3 @@ variable "kafka" {
 variable "common_tags" {
   type = "map"
 }
-variable "whitelisted_accounts" {
-  type = "list"
-  default = []
-}

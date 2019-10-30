@@ -86,7 +86,7 @@ resource "aws_vpc_endpoint_service_allowed_principal" "current_account_whitelist
 }
 
 resource "aws_vpc_endpoint_service_allowed_principal" "kafka_vpce_allowed_principals" {
-  count = "${var.kafka["vpce_enabled"]?length(var.whitelisted_accounts):0}"
+  count = "${var.kafka["vpce_enabled"]?length(var.kafka["vpce_whitelisted_accounts"]):0}"
   vpc_endpoint_service_id = "${aws_vpc_endpoint_service.vpce_provider.id}"
-  principal_arn = "arn:aws:iam::${element(var.whitelisted_accounts, count.index)}:root"
+  principal_arn = "arn:aws:iam::${element(var.kafka["vpce_whitelisted_accounts"], count.index)}:root"
 }

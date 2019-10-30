@@ -254,7 +254,6 @@ module "kafka-vpce" {
   cluster = "${var.cluster}"
   kafka = "${var.kafka}"
   kafka_port = "${local.kafka_port}"
-  whitelisted_accounts = "${var.whitelisted_accounts}"
   common_tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
