@@ -32,6 +32,7 @@ module "kafka" {
   source = "kafka"
   cluster = "${var.cluster}"
   kafka= "${var.kafka}"
+  vpce_whitelisted_accounts = "${var.kafka_vpce_whitelisted_accounts}"
   aws_subnets = "${local.aws_nodes_subnets}"
   aws_hosted_zone_id = "${data.aws_route53_zone.haystack_dns_zone.id}"
   aws_graphite_host = "${var.graphite_hostname}"

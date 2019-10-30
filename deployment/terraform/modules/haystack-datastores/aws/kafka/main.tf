@@ -254,13 +254,14 @@ module "kafka-vpce" {
   cluster = "${var.cluster}"
   kafka = "${var.kafka}"
   kafka_port = "${local.kafka_port}"
+  vpce_whitelisted_accounts = "${var.vpce_whitelisted_accounts}"
   common_tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
     "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
-    "Name", "${var.cluster["name"]}-kafka-brokers-${count.index}",
+    "Name", "${var.cluster["name"]}-kafka-brokers",
     "Component", "Kafka"
   ))}"
-  kafka_instance_ids = ""
+  kafka_instance_ids = []
 }
 
 // create cname for newly created zookeeper cluster

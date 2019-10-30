@@ -2,7 +2,7 @@ data "aws_caller_identity" "current" {}
 
 resource "aws_lb" "kafka_nlb" {
   count = "${var.kafka["vpce_enabled"]?1:0}"
-  name = "nlb-${var.cluster["name"]}-kafka-brokers"
+  name = "nlb-${var.cluster["name"]}"
 
   subnets = "${var.subnets}"
   internal = "true"
@@ -13,15 +13,15 @@ resource "aws_lb" "kafka_nlb" {
 
   tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
-    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
-    "Name", "nlb-${var.cluster["name"]}-kafka-brokers",
+    "Role", "${var.cluster["role_prefix"]}",
+    "Name", "nlb-${var.cluster["name"]}",
     "Component", "Kafka"
   ))}"
 }
 
 resource "aws_lb_target_group" "kafka_nlb_target_group" {
   count = "${var.kafka["vpce_enabled"]?1:0}"
-  name = "nlb-tg-${var.cluster["name"]}-kafka-brokers"
+  name = "nlb-tg-${var.cluster["name"]}"
   port = "${var.kafka_port}"
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   deregistration_delay = 120
@@ -42,8 +42,8 @@ resource "aws_lb_target_group" "kafka_nlb_target_group" {
 
   tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
-    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
-    "Name", "nlb-tg-${var.cluster["name"]}-kafka-brokers",
+    "Role", "${var.cluster["role_prefix"]}",
+    "Name", "nlb-tg-${var.cluster["name"]}",
     "Component", "Kafka"
   ))}"
 }
@@ -86,7 +86,7 @@ resource "aws_vpc_endpoint_service_allowed_principal" "current_account_whitelist
 }
 
 resource "aws_vpc_endpoint_service_allowed_principal" "kafka_vpce_allowed_principals" {
-  count = "${var.kafka["vpce_enabled"]?length(var.kafka["vpce_whitelisted_accounts"]):0}"
+  count = "${var.kafka["vpce_enabled"]?length(var.vpce_whitelisted_accounts):0}"
   vpc_endpoint_service_id = "${aws_vpc_endpoint_service.vpce_provider.id}"
-  principal_arn = "arn:aws:iam::${element(var.kafka["vpce_whitelisted_accounts"], count.index)}:root"
+  principal_arn = "arn:aws:iam::${element(var.vpce_whitelisted_accounts, count.index)}:root"
 }
