@@ -7,10 +7,6 @@ variable "kafka" {
   type = "map"
 }
 
-variable "kafka_vpce_whitelisted_accounts" {
-  type = "list"
-}
-
 variable "es_spans_index" {
   type = "map"
 }

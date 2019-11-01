@@ -30,7 +30,6 @@ module "haystack-datastores" {
   cluster = "${var.cluster}"
   common_tags = "${var.common_tags}"
   kafka = "${var.kafka}"
-  kafka_vpce_whitelisted_accounts = "${var.kafka_vpce_whitelisted_accounts}"
   kinesis-stream = "${var.kinesis-stream}"
   pipes_firehose_stream = "${var.pipes_firehose_stream}"
   cassandra_spans_backend = "${var.cassandra_spans_backend}"

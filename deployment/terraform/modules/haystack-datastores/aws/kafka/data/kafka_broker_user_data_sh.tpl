@@ -30,9 +30,19 @@ sudo sed -i -e "s/_NUM_PARTITIONS/${num_partitions}/g" $KAFKA_SERVER_PROPERTIES_
 sudo sed -i -e "s/_RETENTION_HOURS/${retention_hours}/g" $KAFKA_SERVER_PROPERTIES_FILE
 sudo sed -i -e "s/_RETENTION_BYTES/${retention_bytes}/g" $KAFKA_SERVER_PROPERTIES_FILE
 sudo sed -i -e "/broker.id/ a \broker.rack=${broker_rack}" $KAFKA_SERVER_PROPERTIES_FILE
-if [ ! -z ${advertised_listeners} ]; then
-      # Advertise both, the desired hostname and the local IP for completeness
-      sed -i -e "/^#advertised.listeners=/c\advertised.listeners=PLAINTEXT:\/\/${advertised_listeners}:9092,PLAINTEXT:\/\/${local_ip}:9092" $KAFKA_SERVER_PROPERTIES_FILE
+
+if [ ! -z ${external_advertised_listener_hostname} ]; then
+      # Add the external listener to the list
+      sed -i -e "/^listeners=/c\listeners=INTERNAL:\/\/$${local_ip}:9092,EXTERNAL:\/\/$${local_ip}:${external_advertised_listener_port}" $KAFKA_SERVER_PROPERTIES_FILE
+
+      # Set advertised listeners, both internal and external
+      sed -i -e "/^#advertised.listeners=/c\advertised.listeners=INTERNAL:\/\/$${local_ip}:9092,EXTERNAL:\/\/${external_advertised_listener_hostname}:${external_advertised_listener_port}" $KAFKA_SERVER_PROPERTIES_FILE
+
+      # Set protocol mappings
+      sed -i -e "/^#listener.security.protocol.map=/c\listener.security.protocol.map=INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT" $KAFKA_SERVER_PROPERTIES_FILE
+
+      # Set listener name used for inter-broker communication
+      echo -e "\ninter.broker.listener.name=INTERNAL" >> $KAFKA_SERVER_PROPERTIES_FILE
 fi
 
 # start service

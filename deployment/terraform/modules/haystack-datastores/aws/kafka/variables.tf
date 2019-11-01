@@ -10,9 +10,6 @@ variable "cluster" {
 variable "kafka" {
   type = "map"
 }
-variable "vpce_whitelisted_accounts" {
-  type = "list"
-}
 variable "common_tags" {
   type = "map"
 }

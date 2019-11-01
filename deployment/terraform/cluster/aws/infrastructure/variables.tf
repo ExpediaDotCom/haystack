@@ -75,13 +75,10 @@ variable "kafka" {
     default_partition_count = 96
     broker_image = ""
     vpce_enabled = "false"
-    advertised_hostname = ""
+    vpce_whitelisted_accounts = ""
+    external_advertised_listener_hostname = ""
+    external_advertised_listener_port = ""
   }
-}
-
-variable "kafka_vpce_whitelisted_accounts" {
-  type = "list"
-  default = []
 }
 
 variable "kinesis-stream" {
