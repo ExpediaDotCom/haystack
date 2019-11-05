@@ -24,6 +24,7 @@ module "kafka-security-groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
   common_tags = "${var.common_tags}"
+  kafka_external_port = "${var.kafka["external_advertised_listener_port"]}"
 }
 
 resource "aws_iam_role" "haystack-zookeeper-role" {
@@ -217,8 +218,6 @@ data "template_file" "kafka_broker_user_data" {
     external_advertised_listener_hostname = "${var.kafka["external_advertised_listener_hostname"]}"
     external_advertised_listener_port = "${var.kafka["external_advertised_listener_port"]}"
   }
-
-  depends_on = ["module.kafka-vpce"]
 }
 
 // create kafka brokers
@@ -254,7 +253,7 @@ module "kafka-vpce" {
   subnets = "${var.aws_subnets}"
   cluster = "${var.cluster}"
   kafka = "${var.kafka}"
-  kafka_port = "${local.kafka_port}"
+  kafka_port = "${var.kafka["external_advertised_listener_port"]}"
   vpce_whitelisted_accounts = "${split(",", var.kafka["vpce_whitelisted_accounts"])}"
   common_tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
@@ -262,7 +261,7 @@ module "kafka-vpce" {
     "Name", "${var.cluster["name"]}-kafka-brokers",
     "Component", "Kafka"
   ))}"
-  kafka_instance_ids = []
+  kafka_instance_ids = ["${aws_instance.haystack-kafka-broker.*.id}"]
 }
 
 // create cname for newly created zookeeper cluster

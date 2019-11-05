@@ -4,3 +4,5 @@ variable "cluster" {
 variable "common_tags" {
   type = "map"
 }
+
+variable "kafka_external_port" {}
