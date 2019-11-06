@@ -253,7 +253,7 @@ module "kafka-vpce" {
   subnets = "${var.aws_subnets}"
   cluster = "${var.cluster}"
   kafka = "${var.kafka}"
-  kafka_port = "${var.kafka["external_advertised_listener_port"]}"
+  kafka_port = "${var.kafka["external_advertised_listener_port"] != "" ? var.kafka["external_advertised_listener_port"] : local.kafka_port}"
   vpce_whitelisted_accounts = "${split(",", var.kafka["vpce_whitelisted_accounts"])}"
   common_tags = "${merge(var.common_tags, map(
     "ClusterName", "${var.cluster["name"]}",
