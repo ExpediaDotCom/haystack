@@ -6,3 +6,4 @@ variable "common_tags" {
 }
 variable "external_port_start" {}
 variable "broker_count" {}
+variable "vpce_enabled" {}

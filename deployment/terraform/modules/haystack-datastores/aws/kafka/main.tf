@@ -24,6 +24,8 @@ module "kafka-security-groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
   common_tags = "${var.common_tags}"
+
+  vpce_enabled = "${var.kafka["vpce_enabled"]}"
   external_port_start = "${var.kafka["vpce_external_advertised_listener_port_start"]}"
   broker_count = "${var.kafka["broker_count"]}"
 }

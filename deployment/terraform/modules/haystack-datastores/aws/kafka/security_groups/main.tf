@@ -30,7 +30,7 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-external-ingress" {
-  count = "${var.external_port_start == "" || var.broker_count == 0 ? 0 : 1}"
+  count = "${var.vpce_enabled ? 1 : 0}"
   type = "ingress"
   security_group_id = "${aws_security_group.haystack-kafka.id}"
   from_port = "${var.external_port_start}"
