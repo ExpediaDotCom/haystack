@@ -76,8 +76,8 @@ variable "kafka" {
     broker_image = ""
     vpce_enabled = "false"
     vpce_whitelisted_accounts = ""
-    external_advertised_listener_hostname = ""
-    external_advertised_listener_port = ""
+    vpce_external_advertised_listener_hostname = ""
+    vpce_external_advertised_listener_port_start = ""
   }
 }
 

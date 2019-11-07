@@ -30,11 +30,11 @@ resource "aws_security_group_rule" "haytack-kafka-broker-ingress" {
 }
 
 resource "aws_security_group_rule" "haytack-kafka-broker-external-ingress" {
-  count = "${var.kafka_external_port != "" ? 1 : 0}"
+  count = "${var.external_port_start == "" || var.broker_count == 0 ? 0 : 1}"
   type = "ingress"
   security_group_id = "${aws_security_group.haystack-kafka.id}"
-  from_port = "${var.kafka_external_port}"
-  to_port = "${var.kafka_external_port}"
+  from_port = "${var.external_port_start}"
+  to_port = "${var.external_port_start + var.broker_count}"
   protocol = "tcp"
   cidr_blocks = ["${var.cluster["node_ingress"]}"]
 }

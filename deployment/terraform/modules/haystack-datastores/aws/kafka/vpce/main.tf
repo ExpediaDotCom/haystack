@@ -8,6 +8,8 @@ resource "aws_lb" "kafka_nlb" {
   internal = "true"
 
   load_balancer_type = "network"
+  enable_cross_zone_load_balancing = true
+  enable_deletion_protection = true
 
   idle_timeout = 400
 
@@ -20,9 +22,9 @@ resource "aws_lb" "kafka_nlb" {
 }
 
 resource "aws_lb_target_group" "kafka_nlb_target_group" {
-  count = "${var.kafka["vpce_enabled"]?1:0}"
-  name = "nlb-tg-${var.cluster["name"]}"
-  port = "${var.kafka_port}"
+  count = "${var.kafka["vpce_enabled"] ? var.kafka["broker_count"] : 0}"
+  name = "nlb-tg-${var.cluster["name"]}-${count.index}"
+  port = "${count.index + var.kafka_port}"
   vpc_id = "${var.cluster["aws_vpc_id"]}"
   deregistration_delay = 120
   protocol = "TCP"
@@ -49,20 +51,20 @@ resource "aws_lb_target_group" "kafka_nlb_target_group" {
 }
 
 resource "aws_lb_target_group_attachment" "kafka_nlb_target_group_attachment" {
-  count = "${var.kafka["vpce_enabled"]?length(var.kafka_instance_ids):0}"
-  target_group_arn = "${aws_lb_target_group.kafka_nlb_target_group.arn}"
+  count = "${var.kafka["vpce_enabled"] ? var.kafka["broker_count"] : 0}"
+  target_group_arn = "${element(aws_lb_target_group.kafka_nlb_target_group.*.arn, count.index)}"
   target_id = "${element(var.kafka_instance_ids, count.index)}"
-  port = "${var.kafka_port}"
+  port = "${count.index + var.kafka_port}"
 }
 
 resource "aws_lb_listener" "kafka_nlb_listener" {
-  count = "${var.kafka["vpce_enabled"]?1:0}"
+  count = "${var.kafka["vpce_enabled"] ? var.kafka["broker_count"] : 0}"
   load_balancer_arn = "${aws_lb.kafka_nlb.arn}"
-  port = "${var.kafka_port}"
+  port = "${count.index + var.kafka_port}"
   protocol = "TCP"
 
   default_action {
-    target_group_arn = "${aws_lb_target_group.kafka_nlb_target_group.arn}"
+    target_group_arn = "${element(aws_lb_target_group.kafka_nlb_target_group.*.arn, count.index)}"
     type = "forward"
   }
 }
