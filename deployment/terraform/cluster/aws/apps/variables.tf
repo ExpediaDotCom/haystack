@@ -12,7 +12,7 @@ variable "traces" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.0.11"
     indexer_instances = 1
     indexer_environment_overrides = ""
     indexer_cpu_request = "500m"
@@ -68,7 +68,7 @@ variable "trends" {
   type = "map"
   default = {
     enabled = true
-    version = "1.1"
+    version = "1.1.4"
     metricpoint_encoder_type = "base64"
     span_timeseries_transformer_instances = 1
     span_timeseries_transformer_cpu_request = "500m"
@@ -193,7 +193,7 @@ variable "ui" {
   type = "map"
   default = {
     enabled = true
-    version = "1.1"
+    version = "1.1.8"
     instances = 1
     whitelisted_fields = ""
     enable_sso = false
@@ -205,7 +205,7 @@ variable "ui" {
     cpu_limit = "2000m"
     memory_request = "1536"
     memory_limit = "1536"
-    metricpoint_encoder_type = "base64"
+    encoder_type = "base64"
   }
 }
 
