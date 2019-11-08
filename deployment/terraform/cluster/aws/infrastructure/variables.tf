@@ -74,6 +74,8 @@ variable "kafka" {
     broker_instance_type = "m4.xlarge"
     default_partition_count = 96
     broker_image = ""
+    broker_userdata_s3path = ""
+    zookeeper_userdata_s3path = ""
   }
 }
 

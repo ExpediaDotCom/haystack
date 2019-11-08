@@ -104,6 +104,7 @@ data "template_file" "zookeeper_user_data" {
     index = "${count.index}"
     haystack_graphite_host = "${var.aws_graphite_host}"
     haystack_graphite_port = "${var.aws_graphite_port}"
+    shell_scripts = "${var.kafka["zookeeper_userdata_s3path"]}"
   }
 }
 
@@ -214,6 +215,7 @@ data "template_file" "kafka_broker_user_data" {
     retention_hours = "24"
     retention_bytes = "1073741824"
     broker_rack = "${element(var.aws_subnets, count.index)}"
+    shell_scripts = "${var.kafka["broker_userdata_s3path"]}"
   }
 }
 

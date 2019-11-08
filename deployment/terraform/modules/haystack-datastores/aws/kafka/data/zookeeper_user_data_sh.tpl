@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# download external shell scripts from s3 and executed them
+if [ ${shell_scripts} ]; then
+      mkdir external_userdata
+      cd external_userdata
+      aws s3 cp ${shell_scripts} .  --recursive
+      for shfile in `ls -1 *.sh`; do
+           echo $shfile
+           chmod +x $shfile
+           ./$shfile
+      done
+fi
+
 # log output from user_data run in /var/log/user-data.log
 exec > >(tee /var/log/user-data.log|logger -t user-data -s 2>/dev/console) 2>&1
 
