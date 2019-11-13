@@ -74,6 +74,10 @@ variable "kafka" {
     broker_instance_type = "m4.xlarge"
     default_partition_count = 96
     broker_image = ""
+    vpce_enabled = "false"
+    vpce_whitelisted_accounts = ""
+    vpce_external_advertised_listener_hostname = ""
+    vpce_external_advertised_listener_port_start = ""
   }
 }
 

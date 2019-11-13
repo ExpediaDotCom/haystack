@@ -24,6 +24,10 @@ module "kafka-security-groups" {
   source = "security_groups"
   cluster = "${var.cluster}"
   common_tags = "${var.common_tags}"
+
+  vpce_enabled = "${var.kafka["vpce_enabled"]}"
+  external_port_start = "${var.kafka["vpce_external_advertised_listener_port_start"]}"
+  broker_count = "${var.kafka["broker_count"]}"
 }
 
 resource "aws_iam_role" "haystack-zookeeper-role" {
@@ -214,6 +218,9 @@ data "template_file" "kafka_broker_user_data" {
     retention_hours = "24"
     retention_bytes = "1073741824"
     broker_rack = "${element(var.aws_subnets, count.index)}"
+    vpce_external_advertised_listener_hostname = "${var.kafka["vpce_external_advertised_listener_hostname"]}"
+    vpce_external_advertised_listener_port_start = "${var.kafka["vpce_external_advertised_listener_port_start"]}"
+    broker_index = "${count.index}"
   }
 }
 
@@ -243,6 +250,22 @@ resource "aws_instance" "haystack-kafka-broker" {
   }
 
   user_data = "${data.template_file.kafka_broker_user_data.*.rendered[count.index]}"
+}
+
+module "kafka-vpce" {
+  source = "vpce"
+  subnets = "${var.aws_subnets}"
+  cluster = "${var.cluster}"
+  kafka = "${var.kafka}"
+  kafka_port = "${var.kafka["vpce_external_advertised_listener_port_start"] != "" ? var.kafka["vpce_external_advertised_listener_port_start"] : local.kafka_port}"
+  vpce_whitelisted_accounts = "${split(",", var.kafka["vpce_whitelisted_accounts"])}"
+  common_tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}-kafka-brokers",
+    "Name", "${var.cluster["name"]}-kafka-brokers",
+    "Component", "Kafka"
+  ))}"
+  kafka_instance_ids = ["${aws_instance.haystack-kafka-broker.*.id}"]
 }
 
 // create cname for newly created zookeeper cluster
