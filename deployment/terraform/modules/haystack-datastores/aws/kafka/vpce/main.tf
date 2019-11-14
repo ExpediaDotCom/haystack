@@ -79,6 +79,13 @@ resource "aws_vpc_endpoint_service" "vpce_provider" {
       "allowed_principals"
     ]
   }
+
+  tags = "${merge(var.common_tags, map(
+    "ClusterName", "${var.cluster["name"]}",
+    "Role", "${var.cluster["role_prefix"]}",
+    "Name", "${var.cluster["name"]}-vpce",
+    "Component", "Kafka"
+  ))}"
 }
 
 resource "aws_vpc_endpoint_service_allowed_principal" "current_account_whitelisted" {
