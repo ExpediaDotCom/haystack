@@ -32,7 +32,7 @@ sudo sed -i -e "s/_RETENTION_BYTES/${retention_bytes}/g" $KAFKA_SERVER_PROPERTIE
 sudo sed -i -e "/broker.id/ a \broker.rack=${broker_rack}" $KAFKA_SERVER_PROPERTIES_FILE
 
 if [ ! -z ${vpce_external_advertised_listener_hostname} ]; then
-      external_listener_port=$((vpce_external_advertised_listener_port_start + broker_index))
+      external_listener_port=$((${vpce_external_advertised_listener_port_start} + ${broker_index}))
 
       # Add the external listener to the list
       sed -i -e "/^listeners=/c\listeners=INTERNAL:\/\/$${local_ip}:9092,EXTERNAL:\/\/$${local_ip}:$${external_listener_port}" $KAFKA_SERVER_PROPERTIES_FILE
