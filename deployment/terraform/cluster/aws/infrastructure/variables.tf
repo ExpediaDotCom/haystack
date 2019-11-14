@@ -11,7 +11,7 @@ variable "monitoring_addons" {
     grafana_root_url = ""
     influxdb_storage_volume = "50Gi"
     influxdb_memory_limit = "2Gi"
-    influxdb_cpu_limit = "500"
+    influxdb_cpu_limit = "500m"
   }
 }
 
