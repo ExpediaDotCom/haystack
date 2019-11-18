@@ -9,7 +9,7 @@ resource "aws_lb" "kafka_nlb" {
 
   load_balancer_type = "network"
   enable_cross_zone_load_balancing = true
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
   idle_timeout = 400
 
