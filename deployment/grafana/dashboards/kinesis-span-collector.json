@@ -1329,7 +1329,30 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      0.02
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.02
                     ],
                     "type": "gt"
                   },
@@ -1340,7 +1363,30 @@
                     "params": [
                       "B",
                       "10m",
-                      "now"
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.02
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
                     ]
                   },
                   "reducer": {
@@ -1433,7 +1479,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.1
+                "value": 0.02
               }
             ],
             "timeFrom": null,
