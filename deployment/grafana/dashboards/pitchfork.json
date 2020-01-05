@@ -2,12 +2,6 @@
   "dashboard": {
     "__requires": [
       {
-        "type": "datasource",
-        "id": "cloudwatch",
-        "name": "AWS_CloudWatch",
-        "version": "1.0.0"
-      },
-      {
         "type": "grafana",
         "id": "grafana",
         "name": "Grafana",
@@ -18,30 +12,34 @@
         "id": "graph",
         "name": "Graph",
         "version": ""
+      },
+      {
+        "type": "datasource",
+        "id": "influxdb",
+        "name": "InfluxDB",
+        "version": "1.0.0"
       }
     ],
     "annotations": {
       "list": []
     },
-    "description": "Dashboard for AWS ELB - haystack-nodes-elb",
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": "1m",
     "rows": [
       {
         "collapse": false,
-        "height": "250px",
+        "height": 283,
         "panels": [
           {
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "AWS_CloudWatch",
+            "datasource": "graphite",
             "fill": 1,
             "id": 1,
             "legend": {
@@ -56,7 +54,7 @@
             "lines": true,
             "linewidth": 1,
             "links": [],
-            "nullPointMode": "connected",
+            "nullPointMode": "null",
             "percentage": false,
             "pointradius": 5,
             "points": false,
@@ -68,48 +66,114 @@
             "steppedLine": false,
             "targets": [
               {
-                "dimensions": {
-                  "LoadBalancerName": "$load_balancer"
-                },
                 "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "metricName": "HTTPCode_Backend_2XX",
-                "namespace": "AWS/ELB",
+                "groupBy": [],
+                "measurement": "haystack.pitchfork.#hostname#",
                 "orderByTime": "ASC",
-                "period": "",
                 "policy": "default",
-                "refId": "B",
-                "region": "us-west-2",
+                "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "value"
+                        "pitchfork.spans.protocol.http.transport.jsonv2.count"
                       ],
                       "type": "field"
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "jsonv2"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.protocol.http.transport.jsonv1.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "jsonv1"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.protocol.http.transport.protobuf.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "protobuf"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.protocol.http.transport.thrift.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "thrift"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "pitchfork.spans.invalid.invalid.true.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "invalid"
+                      ],
+                      "type": "alias"
                     }
                   ]
-                ],
-                "statistics": [
-                  "Sum"
                 ],
                 "tags": []
               }
@@ -117,7 +181,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "ELB- 2XX",
+            "title": "Spans Count",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -155,7 +219,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "AWS_CloudWatch",
+            "datasource": "graphite",
             "fill": 1,
             "id": 2,
             "legend": {
@@ -182,48 +246,54 @@
             "steppedLine": false,
             "targets": [
               {
-                "dimensions": {
-                  "LoadBalancerName": "$load_balancer"
-                },
                 "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "$__interval"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "null"
-                    ],
-                    "type": "fill"
-                  }
-                ],
-                "metricName": "HTTPCode_Backend_4XX",
-                "namespace": "AWS/ELB",
+                "groupBy": [],
+                "measurement": "haystack.pitchfork.#hostname#",
                 "orderByTime": "ASC",
-                "period": "",
                 "policy": "default",
                 "refId": "A",
-                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "value"
+                        "server.requests.exception.None.method.POST.outcome.SUCCESS.status.200.uri./api/v2/spans.count"
                       ],
                       "type": "field"
                     },
                     {
-                      "params": [],
-                      "type": "mean"
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "success"
+                      ],
+                      "type": "alias"
+                    }
+                  ],
+                  [
+                    {
+                      "params": [
+                        "server.requests.exception.IllegalArgumentException.method.POST.outcome.SERVER_ERROR.status.500.uri./api/v2/spans.count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [
+                        "5m"
+                      ],
+                      "type": "non_negative_derivative"
+                    },
+                    {
+                      "params": [
+                        "fail"
+                      ],
+                      "type": "alias"
                     }
                   ]
-                ],
-                "statistics": [
-                  "Sum"
                 ],
                 "tags": []
               }
@@ -231,7 +301,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "ELB- 4XX",
+            "title": "Request Success / Failure",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -269,9 +339,9 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "AWS_CloudWatch",
+            "datasource": "graphite",
             "fill": 1,
-            "id": 3,
+            "id": 4,
             "legend": {
               "avg": false,
               "current": false,
@@ -284,7 +354,7 @@
             "lines": true,
             "linewidth": 1,
             "links": [],
-            "nullPointMode": "connected",
+            "nullPointMode": "null",
             "percentage": false,
             "pointradius": 5,
             "points": false,
@@ -296,9 +366,6 @@
             "steppedLine": false,
             "targets": [
               {
-                "dimensions": {
-                  "LoadBalancerName": "$load_balancer"
-                },
                 "dsType": "influxdb",
                 "groupBy": [
                   {
@@ -314,13 +381,11 @@
                     "type": "fill"
                   }
                 ],
-                "metricName": "HTTPCode_Backend_5XX",
-                "namespace": "AWS/ELB",
                 "orderByTime": "ASC",
-                "period": "",
                 "policy": "default",
+                "query": "SELECT \"events.level.error.m1_rate\" FROM \"haystack.pitchfork.#hostname#\" WHERE $timeFilter",
+                "rawQuery": true,
                 "refId": "A",
-                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
@@ -336,16 +401,13 @@
                     }
                   ]
                 ],
-                "statistics": [
-                  "Sum"
-                ],
                 "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "ELB- 5XX",
+            "title": "Errors",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -383,7 +445,7 @@
         "repeatIteration": null,
         "repeatRowId": null,
         "showTitle": false,
-        "title": "Dashboard Row",
+        "title": "Pitchfork",
         "titleSize": "h6"
       }
     ],
@@ -391,25 +453,7 @@
     "style": "dark",
     "tags": [],
     "templating": {
-      "list": [
-        {
-          "current": {
-            "value": "${VAR_LOAD_BALANCER}",
-            "text": "${VAR_LOAD_BALANCER}"
-          },
-          "hide": 0,
-          "label": "LoadBalancer",
-          "name": "load_balancer",
-          "options": [
-            {
-              "value": "${VAR_LOAD_BALANCER}",
-              "text": "${VAR_LOAD_BALANCER}"
-            }
-          ],
-          "query": "${VAR_LOAD_BALANCER}",
-          "type": "constant"
-        }
-      ]
+      "list": []
     },
     "time": {
       "from": "now-3h",
@@ -441,6 +485,6 @@
       ]
     },
     "timezone": "",
-    "title": "AWS ELB"
+    "title": "Pitchfork"
   }
 }

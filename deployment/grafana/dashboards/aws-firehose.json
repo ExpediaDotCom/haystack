@@ -2,6 +2,12 @@
   "dashboard": {
     "__requires": [
       {
+        "type": "datasource",
+        "id": "cloudwatch",
+        "name": "AWS_CloudWatch",
+        "version": "1.0.0"
+      },
+      {
         "type": "grafana",
         "id": "grafana",
         "name": "Grafana",
@@ -12,38 +18,32 @@
         "id": "graph",
         "name": "Graph",
         "version": ""
-      },
-      {
-        "type": "datasource",
-        "id": "influxdb",
-        "name": "InfluxDB",
-        "version": "1.0.0"
       }
     ],
     "annotations": {
       "list": []
     },
-    "description": "Dashboard for haystack-http-span-collector",
+    "description": "AWS Firehose dashboard for writing pipes data to s3",
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": false,
+    "refresh": "1m",
     "rows": [
       {
-        "collapse": true,
-        "height": 250,
+        "collapse": false,
+        "height": "250px",
         "panels": [
           {
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
-            "id": 5,
+            "id": 1,
             "legend": {
               "avg": false,
               "current": false,
@@ -68,20 +68,31 @@
             "steppedLine": false,
             "targets": [
               {
-                "alias": "$tag_pod_name",
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
                 "dsType": "influxdb",
                 "groupBy": [
                   {
                     "params": [
-                      "pod_name"
+                      "$__interval"
                     ],
-                    "type": "tag"
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
                   }
                 ],
-                "measurement": "memory/usage",
+                "metricName": "IncomingRecords",
+                "namespace": "AWS/Firehose",
                 "orderByTime": "ASC",
+                "period": "",
                 "policy": "default",
                 "refId": "A",
+                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
@@ -90,28 +101,137 @@
                         "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "container_name",
-                    "operator": "=",
-                    "value": "http-span-collector"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "namespace_name",
-                    "operator": "=",
-                    "value": "haystack-apps"
-                  }
-                ]
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Memory Usage",
+            "title": "Incoming Records",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "fill": 1,
+            "id": 2,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "IncomingBytes",
+                "namespace": "AWS/Firehose",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Incoming Bytes",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -149,653 +269,7 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "influxdb-datasource",
-            "fill": 1,
-            "id": 6,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_pod_name",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "pod_name"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "memory/request",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "container_name",
-                    "operator": "=",
-                    "value": "http-span-collector"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "namespace_name",
-                    "operator": "=",
-                    "value": "haystack-apps"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Memory Request",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "decbytes",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "influxdb-datasource",
-            "fill": 1,
-            "id": 7,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_pod_name",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "pod_name"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "memory/limit",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "container_name",
-                    "operator": "=",
-                    "value": "http-span-collector"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "namespace_name",
-                    "operator": "=",
-                    "value": "haystack-apps"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Memory Limit",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "decbytes",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "influxdb-datasource",
-            "fill": 1,
-            "id": 8,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_pod_name",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "pod_name"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "cpu/usage_rate",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "container_name",
-                    "operator": "=",
-                    "value": "http-span-collector"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "namespace_name",
-                    "operator": "=",
-                    "value": "haystack-apps"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "CPU Usage (milli cores)",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "influxdb-datasource",
-            "fill": 1,
-            "id": 9,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_pod_name",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "pod_name"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "cpu/request",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "container_name",
-                    "operator": "=",
-                    "value": "http-span-collector"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "namespace_name",
-                    "operator": "=",
-                    "value": "haystack-apps"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "CPU Request",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "influxdb-datasource",
-            "fill": 1,
-            "id": 10,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_pod_name",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "pod_name"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "measurement": "cpu/limit",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "container_name",
-                    "operator": "=",
-                    "value": "http-span-collector"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "namespace_name",
-                    "operator": "=",
-                    "value": "haystack-apps"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "CPU Limit",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          }
-        ],
-        "repeat": null,
-        "repeatIteration": null,
-        "repeatRowId": null,
-        "showTitle": true,
-        "title": "Pods",
-        "titleSize": "h6"
-      },
-      {
-        "collapse": true,
-        "height": 406,
-        "panels": [
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 2,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "apikey.validation.failure.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
-              }
-            ],
-            "thresholds": [],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Api Key Validation Failure",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
             "id": 3,
             "legend": {
@@ -822,36 +296,56 @@
             "steppedLine": false,
             "targets": [
               {
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
                 "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "PutRecordBatch.Latency",
+                "namespace": "AWS/Firehose",
                 "orderByTime": "ASC",
+                "period": "",
                 "policy": "default",
                 "refId": "A",
+                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "invalid.span.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "statistics": [
+                  "Average"
+                ],
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Invalid Spans Rate",
+            "title": "PutRecordBatch Latency",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -889,9 +383,9 @@
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "graphite",
+            "datasource": "AWS_CloudWatch",
             "fill": 1,
-            "id": 4,
+            "id": 6,
             "legend": {
               "avg": false,
               "current": false,
@@ -916,36 +410,56 @@
             "steppedLine": false,
             "targets": [
               {
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
                 "dsType": "influxdb",
-                "groupBy": [],
-                "measurement": "haystack.collector.http",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "DeliveryToS3.Records",
+                "namespace": "AWS/Firehose",
                 "orderByTime": "ASC",
+                "period": "",
                 "policy": "default",
                 "refId": "A",
+                "region": "us-west-2",
                 "resultFormat": "time_series",
                 "select": [
                   [
                     {
                       "params": [
-                        "valid.span.OneMinuteRate"
+                        "value"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
                     }
                   ]
                 ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "http-collector"
-                  }
-                ]
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
               }
             ],
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Valid Spans Rate",
+            "title": "DeliveryToS3 Records",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -977,13 +491,355 @@
                 "show": true
               }
             ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "fill": 1,
+            "id": 7,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "DeliveryToS3.Bytes",
+                "namespace": "AWS/Firehose",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Sum"
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "DeliveryToS3 Bytes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "fill": 1,
+            "id": 5,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "DeliveryToS3.Success",
+                "namespace": "AWS/Firehose",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "DeliveryToS3 Success Rate",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "AWS_CloudWatch",
+            "fill": 1,
+            "id": 4,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "dimensions": {
+                  "DeliveryStreamName": "$aws_firehose_name"
+                },
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "metricName": "DeliveryToS3.DataFreshness",
+                "namespace": "AWS/Firehose",
+                "orderByTime": "ASC",
+                "period": "",
+                "policy": "default",
+                "refId": "A",
+                "region": "us-west-2",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "statistics": [
+                  "Average"
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "DeliveryToS3 DataFreshness",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "s",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
         "repeat": null,
         "repeatIteration": null,
         "repeatRowId": null,
-        "showTitle": true,
-        "title": "Http Collector",
+        "showTitle": false,
+        "title": "Dashboard Row",
         "titleSize": "h6"
       }
     ],
@@ -991,7 +847,25 @@
     "style": "dark",
     "tags": [],
     "templating": {
-      "list": []
+      "list": [
+        {
+          "current": {
+            "value": "${VAR_AWS_FIREHOSE_NAME}",
+            "text": "${VAR_AWS_FIREHOSE_NAME}"
+          },
+          "hide": 0,
+          "label": "AWS Firehose",
+          "name": "aws_firehose_name",
+          "options": [
+            {
+              "value": "${VAR_AWS_FIREHOSE_NAME}",
+              "text": "${VAR_AWS_FIREHOSE_NAME}"
+            }
+          ],
+          "query": "${VAR_AWS_FIREHOSE_NAME}",
+          "type": "constant"
+        }
+      ]
     },
     "time": {
       "from": "now-3h",
@@ -1023,6 +897,6 @@
       ]
     },
     "timezone": "",
-    "title": "Http Collector"
+    "title": "AWS Firehose"
   }
 }

@@ -9,7 +9,8 @@ data "template_file" "influxdb_cluster_addon_config" {
     influxdb_image = "${var.k8s_influxdb_image}"
     influxdb_storage_class = "${var.storage_class}"
     influxdb_storage = "${var.storage_volume}"
-    heap_memory_in_mb = "${var.heap_memory_in_mb}"
+    influxdb_memory_limit = "${var.influxdb_memory_limit}"
+    influxdb_cpu_limit = "${var.influxdb_cpu_limit}"
     graphite_node_port = "${var.graphite_node_port}"
     node_selecter_label = "${var.node_selecter_label}"
   }
@@ -42,6 +43,8 @@ resource "null_resource" "k8s_influxdb_retention" {
     command = "echo '${file("${path.module}/manifests/influx_db_retention.yaml")}' | ${var.kubectl_executable_name} delete -f - --context ${var.kubectl_context_name} || true"
     when = "destroy"
   }
+
+  depends_on = ["null_resource.k8s_influxdb_addons"]
 
   count = "${local.count}"
 }

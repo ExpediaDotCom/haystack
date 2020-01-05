@@ -35,7 +35,7 @@
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": false,
+    "refresh": "1m",
     "rows": [
       {
         "collapse": false,
@@ -718,8 +718,8 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
-        "height": 293,
+        "collapse": true,
+        "height": 241,
         "panels": [
           {
             "aliasColors": {},
@@ -729,7 +729,7 @@
             "datasource": "graphite",
             "description": "This graph shows the heap memory used by each cassandra node",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 1,
             "legend": {
               "avg": false,
@@ -847,7 +847,7 @@
             "datasource": "graphite",
             "description": "This graph shows the heap memory committed by each cassandra node",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 2,
             "legend": {
               "avg": false,
@@ -965,7 +965,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 16,
             "legend": {
               "avg": false,
@@ -1083,7 +1083,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 17,
             "legend": {
               "avg": false,
@@ -1194,6 +1194,85 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      4
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      4
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      4
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Cassandra- increase in OS CPU Average Load",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -1201,7 +1280,7 @@
             "datasource": "graphite",
             "description": "This graph shows the heap memory used by each cassandra node",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 4,
             "legend": {
               "avg": false,
@@ -1222,7 +1301,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 6,
+            "span": 3,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -1327,7 +1406,7 @@
             "datasource": "graphite",
             "description": "This graph shows the threads used by each cassandra node",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 3,
             "legend": {
               "avg": false,
@@ -1348,7 +1427,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 6,
+            "span": 3,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -1447,7 +1526,7 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 250,
         "panels": [
           {
@@ -1689,6 +1768,86 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      100000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      100000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      100000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "To Fix this alert check the dashboard for the mutation graphs to see if a node is down",
+              "name": "Cassandra- increase in Write Latency",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -1939,7 +2098,7 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
+        "collapse": true,
         "height": 250,
         "panels": [
           {
@@ -2181,6 +2340,85 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1000000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1000000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      1000000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Cassandra- increase in Read Latency",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2431,8 +2669,8 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
-        "height": 250,
+        "collapse": true,
+        "height": 298,
         "panels": [
           {
             "aliasColors": {},
@@ -2563,7 +2801,7 @@
             "datasource": "graphite",
             "description": "This graph shows the disk usage of each cassandra node",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 5,
             "legend": {
               "avg": false,
@@ -2637,15 +2875,7 @@
                 ]
               }
             ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 650000000000
-              }
-            ],
+            "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
             "title": "Total Disk Usage per host",
@@ -2689,7 +2919,7 @@
             "datasource": "graphite",
             "description": "This graph shows the disk used by commit logs in  each cassandra node",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 6,
             "legend": {
               "avg": false,
@@ -2917,6 +3147,85 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      0.05
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.05
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.05
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Cassandra- increase in storage exceptions",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -2944,10 +3253,42 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 4,
+            "span": 3,
             "stack": false,
             "steppedLine": false,
             "targets": [
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  }
+                ],
+                "measurement": "haystack.datastore.cassandra",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "Exceptions.Count"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
               {
                 "alias": "$tag_host",
                 "dsType": "influxdb",
@@ -2959,10 +3300,11 @@
                     "type": "tag"
                   }
                 ],
+                "hide": true,
                 "measurement": "haystack.datastore.cassandra",
                 "orderByTime": "ASC",
                 "policy": "default",
-                "refId": "B",
+                "refId": "A",
                 "resultFormat": "time_series",
                 "select": [
                   [
@@ -2983,7 +3325,15 @@
                 "tags": []
               }
             ],
-            "thresholds": [],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 0.05
+              }
+            ],
             "timeFrom": null,
             "timeShift": null,
             "title": "Storage Exceptions",
@@ -3047,7 +3397,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 4,
+            "span": 3,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -3164,7 +3514,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 4,
+            "span": 3,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -3254,10 +3604,89 @@
         "titleSize": "h6"
       },
       {
-        "collapse": false,
-        "height": 250,
+        "collapse": true,
+        "height": 428,
         "panels": [
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      10
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Cassandra- increase in Mutation Stage Pool",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -3265,7 +3694,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 25,
             "legend": {
               "avg": false,
@@ -3441,7 +3870,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 1000
+                "value": 10
               }
             ],
             "timeFrom": null,
@@ -3488,7 +3917,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 27,
             "legend": {
               "avg": false,
@@ -3703,7 +4132,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 36,
             "legend": {
               "avg": false,
@@ -4133,7 +4562,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 26,
             "legend": {
               "avg": false,
@@ -4252,7 +4681,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 28,
             "legend": {
               "avg": false,
@@ -4371,7 +4800,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 30,
             "legend": {
               "avg": false,
@@ -4490,7 +4919,7 @@
             "datasource": "graphite",
             "description": "",
             "fill": 1,
-            "height": "300px",
+            "height": "",
             "id": 37,
             "legend": {
               "avg": false,
@@ -4617,7 +5046,7 @@
       "list": []
     },
     "time": {
-      "from": "now-1h",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -4645,7 +5074,7 @@
         "30d"
       ]
     },
-    "timezone": "browser",
+    "timezone": "",
     "title": "Cassandra"
   }
 }

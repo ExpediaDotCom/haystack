@@ -157,6 +157,10 @@ variable "collector" {
     kinesis_span_collector_memory_request = "250"
     kinesis_span_collector_memory_limit = "250"
     kinesis_span_collector_jvm_memory_limit = "200"
+    kinesis_span_collector_max_spansize_validation_enabled = "false"
+    kinesis_span_collector_max_spansize_limit = 5000
+    kinesis_span_collector_message_tag_key = ""
+    kinesis_span_collector_message_tag_value = ""
 
 
     http_span_collector_app_name = "http-span-collector"
@@ -169,6 +173,10 @@ variable "collector" {
     http_span_collector_memory_limit = "250"
     http_span_collector_jvm_memory_limit = "200"
     http_span_collector_app_name = "http-span-collector"
+    http_span_collector_max_spansize_validation_enabled = "false"
+    http_span_collector_max_spansize_limit = 5000
+    http_span_collector_message_tag_key = ""
+    http_span_collector_message_tag_value = ""
   }
 }
 
@@ -213,7 +221,7 @@ variable "ui" {
     cpu_limit = "1000m"
     memory_request = "250"
     memory_limit = "250"
-    metricpoint_encoder_type = "base64"
+    encoder_type = "base64"
   }
 }
 

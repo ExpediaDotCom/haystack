@@ -24,7 +24,7 @@ variable "dynamodb" {
 
 variable "common_tags" {
   type = "map"
-} 
+}
 variable "cassandra_spans_backend" {
   type = "map"
 }

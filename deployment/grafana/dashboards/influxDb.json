@@ -30,20 +30,20 @@
     "hideControls": false,
     "id": null,
     "links": [],
-    "refresh": false,
+    "refresh": "1m",
     "rows": [
       {
-        "collapse": false,
-        "height": 346,
+        "collapse": true,
+        "height": 250,
         "panels": [
           {
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
             "dashes": false,
-            "datasource": "internal",
+            "datasource": "influxdb-datasource",
             "fill": 1,
-            "id": 1,
+            "id": 8,
             "legend": {
               "avg": false,
               "current": false,
@@ -63,7 +63,759 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 12,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/usage_rate",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/limit\" WHERE \"namespace_name\" = 'kube-system' AND \"container_name\" = 'influxdb' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "kube-system"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "influxdb"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Usage (milli cores)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 7,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/limit\" WHERE \"namespace_name\" = 'kube-system' AND \"container_name\" = 'influxdb' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "kube-system"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "influxdb"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 9,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/limit\" WHERE \"namespace_name\" = 'kube-system' AND \"container_name\" = 'influxdb' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "kube-system"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "influxdb"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/usage",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/limit\" WHERE \"namespace_name\" = 'kube-system' AND \"container_name\" = 'influxdb' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "kube-system"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "influxdb"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Usage (milli cores)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 12,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/limit\" WHERE \"namespace_name\" = 'kube-system' AND \"container_name\" = 'influxdb' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "kube-system"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "influxdb"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/limit\" WHERE \"namespace_name\" = 'kube-system' AND \"container_name\" = 'influxdb' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "kube-system"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "influxdb"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Pod",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": 346,
+        "panels": [
+          {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      990000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "max"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      990000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "max"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      990000
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "A",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "max"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "message": "The maximum number of series supported by this instance of InfluxDb has been reached. Information about this issue is found at https://docs.influxdata.com/influxdb/v1.2/concepts/schema_and_data_layout/#don-t-have-too-many-series",
+              "name": "InfluxDb -  increase in Series and Measurements count",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "internal",
+            "fill": 1,
+            "id": 1,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -178,7 +930,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 999000
+                "value": 990000
               }
             ],
             "timeFrom": null,
@@ -236,14 +988,14 @@
             "lines": true,
             "linewidth": 1,
             "links": [],
-            "nullPointMode": "null",
+            "nullPointMode": "connected",
             "percentage": false,
             "pointradius": 5,
             "points": false,
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 12,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -308,6 +1060,7 @@
                     "type": "fill"
                   }
                 ],
+                "hide": false,
                 "measurement": "database",
                 "orderByTime": "ASC",
                 "policy": "default",
@@ -379,13 +1132,707 @@
                 "show": true
               }
             ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "internal",
+            "fill": 1,
+            "id": 3,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "HeapAlloc",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "hostname"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "runtime",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "HeapAlloc"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "HeapSys",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "hostname"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "runtime",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "HeapSys"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "HeapIdle",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "runtime",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "HeapIdle"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Heap",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "internal",
+            "description": "Total garbage collection (GC) pause time of the Go runtime.",
+            "fill": 1,
+            "id": 4,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "PauseTotalNs",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "runtime",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "PauseTotalNs"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "GC pause time",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ns",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "internal",
+            "description": "The number of bytes received by the data node.",
+            "fill": 1,
+            "id": 5,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "bytesRx",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "hostname"
+                    ],
+                    "type": "tag"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "hide": false,
+                "measurement": "graphite",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "bytesRx"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Data Received",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "internal",
+            "fill": 1,
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "ConnectionsActive",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "graphite",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "connsActive"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "ConnectionsHandled",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "$__interval"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "null"
+                    ],
+                    "type": "fill"
+                  }
+                ],
+                "measurement": "graphite",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "connsHandled"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Connections",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "internal",
+            "description": "The number of bytes received by the data node.",
+            "fill": 1,
+            "id": 13,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [],
+                "hide": false,
+                "measurement": "graphite",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "pointsRx"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [],
+                "hide": false,
+                "measurement": "graphite",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "pointsNaNFail"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              },
+              {
+                "alias": "",
+                "dsType": "influxdb",
+                "groupBy": [],
+                "hide": false,
+                "measurement": "graphite",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "C",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "pointsParseFail"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Points Parse Stats",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
         "repeat": null,
         "repeatIteration": null,
         "repeatRowId": null,
-        "showTitle": false,
-        "title": "Dashboard Row",
+        "showTitle": true,
+        "title": "Influx",
         "titleSize": "h6"
       }
     ],
@@ -396,7 +1843,7 @@
       "list": []
     },
     "time": {
-      "from": "now-7d",
+      "from": "now-3h",
       "to": "now"
     },
     "timepicker": {
@@ -425,7 +1872,6 @@
       ]
     },
     "timezone": "",
-    "title": "InfluxDb",
-    "version": 8
+    "title": "InfluxDb"
   }
 }

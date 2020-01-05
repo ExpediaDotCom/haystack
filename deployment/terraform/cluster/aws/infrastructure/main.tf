@@ -34,7 +34,7 @@ module "haystack-datastores" {
   pipes_firehose_stream = "${var.pipes_firehose_stream}"
   cassandra_spans_backend = "${var.cassandra_spans_backend}"
   es_spans_index = "${var.es_spans_index}"
-  graphite_hostname = "${module.haystack-k8s.external_graphite_hostname}"
+  graphite_hostname = "${module.haystack-k8s.external_graphite_cname}"
   graphite_port = "${module.k8s-addons.graphite_port}"
   k8s_nodes_iam-role_arn = "${module.haystack-k8s.nodes_iam-role_arn}"
   dynamodb = "${var.dynamodb}"
