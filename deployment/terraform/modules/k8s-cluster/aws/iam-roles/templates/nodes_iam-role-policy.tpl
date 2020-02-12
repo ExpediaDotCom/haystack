@@ -57,7 +57,8 @@
         "kinesis:DescribeStream",
         "kinesis:PutRecord",
         "kinesis:PutRecords",
-        "kinesis:DescribeStream"
+        "kinesis:DescribeStream",
+        "kinesis:ListShards"
       ],
       "Resource": [
         "arn:aws:kinesis:${kinesis-stream-region}:${account_id}:stream/haystack-*"
