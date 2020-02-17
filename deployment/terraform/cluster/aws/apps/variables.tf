@@ -31,7 +31,7 @@ variable "traces" {
     reader_jvm_memory_limit = "1024"
 
     backend_cpu_request = "500m"
-    backend_cpu_limit = "1000m"
+    backend_cpu_limit = "500m"
     backend_memory_request = "500"
     backend_memory_limit = "500"
     backend_jvm_memory_limit = "256"
@@ -177,9 +177,12 @@ variable "collector" {
     kinesis_span_collector_jvm_memory_limit = "1024"
     kinesis_span_collector_app_name = "kinesis-span-collector"
     kinesis_span_collector_max_spansize_validation_enabled = "false"
+    kinesis_span_collector_max_spansize_log_only = "false"
     kinesis_span_collector_max_spansize_limit = 5000
     kinesis_span_collector_message_tag_key = ""
     kinesis_span_collector_message_tag_value = ""
+    kinesis_span_collector_max_spansize_skip_tags = "[\"error\"]"
+    kinesis_span_collector_max_spansize_skip_services = "[]"
 
     http_span_collector_instances = 1
     http_span_collector_enabled = false
