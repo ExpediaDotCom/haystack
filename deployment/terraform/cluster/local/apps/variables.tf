@@ -158,10 +158,12 @@ variable "collector" {
     kinesis_span_collector_memory_limit = "250"
     kinesis_span_collector_jvm_memory_limit = "200"
     kinesis_span_collector_max_spansize_validation_enabled = "false"
+    kinesis_span_collector_max_spansize_log_only = "false"
     kinesis_span_collector_max_spansize_limit = 5000
     kinesis_span_collector_message_tag_key = ""
     kinesis_span_collector_message_tag_value = ""
-
+    kinesis_span_collector_max_spansize_skip_tags = "[\"error\"]"
+    kinesis_span_collector_max_spansize_skip_services = "[]"
 
     http_span_collector_app_name = "http-span-collector"
     http_span_collector_instances = 1
