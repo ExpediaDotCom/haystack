@@ -174,12 +174,12 @@ variable "collector" {
     http_span_collector_jvm_memory_limit = "200"
     http_span_collector_app_name = "http-span-collector"
     http_span_collector_max_spansize_validation_enabled = "false"
-    kinesis_span_collector_max_spansize_log_only = "false"
+    http_span_collector_max_spansize_log_only = "false"
     http_span_collector_max_spansize_limit = 5000
     http_span_collector_message_tag_key = ""
     http_span_collector_message_tag_value = ""
-    kinesis_span_collector_max_spansize_skip_tags = "[\"error\"]"
-    kinesis_span_collector_max_spansize_skip_services = "[]"
+    http_span_collector_max_spansize_skip_tags = "[\"error\"]"
+    http_span_collector_max_spansize_skip_services = "[]"
   }
 }
 
