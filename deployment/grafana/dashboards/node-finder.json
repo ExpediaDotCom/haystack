@@ -707,7 +707,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      6000000
+                      3600000
                     ],
                     "type": "gt"
                   },
@@ -730,7 +730,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      6000000
+                      3600000
                     ],
                     "type": "gt"
                   },
@@ -753,7 +753,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      6000000
+                      3600000
                     ],
                     "type": "gt"
                   },
@@ -856,7 +856,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 6000000
+                "value": 3600000
               }
             ],
             "timeFrom": null,
@@ -900,7 +900,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -916,14 +916,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -939,14 +939,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -962,7 +962,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -1049,7 +1049,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 0.1
+                "value": 1
               }
             ],
             "timeFrom": null,
@@ -1093,7 +1093,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -1109,14 +1109,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -1132,14 +1132,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -1155,7 +1155,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -1248,7 +1248,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 0.1
+                "value": 1
               }
             ],
             "timeFrom": null,

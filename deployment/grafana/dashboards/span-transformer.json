@@ -2064,7 +2064,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2087,7 +2087,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2110,7 +2110,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -2121,11 +2121,7 @@
               "message": "This is an alert for drop in kafka read rate.",
               "name": "Span Transformer- drop in kafka read rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2158,59 +2154,6 @@
             "stack": false,
             "steppedLine": false,
             "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "hide": true,
-                "measurement": "records-consumed.rate",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT mean(\"value\") FROM \"records-consumed.rate\" WHERE \"subsystem\" = 'trends' AND \"class\" = 'kafka-consumer' AND \"application\" = 'span-transformer' AND $timeFilter GROUP BY time($__interval) fill(null)",
-                "rawQuery": false,
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "sum"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "subsystem",
-                    "operator": "=",
-                    "value": "trends"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "application",
-                    "operator": "=",
-                    "value": "span-transformer"
-                  }
-                ]
-              },
               {
                 "alias": "$tag_host",
                 "dsType": "influxdb",
@@ -2311,14 +2254,14 @@
                   },
                   "query": {
                     "params": [
-                      "A",
+                      "B",
                       "5m",
                       "now"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2334,14 +2277,14 @@
                   },
                   "query": {
                     "params": [
-                      "A",
+                      "B",
                       "10m",
                       "now-5m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2357,14 +2300,14 @@
                   },
                   "query": {
                     "params": [
-                      "A",
+                      "B",
                       "15m",
                       "now-10m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -2375,11 +2318,7 @@
               "message": "This is an alert for drop in kafka send rate.",
               "name": "Span Transfomer- drop in kafka records send rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2417,6 +2356,12 @@
                 "groupBy": [
                   {
                     "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
                       "host"
                     ],
                     "type": "tag"
@@ -2435,45 +2380,10 @@
                         "record-send.rate"
                       ],
                       "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "kafka-producer"
-                  }
-                ]
-              },
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.trends.span-transformer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "record-send.rate"
-                      ],
-                      "type": "field"
                     },
                     {
                       "params": [],
-                      "type": "mean"
+                      "type": "sum"
                     }
                   ]
                 ],
@@ -2514,205 +2424,6 @@
             "yaxes": [
               {
                 "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              },
-              {
-                "format": "short",
-                "label": null,
-                "logBase": 1,
-                "max": null,
-                "min": null,
-                "show": true
-              }
-            ]
-          },
-          {
-            "alert": {
-              "conditions": [
-                {
-                  "evaluator": {
-                    "params": [
-                      300000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "5m",
-                      "now"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      300000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "10m",
-                      "now-5m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                },
-                {
-                  "evaluator": {
-                    "params": [
-                      300000
-                    ],
-                    "type": "gt"
-                  },
-                  "operator": {
-                    "type": "and"
-                  },
-                  "query": {
-                    "params": [
-                      "B",
-                      "15m",
-                      "now-10m"
-                    ]
-                  },
-                  "reducer": {
-                    "params": [],
-                    "type": "avg"
-                  },
-                  "type": "query"
-                }
-              ],
-              "executionErrorState": "keep_state",
-              "frequency": "60s",
-              "handler": 1,
-              "message": "This alert is for kafka consumer lag in records for topic proto-spans.\n\nProbable reasons:\n- incoming traffic might have increased. Resulting Span Transformer to be behind in reading\n- Span Transformer service is too slow in ingesting messaged from proto span kafka topic",
-              "name": "Span Transformer- increase in kafka consumer lag",
-              "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
-            },
-            "aliasColors": {},
-            "bars": false,
-            "dashLength": 10,
-            "dashes": false,
-            "datasource": "graphite",
-            "fill": 1,
-            "id": 7,
-            "legend": {
-              "avg": false,
-              "current": false,
-              "max": false,
-              "min": false,
-              "show": true,
-              "total": false,
-              "values": false
-            },
-            "lines": true,
-            "linewidth": 1,
-            "links": [],
-            "nullPointMode": "null",
-            "percentage": false,
-            "pointradius": 5,
-            "points": false,
-            "renderer": "flot",
-            "seriesOverrides": [],
-            "spaceLength": 10,
-            "span": 4,
-            "stack": false,
-            "steppedLine": false,
-            "targets": [
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  },
-                  {
-                    "params": [
-                      "host"
-                    ],
-                    "type": "tag"
-                  }
-                ],
-                "hide": false,
-                "measurement": "haystack.trends.span-transformer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "iterator.age.ms.99thPercentile"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              }
-            ],
-            "thresholds": [
-              {
-                "colorMode": "critical",
-                "fill": true,
-                "line": true,
-                "op": "gt",
-                "value": 300000
-              }
-            ],
-            "timeFrom": null,
-            "timeShift": null,
-            "title": "Kafka Consumer Lag Max (Topic : proto-spans)",
-            "tooltip": {
-              "shared": true,
-              "sort": 0,
-              "value_type": "individual"
-            },
-            "type": "graph",
-            "xaxis": {
-              "buckets": null,
-              "mode": "time",
-              "name": null,
-              "show": true,
-              "values": []
-            },
-            "yaxes": [
-              {
-                "format": "ms",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -2808,11 +2519,7 @@
               "message": "This alert indicates that Span Transformer is having trouble in writing to kafka.\n\nProbable reasons:\n- service is not able to write to kafka because of write's reaching threshold, kafka down or any other reason",
               "name": "Span Transformer- increase in kafka records send error rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2820,8 +2527,7 @@
             "dashes": false,
             "datasource": "graphite",
             "fill": 1,
-            "height": "",
-            "id": 3,
+            "id": 7,
             "legend": {
               "avg": false,
               "current": false,
@@ -2908,6 +2614,217 @@
             "yaxes": [
               {
                 "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 7,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "haystack.trends.span-transformer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "B",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "iterator.age.ms.99thPercentile"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka Consumer Lag Max (Topic : proto-spans)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "graphite",
+            "fill": 1,
+            "id": 36,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_host",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
+                      "host"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "hide": false,
+                "measurement": "haystack.trends.span-transformer",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "records-lag.max"
+                      ],
+                      "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "mean"
+                    }
+                  ]
+                ],
+                "tags": []
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Kafka Consumer Records Lag (Topic : proto-spans)",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "none",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -3897,11 +3814,7 @@
               "message": "This is an alert for increase in Span Transformer serialisation failures.",
               "name": "Span Transformer- increase in span serde failure",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -3939,51 +3852,10 @@
                 "groupBy": [
                   {
                     "params": [
-                      "host"
+                      "1m"
                     ],
-                    "type": "tag"
-                  }
-                ],
-                "hide": true,
-                "measurement": "failure.OneMinuteRate",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "application",
-                    "operator": "=",
-                    "value": "span-transformer"
+                    "type": "time"
                   },
-                  {
-                    "condition": "AND",
-                    "key": "class",
-                    "operator": "=",
-                    "value": "span-serde"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "subsystem",
-                    "operator": "=",
-                    "value": "trends"
-                  }
-                ]
-              },
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
                   {
                     "params": [
                       "host"
@@ -4003,6 +3875,10 @@
                         "failure.OneMinuteRate"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],
@@ -4291,11 +4167,7 @@
               "message": "This is an alert for increase in Span Transformer deserialisation failure.",
               "name": "Span Transformer- increase in metricpoint deserialise failure",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -4333,51 +4205,10 @@
                 "groupBy": [
                   {
                     "params": [
-                      "host"
+                      "1m"
                     ],
-                    "type": "tag"
-                  }
-                ],
-                "hide": true,
-                "measurement": "ser.failure.OneMinuteRate",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "A",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "value"
-                      ],
-                      "type": "field"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "application",
-                    "operator": "=",
-                    "value": "span-transformer"
+                    "type": "time"
                   },
-                  {
-                    "condition": "AND",
-                    "key": "class",
-                    "operator": "=",
-                    "value": "metricpoint"
-                  },
-                  {
-                    "condition": "AND",
-                    "key": "subsystem",
-                    "operator": "=",
-                    "value": "trends"
-                  }
-                ]
-              },
-              {
-                "alias": "$tag_host",
-                "dsType": "influxdb",
-                "groupBy": [
                   {
                     "params": [
                       "host"
@@ -4397,6 +4228,10 @@
                         "ser.failure.OneMinuteRate"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],

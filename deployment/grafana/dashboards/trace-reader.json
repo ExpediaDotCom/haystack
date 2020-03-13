@@ -145,7 +145,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      5000
+                      30000
                     ],
                     "type": "gt"
                   },
@@ -168,7 +168,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      5000
+                      30000
                     ],
                     "type": "gt"
                   },
@@ -191,7 +191,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      5000
+                      30000
                     ],
                     "type": "gt"
                   },
@@ -218,11 +218,7 @@
               "message": "This alert indicates increase in the duration for Cassandra Read Time.",
               "name": "Trace Reader- increase in Cassandra read time",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -295,7 +291,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 5000
+                "value": 30000
               }
             ],
             "timeFrom": null,
@@ -412,11 +408,7 @@
               "message": "This is an alert for increase in Cassandra reads failure rate.",
               "name": "Trace Reader- increase in Cassandra read failure rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -647,7 +639,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      5000
+                      30000
                     ],
                     "type": "gt"
                   },
@@ -670,7 +662,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      5000
+                      30000
                     ],
                     "type": "gt"
                   },
@@ -693,7 +685,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      5000
+                      30000
                     ],
                     "type": "gt"
                   },
@@ -720,11 +712,7 @@
               "message": "This alert indicates increase in the duration for ES reads.",
               "name": "Trace Reader- increase in ES Read Time",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -797,7 +785,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 5000
+                "value": 30000
               }
             ],
             "timeFrom": null,
@@ -914,11 +902,7 @@
               "message": "This is an alert for increase in elastic search failure rate.",
               "name": "Trace Reader- Increase in ES read failure rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2276,11 +2260,7 @@
               "message": "This alert indicates increase in the duration of GetTrace endpoint.",
               "name": "Trace Reader- increase in duration of GetTrace endpoint",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2657,11 +2637,7 @@
               "message": "This alert indicates increase in duration for SearchTraces endpoint.",
               "name": "Trace Reader- increase in duration of SearchTraces endpoint",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,

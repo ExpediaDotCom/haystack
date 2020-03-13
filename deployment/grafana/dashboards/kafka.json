@@ -2432,7 +2432,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2455,7 +2455,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2478,7 +2478,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -3074,7 +3074,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.3
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -3090,14 +3090,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.3
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -3113,14 +3113,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.3
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -3136,7 +3136,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -3235,7 +3235,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 0.3
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -3279,7 +3279,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.3
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -3295,14 +3295,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.3
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -3318,14 +3318,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.3
+                      0.1
                     ],
                     "type": "lt"
                   },
@@ -3341,7 +3341,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -3440,7 +3440,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 0.3
+                "value": 0.1
               }
             ],
             "timeFrom": null,
@@ -3850,7 +3850,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      20
                     ],
                     "type": "gt"
                   },
@@ -3866,14 +3866,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      20
                     ],
                     "type": "gt"
                   },
@@ -3889,14 +3889,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      20
                     ],
                     "type": "gt"
                   },
@@ -3912,7 +3912,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -4011,7 +4011,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0
+                "value": 20
               }
             ],
             "timeFrom": null,
@@ -4055,7 +4055,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4071,14 +4071,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4094,14 +4094,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4117,7 +4117,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -4216,7 +4216,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0
+                "value": 5
               }
             ],
             "timeFrom": null,
@@ -4272,7 +4272,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.5
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4288,14 +4288,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.5
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4311,14 +4311,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.5
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4334,7 +4334,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -4433,7 +4433,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0.5
+                "value": 5
               }
             ],
             "timeFrom": null,
@@ -4477,7 +4477,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4493,14 +4493,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4516,14 +4516,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0
+                      5
                     ],
                     "type": "gt"
                   },
@@ -4539,7 +4539,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -4639,7 +4639,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 0
+                "value": 5
               }
             ],
             "timeFrom": null,
