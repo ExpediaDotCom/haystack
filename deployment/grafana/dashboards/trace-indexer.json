@@ -62,7 +62,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -152,6 +152,226 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
+            "id": 27,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "trace-indexer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 28,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "trace-indexer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
             "id": 16,
             "legend": {
               "avg": false,
@@ -172,7 +392,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -260,6 +480,222 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
+            "id": 29,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "trace-indexer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Limit",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 30,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "trace-indexer"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Request",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
             "id": 24,
             "legend": {
               "avg": false,
@@ -280,7 +716,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -370,6 +806,226 @@
             "dashes": false,
             "datasource": "influxdb-datasource",
             "fill": 1,
+            "id": 31,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/limit",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "storage-backend-cassandra"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Limit - StorageBackend",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 32,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "cpu/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "query": "SELECT \"value\" FROM \"cpu/usage_rate\" WHERE \"namespace_name\" = 'haystack-apps' AND \"container_name\" = 'trace-indexer' AND $timeFilter GROUP BY \"pod_name\"",
+                "rawQuery": false,
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "storage-backend-cassandra"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "CPU Request - StorageBackend",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
             "id": 25,
             "legend": {
               "avg": false,
@@ -390,7 +1046,7 @@
             "renderer": "flot",
             "seriesOverrides": [],
             "spaceLength": 10,
-            "span": 3,
+            "span": 4,
             "stack": false,
             "steppedLine": false,
             "targets": [
@@ -470,6 +1126,222 @@
                 "show": true
               }
             ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 33,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/usage",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "storage-backend-cassandra"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Limit - StorageBackend",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {},
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": "influxdb-datasource",
+            "fill": 1,
+            "id": 34,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "alias": "$tag_pod_name",
+                "dsType": "influxdb",
+                "groupBy": [
+                  {
+                    "params": [
+                      "pod_name"
+                    ],
+                    "type": "tag"
+                  }
+                ],
+                "measurement": "memory/request",
+                "orderByTime": "ASC",
+                "policy": "default",
+                "refId": "A",
+                "resultFormat": "time_series",
+                "select": [
+                  [
+                    {
+                      "params": [
+                        "value"
+                      ],
+                      "type": "field"
+                    }
+                  ]
+                ],
+                "tags": [
+                  {
+                    "key": "namespace_name",
+                    "operator": "=",
+                    "value": "haystack-apps"
+                  },
+                  {
+                    "condition": "AND",
+                    "key": "container_name",
+                    "operator": "=",
+                    "value": "storage-backend-cassandra"
+                  }
+                ]
+              }
+            ],
+            "thresholds": [],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory Request - StorageBackend",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": []
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
           }
         ],
         "repeat": null,
@@ -498,14 +1370,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "5m",
                       "now"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -521,14 +1393,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "10m",
                       "now-5m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -544,14 +1416,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "15m",
                       "now-10m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -607,34 +1479,7 @@
                       "1m"
                     ],
                     "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "records-consumed.rate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": []
-              },
-              {
-                "alias": "$tag_host,$tag_class",
-                "dsType": "influxdb",
-                "groupBy": [
+                  },
                   {
                     "params": [
                       "host"
@@ -660,6 +1505,10 @@
                         "records-consumed.rate"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],
@@ -781,7 +1630,7 @@
             "thresholds": [],
             "timeFrom": null,
             "timeShift": null,
-            "title": "Max Kafka Lag - topic: proto-spans",
+            "title": "Kafka Records Lag - topic: proto-spans",
             "tooltip": {
               "shared": true,
               "sort": 0,
@@ -820,7 +1669,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      300000
+                      600000
                     ],
                     "type": "gt"
                   },
@@ -843,7 +1692,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      300000
+                      600000
                     ],
                     "type": "gt"
                   },
@@ -866,7 +1715,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      300000
+                      600000
                     ],
                     "type": "gt"
                   },
@@ -972,7 +1821,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 300000
+                "value": 600000
               }
             ],
             "timeFrom": null,
@@ -1442,14 +2291,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "5m",
                       "now"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -1465,14 +2314,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "10m",
                       "now-5m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -1488,14 +2337,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "15m",
                       "now-10m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -1542,45 +2391,6 @@
             "stack": false,
             "steppedLine": false,
             "targets": [
-              {
-                "alias": "",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "writer.time.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "elasticsearch"
-                  }
-                ]
-              },
               {
                 "alias": "$tag_host",
                 "dsType": "influxdb",
@@ -1666,7 +2476,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1
+                      10
                     ],
                     "type": "gt"
                   },
@@ -1689,7 +2499,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1
+                      10
                     ],
                     "type": "gt"
                   },
@@ -1712,7 +2522,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1
+                      10
                     ],
                     "type": "gt"
                   },
@@ -1816,7 +2626,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 1
+                "value": 10
               }
             ],
             "timeFrom": null,
@@ -1872,7 +2682,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1000
+                      1000000
                     ],
                     "type": "gt"
                   },
@@ -1895,7 +2705,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1000
+                      1000000
                     ],
                     "type": "gt"
                   },
@@ -1918,7 +2728,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      1000
+                      1000000
                     ],
                     "type": "gt"
                   },
@@ -1943,7 +2753,7 @@
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for increase in Cassandra write time.",
-              "name": "Trace Indexer- increase in Cassandra  write time",
+              "name": "Storage Backend Client- increase in Cassandra write time",
               "noDataState": "keep_state",
               "notifications": [
                 {
@@ -2024,7 +2834,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 1000
+                "value": 1000000
               }
             ],
             "timeFrom": null,
@@ -2077,14 +2887,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "5m",
                       "now"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2100,14 +2910,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "10m",
                       "now-5m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2123,14 +2933,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "15m",
                       "now-10m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -2139,8 +2949,8 @@
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for drop in Cassandra write rate.",
-              "name": "Trace Indexer- drop in Cassandra write rate",
-              "noDataState": "alerting",
+              "name": "Storage Backend Client- drop in Cassandra write rate",
+              "noDataState": "keep_state",
               "notifications": [
                 {
                   "id": 1
@@ -2177,45 +2987,6 @@
             "stack": false,
             "steppedLine": false,
             "targets": [
-              {
-                "alias": "",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.traces.indexer",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "write.time.OneMinuteRate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "backend"
-                  }
-                ]
-              },
               {
                 "alias": "$tag_host",
                 "dsType": "influxdb",
@@ -2382,7 +3153,7 @@
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for increase in Cassandra failure rate.",
-              "name": "Trace Indexer- increase in Cassandra write failure rate",
+              "name": "Storage Backend Client- increase in Cassandra write failure",
               "noDataState": "keep_state",
               "notifications": [
                 {
@@ -2974,14 +3745,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "5m",
                       "now"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -2997,14 +3768,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "10m",
                       "now-5m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -3020,14 +3791,14 @@
                   },
                   "query": {
                     "params": [
-                      "B",
+                      "A",
                       "15m",
                       "now-10m"
                     ]
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -3035,7 +3806,7 @@
               "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
-              "name": "Cassandra- drop in write rate",
+              "name": "Storage Backend Server- Drop in Cassandra write rate",
               "noDataState": "keep_state",
               "notifications": []
             },
@@ -3069,47 +3840,6 @@
             "stack": false,
             "steppedLine": false,
             "targets": [
-              {
-                "alias": "",
-                "dsType": "influxdb",
-                "groupBy": [
-                  {
-                    "params": [
-                      "1m"
-                    ],
-                    "type": "time"
-                  }
-                ],
-                "hide": true,
-                "measurement": "haystack.traces.backend-cassandra",
-                "orderByTime": "ASC",
-                "policy": "default",
-                "query": "SELECT \"write.time.99thPercentile\" FROM \"haystack.traces.indexer\" WHERE \"class\" = 'backend' AND $timeFilter GROUP BY \"host\"",
-                "rawQuery": false,
-                "refId": "B",
-                "resultFormat": "time_series",
-                "select": [
-                  [
-                    {
-                      "params": [
-                        "requests.rate"
-                      ],
-                      "type": "field"
-                    },
-                    {
-                      "params": [],
-                      "type": "mean"
-                    }
-                  ]
-                ],
-                "tags": [
-                  {
-                    "key": "class",
-                    "operator": "=",
-                    "value": "cassandra"
-                  }
-                ]
-              },
               {
                 "alias": "$tag_host",
                 "dsType": "influxdb",
@@ -3202,6 +3932,85 @@
             ]
           },
           {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      3
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "5m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      3
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "10m",
+                      "now-5m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      3
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "params": [
+                      "B",
+                      "15m",
+                      "now-10m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [],
+                    "type": "avg"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60s",
+              "handler": 1,
+              "name": "Storage Backend Server- Increase in Cassandra Write Failure",
+              "noDataState": "keep_state",
+              "notifications": []
+            },
             "aliasColors": {},
             "bars": false,
             "dashLength": 10,
@@ -3238,6 +4047,12 @@
                 "groupBy": [
                   {
                     "params": [
+                      "1m"
+                    ],
+                    "type": "time"
+                  },
+                  {
+                    "params": [
                       "host"
                     ],
                     "type": "tag"
@@ -3257,6 +4072,10 @@
                         "write.failure.OneMinuteRate"
                       ],
                       "type": "field"
+                    },
+                    {
+                      "params": [],
+                      "type": "sum"
                     }
                   ]
                 ],
@@ -3275,7 +4094,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 1000
+                "value": 3
               }
             ],
             "timeFrom": null,

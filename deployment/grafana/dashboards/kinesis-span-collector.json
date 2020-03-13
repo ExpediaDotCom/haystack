@@ -142,7 +142,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "kinesis-lpas-span-collector"
+                    "value": "kinesis-span-collector"
                   }
                 ]
               }
@@ -290,7 +290,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "kinesis-lpas-span-collector"
+                    "value": "kinesis-span-collector"
                   }
                 ]
               }
@@ -438,7 +438,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "kinesis-lpas-span-collector"
+                    "value": "kinesis-span-collector"
                   }
                 ]
               }
@@ -586,7 +586,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "kinesis-lpas-span-collector"
+                    "value": "kinesis-span-collector"
                   }
                 ]
               }
@@ -734,7 +734,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "kinesis-lpas-span-collector"
+                    "value": "kinesis-span-collector"
                   }
                 ]
               }
@@ -882,7 +882,7 @@
                     "condition": "AND",
                     "key": "container_name",
                     "operator": "=",
-                    "value": "kinesis-lpas-span-collector"
+                    "value": "kinesis-span-collector"
                   }
                 ]
               }
@@ -941,7 +941,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -957,14 +957,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -980,14 +980,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      0.1
+                      1
                     ],
                     "type": "lt"
                   },
@@ -1003,7 +1003,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -1011,7 +1011,7 @@
               "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
-              "message": "This is an alert for drop in kinesis ingestion rate.",
+              "message": "This is an alert for drop in kinesis ingestion rate.\n1. Check collector is fine\n2. Check source ie kinesis stream\n2. Check destination ie kafka",
               "name": "Kinesis Span Collector- drop in kinesis ingestion rate",
               "noDataState": "keep_state",
               "notifications": [
@@ -1091,7 +1091,7 @@
                 "fill": true,
                 "line": true,
                 "op": "lt",
-                "value": 0.1
+                "value": 1
               }
             ],
             "timeFrom": null,
@@ -1135,7 +1135,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      120000
+                      600000
                     ],
                     "type": "gt"
                   },
@@ -1158,7 +1158,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      120000
+                      600000
                     ],
                     "type": "gt"
                   },
@@ -1181,7 +1181,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      120000
+                      600000
                     ],
                     "type": "gt"
                   },
@@ -1285,7 +1285,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 120000
+                "value": 600000
               }
             ],
             "timeFrom": null,
@@ -1306,7 +1306,7 @@
             },
             "yaxes": [
               {
-                "format": "dtdurationms",
+                "format": "ms",
                 "label": null,
                 "logBase": 1,
                 "max": null,
@@ -1400,7 +1400,7 @@
               "frequency": "60s",
               "handler": 1,
               "message": "This is an alert for increase in kinesis checkpoint failure rate.",
-              "name": "Kinesis Span Collector- increase in kinesis checkpoint failure rate",
+              "name": "Kinesis Span Collector- Increase in kinesis checkpoint failure rate",
               "noDataState": "keep_state",
               "notifications": [
                 {
@@ -1551,7 +1551,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -1574,7 +1574,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
@@ -1597,7 +1597,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
