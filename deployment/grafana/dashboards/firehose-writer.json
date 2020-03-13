@@ -1554,11 +1554,7 @@
               "handler": 1,
               "name": "Firehose Writer- increase in error count",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2213,11 +2209,7 @@
               "message": "Kafka reads have gone below the threshold limit. Possible causes:\na) span-collector is not pushing the spans to Kafka.\nb) Kafka may be down.",
               "name": "Firehose Writer- increase in Kafka lag",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,

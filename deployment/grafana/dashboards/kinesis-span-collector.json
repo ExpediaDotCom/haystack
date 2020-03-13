@@ -1014,11 +1014,7 @@
               "message": "This is an alert for drop in kinesis ingestion rate.\n1. Check collector is fine\n2. Check source ie kinesis stream\n2. Check destination ie kafka",
               "name": "Kinesis Span Collector- drop in kinesis ingestion rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -1208,11 +1204,7 @@
               "message": "This is an alert for increase in kinesis lag (ms).\n\nTroubleshooting steps:\n1. check kafka health\n2. check kinesis traffic and read success\n3. check collector's cpu and memory\n4. try increasing cpu / memory and/or no. of pods",
               "name": "Kinesis Span Collector- increase in kinesis lag",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -1402,11 +1394,7 @@
               "message": "This is an alert for increase in kinesis checkpoint failure rate.",
               "name": "Kinesis Span Collector- Increase in kinesis checkpoint failure rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -1608,11 +1596,7 @@
               "message": "This is an alert for drop in kafka send rate.",
               "name": "Kinesis Span Collector- drop in kafka send rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -1898,11 +1882,7 @@
               "message": "This is an alert for increase in kafka produce error rate.",
               "name": "Kinesis Span Collector- increase in kafka produce error rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,

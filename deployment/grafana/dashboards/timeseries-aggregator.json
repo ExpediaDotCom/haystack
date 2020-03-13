@@ -2873,11 +2873,7 @@
               "message": "This is an alert from Timeseries Aggregator for increase in kafka producer's record send error rate.",
               "name": "Timeseries Aggregator- increase in records send error rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -3562,11 +3558,7 @@
               "message": "This is an alert for increase in rate of invalid metric points.",
               "name": "Timeseries Aggregator- increase in invalid MetricPoints",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -4404,11 +4396,7 @@
               "message": "This is an alert for increase in MetricPoint compute failure.",
               "name": "Timeseries Aggregator- increase in unique trends count",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -4935,11 +4923,7 @@
               "message": "This alert indicates the increase in windowed metric deserialisation error rate.",
               "name": "Timeseries Aggregator- increase in windowed metric deserialise failure",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -5130,11 +5114,7 @@
               "message": "This alert indicates increase in deserialisation error rate.",
               "name": "Timeseries Aggregator- increase in MetricPoint deserialise failure rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,

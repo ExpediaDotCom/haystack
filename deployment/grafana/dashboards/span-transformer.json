@@ -2121,11 +2121,7 @@
               "message": "This is an alert for drop in kafka read rate.",
               "name": "Span Transformer- drop in kafka read rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2322,11 +2318,7 @@
               "message": "This is an alert for drop in kafka send rate.",
               "name": "Span Transfomer- drop in kafka records send rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2527,11 +2519,7 @@
               "message": "This alert indicates that Span Transformer is having trouble in writing to kafka.\n\nProbable reasons:\n- service is not able to write to kafka because of write's reaching threshold, kafka down or any other reason",
               "name": "Span Transformer- increase in kafka records send error rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -3826,11 +3814,7 @@
               "message": "This is an alert for increase in Span Transformer serialisation failures.",
               "name": "Span Transformer- increase in span serde failure",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -4183,11 +4167,7 @@
               "message": "This is an alert for increase in Span Transformer deserialisation failure.",
               "name": "Span Transformer- increase in metricpoint deserialise failure",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,

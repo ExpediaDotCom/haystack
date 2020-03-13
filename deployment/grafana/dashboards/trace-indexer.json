@@ -1434,11 +1434,7 @@
               "message": "Kafka reads have gone down the threshold limit, possible cases:\na) span-collector is not pushing the spans to kafka\nb) kafka may be down\nc) Check indexer",
               "name": "Trace Indexer- drop in Kafka spans reads",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2161,11 +2157,7 @@
               "message": "This is an alert for increase in ES write time.",
               "name": "Trace Indexer- increase in ES write time",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2355,11 +2347,7 @@
               "message": "This is an alert for drop in ES write rate.",
               "name": "Trace Indexer- drop in ES write rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2549,11 +2537,7 @@
               "message": "This is an alert for increase in ES write failure rate.",
               "name": "Trace Indexer- increase in ES write failure rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2755,11 +2739,7 @@
               "message": "This is an alert for increase in Cassandra write time.",
               "name": "Storage Backend Client- increase in Cassandra write time",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -2951,11 +2931,7 @@
               "message": "This is an alert for drop in Cassandra write rate.",
               "name": "Storage Backend Client- drop in Cassandra write rate",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
@@ -3155,11 +3131,7 @@
               "message": "This is an alert for increase in Cassandra failure rate.",
               "name": "Storage Backend Client- increase in Cassandra write failure",
               "noDataState": "keep_state",
-              "notifications": [
-                {
-                  "id": 1
-                }
-              ]
+              "notifications": []
             },
             "aliasColors": {},
             "bars": false,
