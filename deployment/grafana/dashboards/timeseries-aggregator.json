@@ -3823,7 +3823,7 @@
                 {
                   "evaluator": {
                     "params": [
-                      20000
+                      50000
                     ],
                     "type": "gt"
                   },
@@ -3839,14 +3839,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      20000
+                      50000
                     ],
                     "type": "gt"
                   },
@@ -3862,14 +3862,14 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 },
                 {
                   "evaluator": {
                     "params": [
-                      20000
+                      50000
                     ],
                     "type": "gt"
                   },
@@ -3885,7 +3885,7 @@
                   },
                   "reducer": {
                     "params": [],
-                    "type": "avg"
+                    "type": "sum"
                   },
                   "type": "query"
                 }
@@ -3893,7 +3893,7 @@
               "executionErrorState": "keep_state",
               "frequency": "60s",
               "handler": 1,
-              "name": "Disordered Metric Points OneMinuteRate alert",
+              "name": "Timeseries Aggregator- Disordered Metric Points OneMinuteRate",
               "noDataState": "keep_state",
               "notifications": []
             },
@@ -3979,7 +3979,7 @@
                 "fill": true,
                 "line": true,
                 "op": "gt",
-                "value": 20000
+                "value": 50000
               }
             ],
             "timeFrom": null,
