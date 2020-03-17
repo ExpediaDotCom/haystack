@@ -1,5 +1,5 @@
 {
-  "dashboard": {
+  "datasource": {
     "__requires": [
       {
         "type": "grafana",
