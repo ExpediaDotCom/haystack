@@ -77,6 +77,7 @@ variable "trends" {
     span_timeseries_transformer_memory_limit = "1536"
     span_timeseries_transformer_jvm_memory_limit = "1024"
     span_timeseries_transformer_environment_overrides = ""
+    span_timeseries_transformer_kafka_num_stream_threads = "3"
 
     timeseries_aggregator_instances = 1
     timeseries_aggregator_environment_overrides = ""
