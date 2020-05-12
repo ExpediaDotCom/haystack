@@ -168,7 +168,7 @@ variable "collector" {
 
     http_span_collector_app_name = "http-span-collector"
     http_span_collector_instances = 1
-    http_span_collector_enabled = false
+    http_span_collector_enabled = true
     http_span_collector_environment_overrides = ""
     http_span_collector_cpu_request = "100m"
     http_span_collector_cpu_limit = "1000m"
@@ -448,7 +448,8 @@ variable "alert-manager-service" {
   default = {
     enabled = false
     instances = 1
-    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
+    image = "expediadotcom/alert-manager-service:67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
+    version = "67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -460,6 +461,10 @@ variable "alert-manager-service" {
     es_urls = ""
     es_aws_iam_auth_required = false
     additional_email_validator_expression = ""
+    subscription_es_urls = ""
+    subscription_es_config_vars_json = ""
+    alert_store_es_config_vars_json=""
+    alert_store_es_urls=""
   }
 }
 
@@ -468,7 +473,8 @@ variable "alert-manager-store" {
   default = {
     enabled = false
     instances = 1
-    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
+    image = "expediadotcom/alert-manager-store:67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
+    version = "67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -479,6 +485,8 @@ variable "alert-manager-store" {
     es_urls = ""
     es_aws_iam_auth_required = false
     es_aws_region = ""
+    alert_store_es_config_vars_json = ""
+    alert_store_es_urls = ""
   }
 }
 
@@ -487,7 +495,8 @@ variable "alert-manager-notifier" {
   default = {
     enabled = false
     instances = 1
-    version = "36606bf915f7c45d8b4f9ae6c8dfc4909b0117f6"
+    image = "expediadotcom/alert-manager-notifier:67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
+    version = "67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -503,5 +512,7 @@ variable "alert-manager-notifier" {
     alert_rate_limit_enabled = false
     alert_rate_limit_value = ""
     alert_expiry_time_in_sec = 36000
+    alert_store_es_urls= ""
+    alert_store_es_config_vars_json=""
   }
 }
