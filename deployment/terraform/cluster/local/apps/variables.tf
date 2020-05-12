@@ -528,7 +528,6 @@ variable "alert-manager-service" {
     enabled = false
     instances = 1
     image = "expediadotcom/alert-manager-service:67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
-    version = "67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -553,7 +552,6 @@ variable "alert-manager-store" {
     enabled = false
     instances = 1
     image = "expediadotcom/alert-manager-store:67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
-    version = "67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
