@@ -168,7 +168,7 @@ variable "collector" {
 
     http_span_collector_app_name = "http-span-collector"
     http_span_collector_instances = 1
-    http_span_collector_enabled = true
+    http_span_collector_enabled = false
     http_span_collector_environment_overrides = ""
     http_span_collector_cpu_request = "100m"
     http_span_collector_cpu_limit = "1000m"
@@ -337,7 +337,7 @@ variable "haystack-agent" {
 variable "alerting" {
   type = "map"
   default = {
-    version = "baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    version = "e90821e5ca0e0d895e01d9cb87612c463dcf0dc6"
   }
 }
 
@@ -346,7 +346,7 @@ variable "modelservice" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-modelservice:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image = "expediadotcom/adaptive-alerting-modelservice:e90821e5ca0e0d895e01d9cb87612c463dcf0dc6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -355,6 +355,16 @@ variable "modelservice" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     db_endpoint = ""
+    detector_mapper_es_urls = ""
+    graphite_url=""
+    detector_mapper_doctype=""
+    detector_mapper_es_config_max_total_connection=""
+    detector_mapper_es_config_connection_retry_timeout= ""
+    detector_doctype=""
+    detector_mapper_es_config_connection_timeout=""
+    detector_mapper_index_name=""
+    detector_index_name=""
+    detector_mapper_es_config_aws_iam_auth_required=""
   }
 }
 
@@ -363,7 +373,7 @@ variable "ad-mapper" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image = "expediadotcom/adaptive-alerting-ad-mapper:e90821e5ca0e0d895e01d9cb87612c463dcf0dc6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -373,6 +383,11 @@ variable "ad-mapper" {
     environment_overrides = ""
     modelservice_uri_template = "http://modelservice/api/detectors/search/findByMetricHash?hash=%s"
     kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
+    detector_mapper_index_name=""
+    detector_index_name=""
+    detector_mapping_cache_update_period=""
+    detector_mapper_es_config_aws_iam_auth_required=""
+    modelservice_base_uri=""
   }
 }
 
@@ -381,7 +396,7 @@ variable "ad-manager" {
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-ad-manager:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image = "expediadotcom/adaptive-alerting-ad-manager:e90821e5ca0e0d895e01d9cb87612c463dcf0dc6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -391,15 +406,32 @@ variable "ad-manager" {
     environment_overrides = ""
     modelservice_uri_template = "http://modelservice/api/models/search/findLatestByDetectorUuid?uuid=%s"
     kafka_hostname = "kafka-service.haystack-apps.svc.cluster.local"
+    graphite_data_retrieval_key=""
+    metric_consumer_topic=""
+    anomaly_producer_bootstrap_servers=""
+    metric_consumer_bootstrap_servers=""
+    modelservice_base_uri=""
+    metric_consumer_key_deserializer=""
+    graphite_base_uri=""
+    metric_consumer_value_deserializer=""
+    anomaly_producer_outlier_topic=""
+    detector_refresh_period = ""
+    anomaly_producer_client_id=""
+    anomaly_producer_key_serializer=""
+    anomaly_producer_value_serializer=""
+    metric_consumer_group_id=""
+    anomaly_producer_breakout_topic=""
+    throttle_gate_likelihood=""
   }
 }
+
 
 variable "mc-a2m-mapper" {
   type = "map"
   default = {
     enabled = false
     instances = 1
-    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:baf31dac6b41c83f871dfbe0fa1cc0892d8258b0"
+    image = "expediadotcom/adaptive-alerting-mc-a2m-mapper:e90821e5ca0e0d895e01d9cb87612c463dcf0dc6"
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -436,6 +468,53 @@ variable "notifier" {
     jvm_memory_limit = "300"
     environment_overrides = ""
     webhook_url = ""
+  }
+}
+
+
+variable "aa-metric-functions" {
+  type = "map"
+  default = {
+    enabled = false
+    image=""
+    instances = 0
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    jvm_memory_limit = "300"
+    memory_request = "500"
+    memory_limit = "500"
+    environment_overrides = ""
+    image_pull_policy = "IfNotPresent"
+    is_graphite_server_metrictank = false
+    metric_source_graphite_host =""
+    initContainer_image = ""
+    aggregator_producer_topic = ""
+    download_input_file_command =""
+  }
+}
+
+
+variable "visualizer" {
+  type = "map"
+  default = {
+    enabled = false
+    image=""
+    instances = 0
+    cpu_request = "100m"
+    cpu_limit = "1000m"
+    jvm_memory_limit = "300"
+    memory_request = "500"
+    memory_limit = "500"
+    elasticsearch_endpoint = ""
+    image_pull_policy = "IfNotPresent"
+    topic=""
+    value_deserializer=""
+    elasticsearch_port1=""
+    environment_overrides=""
+    elasticsearch_scheme=""
+    elasticsearch_port2=""
+    key_deserializer = ""
+    group_id=""
   }
 }
 
@@ -494,9 +573,8 @@ variable "alert-manager-notifier" {
   type = "map"
   default = {
     enabled = false
-    instances = 1
     image = "expediadotcom/alert-manager-notifier:67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
-    version = "67a10b9e28dfc51e806b9ee629ad91a7dfc1d505"
+    instances = 1
     image_pull_policy = "IfNotPresent"
     cpu_request = "100m"
     cpu_limit = "1000m"
@@ -507,10 +585,10 @@ variable "alert-manager-notifier" {
     subscription_search_url = ""
     mail_from = ""
     es_urls = ""
-    es_aws_iam_auth_required = false
     es_aws_region = ""
+    es_aws_iam_auth_required = false
     alert_rate_limit_enabled = false
-    alert_rate_limit_value = ""
+    alert_rate_limit_value = "1000"
     alert_expiry_time_in_sec = 36000
     alert_store_es_urls= ""
     alert_store_es_config_vars_json=""

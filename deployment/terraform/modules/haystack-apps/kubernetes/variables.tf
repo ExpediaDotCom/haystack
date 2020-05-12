@@ -83,6 +83,13 @@ variable "notifier" {
   type = "map"
 }
 
+variable "visualizer" {
+  type = "map"
+}
+
+variable "aa-metric-functions" {
+  type = "map"
+}
 
 # ========================================
 # Alert Manager
@@ -120,3 +127,4 @@ variable "reverse-proxy" {
 variable "haystack-agent" {
   type = "map"
 }
+

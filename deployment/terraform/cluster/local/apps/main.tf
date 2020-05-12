@@ -28,6 +28,9 @@ module "haystack-apps" {
   app-node_selector_label = "${local.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   domain_name = "${var.domain_name}"
+  kinesis-stream_region = "kinesis-stream_region"
+  pipes_firehose_writer_firehose_streamname= "pipes_firehose_writer_firehose_streamname"
+  kinesis-stream_name = "kinesis-stream_name"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"
@@ -46,9 +49,8 @@ module "haystack-apps" {
   ad-manager = "${var.ad-manager}"
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
-  kinesis-stream_region = "kinesis-stream_region"
-  pipes_firehose_writer_firehose_streamname= "pipes_firehose_writer_firehose_streamname"
-  kinesis-stream_name = "kinesis-stream_name"
+  visualizer = "${var.visualizer}"
+  aa-metric-functions = "${var.aa-metric-functions}"
 
   # Alert Manager
   alert-manager-service = "${var.alert-manager-service}"
