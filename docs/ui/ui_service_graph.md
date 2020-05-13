@@ -6,7 +6,7 @@ sidebar_label: Service Graph
 Visualization for Haystack's Service Graph submodule. Haystack's Service Graph UI utilizes Netflix's open-sourced data visualization tool, [Vizceral](https://github.com/Netflix/vizceral).
 
 ## Default View
-Upon landing on the home page with [service graph enabled](https://github.com/ExpediaDotCom/haystack-ui/blob/master/server/config/base.js#L75) and no query submitted to the [universal search bar](https://expediadotcom.github.io/haystack/docs/ui_universal_search.html), the service graph will list display information about the services in the service graph submodule for the selected time period (default 1 hour). 
+Upon landing on the home page with [service graph enabled](https://github.com/ExpediaDotCom/haystack-ui/blob/master/server/config/base.js#L75) and no query submitted to the [universal search bar](./ui_universal_search.html), the service graph will list display information about the services in the service graph submodule for the selected time period (default 1 hour). 
 
 Hovering over a service name will display traffic information (requests/sec and error rate) at a quick glance. The color of the service nodes will represent the health state, and a traffic animation will display the calls between nodes. 
 

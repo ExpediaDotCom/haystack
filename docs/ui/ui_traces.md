@@ -6,7 +6,7 @@ sidebar_label: Traces
 Visualization for tracing sub-system of Haystack.
 
 ## Traces Search  
-Any query done in the search bar will display the traces tab. Using the search bar, fields you want to filter on can be specified `key=value` format. Time Picker allows selecting presets and any time range you want. For more information on universal search bar querying, visit the [Universal Search documentation](https://expediadotcom.github.io/haystack/docs/ui/ui_universal_search.html).
+Any query done in the search bar will display the traces tab. Using the search bar, fields you want to filter on can be specified `key=value` format. Time Picker allows selecting presets and any time range you want. For more information on universal search bar querying, visit the [Universal Search documentation](./ui_universal_search.html).
 
 ![Traces](/haystack/img/traces.png)
 

@@ -9,6 +9,10 @@
         "title": "Architecture",
         "sidebar_label": "Architecture"
       },
+      "about/blobs": {
+        "title": "Blobs",
+        "sidebar_label": "Blobs"
+      },
       "about/clients": {
         "title": "Haystack Client",
         "sidebar_label": "Clients"
@@ -72,6 +76,10 @@
       "ui/ui_service_graph": {
         "title": "Service Graph UI",
         "sidebar_label": "Service Graph"
+      },
+      "ui/ui_service_insights": {
+        "title": "Service Insights UI",
+        "sidebar_label": "Service Insights"
       },
       "ui/ui_traces": {
         "title": "Traces",
