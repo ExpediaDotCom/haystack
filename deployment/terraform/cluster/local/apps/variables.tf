@@ -8,6 +8,10 @@ variable "domain_name" {
   default = "local"
 }
 
+variable "kinesis-stream_region" {}
+variable "pipes_firehose_writer_firehose_streamname" {}
+variable "kinesis-stream_name" {}
+
 # ========================================
 # Haystack
 # ========================================

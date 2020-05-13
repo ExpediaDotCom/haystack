@@ -28,9 +28,9 @@ module "haystack-apps" {
   app-node_selector_label = "${local.app-node_selector_label}"
   kubectl_executable_name = "${var.kubectl_executable_name}"
   domain_name = "${var.domain_name}"
-  kinesis-stream_region = ""
-  pipes_firehose_writer_firehose_streamname= ""
-  kinesis-stream_name = ""
+  kinesis-stream_region = "${var.kinesis-stream_region}"
+  pipes_firehose_writer_firehose_streamname = "${var.pipes_firehose_writer_firehose_streamname}"
+  kinesis-stream_name = "${var.kinesis-stream_name}"
 
   # Haystack configuration overrides
   pipes = "${var.pipes}"
