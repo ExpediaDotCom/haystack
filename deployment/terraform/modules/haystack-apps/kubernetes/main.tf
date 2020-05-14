@@ -135,8 +135,8 @@ module "alerting" {
   modelservice = "${var.modelservice}"
   ad-mapper = "${var.ad-mapper}"
   ad-manager = "${var.ad-manager}"
-  mc-a2m-mapper = "${var.mc-a2m-mapper}"
-  notifier = "${var.notifier}"
+  visualizer = "${var.visualizer}"
+  aa-metric-functions = "${var.aa-metric-functions}"
 }
 
 module "alert-manager" {
