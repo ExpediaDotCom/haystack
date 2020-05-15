@@ -20,24 +20,21 @@ Also, Minikube is not the only option to run Haystack server component locally. 
 
 Using docker-compose is the easiest option to get Haystack server running locally. 
 
-Clone [ExpediaDotCom/haystack-docker](https://github.com/ExpediaDotCom/haystack-docker) repository and run docker-compose as described below
+1. Clone [ExpediaDotCom/haystack-docker](https://github.com/ExpediaDotCom/haystack-docker) repository and run docker-compose as described below.
+2. Allocate memory to docker.
+3. To run all of haystack and its components, it is suggested to change the default in docker settings from `2GiB` to `4GiB`. Please check this [Stackoverflow](https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container) post on changing docker memory allocation.
+4. To start Haystack's traces, trends and service graph
+    ```shell
+    docker-compose -f docker-compose.yml \
+                   -f traces/docker-compose.yml \
+                   -f trends/docker-compose.yml \
+                   -f service-graph/docker-compose.yml \
+                   -f agent/docker-compose.yml up
+    ```
+    The command above starts haystack-agent as well. Give a minute or two for the containers to come up and connect with each other. Haystack's UI will be available at http://localhost:8080.
 
-1. Allocate memory to docker
+5. Finally, one can find a sample spring boot application @ https://github.com/ExpediaDotCom/opentracing-spring-haystack-example to send data to Haystack via haystack-agent listening in port 35000.
 
-To run all of haystack and its components, it is suggested to change the default in docker settings from `2GiB` to `4GiB`. Please check this [Stackoverflow](https://stackoverflow.com/questions/44533319/how-to-assign-more-memory-to-docker-container) post on changing docker memory allocation.
-
-2. To start Haystack's traces, trends and service graph
-
-```shell
-docker-compose -f docker-compose.yml \
-               -f traces/docker-compose.yml \
-               -f trends/docker-compose.yml \
-               -f service-graph/docker-compose.yml \
-               -f agent/docker-compose.yml up
-```
-The command above starts haystack-agent as well. Give a minute or two for the containers to come up and connect with each other. Haystack's UI will be available at http://localhost:8080
-
-Finally, one can find a sample spring boot application @ https://github.com/ExpediaDotCom/opentracing-spring-haystack-example to send data to Haystack via haystack-agent listening in port 35000.
 
 ### MiniKube (Kubernetes) with Terraform Approach 
 
@@ -45,11 +42,14 @@ To get a feel of Haystack running in Kubernetes, one can run Haystack locally in
 
 Note: Terraform to deploy Haystack into minikube described below can be used for deploying Haystack into large kubernetes clusters as well.
 
-1. Install [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) on your box.
-2. Start Minikube, optionally increasing its memory and/or CPUs if necessary:
-```shell
-minikube start --memory 8192 --cpus 4
-```
+1. Install Minikube on your box
+   ```shell 
+   curl -Lo minikube https://storage.googleapis.com/minikube/releases/v1.1.0/minikube-darwin-amd64 && chmod +x minikube && sudo cp minikube /usr/local/bin/ && rm minikube
+   ```
+2. Start Minikube, optionally increasing its memory and/or CPUs, if necessary
+    ```shell
+    minikube start --memory 8192 --cpus 4 --kubernetes-version v1.10.0
+    ```
 
 NOTE: if minikube has been previously started without these resource parameters, you may need to convince it to forget it's previous settings. 
 You can use one of the following 2 methods:
@@ -59,7 +59,7 @@ You can use one of the following 2 methods:
         ```shell
         minikube stop
         ``` 
-    2. Manually change the memory and cpu settings in your Virtual Machine software,
+    2. Manually change the memory and cpu settings in your Virtual Machine software.
     3. Restart minikube
         ```shell
         minikube start
@@ -70,7 +70,7 @@ You can use one of the following 2 methods:
         minikube stop 
         minikube delete 
         ``` 
-    2. Run the command to start minikube with desired configuration :
+    2. Run the command to start minikube with desired configuration
         ```shell
         minikube start --memory 8192 --cpus 4
         ```
