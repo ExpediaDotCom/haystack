@@ -25,7 +25,7 @@ module "haystack-apps" {
   elasticsearch_port = "${data.terraform_remote_state.haystack_infrastructure.elasticsearch_port}"
   kubectl_context_name = "${data.terraform_remote_state.haystack_infrastructure.k8s_cluster_name}"
   cassandra_hostname = "${data.terraform_remote_state.haystack_infrastructure.cassandra_hostname}"
-  kafka_hostname = "${data.terraform_remote_state.haystack_infrastructure.kafka_hostname}"
+  kafka_hostname = "haystack-oss-test.kafka.fdqn"
   kafka_port = "${data.terraform_remote_state.haystack_infrastructure.kafka_port}"
   cassandra_port = "${data.terraform_remote_state.haystack_infrastructure.cassandra_port}"
   graphite_hostname = "${data.terraform_remote_state.haystack_infrastructure.graphite_hostname}"
@@ -54,6 +54,8 @@ module "haystack-apps" {
   ad-manager = "${var.ad-manager}"
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
+  visualizer = "${var.visualizer}"
+  aa-metric-functions = "${var.aa-metric-functions}"
 
   # Alert Manager
   alert-manager-service = "${var.alert-manager-service}"
