@@ -46,6 +46,10 @@ variable "ui" {
   type = "map"
 }
 
+variable "haystack-console" {
+  type = "map"
+}
+
 variable "metrictank" {
   type = "map"
 }
