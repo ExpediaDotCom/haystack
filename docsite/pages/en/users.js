@@ -12,33 +12,48 @@ const Container = CompLibrary.Container;
 
 const siteConfig = require(process.cwd() + '/siteConfig.js');
 
+const adopters = siteConfig.users;
+
+function imgUrl(img) {
+  return siteConfig.baseUrl + 'img/users/' + img;
+}
+
 class Users extends React.Component {
   render() {
-    if ((siteConfig.users || []).length === 0) {
+    if (adopters.length === 0) {
       return null;
     }
-    const showcase = siteConfig.users.map((user, i) => {
-      return (
-        <a href={user.infoLink} key={i}>
-          <img src={user.image} title={user.caption} />
-        </a>
-      );
-    });
+
+    const UserLink = ({infoLink, image, caption}) => (
+      <a className="link" href={infoLink} key={infoLink}>
+        <img src={imgUrl(image)} alt={caption} title={caption} />
+        <span className="caption">{caption}</span>
+      </a>
+    );
+
+    const Showcase = ({users}) => (
+      <div className="showcase">
+        {users.map((user) => (
+          <UserLink key={user.infoLink} {...user} />
+        ))}
+      </div>
+    );
 
     return (
       <div className="mainContainer">
-        <Container padding={['bottom', 'top']}>
+        <Container padding={['bottom']}>
           <div className="showcaseSection">
             <div className="prose">
-              <h1>Who's Using This?</h1>
-              <p>This project is used by many folks</p>
+              <h1>Haystack Adopters</h1>
             </div>
-            <div className="logos">{showcase}</div>
+            <div className="logos">
+              <Showcase users={adopters} />
+            </div>
             <p>Are you using this project?</p>
             <a
-              href="https://github.com/facebook/docusaurus/edit/master/website/siteConfig.js"
+              href="https://github.com/ExpediaDotCom/haystack/edit/master/docsite/adopters.js"
               className="button">
-              Add your company
+              Add your company to the list here!
             </a>
           </div>
         </Container>

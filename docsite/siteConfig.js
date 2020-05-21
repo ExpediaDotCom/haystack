@@ -1,3 +1,5 @@
+const users = require(process.cwd() + '/adopters.js');
+
 const siteConfig = {
     title: 'Haystack',
     tagline: 'A resilient, scalable tracing and analysis system',
@@ -6,7 +8,10 @@ const siteConfig = {
     projectName: 'haystack',
     headerLinks: [
         {doc: 'about/introduction', label: 'Docs'},
+        {doc: 'contributing', label: 'Contributing'},
         {page: 'help', label: 'Help'},
+        { href: 'https://github.com/expediadotcom/haystack', label: 'GitHub' },
+        { page: 'users', label: 'Adopters' }
     ],
     headerIcon: 'img/logo/logo.png',
     footerIcon: 'img/logo/logo.png',
@@ -27,6 +32,7 @@ const siteConfig = {
             "system-ui"
         ]
     },
+    users,
     copyright: 'Copyright © ' +
     new Date().getFullYear() +
     'Expedia',

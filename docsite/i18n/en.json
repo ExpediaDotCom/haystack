@@ -45,9 +45,17 @@
         "title": "Anomaly Detection",
         "sidebar_label": "Anomaly Detection"
       },
+      "subsystems/subsystems_attribution": {
+        "title": "Attribution Components",
+        "sidebar_label": "Attribution"
+      },
       "subsystems/subsystems_collectors": {
         "title": "Collector",
         "sidebar_label": "Collector"
+      },
+      "subsystems/subsystems_console": {
+        "title": "Console",
+        "sidebar_label": "Console"
       },
       "subsystems/subsystems_dependencies": {
         "title": "Service Graph",
@@ -100,14 +108,16 @@
     },
     "links": {
       "Docs": "Docs",
-      "Help": "Help"
+      "Contributing": "Contributing",
+      "Help": "Help",
+      "GitHub": "GitHub",
+      "Adopters": "Adopters"
     },
     "categories": {
       "About": "About",
       "Subsystems": "Subsystems",
       "UI": "UI",
-      "Deployment": "Deployment",
-      " ": " "
+      "Deployment": "Deployment"
     }
   },
   "pages-strings": {
