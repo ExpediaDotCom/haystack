@@ -235,6 +235,30 @@ variable "ui" {
   }
 }
 
+variable "haystack-console" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "1.0"
+    influxdb_endpoint_port = "8086"
+    influxdb_endpoint_host = "monitoring-influxd"
+    console_instances = 1
+    console_attributor_endpoint= "attributor:8080"
+    console_grafana_endpoint = "https://metrics.haystack.local:32300"
+    console_environment_overrides = ""
+    console_cpu_request = "500m"
+    console_cpu_limit = "500m"
+    console_memory_request = "1000"
+    console_memory_limit = "1000"
+    console_jvm_memory_limit = "768"
+    healthcheckthreshold_trends_iteratorAgeSeconds = "300"
+    healthcheckthreshold_traces_iteratorAgeSeconds = "300"
+    healthcheckthreshold_service-graph_iteratorAgeSeconds = "300"
+    healthcheckthreshold_collector_iteratorAgeSeconds = "300"
+    attributorAdditionalTags = "{ \"blobsCount\" : { \"tagDisplayName\" : \"Blobs Count\", \"valueType\": \"COUNT\" }}"
+  }
+}
+
 variable "metrictank" {
   type = "map"
   default = {

@@ -25,3 +25,4 @@ docsite/build/
 docsite/yarn.lock
 fakespans
 **/.terraform/**
+*.history/

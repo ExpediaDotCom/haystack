@@ -115,6 +115,34 @@ module "ui" {
   encoder_type = "${var.ui["encoder_type"]}"
 }
 
+module "haystack-console" {
+  source = "github.com/ExpediaDotCom/haystack-console/deployment/terraform"
+  image = "expediadotcom/haystack-console:${var.haystack-console["version"]}"
+  haystack_domain_name = "${var.haystack_domain_name}"
+  haystack_cluster_name= "${var.haystack_cluster_name}"
+  attributor_endpoint = "${var.haystack-console["console_attributor_endpoint"]}"
+  influxdb_endpoint_host = "${var.haystack-console["influxdb_endpoint_host"]}"
+  influxdb_endpoint_port = "${var.haystack-console["influxdb_endpoint_port"]}"
+  grafana_endpoint = "${var.haystack-console["console_grafana_endpoint"]}"
+  healthcheckthreshold_trends_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_trends_iteratorAgeSeconds"]}"
+  healthcheckthreshold_traces_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_traces_iteratorAgeSeconds"]}"
+  healthcheckthreshold_service-graph_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_service-graph_iteratorAgeSeconds"]}"
+  healthcheckthreshold_collector_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_collector_iteratorAgeSeconds"]}"
+  attributorAdditionalTags= "${var.haystack-console["attributorAdditionalTags"]}"
+  replicas = "${var.haystack-console["console_instances"]}"
+  namespace = "${var.namespace}"
+  enabled = "${var.haystack-console["enabled"]}"
+  node_selector_label = "${var.node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  cpu_limit = "${var.haystack-console["console_cpu_limit"]}"
+  cpu_request = "${var.haystack-console["console_cpu_request"]}"
+  memory_limit = "${var.haystack-console["console_memory_limit"]}"
+  memory_request = "${var.haystack-console["console_memory_request"]}"
+  jvm_memory_limit = "${var.haystack-console["console_jvm_memory_limit"]}"
+  env_vars = "${var.haystack-console["console_environment_overrides"]}"
+}
+
 #Adaptive Alerting
 module "alerting" {
   source = "github.com/ExpediaDotCom/adaptive-alerting/deployment/terraform"
