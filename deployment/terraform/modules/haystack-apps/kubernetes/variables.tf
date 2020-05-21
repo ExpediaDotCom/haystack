@@ -83,6 +83,13 @@ variable "notifier" {
   type = "map"
 }
 
+variable "visualizer" {
+  type = "map"
+}
+
+variable "aa-metric-functions" {
+  type = "map"
+}
 
 # ========================================
 # Alert Manager
