@@ -17,6 +17,17 @@ spec:
   cloudProvider: aws
   configBase: s3://${s3_bucket_name}/${cluster_name}
   dnsZone: ${aws_dns_zone_id}
+  docker:
+    bridge: ""
+    ipMasq: false
+    ipTables: false
+    logDriver: json-file
+    logLevel: warn
+    logOpt:
+    - max-size=10m
+    - max-file=5
+    storage: overlay,aufs
+    version: 17.09.0
   etcdClusters:
   - etcdMembers:
     - instanceGroup: master-${aws_zone}-1
