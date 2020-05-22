@@ -122,7 +122,7 @@ a.navItemActive {
     font-weight: bolder;
 }
 
-.mainContainer .wrapper a:not(.button) {
+.mainContainer .wrapper a:not(.button):not(.link) {
     text-decoration: underline !important;
     font-weight: bold;
     color: $secondaryColor
@@ -172,7 +172,7 @@ a.navItemActive {
     color: #2d3750;
 }
 
-.mainContainer .wrapper a:not(.button) {
+.mainContainer .wrapper a:not(.button):not(.link) {
     color: #e23474;
     font-weight: 400;
 }
@@ -210,4 +210,51 @@ input#search_input_react {
 }
 
 @media only screen and (min-width: 1500px) {
+}
+
+.showcase {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.showcase .link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    margin: 5px;
+    padding: 5px;
+    text-decoration: none;
+    color: #e23474;
+}
+
+.showcase .link:hover {
+    text-decoration: underline !important;
+}
+
+.showcase .link .caption {
+    line-height: 20px;
+    height: 20px;
+}
+
+.showcase .link img {
+    max-height: 110px;
+    padding: 20px;
+    width: 110px;
+    align-self: center;
+}
+
+@media only screen and (max-width: 735px) {
+    .showcase .link {
+        height: 134px;
+    }
+
+    .showcase .link img {
+        max-height: 64px;
+        padding: 20px;
+        width: 64px;
+    }
 }

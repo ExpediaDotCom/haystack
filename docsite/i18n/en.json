@@ -9,6 +9,10 @@
         "title": "Architecture",
         "sidebar_label": "Architecture"
       },
+      "about/blobs": {
+        "title": "Blobs",
+        "sidebar_label": "Blobs"
+      },
       "about/clients": {
         "title": "Haystack Client",
         "sidebar_label": "Clients"
@@ -41,9 +45,17 @@
         "title": "Anomaly Detection",
         "sidebar_label": "Anomaly Detection"
       },
+      "subsystems/subsystems_attribution": {
+        "title": "Attribution Components",
+        "sidebar_label": "Attribution"
+      },
       "subsystems/subsystems_collectors": {
         "title": "Collector",
         "sidebar_label": "Collector"
+      },
+      "subsystems/subsystems_console": {
+        "title": "Console",
+        "sidebar_label": "Console"
       },
       "subsystems/subsystems_dependencies": {
         "title": "Service Graph",
@@ -73,6 +85,10 @@
         "title": "Service Graph UI",
         "sidebar_label": "Service Graph"
       },
+      "ui/ui_service_insights": {
+        "title": "Service Insights UI",
+        "sidebar_label": "Service Insights"
+      },
       "ui/ui_traces": {
         "title": "Traces",
         "sidebar_label": "Traces"
@@ -92,14 +108,16 @@
     },
     "links": {
       "Docs": "Docs",
-      "Help": "Help"
+      "Contributing": "Contributing",
+      "Help": "Help",
+      "GitHub": "GitHub",
+      "Adopters": "Adopters"
     },
     "categories": {
       "About": "About",
       "Subsystems": "Subsystems",
       "UI": "UI",
-      "Deployment": "Deployment",
-      " ": " "
+      "Deployment": "Deployment"
     }
   },
   "pages-strings": {

@@ -39,4 +39,6 @@ And we provide User Interface components for viewing and analyzing trace data:
 * [Traces View](../ui/ui_traces.html)
 * [Trends View](../ui/ui_trends.html)
 * [Alerts View](../ui/ui_alerts.html)
+* [Service Graph View](../ui/ui_service_graph.html)
+* [Service Insights View](../ui/ui_service_insights.html)
 

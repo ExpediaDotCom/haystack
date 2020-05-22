@@ -3,7 +3,7 @@ title: Subsystems Deployment
 sidebar_label: Subsystems
 ---
 
-AAll the Haystack components are released as Docker images on the Docker Hub:-
+All the Haystack components are released as Docker images on the Docker Hub:-
  
  Component | Repository 
  ----------- | ---- |

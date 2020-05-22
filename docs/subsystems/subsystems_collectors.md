@@ -12,8 +12,9 @@ Note that you only need a Collector module if you're getting span data from outs
 ## Modules
 The Collector subsystem has been designed to provide modular components, where each component manages a particular data source. At this time, we provide modules that ingest data from:
 * **AWS Kinesis**: AWS Kinesis is a highly popular streaming solution provided by AWS for building real time applications. The Haystack [Kinesis collector](https://github.com/ExpediaDotCom/haystack-collector/tree/master/kinesis) provides an easy integration channel by reading the spans data from Kinesis and writing to Haystack's Kafka instance. 
+* **HTTP**: The [http collector](https://github.com/ExpediaDotCom/haystack-collector/tree/master/http) is a web service built on akka-http. It accepts [proto](https://github.com/ExpediaDotCom/haystack-idl/tree/master/proto) serialized and json serialized spans on port 8080 (configurable).
 
 Each collector type is published as a separate Docker image under the ExpediaDotCom account on the Docker Hub. 
 
-We want to highlight the fact that we are not limited to importing data only from AWS Kinesis -- that's just where we started producing Collector modules. We will be adding modules in the future, and we solicit your Open Source contributions here if you choose to write and share more Connector modules for improving the integration capabilities of Haystack. Check out our [contributing](../contributing.html) guidelines for more details.
+We want to highlight the fact that we are not limited to importing data only from AWS Kinesis or via HTTP -- that's just where we started producing Collector modules. We will be adding modules in the future, and we solicit your Open Source contributions here if you choose to write and share more Connector modules for improving the integration capabilities of Haystack. Check out our [contributing](../contributing.html) guidelines for more details.
 
