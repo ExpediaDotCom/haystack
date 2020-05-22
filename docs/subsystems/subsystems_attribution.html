@@ -1,0 +1,112 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Attribution Components · Haystack</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;div class=&quot;note&quot;&gt;&lt;i&gt;&lt;b&gt;Note:&lt;/b&gt; This topic describes work in progress. The released component may vary from what&#x27;s described here.&lt;/i&gt; &lt;/div&gt;"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Attribution Components · Haystack"/><meta property="og:type" content="website"/><meta property="og:url" content="https://expediadotcom.github.io/haystack/index.html"/><meta property="og:description" content="&lt;div class=&quot;note&quot;&gt;&lt;i&gt;&lt;b&gt;Note:&lt;/b&gt; This topic describes work in progress. The released component may vary from what&#x27;s described here.&lt;/i&gt; &lt;/div&gt;"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/haystack/img/favicon/favicon.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><script>
+              (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+              (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+              m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+              ga('create', 'UA-109460835-4', 'auto');
+              ga('send', 'pageview');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/haystack/js/scrollSpy.js"></script><link rel="stylesheet" href="/haystack/css/main.css"/><script src="/haystack/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/haystack/"><img class="logo" src="/haystack/img/logo/logo.png" alt="Haystack"/><h2 class="headerTitleWithLogo">Haystack</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/haystack/docs/about/introduction.html" target="_self">Docs</a></li><li class=""><a href="/haystack/docs/contributing.html" target="_self">Contributing</a></li><li class=""><a href="/haystack/help.html" target="_self">Help</a></li><li class=""><a href="https://github.com/expediadotcom/haystack" target="_self">GitHub</a></li><li class=""><a href="/haystack/users.html" target="_self">Adopters</a></li><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Subsystems</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">About</h3><ul class=""><li class="navListItem"><a class="navItem" href="/haystack/docs/about/introduction.html">Introduction</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/about/getting_started.html">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/about/architecture.html">Architecture</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/about/clients.html">Clients</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/about/blobs.html">Blobs</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Subsystems</h3><ul class=""><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems.html">Subsystems</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_traces.html">Traces</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_trends.html">Trends</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_collectors.html">Collector</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_dependencies.html">Service Graph</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_pipes.html">Pipes</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_anomaly_detection.html">Anomaly Detection</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/haystack/docs/subsystems/subsystems_attribution.html">Attribution</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/subsystems/subsystems_console.html">Console</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">UI</h3><ul class=""><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui.html">UI</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui_traces.html">Traces</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui_trends.html">Trends</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui_alerts.html">Alerts</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui_service_graph.html">Service Graph</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui_service_insights.html">Service Insights</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/ui/ui_universal_search.html">Universal Search</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Deployment</h3><ul class=""><li class="navListItem"><a class="navItem" href="/haystack/docs/deployment/deployment.html">Deployment</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/deployment/deployment_sub_systems.html">Subsystems</a></li><li class="navListItem"><a class="navItem" href="/haystack/docs/deployment/deployment_clients.html">Clients</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/ExpediaDotCom/haystack/blob/master/docs/subsystems/subsystems_attribution.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 id="__docusaurus" class="postHeaderTitle">Attribution Components</h1></header><article><div><span><div class="note"><i><b>Note:</b> This topic describes work in progress. The released component may vary from what's described here.</i> </div>
+<br>
+<p><a href="https://github.com/ExpediaDotCom/haystack-attribution">Haystack-attribution</a> is a group of components that are used to monitor and manage the health of a Haystack deployment. It contains the following subsystems:</p>
+<h3><a class="anchor" aria-hidden="true" id="haystack-attributor-module"></a><a href="#haystack-attributor-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Haystack-attributor Module</h3>
+<p>For smooth operation of a Haystack cluster, traffic should be monitored on a service-to-service basis. If a service goes berserk, it could put a severe load on the whole infrastructure and impact all other services. Attributor is the component responsible for measuring and keeping track of the volume of spans sent by each service.</p>
+<p>In addition to few basic attribution fields like span count, span size, operation count; one can also do attribution on the basis of span tags.</p>
+<p>For using this attributed data, there are two ways provided for persistence. One can either setup the email for getting the attribution report as an email at regular intervals. Or other way is to dump the report in s3 and use it the way user wants to use.</p>
+<h3><a class="anchor" aria-hidden="true" id="haystack-attribution-persistence-email-module"></a><a href="#haystack-attribution-persistence-email-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Haystack-attribution-persistence-email Module</h3>
+<p>This sub-component fetches the stats from attributor via a rest call and sends the attributed data / stats as an email. It is scheduled as a cron job in our k8s cluster to send the email (for previous calender day, currently).</p>
+<p>What it does:</p>
+<ul>
+<li>rest call to attributor to fetch service stats for previous day's time window</li>
+<li>creates an email template for stats</li>
+<li>email using aws ses service / smtp to all the ids in configuration</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="haystack-attribution-persistence-s3-module"></a><a href="#haystack-attribution-persistence-s3-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Haystack-attribution-persistence-s3 Module</h3>
+<p>Component which persists the attributed data to s3 for consumption by any other tool. This component is also scheduled as a cron job in our k8s cluster to persist the cost attribution details as csv in S3.</p>
+<p>What it does:</p>
+<ul>
+<li>rest call to attributor to fetch service stats (for previous day's time window, currently)</li>
+<li>transforms the stats data using a transformer (transformer can be overridden)</li>
+<li>persist the transformed data to s3</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/haystack/docs/subsystems/subsystems_anomaly_detection.html"><span class="arrow-prev">← </span><span>Anomaly Detection</span></a><a class="docs-next button" href="/haystack/docs/subsystems/subsystems_console.html"><span>Console</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/haystack/" class="nav-home"><img src="/haystack/img/logo/logo.png" alt="Haystack" width="66" height="58"/></a><div><h5>Docs</h5><a href="/haystack/docs/about/introduction.html">Introduction</a><a href="/haystack/docs/about/getting_started.html">Getting Started</a><a href="/haystack/docs/about/architecture.html">Architecture</a></div><div><h5>Related</h5><a href="https://gitter.im/expedia-haystack/Lobby">Chat on Gitter</a><a href="/haystack/docs/contributing.html">Contributing to Haystack</a></div><div><h5>More</h5><a href="https://github.com/ExpediaDotCom/haystack">GitHub</a><a class="github-button" href="https://github.com/ExpediaDotCom/haystack" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://www.expedia.com" target="_blank" class="footer__logo"><img src="/haystack/img/logo/expedia_logo_inverted.png" alt="Expedia"/></a><section class="copyright">Copyright © 2020 Expedia</section></footer></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: 'd35e5b975bb77d817c19162f8d0e9ec6',
+                indexName: 'haystack',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
