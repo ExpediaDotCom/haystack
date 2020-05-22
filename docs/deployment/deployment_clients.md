@@ -10,7 +10,7 @@ We have an [OpenTracing](http://opentracing.io/)-compliant client libraries to f
  * [Go client](https://github.com/ExpediaDotCom/haystack-client-go)
  * [Dropwizard integration](https://github.com/ExpediaDotCom/haystack-dropwizard) that utilizes the Java client
  * [Spring starter](https://github.com/ExpediaDotCom/opentracing-spring-haystack-starter)  that utilizes [opentracing-spring-cloud-starter](https://github.com/opentracing-contrib/java-spring-cloud)
-  
+ * [OpenTelemetry via Zipkin](https://github.com/ExpediaDotCom/haystack-opentelemetry-example)
   
 Additionally, with [Pitchfork mode of the Agent](../about/clients.html#pitchfork-agent), you are able to send spans from any Zipkin-compatible client to the agent. If you have existing client code that is written to send trace data to other systems, investigate using the [Collector subsystem](../subsystems/subsystems_collectors.html) to import that data into Haystack.
 
