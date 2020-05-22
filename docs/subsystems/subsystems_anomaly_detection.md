@@ -3,7 +3,8 @@ title: Anomaly Detection
 sidebar_label: Anomaly Detection
 ---
 
-<div class="note"><b>Note:</b> This topic describes work in progress. The released component may vary from what's described here. This topic will be updated when the code for Dependencies is released.</div>
+<div class="note"><i><b>Note:</b> This topic describes work in progress. The released component may vary from what's described here.</i> </div>
+<br>
 
 The Anomaly Detection subsystem is responsible for identifying anomalies in services' health and triggering alerts. By default, Anomaly Detection will monitor for anomalies in duration, success percentage, and count (number of operations over time) for all operations of all services sending data to Haystack.
 
