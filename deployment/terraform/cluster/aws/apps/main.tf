@@ -69,4 +69,6 @@ module "haystack-apps" {
 
   # haystack-agent
   haystack-agent = "${var.haystack-agent}"
+
+  haystack-attribution = "${var.haystack-attribution}"
 }

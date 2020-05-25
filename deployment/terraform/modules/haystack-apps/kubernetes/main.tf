@@ -238,3 +238,21 @@ module "reverse-proxy" {
   kubectl_context_name = "${var.kubectl_context_name}"
   grpc_server_endpoint ="${module.haystack-agent.proxy_grpc_server_endpoint}"
 }
+
+module "haystack-attribution" {
+  source = "github.com/ExpediaDotCom/haystack-attribution/deployment/terraform"
+  namespace = "${var.k8s_app_namespace}"
+  kafka_hostname = "${var.kafka_hostname}"
+  kafka_port = "${var.kafka_port}"
+  elasticsearch_port = "${var.elasticsearch_port}"
+  elasticsearch_hostname = "${var.elasticsearch_hostname}"
+  graphite_hostname = "${var.graphite_hostname}"
+  graphite_port = "${var.graphite_port}"
+  graphite_enabled = "${var.graphite_enabled}"
+  node_selector_label = "${var.app-node_selector_label}"
+  kubectl_executable_name = "${var.kubectl_executable_name}"
+  kubectl_context_name = "${var.kubectl_context_name}"
+  haystack-attribution = "${var.haystack-attribution}"
+  haystack_cluster_name ="${var.haystack_cluster_name}"
+  haystack_domain_name="${var.domain_name}"
+}

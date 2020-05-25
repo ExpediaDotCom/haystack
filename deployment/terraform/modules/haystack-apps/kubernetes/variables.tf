@@ -131,3 +131,7 @@ variable "reverse-proxy" {
 variable "haystack-agent" {
   type = "map"
 }
+
+variable "haystack-attribution" {
+  type = "map"
+}
