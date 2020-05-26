@@ -620,3 +620,47 @@ variable "alert-manager-notifier" {
     alert_store_es_config_vars_json=""
   }
 }
+
+variable "haystack-attribution" {
+  type = "map"
+  default = {
+    enabled = false
+    version = "1.0"
+    environment_name = ""
+    influxdb_endpoint_port = ""
+    influxdb_endpoint_host = ""
+    docker_registry = ""
+
+    attributor_instances = 0
+    attributor_environment_overrides = ""
+    attributor_cpu_request = "100m"
+    attributor_cpu_limit = "100m"
+    attributor_memory_request = "200"
+    attributor_memory_limit = "200"
+    attributor_jvm_memory_limit = "100"
+    attributor_tags = "{\"items\":[{\"attributeName\":\"blobsCount\",\"spanTagKeys\":[\"request\",\"response\"],\"operatorType\":\"count\"}]}"
+    attributor_num_stream_threads = 2
+
+    attribution-persistence-email_instances = 0
+    attribution-persistence-email_environment_overrides = ""
+    attribution-persistence-email_cpu_request = "100m"
+    attribution-persistence-email_cpu_limit = "100m"
+    attribution-persistence-email_memory_request = "200"
+    attribution-persistence-email_memory_limit = "200"
+    attribution-persistence-email_jvm_memory_limit = "100"
+    attribution_to_email_ids = ""
+    attribution_from_email_id = ""
+    attribution_email_subject_line = ""
+    attribution_email_override_template = ""
+
+    attribution-persistence-s3_instances = 0
+    attribution-persistence-s3_environment_overrides = ""
+    attribution-persistence-s3_cpu_request = "100m"
+    attribution-persistence-s3_cpu_limit = "100m"
+    attribution-persistence-s3_memory_request = "200"
+    attribution-persistence-s3_memory_limit = "200"
+    attribution-persistence-s3_jvm_memory_limit = "100"
+    attribution_s3_aws_config = ""
+    attribution_s3_transformers_config = ""
+  }
+}
