@@ -278,6 +278,7 @@ function installInfrastructure() {
     echo "Creating haystack infrastructure using terraform "
     case "$CLUSTER_TYPE" in
         aws)
+            export KOPS_RUN_OBSOLETE_VERSION=true
             $TERRAFORM init -backend-config="bucket=$S3_BUCKET" -backend-config="key=terraform/$CLUSTER_NAME-infrastructure"
             #setting the correct kubectl config for terraform
             DOMAIN_NAME=$(echo "var.domain_name" | $TERRAFORM console -var-file=$INFRA_VARS_FILE)

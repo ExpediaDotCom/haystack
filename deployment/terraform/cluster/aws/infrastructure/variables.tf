@@ -5,7 +5,7 @@ variable "domain_name" {}
 variable "monitoring_addons" {
   type = "map"
   default = {
-    enabled = "false"
+    enabled = "true"
     graphite_node_port = "32301"
     grafana_storage_volume = "2Gi"
     grafana_root_url = ""
@@ -113,10 +113,10 @@ variable "kops_kubernetes" {
   default = {
     master_instance_type = "c4.large"
     master_instance_volume = 128
-    app-nodes_instance_type = "c5.large"
-    app-nodes_instance_count = 4
+    app-nodes_instance_type = "c5.xlarge"
+    app-nodes_instance_count = 8
     app-nodes_instance_volume = 256
-    monitoring-nodes_instance_type = "m4.xlarge"
+    monitoring-nodes_instance_type = "m4.large"
     monitoring-nodes_instance_count = 2
     monitoring-nodes_instance_volume = 128
     k8s_version = "1.8.6"

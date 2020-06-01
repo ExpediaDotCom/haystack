@@ -15,8 +15,8 @@ variable "traces" {
     version = "1.0.11"
     indexer_instances = 1
     indexer_environment_overrides = ""
-    indexer_cpu_request = "500m"
-    indexer_cpu_limit = "2000m"
+    indexer_cpu_request = "1250m"
+    indexer_cpu_limit = "1250m"
     indexer_memory_limit = "1536"
     indexer_memory_request = "1536"
     indexer_jvm_memory_limit = "1024"
@@ -25,16 +25,16 @@ variable "traces" {
     reader_instances = 1
     reader_environment_overrides = ""
     reader_cpu_request = "500m"
-    reader_cpu_limit = "2000m"
-    reader_memory_request = "1536"
-    reader_memory_limit = "1536"
-    reader_jvm_memory_limit = "1024"
+    reader_cpu_limit = "500m"
+    reader_memory_request = 1536
+    reader_memory_limit = 1536
+    reader_jvm_memory_limit = 1024
 
     backend_cpu_request = "500m"
     backend_cpu_limit = "500m"
     backend_memory_request = "500"
     backend_memory_limit = "500"
-    backend_jvm_memory_limit = "256"
+    backend_jvm_memory_limit = "512"
     backend_environment_overrides = ""
   }
 }
@@ -165,8 +165,8 @@ variable "collector" {
   type = "map"
   default = {
     version = "1.1"
-    kinesis_span_collector_instances = 1
-    kinesis_span_collector_enabled = true
+    kinesis_span_collector_instances = 0
+    kinesis_span_collector_enabled = false
     kinesis_stream_region = ""
     kinesis_stream_name = ""
     kinesis_span_collector_sts_role_arn = ""
