@@ -26,7 +26,7 @@ variable "alerting_addons" {
 variable "logging_addons" {
   type = "map"
   default = {
-    enabled = "true"
+    enabled = "false"
     container_log_path = "/var/lib/docker/containers"
     es_nodes = "1"
     es_storage_volume = "100Gi"
@@ -113,10 +113,10 @@ variable "kops_kubernetes" {
   default = {
     master_instance_type = "c4.large"
     master_instance_volume = 128
-    app-nodes_instance_type = "c5.large"
-    app-nodes_instance_count = 4
+    app-nodes_instance_type = "c5.xlarge"
+    app-nodes_instance_count = 8
     app-nodes_instance_volume = 256
-    monitoring-nodes_instance_type = "m4.xlarge"
+    monitoring-nodes_instance_type = "m4.large"
     monitoring-nodes_instance_count = 2
     monitoring-nodes_instance_volume = 128
     k8s_version = "1.8.6"
@@ -155,7 +155,7 @@ variable "cassandra_spans_backend" {
 variable "aa_apps_resource_limits" {
   type = "map"
   default = {
-    enabled = true
+    enabled = false
     cpu_limit = "2"
     memory_limit = "4Gi"
   }

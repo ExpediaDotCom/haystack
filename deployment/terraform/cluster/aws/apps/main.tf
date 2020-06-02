@@ -55,6 +55,8 @@ module "haystack-apps" {
   ad-manager = "${var.ad-manager}"
   mc-a2m-mapper = "${var.mc-a2m-mapper}"
   notifier = "${var.notifier}"
+  visualizer = "${var.visualizer}"
+  aa-metric-functions = "${var.aa-metric-functions}"
 
   # Alert Manager
   alert-manager-service = "${var.alert-manager-service}"

@@ -17,6 +17,18 @@ spec:
   cloudProvider: aws
   configBase: s3://${s3_bucket_name}/${cluster_name}
   dnsZone: ${aws_dns_zone_id}
+  docker:
+    version: 17.09.0
+    skipInstall: false
+    bridge: ""
+    ipMasq: false
+    ipTables: false
+    logDriver: json-file
+    logLevel: warn
+    logOpt:
+    - max-size=10m
+    - max-file=5
+    storage: overlay,aufs
   etcdClusters:
   - etcdMembers:
     - instanceGroup: master-${aws_zone}-1
@@ -169,7 +181,7 @@ metadata:
   name: monitoring-nodes
 spec:
   associatePublicIp: false
-  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-08-17
   machineType: ${monitoring-node_instance_type}
   maxSize: ${monitoring-node_instance_count}
   minSize: ${monitoring-node_instance_count}
