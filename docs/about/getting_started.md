@@ -62,7 +62,7 @@ You can use one of the following 2 methods:
     2. Manually change the memory and cpu settings in your Virtual Machine software.
     3. Restart minikube
         ```shell
-        minikube start
+        minikube start --memory 8192 --cpus 4 --kubernetes-version v1.10.0
         ```
 * Method 2 :
     1. Delete minikube
@@ -72,7 +72,7 @@ You can use one of the following 2 methods:
         ``` 
     2. Run the command to start minikube with desired configuration
         ```shell
-        minikube start --memory 8192 --cpus 4
+        minikube start --memory 8192 --cpus 4 --kubernetes-version v1.10.0
         ```
 
 #### Install the software
