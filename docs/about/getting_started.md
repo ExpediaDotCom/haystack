@@ -75,7 +75,7 @@ You can use one of the following 2 methods:
         minikube start --memory 8192 --cpus 4
         ```
 
-#### Install the software
+3. #### Install the software
 
 From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
 ```shell
@@ -93,7 +93,7 @@ Once the record for the Minikube appears in `/etc/hosts`, you can access the Hay
 
 You can access the Kubernetes console at `http://haystack.local:30000`.
 
-#### Installed components list
+4. #### Installed components list
 
 The list of components that were installed can be seen in the Minikube dashboard, inside the `haystack-apps` namespace.
 To open the Minikube dashboard type `minikube dashboard`.
