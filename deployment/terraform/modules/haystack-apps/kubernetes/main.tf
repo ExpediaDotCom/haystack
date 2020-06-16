@@ -213,6 +213,7 @@ module "pitchfork" {
   pitchfork = "${var.pitchfork}"
   domain_name = "${var.domain_name}"
   haystack_cluster_name = "${var.haystack_cluster_name}"
+  node_selector_label = "${var.app-node_selector_label}"
 }
 
 module "haystack-agent" {

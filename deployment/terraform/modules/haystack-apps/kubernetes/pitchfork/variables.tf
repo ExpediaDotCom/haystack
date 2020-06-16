@@ -14,3 +14,4 @@ variable "kafka_hostname" {}
 variable "kafka_port" {} 
 variable "domain_name" {}
 variable "haystack_cluster_name" {}
+variable "node_selector_label" {}
