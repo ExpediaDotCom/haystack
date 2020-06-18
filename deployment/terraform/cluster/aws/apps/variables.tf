@@ -228,9 +228,9 @@ variable "haystack-console" {
   type = "map"
   default = {
     enabled = true
-    version = "1.0"
+    version = "1.0.0"
     influxdb_endpoint_port = "8086"
-    influxdb_endpoint_host = "monitoring-influxd"
+    influxdb_endpoint_host = "monitoring-influxdb.kube-system.svc"
     console_instances = 1
     console_attributor_endpoint= "attributor:8080"
     console_grafana_endpoint = "https://metrics.haystack.local:32300"
