@@ -35,6 +35,19 @@ Haystack deployment on AWS requires that you create the following resources in A
 
 Make sure the machine where you are running this script has an [IAM USER](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/setup-credentials.html) configured as a system property and has Admin privileges in the AWS account.
 
+### Building AMI 
+Builder script for creating Cassandra and Kafka golden image using Packer. There is still instance specific configuration that must be applied before Cassandra and Kafka nodes can be started. 
+
+```shell
+cd deployment/terraform/packer/
+```
+
+Update required configurations in variable.json and use the below command to create the AMI. Script installs Packer if its not available already. It will output AMI id once done successfully, please save that for later use.
+
+```shell
+./build-image.sh
+```
+
 ### Start deployment
 From the root of the location to which `ExpediaDotCom/haystack` has been cloned:
 ```shell
