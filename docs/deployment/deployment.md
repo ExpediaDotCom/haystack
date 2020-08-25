@@ -45,7 +45,7 @@ cd deployment/terraform/packer/
 Update required configurations in variable.json and use the below command to create the AMI. Script installs Packer if its not available already. It will output AMI id once done successfully, please save that for later use.
 
 ```shell
-./build-image.sh
+./build-images.sh
 ```
 
 ### Start deployment
