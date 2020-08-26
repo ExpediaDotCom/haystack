@@ -4,7 +4,7 @@
  
  Update required configurations in `variable.json` and use the below command to create the AMI. Script installs Packer if its not available already. It will output AMI id once done successfully, please save that for later use. 
  ```bash
-./build-image.sh
+./build-images.sh
 ```
  
 You don't need to build AMI everytime you create haystack cluster. Once you have an AMI ready for a region, Terraform scripts will query based on tag `type:haystack-cassandra-base` or `type:haystack-kafka-base`
