@@ -8,6 +8,7 @@ env:
     - BRANCH=${TRAVIS_BRANCH}
     - TAG=${TRAVIS_TAG}
     - SHA=${TRAVIS_COMMIT}
+    - GIT_USER=absrivastava
 
 # generate doc pages and move generated resources to out folder
 script:
