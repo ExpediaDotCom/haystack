@@ -30,4 +30,5 @@ You can customize even further by submitting multiple separate queries. When sub
  
  This will display only traces with at least one span that is from **`example-service`** and at least one (potentially separate) span that is tagged as an **error**. The notable difference is that in the first condition, the error does not have to be in a **`example-service`** span. 
 
+Note that values that include whitespace characters must be enclosed with quotations, example: **`serviceName="example whitespace service"`**
 
