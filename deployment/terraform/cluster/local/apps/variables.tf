@@ -251,6 +251,10 @@ variable "haystack-console" {
     console_memory_request = "1000"
     console_memory_limit = "1000"
     console_jvm_memory_limit = "768"
+    upstreamTimeout = 20000
+    healthcheckthreshold_k8sCluster_cpuUsage = "0.9"
+    healthcheckthreshold_k8sCluster_memoryUsage = "0.9"
+    healthcheckthreshold_kafka_cpuUsage = "0.9"
     healthcheckthreshold_trends_iteratorAgeSeconds = "300"
     healthcheckthreshold_traces_iteratorAgeSeconds = "300"
     healthcheckthreshold_service-graph_iteratorAgeSeconds = "300"
@@ -393,6 +397,13 @@ variable "modelservice" {
     detector_mapper_index_name=""
     detector_index_name=""
     detector_mapper_es_config_aws_iam_auth_required=""
+    modelservice_tracing_apikey=""
+    haystack_collector_endpoint=""
+    modelservice_tracing_clientid=""
+    haystack_tracer_shutdown_timeout=""
+    haystack_tracer_flush_interval=""
+    haystack_tracer_thread_count=""
+    haystack_tracer_queue_size=""
   }
 }
 
@@ -450,6 +461,14 @@ variable "ad-manager" {
     metric_consumer_group_id=""
     anomaly_producer_breakout_topic=""
     throttle_gate_likelihood=""
+    ad_manager_tracing_clientid=""
+    tracing_status=""
+    haystack_tracer_shutdown_timeout=""
+    haystack_collector_endpoint=""
+    haystack_tracer_flush_interval=""
+    ad_manager_tracing_apikey=""
+    haystack_tracer_thread_count=""
+    haystack_tracer_queue_size=""
   }
 }
 

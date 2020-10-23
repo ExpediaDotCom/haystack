@@ -124,10 +124,14 @@ module "haystack-console" {
   influxdb_endpoint_host = "${var.haystack-console["influxdb_endpoint_host"]}"
   influxdb_endpoint_port = "${var.haystack-console["influxdb_endpoint_port"]}"
   grafana_endpoint = "${var.haystack-console["console_grafana_endpoint"]}"
+  upstreamTimeout = "${var.haystack-console["upstreamTimeout"]}"
   healthcheckthreshold_trends_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_trends_iteratorAgeSeconds"]}"
   healthcheckthreshold_traces_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_traces_iteratorAgeSeconds"]}"
   healthcheckthreshold_service-graph_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_service-graph_iteratorAgeSeconds"]}"
   healthcheckthreshold_collector_iteratorAgeSeconds = "${var.haystack-console["healthcheckthreshold_collector_iteratorAgeSeconds"]}"
+  healthcheckthreshold_k8sCluster_cpuUsage = "${var.haystack-console["healthcheckthreshold_k8sCluster_cpuUsage"]}"
+  healthcheckthreshold_k8sCluster_memoryUsage = "${var.haystack-console["healthcheckthreshold_k8sCluster_memoryUsage"]}"
+  healthcheckthreshold_kafka_cpuUsage = "${var.haystack-console["healthcheckthreshold_kafka_cpuUsage"]}"
   attributorAdditionalTags= "${var.haystack-console["attributorAdditionalTags"]}"
   replicas = "${var.haystack-console["console_instances"]}"
   namespace = "${var.k8s_app_namespace}"
@@ -256,3 +260,4 @@ module "haystack-attribution" {
   haystack_cluster_name ="${var.haystack_cluster_name}"
   haystack_domain_name="${var.domain_name}"
 }
+
