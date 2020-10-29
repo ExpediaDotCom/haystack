@@ -7,6 +7,7 @@ data "template_file" "curator_cron_job" {
   vars {
     elasticsearch_host = "${var.elasticsearch_host}"
     node_selecter_label = "${var.monitoring-node_selecter_label}"
+    curator_image = "${var.curator_image}"
   }
 }
 

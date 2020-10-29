@@ -5,4 +5,5 @@ module "kubewatch-addon" {
   kubectl_context_name = "${var.kubectl_context_name}"
   kubewatch_config_yaml_base64 = "${var.alerting_addons["kubewatch_config_yaml_base64"]}"
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
+  kubewatch_image = "${var.alerting_addons["kubewatch_image"]}"
 }

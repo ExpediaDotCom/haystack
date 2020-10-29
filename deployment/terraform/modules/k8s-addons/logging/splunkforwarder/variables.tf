@@ -6,3 +6,4 @@ variable "enabled" {}
 variable "logging_backend" {}
 variable "cluster_name" {}
 variable "splunk_index" {}
+variable "splunk_forwarder_image" {}

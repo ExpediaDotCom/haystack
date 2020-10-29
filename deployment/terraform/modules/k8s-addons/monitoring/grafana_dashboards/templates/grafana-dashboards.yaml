@@ -9,5 +9,5 @@ spec:
     spec:
       containers:
       - name: grafana-dashboards
-        image: expediadotcom/haystack-grafana-dashboards
+        image: ${haystack_grafana_dashboard_image}
       restartPolicy: Never

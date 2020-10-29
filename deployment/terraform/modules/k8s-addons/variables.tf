@@ -18,6 +18,10 @@ variable "logging_addons" {
   type = "map"
 }
 
+variable "traefik_addon" {
+  type = "map"
+}
+
 variable "aa_apps_resource_limits" {
   type = "map"
 }

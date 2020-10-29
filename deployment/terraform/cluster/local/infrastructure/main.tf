@@ -16,6 +16,7 @@ module "k8s-addons" {
   monitoring_addons = "${var.monitoring_addons}"
   alerting_addons = "${var.alerting_addons}"
   logging_addons = "${var.logging_addons}"
+  traefik_addon = "${var.traefik_addon}"
   cluster = "${var.cluster}"
 
 }
