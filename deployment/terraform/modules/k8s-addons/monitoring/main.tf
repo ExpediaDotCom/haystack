@@ -14,6 +14,7 @@ module "influxdb-addon" {
   node_selecter_label = "${var.cluster["monitoring-node_selecter_label"]}"
   influxdb_memory_limit = "${var.monitoring_addons["influxdb_memory_limit"]}"
   influxdb_cpu_limit = "${var.monitoring_addons["influxdb_cpu_limit"]}"
+  k8s_influxdb_image = "${var.monitoring_addons["k8s_influxdb_image"]}"
 }
 
 
@@ -53,4 +54,5 @@ module "grafana-dashboards-addon" {
   kubectl_executable_name = "${var.kubectl_executable_name}"
   enabled = "${var.monitoring_addons["enabled"]}"
   kubectl_context_name = "${var.kubectl_context_name}"
+  haystack_grafana_dashboard_image = "${var.monitoring_addons["haystack_grafana_dashboard_image"]}"
 }

@@ -11,6 +11,9 @@ variable "splunk_deployment_server" {}
 variable "logging_backend" {}
 variable "cluster_name" {}
 variable "splunk_index" {}
+variable "curator_image" {}
+variable "kibana_logging_image" {}
+variable "splunk_forwarder_image" {}
 
 variable "enabled" {
   default = false

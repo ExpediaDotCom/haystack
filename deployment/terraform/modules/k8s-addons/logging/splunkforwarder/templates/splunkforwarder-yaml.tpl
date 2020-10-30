@@ -46,7 +46,7 @@ spec:
       hostNetwork: true
       containers:
       - name: splunk-forwarder
-        image: splunk/universalforwarder:6.6.3
+        image: ${splunk_forwarder_image}
         resources:
           limits:
             cpu: 100m

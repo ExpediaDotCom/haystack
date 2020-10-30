@@ -19,6 +19,7 @@ module "curator-addon" {
   monitoring-node_selecter_label = "${var.node_selecter_label}"
   elasticsearch_host = "${module.elasticsearch-addon.host}"
   logging_backend = "${var.logging_backend}"
+  curator_image = "${var.curator_image}"
 }
 
 module "fluentd-addon" {
@@ -40,6 +41,7 @@ module "kibana-addon" {
   monitoring-node_selecter_label = "${var.node_selecter_label}"
   logs_cname = "${var.logs_cname}"
   logging_backend = "${var.logging_backend}"
+  kibana_logging_image = "${var.kibana_logging_image}"
 }
 
 module "splunkforwarder" {
@@ -52,4 +54,5 @@ module "splunkforwarder" {
   logging_backend = "${var.logging_backend}"
   cluster_name = "${var.cluster_name}"
   splunk_index = "${var.splunk_index}"
+  splunk_forwarder_image = "${var.splunk_forwarder_image}"
 }

@@ -5,6 +5,7 @@ variable "monitoring-node_selecter_label" {}
 variable "enabled" {}
 variable "logs_cname" {}
 variable "logging_backend" {}
+variable "kibana_logging_image" {}
 
 variable "k8s_fluentd_image" {
   default = "cheungpat/fluentd-elasticsearch-aws:1.22"

@@ -38,6 +38,9 @@ module "logging-addons" {
   logging_backend = "${var.logging_addons["logging_backend"]}"
   cluster_name = "${var.cluster["name"]}"
   splunk_index = "${var.logging_addons["splunk_index"]}"
+  curator_image = "${var.logging_addons["curator_image"]}"
+  kibana_logging_image = "${var.logging_addons["kibana_logging_image"]}"
+  splunk_forwarder_image = "${var.logging_addons["splunk_forwarder_image"]}"
 }
 
 module "traefik-addon" {
@@ -47,6 +50,7 @@ module "traefik-addon" {
   haystack_ui_cname = "${local.haystack_ui_cname}"
   traefik_node_port = "${var.cluster["reverse_proxy_port"]}"
   app-node_selecter_label = "${var.cluster["app-node_selecter_label"]}"
+  k8s_traefik_image = "${var.traefik_addon["k8s_traefik_image"]}"
 }
 
 module "aa_apps_resource_limits" {

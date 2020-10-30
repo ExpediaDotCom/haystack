@@ -9,6 +9,7 @@ data "template_file" "splunkforwarder_config" {
     splunk_deployment_server = "${var.splunk_deployment_server}"
     cluster_name = "${var.cluster_name}"
     splunk_index = "${var.splunk_index}"
+    splunk_forwarder_image = "${var.splunk_forwarder_image}"
   }
 }
 
