@@ -41,7 +41,11 @@ spec:
         - name: "PITCHFORK_FORWARDERS_LOGGING_LOG_FULL_SPAN"
           value: "${logging_span_enabled}"
         - name: "PITCHFORK_FORWARDERS_HAYSTACK_KAFKA_TOPIC"
-          value: "${kafka_topic}" 
+          value: "${kafka_topic}"
+        - name: "PITCHFORK_VALIDATORS_MAX_TIMESTAMP_DRIFT_SECONDS"
+          value: "86400"
+        - name: "PITCHFORK_VALIDATORS_ACCEPT_NULL_TIMESTAMPS"
+          value: "false"
         ${env_vars}  
         livenessProbe:
           httpGet:
