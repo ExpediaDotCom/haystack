@@ -89,7 +89,7 @@ metadata:
   name: master-${aws_zone}-1
 spec:
   associatePublicIp: false
-  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: kope.io/k8s-1.9-debian-stretch-amd64-hvm-ebs-2018-08-17
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
@@ -112,7 +112,7 @@ metadata:
   name: master-${aws_zone}-2
 spec:
   associatePublicIp: false
-  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: kope.io/k8s-1.9-debian-stretch-amd64-hvm-ebs-2018-08-17
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
@@ -135,7 +135,7 @@ metadata:
   name: master-${aws_zone}-3
 spec:
   associatePublicIp: false
-  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: kope.io/k8s-1.9-debian-stretch-amd64-hvm-ebs-2018-08-17
   machineType: ${master_instance_type}
   maxSize: 1
   minSize: 1
@@ -158,7 +158,7 @@ metadata:
   name: app-nodes
 spec:
   associatePublicIp: false
-  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-03-11
+  image: kope.io/k8s-1.9-debian-stretch-amd64-hvm-ebs-2018-08-17
   machineType: ${app-nodes_instance_type}
   maxSize: ${app-nodes_instance_count}
   minSize: ${app-nodes_instance_count}
@@ -181,7 +181,7 @@ metadata:
   name: monitoring-nodes
 spec:
   associatePublicIp: false
-  image: kope.io/k8s-1.8-debian-stretch-amd64-hvm-ebs-2018-08-17
+  image: kope.io/k8s-1.9-debian-stretch-amd64-hvm-ebs-2018-08-17
   machineType: ${monitoring-node_instance_type}
   maxSize: ${monitoring-node_instance_count}
   minSize: ${monitoring-node_instance_count}

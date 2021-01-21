@@ -133,8 +133,8 @@ variable "kops_kubernetes" {
     monitoring-nodes_instance_count = 2
     monitoring-nodes_instance_volume = 128
     k8s_version = "1.8.6"
-    node_ami = "ami-7ee37206"
-    master_ami = "ami-7ee37206"
+    node_ami = "ami-070a2702b64c27a51"
+    master_ami = "ami-070a2702b64c27a51"
   }
 }
 
