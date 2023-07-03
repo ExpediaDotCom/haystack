@@ -1,0 +1,9 @@
+version: '3'
+services:
+   cassandra:
+     image: cassandra:3.11.0
+     environment:
+       MAX_HEAP_SIZE: 256m
+       HEAP_NEWSIZE: 256m
+     ports:
+       - "9042:9042"

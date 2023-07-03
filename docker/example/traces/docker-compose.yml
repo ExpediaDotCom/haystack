@@ -1,0 +1,28 @@
+version: "3"
+services:
+  haystack-agent:
+    # it is expected that this example is run along with the 
+    # agent/docker-compose.yml file
+
+  frontend:
+    image: expediadotcom/opentracing-spring-haystack-example
+    environment:
+      APP_MODE: frontend
+      SPRING_PROFILE: remote
+      HAYSTACK_AGENT_HOST: haystack-agent
+      BACKEND_URL: http://backend:9091
+      HAYSTACK_BLOBS_ENABLED: "false"
+    depends_on: 
+      - haystack-agent
+    ports:
+      - "9090:9090"
+
+  backend:
+    image: expediadotcom/opentracing-spring-haystack-example
+    environment:
+      APP_MODE: backend
+      SPRING_PROFILE: remote
+      HAYSTACK_AGENT_HOST: haystack-agent
+      HAYSTACK_BLOBS_ENABLED: "false"
+    depends_on: 
+      - haystack-agent

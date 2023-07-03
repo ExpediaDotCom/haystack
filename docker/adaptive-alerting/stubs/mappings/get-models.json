@@ -1,0 +1,16 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/models/search/findByMetricHash",
+    "queryParameters": {
+      "hash" : {
+        "matches" : ".*"
+      }
+    }
+
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "get_models.json"
+  }
+}

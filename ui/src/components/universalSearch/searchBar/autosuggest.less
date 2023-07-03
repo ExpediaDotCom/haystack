@@ -1,0 +1,254 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *           http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ *
+ */
+
+@import (reference) '../../../app';
+
+// search bar
+.usb-wrapper {
+    position: relative;
+    margin-top: @spacing-s;
+}
+
+.usb-search {
+    display: flex;
+    align-items: baseline;
+    background: @gray-lighter;
+    border: 1px solid @gray-mid-lighter;
+    border-radius: 4px !important;
+}
+
+// chips
+.usb-chips {
+    white-space: nowrap;
+    overflow: hidden;
+    padding-left: @spacing-xs;
+}
+
+.usb-queries {
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-left: @spacing-xs;
+    margin-top: @spacing-s;
+    padding-bottom: @spacing-s;
+}
+
+.usb-chip {
+    display: inline-block;
+    margin-right: @spacing-xs;
+    font-family: @font-family-monospace;
+    font-size: @font-size-base;
+    border-radius: 4px;
+    line-height: 30px;
+    color: white;
+}
+
+.usb-surplus-button {
+    color: @brand-primary;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: @spacing-s;
+}
+
+.usb-surplus {
+    margin-top: @spacing-xs;
+    margin-bottom: @spacing-xs;
+}
+
+.usb-chip__key {
+    display: inline-block;
+    padding: 0 @spacing-xs 0 @spacing-xs;
+}
+
+.usb-chip__operator {
+    display: inline-block;
+    padding: 0 @spacing-xs 0 0;
+    font-weight: bolder;
+}
+
+.usb-chip__value {
+    display: inline-block;
+    padding: 0 @spacing-xs 0 @spacing-xs;
+    background-color: rgba(0, 0, 0, 0.25);
+    max-width: 10vw;
+    vertical-align: bottom;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:hover {
+        max-width: none;
+        overflow: visible;
+    }
+  }
+
+.usb-chip__delete {
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.25);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+// searchbar
+.usb-searchbar {
+    flex-grow: 1;
+}
+
+.usb-searchbar__input {
+    background: @gray-lighter;
+    width: 100%;
+    padding-left: @spacing-xs !important;
+    line-height: 42px;
+    font-family: @font-family-monospace;
+    font-size: 13px !important;
+    box-shadow: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.usb-timepicker {
+    position: relative;
+}
+
+.usb-timepicker__button {
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 0 @spacing-s;
+    border: none;
+    line-height: 43px;
+    box-shadow: 3px 0 3px -3px #666;
+    background: @brand-primary;
+    color: white;
+    &:focus {
+        outline: none;
+    }
+}
+
+.usb-submit__button {
+    padding: 0 @spacing-m;
+    border: none;
+    line-height: 43px;
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    background: @brand-primary;
+    color: white;
+    font-weight: bold;
+    &:focus {
+        outline: none;
+    }
+}
+
+.usb-suggestions {
+    position: relative;
+}
+
+.usb-suggestions__tray {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border: 1px solid @gray-dark;
+    border-top: 0;
+    background-color: @gray-lighter;
+    font-size: @font-size-base;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    z-index: 2;
+
+    box-shadow: 0 3px 8px 0 rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.08);
+}
+
+.usb-suggestions__fields-wrapper {
+    width: 35%;
+    background-color: white;
+    min-height: 380px;
+    max-height: 450px;
+    overflow-y: scroll;
+    font-family: @font-family-monospace;
+    line-height: 36px;
+}
+
+.usb-suggestions__fields {
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.usb-suggestions__field-category {
+    padding-left: @spacing-s;
+    font-weight: 600;
+}
+
+.usb-suggestions__field {
+    padding-left: @spacing-l;
+    list-style-type: none;
+}
+
+.usb-suggestions__field-highlight {
+    background-color: #f9dada;
+}
+
+.usb-suggestions__field--active {
+    background-color: @gray-mid-lighter;
+}
+
+.usb-suggestions__guide-wrapper {
+    width: 65%;
+    padding: @spacing-s
+}
+
+.usb-suggestions__guide-highlight {
+    background-color: white;
+    padding: 0 @spacing-xs;
+}
+
+.usb-suggestions__description {
+    padding-left: @spacing-xs;
+    color: @brand-primary;
+    font-size: smaller;
+}
+
+.usb-suggestions__guide-tab {
+    padding: 0 @spacing-xs;
+}
+
+.usb-search__error-message {
+    margin-top: @spacing-s;
+    color: @brand-danger;
+    font-weight: bold;
+}
+
+.new-query-button {
+    margin-right: @spacing-s;
+}
+
+.usb-suggestions__guide-history-list {
+    list-style-type: none;
+    overflow-y: scroll;
+    max-height: 100px;
+}
+
+.usb-reset-button {
+    color: @brand-primary;
+    text-decoration: underline;
+    cursor: pointer;
+    position: absolute;
+    right: -80px;
+    top: 10px;
+}

@@ -1,0 +1,74 @@
+/*
+ *
+ *  Copyright 2017 Expedia, Inc.
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ *
+ */
+syntax = "proto3";
+
+option java_package = "com.expedia.open.tracing";
+option java_multiple_files = true;
+option go_package = "haystack";
+
+// Span represents a unit of work performed by a service.
+message Span {
+
+    string traceId             = 1;        // unique trace id
+    string spanId              = 2;        // unique span id
+    string parentSpanId        = 3;        // optional, a span can have its parent spanId
+    string serviceName         = 4;        // name of service
+    string operationName       = 5;        // name of operation
+
+    int64 startTime            = 6;        // creation time of this span in microseconds since epoch
+    int64 duration             = 7;        // span duration in microseconds
+
+    repeated Log logs          = 8;        // arbitrary set of timestamp-aware key-value pairs
+    repeated Tag tags          = 9;        // arbitrary set of key-value pairs
+}
+
+
+// Log is a timestamped event with a set of tags.
+message Log {
+  int64 timestamp              = 1;       // timestamp in microseconds since epoch
+  repeated Tag fields          = 2;
+}
+
+
+// Tag is a strongly typed key/value pair. We use 'oneof' protobuf attribute to represent the possible tagTypes
+message Tag {
+
+  // TagType denotes the type of a Tag's value.
+  enum TagType {
+    STRING = 0;
+    DOUBLE = 1;
+    BOOL   = 2;
+    LONG   = 3;
+    BINARY = 4;
+  }
+  string key                  = 1;          // name of the tag key
+  TagType type                = 2;          // type of tag, namely string, double, bool, long and binary
+  oneof myvalue {
+      string vStr             = 3;          // string value type
+      int64 vLong             = 4;          // long value type
+      double vDouble          = 5;          // double value type
+      bool vBool              = 6;          // bool value type
+      bytes vBytes            = 7;          // byte array value type
+  }
+}
+
+
+// You can optionally use Batch to send a collection of spans. Spans may not necessarily belong to one traceId.
+message Batch {
+   repeated Span spans        = 1;          // a collection of spans emitted from the process/service
+}

@@ -1,0 +1,29 @@
+language: node_js
+
+node_js:
+  - "12"
+
+services:
+  - docker
+
+dist: xenial
+
+env:
+  global:
+    - BRANCH=${TRAVIS_BRANCH}
+    - TAG=${TRAVIS_TAG}
+    - SHA=${TRAVIS_COMMIT}
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+
+script:
+  # build, create docker image
+  # upload to dockerhub only for master(non PR) and tag scenario
+  - if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]) || [ -n "$TRAVIS_TAG" ];  then make release; else make all; fi
+
+notifications:
+  email:
+    - haystack-notifications@expedia.com

@@ -1,0 +1,2547 @@
+{
+  "edges": [
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "provideradapter-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 202931,
+        "lastSeen": 1544575410111,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587937
+    },
+    {
+      "source": {
+        "name": "daily-data-update-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "async-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 5136140,
+        "lastSeen": 1544575571142,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587796
+    },
+    {
+      "source": {
+        "name": "search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "provideradapter-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 134125,
+        "lastSeen": 1544575498167,
+        "errorCount": 21882
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587999
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "front-door-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "stats": {
+        "count": 17367200,
+        "lastSeen": 1544575567920,
+        "errorCount": 103264
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588026
+    },
+    {
+      "source": {
+        "name": "westeros-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "stark-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 157201,
+        "lastSeen": 1544575421793,
+        "errorCount": 36
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588024
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "rails-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 130,
+        "lastSeen": 1544573988361,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "new-shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3531583,
+        "lastSeen": 1544575569804,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587705
+    },
+    {
+      "source": {
+        "name": "authentication-service",
+        "tags": {}
+      },
+      "destination": {
+        "name": "userinteraction-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 76788,
+        "lastSeen": 1544575553640,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587815
+    },
+    {
+      "source": {
+        "name": "stark-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "context-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 180327,
+        "lastSeen": 1544575421874,
+        "errorCount": 2088
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587693
+    },
+    {
+      "source": {
+        "name": "stark-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "template-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 169216,
+        "lastSeen": 1544575421889,
+        "errorCount": 1
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588068
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "westeros-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 22890079,
+        "lastSeen": 1544575572251,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587672
+    },
+    {
+      "source": {
+        "name": "api-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-content-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2,
+        "lastSeen": 1544554416805,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544553000000,
+      "effectiveTo": 1544554800000
+    },
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "chargeback-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 60,
+        "lastSeen": 1544574583227,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "adapter-aws",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 303022,
+        "lastSeen": 1544575592096,
+        "errorCount": 1786
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587954
+    },
+    {
+      "source": {
+        "name": "new-shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "multishop",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3893347,
+        "lastSeen": 1544575569844,
+        "errorCount": 2
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587734
+    },
+    {
+      "source": {
+        "name": "westeros-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "guide-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1442998,
+        "lastSeen": 1544575571677,
+        "errorCount": 61
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587753
+    },
+    {
+      "source": {
+        "name": "search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "help-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2826475,
+        "lastSeen": 1544575555819,
+        "errorCount": 1624211
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587681
+    },
+    {
+      "source": {
+        "name": "authentication-service",
+        "tags": {}
+      },
+      "destination": {
+        "name": "front-door-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "stats": {
+        "count": 99413,
+        "lastSeen": 1544575499415,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587706
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "provideradapter-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3258,
+        "lastSeen": 1544575229219,
+        "errorCount": 800
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587979
+    },
+    {
+      "source": {
+        "name": "payment-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "fx",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 233615,
+        "lastSeen": 1544575277983,
+        "errorCount": 16
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587689
+    },
+    {
+      "source": {
+        "name": "api-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 196315,
+        "lastSeen": 1544575522183,
+        "errorCount": 4
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587866
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "booking-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3,
+        "lastSeen": 1544559964099,
+        "errorCount": 1
+      },
+      "effectiveFrom": 1544558400000,
+      "effectiveTo": 1544560200000
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "chargeback-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 169,
+        "lastSeen": 1544574617075,
+        "errorCount": 38
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588010
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1,2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "checkout-payment-domain-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "stats": {
+        "count": 342981,
+        "lastSeen": 1544575571750,
+        "errorCount": 126
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587681
+    },
+    {
+      "source": {
+        "name": "forge-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "context-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 5042343,
+        "lastSeen": 1544575571591,
+        "errorCount": 405
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587826
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "3,1,2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "stats": {
+        "count": 21474934,
+        "lastSeen": 1544575571886,
+        "errorCount": 26012
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588099
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "his-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 698168,
+        "lastSeen": 1544575554236,
+        "errorCount": 87771
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587677
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "hers-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2907715,
+        "lastSeen": 1544575570922,
+        "errorCount": 33645
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587793
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "new-shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 116,
+        "lastSeen": 1544574157710,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "lpt-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1821807,
+        "lastSeen": 1544575567232,
+        "errorCount": 6746
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588011
+    },
+    {
+      "source": {
+        "name": "satellite",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "endurance-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 12111,
+        "lastSeen": 1544575506385,
+        "errorCount": 140
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588024
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "stats": {
+        "count": 570805,
+        "lastSeen": 1544575504575,
+        "errorCount": 32
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587811
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "stats": {
+        "count": 74,
+        "lastSeen": 1544573552180,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "loom-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "lists-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 18356,
+        "lastSeen": 1544575525038,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588011
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "mars",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 73614,
+        "lastSeen": 1544575526411,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587848
+    },
+    {
+      "source": {
+        "name": "mormont-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "seo-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 596144,
+        "lastSeen": 1544575525706,
+        "errorCount": 3
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587937
+    },
+    {
+      "source": {
+        "name": "info-site-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-cart",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 6,
+        "lastSeen": 1544572410049,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544500800000,
+      "effectiveTo": 1544572800000
+    },
+    {
+      "source": {
+        "name": "shopping-detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2838890,
+        "lastSeen": 1544575569418,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587682
+    },
+    {
+      "source": {
+        "name": "loom-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "api-customer",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 8583,
+        "lastSeen": 1544575208652,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587796
+    },
+    {
+      "source": {
+        "name": "multishop",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "pricing-engine",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 15560819,
+        "lastSeen": 1544575569839,
+        "errorCount": 35
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587689
+    },
+    {
+      "source": {
+        "name": "westeros-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "forge-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3161466,
+        "lastSeen": 1544575571588,
+        "errorCount": 4817
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587639
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "third-party-provider-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 9735,
+        "lastSeen": 1544575279207,
+        "errorCount": 3
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587827
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "insurance-shopping-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 410,
+        "lastSeen": 1544574748096,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587918
+    },
+    {
+      "source": {
+        "name": "shopping-detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-user-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1214950,
+        "lastSeen": 1544575528611,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587723
+    },
+    {
+      "source": {
+        "name": "ticket-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "stats": {
+        "count": 20845,
+        "lastSeen": 1544575478589,
+        "errorCount": 68
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587644
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "third-party-api-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 5000,
+        "lastSeen": 1544574936681,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587722
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "progressive-webapp-api",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 687220,
+        "lastSeen": 1544575524183,
+        "errorCount": 20
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587866
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "compositor-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 243059,
+        "lastSeen": 1544575396324,
+        "errorCount": 22
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588026
+    },
+    {
+      "source": {
+        "name": "westeros-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "mormont-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 652939,
+        "lastSeen": 1544575525612,
+        "errorCount": 68
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587815
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "ticket-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 27317,
+        "lastSeen": 1544575505207,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588010
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "userinteraction-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2907462,
+        "lastSeen": 1544575570897,
+        "errorCount": 10681
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587808
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "info-site-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 84704,
+        "lastSeen": 1544575480474,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587827
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "melisandre-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 125064,
+        "lastSeen": 1544575501716,
+        "errorCount": 2985
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588087
+    },
+    {
+      "source": {
+        "name": "progressive-webapp-api",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2469688,
+        "lastSeen": 1544575569284,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587909
+    },
+    {
+      "source": {
+        "name": "guide-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "template-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 806,
+        "lastSeen": 1544573623862,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "api-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 8,
+        "lastSeen": 1544569762201,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544491800000,
+      "effectiveTo": 1544571000000
+    },
+    {
+      "source": {
+        "name": "search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "controller-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 20783217,
+        "lastSeen": 1544575572498,
+        "errorCount": 246
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587641
+    },
+    {
+      "source": {
+        "name": "progressive-webapp-api",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 973286,
+        "lastSeen": 1544575570804,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588061
+    },
+    {
+      "source": {
+        "name": "endurance-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 18729,
+        "lastSeen": 1544575266335,
+        "errorCount": 16
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587723
+    },
+    {
+      "source": {
+        "name": "help-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "adapter-aws",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 379955,
+        "lastSeen": 1544575554493,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587808
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "targaryen-web",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 8861,
+        "lastSeen": 1544575485661,
+        "errorCount": 324
+      },
+      "effectiveFrom": 1544500800000,
+      "effectiveTo": 1544575587634
+    },
+    {
+      "source": {
+        "name": "guide-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "seo-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 654,
+        "lastSeen": 1544573560757,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "drogo-api",
+        "tags": {}
+      },
+      "stats": {
+        "count": 11154,
+        "lastSeen": 1544575207980,
+        "errorCount": 11
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587669
+    },
+    {
+      "source": {
+        "name": "payment-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "lannister-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 13974992,
+        "lastSeen": 1544575556069,
+        "errorCount": 9
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587798
+    },
+    {
+      "source": {
+        "name": "info-site-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "stats": {
+        "count": 234369,
+        "lastSeen": 1544575570813,
+        "errorCount": 6024
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587952
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-content-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 19029006,
+        "lastSeen": 1544575571645,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587677
+    },
+    {
+      "source": {
+        "name": "new-shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "fx",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 304458,
+        "lastSeen": 1544575397477,
+        "errorCount": 5
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587674
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "loom-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 90053,
+        "lastSeen": 1544575481890,
+        "errorCount": 7
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587788
+    },
+    {
+      "source": {
+        "name": "new-shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "payment-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 20680712,
+        "lastSeen": 1544575556069,
+        "errorCount": 32
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587782
+    },
+    {
+      "source": {
+        "name": "api-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 56878,
+        "lastSeen": 1544575522176,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587882
+    },
+    {
+      "source": {
+        "name": "search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "margaery-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 14646996,
+        "lastSeen": 1544575571980,
+        "errorCount": 145
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587689
+    },
+    {
+      "source": {
+        "name": "loom-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "api-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 985553,
+        "lastSeen": 1544575571604,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588060
+    },
+    {
+      "source": {
+        "name": "tyrion-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "chargeback-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 176,
+        "lastSeen": 1544573823589,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "help-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "rules-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 237982,
+        "lastSeen": 1544575571933,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587954
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-pricing",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 33794745,
+        "lastSeen": 1544575571645,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587875
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "bolton-service",
+        "tags": {}
+      },
+      "stats": {
+        "count": 319715,
+        "lastSeen": 1544575500355,
+        "errorCount": 1004
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587658
+    },
+    {
+      "source": {
+        "name": "ticket-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "melisandre-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 13072,
+        "lastSeen": 1544575568510,
+        "errorCount": 59
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587716
+    },
+    {
+      "source": {
+        "name": "help-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "provideradapter-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1403232,
+        "lastSeen": 1544575555851,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587827
+    },
+    {
+      "source": {
+        "name": "tyrion-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "provideradapter-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 26,
+        "lastSeen": 1544571310584,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544572800000
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 32518,
+        "lastSeen": 1544575275982,
+        "errorCount": 75
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587870
+    },
+    {
+      "source": {
+        "name": "forge-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "template-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3548918,
+        "lastSeen": 1544575571596,
+        "errorCount": 30
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587738
+    },
+    {
+      "source": {
+        "name": "tips-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 764,
+        "lastSeen": 1544574548576,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544574600000
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "baratheon-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 578577,
+        "lastSeen": 1544575571747,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587662
+    },
+    {
+      "source": {
+        "name": "westeros-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "hodor-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 6512590,
+        "lastSeen": 1544575570949,
+        "errorCount": 1296924
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587762
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "ecommerce-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 73,
+        "lastSeen": 1544572581996,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544493600000,
+      "effectiveTo": 1544572800000
+    },
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "provideradapter-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 9094,
+        "lastSeen": 1544575240906,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588090
+    },
+    {
+      "source": {
+        "name": "forge-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "seo-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3369864,
+        "lastSeen": 1544575571631,
+        "errorCount": 6
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587848
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "varys-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 68388,
+        "lastSeen": 1544575520781,
+        "errorCount": 80
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587934
+    },
+    {
+      "source": {
+        "name": "bronn-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 99784,
+        "lastSeen": 1544575571751,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544563800000,
+      "effectiveTo": 1544575587662
+    },
+    {
+      "source": {
+        "name": "stark-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "seo-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 167207,
+        "lastSeen": 1544575421914,
+        "errorCount": 1
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587725
+    },
+    {
+      "source": {
+        "name": "tyrion-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "adapter-aws",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 8112,
+        "lastSeen": 1544575271597,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588026
+    },
+    {
+      "source": {
+        "name": "guide-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "context-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1984413,
+        "lastSeen": 1544575571681,
+        "errorCount": 1983415
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587723
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "booking-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 37252,
+        "lastSeen": 1544575265116,
+        "errorCount": 1136
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588025
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1473126,
+        "lastSeen": 1544575571747,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587672
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "bronn-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1,
+        "lastSeen": 1544565534137,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544563800000,
+      "effectiveTo": 1544565600000
+    },
+    {
+      "source": {
+        "name": "baratheon-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "bronn-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 100667,
+        "lastSeen": 1544575571750,
+        "errorCount": 1
+      },
+      "effectiveFrom": 1544563800000,
+      "effectiveTo": 1544575587848
+    },
+    {
+      "source": {
+        "name": "varys-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3,
+        "lastSeen": 1544552474213,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544553000000
+    },
+    {
+      "source": {
+        "name": "endurance-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "authentication-service",
+        "tags": {}
+      },
+      "stats": {
+        "count": 8719,
+        "lastSeen": 1544575265175,
+        "errorCount": 77
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587674
+    },
+    {
+      "source": {
+        "name": "brienne-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "geo-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 38627,
+        "lastSeen": 1544557965110,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544558400000
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "stats": {
+        "count": 587165,
+        "lastSeen": 1544575520505,
+        "errorCount": 1
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587935
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "cache-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 72562,
+        "lastSeen": 1544575498524,
+        "errorCount": 206
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587934
+    },
+    {
+      "source": {
+        "name": "hodor-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 10500513,
+        "lastSeen": 1544575570958,
+        "errorCount": 76483
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588061
+    },
+    {
+      "source": {
+        "name": "margaery-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "airpricingservice",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 16824540,
+        "lastSeen": 1544575571994,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587641
+    },
+    {
+      "source": {
+        "name": "shopping-content-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 30148726,
+        "lastSeen": 1544575571973,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588099
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "domain-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 46,
+        "lastSeen": 1544569236656,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544497200000,
+      "effectiveTo": 1544571000000
+    },
+    {
+      "source": {
+        "name": "progressive-webapp-api",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-content-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 5277998,
+        "lastSeen": 1544575572135,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587909
+    },
+    {
+      "source": {
+        "name": "progressive-webapp-api",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "location-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3891685,
+        "lastSeen": 1544575571930,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588087
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "authentication-service",
+        "tags": {}
+      },
+      "stats": {
+        "count": 170461,
+        "lastSeen": 1544575499257,
+        "errorCount": 11
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587699
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "session-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 611347,
+        "lastSeen": 1544575568839,
+        "errorCount": 1
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588024
+    },
+    {
+      "source": {
+        "name": "ticket-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "booking-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 13140,
+        "lastSeen": 1544575218424,
+        "errorCount": 23
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587914
+    },
+    {
+      "source": {
+        "name": "shopping-detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-content-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 5779855,
+        "lastSeen": 1544575569418,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587937
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "2",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "greyjoy-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 3984995,
+        "lastSeen": 1544575570003,
+        "errorCount": 106528
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587704
+    },
+    {
+      "source": {
+        "name": "boss-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "ticket-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2,
+        "lastSeen": 1544559967407,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544558400000,
+      "effectiveTo": 1544560200000
+    },
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws,dc"
+        }
+      },
+      "destination": {
+        "name": "margaery-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 2674151,
+        "lastSeen": 1544575594133,
+        "errorCount": 49
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587953
+    },
+    {
+      "source": {
+        "name": "shopping-search-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "shopping-user-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 18737197,
+        "lastSeen": 1544575571645,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587979
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "satellite",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 217364,
+        "lastSeen": 1544575482983,
+        "errorCount": 290
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587723
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "shopping-cart",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 10386,
+        "lastSeen": 1544575280832,
+        "errorCount": 204
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587797
+    },
+    {
+      "source": {
+        "name": "mormont-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "context-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 844962,
+        "lastSeen": 1544575554067,
+        "errorCount": 28241
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587815
+    },
+    {
+      "source": {
+        "name": "internet-proxy",
+        "tags": {}
+      },
+      "destination": {
+        "name": "user-profile-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 151657,
+        "lastSeen": 1544575488509,
+        "errorCount": 12
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575588060
+    },
+    {
+      "source": {
+        "name": "front-door-service",
+        "tags": {
+          "tier": "1",
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "shae-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "stats": {
+        "count": 7126,
+        "lastSeen": 1544575152362,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587866
+    },
+    {
+      "source": {
+        "name": "mormont-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "destination": {
+        "name": "template-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 832484,
+        "lastSeen": 1544575554075,
+        "errorCount": 5
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587723
+    },
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "rules-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 586462,
+        "lastSeen": 1544575592045,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587763
+    },
+    {
+      "source": {
+        "name": "detail-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "dc"
+        }
+      },
+      "destination": {
+        "name": "controller-service",
+        "tags": {
+          "X-HAYSTACK-INFRASTRUCTURE-PROVIDER": "aws"
+        }
+      },
+      "stats": {
+        "count": 1297487,
+        "lastSeen": 1544575592045,
+        "errorCount": 0
+      },
+      "effectiveFrom": 1544488200000,
+      "effectiveTo": 1544575587693
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *           http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ *
+ */
+@import (reference) '../../app';
+
+.serviceGraph__header-title {
+    font-size: @font-size-h3;
+    font-weight: @headings-font-weight;
+}
+
+.serviceGraph__tabs {
+    margin-top: @spacing-m;
+
+    .serviceGraph__tab-link:focus {
+        outline: none;
+    }
+}
+
+.serviceGraph__panel {
+    height: 1000px;
+    margin-bottom: @spacing-l;
+    background-color: white;
+}
+
+.vizceral {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+}
+
+.col-md-12 {
+    .serviceGraph__panel {
+        .vizceral {
+            height: 800px;
+            width: 1000px;
+        }
+    }
+}
+.vizceral-notice {
+    position: absolute;
+    padding: @spacing-m;
+
+    ul {
+        margin: 0 !important;
+        padding: @spacing-xs @spacing-s !important;
+        box-shadow: 1px 1px 1.5px 1.5px @gray-mid-light;
+        background: @gray-lighter;
+        color: @gray-darker;
+
+        li {
+            line-height: 1.2;
+        }
+    }
+}
+
+.vizceral-normal {
+    color: #479fd6;
+}
+.vizceral-warning {
+    color: #e98c15;
+}
+.vizceral-danger {
+    color: #ff333e;
+}
+
+.service-graph__label-large {
+    margin-top: 0;
+}
+
+.service-graph__label-small {
+    font-size: @font-size-large;
+    margin-bottom: 0;
+}
+
+.graph-search__wrapper {
+    padding: @spacing-s 0 0 @spacing-m;
+}
+
+.graph-search__wrapper .graph-search__input {
+    display: inline-block;
+    width: 200px;
+    color: @text-color;
+}
+
+.graph-search__search-icon {
+    font-size: @font-size-h6;
+}
+
+.service-graph__info {
+    padding-bottom: @spacing-xs;
+}
+
+.service-graph__info-header {
+    .h5;
+    margin-bottom: @spacing-xs;
+}
+
+.service-graph__info-sub {
+    .text-muted;
+    font-size: @font-size-small;
+}
+
+.service-graph__info-table {
+    .table;
+    border-bottom: 1px solid @gray-mid-light;
+
+    > thead > tr > th {
+        border-bottom: 1px solid @gray-mid-light;
+    }
+
+    > tbody {
+        background-color: white;
+        > tr > td {
+            line-height: 1.2;
+        }
+    }
+}
+
+.service-graph__info-error-normal {
+    font-weight: 600;
+    color: #3c86b4;
+}
+
+.service-graph__info-error-warning {
+    font-weight: 600;
+    color: #e98c15;
+}
+
+.service-graph__info-error-danger {
+    font-weight: 600;
+    color: #e23474;
+}

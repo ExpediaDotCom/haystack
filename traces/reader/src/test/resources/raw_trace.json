@@ -1,0 +1,651 @@
+{
+  "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+  "childSpans": [
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "2fe438d3-9742-4973-a5b6-e0e7870c60e3",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_a",
+      "operationName": "oper_1",
+      "startTime": 1534487370387000,
+      "duration": 0,
+      "logs": [],
+      "tags": [
+        {
+          "key": "span.kind",
+          "value": "server"
+        }
+      ]
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "933e7aa6-9dd6-4818-86b0-a8561fc0b4da",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_b",
+      "operationName": "oper_2",
+      "startTime": 1534487370212000,
+      "duration": 155000,
+      "logs": [
+        {
+          "timestamp": 1534487370212000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487370367000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "2fe438d3-9742-4973-a5b6-e0e7870c60e3",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_b",
+      "operationName": "oper_3",
+      "startTime": 1534487370368000,
+      "duration": 53000,
+      "logs": [
+        {
+          "timestamp": 1534487370368000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487370421000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "f9d9fd32-55b9-4355-a07a-5e9455d17820",
+      "parentSpanId": "5e5a9451-08f2-4d83-90cb-4eb424f657fb",
+      "serviceName": "service_c",
+      "operationName": "oper_4",
+      "startTime": 1534487372108000,
+      "duration": 177000,
+      "logs": [
+        {
+          "timestamp": 1534487372108000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372285000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "5e5a9451-08f2-4d83-90cb-4eb424f657fb",
+      "parentSpanId": "12e410a5-58a4-4f3a-b559-6822ade5acfd",
+      "serviceName": "service_c",
+      "operationName": "oper_5",
+      "startTime": 1534487370603000,
+      "duration": 1686000,
+      "logs": [
+        {
+          "timestamp": 1534487370603000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372289000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "5e5a9451-08f2-4d83-90cb-4eb424f657fb",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_b",
+      "operationName": "oper_6",
+      "startTime": 1534487370430000,
+      "duration": 1893000,
+      "logs": [
+        {
+          "timestamp": 1534487370430000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372323000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_b",
+      "operationName": "oper_7",
+      "startTime": 1534487372324000,
+      "duration": 399000,
+      "logs": [
+        {
+          "timestamp": 1534487372324000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372723000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "eb9b1f0d-c0e5-487e-9b50-a2175c69807e",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_b",
+      "operationName": "oper_7",
+      "startTime": 1534487372726000,
+      "duration": 95000,
+      "logs": [
+        {
+          "timestamp": 1534487372726000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372821000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "parentSpanId": "a6575426-1bd5-4195-ba8d-1bd36bc390b1",
+      "serviceName": "service_b",
+      "operationName": "oper_8",
+      "startTime": 1534487370211000,
+      "duration": 2617000,
+      "logs": [
+        {
+          "timestamp": 1534487370211000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372828000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "14eeae8e-90c2-4e43-8a3a-2737b8a8dd55",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_b",
+      "operationName": "oper_9",
+      "startTime": 1534487372725000,
+      "duration": 986000,
+      "logs": [
+        {
+          "timestamp": 1534487372725000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487373711000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "e799c8f3-7dd1-49e6-bb8a-df6f4f02966e",
+      "parentSpanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "serviceName": "service_d",
+      "operationName": "oper_10",
+      "startTime": 1534487372347000,
+      "duration": 81000,
+      "logs": [
+        {
+          "timestamp": 1534487372347000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372428000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "parentSpanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "serviceName": "service_d",
+      "operationName": "oper_11",
+      "startTime": 1534487372435000,
+      "duration": 146000,
+      "logs": [
+        {
+          "timestamp": 1534487372435000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372581000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "fc1d74f3-94a4-4a95-86af-b6100bb6a337",
+      "parentSpanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "serviceName": "service_d",
+      "operationName": "oper_12",
+      "startTime": 1534487372691000,
+      "duration": 0,
+      "logs": [
+        {
+          "timestamp": 1534487372691000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372691000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_d",
+      "operationName": "oper_13",
+      "startTime": 1534487372345000,
+      "duration": 348000,
+      "logs": [
+        {
+          "timestamp": 1534487372345000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372693000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "435a043c-fcd9-4a81-8045-9d69bc9966c9",
+      "parentSpanId": "eb9b1f0d-c0e5-487e-9b50-a2175c69807e",
+      "serviceName": "service_d",
+      "operationName": "oper_12",
+      "startTime": 1534487372789000,
+      "duration": 0,
+      "logs": [
+        {
+          "timestamp": 1534487372789000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372789000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "eb9b1f0d-c0e5-487e-9b50-a2175c69807e",
+      "parentSpanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "serviceName": "service_d",
+      "operationName": "oper_13",
+      "startTime": 1534487372748000,
+      "duration": 43000,
+      "logs": [
+        {
+          "timestamp": 1534487372748000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372791000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "fc1d74f3-94a4-4a95-86af-b6100bb6a337",
+      "parentSpanId": "0e4ebf10-ad12-4d3c-bf4c-db2bafa64e60",
+      "serviceName": "service_e",
+      "operationName": "oper_14",
+      "startTime": 1534487372648000,
+      "duration": 44000,
+      "logs": [
+        {
+          "timestamp": 1534487372648000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372692000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "435a043c-fcd9-4a81-8045-9d69bc9966c9",
+      "parentSpanId": "eb9b1f0d-c0e5-487e-9b50-a2175c69807e",
+      "serviceName": "service_e",
+      "operationName": "oper_14",
+      "startTime": 1534487372756000,
+      "duration": 34000,
+      "logs": [
+        {
+          "timestamp": 1534487372756000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372790000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "9b0523d6-f14b-4a33-ba75-1e46720684cc",
+      "parentSpanId": "5fbe1254-1036-4d47-80b9-0cbf36fdd128",
+      "serviceName": "service_f",
+      "operationName": "oper_15",
+      "startTime": 1534487372849000,
+      "duration": 0,
+      "logs": [
+        {
+          "timestamp": 1534487372849000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372849000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "5fbe1254-1036-4d47-80b9-0cbf36fdd128",
+      "parentSpanId": "",
+      "serviceName": "service_f",
+      "operationName": "oper_16",
+      "startTime": 1534487370131000,
+      "duration": 2844000,
+      "logs": [
+        {
+          "timestamp": 1534487370131000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372975000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "095f1fa8-d920-4230-b142-6ccb0d9e7a04",
+      "parentSpanId": "",
+      "serviceName": "service_g",
+      "operationName": "oper_17",
+      "startTime": 1534487368981000,
+      "duration": 3019000,
+      "logs": [
+        {
+          "timestamp": 1534487368981000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "sr"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372000000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "ss"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "traceId": "c4fffc7d-7c0d-4073-98ea-34362506d323",
+      "spanId": "5fbe1254-1036-4d47-80b9-0cbf36fdd128",
+      "parentSpanId": "095f1fa8-d920-4230-b142-6ccb0d9e7a04",
+      "serviceName": "service_g",
+      "operationName": "oper_18",
+      "startTime": 1534487368981000,
+      "duration": 3019000,
+      "logs": [
+        {
+          "timestamp": 1534487368981000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cs"
+            }
+          ]
+        },
+        {
+          "timestamp": 1534487372000000,
+          "fields": [
+            {
+              "key": "event",
+              "value": "cr"
+            }
+          ]
+        }
+      ],
+      "tags": []
+    }
+  ]
+}

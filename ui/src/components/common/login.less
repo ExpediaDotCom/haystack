@@ -1,0 +1,54 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *         Licensed under the Apache License, Version 2.0 (the "License");
+ *         you may not use this file except in compliance with the License.
+ *         You may obtain a copy of the License at
+ *
+ *             http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *         Unless required by applicable law or agreed to in writing, software
+ *         distributed under the License is distributed on an "AS IS" BASIS,
+ *         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *         See the License for the specific language governing permissions and
+ *         limitations under the License.
+ */
+
+@import (reference) '../../app';
+
+.login-cover {
+    position: relative;
+    height: 100%;
+    background-color: @gray-darker;
+}
+
+.login-box {
+    position: absolute;
+    top: 150px;
+    width: 100%;
+}
+
+.login-box_jumbotron {
+    .jumbotron;
+    display: inline-block;
+    width: 600px;
+    margin-right: 0;
+    margin-left: 0;
+    border-radius: 6px;
+    background-color: @gray-lighter;
+}
+
+.login-box_title.h1 {
+    color: @gray-dark;
+}
+
+.login-box_logo {
+    width: 70px;
+    margin-right: @spacing-s;
+    padding-bottom: @spacing-l;
+}
+
+.login-box_btn {
+    padding-left: @spacing-xl !important;
+    padding-right: @spacing-xl !important;
+}

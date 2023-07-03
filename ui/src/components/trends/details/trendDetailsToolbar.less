@@ -1,0 +1,94 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *         Licensed under the Apache License, Version 2.0 (the "License");
+ *         you may not use this file except in compliance with the License.
+ *         You may obtain a copy of the License at
+ *
+ *             http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *         Unless required by applicable law or agreed to in writing, software
+ *         distributed under the License is distributed on an "AS IS" BASIS,
+ *         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *         See the License for the specific language governing permissions and
+ *         limitations under the License.
+ */
+@import (reference) '../../../app';
+
+.trend-details-toolbar {
+  margin-bottom: @spacing-m;
+}
+
+.trend-details-toolbar__time-range {
+  position: relative;
+  margin-right: @spacing-m;
+}
+
+
+.custom-timerange-picker {
+  position: absolute;
+  padding: @spacing-s @spacing-l @spacing-s @spacing-l;
+  background-color: white;
+  border : 1px solid #ccc;
+  border-radius : 3px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  right:0;
+  animation-duration: 0.1s;
+  animation-name: slideDown;
+}
+
+.autorefresh-group {
+  margin-left: @spacing-m;
+}
+
+@keyframes slideDown {
+  from {
+    margin-top: -1%;
+  }
+  to {
+    margin-top: 0;
+  }
+}
+
+.rdtPicker table {
+  width: 100%;
+  margin: 0;
+  table-layout: unset;
+
+}
+
+.rdtPicker td.rdtDay,
+.rdtPicker td.rdtHour,
+.rdtPicker td.rdtMinute,
+.rdtPicker td.rdtSecond,
+.rdtPicker .rdtTimeToggle {
+  background-color: #fff !important;
+  color: @gray-dark !important;
+}
+
+.rdtPicker td.rdtDay:hover,
+.rdtPicker td.rdtHour:hover,
+.rdtPicker td.rdtMinute:hover,
+.rdtPicker td.rdtSecond:hover,
+.rdtPicker .rdtTimeToggle:hover {
+  background: #eeeeee !important;
+}
+
+.rdtPicker td.rdtActive,
+.rdtPicker td.rdtActive:hover {
+  background-color: #428bca !important;
+  color: #fff  !important;
+}
+
+.react-bs-table .rdtTime tr:not(.expand-row-body):not(.selected-row):hover td {
+  background-color: white;
+  color: @gray-dark;
+  cursor: initial;
+}
+
+.custom-timerange-picker__datetime {
+  .form-control {
+    color: @gray-dark;
+  }
+}

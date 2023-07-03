@@ -1,0 +1,31 @@
+# Logs
+logs
+sample
+*.log
+
+# Mac Trash directories
+*.DS_Store
+
+# Dependency directory
+node_modules
+
+#intellij
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# generated scripts/css in public should not be commited
+public/bundles
+static_codegen
+
+# Code coverage reports
+.nyc_output/
+coverage
+
+# HTTPS Certs
+server.cert
+server.key
+
+# Zipkin runner
+zipkin-workspace

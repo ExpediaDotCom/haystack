@@ -1,0 +1,15 @@
+{
+  "port": 8080,
+  "cluster": false,
+  "upstreamTimeout": 30000,
+  "connectors": {
+    "traces": {
+      "connectorName": "zipkin",
+      "zipkinUrl": "http://localhost:9411/api/v2"
+    },
+    "serviceGraph": {
+      "connectorName": "zipkin",
+      "zipkinUrl": "http://localhost:9411/api/v2"
+    }
+  }
+}

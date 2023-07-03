@@ -1,0 +1,105 @@
+/*
+ * Copyright 2019 Expedia Group
+ *
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *           http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ *
+ */
+
+@tooltipBackgroundColor: rgba(34, 34, 34, 0.9);
+
+.graph-tooltip {
+    pointer-events: none;
+    user-select: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.graph-tooltip_decoration {
+    color: #abcff3;
+    position: absolute;
+    margin: -25px 0 0 12px;
+    padding: 10px 20px 12px 15px;
+    max-width: 640px;
+    font-size: 12px;
+    line-height: 12px;
+    background: @tooltipBackgroundColor;
+    border: 0px;
+    border-radius: 4px;
+    pointer-events: none;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 7px 12px 0px;
+
+    &.line {
+        margin: -16px 0 0 14px;
+    }
+
+    // Triangle
+    &:before {
+        content: '';
+        position: absolute;
+        top: 15px;
+        left: -10px;
+        transform: translateX(-50%);
+        border: 10px solid @tooltipBackgroundColor;
+        border-left-color: transparent;
+        border-right-color: @tooltipBackgroundColor;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        width: 0;
+        height: 0;
+        margin: 0 auto;
+    }
+
+    &.line:before {
+        top: 8px;
+        left: -8px;
+        border-width: 8px;
+    }
+
+    .graph-tooltip_title {
+        color: white;
+        margin-bottom: 7px;
+        font-size: 17px;
+        line-height: 18px;
+
+        &.debug {
+            border-top: solid 1px #676767;
+            margin-top: 8px;
+            padding-top: 6px;
+        }
+    }
+
+    .tip-grid {
+        display: grid;
+        grid-template-columns: 90px auto;
+        align-items: baseline;
+
+        .line& {
+            grid-template-columns: auto auto;
+        }
+    }
+
+    .tip-grid_label {
+        padding: 2px 4px;
+        font-weight: normal;
+        text-align: right;
+        color: #dcdcdc;
+    }
+
+    .tip-grid_value {
+        padding: 2px 4px;
+    }
+}
