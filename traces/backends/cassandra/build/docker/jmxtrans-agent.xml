@@ -1,0 +1,48 @@
+<jmxtrans-agent>
+    <queries>
+
+        <!-- grpc endpoint metrics -->
+        <query objectName="metrics:name=StorageBackend.writeSpans" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="endpoint.writeSpans.#attribute#"/>
+        <query objectName="metrics:name=StorageBackend.writeSpans.failures" attributes="OneMinuteRate" resultAlias="endpoint.writeSpans.failures.#attribute#"/>
+        <query objectName="metrics:name=StorageBackend.readSpans" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="endpoint.readSpans.#attribute#"/>
+        <query objectName="metrics:name=StorageBackend.readSpans.failures" attributes="OneMinuteRate" resultAlias="endpoint.readSpans.failures.#attribute#"/>
+
+        <query objectName="metrics:name=cassandra.read.time"
+               attributes="99thPercentile,50thPercentile,OneMinuteRate"
+               resultAlias="cassandra.read.time.#attribute#"/>
+        <query objectName="metrics:name=cassandra.read.failures"
+               attributes="OneMinuteRate"
+               resultAlias="cassandra.read.failures.#attribute#"/>
+        <query objectName="metrics:name=cassandra.write.failure" attributes="OneMinuteRate"
+               resultAlias="cassandra.write.failure.#attribute#"/>
+        <query objectName="metrics:name=cassandra.write.warnings" attributes="OneMinuteRate"
+               resultAlias="cassandra.write.warnings.#attribute#"/>
+
+        <!-- cassandra metrics coming from driver-->
+        <query objectName="cassandra-cluster-metrics:name=connection-errors" attribute="Count"
+               resultAlias="cassandra.errors.count"/>
+        <query objectName="cassandra-cluster-metrics:name=read-timeouts" attribute="Count"
+               resultAlias="cassandra.read-timeouts.count"/>
+        <query objectName="cassandra-cluster-metrics:name=client-timeouts" attribute="Count"
+               resultAlias="cassandra.client-timeouts.count"/>
+        <query objectName="cassandra-cluster-metrics:name=requests" attribute="OneMinuteRate"
+               resultAlias="cassandra.requests.rate"/>
+        <query objectName="cassandra-cluster-metrics:name=requests" attribute="99thPercentile"
+               resultAlias="cassandra.requests.99thPercentile"/>
+        <query objectName="cassandra-cluster-metrics:name=write-timeouts" attribute="Count"
+               resultAlias="cassandra.write-timeouts.count"/>
+        <query objectName="cassandra-cluster-metrics:name=open-connections" attribute="Value"
+               resultAlias="cassandra.open-connections.value"/>
+        <query objectName="cassandra-cluster-metrics:name=other-errors" attribute="Count"
+               resultAlias="cassandra.other-errors.count"/>
+
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <!-- template used in influxdb : "haystack.* system.subsystem.application.host.class.measurement*" -->
+        <host>${HAYSTACK_GRAPHITE_HOST:monitoring-influxdb-graphite.kube-system.svc}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT:2003}</port>
+        <enabled>${HAYSTACK_GRAPHITE_ENABLED:true}</enabled>
+        <namePrefix>haystack.traces.backend-cassandra.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+</jmxtrans-agent>

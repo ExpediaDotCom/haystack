@@ -1,0 +1,13 @@
+<jmxtrans-agent>
+    <queries>
+
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <!-- template used in influxdb : "haystack.* system.subsystem.application.host.class.measurement*" -->
+        <host>${HAYSTACK_GRAPHITE_HOST:monitoring-influxdb-graphite.kube-system.svc}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT:2003}</port>
+        <enabled>${HAYSTACK_GRAPHITE_ENABLED:true}</enabled>
+        <namePrefix>haystack.traces.backend-cassandra.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+</jmxtrans-agent>

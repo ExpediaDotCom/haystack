@@ -1,0 +1,75 @@
+{
+    "root": true,
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "plugins": ["json", "prettier", "import", "jsx-a11y", "react"],
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "legacyDecorators": true
+        }
+    },
+    "env": {
+        "node": true,
+        "browser": true,
+        "mocha": true,
+        "jquery": true
+    },
+    "rules": {
+        "no-unused-vars": ["error"],
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": true
+            }
+        ],
+        "arrow-parens": 0,
+        "comma-dangle": ["error", "never"],
+        "comma-style": 0,
+        "function-paren-newline": 0,
+        "implicit-arrow-linebreak": 0,
+        "import/no-cycle": 0,
+        "import/no-named-as-default": 0,
+        "import/no-useless-path-segments": 0,
+        "import/order": 0,
+        "indent": 0,
+        "jsx-a11y/anchor-is-valid": 0,
+        "jsx-a11y/click-events-have-key-events": 0,
+        "jsx-a11y/href-no-hash": 0,
+        "lines-between-class-members": 0,
+        "max-len": ["error", 250],
+        "no-confusing-arrow": 0,
+        "no-else-return": 0,
+        "no-mixed-operators": 0,
+        "no-multi-spaces": 0,
+        "no-multiple-empty-lines": 0,
+        "no-param-reassign": 0,
+        "no-plusplus": 0,
+        "no-restricted-globals": 0,
+        "no-trailing-spaces": 0,
+        "object-curly-newline": 0,
+        "object-curly-spacing": [0, "never"],
+        "operator-linebreak": 0,
+        "prefer-destructuring": 0,
+        "react/button-has-type": 0,
+        "react/default-props-match-prop-types": 0,
+        "react/destructuring-assignment": 0,
+        "react/forbid-prop-types": 0,
+        "react/jsx-closing-tag-location": 0,
+        "react/jsx-curly-brace-presence": 0,
+        "react/jsx-indent-props": 0,
+        "react/jsx-indent": 0,
+        "react/jsx-no-target-blank": 0,
+        "react/jsx-one-expression-per-line": 0,
+        "react/jsx-props-no-multi-spaces": 0,
+        "react/jsx-tag-spacing": 0,
+        "react/jsx-wrap-multilines": 0,
+        "react/no-access-state-in-setstate": 0,
+        "react/no-string-refs": 0,
+        "react/no-unescaped-entities": 0,
+        "react/no-unused-state": 0,
+        "react/require-default-props": 0,
+        "react/sort-comp": 0
+    }
+}

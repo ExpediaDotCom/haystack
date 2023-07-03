@@ -1,0 +1,63 @@
+#
+#  Copyright 2018 Expedia, Inc.
+#
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#      You may obtain a copy of the License at
+#
+#           http://www.apache.org/licenses/LICENSE-2.0
+#
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+version: "3"
+services:
+  storage-backend:
+    image: expediadotcom/haystack-trace-backend-cassandra
+    environment:
+      HAYSTACK_GRAPHITE_ENABLED: "false"
+      HAYSTACK_LOG_LEVEL: "DEBUG"
+      JAVA_XMS: 128m
+    depends_on:
+      - "cassandra"
+    entrypoint: ["/dockerize","-wait=tcp://cassandra:9042","-timeout=200s","-wait-retry-interval=20s","--","./start-app.sh"]
+    restart: always
+    # uncomment below port mapping to expose and connect to this application out of local docker container network
+#    ports:
+#      - "8090:8090"
+      
+  trace-reader:
+    image: expediadotcom/haystack-trace-reader:1.0.10
+    environment:
+      HAYSTACK_GRAPHITE_ENABLED: "false"
+      HAYSTACK_PROP_BACKEND_CLIENT_HOST: "storage-backend"
+      JAVA_XMS: 128m
+    entrypoint: ["/dockerize","-wait=tcp://storage-backend:8090","-timeout=200s","-wait-retry-interval=40s","--","./start-app.sh"]
+    restart: always
+
+  trace-indexer:
+    image: expediadotcom/haystack-trace-indexer:1.0.10
+    environment:
+      HAYSTACK_GRAPHITE_ENABLED: "false"
+      HAYSTACK_PROP_BACKEND_CLIENT_HOST: "storage-backend"
+      HAYSTACK_PROP_SERVICE_METADATA_ENABLED: "true"
+      HAYSTACK_PROP_KAFKA_MAX_WAKEUPS: "100"
+      HAYSTACK_PROP_SERVICE_METADATA_FLUSH_INTERVAL_SEC: "0"
+      JAVA_XMS: 128m
+    entrypoint: ["/dockerize","-wait=tcp://kafkasvc:9092","-timeout=200s","-wait-retry-interval=40s","--","./start-app.sh"]
+    depends_on:
+      - "elasticsearch"
+    restart: always
+
+  ui:
+    environment:
+      HAYSTACK_OVERRIDES_CONFIG_PATH: /data/connectors.json
+      HAYSTACK_PROP_CONNECTORS_TRACES_CONNECTOR__NAME: "haystack"
+      HAYSTACK_PROP_CONNECTORS_TRACES_SERVICE__REFRESH__INTERVAL__IN__SECS: "0"
+      HAYSTACK_PROP_CONNECTORS_TRACES_HAYSTACK__HOST: "trace-reader"
+      HAYSTACK_PROP_CONNECTORS_TRACES_HAYSTACK__PORT: "8088"
+      HAYSTACK_PROP_CONNECTORS_BLOBS_ENABLE__BLOBS: "true"
+      HAYSTACK_PROP_CONNECTORS_BLOBS_BLOBS__URL : "http://localhost:35002"

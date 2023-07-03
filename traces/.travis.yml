@@ -1,0 +1,39 @@
+sudo: required
+
+language: java
+
+jdk:
+- openjdk8
+
+dist: trusty
+
+services:
+  - docker
+
+cache:
+  directories:
+    - $HOME/.m2
+
+install:
+  - java -XX:+PrintFlagsFinal -version
+  - ./mvnw --version
+
+addons:
+  hosts:
+    - elasticsearch
+    - cassandra
+
+env:
+  global:
+    - BRANCH=${TRAVIS_BRANCH}
+    - TAG=${TRAVIS_TAG}
+    - SHA=${TRAVIS_COMMIT}
+
+script:
+  # build, create docker image
+  # upload to dockerhub only for master(non PR) and tag scenario
+  - if ([ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]) || [ -n "$TRAVIS_TAG" ];  then make release; else make all; fi
+
+notifications:
+  email:
+    - haystack-notifications@expedia.com

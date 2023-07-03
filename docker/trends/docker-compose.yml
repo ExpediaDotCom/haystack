@@ -1,0 +1,64 @@
+#
+#  Copyright 2018 Expedia, Inc.
+#
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#      You may obtain a copy of the License at
+#
+#           http://www.apache.org/licenses/LICENSE-2.0
+#
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+version: "3"
+services:
+  metrictank:
+    image: grafana/metrictank:0.10.1
+    environment:
+      MT_HTTP_MULTI_TENANT: "false"
+      MT_CARBON_IN_ENABLED: "false"
+      MT_KAFKA_MDM_IN_ENABLED: "true"
+      MT_CASSANDRA_ADDRS: "cassandra:9042"
+      MT_KAFKA_MDM_IN_BROKERS: "kafkasvc:9092"
+      MT_CASSANDRA_IDX_HOSTS: "cassandra:9042"
+      MT_STATS_ENABLED: "false"
+      MT_MEMORY_IDX_TAG_SUPPORT: "true"
+    depends_on:
+      - "kafkasvc"
+    restart: always
+    # uncomment below port mapping to expose and connect to this application out of local docker container network
+#    ports:
+#      - "6060:6060"
+
+  trends-transformer:
+    image: expediadotcom/haystack-span-timeseries-transformer:1.1.3
+    environment:
+      HAYSTACK_GRAPHITE_ENABLED: "false"
+      HAYSTACK_PROP_KAFKA_STREAMS_BOOTSTRAP_SERVERS: "kafkasvc:9092"
+      HAYSTACK_PROP_KAFKA_PRODUCER_TOPIC: "metric-data-points"
+      JAVA_XMS: 128m
+    entrypoint: ["/dockerize","-wait=tcp://kafkasvc:9092","-timeout=200s","-wait-retry-interval=40s","--","./start-app.sh"]
+    depends_on:
+      - "kafkasvc"
+    restart: always
+
+  trends-aggregator:
+    image: expediadotcom/haystack-timeseries-aggregator:1.1.3
+    environment:
+      HAYSTACK_GRAPHITE_ENABLED: "false"
+      HAYSTACK_PROP_KAFKA_STREAMS_BOOTSTRAP_SERVERS: "kafkasvc:9092"
+      HAYSTACK_PROP_KAFKA_CONSUMER_TOPIC: "metric-data-points"
+      JAVA_XMS: 128m
+    entrypoint: ["/dockerize","-wait=tcp://kafkasvc:9092","-timeout=200s","-wait-retry-interval=40s","--","./start-app.sh"]
+    depends_on:
+      - "kafkasvc"
+    restart: always
+
+  ui:
+    environment:
+      HAYSTACK_OVERRIDES_CONFIG_PATH: /data/connectors.json
+      HAYSTACK_PROP_CONNECTORS_TRENDS_CONNECTOR__NAME: "haystack"
+      HAYSTACK_PROP_CONNECTORS_TRENDS_METRIC__TANK__URL: "http://metrictank:6060"

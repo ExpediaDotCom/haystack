@@ -1,0 +1,33 @@
+<jmxtrans-agent>
+    <queries>
+        <query objectName="metrics:name=elasticsearch.read.time" attributes="99thPercentile,50thPercentile,OneMinuteRate" resultAlias="elasticsearch.read.time.#attribute#"/>
+        <query objectName="metrics:name=elasticsearch.read.failures" attributes="OneMinuteRate" resultAlias="elasticsearch.read.failures.#attribute#"/>
+        <query objectName="metrics:name=backend.read.time" attributes="99thPercentile,50thPercentile,OneMinuteRate" resultAlias="backend.read.time.#attribute#"/>
+        <query objectName="metrics:name=backend.read.failures" attributes="OneMinuteRate" resultAlias="backend.read.failures.#attribute#"/>
+        <query objectName="metrics:name=search.trace.rejected" attributes="OneMinuteRate" resultAlias="trace-search.rejected.#attribute#"/>
+        <query objectName="metrics:name=backend.traces.failures" attributes="OneMinuteRate" resultAlias="backend.traces.failures.#attribute#"/>
+
+        <!-- reader endpoint metrics -->
+        <query objectName="metrics:name=TraceReader.getFieldNames" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="trace.reader.getFieldNames.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getFieldNames.failures" attributes="OneMinuteRate" resultAlias="trace.reader.getFieldNames.failures.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getFieldValues" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="trace.reader.getFieldValues.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getFieldValues.failures" attributes="OneMinuteRate" resultAlias="trace.reader.getFieldValues.failures.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getRawSpan" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="trace.reader.getRawSpan.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getRawSpan.failures" attributes="OneMinuteRate" resultAlias="trace.reader.getRawSpan.failures.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getRawTrace" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="trace.reader.getRawTrace.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getRawTrace.failures" attributes="OneMinuteRate" resultAlias="trace.reader.getRawTrace.failures.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getTrace" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="trace.reader.getTrace.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.getTrace.failures" attributes="OneMinuteRate" resultAlias="trace.reader.getTrace.failures.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.searchTraces" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="trace.reader.searchTraces.#attribute#"/>
+        <query objectName="metrics:name=TraceReader.searchTraces.failures" attributes="OneMinuteRate" resultAlias="trace.reader.searchTraces.failures.#attribute#"/>
+    </queries>
+
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <!-- template used in influxdb : "haystack.* system.subsystem.application.host.class.measurement*" -->
+        <host>${HAYSTACK_GRAPHITE_HOST:monitoring-influxdb-graphite.kube-system.svc}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT:2003}</port>
+        <enabled>${HAYSTACK_GRAPHITE_ENABLED:true}</enabled>
+        <namePrefix>haystack.traces.reader.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>30</collectIntervalInSeconds>
+</jmxtrans-agent>

@@ -1,0 +1,33 @@
+<jmxtrans-agent>
+    <queries>
+        <!-- kafka producer metrics -->
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="record-send-rate" resultAlias="kafka-producer.record-send.rate"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="buffer-exhausted-rate" resultAlias="kafka-producer.buffer-exhausted.rate"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="record-retry-rate" resultAlias="kafka-producer.record-retry.rate"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="produce-throttle-time-avg" resultAlias="kafka-producer.produce-throttle-time.avg"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="request-latency-avg" resultAlias="kafka-producer.request-latency.avg"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="buffer-available-bytes" resultAlias="kafka-producer.buffer-bytes.available"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="buffer-total-bytes" resultAlias="kafka-producer.buffer-bytes.total"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="request-size-max" resultAlias="kafka-producer.request-size.max"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="request-rate" resultAlias="kafka-producer.request.rate"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="response-rate" resultAlias="kafka-producer.response.rate"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="record-error-rate" resultAlias="kafka-producer.record-error.rate"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="requests-in-flight" resultAlias="kafka-producer.request-in-flight.count"/>
+        <query objectName="kafka.producer:type=producer-metrics,client-id=*" attribute="batch-size-avg" resultAlias="kafka-producer.batch-size.avg"/>
+
+        <query objectName="metrics:name=kinesis.ingestion-success" attributes="OneMinuteRate" resultAlias="kinesis.ingestion-success.#attribute#"/>
+        <query objectName="metrics:name=kinesis.processing.lag" attributes="50thPercentile,75thPercentile,99thPercentile" resultAlias="kinesis.processing.lag.#attribute#"/>
+        <query objectName="metrics:name=kinesis.checkpoint.failure" attributes="OneMinuteRate" resultAlias="kinesis.checkpoint.failure.#attribute#"/>
+
+        <query objectName="metrics:name=valid.span" attributes="OneMinuteRate" resultAlias="valid.span.#attribute#"/>
+        <query objectName="metrics:name=invalid.span" attributes="OneMinuteRate" resultAlias="invalid.span.#attribute#"/>
+        <query objectName="metrics:name=sizeLimitExceeded.span" attributes="OneMinuteRate" resultAlias="sizeLimitExceeded.span.#attribute#"/>
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <host>${HAYSTACK_GRAPHITE_HOST:monitoring-influxdb-graphite.kube-system.svc}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT:2003}</port>
+        <enabled>${HAYSTACK_GRAPHITE_ENABLED:true}</enabled>
+        <namePrefix>${HAYSTACK_GRAPHITE_PREFIX:haystack.collector.kinesis}.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>60</collectIntervalInSeconds>
+</jmxtrans-agent>

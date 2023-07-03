@@ -1,0 +1,10 @@
+{
+  "_embedded": {
+    "models": []
+  },
+  "_links": {
+    "self": {
+      "href": "http://modelservice:8080/api/detectors/search/findByMetricHash?hash=1234"
+    }
+  }
+}

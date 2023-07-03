@@ -1,0 +1,39 @@
+<jmxtrans-agent>
+    <queries>
+        <!-- kafka consumer metrics -->
+        <query objectName="kafka.consumer:type=consumer-metrics,client-id=*" attribute="request-rate" resultAlias="kafka-consumer-%client-id%.request.rate"/>
+        <query objectName="kafka.consumer:type=consumer-metrics,client-id=*" attribute="response-rate" resultAlias="kafka-consumer-%client-id%.response.rate"/>
+        <query objectName="kafka.consumer:type=consumer-metrics,client-id=*" attribute="incoming-byte-rate" resultAlias="kafka-consumer-%client-id%.incoming-byte.rate"/>
+        <query objectName="kafka.consumer:type=consumer-fetch-manager-metrics,client-id=*" attribute="records-lag-max" resultAlias="kafka-consumer-%client-id%.records-lag.max"/>
+        <query objectName="kafka.consumer:type=consumer-fetch-manager-metrics,client-id=*" attribute="records-consumed-rate" resultAlias="kafka-consumer-%client-id%.records-consumed.rate"/>
+
+        <!-- iterator age using span event time -->
+        <query objectName="metrics:name=kafka.iterator.age.ms" attributes="50thPercentile,99thPercentile" resultAlias="kafka.iterator.age.ms.#attribute#"/>
+
+        <!-- backend metrics coming from our code -->
+        <query objectName="metrics:name=backend.write.failure" attributes="OneMinuteRate" resultAlias="backend.write.failure.#attribute#"/>
+        <query objectName="metrics:name=backend.write.time" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="backend.write.time.#attribute#"/>
+
+        <query objectName="metrics:name=state.store.eviction" attributes="OneMinuteRate" resultAlias="span-state-store.eviction.#attribute#"/>
+        <query objectName="metrics:name=span.proto.deser.failure" attributes="OneMinuteRate" resultAlias="span-proto-deserializer.failure.#attribute#"/>
+
+        <!-- elasticsearch metrics coming from driver-->
+        <query objectName="metrics:name=es.write.failure" attributes="OneMinuteRate" resultAlias="elasticsearch.writer.failure.#attribute#"/>
+        <query objectName="metrics:name=es.writer.time" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="elasticsearch.writer.time.#attribute#"/>
+
+        <!-- service metadata metrics -->
+        <query objectName="metrics:name=metadata.write.failure" attributes="OneMinuteRate" resultAlias="metadata.writer.failure.#attribute#"/>
+        <query objectName="metrics:name=metadata.write.time" attributes="50thPercentile,99thPercentile,OneMinuteRate" resultAlias="metadata.writer.time.#attribute#"/>
+
+        <query objectName="metrics:name=buffered.spans.count" attributes="50thPercentile,99thPercentile,Max" resultAlias="span-processor.buffer-size.#attribute#"/>
+        <query objectName="metrics:name=buffer.process" attributes="50thPercentile,99thPercentile" resultAlias="span-processor.process-time.#attribute#"/>
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <host>${HAYSTACK_GRAPHITE_HOST:monitoring-influxdb-graphite.kube-system.svc}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT:2003}</port>
+        <enabled>${HAYSTACK_GRAPHITE_ENABLED:true}</enabled>
+        <!-- template used in influxdb : "haystack.* system.subsystem.application.host.class.measurement*" -->
+        <namePrefix>haystack.traces.indexer.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>60</collectIntervalInSeconds>
+</jmxtrans-agent>

@@ -1,0 +1,56 @@
+version: '3'
+services:
+  s3rver:
+    image: vaibhavsawhney1511/s3rver
+    ports:
+      - "5000:5000"
+
+  haystack-agent:
+    # it is expected that this example is run along with the 
+    # agent/docker-compose.yml file
+
+    depends_on:
+      - s3rver
+    environment:
+      JAVA_XMS: 128m
+      haystack_env_agents_spans_port: 35000
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_ENABLED: "true"
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_PORT: 35001
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_SERVICE_ENDPOINT: http://s3rver:5000
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_PATH_STYLE_ACCESS_ENABLED: "true"
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_DISABLE_CHUNKED_ENCODING: "true"
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_aws_access_key: "S3RVER"
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_aws_secret_key: "S3RVER"
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_BUCKET_NAME: "s3rver"
+      HAYSTACK_PROP_AGENTS_OSSBLOBS_DISPATCHERS_S3_SHOULD_WAIT_FOR_UPLOAD: "false"
+    ports:
+      - "35000:35000"
+      - "35001:35001"
+
+  reverse-proxy:
+    image: expediadotcom/blobs-http-reverse-proxy:latest
+    depends_on:
+      - haystack-agent
+    environment:
+              grpc-server-endpoint: haystack-agent:35001
+              http-port: ":35002"
+    ports:
+      - "35002:35002"
+
+  haystack-blob-example-client:
+    image: expediadotcom/haystack-blob-example-client:4b43b0858d8be7455a830df430e7f0a4a0a8afbf
+    depends_on:
+      - haystack-blob-example-server
+    expose:
+      - "9091"
+    ports:
+      - "9091:9091"
+
+  haystack-blob-example-server:
+    image: expediadotcom/haystack-blob-example-server:4b43b0858d8be7455a830df430e7f0a4a0a8afbf
+    depends_on:
+      - reverse-proxy
+    expose:
+      - "9090"
+    ports:
+      - "9090:9090"

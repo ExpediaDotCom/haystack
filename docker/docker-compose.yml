@@ -1,0 +1,64 @@
+#
+#  Copyright 2018 Expedia, Inc.
+#
+#       Licensed under the Apache License, Version 2.0 (the "License");
+#       you may not use this file except in compliance with the License.
+#      You may obtain a copy of the License at
+#
+#           http://www.apache.org/licenses/LICENSE-2.0
+#
+#       Unless required by applicable law or agreed to in writing, software
+#       distributed under the License is distributed on an "AS IS" BASIS,
+#       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#       See the License for the specific language governing permissions and
+#       limitations under the License.
+#
+version: "3"
+services:
+  elasticsearch:
+    image: elastic/elasticsearch:6.0.1
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      xpack.security.enabled: "false"
+    ports:
+      - "9200:9200"
+    restart: always
+
+  cassandra:
+    image: cassandra:3.11.0
+    environment:
+      MAX_HEAP_SIZE: 256m
+      HEAP_NEWSIZE: 256m
+    # uncomment below port mapping to expose and connect to this application out of local docker container network
+#    ports:
+#      - "9042:9042"
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+
+  kafkasvc:
+    image: wurstmeister/kafka:2.11-1.1.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafkasvc:9092,OUTSIDE://localhost:19092
+      KAFKA_LISTENERS: INSIDE://:9092,OUTSIDE://:19092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "proto-spans:1:1,metricpoints:1:1,metric-data-points:1:1,mdm:1:1,metrics:1:1,graph-nodes:1:1,service-graph:1:1,mapped-metrics:1:1,anomalies:1:1,alerts:1:1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "9092:9092"
+      - "19092:19092"
+
+  ui:
+    image: expediadotcom/haystack-ui:1.1.7
+    volumes:
+      - ./:/data
+    ports:
+      - "8080:8080"

@@ -1,0 +1,100 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *           http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ *
+ */
+
+@import (reference) '../../app';
+
+.servicePerformance {
+    padding-bottom: @spacing-m;
+}
+
+.servicePerformance__header {
+    padding-bottom: @spacing-s;
+}
+
+.servicePerformance__header-title {
+    font-size: @font-size-h3;
+    font-weight: @headings-font-weight;
+}
+
+.servicePerformance__param-selector {
+    width: 180px;
+    padding-left: @spacing-m;
+}
+
+.servicePerformance__search {
+    margin-top: @line-height-computed;
+}
+
+.servicePerformance__searchBox {
+    font-size: @font-size-large;
+    box-shadow: none;
+    background-color: @gray-lighter;
+    line-height: 34px;
+    padding-left: @padding-small-horizontal;
+    width: 95%;
+    color: #333333;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.servicePerformance__colorRangeIndicator {
+    background: linear-gradient(90deg, #3f4d71, #f2f4fb);
+    height: @spacing-m;
+    width: 200px;
+    padding-top: @spacing-s;
+}
+
+.rv-treemap {
+    font-size: 12px;
+    position: relative;
+}
+
+.rv-treemap__leaf {
+    position: absolute;
+}
+
+.rv-treemap__leaf--circle {
+    align-items: center;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    border: 0.5px solid @gray-mid-lighter;
+
+    &:not(:first-child) {
+        cursor: pointer;
+
+        &:hover {
+            border: 0.5px solid @gray-mid-light;
+            box-shadow: 1px 1px 15px 0 @gray-mid-light;
+        }
+    }
+}
+
+.rv-treemap__leaf__content {
+    padding: 5px;
+    .ellipsis;
+}
+
+.rv-treemap__leaf__title {
+    .ellipsis;
+}
+
+.rv-treemap__leaf__data {
+    .ellipsis;
+}

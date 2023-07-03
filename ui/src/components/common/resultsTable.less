@@ -1,0 +1,354 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *         Licensed under the Apache License, Version 2.0 (the "License");
+ *         you may not use this file except in compliance with the License.
+ *         You may obtain a copy of the License at
+ *
+ *             http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *         Unless required by applicable law or agreed to in writing, software
+ *         distributed under the License is distributed on an "AS IS" BASIS,
+ *         WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *         See the License for the specific language governing permissions and
+ *         limitations under the License.
+ */
+
+@import (reference) '../../app';
+
+.react-bs-table-container {
+    margin-top: @spacing-s;
+
+    .react-bs-table-search-form {
+        margin-bottom: 0;
+    }
+}
+
+.react-bs-table-bordered {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.react-bs-table table {
+    margin-bottom: 0;
+    table-layout: fixed;
+}
+
+.react-bs-table table td,
+.react-bs-table table th {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.react-bs-table table tr:not(.selected-row) {
+    border-bottom: 1px solid @gray-mid-lighter;
+}
+
+tr.tr-no-border > td {
+    background-color: white;
+}
+
+.react-bs-table tr:not(.expand-row-body):not(.selected-row):not(.non-highlight-row):hover td {
+    background-color: @gray-dark;
+    color: @gray-lighter;
+    cursor: pointer;
+}
+
+.react-bs-table-pagination {
+    margin-top: 10px;
+}
+
+.react-bs-table-tool-bar {
+    margin-bottom: 5px;
+}
+
+.react-bs-container-header {
+    overflow: hidden;
+    width: 100%;
+}
+
+.react-bs-container-body {
+    overflow: auto;
+    width: 100%;
+}
+
+.react-bootstrap-table-page-btns-ul {
+    float: right;
+    /* override the margin-top defined in .pagination class in bootstrap. */
+    margin-top: 0;
+}
+
+.react-bs-table .table-bordered {
+    border: 0;
+    outline: none !important;
+}
+
+.react-bs-table .table-bordered > thead > tr > th,
+.react-bs-table .table-bordered > thead > tr > td {
+    border-bottom-width: 2px;
+}
+
+.react-bs-table .table-bordered > tbody > tr > td {
+    outline: none !important;
+}
+
+.react-bs-table .table-bordered > tbody > tr > td.default-focus-cell {
+    outline: 3px solid cornflowerblue !important;
+    outline-offset: -1px;
+}
+
+.react-bs-table .table-bordered > tfoot > tr > th,
+.react-bs-table .table-bordered > tfoot > tr > td {
+    border-top-width: 2px;
+}
+
+.react-bs-table .table-bordered > tfoot > tr > th,
+.react-bs-table .table-bordered > tfoot > tr > td {
+    border-bottom-width: 0;
+}
+
+/*Esquerda*/
+.react-bs-table .table-bordered > thead > tr > th:first-child,
+.react-bs-table .table-bordered > tbody > tr > th:first-child,
+.react-bs-table .table-bordered > tfoot > tr > th:first-child,
+.react-bs-table .table-bordered > thead > tr > td:first-child,
+.react-bs-table .table-bordered > tbody > tr > td:first-child,
+.react-bs-table .table-bordered > tfoot > tr > td:first-child {
+    border-left-width: 0;
+}
+
+/*Direita*/
+.react-bs-table .table-bordered > thead > tr > th:last-child,
+.react-bs-table .table-bordered > tbody > tr > th:last-child,
+.react-bs-table .table-bordered > tfoot > tr > th:last-child,
+.react-bs-table .table-bordered > thead > tr > td:last-child,
+.react-bs-table .table-bordered > tbody > tr > td:last-child,
+.react-bs-table .table-bordered > tfoot > tr > td:last-child {
+    border-right-width: 0;
+}
+
+/*Topo*/
+.react-bs-table .table-bordered > thead > tr:first-child > th,
+.react-bs-table .table-bordered > thead > tr:first-child > td {
+    border-top-width: 0;
+}
+
+/*Baixo*/
+.react-bs-table .table-bordered > tfoot > tr:last-child > th,
+.react-bs-table .table-bordered > tfoot > tr:last-child > td {
+    border-bottom-width: 0;
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th {
+    vertical-align: bottom;
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th .filter {
+    font-weight: 600;
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th .select-filter option[value=''],
+.react-bs-table .react-bs-container-header > table > thead > tr > th .select-filter.placeholder-selected,
+.react-bs-table .react-bs-container-header > table > thead > tr > th .filter::-webkit-input-placeholder,
+.react-bs-table .react-bs-container-header > table > thead > tr > th .number-filter-input::-webkit-input-placeholder {
+    color: lightgrey;
+    font-style: italic;
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th .select-filter.placeholder-selected option:not([value='']) {
+    color: initial;
+    font-style: initial;
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th .number-filter,
+.react-bs-table .react-bs-container-header > table > thead > tr > th .date-filter {
+    display: flex;
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th .number-filter-input,
+.react-bs-table .react-bs-container-header > table > thead > tr > th .date-filter-input {
+    margin-left: 5px;
+    float: left;
+    width: calc(100% - 67px - 5px);
+}
+
+.react-bs-table .react-bs-container-header > table > thead > tr > th .number-filter-comparator,
+.react-bs-table .react-bs-container-header > table > thead > tr > th .date-filter-comparator {
+    width: 67px;
+    float: left;
+}
+
+.react-bs-table .react-bs-container-header .sort-column {
+    cursor: pointer;
+}
+
+/*inline editor default style*/
+.react-bs-container .form-control.editor {
+    /*width:100%;
+  top:0;
+  left:0;*/
+    /*height: 100%;
+  position: absolute;*/
+}
+
+.react-bs-container .textarea-save-btn {
+    position: absolute;
+    z-index: 100;
+    right: 0;
+    top: -21px;
+}
+
+.react-bs-table-no-data {
+    text-align: center;
+}
+
+.table__primary {
+    font-weight: 600;
+    font-size: 16px;
+    .ellipsis;
+}
+
+.table__primary-duration {
+    font-weight: 800;
+    font-size: 16px;
+    .ellipsis;
+}
+
+.table__left {
+    text-align: left;
+    font-weight: 600;
+    font-size: @font-size-h5;
+    line-height: 3;
+    .ellipsis;
+}
+
+.table__right {
+    text-align: right;
+    font-size: 16px;
+    .ellipsis;
+}
+
+.table__secondary {
+    font-weight: 300;
+    font-size: 12px;
+    .ellipsis;
+}
+
+.table__status {
+    padding-top: @spacing-xs;
+}
+
+.service-spans {
+    display: inline-block !important; // to override bootstrap
+    margin-right: @spacing-xs;
+    font-weight: 600 !important; // to override bootstrap
+    font-size: @font-size-base !important; // to override bootstrap
+}
+
+.error-span-count {
+    display: inline-block !important; // to override bootstrap
+    margin-right: @spacing-xs;
+    font-weight: 600 !important; // to override bootstrap
+    font-size: @font-size-base !important; // to override bootstrap
+    color: @brand-danger !important;
+    background-color: #fbe7f1;
+    position: relative;
+    top: -1px;
+}
+
+// overriding header styles
+.results-header {
+    color: @brand-primary;
+    &:only-of-type {
+        color: inherit;
+    }
+    &:hover {
+        color: @brand-primary;
+    }
+}
+
+@keyframes EXPAND {
+    from {
+        margin-top: -2%;
+    }
+    to {
+        margin-top: 0;
+    }
+}
+
+.react-bs-container-body tr:nth-child(even):not([hidden]) td section div {
+    animation: EXPAND 0.2s;
+}
+
+// CSS For the tentative progress bar
+.percentDialContainer {
+    display: inline-block;
+    margin-top: @spacing-xs;
+    width: 40px;
+}
+
+// CSS For the tentative progress bar
+.percentContainer {
+    font-weight: 600;
+    .table__right;
+
+    &.green {
+        color: @brand-success;
+    }
+    &.orange {
+        color: darken(@brand-warning, 10%);
+    }
+    &.red {
+        color: @brand-danger;
+    }
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+    stroke: @brand-success;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+    stroke: @gray-mid-lighter;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+    fill: @brand-success;
+    font-size: 30px;
+    font-weight: 600;
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+
+.expand-row-body {
+    > td {
+        padding: 0 !important;
+    }
+}
+
+.selected-row {
+    > td {
+        cursor: pointer;
+        background-color: @gray-dark !important;
+        color: @gray-lighter;
+    }
+}
+
+.table-row-details {
+    padding: 18px 18px 24px 18px;
+    border-right: 2px solid @gray-dark;
+    border-left: 2px solid @gray-dark;
+    border-bottom: 2px solid @gray-dark;
+    border-radius: 0px 0px 3px 3px;
+    background-color: white;
+}
+
+.table-row-details-upload {
+    border-top: 2px solid @gray-dark;
+}
+
+.react-bs-table tr:not(.expand-row-body):not(.selected-row):not(.non-highlight-row):hover td .table-tags-listing {
+    color: @gray-dark;
+}

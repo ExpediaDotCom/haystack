@@ -1,0 +1,63 @@
+/*
+ * Copyright 2019 Expedia Group
+ *
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *           http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ *
+ */
+
+.service-insights {
+    margin-top: -18px;
+    margin-bottom: -19px;
+}
+
+.service-insights__header {
+    label {
+        padding-right: 20px;
+    }
+}
+
+.service-insights__filter {
+    position: absolute;
+    right: 50px;
+    z-index: 1;
+    span {
+        display: inline-block;
+        margin-right: 5px;
+    }
+    select {
+        padding-right: 20px;
+    }
+}
+
+.header-summary {
+    position: absolute;
+    max-width: 500px;
+    margin-top: 20px;
+    padding: 8px 16px;
+    z-index: 1;
+    background: #f2f4fbde;
+    border: solid 1px #cacaca;
+    pointer-events: none;
+
+    .violation-grid {
+        display: grid;
+        grid-template-columns: auto auto;
+        align-items: baseline;
+        line-height: 14px;
+        color: red;
+    }
+
+    .violation-title {
+        padding-right: 5px;
+    }
+}

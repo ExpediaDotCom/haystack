@@ -1,0 +1,177 @@
+/*
+ * Copyright 2018 Expedia Group
+ *
+ *       Licensed under the Apache License, Version 2.0 (the "License");
+ *       you may not use this file except in compliance with the License.
+ *       You may obtain a copy of the License at
+ *
+ *           http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *       Unless required by applicable law or agreed to in writing, software
+ *       distributed under the License is distributed on an "AS IS" BASIS,
+ *       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *       See the License for the specific language governing permissions and
+ *       limitations under the License.
+ *
+ */
+
+@import (reference) '../../app';
+
+.alert-counter {
+    position: absolute;
+    margin-left: @spacing-xs;
+    margin-top: @spacing-xxs;
+}
+
+.alerts-title__header {
+    font-size: @font-size-h3;
+    line-height: 1.2;
+}
+
+.alert-details__alert-glow {
+    animation: glow 700ms ease-out infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        border-left: 3px solid @white;
+    }
+    100% {
+        border-left: 3px solid @brand-danger;
+    }
+}
+
+.alerts-table .react-bs-table .table-bordered > tbody > tr > td {
+    vertical-align: middle;
+}
+
+.alerts-table .sparkline-container .sparkline-graph {
+    height: 40px;
+}
+
+.alerts__bold {
+    font-weight: 600;
+}
+
+.table__large-label {
+    font-size: 90%;
+}
+
+.subscriptions {
+    margin-bottom: @spacing-m;
+}
+
+.subscriptions__table.table {
+    margin-bottom: @spacing-s;
+}
+
+.alert-details-container_header {
+    margin-bottom: @spacing-m;
+}
+
+.alerts-table.react-bs-table-container {
+    margin-top: 0;
+}
+
+.alerts-table {
+    th[data-field] {
+        padding: 0 @spacing-s @spacing-s 0;
+
+        input,
+        select {
+            .input-sm;
+            padding-left: @spacing-xs;
+            border: 1px solid @gray-mid-light;
+            border-radius: 3px;
+            background-color: white;
+            color: @gray-darker;
+        }
+    }
+}
+
+.alert-table_sparkline {
+    margin-top: -1px;
+    margin-bottom: -7px;
+
+    color: @gray-mid-light;
+}
+
+.alert-table_sparkline-loading {
+    color: @gray-mid-light;
+}
+
+.alert-tabs {
+    margin-bottom: @spacing-s;
+    font-size: 16px;
+    .nav-tabs > li > a {
+        padding-top: 0;
+        padding-left: 0;
+        padding-right: @spacing-l;
+    }
+}
+
+.alert-tabs_tab:focus {
+    outline: none;
+}
+
+.subscription-button {
+    display: inline;
+}
+
+.subscription-error {
+    color: red;
+    font-weight: 600;
+    width: 50%;
+    display: inline;
+    padding-left: @spacing-l;
+}
+
+.alerts-table .react-bs-table .table-bordered > tbody > tr > td {
+    height: 56px;
+}
+
+.subscription-dispatcher-row {
+    display: flex;
+}
+
+.alert-interval {
+    color: @gray-darker !important;
+    display: inline !important;
+    width: 50px !important;
+    margin-left: 15px;
+}
+
+.box-inline {
+    display: inline;
+    margin-right: 15px;
+}
+
+.dispatcher-header {
+    display: inline;
+}
+
+.dispatcher-row {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.subscription-select {
+    margin-right: 15px;
+    padding-left: 4px;
+    width: 80px !important; // Override bootstrap
+}
+
+.dispatcher-input {
+    margin-right: 15px;
+    width: 55% !important; // Override bootstrap
+}
+
+.subscription-form {
+    // bootstrap overrides
+    display: inline !important;
+    color: @gray-darker !important;
+}
+
+.default-cursor {
+    cursor: default !important;
+}

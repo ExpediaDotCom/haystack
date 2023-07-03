@@ -1,0 +1,44 @@
+<jmxtrans-agent>
+    <queries>
+        <!-- JVM -->
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="used"
+               resultAlias="jvm.heapMemoryUsage.used"/>
+        <query objectName="java.lang:type=Memory" attribute="HeapMemoryUsage" key="committed"
+               resultAlias="jvm.heapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="used"
+               resultAlias="jvm.nonHeapMemoryUsage.used"/>
+        <query objectName="java.lang:type=Memory" attribute="NonHeapMemoryUsage" key="committed"
+               resultAlias="jvm.nonHeapMemoryUsage.committed"/>
+        <query objectName="java.lang:type=ClassLoading" attribute="LoadedClassCount" resultAlias="jvm.loadedClasses"/>
+        <query objectName="java.lang:type=Threading" attribute="ThreadCount" resultAlias="jvm.thread"/>
+
+        <!-- useG1GC metrics -->
+        <query objectName="java.lang:type=MemoryPool,name=G1 Eden Space" attribute="Usage" key="used"
+               resultAlias="jvm.g1EdenSpace.used" />
+        <query objectName="java.lang:type=MemoryPool,name=G1 Eden Space" attribute="Usage" key="max"
+               resultAlias="jvm.g1EdenSpace.max" />
+
+        <query objectName="java.lang:type=MemoryPool,name=G1 Old Gen" attribute="Usage" key="used"
+               resultAlias="jvm.g1OldGen.used" />
+        <query objectName="java.lang:type=MemoryPool,name=G1 Old Gen" attribute="Usage" key="max"
+               resultAlias="jvm.g1OldGen.max" />
+
+        <query objectName="java.lang:type=MemoryPool,name=G1 Survivor Space" attribute="Usage" key="max"
+               resultAlias="jvm.g1SurvivorSpace.max" />
+        <query objectName="java.lang:type=MemoryPool,name=G1 Survivor Space" attribute="Usage" key="used"
+               resultAlias="jvm.g1SurvivorSpace.used" />
+
+        <query objectName="java.lang:type=GarbageCollector" attribute="LastGcInfo" key="duration"
+               resultAlias="jvm.gc.duration" />
+        <query objectName="java.lang:type=GarbageCollector" attribute="CollectionTime"
+               resultAlias="jvm.gc.collection.time" />
+    </queries>
+    <outputWriter class="org.jmxtrans.agent.GraphitePlainTextTcpOutputWriter">
+        <host>${HAYSTACK_GRAPHITE_HOST:monitoring-influxdb-graphite.kube-system.svc}</host>
+        <port>${HAYSTACK_GRAPHITE_PORT:2003}</port>
+        <enabled>${HAYSTACK_GRAPHITE_ENABLED:false}</enabled>
+        <!-- template used in influxdb : "haystack.* system.subsystem.application.host.class.measurement*" -->
+        <namePrefix>haystack.service-graph.snapshotter.#hostname#.</namePrefix>
+    </outputWriter>
+    <collectIntervalInSeconds>60</collectIntervalInSeconds>
+</jmxtrans-agent>

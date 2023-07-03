@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/detectors/search/findByMetricHash",
+    "queryParameters": {
+      "hash" : {
+        "matches" : ".*"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "get_detectors.json"
+  }
+}

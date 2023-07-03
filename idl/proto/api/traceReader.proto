@@ -1,0 +1,178 @@
+/*
+ *
+ *  Copyright 2018 Expedia, Inc.
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ *
+ */
+syntax = "proto3";
+import "span.proto";
+
+option java_package = "com.expedia.open.tracing.api";
+option java_multiple_files = true;
+option go_package = "haystack";
+
+// collection of spans belonging to a single Trace
+message Trace {
+    string traceId              = 1;
+    repeated Span childSpans    = 2;
+}
+
+// request for fetching Trace for traceId
+message TraceRequest {
+    string traceId = 1;
+}
+
+// request for raw traces representing list of traceIds
+message RawTracesRequest {
+    repeated string traceId = 1;
+}
+
+// list of filtered traces
+message RawTracesResult {
+    repeated Trace traces   = 1;
+}
+
+// request for fetching span for give traceId and spanId
+message SpanRequest {
+    string traceId = 1;
+    string spanId  = 2;
+}
+
+message SpanResponse {
+    repeated Span spans    = 1; // list of spans with a given traceId and spanId
+}
+
+// a single operand in the expression tree
+message Operand {
+    oneof operand {
+        Field field                 = 1; // leaf field value
+        ExpressionTree expression   = 2; // a nested expression tree
+    }
+}
+
+// nested n-ary expression tree for specifying expression to filter
+// represents a binary operator which will be performed on a list of operands
+message ExpressionTree {
+    enum Operator {
+        AND = 0;
+        OR = 1;
+    }
+
+    Operator operator            = 1; // operator to use the subtree results
+    repeated Operand operands    = 2; // list of operands
+    bool isSpanLevelExpression   = 3; // if this expression is a span level or trace level filter
+}
+
+// criteria for searching traces
+message TracesSearchRequest {
+    repeated Field fields           = 1 [deprecated=true]; // fields to filter traces
+    int64 startTime                 = 2; // search window start time in microseconds time from epoch
+    int64 endTime                   = 3; // search window end time in microseconds time from epoch
+    int32 limit                     = 4; // limit on number of results to return
+    ExpressionTree filterExpression = 5; // expression tree for trace search filters
+}
+
+// list of filtered traces
+message TracesSearchResult {
+    repeated Trace traces   = 1;
+}
+
+// request for fetching trace count of search result per interval
+message TraceCountsRequest {
+    repeated Field fields           = 1 [deprecated=true]; // fields to filter traces
+    int64 startTime                 = 2; // search window start time in microseconds time from epoch
+    int64 endTime                   = 3; // search window end time in microseconds time from epoch
+    int64 interval                  = 4; // interval in microseconds
+    ExpressionTree filterExpression = 5; // expression tree for trace search filters
+}
+
+// trace count list
+message TraceCounts {
+    repeated TraceCount traceCount = 1;
+}
+
+// count of traces for an interval
+message TraceCount {
+    int64 timestamp     = 1;     // end time of trace search result in microseconds time from epoch
+    int64 count         = 2;     // count of traces
+}
+
+// Field is a general abstraction on data associated with a span
+// It can represent any indexed span attribute such as tag, log, spanName, or operationName
+message Field {
+    enum Operator {                 // define the operator between name and its value
+      EQUAL        = 0;
+      GREATER_THAN = 1;
+      LESS_THAN    = 2;
+      NOT_EQUAL    = 3;
+    }
+
+    string name       = 1;          // name of the field
+    string value      = 2;          // value of the field
+    Operator operator = 3;          // operation between name and value, default is EQUAL
+}
+
+// An empty message type for rq/rs
+message Empty {}
+
+// query for fetching values for given field
+message FieldValuesRequest {
+    string fieldName         = 1; // name of field to query for
+    repeated Field filters   = 2; // provided fields to be used for filtering
+}
+
+// whitelisted field metadata to accompany field name
+message FieldMetadata {
+    bool isRangeQuery = 1;
+}
+
+message FieldNames {
+    repeated string names = 1;
+    repeated FieldMetadata fieldMetadata = 2;
+}
+
+message FieldValues {
+    repeated string values = 1;
+}
+
+message CallNode {
+    string serviceName = 1;
+    string operationName = 2;
+    string infrastructureProvider = 3;  // infrastructure provider hosting the service
+    string infrastructureLocation = 4;  // infrastructure location hosting the service
+    string duration = 5;                // duration of the call perceived by the service
+}
+
+message Call {
+    CallNode from = 1;          // service node from which call was started
+    CallNode to = 2;            // service node to which call was terminated
+    int64 networkDelta = 3;     // time delta in transit
+}
+
+message TraceCallGraph {
+    repeated Call calls = 1;    // list of service calls
+}
+
+// service interface to search and get traces
+service TraceReader {
+    rpc searchTraces (TracesSearchRequest) returns (TracesSearchResult);    // search for traces based on filter fields and other criteria
+    rpc getTraceCounts (TraceCountsRequest) returns (TraceCounts);          // fetch per interval count of traces search
+    rpc getTrace (TraceRequest) returns (Trace);                            // fetch a trace using traceId
+    rpc getRawTrace (TraceRequest) returns (Trace);                         // fetch a trace in raw un-transformed format using traceId
+    rpc getRawSpan (SpanRequest) returns (SpanResponse);                    // fetch a span of a trace in raw un-transformed format using traceId and spanId
+    rpc getFieldNames (Empty) returns (FieldNames);                         // get all searchable Fields available in haystack system
+    rpc getFieldValues (FieldValuesRequest) returns (FieldValues);          // get values for a given Field
+    rpc getTraceCallGraph (TraceRequest) returns (TraceCallGraph);          // get graph of service calls made in the given traceId
+    rpc getRawTraces (RawTracesRequest) returns (RawTracesResult);          // get raw traces for given list of traceIds
+}

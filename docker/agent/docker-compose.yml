@@ -1,0 +1,13 @@
+version: "3"
+services:
+  haystack-agent:
+    image: expediadotcom/haystack-agent:latest
+    volumes:
+      # make sure you run docker-compose from the
+      # root path
+      - ./agent/default.conf:/app/bin/default.conf
+    environment:
+      JAVA_XMS: 128m
+      haystack_env_agents_spans_port: 35000
+    ports:
+      - "35000:35000"
